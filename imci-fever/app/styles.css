@@ -1,0 +1,29 @@
+body { margin: 0; font: 15px/1.4 system-ui, sans-serif; background: #fafafa; color: #222; }
+[hidden] { display: none !important; }
+main { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1000px; margin: 0 auto; padding: 16px; }
+header { grid-column: 1 / -1; }
+h1 { margin: 0 0 4px; }
+.warning { margin: 8px 0 0; padding: 8px 12px; border: 1px solid #e0a800; border-radius: 4px; background: #fff8e1; color: #6b3d00; }
+
+/* JSON Forms vanilla renderers */
+.categorization-master { display: flex; gap: 4px; margin-bottom: 12px; }
+.categorization-master ul { display: flex; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.categorization-master li { padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; }
+.categorization-master li.selected { background: #222; color: #fff; }
+.control { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #eee; }
+.control .input-description { grid-column: 1 / -1; color: #666; font-size: 13px; }
+.control .validation { grid-column: 1 / -1; color: #b00020; font-size: 13px; }
+.control input[type="number"], .control select { width: 90px; }
+
+/* Results: the IMCI colours */
+article { border-left: 8px solid; border-radius: 4px; padding: 8px 12px; margin-bottom: 12px; background: #fff; }
+article h2 { font-size: 16px; margin: 0 0 4px; }
+article ul { margin: 0 0 4px; padding-left: 20px; }
+article small { color: #666; }
+article .qualifier { margin: 0 0 4px; font-weight: 600; }
+.pink { border-color: #e7549a; background: #fde8f1; }
+.yellow { border-color: #e6b800; background: #fff8d6; }
+.green { border-color: #3a9d4a; background: #e6f4e8; }
+.pending { border-color: #999; }
+
+@media (max-width: 700px) { main { grid-template-columns: 1fr; } }

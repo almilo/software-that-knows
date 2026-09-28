@@ -1,0 +1,196 @@
+{
+  "$comment": "Generated from ontology/imci-fever.ttl by generator/generate.ts. Do not edit.",
+  "type": "object",
+  "title": "Sick child, age 2 months up to 5 years",
+  "properties": {
+    "convulsingNow": {
+      "type": "boolean",
+      "title": "Convulsing now (stabilized, the consultation continues)"
+    },
+    "convulsions": {
+      "type": "boolean",
+      "title": "Convulsions in this illness"
+    },
+    "convulsionCount": {
+      "type": "string",
+      "enum": [
+        "one",
+        "two or more"
+      ],
+      "title": "Number of convulsions in this illness"
+    },
+    "convulsionLong": {
+      "type": "boolean",
+      "title": "A convulsion lasted 15 minutes or longer"
+    },
+    "lethargic": {
+      "type": "boolean",
+      "title": "Unconscious or lethargic"
+    },
+    "notAbleToDrink": {
+      "type": "boolean",
+      "title": "Not able to drink or breastfeed"
+    },
+    "vomitsEverything": {
+      "type": "boolean",
+      "title": "Vomiting everything"
+    },
+    "oralFluidTest": {
+      "type": "string",
+      "enum": [
+        "completely unable to drink",
+        "vomits immediately or everything",
+        "drinks poorly",
+        "drinks eagerly or thirstily",
+        "drinks normally",
+        "unable to do the test"
+      ],
+      "title": "Oral fluid test result",
+      "description": "Do not do the test if the child is unconscious."
+    },
+    "feverReported": {
+      "type": "boolean",
+      "title": "Fever reported (fever in this illness)"
+    },
+    "axillaryTemperature": {
+      "type": "number",
+      "title": "Axillary temperature (°C)",
+      "minimum": 30,
+      "maximum": 44
+    },
+    "rectalTemperature": {
+      "type": "number",
+      "title": "Rectal temperature (°C)",
+      "description": "Only if trained to take it.",
+      "minimum": 30,
+      "maximum": 44
+    },
+    "thermometerNotAvailable": {
+      "type": "boolean",
+      "title": "No thermometer available"
+    },
+    "hotToTouch": {
+      "type": "boolean",
+      "title": "Hot to touch"
+    },
+    "malariaRisk": {
+      "type": "string",
+      "enum": [
+        "high",
+        "low",
+        "no"
+      ],
+      "title": "Malaria risk of the area"
+    },
+    "travelToHighRiskArea": {
+      "type": "boolean",
+      "title": "Travel to a high malaria risk area in the last 2 weeks"
+    },
+    "obviousCause": {
+      "type": "boolean",
+      "title": "Obvious cause of fever"
+    },
+    "feverDuration": {
+      "type": "string",
+      "enum": [
+        "7 days or less",
+        "more than 7 days"
+      ],
+      "title": "Fever for how long?"
+    },
+    "feverEveryDay": {
+      "type": "boolean",
+      "title": "Fever present every day for more than 7 days?"
+    },
+    "stiffNeck": {
+      "type": "boolean",
+      "title": "Stiff neck"
+    },
+    "refusalToUseLimb": {
+      "type": "boolean",
+      "title": "Refusal to use a limb"
+    },
+    "warmTenderJoint": {
+      "type": "boolean",
+      "title": "Warm, tender or swollen joint or bone"
+    },
+    "painPassingUrine": {
+      "type": "boolean",
+      "title": "Pain or difficulty passing urine, or crying when passing urine"
+    },
+    "cough": {
+      "type": "boolean",
+      "title": "Cough"
+    },
+    "runnyNose": {
+      "type": "boolean",
+      "title": "Runny nose"
+    },
+    "redEyes": {
+      "type": "boolean",
+      "title": "Red eyes"
+    },
+    "otherSevereClassification": {
+      "type": "boolean",
+      "title": "Severe classification from another part of the assessment",
+      "description": "For example severe pneumonia, mastoiditis or complicated severe acute malnutrition. This demo does not have those parts."
+    },
+    "malariaTest": {
+      "type": "string",
+      "enum": [
+        "positive",
+        "negative",
+        "unknown"
+      ],
+      "title": "Malaria test result",
+      "description": "unknown: status unknown, test unavailable, invalid or not feasible"
+    },
+    "highParasiteDensity": {
+      "type": "boolean",
+      "title": "High parasite density",
+      "description": "P. falciparum more than 10% or 500 000 per microlitre, or P. knowlesi more than 2% or 100 000 per microlitre"
+    },
+    "skinProblem": {
+      "type": "string",
+      "enum": [
+        "generalized",
+        "localized",
+        "none"
+      ],
+      "title": "Skin problem"
+    },
+    "measlesRash": {
+      "type": "boolean",
+      "title": "Measles rash"
+    },
+    "measlesRecent": {
+      "type": "boolean",
+      "title": "Measles within the last 3 months"
+    },
+    "mouthUlcers": {
+      "type": "string",
+      "enum": [
+        "none",
+        "oral thrush",
+        "deep and extensive",
+        "not deep and extensive"
+      ],
+      "title": "Oral sores or mouth ulcers"
+    },
+    "pusFromEye": {
+      "type": "boolean",
+      "title": "Pus draining from the eye"
+    },
+    "corneaClouding": {
+      "type": "boolean",
+      "title": "Clouding of the cornea"
+    },
+    "vitaminARecent": {
+      "type": "boolean",
+      "title": "Vitamin A, or malnutrition treatment that contains vitamin A, in the past month"
+    }
+  },
+  "required": [
+    "malariaRisk"
+  ]
+}

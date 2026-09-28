@@ -1,0 +1,5271 @@
+{
+  "$comment": "Generated from ontology/imci-fever.ttl by generator/generate.ts. Do not edit.",
+  "shownWhen": {
+    "convulsionCount": {
+      "properties": {
+        "convulsions": {
+          "const": true
+        }
+      },
+      "required": [
+        "convulsions"
+      ]
+    },
+    "convulsionLong": {
+      "properties": {
+        "convulsions": {
+          "const": true
+        }
+      },
+      "required": [
+        "convulsions"
+      ]
+    },
+    "oralFluidTest": {
+      "anyOf": [
+        {
+          "properties": {
+            "notAbleToDrink": {
+              "const": true
+            }
+          },
+          "required": [
+            "notAbleToDrink"
+          ]
+        },
+        {
+          "properties": {
+            "vomitsEverything": {
+              "const": true
+            }
+          },
+          "required": [
+            "vomitsEverything"
+          ]
+        }
+      ]
+    },
+    "hotToTouch": {
+      "properties": {
+        "thermometerNotAvailable": {
+          "const": true
+        }
+      },
+      "required": [
+        "thermometerNotAvailable"
+      ]
+    },
+    "malariaRisk": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "travelToHighRiskArea": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "feverReported": {
+                  "const": true
+                }
+              },
+              "required": [
+                "feverReported"
+              ]
+            },
+            {
+              "properties": {
+                "hotToTouch": {
+                  "const": true
+                }
+              },
+              "required": [
+                "hotToTouch"
+              ]
+            },
+            {
+              "properties": {
+                "axillaryTemperature": {
+                  "minimum": 37.5
+                }
+              },
+              "required": [
+                "axillaryTemperature"
+              ]
+            },
+            {
+              "properties": {
+                "rectalTemperature": {
+                  "minimum": 38
+                }
+              },
+              "required": [
+                "rectalTemperature"
+              ]
+            }
+          ]
+        },
+        {
+          "not": {
+            "anyOf": [
+              {
+                "properties": {
+                  "convulsingNow": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "convulsingNow"
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "properties": {
+                      "convulsions": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "convulsions"
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "convulsionCount": {
+                            "const": "two or more"
+                          }
+                        },
+                        "required": [
+                          "convulsionCount"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "convulsionLong": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "convulsionLong"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "properties": {
+                  "lethargic": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "lethargic"
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "notAbleToDrink": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "notAbleToDrink"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "vomitsEverything": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "vomitsEverything"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "oralFluidTest": {
+                            "const": "completely unable to drink"
+                          }
+                        },
+                        "required": [
+                          "oralFluidTest"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "oralFluidTest": {
+                            "const": "vomits immediately or everything"
+                          }
+                        },
+                        "required": [
+                          "oralFluidTest"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "properties": {
+            "malariaRisk": {
+              "const": "low"
+            }
+          },
+          "required": [
+            "malariaRisk"
+          ]
+        }
+      ]
+    },
+    "obviousCause": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "feverReported": {
+                  "const": true
+                }
+              },
+              "required": [
+                "feverReported"
+              ]
+            },
+            {
+              "properties": {
+                "hotToTouch": {
+                  "const": true
+                }
+              },
+              "required": [
+                "hotToTouch"
+              ]
+            },
+            {
+              "properties": {
+                "axillaryTemperature": {
+                  "minimum": 37.5
+                }
+              },
+              "required": [
+                "axillaryTemperature"
+              ]
+            },
+            {
+              "properties": {
+                "rectalTemperature": {
+                  "minimum": 38
+                }
+              },
+              "required": [
+                "rectalTemperature"
+              ]
+            }
+          ]
+        },
+        {
+          "properties": {
+            "malariaRisk": {
+              "const": "low"
+            }
+          },
+          "required": [
+            "malariaRisk"
+          ]
+        }
+      ]
+    },
+    "feverDuration": {
+      "properties": {
+        "feverReported": {
+          "const": true
+        }
+      },
+      "required": [
+        "feverReported"
+      ]
+    },
+    "feverEveryDay": {
+      "properties": {
+        "feverDuration": {
+          "const": "more than 7 days"
+        }
+      },
+      "required": [
+        "feverDuration"
+      ]
+    },
+    "stiffNeck": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "refusalToUseLimb": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "warmTenderJoint": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "painPassingUrine": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "cough": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "runnyNose": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "redEyes": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "otherSevereClassification": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "malariaTest": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "feverReported": {
+                  "const": true
+                }
+              },
+              "required": [
+                "feverReported"
+              ]
+            },
+            {
+              "properties": {
+                "hotToTouch": {
+                  "const": true
+                }
+              },
+              "required": [
+                "hotToTouch"
+              ]
+            },
+            {
+              "properties": {
+                "axillaryTemperature": {
+                  "minimum": 37.5
+                }
+              },
+              "required": [
+                "axillaryTemperature"
+              ]
+            },
+            {
+              "properties": {
+                "rectalTemperature": {
+                  "minimum": 38
+                }
+              },
+              "required": [
+                "rectalTemperature"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "malariaRisk": {
+                  "const": "high"
+                }
+              },
+              "required": [
+                "malariaRisk"
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "malariaRisk": {
+                      "const": "low"
+                    }
+                  },
+                  "required": [
+                    "malariaRisk"
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "travelToHighRiskArea": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "travelToHighRiskArea"
+                      ]
+                    },
+                    {
+                      "not": {
+                        "properties": {
+                          "obviousCause": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "obviousCause"
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "not": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "convulsingNow": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "convulsingNow"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "convulsions": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "convulsions"
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "convulsionCount": {
+                                "const": "two or more"
+                              }
+                            },
+                            "required": [
+                              "convulsionCount"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "convulsionLong": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "convulsionLong"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "lethargic": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "lethargic"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "notAbleToDrink": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "notAbleToDrink"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "vomitsEverything": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "vomitsEverything"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "completely unable to drink"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "vomits immediately or everything"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "properties": {
+                  "stiffNeck": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "stiffNeck"
+                ]
+              },
+              {
+                "properties": {
+                  "refusalToUseLimb": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "refusalToUseLimb"
+                ]
+              },
+              {
+                "properties": {
+                  "warmTenderJoint": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "warmTenderJoint"
+                ]
+              },
+              {
+                "properties": {
+                  "corneaClouding": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "corneaClouding"
+                ]
+              },
+              {
+                "properties": {
+                  "mouthUlcers": {
+                    "const": "deep and extensive"
+                  }
+                },
+                "required": [
+                  "mouthUlcers"
+                ]
+              },
+              {
+                "properties": {
+                  "otherSevereClassification": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "otherSevereClassification"
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "highParasiteDensity": {
+      "properties": {
+        "malariaTest": {
+          "const": "positive"
+        }
+      },
+      "required": [
+        "malariaTest"
+      ]
+    },
+    "skinProblem": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "feverReported": {
+                  "const": true
+                }
+              },
+              "required": [
+                "feverReported"
+              ]
+            },
+            {
+              "properties": {
+                "hotToTouch": {
+                  "const": true
+                }
+              },
+              "required": [
+                "hotToTouch"
+              ]
+            },
+            {
+              "properties": {
+                "axillaryTemperature": {
+                  "minimum": 37.5
+                }
+              },
+              "required": [
+                "axillaryTemperature"
+              ]
+            },
+            {
+              "properties": {
+                "rectalTemperature": {
+                  "minimum": 38
+                }
+              },
+              "required": [
+                "rectalTemperature"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "cough": {
+                  "const": true
+                }
+              },
+              "required": [
+                "cough"
+              ]
+            },
+            {
+              "properties": {
+                "runnyNose": {
+                  "const": true
+                }
+              },
+              "required": [
+                "runnyNose"
+              ]
+            },
+            {
+              "properties": {
+                "redEyes": {
+                  "const": true
+                }
+              },
+              "required": [
+                "redEyes"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "measlesRash": {
+      "properties": {
+        "skinProblem": {
+          "const": "generalized"
+        }
+      },
+      "required": [
+        "skinProblem"
+      ]
+    },
+    "measlesRecent": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "mouthUlcers": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "pusFromEye": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "corneaClouding": {
+      "anyOf": [
+        {
+          "properties": {
+            "feverReported": {
+              "const": true
+            }
+          },
+          "required": [
+            "feverReported"
+          ]
+        },
+        {
+          "properties": {
+            "hotToTouch": {
+              "const": true
+            }
+          },
+          "required": [
+            "hotToTouch"
+          ]
+        },
+        {
+          "properties": {
+            "axillaryTemperature": {
+              "minimum": 37.5
+            }
+          },
+          "required": [
+            "axillaryTemperature"
+          ]
+        },
+        {
+          "properties": {
+            "rectalTemperature": {
+              "minimum": 38
+            }
+          },
+          "required": [
+            "rectalTemperature"
+          ]
+        }
+      ]
+    },
+    "vitaminARecent": {
+      "allOf": [
+        {
+          "anyOf": [
+            {
+              "properties": {
+                "feverReported": {
+                  "const": true
+                }
+              },
+              "required": [
+                "feverReported"
+              ]
+            },
+            {
+              "properties": {
+                "hotToTouch": {
+                  "const": true
+                }
+              },
+              "required": [
+                "hotToTouch"
+              ]
+            },
+            {
+              "properties": {
+                "axillaryTemperature": {
+                  "minimum": 37.5
+                }
+              },
+              "required": [
+                "axillaryTemperature"
+              ]
+            },
+            {
+              "properties": {
+                "rectalTemperature": {
+                  "minimum": 38
+                }
+              },
+              "required": [
+                "rectalTemperature"
+              ]
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "allOf": [
+                {
+                  "properties": {
+                    "skinProblem": {
+                      "const": "generalized"
+                    }
+                  },
+                  "required": [
+                    "skinProblem"
+                  ]
+                },
+                {
+                  "properties": {
+                    "measlesRash": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "measlesRash"
+                  ]
+                },
+                {
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "cough": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "cough"
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "runnyNose": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "runnyNose"
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "redEyes": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "redEyes"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "properties": {
+                "measlesRecent": {
+                  "const": true
+                }
+              },
+              "required": [
+                "measlesRecent"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "tables": [
+    {
+      "id": "FeverTable",
+      "label": "Fever",
+      "source": "WHO DAK child health (2024), Web Annex B: decision-support logic",
+      "usedWhen": {
+        "anyOf": [
+          {
+            "properties": {
+              "feverReported": {
+                "const": true
+              }
+            },
+            "required": [
+              "feverReported"
+            ]
+          },
+          {
+            "properties": {
+              "hotToTouch": {
+                "const": true
+              }
+            },
+            "required": [
+              "hotToTouch"
+            ]
+          },
+          {
+            "properties": {
+              "axillaryTemperature": {
+                "minimum": 37.5
+              }
+            },
+            "required": [
+              "axillaryTemperature"
+            ]
+          },
+          {
+            "properties": {
+              "rectalTemperature": {
+                "minimum": 38
+              }
+            },
+            "required": [
+              "rectalTemperature"
+            ]
+          }
+        ]
+      },
+      "rows": [
+        {
+          "id": "VerySevereFebrileDisease",
+          "label": "VERY SEVERE FEBRILE DISEASE",
+          "severity": "pink",
+          "matchesWhen": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "convulsingNow": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "convulsingNow"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "convulsions": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "convulsions"
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "convulsionCount": {
+                                "const": "two or more"
+                              }
+                            },
+                            "required": [
+                              "convulsionCount"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "convulsionLong": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "convulsionLong"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "lethargic": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "lethargic"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "notAbleToDrink": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "notAbleToDrink"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "vomitsEverything": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "vomitsEverything"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "completely unable to drink"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "vomits immediately or everything"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "properties": {
+                  "stiffNeck": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "stiffNeck"
+                ]
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give first dose of artesunate (IM or rectal)",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "malariaRisk": {
+                        "const": "high"
+                      }
+                    },
+                    "required": [
+                      "malariaRisk"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "malariaRisk": {
+                        "const": "low"
+                      }
+                    },
+                    "required": [
+                      "malariaRisk"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give first dose of ceftriaxone (IM)",
+              "givenWhen": {
+                "properties": {
+                  "stiffNeck": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "stiffNeck"
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give first dose of ampicillin (IM) and gentamicin (IM)",
+              "givenWhen": {
+                "not": {
+                  "properties": {
+                    "stiffNeck": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "stiffNeck"
+                  ]
+                }
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Treat the child to prevent low blood sugar",
+              "derivedFrom": []
+            },
+            {
+              "label": "Give one dose of paracetamol in the clinic for high fever (38.5 °C or above)",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 38.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 39
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer URGENTLY to the hospital",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL84",
+            "CHE.DT.01.CL85",
+            "CHE.DT.03.TR46",
+            "CHE.DT.03.TR47",
+            "CHE.DT.03.TR48",
+            "CHE.DT.03.TR49",
+            "CHE.DT.03.TR50",
+            "CHE.DT.03.TR51"
+          ]
+        },
+        {
+          "id": "Malaria",
+          "label": "MALARIA",
+          "severity": "yellow",
+          "matchesWhen": {
+            "allOf": [
+              {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "malariaRisk": {
+                            "const": "high"
+                          }
+                        },
+                        "required": [
+                          "malariaRisk"
+                        ]
+                      },
+                      {
+                        "allOf": [
+                          {
+                            "properties": {
+                              "malariaRisk": {
+                                "const": "low"
+                              }
+                            },
+                            "required": [
+                              "malariaRisk"
+                            ]
+                          },
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "travelToHighRiskArea": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "travelToHighRiskArea"
+                                ]
+                              },
+                              {
+                                "not": {
+                                  "properties": {
+                                    "obviousCause": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "obviousCause"
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "convulsingNow": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "convulsingNow"
+                                ]
+                              },
+                              {
+                                "allOf": [
+                                  {
+                                    "properties": {
+                                      "convulsions": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "convulsions"
+                                    ]
+                                  },
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "convulsionCount": {
+                                            "const": "two or more"
+                                          }
+                                        },
+                                        "required": [
+                                          "convulsionCount"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "convulsionLong": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "convulsionLong"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "lethargic": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "lethargic"
+                                ]
+                              },
+                              {
+                                "allOf": [
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "notAbleToDrink": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "notAbleToDrink"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "vomitsEverything": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "vomitsEverything"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "oralFluidTest": {
+                                            "const": "completely unable to drink"
+                                          }
+                                        },
+                                        "required": [
+                                          "oralFluidTest"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "oralFluidTest": {
+                                            "const": "vomits immediately or everything"
+                                          }
+                                        },
+                                        "required": [
+                                          "oralFluidTest"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "stiffNeck": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "stiffNeck"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "refusalToUseLimb": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "refusalToUseLimb"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "warmTenderJoint": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "warmTenderJoint"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "corneaClouding": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "corneaClouding"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "mouthUlcers": {
+                                "const": "deep and extensive"
+                              }
+                            },
+                            "required": [
+                              "mouthUlcers"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "otherSevereClassification": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "otherSevereClassification"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "malariaTest": {
+                            "const": "positive"
+                          }
+                        },
+                        "required": [
+                          "malariaTest"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "malariaTest": {
+                            "const": "unknown"
+                          }
+                        },
+                        "required": [
+                          "malariaTest"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "stiffNeck": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "stiffNeck"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "qualifiers": [
+            {
+              "label": "Malaria unconfirmed (no test available or performed)",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "malariaTest": {
+                        "const": "unknown"
+                      }
+                    },
+                    "required": [
+                      "malariaTest"
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "convulsingNow": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "convulsingNow"
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "convulsions": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "convulsions"
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "properties": {
+                                      "convulsionCount": {
+                                        "const": "two or more"
+                                      }
+                                    },
+                                    "required": [
+                                      "convulsionCount"
+                                    ]
+                                  },
+                                  {
+                                    "properties": {
+                                      "convulsionLong": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "convulsionLong"
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "lethargic": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "lethargic"
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "anyOf": [
+                                  {
+                                    "properties": {
+                                      "notAbleToDrink": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "notAbleToDrink"
+                                    ]
+                                  },
+                                  {
+                                    "properties": {
+                                      "vomitsEverything": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "vomitsEverything"
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "properties": {
+                                      "oralFluidTest": {
+                                        "const": "completely unable to drink"
+                                      }
+                                    },
+                                    "required": [
+                                      "oralFluidTest"
+                                    ]
+                                  },
+                                  {
+                                    "properties": {
+                                      "oralFluidTest": {
+                                        "const": "vomits immediately or everything"
+                                      }
+                                    },
+                                    "required": [
+                                      "oralFluidTest"
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "stiffNeck": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "stiffNeck"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "refusalToUseLimb": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "refusalToUseLimb"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "warmTenderJoint": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "warmTenderJoint"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "corneaClouding": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "corneaClouding"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "mouthUlcers": {
+                            "const": "deep and extensive"
+                          }
+                        },
+                        "required": [
+                          "mouthUlcers"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "otherSevereClassification": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "otherSevereClassification"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": [
+                "CHE.DT.01.CL95",
+                "CHE.DT.01.CL96",
+                "CHE.B23.DE22"
+              ]
+            },
+            {
+              "label": "High parasite density",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "malariaTest": {
+                        "const": "positive"
+                      }
+                    },
+                    "required": [
+                      "malariaTest"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "highParasiteDensity": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "highParasiteDensity"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": [
+                "CHE.DT.01.CL93",
+                "CHE.B23.DE21"
+              ]
+            },
+            {
+              "label": "Fever present every day for more than 7 days",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "feverDuration": {
+                        "const": "more than 7 days"
+                      }
+                    },
+                    "required": [
+                      "feverDuration"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "feverEveryDay": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverEveryDay"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": [
+                "CHE.DT.01.CL92",
+                "CHE.B23.DE23"
+              ]
+            }
+          ],
+          "treatments": [
+            {
+              "label": "Give one dose of paracetamol in the clinic for high fever (38.5 °C or above)",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 38.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 39
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give antimalarial medication: artemether with lumefantrine (oral), dose by weight",
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer to the hospital for assessment",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "malariaTest": {
+                            "const": "unknown"
+                          }
+                        },
+                        "required": [
+                          "malariaTest"
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "convulsingNow": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "convulsingNow"
+                                ]
+                              },
+                              {
+                                "allOf": [
+                                  {
+                                    "properties": {
+                                      "convulsions": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "convulsions"
+                                    ]
+                                  },
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "convulsionCount": {
+                                            "const": "two or more"
+                                          }
+                                        },
+                                        "required": [
+                                          "convulsionCount"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "convulsionLong": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "convulsionLong"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "lethargic": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "lethargic"
+                                ]
+                              },
+                              {
+                                "allOf": [
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "notAbleToDrink": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "notAbleToDrink"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "vomitsEverything": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "vomitsEverything"
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "anyOf": [
+                                      {
+                                        "properties": {
+                                          "oralFluidTest": {
+                                            "const": "completely unable to drink"
+                                          }
+                                        },
+                                        "required": [
+                                          "oralFluidTest"
+                                        ]
+                                      },
+                                      {
+                                        "properties": {
+                                          "oralFluidTest": {
+                                            "const": "vomits immediately or everything"
+                                          }
+                                        },
+                                        "required": [
+                                          "oralFluidTest"
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "stiffNeck": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "stiffNeck"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "refusalToUseLimb": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "refusalToUseLimb"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "warmTenderJoint": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "warmTenderJoint"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "corneaClouding": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "corneaClouding"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "mouthUlcers": {
+                                "const": "deep and extensive"
+                              }
+                            },
+                            "required": [
+                              "mouthUlcers"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "otherSevereClassification": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "otherSevereClassification"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "malariaTest": {
+                            "const": "positive"
+                          }
+                        },
+                        "required": [
+                          "malariaTest"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "highParasiteDensity": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "highParasiteDensity"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "feverDuration": {
+                            "const": "more than 7 days"
+                          }
+                        },
+                        "required": [
+                          "feverDuration"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "feverEveryDay": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverEveryDay"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Advise the caregiver when to return immediately",
+              "derivedFrom": []
+            },
+            {
+              "label": "Follow up in 3 days if fever persists",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL95",
+            "CHE.DT.01.CL96",
+            "CHE.DT.01.CL86",
+            "CHE.DT.01.CL88",
+            "CHE.DT.01.CL89",
+            "CHE.DT.01.CL97",
+            "CHE.DT.01.CL98",
+            "CHE.DT.01.CL99",
+            "CHE.DT.01.CL100",
+            "CHE.DT.03.TR52",
+            "CHE.DT.03.TR53",
+            "CHE.DT.03.TR54",
+            "CHE.DT.03.TR55",
+            "CHE.DT.03.TR56",
+            "CHE.DT.03.TR57"
+          ]
+        },
+        {
+          "id": "FeverNoMalaria",
+          "label": "FEVER: NO MALARIA",
+          "severity": "green",
+          "matchesWhen": {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "malariaRisk": {
+                                "const": "high"
+                              }
+                            },
+                            "required": [
+                              "malariaRisk"
+                            ]
+                          },
+                          {
+                            "allOf": [
+                              {
+                                "properties": {
+                                  "malariaRisk": {
+                                    "const": "low"
+                                  }
+                                },
+                                "required": [
+                                  "malariaRisk"
+                                ]
+                              },
+                              {
+                                "anyOf": [
+                                  {
+                                    "properties": {
+                                      "travelToHighRiskArea": {
+                                        "const": true
+                                      }
+                                    },
+                                    "required": [
+                                      "travelToHighRiskArea"
+                                    ]
+                                  },
+                                  {
+                                    "not": {
+                                      "properties": {
+                                        "obviousCause": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "obviousCause"
+                                      ]
+                                    }
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "malariaTest": {
+                            "const": "negative"
+                          }
+                        },
+                        "required": [
+                          "malariaTest"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "malariaRisk": {
+                            "const": "low"
+                          }
+                        },
+                        "required": [
+                          "malariaRisk"
+                        ]
+                      },
+                      {
+                        "not": {
+                          "properties": {
+                            "travelToHighRiskArea": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "travelToHighRiskArea"
+                          ]
+                        }
+                      },
+                      {
+                        "properties": {
+                          "obviousCause": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "obviousCause"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "stiffNeck": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "stiffNeck"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "malariaRisk": {
+                                  "const": "high"
+                                }
+                              },
+                              "required": [
+                                "malariaRisk"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "malariaRisk": {
+                                      "const": "low"
+                                    }
+                                  },
+                                  "required": [
+                                    "malariaRisk"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "travelToHighRiskArea": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "travelToHighRiskArea"
+                                      ]
+                                    },
+                                    {
+                                      "not": {
+                                        "properties": {
+                                          "obviousCause": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "obviousCause"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsingNow": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsingNow"
+                                      ]
+                                    },
+                                    {
+                                      "allOf": [
+                                        {
+                                          "properties": {
+                                            "convulsions": {
+                                              "const": true
+                                            }
+                                          },
+                                          "required": [
+                                            "convulsions"
+                                          ]
+                                        },
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "convulsionCount": {
+                                                  "const": "two or more"
+                                                }
+                                              },
+                                              "required": [
+                                                "convulsionCount"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "convulsionLong": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "convulsionLong"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "lethargic": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "lethargic"
+                                      ]
+                                    },
+                                    {
+                                      "allOf": [
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "notAbleToDrink": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "notAbleToDrink"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "vomitsEverything": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "vomitsEverything"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "oralFluidTest": {
+                                                  "const": "completely unable to drink"
+                                                }
+                                              },
+                                              "required": [
+                                                "oralFluidTest"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "oralFluidTest": {
+                                                  "const": "vomits immediately or everything"
+                                                }
+                                              },
+                                              "required": [
+                                                "oralFluidTest"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "stiffNeck": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "stiffNeck"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "refusalToUseLimb": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "refusalToUseLimb"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "warmTenderJoint": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "warmTenderJoint"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "corneaClouding": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "corneaClouding"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "mouthUlcers": {
+                                      "const": "deep and extensive"
+                                    }
+                                  },
+                                  "required": [
+                                    "mouthUlcers"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "otherSevereClassification": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "otherSevereClassification"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "malariaTest": {
+                                  "const": "positive"
+                                }
+                              },
+                              "required": [
+                                "malariaTest"
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "malariaTest": {
+                                  "const": "unknown"
+                                }
+                              },
+                              "required": [
+                                "malariaTest"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "qualifiers": [
+            {
+              "label": "Fever present every day for more than 7 days",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "feverDuration": {
+                        "const": "more than 7 days"
+                      }
+                    },
+                    "required": [
+                      "feverDuration"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "feverEveryDay": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverEveryDay"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": [
+                "CHE.DT.01.CL114",
+                "CHE.B23.DE27"
+              ]
+            }
+          ],
+          "treatments": [
+            {
+              "label": "Give oral paracetamol",
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer to the hospital for assessment",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "feverDuration": {
+                        "const": "more than 7 days"
+                      }
+                    },
+                    "required": [
+                      "feverDuration"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "feverEveryDay": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverEveryDay"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Advise the caregiver when to return immediately",
+              "derivedFrom": []
+            },
+            {
+              "label": "Follow up in 3 days if fever persists",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL110",
+            "CHE.DT.01.CL111",
+            "CHE.DT.01.CL112",
+            "CHE.DT.01.CL113",
+            "CHE.DT.03.TR60",
+            "CHE.DT.03.TR61"
+          ]
+        },
+        {
+          "id": "Fever",
+          "label": "FEVER",
+          "severity": "green",
+          "matchesWhen": {
+            "allOf": [
+              {
+                "properties": {
+                  "malariaRisk": {
+                    "const": "no"
+                  }
+                },
+                "required": [
+                  "malariaRisk"
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "stiffNeck": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "stiffNeck"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "malariaRisk": {
+                                  "const": "high"
+                                }
+                              },
+                              "required": [
+                                "malariaRisk"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "malariaRisk": {
+                                      "const": "low"
+                                    }
+                                  },
+                                  "required": [
+                                    "malariaRisk"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "travelToHighRiskArea": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "travelToHighRiskArea"
+                                      ]
+                                    },
+                                    {
+                                      "not": {
+                                        "properties": {
+                                          "obviousCause": {
+                                            "const": true
+                                          }
+                                        },
+                                        "required": [
+                                          "obviousCause"
+                                        ]
+                                      }
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsingNow": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsingNow"
+                                      ]
+                                    },
+                                    {
+                                      "allOf": [
+                                        {
+                                          "properties": {
+                                            "convulsions": {
+                                              "const": true
+                                            }
+                                          },
+                                          "required": [
+                                            "convulsions"
+                                          ]
+                                        },
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "convulsionCount": {
+                                                  "const": "two or more"
+                                                }
+                                              },
+                                              "required": [
+                                                "convulsionCount"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "convulsionLong": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "convulsionLong"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "lethargic": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "lethargic"
+                                      ]
+                                    },
+                                    {
+                                      "allOf": [
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "notAbleToDrink": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "notAbleToDrink"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "vomitsEverything": {
+                                                  "const": true
+                                                }
+                                              },
+                                              "required": [
+                                                "vomitsEverything"
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "anyOf": [
+                                            {
+                                              "properties": {
+                                                "oralFluidTest": {
+                                                  "const": "completely unable to drink"
+                                                }
+                                              },
+                                              "required": [
+                                                "oralFluidTest"
+                                              ]
+                                            },
+                                            {
+                                              "properties": {
+                                                "oralFluidTest": {
+                                                  "const": "vomits immediately or everything"
+                                                }
+                                              },
+                                              "required": [
+                                                "oralFluidTest"
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "stiffNeck": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "stiffNeck"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "refusalToUseLimb": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "refusalToUseLimb"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "warmTenderJoint": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "warmTenderJoint"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "corneaClouding": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "corneaClouding"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "mouthUlcers": {
+                                      "const": "deep and extensive"
+                                    }
+                                  },
+                                  "required": [
+                                    "mouthUlcers"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "otherSevereClassification": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "otherSevereClassification"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "malariaTest": {
+                                  "const": "positive"
+                                }
+                              },
+                              "required": [
+                                "malariaTest"
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "malariaTest": {
+                                  "const": "unknown"
+                                }
+                              },
+                              "required": [
+                                "malariaTest"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "allOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "properties": {
+                                    "malariaRisk": {
+                                      "const": "high"
+                                    }
+                                  },
+                                  "required": [
+                                    "malariaRisk"
+                                  ]
+                                },
+                                {
+                                  "allOf": [
+                                    {
+                                      "properties": {
+                                        "malariaRisk": {
+                                          "const": "low"
+                                        }
+                                      },
+                                      "required": [
+                                        "malariaRisk"
+                                      ]
+                                    },
+                                    {
+                                      "anyOf": [
+                                        {
+                                          "properties": {
+                                            "travelToHighRiskArea": {
+                                              "const": true
+                                            }
+                                          },
+                                          "required": [
+                                            "travelToHighRiskArea"
+                                          ]
+                                        },
+                                        {
+                                          "not": {
+                                            "properties": {
+                                              "obviousCause": {
+                                                "const": true
+                                              }
+                                            },
+                                            "required": [
+                                              "obviousCause"
+                                            ]
+                                          }
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "malariaTest": {
+                                  "const": "negative"
+                                }
+                              },
+                              "required": [
+                                "malariaTest"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "properties": {
+                                "malariaRisk": {
+                                  "const": "low"
+                                }
+                              },
+                              "required": [
+                                "malariaRisk"
+                              ]
+                            },
+                            {
+                              "not": {
+                                "properties": {
+                                  "travelToHighRiskArea": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "travelToHighRiskArea"
+                                ]
+                              }
+                            },
+                            {
+                              "properties": {
+                                "obviousCause": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "obviousCause"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "qualifiers": [
+            {
+              "label": "Fever present every day for more than 7 days",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "feverDuration": {
+                        "const": "more than 7 days"
+                      }
+                    },
+                    "required": [
+                      "feverDuration"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "feverEveryDay": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverEveryDay"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": [
+                "CHE.DT.01.CL116",
+                "CHE.B23.DE29"
+              ]
+            }
+          ],
+          "treatments": [
+            {
+              "label": "Give oral paracetamol",
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer to the hospital for assessment",
+              "givenWhen": {
+                "allOf": [
+                  {
+                    "properties": {
+                      "feverDuration": {
+                        "const": "more than 7 days"
+                      }
+                    },
+                    "required": [
+                      "feverDuration"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "feverEveryDay": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverEveryDay"
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Advise the caregiver when to return immediately",
+              "derivedFrom": []
+            },
+            {
+              "label": "Follow up in 3 days if fever persists",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL115",
+            "CHE.DT.03.TR62",
+            "CHE.DT.03.TR63"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BoneJointTable",
+      "label": "Bone or joint",
+      "source": "WHO DAK child health (2024), Web Annex B: decision-support logic",
+      "usedWhen": {
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "properties": {
+                  "refusalToUseLimb": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "refusalToUseLimb"
+                ]
+              },
+              {
+                "properties": {
+                  "warmTenderJoint": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "warmTenderJoint"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "rows": [
+        {
+          "id": "PossibleBoneJointInfection",
+          "label": "POSSIBLE BONE/JOINT INFECTION",
+          "severity": "pink",
+          "matchesWhen": {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give an antibiotic (IM or oral)",
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer URGENTLY to the hospital",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL107",
+            "CHE.DT.01.CL108",
+            "CHE.DT.03.TR58"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "UrineTable",
+      "label": "Urine",
+      "source": "WHO DAK child health (2024), Web Annex B: decision-support logic",
+      "usedWhen": {
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          },
+          {
+            "properties": {
+              "painPassingUrine": {
+                "const": true
+              }
+            },
+            "required": [
+              "painPassingUrine"
+            ]
+          }
+        ]
+      },
+      "rows": [
+        {
+          "id": "PossibleUrineInfection",
+          "label": "POSSIBLE URINE INFECTION",
+          "severity": "yellow",
+          "matchesWhen": {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give an oral antibiotic",
+              "derivedFrom": []
+            },
+            {
+              "label": "Follow up in 3 days if fever persists, otherwise in 5 days",
+              "derivedFrom": []
+            },
+            {
+              "label": "Advise the caregiver when to return immediately",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL109",
+            "CHE.DT.03.TR59"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "MeaslesTable",
+      "label": "Measles",
+      "source": "WHO DAK child health (2024), Web Annex B: decision-support logic",
+      "usedWhen": {
+        "allOf": [
+          {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          },
+          {
+            "anyOf": [
+              {
+                "allOf": [
+                  {
+                    "properties": {
+                      "skinProblem": {
+                        "const": "generalized"
+                      }
+                    },
+                    "required": [
+                      "skinProblem"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "measlesRash": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "measlesRash"
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "cough": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "cough"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "runnyNose": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "runnyNose"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "redEyes": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "redEyes"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "properties": {
+                  "measlesRecent": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "measlesRecent"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "rows": [
+        {
+          "id": "SevereComplicatedMeasles",
+          "label": "SEVERE COMPLICATED MEASLES",
+          "severity": "pink",
+          "matchesWhen": {
+            "anyOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "convulsingNow": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "convulsingNow"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "convulsions": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "convulsions"
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "convulsionCount": {
+                                "const": "two or more"
+                              }
+                            },
+                            "required": [
+                              "convulsionCount"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "convulsionLong": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "convulsionLong"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "lethargic": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "lethargic"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "notAbleToDrink": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "notAbleToDrink"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "vomitsEverything": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "vomitsEverything"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "completely unable to drink"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "vomits immediately or everything"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "properties": {
+                  "corneaClouding": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "corneaClouding"
+                ]
+              },
+              {
+                "properties": {
+                  "mouthUlcers": {
+                    "const": "deep and extensive"
+                  }
+                },
+                "required": [
+                  "mouthUlcers"
+                ]
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give vitamin A treatment: first dose in the clinic, one dose at home the next day",
+              "givenWhen": {
+                "not": {
+                  "properties": {
+                    "vitaminARecent": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "vitaminARecent"
+                  ]
+                }
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give first dose of ampicillin (IM) and gentamicin (IM)",
+              "givenWhen": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "convulsingNow": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "convulsingNow"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "properties": {
+                          "convulsions": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "convulsions"
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "convulsionCount": {
+                                "const": "two or more"
+                              }
+                            },
+                            "required": [
+                              "convulsionCount"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "convulsionLong": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "convulsionLong"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "lethargic": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "lethargic"
+                    ]
+                  },
+                  {
+                    "allOf": [
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "notAbleToDrink": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "notAbleToDrink"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "vomitsEverything": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "vomitsEverything"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "anyOf": [
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "completely unable to drink"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "oralFluidTest": {
+                                "const": "vomits immediately or everything"
+                              }
+                            },
+                            "required": [
+                              "oralFluidTest"
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give first dose of amoxicillin (oral)",
+              "givenWhen": {
+                "not": {
+                  "anyOf": [
+                    {
+                      "properties": {
+                        "convulsingNow": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "convulsingNow"
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "properties": {
+                            "convulsions": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "convulsions"
+                          ]
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsionCount": {
+                                  "const": "two or more"
+                                }
+                              },
+                              "required": [
+                                "convulsionCount"
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "convulsionLong": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsionLong"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "properties": {
+                        "lethargic": {
+                          "const": true
+                        }
+                      },
+                      "required": [
+                        "lethargic"
+                      ]
+                    },
+                    {
+                      "allOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "notAbleToDrink": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "notAbleToDrink"
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "vomitsEverything": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "vomitsEverything"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "oralFluidTest": {
+                                  "const": "completely unable to drink"
+                                }
+                              },
+                              "required": [
+                                "oralFluidTest"
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "oralFluidTest": {
+                                  "const": "vomits immediately or everything"
+                                }
+                              },
+                              "required": [
+                                "oralFluidTest"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Give first dose of tetracycline eye ointment",
+              "givenWhen": {
+                "properties": {
+                  "corneaClouding": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "corneaClouding"
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Refer URGENTLY to the hospital",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL117",
+            "CHE.DT.01.CL120",
+            "CHE.DT.01.CL118",
+            "CHE.DT.01.CL119",
+            "CHE.DT.03.TR64",
+            "CHE.DT.03.TR65",
+            "CHE.DT.03.TR66",
+            "CHE.DT.03.TR70",
+            "CHE.DT.03.TR72",
+            "CHE.DT.03.TR73",
+            "CHE.DT.03.TR74",
+            "CHE.DT.03.TR78",
+            "CHE.DT.03.TR80",
+            "CHE.DT.03.TR81",
+            "CHE.DT.03.TR82",
+            "CHE.DT.03.TR86",
+            "CHE.DT.03.TR88",
+            "CHE.DT.03.TR89",
+            "CHE.DT.03.TR90",
+            "CHE.DT.03.TR94"
+          ]
+        },
+        {
+          "id": "MeaslesWithEyeOrMouthComplications",
+          "label": "MEASLES WITH EYE OR MOUTH COMPLICATIONS",
+          "severity": "yellow",
+          "matchesWhen": {
+            "allOf": [
+              {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "pusFromEye": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "pusFromEye"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "mouthUlcers": {
+                        "const": "not deep and extensive"
+                      }
+                    },
+                    "required": [
+                      "mouthUlcers"
+                    ]
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "corneaClouding": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "corneaClouding"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "mouthUlcers": {
+                              "const": "deep and extensive"
+                            }
+                          },
+                          "required": [
+                            "mouthUlcers"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give vitamin A treatment: first dose in the clinic, one dose at home the next day",
+              "givenWhen": {
+                "not": {
+                  "properties": {
+                    "vitaminARecent": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "vitaminARecent"
+                  ]
+                }
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Tetracycline eye ointment, four times daily for 7 days",
+              "givenWhen": {
+                "properties": {
+                  "pusFromEye": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "pusFromEye"
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "For mouth ulcers, treat with half-strength gentian violet four times daily for 7 days",
+              "givenWhen": {
+                "properties": {
+                  "mouthUlcers": {
+                    "const": "not deep and extensive"
+                  }
+                },
+                "required": [
+                  "mouthUlcers"
+                ]
+              },
+              "derivedFrom": []
+            },
+            {
+              "label": "Follow up in 3 days",
+              "derivedFrom": []
+            },
+            {
+              "label": "Advise the caregiver when to return immediately",
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.01.CL139",
+            "CHE.DT.01.CL140",
+            "CHE.DT.01.CL141",
+            "CHE.DT.03.TR96",
+            "CHE.DT.03.TR97",
+            "CHE.DT.03.TR98",
+            "CHE.DT.03.TR102",
+            "CHE.DT.03.TR104",
+            "CHE.DT.03.TR105",
+            "CHE.DT.03.TR106",
+            "CHE.DT.03.TR110",
+            "CHE.DT.03.TR112",
+            "CHE.DT.03.TR113",
+            "CHE.DT.03.TR114",
+            "CHE.DT.03.TR118"
+          ]
+        },
+        {
+          "id": "Measles",
+          "label": "MEASLES",
+          "severity": "green",
+          "matchesWhen": {
+            "allOf": [
+              {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "allOf": [
+                          {
+                            "properties": {
+                              "skinProblem": {
+                                "const": "generalized"
+                              }
+                            },
+                            "required": [
+                              "skinProblem"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "measlesRash": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "measlesRash"
+                            ]
+                          },
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "cough": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "cough"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "runnyNose": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "runnyNose"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "redEyes": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "redEyes"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "measlesRecent": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "measlesRecent"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "not": {
+                  "anyOf": [
+                    {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "corneaClouding": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "corneaClouding"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "mouthUlcers": {
+                              "const": "deep and extensive"
+                            }
+                          },
+                          "required": [
+                            "mouthUlcers"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "pusFromEye": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "pusFromEye"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "mouthUlcers": {
+                              "const": "not deep and extensive"
+                            }
+                          },
+                          "required": [
+                            "mouthUlcers"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          "qualifiers": [],
+          "treatments": [
+            {
+              "label": "Give vitamin A treatment: first dose in the clinic, one dose at home the next day",
+              "givenWhen": {
+                "not": {
+                  "properties": {
+                    "vitaminARecent": {
+                      "const": true
+                    }
+                  },
+                  "required": [
+                    "vitaminARecent"
+                  ]
+                }
+              },
+              "derivedFrom": []
+            }
+          ],
+          "derivedFrom": [
+            "CHE.DT.03.TR119",
+            "CHE.DT.01.CL159",
+            "CHE.DT.01.CL160",
+            "CHE.DT.03.TR120",
+            "CHE.DT.03.TR121",
+            "CHE.DT.03.TR122",
+            "CHE.DT.03.TR123",
+            "CHE.DT.03.TR124",
+            "CHE.DT.03.TR125",
+            "CHE.DT.03.TR126",
+            "CHE.DT.03.TR127"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+# Build the demos and publish them to GitHub Pages.
+# Each demo goes to its own folder, for example /imci-fever/.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: imci-fever
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.11
+
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run test
+      - run: bun run build
+
+      - name: Assemble site
+        working-directory: .
+        run: |
+          mkdir -p _site/imci-fever
+          cp -r imci-fever/dist/. _site/imci-fever/
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>Software that knows</title>
+            </head>
+            <body>
+              <h1>Software that knows</h1>
+              <p>Demonstrations only. Not medical devices. Do not use them to assess or treat anyone.</p>
+              <ul>
+                <li><a href="./imci-fever/">IMCI fever</a></li>
+              </ul>
+            </body>
+          </html>
+          EOF
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

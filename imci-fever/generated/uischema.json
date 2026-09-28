@@ -1,0 +1,1752 @@
+{
+  "$comment": "Generated from ontology/imci-fever.ttl by generator/generate.ts. Do not edit.",
+  "type": "Categorization",
+  "elements": [
+    {
+      "type": "Category",
+      "label": "Danger signs",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/convulsingNow"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/convulsions"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/convulsionCount",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "convulsions": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "convulsions"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/convulsionLong",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "convulsions": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "convulsions"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/lethargic"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/notAbleToDrink"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/vomitsEverything"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/oralFluidTest",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "notAbleToDrink": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "notAbleToDrink"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "vomitsEverything": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "vomitsEverything"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Fever",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/feverReported"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/axillaryTemperature"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/rectalTemperature"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/thermometerNotAvailable"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/hotToTouch",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "thermometerNotAvailable": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "thermometerNotAvailable"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/malariaRisk",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/travelToHighRiskArea",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "properties": {
+                            "convulsingNow": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "convulsingNow"
+                          ]
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "properties": {
+                                "convulsions": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsions"
+                              ]
+                            },
+                            {
+                              "anyOf": [
+                                {
+                                  "properties": {
+                                    "convulsionCount": {
+                                      "const": "two or more"
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsionCount"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "convulsionLong": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsionLong"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "lethargic": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "lethargic"
+                          ]
+                        },
+                        {
+                          "allOf": [
+                            {
+                              "anyOf": [
+                                {
+                                  "properties": {
+                                    "notAbleToDrink": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "notAbleToDrink"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "vomitsEverything": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "vomitsEverything"
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "anyOf": [
+                                {
+                                  "properties": {
+                                    "oralFluidTest": {
+                                      "const": "completely unable to drink"
+                                    }
+                                  },
+                                  "required": [
+                                    "oralFluidTest"
+                                  ]
+                                },
+                                {
+                                  "properties": {
+                                    "oralFluidTest": {
+                                      "const": "vomits immediately or everything"
+                                    }
+                                  },
+                                  "required": [
+                                    "oralFluidTest"
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "properties": {
+                      "malariaRisk": {
+                        "const": "low"
+                      }
+                    },
+                    "required": [
+                      "malariaRisk"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/obviousCause",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "malariaRisk": {
+                        "const": "low"
+                      }
+                    },
+                    "required": [
+                      "malariaRisk"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/feverDuration",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/feverEveryDay",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "feverDuration": {
+                    "const": "more than 7 days"
+                  }
+                },
+                "required": [
+                  "feverDuration"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/stiffNeck",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/refusalToUseLimb",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/warmTenderJoint",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/painPassingUrine",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/cough",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/runnyNose",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/redEyes",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/otherSevereClassification",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/malariaTest",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "malariaRisk": {
+                            "const": "high"
+                          }
+                        },
+                        "required": [
+                          "malariaRisk"
+                        ]
+                      },
+                      {
+                        "allOf": [
+                          {
+                            "properties": {
+                              "malariaRisk": {
+                                "const": "low"
+                              }
+                            },
+                            "required": [
+                              "malariaRisk"
+                            ]
+                          },
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "travelToHighRiskArea": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "travelToHighRiskArea"
+                                ]
+                              },
+                              {
+                                "not": {
+                                  "properties": {
+                                    "obviousCause": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "obviousCause"
+                                  ]
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "not": {
+                      "anyOf": [
+                        {
+                          "anyOf": [
+                            {
+                              "properties": {
+                                "convulsingNow": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "convulsingNow"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "properties": {
+                                    "convulsions": {
+                                      "const": true
+                                    }
+                                  },
+                                  "required": [
+                                    "convulsions"
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "convulsionCount": {
+                                          "const": "two or more"
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionCount"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "convulsionLong": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "convulsionLong"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "properties": {
+                                "lethargic": {
+                                  "const": true
+                                }
+                              },
+                              "required": [
+                                "lethargic"
+                              ]
+                            },
+                            {
+                              "allOf": [
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "notAbleToDrink": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "notAbleToDrink"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "vomitsEverything": {
+                                          "const": true
+                                        }
+                                      },
+                                      "required": [
+                                        "vomitsEverything"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "anyOf": [
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "completely unable to drink"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    },
+                                    {
+                                      "properties": {
+                                        "oralFluidTest": {
+                                          "const": "vomits immediately or everything"
+                                        }
+                                      },
+                                      "required": [
+                                        "oralFluidTest"
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "stiffNeck": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "stiffNeck"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "refusalToUseLimb": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "refusalToUseLimb"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "warmTenderJoint": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "warmTenderJoint"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "corneaClouding": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "corneaClouding"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "mouthUlcers": {
+                              "const": "deep and extensive"
+                            }
+                          },
+                          "required": [
+                            "mouthUlcers"
+                          ]
+                        },
+                        {
+                          "properties": {
+                            "otherSevereClassification": {
+                              "const": true
+                            }
+                          },
+                          "required": [
+                            "otherSevereClassification"
+                          ]
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/highParasiteDensity",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "malariaTest": {
+                    "const": "positive"
+                  }
+                },
+                "required": [
+                  "malariaTest"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Skin, mouth and eyes",
+      "rule": {
+        "effect": "SHOW",
+        "condition": {
+          "scope": "#",
+          "schema": {
+            "anyOf": [
+              {
+                "properties": {
+                  "feverReported": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "feverReported"
+                ]
+              },
+              {
+                "properties": {
+                  "hotToTouch": {
+                    "const": true
+                  }
+                },
+                "required": [
+                  "hotToTouch"
+                ]
+              },
+              {
+                "properties": {
+                  "axillaryTemperature": {
+                    "minimum": 37.5
+                  }
+                },
+                "required": [
+                  "axillaryTemperature"
+                ]
+              },
+              {
+                "properties": {
+                  "rectalTemperature": {
+                    "minimum": 38
+                  }
+                },
+                "required": [
+                  "rectalTemperature"
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/skinProblem",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "cough": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "cough"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "runnyNose": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "runnyNose"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "redEyes": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "redEyes"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/measlesRash",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "properties": {
+                  "skinProblem": {
+                    "const": "generalized"
+                  }
+                },
+                "required": [
+                  "skinProblem"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/measlesRecent",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/mouthUlcers",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/pusFromEye",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/corneaClouding",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "feverReported": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "feverReported"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "hotToTouch": {
+                        "const": true
+                      }
+                    },
+                    "required": [
+                      "hotToTouch"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "axillaryTemperature": {
+                        "minimum": 37.5
+                      }
+                    },
+                    "required": [
+                      "axillaryTemperature"
+                    ]
+                  },
+                  {
+                    "properties": {
+                      "rectalTemperature": {
+                        "minimum": 38
+                      }
+                    },
+                    "required": [
+                      "rectalTemperature"
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/vitaminARecent",
+          "rule": {
+            "effect": "SHOW",
+            "condition": {
+              "scope": "#",
+              "schema": {
+                "allOf": [
+                  {
+                    "anyOf": [
+                      {
+                        "properties": {
+                          "feverReported": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "feverReported"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "hotToTouch": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "hotToTouch"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "axillaryTemperature": {
+                            "minimum": 37.5
+                          }
+                        },
+                        "required": [
+                          "axillaryTemperature"
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "rectalTemperature": {
+                            "minimum": 38
+                          }
+                        },
+                        "required": [
+                          "rectalTemperature"
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "anyOf": [
+                      {
+                        "allOf": [
+                          {
+                            "properties": {
+                              "skinProblem": {
+                                "const": "generalized"
+                              }
+                            },
+                            "required": [
+                              "skinProblem"
+                            ]
+                          },
+                          {
+                            "properties": {
+                              "measlesRash": {
+                                "const": true
+                              }
+                            },
+                            "required": [
+                              "measlesRash"
+                            ]
+                          },
+                          {
+                            "anyOf": [
+                              {
+                                "properties": {
+                                  "cough": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "cough"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "runnyNose": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "runnyNose"
+                                ]
+                              },
+                              {
+                                "properties": {
+                                  "redEyes": {
+                                    "const": true
+                                  }
+                                },
+                                "required": [
+                                  "redEyes"
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "properties": {
+                          "measlesRecent": {
+                            "const": true
+                          }
+                        },
+                        "required": [
+                          "measlesRecent"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,653 @@
+# A knowledge model of the fever section of IMCI, for children aged 2 months up to 5 years,
+# adapted from the WHO Digital adaptation kit (DAK) for child health (0-59 months) in
+# humanitarian emergencies (2024):
+#   Web Annex A, core data dictionary     (the fields)
+#   Web Annex B, decision-support logic   (classifications CHE.DT.01, treatments CHE.DT.03)
+# Every field, row, qualifier and treatment names the DAK entries it comes from with
+# prov:wasDerivedFrom. Part 5 lists those entries.
+#
+# Licence: CC BY-NC-SA 3.0 IGO, like the DAK. This adaptation was not created by WHO, and WHO is
+# not responsible for its content or accuracy. Demonstration only: not reviewed by a clinician.
+#
+# Scope and simplifications:
+#   - Only the fever, malaria and measles logic. Findings from other parts of the assessment
+#     (for example severe pneumonia) are one field: otherSevereClassification.
+#   - Malaria from palmar pallor without fever (CL87, CL90) is not modelled.
+#   - Drug doses are left out. The DAK has them.
+#   - Vitamin A: one field for "vitamin A in the past month" instead of the age-based questions.
+#   - Colours: pink is a DAK severe classification (refer). Yellow and green follow the IMCI
+#     colour convention; the DAK itself does not name them.
+#
+# The file has five parts:
+#   1. Vocabulary: the terms that the other parts use.
+#   2. Fields: one SHACL shape. The generator makes the JSON Forms schema and UI schema from it.
+#   3. Conditions: named yes/no questions about the form data.
+#   4. Classification tables: their rows (the classifications), qualifiers and treatments.
+#   5. Provenance: the DAK documents and entries that parts 2 to 4 come from.
+#
+# A condition is a yes/no question about the form data. It has one of these forms:
+#   [ imci:field <path> ; imci:equals <value> ]
+#   [ imci:field <path> ; imci:atLeast <number> ]
+#   [ imci:allOf ( <condition> ... ) ]  [ imci:anyOf ( <condition> ... ) ]  [ imci:not <condition> ]
+# A condition that is used more than once has a name and the type imci:Condition.
+#
+# A rule is a condition and its effect. There are four kinds of rules:
+#   imci:shownWhen    a field or a tab is shown
+#   imci:usedWhen     a classification table is used
+#   imci:matchesWhen  a row matches (the first row that matches is the classification)
+#   imci:givenWhen    a qualifier or a treatment applies
+
+@prefix imci: <https://example.org/imci#> .
+@prefix dak:  <https://example.org/dak-ccc#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# ---------------------------------------------------------------------------
+# 1. Vocabulary
+# ---------------------------------------------------------------------------
+
+imci:Condition           a rdfs:Class ; rdfs:label "Condition" ;
+  rdfs:comment "A yes/no question about the form data." .
+imci:ClassificationTable a rdfs:Class ; rdfs:label "Classification table" .
+imci:Classification      a rdfs:Class ; rdfs:label "Classification" ;
+  rdfs:comment "One row of a classification table." .
+imci:Qualifier           a rdfs:Class ; rdfs:label "Qualifier" ;
+  rdfs:comment "Adds detail to a classification. It applies when its imci:givenWhen condition is true." .
+imci:Treatment           a rdfs:Class ; rdfs:label "Treatment" .
+imci:Severity            a rdfs:Class ; rdfs:label "Severity" .
+
+imci:Pink   a imci:Severity ; rdfs:label "pink" ;   rdfs:comment "A severe classification: refer to hospital." .
+imci:Yellow a imci:Severity ; rdfs:label "yellow" ; rdfs:comment "Treatment at the facility and at home." .
+imci:Green  a imci:Severity ; rdfs:label "green" ;  rdfs:comment "Home care." .
+
+imci:shownWhen   a rdf:Property ; rdfs:label "shown when" ;   rdfs:range imci:Condition ;
+  rdfs:comment "The field or the tab is shown only when this condition is true." .
+imci:usedWhen    a rdf:Property ; rdfs:label "used when" ;    rdfs:range imci:Condition ;
+  rdfs:domain imci:ClassificationTable ; rdfs:comment "The table is used only when this condition is true." .
+imci:matchesWhen a rdf:Property ; rdfs:label "matches when" ; rdfs:range imci:Condition ;
+  rdfs:domain imci:Classification ; rdfs:comment "The row matches when this condition is true." .
+imci:givenWhen   a rdf:Property ; rdfs:label "given when" ;   rdfs:range imci:Condition ;
+  rdfs:comment "The qualifier or treatment applies only when this condition is true." .
+imci:rows        a rdf:Property ; rdfs:label "rows" ; rdfs:domain imci:ClassificationTable ;
+  rdfs:comment "The rows of a table, top row first. The first row that matches is the classification." .
+imci:qualifiers  a rdf:Property ; rdfs:label "qualifiers" ; rdfs:domain imci:Classification ;
+  rdfs:comment "An ordered list of qualifiers." .
+imci:treatments  a rdf:Property ; rdfs:label "treatments" ; rdfs:domain imci:Classification ;
+  rdfs:comment "An ordered list of treatments." .
+imci:severity    a rdf:Property ; rdfs:label "severity" ; rdfs:range imci:Severity .
+
+# ---------------------------------------------------------------------------
+# 2. Fields
+# ---------------------------------------------------------------------------
+
+imci:DangerSignsTab a sh:PropertyGroup ; rdfs:label "Danger signs" ;         sh:order 1 .
+imci:FeverTab       a sh:PropertyGroup ; rdfs:label "Fever" ;                sh:order 2 .
+imci:SkinTab        a sh:PropertyGroup ; rdfs:label "Skin, mouth and eyes" ; sh:order 3 ;
+  imci:shownWhen imci:hasFever .
+
+imci:AssessmentShape a sh:NodeShape ;
+  rdfs:label "Sick child, age 2 months up to 5 years" ;
+  sh:property
+    [ sh:path imci:convulsingNow ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 1 ;
+      sh:name "Convulsing now (stabilized, the consultation continues)" ; prov:wasDerivedFrom dak:CHE.B7.DE02 ] ,
+    [ sh:path imci:convulsions ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 2 ;
+      sh:name "Convulsions in this illness" ; prov:wasDerivedFrom dak:CHE.B7.DE03 ] ,
+    [ sh:path imci:convulsionCount ; sh:in ( "one" "two or more" ) ; sh:group imci:DangerSignsTab ; sh:order 3 ;
+      sh:name "Number of convulsions in this illness" ; prov:wasDerivedFrom dak:CHE.B7.DE08 ;
+      imci:shownWhen [ imci:field imci:convulsions ; imci:equals true ] ] ,
+    [ sh:path imci:convulsionLong ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 4 ;
+      sh:name "A convulsion lasted 15 minutes or longer" ; prov:wasDerivedFrom dak:CHE.B7.DE11 ;
+      imci:shownWhen [ imci:field imci:convulsions ; imci:equals true ] ] ,
+    [ sh:path imci:lethargic ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 5 ;
+      sh:name "Unconscious or lethargic" ; prov:wasDerivedFrom dak:CHE.B7.DE04 ] ,
+    [ sh:path imci:notAbleToDrink ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 6 ;
+      sh:name "Not able to drink or breastfeed" ; prov:wasDerivedFrom dak:CHE.B7.DE05 ] ,
+    [ sh:path imci:vomitsEverything ; sh:datatype xsd:boolean ; sh:group imci:DangerSignsTab ; sh:order 7 ;
+      sh:name "Vomiting everything" ; prov:wasDerivedFrom dak:CHE.B7.DE06 ] ,
+    [ sh:path imci:oralFluidTest ;
+      sh:in ( "completely unable to drink" "vomits immediately or everything" "drinks poorly"
+              "drinks eagerly or thirstily" "drinks normally" "unable to do the test" ) ;
+      sh:group imci:DangerSignsTab ; sh:order 8 ;
+      sh:name "Oral fluid test result" ; sh:description "Do not do the test if the child is unconscious." ;
+      prov:wasDerivedFrom dak:CHE.B24.G.DE07 ;
+      imci:shownWhen [ imci:anyOf ( [ imci:field imci:notAbleToDrink ; imci:equals true ]
+                                    [ imci:field imci:vomitsEverything ; imci:equals true ] ) ] ] ,
+
+    [ sh:path imci:feverReported ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 1 ;
+      sh:name "Fever reported (fever in this illness)" ; prov:wasDerivedFrom dak:CHE.B11S1.DE02 ] ,
+    [ sh:path imci:axillaryTemperature ; sh:datatype xsd:decimal ; sh:group imci:FeverTab ; sh:order 2 ;
+      sh:name "Axillary temperature (°C)" ; sh:minInclusive 30 ; sh:maxInclusive 44 ;
+      prov:wasDerivedFrom dak:CHE.B6.DE01 ] ,
+    [ sh:path imci:rectalTemperature ; sh:datatype xsd:decimal ; sh:group imci:FeverTab ; sh:order 3 ;
+      sh:name "Rectal temperature (°C)" ; sh:description "Only if trained to take it." ;
+      sh:minInclusive 30 ; sh:maxInclusive 44 ; prov:wasDerivedFrom dak:CHE.B6.DE03 ] ,
+    [ sh:path imci:thermometerNotAvailable ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 4 ;
+      sh:name "No thermometer available" ; prov:wasDerivedFrom dak:CHE.B6.DE05 ] ,
+    [ sh:path imci:hotToTouch ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 5 ;
+      sh:name "Hot to touch" ; prov:wasDerivedFrom dak:CHE.B6.DE06 ;
+      imci:shownWhen [ imci:field imci:thermometerNotAvailable ; imci:equals true ] ] ,
+    # The malaria risk of the area. In the DAK it is set once for the facility.
+    [ sh:path imci:malariaRisk ; sh:in ( "high" "low" "no" ) ; sh:minCount 1 ; sh:group imci:FeverTab ; sh:order 6 ;
+      sh:name "Malaria risk of the area" ; prov:wasDerivedFrom dak:CHE.B25.H.DE01 ;
+      imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:travelToHighRiskArea ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 7 ;
+      sh:name "Travel to a high malaria risk area in the last 2 weeks" ; prov:wasDerivedFrom dak:CHE.B12S1.DE19 ;
+      imci:shownWhen [ imci:allOf ( imci:hasFever [ imci:not imci:hasDangerSign ]
+                                    [ imci:field imci:malariaRisk ; imci:equals "low" ] ) ] ] ,
+    [ sh:path imci:obviousCause ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 8 ;
+      sh:name "Obvious cause of fever" ; prov:wasDerivedFrom dak:CHE.B24.DE07 ;
+      imci:shownWhen [ imci:allOf ( imci:hasFever [ imci:field imci:malariaRisk ; imci:equals "low" ] ) ] ] ,
+    [ sh:path imci:feverDuration ; sh:in ( "7 days or less" "more than 7 days" ) ; sh:group imci:FeverTab ; sh:order 9 ;
+      sh:name "Fever for how long?" ; prov:wasDerivedFrom dak:CHE.B12S1.DE03 ;
+      imci:shownWhen [ imci:field imci:feverReported ; imci:equals true ] ] ,
+    [ sh:path imci:feverEveryDay ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 10 ;
+      sh:name "Fever present every day for more than 7 days?" ; prov:wasDerivedFrom dak:CHE.B12S1.DE06 ;
+      imci:shownWhen [ imci:field imci:feverDuration ; imci:equals "more than 7 days" ] ] ,
+    [ sh:path imci:stiffNeck ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 11 ;
+      sh:name "Stiff neck" ; prov:wasDerivedFrom dak:CHE.B12S2.DE01 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:refusalToUseLimb ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 12 ;
+      sh:name "Refusal to use a limb" ; prov:wasDerivedFrom dak:CHE.B12S2.DE02 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:warmTenderJoint ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 13 ;
+      sh:name "Warm, tender or swollen joint or bone" ; prov:wasDerivedFrom dak:CHE.B12S2.DE03 ;
+      imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:painPassingUrine ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 14 ;
+      sh:name "Pain or difficulty passing urine, or crying when passing urine" ;
+      prov:wasDerivedFrom dak:CHE.B12S1.DE11 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:cough ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 15 ;
+      sh:name "Cough" ; prov:wasDerivedFrom dak:CHE.B10S1.DE05A ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:runnyNose ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 16 ;
+      sh:name "Runny nose" ; prov:wasDerivedFrom dak:CHE.B12S2.DE05 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:redEyes ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 17 ;
+      sh:name "Red eyes" ; prov:wasDerivedFrom dak:CHE.B14S2.DE01 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:otherSevereClassification ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 18 ;
+      sh:name "Severe classification from another part of the assessment" ;
+      sh:description "For example severe pneumonia, mastoiditis or complicated severe acute malnutrition. This demo does not have those parts." ;
+      prov:wasDerivedFrom dak:CHE.B27.G.DE05 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:malariaTest ; sh:in ( "positive" "negative" "unknown" ) ; sh:group imci:FeverTab ; sh:order 19 ;
+      sh:name "Malaria test result" ; sh:description "unknown: status unknown, test unavailable, invalid or not feasible" ;
+      prov:wasDerivedFrom dak:CHE.B24.DE07 ; imci:shownWhen imci:needsMalariaTest ] ,
+    [ sh:path imci:highParasiteDensity ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 20 ;
+      sh:name "High parasite density" ;
+      sh:description "P. falciparum more than 10% or 500 000 per microlitre, or P. knowlesi more than 2% or 100 000 per microlitre" ;
+      prov:wasDerivedFrom dak:CHE.B24.G.DE71 ;
+      imci:shownWhen [ imci:field imci:malariaTest ; imci:equals "positive" ] ] ,
+
+    [ sh:path imci:skinProblem ; sh:in ( "generalized" "localized" "none" ) ; sh:group imci:SkinTab ; sh:order 1 ;
+      sh:name "Skin problem" ; prov:wasDerivedFrom dak:CHE.B14S2.DE06 ;
+      imci:shownWhen [ imci:allOf ( imci:hasFever imci:hasCatarrhalSign ) ] ] ,
+    [ sh:path imci:measlesRash ; sh:datatype xsd:boolean ; sh:group imci:SkinTab ; sh:order 2 ;
+      sh:name "Measles rash" ; prov:wasDerivedFrom dak:CHE.B14S2.DE10 ;
+      imci:shownWhen [ imci:field imci:skinProblem ; imci:equals "generalized" ] ] ,
+    [ sh:path imci:measlesRecent ; sh:datatype xsd:boolean ; sh:group imci:SkinTab ; sh:order 3 ;
+      sh:name "Measles within the last 3 months" ; prov:wasDerivedFrom dak:CHE.B14S2.DE11 ;
+      imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:mouthUlcers ; sh:in ( "none" "oral thrush" "deep and extensive" "not deep and extensive" ) ;
+      sh:group imci:SkinTab ; sh:order 4 ; sh:name "Oral sores or mouth ulcers" ;
+      prov:wasDerivedFrom dak:CHE.B14S2.DE38 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:pusFromEye ; sh:datatype xsd:boolean ; sh:group imci:SkinTab ; sh:order 5 ;
+      sh:name "Pus draining from the eye" ; prov:wasDerivedFrom dak:CHE.B14S2.DE02 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:corneaClouding ; sh:datatype xsd:boolean ; sh:group imci:SkinTab ; sh:order 6 ;
+      sh:name "Clouding of the cornea" ; prov:wasDerivedFrom dak:CHE.B14S2.DE03 ; imci:shownWhen imci:hasFever ] ,
+    [ sh:path imci:vitaminARecent ; sh:datatype xsd:boolean ; sh:group imci:SkinTab ; sh:order 7 ;
+      sh:name "Vitamin A, or malnutrition treatment that contains vitamin A, in the past month" ;
+      prov:wasDerivedFrom dak:CHE.DT.03.TR119 ; imci:shownWhen imci:hasMeasles ] .
+
+# ---------------------------------------------------------------------------
+# 3. Conditions
+# ---------------------------------------------------------------------------
+
+imci:hasDangerSign a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B27.G.DE01 ;
+  imci:anyOf (
+    [ imci:field imci:convulsingNow ; imci:equals true ]
+    [ imci:allOf ( [ imci:field imci:convulsions ; imci:equals true ]
+                   [ imci:anyOf ( [ imci:field imci:convulsionCount ; imci:equals "two or more" ]
+                                  [ imci:field imci:convulsionLong ; imci:equals true ] ) ] ) ]
+    [ imci:field imci:lethargic ; imci:equals true ]
+    [ imci:allOf ( [ imci:anyOf ( [ imci:field imci:notAbleToDrink ; imci:equals true ]
+                                  [ imci:field imci:vomitsEverything ; imci:equals true ] ) ]
+                   [ imci:anyOf ( [ imci:field imci:oralFluidTest ; imci:equals "completely unable to drink" ]
+                                  [ imci:field imci:oralFluidTest ; imci:equals "vomits immediately or everything" ] ) ] ) ] ) .
+
+# Fever: reported, hot to touch, or measured. Rectal readings are about 0.5 °C higher than axillary.
+imci:hasFever a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B27.G.DE06 , dak:CHE.B6.DE01 , dak:CHE.B6.DE03 ;
+  imci:anyOf (
+    [ imci:field imci:feverReported ; imci:equals true ]
+    [ imci:field imci:hotToTouch ; imci:equals true ]
+    [ imci:field imci:axillaryTemperature ; imci:atLeast 37.5 ]
+    [ imci:field imci:rectalTemperature ; imci:atLeast 38.0 ] ) .
+
+imci:hasHighFever a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B6.DE01 , dak:CHE.B6.DE03 ;
+  imci:anyOf (
+    [ imci:field imci:axillaryTemperature ; imci:atLeast 38.5 ]
+    [ imci:field imci:rectalTemperature ; imci:atLeast 39.0 ] ) .
+
+# The part of "2-59 months severe classification other than severe dehydration" that this demo
+# can see. Findings from the other parts of the assessment come in as otherSevereClassification.
+imci:hasSevereClassification a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B27.G.DE05 ;
+  imci:anyOf (
+    imci:hasDangerSign
+    [ imci:field imci:stiffNeck ; imci:equals true ]
+    [ imci:field imci:refusalToUseLimb ; imci:equals true ]
+    [ imci:field imci:warmTenderJoint ; imci:equals true ]
+    [ imci:field imci:corneaClouding ; imci:equals true ]
+    [ imci:field imci:mouthUlcers ; imci:equals "deep and extensive" ]
+    [ imci:field imci:otherSevereClassification ; imci:equals true ] ) .
+
+# The malaria rows apply: high risk, or low risk with recent travel or with no obvious cause.
+imci:malariaApplies a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B24.DE07 ;
+  imci:anyOf (
+    [ imci:field imci:malariaRisk ; imci:equals "high" ]
+    [ imci:allOf ( [ imci:field imci:malariaRisk ; imci:equals "low" ]
+                   [ imci:anyOf ( [ imci:field imci:travelToHighRiskArea ; imci:equals true ]
+                                  [ imci:not [ imci:field imci:obviousCause ; imci:equals true ] ] ) ] ) ] ) .
+
+imci:needsMalariaTest a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.B24.DE07 ;
+  imci:allOf ( imci:hasFever imci:malariaApplies [ imci:not imci:hasSevereClassification ] ) .
+
+imci:hasCatarrhalSign a imci:Condition ;
+  imci:anyOf (
+    [ imci:field imci:cough ; imci:equals true ]
+    [ imci:field imci:runnyNose ; imci:equals true ]
+    [ imci:field imci:redEyes ; imci:equals true ] ) .
+
+imci:hasMeasles a imci:Condition ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL117 , dak:CHE.DT.01.CL120 , dak:CHE.DT.01.CL138 ;
+  imci:allOf (
+    imci:hasFever
+    [ imci:anyOf (
+        [ imci:allOf ( [ imci:field imci:skinProblem ; imci:equals "generalized" ]
+                       [ imci:field imci:measlesRash ; imci:equals true ]
+                       imci:hasCatarrhalSign ) ]
+        [ imci:field imci:measlesRecent ; imci:equals true ] ) ] ) .
+
+imci:hasLongFever a imci:Condition ;
+  imci:allOf (
+    [ imci:field imci:feverDuration ; imci:equals "more than 7 days" ]
+    [ imci:field imci:feverEveryDay ; imci:equals true ] ) .
+
+imci:malariaUnconfirmed a imci:Condition ;
+  imci:anyOf ( [ imci:field imci:malariaTest ; imci:equals "unknown" ] imci:hasSevereClassification ) .
+
+imci:hasHighParasiteDensity a imci:Condition ;
+  imci:allOf ( [ imci:field imci:malariaTest ; imci:equals "positive" ]
+               [ imci:field imci:highParasiteDensity ; imci:equals true ] ) .
+
+imci:notRecentVitaminA a imci:Condition ;
+  imci:not [ imci:field imci:vitaminARecent ; imci:equals true ] .
+
+# ---------------------------------------------------------------------------
+# 4. Classification tables
+# ---------------------------------------------------------------------------
+
+## Qualifiers
+
+imci:MalariaUnconfirmed a imci:Qualifier ;
+  rdfs:label "Malaria unconfirmed (no test available or performed)" ;
+  imci:givenWhen imci:malariaUnconfirmed ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL95 , dak:CHE.DT.01.CL96 , dak:CHE.B23.DE22 .
+imci:HighParasiteDensity a imci:Qualifier ;
+  rdfs:label "High parasite density" ;
+  imci:givenWhen imci:hasHighParasiteDensity ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL93 , dak:CHE.B23.DE21 .
+imci:MalariaLongFever a imci:Qualifier ;
+  rdfs:label "Fever present every day for more than 7 days" ;
+  imci:givenWhen imci:hasLongFever ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL92 , dak:CHE.B23.DE23 .
+imci:NoMalariaLongFever a imci:Qualifier ;
+  rdfs:label "Fever present every day for more than 7 days" ;
+  imci:givenWhen imci:hasLongFever ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL114 , dak:CHE.B23.DE27 .
+imci:FeverLongFever a imci:Qualifier ;
+  rdfs:label "Fever present every day for more than 7 days" ;
+  imci:givenWhen imci:hasLongFever ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL116 , dak:CHE.B23.DE29 .
+
+## Treatments (drug doses left out; the DAK has them)
+#
+# A treatment is shared by several classifications, so its DAK treatment rows (CHE.DT.03) are
+# listed on each classification, not here: on a shared node they would mix the contexts.
+
+imci:FirstDoseArtesunate a imci:Treatment ;
+  rdfs:label "Give first dose of artesunate (IM or rectal)" ;
+  imci:givenWhen [ imci:anyOf ( [ imci:field imci:malariaRisk ; imci:equals "high" ]
+                                [ imci:field imci:malariaRisk ; imci:equals "low" ] ) ] .
+imci:FirstDoseCeftriaxone a imci:Treatment ;
+  rdfs:label "Give first dose of ceftriaxone (IM)" ;
+  imci:givenWhen [ imci:field imci:stiffNeck ; imci:equals true ] .
+imci:FirstDoseAmpicillinGentamicinFever a imci:Treatment ;
+  rdfs:label "Give first dose of ampicillin (IM) and gentamicin (IM)" ;
+  imci:givenWhen [ imci:not [ imci:field imci:stiffNeck ; imci:equals true ] ] .
+imci:PreventLowBloodSugar a imci:Treatment ;
+  rdfs:label "Treat the child to prevent low blood sugar" .
+imci:ParacetamolHighFever a imci:Treatment ;
+  rdfs:label "Give one dose of paracetamol in the clinic for high fever (38.5 °C or above)" ;
+  imci:givenWhen imci:hasHighFever .
+imci:ReferUrgently a imci:Treatment ;
+  rdfs:label "Refer URGENTLY to the hospital" .
+imci:Antimalarial a imci:Treatment ;
+  rdfs:label "Give antimalarial medication: artemether with lumefantrine (oral), dose by weight" .
+imci:ReferForAssessmentMalaria a imci:Treatment ;
+  rdfs:label "Refer to the hospital for assessment" ;
+  imci:givenWhen [ imci:anyOf ( imci:malariaUnconfirmed imci:hasHighParasiteDensity imci:hasLongFever ) ] .
+imci:ReferForAssessmentLongFever a imci:Treatment ;
+  rdfs:label "Refer to the hospital for assessment" ;
+  imci:givenWhen imci:hasLongFever .
+imci:OralParacetamol a imci:Treatment ;
+  rdfs:label "Give oral paracetamol" .
+imci:AdviseReturn a imci:Treatment ;
+  rdfs:label "Advise the caregiver when to return immediately" .
+imci:FollowUp3DaysFever a imci:Treatment ;
+  rdfs:label "Follow up in 3 days if fever persists" .
+imci:AntibioticBoneJoint a imci:Treatment ;
+  rdfs:label "Give an antibiotic (IM or oral)" .
+imci:AntibioticUrine a imci:Treatment ;
+  rdfs:label "Give an oral antibiotic" .
+imci:FollowUpUrine a imci:Treatment ;
+  rdfs:label "Follow up in 3 days if fever persists, otherwise in 5 days" .
+imci:VitaminA a imci:Treatment ;
+  rdfs:label "Give vitamin A treatment: first dose in the clinic, one dose at home the next day" ;
+  imci:givenWhen imci:notRecentVitaminA .
+imci:FirstDoseAmpicillinGentamicinMeasles a imci:Treatment ;
+  rdfs:label "Give first dose of ampicillin (IM) and gentamicin (IM)" ;
+  imci:givenWhen imci:hasDangerSign .
+imci:FirstDoseAmoxicillin a imci:Treatment ;
+  rdfs:label "Give first dose of amoxicillin (oral)" ;
+  imci:givenWhen [ imci:not imci:hasDangerSign ] .
+imci:FirstDoseTetracyclineCornea a imci:Treatment ;
+  rdfs:label "Give first dose of tetracycline eye ointment" ;
+  imci:givenWhen [ imci:field imci:corneaClouding ; imci:equals true ] .
+imci:TetracyclineEye a imci:Treatment ;
+  rdfs:label "Tetracycline eye ointment, four times daily for 7 days" ;
+  imci:givenWhen [ imci:field imci:pusFromEye ; imci:equals true ] .
+imci:GentianViolet a imci:Treatment ;
+  rdfs:label "For mouth ulcers, treat with half-strength gentian violet four times daily for 7 days" ;
+  imci:givenWhen [ imci:field imci:mouthUlcers ; imci:equals "not deep and extensive" ] .
+imci:FollowUp3Days a imci:Treatment ;
+  rdfs:label "Follow up in 3 days" .
+
+## Fever table
+
+imci:FeverTable a imci:ClassificationTable ;
+  rdfs:label "Fever" ;
+  prov:wasDerivedFrom dak:DecisionLogic ;
+  imci:usedWhen imci:hasFever ;
+  imci:rows ( imci:VerySevereFebrileDisease imci:Malaria imci:FeverNoMalaria imci:Fever ) .
+
+imci:VerySevereFebrileDisease a imci:Classification ;
+  rdfs:label "VERY SEVERE FEBRILE DISEASE" ;
+  imci:severity imci:Pink ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL84 , dak:CHE.DT.01.CL85 ,
+                      dak:CHE.DT.03.TR46 , dak:CHE.DT.03.TR47 , dak:CHE.DT.03.TR48 , dak:CHE.DT.03.TR49 , dak:CHE.DT.03.TR50 , dak:CHE.DT.03.TR51 ;
+  imci:matchesWhen [ imci:anyOf ( imci:hasDangerSign [ imci:field imci:stiffNeck ; imci:equals true ] ) ] ;
+  imci:treatments ( imci:FirstDoseArtesunate imci:FirstDoseCeftriaxone imci:FirstDoseAmpicillinGentamicinFever
+                    imci:PreventLowBloodSugar imci:ParacetamolHighFever imci:ReferUrgently ) .
+
+# A positive or unknown test, or no test because of another severe classification (CL95, CL97,
+# CL98): the child is then classified as malaria, unconfirmed.
+imci:Malaria a imci:Classification ;
+  rdfs:label "MALARIA" ;
+  imci:severity imci:Yellow ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL86 , dak:CHE.DT.01.CL88 , dak:CHE.DT.01.CL89 ,
+                      dak:CHE.DT.01.CL95 , dak:CHE.DT.01.CL96 , dak:CHE.DT.01.CL97 ,
+                      dak:CHE.DT.01.CL98 , dak:CHE.DT.01.CL99 , dak:CHE.DT.01.CL100 ,
+                      dak:CHE.DT.03.TR52 , dak:CHE.DT.03.TR53 , dak:CHE.DT.03.TR54 , dak:CHE.DT.03.TR55 , dak:CHE.DT.03.TR56 , dak:CHE.DT.03.TR57 ;
+  imci:matchesWhen [ imci:allOf (
+    imci:malariaApplies
+    [ imci:anyOf (
+        imci:hasSevereClassification
+        [ imci:field imci:malariaTest ; imci:equals "positive" ]
+        [ imci:field imci:malariaTest ; imci:equals "unknown" ] ) ] ) ] ;
+  imci:qualifiers ( imci:MalariaUnconfirmed imci:HighParasiteDensity imci:MalariaLongFever ) ;
+  imci:treatments ( imci:ParacetamolHighFever imci:Antimalarial imci:ReferForAssessmentMalaria
+                    imci:AdviseReturn imci:FollowUp3DaysFever ) .
+
+imci:FeverNoMalaria a imci:Classification ;
+  rdfs:label "FEVER: NO MALARIA" ;
+  imci:severity imci:Green ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL110 , dak:CHE.DT.01.CL111 , dak:CHE.DT.01.CL112 , dak:CHE.DT.01.CL113 ,
+                      dak:CHE.DT.03.TR60 , dak:CHE.DT.03.TR61 ;
+  imci:matchesWhen [ imci:anyOf (
+    [ imci:allOf ( imci:malariaApplies [ imci:field imci:malariaTest ; imci:equals "negative" ] ) ]
+    # Low risk, no travel, and an obvious cause of fever: no malaria test (CL113).
+    [ imci:allOf ( [ imci:field imci:malariaRisk ; imci:equals "low" ]
+                   [ imci:not [ imci:field imci:travelToHighRiskArea ; imci:equals true ] ]
+                   [ imci:field imci:obviousCause ; imci:equals true ] ) ] ) ] ;
+  imci:qualifiers ( imci:NoMalariaLongFever ) ;
+  imci:treatments ( imci:OralParacetamol imci:ReferForAssessmentLongFever imci:AdviseReturn imci:FollowUp3DaysFever ) .
+
+imci:Fever a imci:Classification ;
+  rdfs:label "FEVER" ;
+  imci:severity imci:Green ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL115 ,
+                      dak:CHE.DT.03.TR62 , dak:CHE.DT.03.TR63 ;
+  imci:matchesWhen [ imci:field imci:malariaRisk ; imci:equals "no" ] ;
+  imci:qualifiers ( imci:FeverLongFever ) ;
+  imci:treatments ( imci:OralParacetamol imci:ReferForAssessmentLongFever imci:AdviseReturn imci:FollowUp3DaysFever ) .
+
+## Bone or joint table
+
+imci:BoneJointTable a imci:ClassificationTable ;
+  rdfs:label "Bone or joint" ;
+  prov:wasDerivedFrom dak:DecisionLogic ;
+  imci:usedWhen [ imci:allOf ( imci:hasFever [ imci:anyOf ( [ imci:field imci:refusalToUseLimb ; imci:equals true ]
+                                                             [ imci:field imci:warmTenderJoint ; imci:equals true ] ) ] ) ] ;
+  imci:rows ( imci:PossibleBoneJointInfection ) .
+
+imci:PossibleBoneJointInfection a imci:Classification ;
+  rdfs:label "POSSIBLE BONE/JOINT INFECTION" ;
+  imci:severity imci:Pink ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL107 , dak:CHE.DT.01.CL108 ,
+                      dak:CHE.DT.03.TR58 ;
+  imci:matchesWhen imci:hasFever ;
+  imci:treatments ( imci:AntibioticBoneJoint imci:ReferUrgently ) .
+
+## Urine table
+
+imci:UrineTable a imci:ClassificationTable ;
+  rdfs:label "Urine" ;
+  prov:wasDerivedFrom dak:DecisionLogic ;
+  imci:usedWhen [ imci:allOf ( imci:hasFever [ imci:field imci:painPassingUrine ; imci:equals true ] ) ] ;
+  imci:rows ( imci:PossibleUrineInfection ) .
+
+imci:PossibleUrineInfection a imci:Classification ;
+  rdfs:label "POSSIBLE URINE INFECTION" ;
+  imci:severity imci:Yellow ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL109 ,
+                      dak:CHE.DT.03.TR59 ;
+  imci:matchesWhen imci:hasFever ;
+  imci:treatments ( imci:AntibioticUrine imci:FollowUpUrine imci:AdviseReturn ) .
+
+## Measles table
+
+imci:MeaslesTable a imci:ClassificationTable ;
+  rdfs:label "Measles" ;
+  prov:wasDerivedFrom dak:DecisionLogic ;
+  imci:usedWhen imci:hasMeasles ;
+  imci:rows ( imci:SevereComplicatedMeasles imci:MeaslesWithEyeOrMouthComplications imci:Measles ) .
+
+imci:SevereComplicatedMeasles a imci:Classification ;
+  rdfs:label "SEVERE COMPLICATED MEASLES" ;
+  imci:severity imci:Pink ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL117 , dak:CHE.DT.01.CL118 , dak:CHE.DT.01.CL119 , dak:CHE.DT.01.CL120 ,
+                      dak:CHE.DT.03.TR64 , dak:CHE.DT.03.TR65 , dak:CHE.DT.03.TR66 , dak:CHE.DT.03.TR70 , dak:CHE.DT.03.TR72 , dak:CHE.DT.03.TR73 , dak:CHE.DT.03.TR74 , dak:CHE.DT.03.TR78 , dak:CHE.DT.03.TR80 , dak:CHE.DT.03.TR81 , dak:CHE.DT.03.TR82 , dak:CHE.DT.03.TR86 , dak:CHE.DT.03.TR88 , dak:CHE.DT.03.TR89 , dak:CHE.DT.03.TR90 , dak:CHE.DT.03.TR94 ;
+  imci:matchesWhen [ imci:anyOf (
+    imci:hasDangerSign
+    [ imci:field imci:corneaClouding ; imci:equals true ]
+    [ imci:field imci:mouthUlcers ; imci:equals "deep and extensive" ] ) ] ;
+  imci:treatments ( imci:VitaminA imci:FirstDoseAmpicillinGentamicinMeasles imci:FirstDoseAmoxicillin
+                    imci:FirstDoseTetracyclineCornea imci:ReferUrgently ) .
+
+imci:MeaslesWithEyeOrMouthComplications a imci:Classification ;
+  rdfs:label "MEASLES WITH EYE OR MOUTH COMPLICATIONS" ;
+  imci:severity imci:Yellow ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL139 , dak:CHE.DT.01.CL140 , dak:CHE.DT.01.CL141 ,
+                      dak:CHE.DT.03.TR96 , dak:CHE.DT.03.TR97 , dak:CHE.DT.03.TR98 , dak:CHE.DT.03.TR102 , dak:CHE.DT.03.TR104 , dak:CHE.DT.03.TR105 , dak:CHE.DT.03.TR106 , dak:CHE.DT.03.TR110 , dak:CHE.DT.03.TR112 , dak:CHE.DT.03.TR113 , dak:CHE.DT.03.TR114 , dak:CHE.DT.03.TR118 ;
+  imci:matchesWhen [ imci:anyOf (
+    [ imci:field imci:pusFromEye ; imci:equals true ]
+    [ imci:field imci:mouthUlcers ; imci:equals "not deep and extensive" ] ) ] ;
+  imci:treatments ( imci:VitaminA imci:TetracyclineEye imci:GentianViolet imci:FollowUp3Days imci:AdviseReturn ) .
+
+imci:Measles a imci:Classification ;
+  rdfs:label "MEASLES" ;
+  imci:severity imci:Green ;
+  prov:wasDerivedFrom dak:CHE.DT.01.CL159 , dak:CHE.DT.01.CL160 ,
+                      dak:CHE.DT.03.TR119 , dak:CHE.DT.03.TR120 , dak:CHE.DT.03.TR121 , dak:CHE.DT.03.TR122 , dak:CHE.DT.03.TR123 , dak:CHE.DT.03.TR124 , dak:CHE.DT.03.TR125 , dak:CHE.DT.03.TR126 , dak:CHE.DT.03.TR127 ;
+  imci:matchesWhen imci:hasMeasles ;
+  imci:treatments ( imci:VitaminA ) .
+
+# ---------------------------------------------------------------------------
+# 5. Provenance
+# ---------------------------------------------------------------------------
+
+dak:DecisionLogic a prov:Entity ;
+  rdfs:label "WHO DAK child health (2024), Web Annex B: decision-support logic" ;
+  rdfs:seeAlso <https://smart.who.int/dak-ccc/v1.0.0/CCC%20DAK_decision-support%20logic.xlsx> .
+dak:DataDictionary a prov:Entity ;
+  rdfs:label "WHO DAK child health (2024), Web Annex A: core data dictionary" ;
+  rdfs:seeAlso <https://smart.who.int/dak-ccc/v1.0.0/CCC%20DAK_core%20data%20dictionary.xlsx> .
+
+imci:DakAdaptation a prov:Activity ;
+  rdfs:label "Adaptation of the DAK fever logic into this knowledge model" ;
+  rdfs:comment "Done with an AI coding assistant. Not reviewed by a clinician." ;
+  prov:used dak:DecisionLogic , dak:DataDictionary .
+
+# Rows of the decision-support logic (CHE.DT.01 classifications, CHE.DT.03 treatments)
+dak:CHE.DT.01.CL84  a prov:Entity ; rdfs:label "CHE.DT.01.CL84" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL85  a prov:Entity ; rdfs:label "CHE.DT.01.CL85" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL86  a prov:Entity ; rdfs:label "CHE.DT.01.CL86" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL88  a prov:Entity ; rdfs:label "CHE.DT.01.CL88" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL89  a prov:Entity ; rdfs:label "CHE.DT.01.CL89" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL92  a prov:Entity ; rdfs:label "CHE.DT.01.CL92" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL93  a prov:Entity ; rdfs:label "CHE.DT.01.CL93" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL95  a prov:Entity ; rdfs:label "CHE.DT.01.CL95" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL96  a prov:Entity ; rdfs:label "CHE.DT.01.CL96" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL97  a prov:Entity ; rdfs:label "CHE.DT.01.CL97" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL98  a prov:Entity ; rdfs:label "CHE.DT.01.CL98" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL99  a prov:Entity ; rdfs:label "CHE.DT.01.CL99" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL100 a prov:Entity ; rdfs:label "CHE.DT.01.CL100" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL107 a prov:Entity ; rdfs:label "CHE.DT.01.CL107" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL108 a prov:Entity ; rdfs:label "CHE.DT.01.CL108" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL109 a prov:Entity ; rdfs:label "CHE.DT.01.CL109" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL110 a prov:Entity ; rdfs:label "CHE.DT.01.CL110" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL111 a prov:Entity ; rdfs:label "CHE.DT.01.CL111" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL112 a prov:Entity ; rdfs:label "CHE.DT.01.CL112" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL113 a prov:Entity ; rdfs:label "CHE.DT.01.CL113" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL114 a prov:Entity ; rdfs:label "CHE.DT.01.CL114" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL115 a prov:Entity ; rdfs:label "CHE.DT.01.CL115" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL116 a prov:Entity ; rdfs:label "CHE.DT.01.CL116" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL117 a prov:Entity ; rdfs:label "CHE.DT.01.CL117" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL118 a prov:Entity ; rdfs:label "CHE.DT.01.CL118" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL119 a prov:Entity ; rdfs:label "CHE.DT.01.CL119" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL120 a prov:Entity ; rdfs:label "CHE.DT.01.CL120" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL138 a prov:Entity ; rdfs:label "CHE.DT.01.CL138" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL139 a prov:Entity ; rdfs:label "CHE.DT.01.CL139" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL140 a prov:Entity ; rdfs:label "CHE.DT.01.CL140" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL141 a prov:Entity ; rdfs:label "CHE.DT.01.CL141" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL159 a prov:Entity ; rdfs:label "CHE.DT.01.CL159" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL160 a prov:Entity ; rdfs:label "CHE.DT.01.CL160" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR46  a prov:Entity ; rdfs:label "CHE.DT.03.TR46" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR47  a prov:Entity ; rdfs:label "CHE.DT.03.TR47" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR48  a prov:Entity ; rdfs:label "CHE.DT.03.TR48" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR49  a prov:Entity ; rdfs:label "CHE.DT.03.TR49" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR50  a prov:Entity ; rdfs:label "CHE.DT.03.TR50" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR51  a prov:Entity ; rdfs:label "CHE.DT.03.TR51" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR52  a prov:Entity ; rdfs:label "CHE.DT.03.TR52" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR53  a prov:Entity ; rdfs:label "CHE.DT.03.TR53" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR54  a prov:Entity ; rdfs:label "CHE.DT.03.TR54" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR55  a prov:Entity ; rdfs:label "CHE.DT.03.TR55" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR56  a prov:Entity ; rdfs:label "CHE.DT.03.TR56" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR57  a prov:Entity ; rdfs:label "CHE.DT.03.TR57" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR58  a prov:Entity ; rdfs:label "CHE.DT.03.TR58" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR59  a prov:Entity ; rdfs:label "CHE.DT.03.TR59" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR60  a prov:Entity ; rdfs:label "CHE.DT.03.TR60" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR61  a prov:Entity ; rdfs:label "CHE.DT.03.TR61" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR62  a prov:Entity ; rdfs:label "CHE.DT.03.TR62" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR63  a prov:Entity ; rdfs:label "CHE.DT.03.TR63" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR64  a prov:Entity ; rdfs:label "CHE.DT.03.TR64" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR65  a prov:Entity ; rdfs:label "CHE.DT.03.TR65" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR66  a prov:Entity ; rdfs:label "CHE.DT.03.TR66" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR70  a prov:Entity ; rdfs:label "CHE.DT.03.TR70" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR72  a prov:Entity ; rdfs:label "CHE.DT.03.TR72" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR73  a prov:Entity ; rdfs:label "CHE.DT.03.TR73" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR74  a prov:Entity ; rdfs:label "CHE.DT.03.TR74" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR78  a prov:Entity ; rdfs:label "CHE.DT.03.TR78" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR80  a prov:Entity ; rdfs:label "CHE.DT.03.TR80" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR81  a prov:Entity ; rdfs:label "CHE.DT.03.TR81" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR82  a prov:Entity ; rdfs:label "CHE.DT.03.TR82" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR86  a prov:Entity ; rdfs:label "CHE.DT.03.TR86" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR88  a prov:Entity ; rdfs:label "CHE.DT.03.TR88" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR89  a prov:Entity ; rdfs:label "CHE.DT.03.TR89" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR90  a prov:Entity ; rdfs:label "CHE.DT.03.TR90" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR94  a prov:Entity ; rdfs:label "CHE.DT.03.TR94" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR96  a prov:Entity ; rdfs:label "CHE.DT.03.TR96" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR97  a prov:Entity ; rdfs:label "CHE.DT.03.TR97" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR98  a prov:Entity ; rdfs:label "CHE.DT.03.TR98" ;      prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR102 a prov:Entity ; rdfs:label "CHE.DT.03.TR102" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR104 a prov:Entity ; rdfs:label "CHE.DT.03.TR104" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR105 a prov:Entity ; rdfs:label "CHE.DT.03.TR105" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR106 a prov:Entity ; rdfs:label "CHE.DT.03.TR106" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR110 a prov:Entity ; rdfs:label "CHE.DT.03.TR110" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR112 a prov:Entity ; rdfs:label "CHE.DT.03.TR112" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR113 a prov:Entity ; rdfs:label "CHE.DT.03.TR113" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR114 a prov:Entity ; rdfs:label "CHE.DT.03.TR114" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR118 a prov:Entity ; rdfs:label "CHE.DT.03.TR118" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR119 a prov:Entity ; rdfs:label "CHE.DT.03.TR119" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR120 a prov:Entity ; rdfs:label "CHE.DT.03.TR120" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR121 a prov:Entity ; rdfs:label "CHE.DT.03.TR121" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR122 a prov:Entity ; rdfs:label "CHE.DT.03.TR122" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR123 a prov:Entity ; rdfs:label "CHE.DT.03.TR123" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR124 a prov:Entity ; rdfs:label "CHE.DT.03.TR124" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR125 a prov:Entity ; rdfs:label "CHE.DT.03.TR125" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR126 a prov:Entity ; rdfs:label "CHE.DT.03.TR126" ;     prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.03.TR127 a prov:Entity ; rdfs:label "CHE.DT.03.TR127" ;     prov:hadPrimarySource dak:DecisionLogic .
+
+# Data elements of the core data dictionary
+dak:CHE.B6.DE01      a prov:Entity ; rdfs:label "CHE.B6.DE01" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B6.DE03      a prov:Entity ; rdfs:label "CHE.B6.DE03" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B6.DE05      a prov:Entity ; rdfs:label "CHE.B6.DE05" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B6.DE06      a prov:Entity ; rdfs:label "CHE.B6.DE06" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE02      a prov:Entity ; rdfs:label "CHE.B7.DE02" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE03      a prov:Entity ; rdfs:label "CHE.B7.DE03" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE04      a prov:Entity ; rdfs:label "CHE.B7.DE04" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE05      a prov:Entity ; rdfs:label "CHE.B7.DE05" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE06      a prov:Entity ; rdfs:label "CHE.B7.DE06" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE08      a prov:Entity ; rdfs:label "CHE.B7.DE08" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B7.DE11      a prov:Entity ; rdfs:label "CHE.B7.DE11" ;      prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B10S1.DE05A  a prov:Entity ; rdfs:label "CHE.B10S1.DE05A" ;  prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B11S1.DE02   a prov:Entity ; rdfs:label "CHE.B11S1.DE02" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S1.DE03   a prov:Entity ; rdfs:label "CHE.B12S1.DE03" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S1.DE06   a prov:Entity ; rdfs:label "CHE.B12S1.DE06" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S1.DE11   a prov:Entity ; rdfs:label "CHE.B12S1.DE11" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S1.DE19   a prov:Entity ; rdfs:label "CHE.B12S1.DE19" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S2.DE01   a prov:Entity ; rdfs:label "CHE.B12S2.DE01" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S2.DE02   a prov:Entity ; rdfs:label "CHE.B12S2.DE02" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S2.DE03   a prov:Entity ; rdfs:label "CHE.B12S2.DE03" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B12S2.DE05   a prov:Entity ; rdfs:label "CHE.B12S2.DE05" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE01   a prov:Entity ; rdfs:label "CHE.B14S2.DE01" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE02   a prov:Entity ; rdfs:label "CHE.B14S2.DE02" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE03   a prov:Entity ; rdfs:label "CHE.B14S2.DE03" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE06   a prov:Entity ; rdfs:label "CHE.B14S2.DE06" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE10   a prov:Entity ; rdfs:label "CHE.B14S2.DE10" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE11   a prov:Entity ; rdfs:label "CHE.B14S2.DE11" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B14S2.DE38   a prov:Entity ; rdfs:label "CHE.B14S2.DE38" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B23.DE21     a prov:Entity ; rdfs:label "CHE.B23.DE21" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B23.DE22     a prov:Entity ; rdfs:label "CHE.B23.DE22" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B23.DE23     a prov:Entity ; rdfs:label "CHE.B23.DE23" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B23.DE27     a prov:Entity ; rdfs:label "CHE.B23.DE27" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B23.DE29     a prov:Entity ; rdfs:label "CHE.B23.DE29" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B24.DE07     a prov:Entity ; rdfs:label "CHE.B24.DE07" ;     prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B24.G.DE07   a prov:Entity ; rdfs:label "CHE.B24.G.DE07" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B24.G.DE71   a prov:Entity ; rdfs:label "CHE.B24.G.DE71" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B25.H.DE01   a prov:Entity ; rdfs:label "CHE.B25.H.DE01" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B27.G.DE01   a prov:Entity ; rdfs:label "CHE.B27.G.DE01" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B27.G.DE05   a prov:Entity ; rdfs:label "CHE.B27.G.DE05" ;   prov:hadPrimarySource dak:DataDictionary .
+dak:CHE.B27.G.DE06   a prov:Entity ; rdfs:label "CHE.B27.G.DE06" ;   prov:hadPrimarySource dak:DataDictionary .

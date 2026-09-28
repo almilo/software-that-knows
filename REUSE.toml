@@ -1,0 +1,17 @@
+version = 1
+
+# Code and documentation: MIT.
+[[annotations]]
+path = "**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 almilo"
+SPDX-License-Identifier = "MIT"
+
+# Knowledge models and every file generated from them are adaptations of the
+# WHO Digital adaptation kit for child health (0-59 months) in humanitarian
+# emergencies (2024), so they keep its licence.
+[[annotations]]
+path = ["**/ontology/**", "**/generated/**"]
+precedence = "override"
+SPDX-FileCopyrightText = ["2024 World Health Organization", "2026 almilo"]
+SPDX-License-Identifier = "CC-BY-NC-SA-3.0-IGO"

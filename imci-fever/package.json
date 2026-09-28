@@ -1,0 +1,27 @@
+{
+  "name": "imci-fever",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun generator/generate.ts",
+    "dev": "bun run generate && bun ./index.html",
+    "build": "bun run generate && bun build ./index.html --outdir dist --production",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@jsonforms/core": "^3.8.0",
+    "@jsonforms/react": "^3.8.0",
+    "@jsonforms/vanilla-renderers": "^3.8.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/n3": "^1.26.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "n3": "^2.7.12",
+    "typescript": "^7.0.2"
+  }
+}

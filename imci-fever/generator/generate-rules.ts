@@ -16,9 +16,13 @@ function exclusive(own: ConditionSchema, above: ConditionSchema[]): ConditionSch
 export function generateRules(o: Ontology): Rules {
   const condition = (node: Term, property: string) =>
     compileCondition(o, o.one(node, `${IMCI}${property}`)!);
-  // The labels of the entities that a node was derived from (prov:wasDerivedFrom).
+  // The labels of the entities that a node was derived from (prov:wasDerivedFrom), sorted by their
+  // numbers (CL84 before CL100), so the generated file does not depend on the order of the triples.
   const derivedFrom = (node: Term) =>
-    o.all(node, `${PROV}wasDerivedFrom`).map((source) => o.text(source, `${RDFS}label`) ?? source.value);
+    o
+      .all(node, `${PROV}wasDerivedFrom`)
+      .map((source) => o.text(source, `${RDFS}label`) ?? source.value)
+      .sort(new Intl.Collator("en", { numeric: true }).compare);
 
   return {
     // The classifier removes the values of hidden fields, so it needs the same conditions as the form.

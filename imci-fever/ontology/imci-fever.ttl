@@ -138,7 +138,11 @@ imci:AssessmentShape a sh:NodeShape ;
       imci:shownWhen [ imci:allOf ( imci:hasFever [ imci:not imci:hasDangerSign ]
                                     [ imci:field imci:malariaRisk ; imci:equals "low" ] ) ] ] ,
     [ sh:path imci:obviousCause ; sh:datatype xsd:boolean ; sh:group imci:FeverTab ; sh:order 8 ;
-      sh:name "Obvious cause of fever" ; prov:wasDerivedFrom dak:CHE.B24.DE07 ;
+      # The DAK has no data element for it: only the condition "Obvious causes of fever (to determine
+      # if malaria test required)" in the rows of the fever table that use it.
+      sh:name "Obvious cause of fever" ;
+      prov:wasDerivedFrom dak:CHE.DT.01.CL89 , dak:CHE.DT.01.CL91 , dak:CHE.DT.01.CL98 , dak:CHE.DT.01.CL100 ,
+                          dak:CHE.DT.01.CL104 , dak:CHE.DT.01.CL106 , dak:CHE.DT.01.CL112 , dak:CHE.DT.01.CL113 ;
       imci:shownWhen [ imci:allOf ( imci:hasFever [ imci:field imci:malariaRisk ; imci:equals "low" ] ) ] ] ,
     [ sh:path imci:feverDuration ; sh:in ( "7 days or less" "more than 7 days" ) ; sh:group imci:FeverTab ; sh:order 9 ;
       sh:name "Fever for how long?" ; prov:wasDerivedFrom dak:CHE.B12S1.DE03 ;
@@ -526,6 +530,7 @@ dak:CHE.DT.01.CL85  a prov:Entity ; rdfs:label "CHE.DT.01.CL85" ;  prov:hadPrima
 dak:CHE.DT.01.CL86  a prov:Entity ; rdfs:label "CHE.DT.01.CL86" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL88  a prov:Entity ; rdfs:label "CHE.DT.01.CL88" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL89  a prov:Entity ; rdfs:label "CHE.DT.01.CL89" ;  prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL91  a prov:Entity ; rdfs:label "CHE.DT.01.CL91" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL92  a prov:Entity ; rdfs:label "CHE.DT.01.CL92" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL93  a prov:Entity ; rdfs:label "CHE.DT.01.CL93" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL95  a prov:Entity ; rdfs:label "CHE.DT.01.CL95" ;  prov:hadPrimarySource dak:DecisionLogic .
@@ -534,6 +539,8 @@ dak:CHE.DT.01.CL97  a prov:Entity ; rdfs:label "CHE.DT.01.CL97" ;  prov:hadPrima
 dak:CHE.DT.01.CL98  a prov:Entity ; rdfs:label "CHE.DT.01.CL98" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL99  a prov:Entity ; rdfs:label "CHE.DT.01.CL99" ;  prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL100 a prov:Entity ; rdfs:label "CHE.DT.01.CL100" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL104 a prov:Entity ; rdfs:label "CHE.DT.01.CL104" ; prov:hadPrimarySource dak:DecisionLogic .
+dak:CHE.DT.01.CL106 a prov:Entity ; rdfs:label "CHE.DT.01.CL106" ; prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL107 a prov:Entity ; rdfs:label "CHE.DT.01.CL107" ; prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL108 a prov:Entity ; rdfs:label "CHE.DT.01.CL108" ; prov:hadPrimarySource dak:DecisionLogic .
 dak:CHE.DT.01.CL109 a prov:Entity ; rdfs:label "CHE.DT.01.CL109" ; prov:hadPrimarySource dak:DecisionLogic .

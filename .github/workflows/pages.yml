@@ -1,5 +1,5 @@
 # Build the demos and publish them to GitHub Pages.
-# Each demo goes to its own folder, for example /imci-fever/.
+# Each demo goes to its own folder, for example /imci-fever/. The landing page is site/index.html.
 name: Pages
 
 on:
@@ -38,23 +38,7 @@ jobs:
         run: |
           mkdir -p _site/imci-fever
           cp -r imci-fever/dist/. _site/imci-fever/
-          cat > _site/index.html <<'EOF'
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <title>Software that knows</title>
-            </head>
-            <body>
-              <h1>Software that knows</h1>
-              <p>Demonstrations only. Not medical devices. Do not use them to assess or treat anyone.</p>
-              <ul>
-                <li><a href="./imci-fever/">IMCI fever</a></li>
-              </ul>
-            </body>
-          </html>
-          EOF
+          cp -r site/. _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:

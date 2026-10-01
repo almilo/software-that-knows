@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Software that knows</title>
+    <meta name="description" content="Demonstrations for the article series Software that knows." />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <!-- The same look as the demos (imci-fever/app/styles.css), so the step from this page to a demo is seamless. -->
+    <style>
+      body { margin: 0; font: 15px/1.4 system-ui, sans-serif; background: #fafafa; color: #222; }
+      main { max-width: 720px; margin: 0 auto; padding: 16px; }
+      h1 { margin: 0 0 4px; }
+      a { color: #222; }
+      .intro { margin: 4px 0 0; color: #555; }
+      .warning { margin: 12px 0 20px; padding: 8px 12px; border: 1px solid #e0a800; border-radius: 4px; background: #fff8e1; color: #6b3d00; }
+      .demo { padding: 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+      .demo h2 { margin: 0 0 4px; font-size: 18px; }
+      .demo p { margin: 0 0 12px; }
+      .links { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+      .open { padding: 6px 12px; border-radius: 4px; background: #222; color: #fff; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Software that knows</h1>
+      <p class="intro">
+        Demonstrations for the article series <a href="https://almilo.com/">Software that knows</a>: software derived
+        from formal, explicit knowledge.
+      </p>
+      <p class="warning">Demonstrations only. Not medical devices. Do not use them to assess or treat anyone.</p>
+
+      <section class="demo">
+        <h2>IMCI fever</h2>
+        <p>
+          A form for a sick child with fever, derived from the WHO digital adaptation kit for child health (2024): it asks
+          the questions, classifies the case and lists the treatments, each with the WHO rules it comes from.
+        </p>
+        <div class="links">
+          <a class="open" href="./imci-fever/">Open the demo</a>
+          <a href="https://almilo.com/blog/software-that-knows-from-guideline-to-application/">Article: part 5</a>
+          <a href="https://github.com/almilo/software-that-knows/tree/main/imci-fever">Code</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -10,5 +10,5 @@
     "noEmit": true,
     "types": ["bun"]
   },
-  "include": ["app", "generator", "shared", "test"]
+  "include": ["app", "eval", "extract-words", "generator", "note", "server", "shared", "test"]
 }

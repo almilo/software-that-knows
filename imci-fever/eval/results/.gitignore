@@ -1,0 +1,2 @@
+# Saved results of the evaluations: they contain API usage and are rewritten on each run
+*.json

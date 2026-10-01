@@ -45,3 +45,16 @@ export type Rules = {
   shownWhen: Record<string, ConditionSchema>;
   tables: ClassificationTable[];
 };
+
+// The shape of generated/lexicon.json: how a note in free text states each field. Two sources:
+// code derives words from the field's own label (sh:name), and part 6 of the ontology adds the
+// words that need judgement (extended with .claude/skills/extract-words). The words interpreter in note/ uses it to find the fields that a note mentions and to
+// check the evidence that the language model quotes. All words are in lower case.
+export type ValueWords = { value: string; labels: string[]; minDays?: number; maxDays?: number };
+export type FieldWords = {
+  labels: string[]; // the field's label (sh:name) and skos:altLabel: the words that state the field (for yes/no: that the sign is present)
+  absent: string[]; // imci:absentLabel: the words that state that a yes/no sign is absent
+  values?: ValueWords[]; // imci:valueLabel: the words for each allowed value
+  definition?: string; // the definition of the field's DAK data element (source/dak-data-dictionary.json)
+};
+export type Lexicon = { fields: Record<string, FieldWords> };

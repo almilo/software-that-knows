@@ -4,15 +4,19 @@
   "type": "module",
   "scripts": {
     "generate": "bun generator/generate.ts",
-    "dev": "bun run generate && bun ./index.html",
+    "extract-dak": "bun generator/extract-dak.ts",
+    "dev": "bun run generate && bun server/main.ts",
     "build": "bun run generate && bun build ./index.html --outdir dist --production",
     "test": "bun test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.129.0",
     "@jsonforms/core": "^3.8.0",
     "@jsonforms/react": "^3.8.0",
     "@jsonforms/vanilla-renderers": "^3.8.0",
+    "@typesafe-ai/sdk": "^0.6.0",
+    "openai": "^7.25.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },

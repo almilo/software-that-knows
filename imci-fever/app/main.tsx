@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
+import { NotePanel } from "./NotePanel";
 import { classify, type Assessment } from "./classify";
 import { Form } from "./Form";
 import { Results } from "./Results";
 
+// The form on the left. On the right, a note in free text that fills the same form, and the result.
 function App() {
   const [data, setData] = useState<Assessment>({});
+  // The data that the form loads. It changes only when the note changes the answers (see Form.tsx).
+  const [formData, setFormData] = useState<Assessment>({});
+  const fromNote = (next: Assessment) => {
+    setData(next);
+    setFormData(next);
+  };
+
   return (
     <main>
       <header>
@@ -16,10 +25,15 @@ function App() {
         </p>
       </header>
       <section className="form">
-        <Form onChange={setData} />
+        <Form data={formData} onChange={setData} />
+        <button className="clear" onClick={() => fromNote({})}>
+          Clear the form
+        </button>
       </section>
-      <section className="results">
-        <Results results={classify(data)} />
+      <section className="side">
+        <NotePanel data={data} onApply={fromNote} />
+        <h2>Result</h2>
+        <Results results={classify(data)} answered={Object.keys(data).length > 0} />
       </section>
     </main>
   );

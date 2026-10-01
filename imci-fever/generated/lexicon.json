@@ -1,0 +1,807 @@
+{
+  "$comment": "Generated from ontology/imci-fever.ttl by generator/generate.ts. Do not edit.",
+  "fields": {
+    "convulsingNow": {
+      "labels": [
+        "convulsing now",
+        "convulsing right now",
+        "fitting now",
+        "seizing now",
+        "currently convulsing",
+        "actively convulsing",
+        "convulsing at present"
+      ],
+      "absent": [
+        "not convulsing now",
+        "not currently convulsing"
+      ],
+      "definition": "The child is convulsing now --> Treat immediately"
+    },
+    "convulsions": {
+      "labels": [
+        "convulsions in this illness",
+        "convulsion",
+        "convulsions",
+        "convulsed",
+        "fit",
+        "fits",
+        "seizure",
+        "seizures",
+        "had a convulsion",
+        "had a fit",
+        "history of convulsions",
+        "had convulsions",
+        "had fits",
+        "had spasms"
+      ],
+      "absent": [
+        "no convulsions",
+        "no convulsion",
+        "no fits",
+        "no seizures",
+        "no history of convulsions",
+        "has not convulsed"
+      ],
+      "definition": "The child has had one or more convulsions.\nDuring a convulsion, the child’s arms and legs stiffen because the muscles are contracting. The child may lose consciousness or cannot respond to spoken directions. Use words the caregiver understands. For example, the caregiver may call convulsions “fits” or “spasms”."
+    },
+    "convulsionCount": {
+      "labels": [
+        "number of convulsions in this illness",
+        "convulsion",
+        "convulsions",
+        "fit",
+        "fits",
+        "seizure",
+        "seizures",
+        "number of fits",
+        "how many convulsions"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "one",
+          "labels": [
+            "one",
+            "once",
+            "a single",
+            "a convulsion",
+            "a fit",
+            "a seizure",
+            "one convulsion",
+            "convulsed once",
+            "single convulsion",
+            "one fit"
+          ]
+        },
+        {
+          "value": "two or more",
+          "labels": [
+            "two",
+            "twice",
+            "three",
+            "several",
+            "multiple",
+            "repeated",
+            "more than one convulsion",
+            "convulsed twice",
+            "repeated convulsions",
+            "multiple convulsions"
+          ]
+        }
+      ]
+    },
+    "convulsionLong": {
+      "labels": [
+        "a convulsion lasted 15 minutes or longer",
+        "15 minutes",
+        "long convulsion",
+        "prolonged",
+        "lasted",
+        "convulsion lasting 15 minutes or more",
+        "seizure lasting over 15 minutes"
+      ],
+      "absent": [
+        "less than a minute",
+        "convulsion lasted less than 15 minutes",
+        "convulsion under 15 minutes"
+      ],
+      "definition": "The child has had one or more convulsions lasting 15 minutes or longer."
+    },
+    "lethargic": {
+      "labels": [
+        "unconscious or lethargic",
+        "lethargic",
+        "lethargy",
+        "unconscious",
+        "abnormally sleepy",
+        "very sleepy",
+        "difficult to wake",
+        "difficult to awaken",
+        "unresponsive",
+        "no interest in surroundings"
+      ],
+      "absent": [
+        "not lethargic"
+      ],
+      "definition": "A lethargic child is not awake and alert when they should be. The child is drowsy and does not show interest in what is happening around them."
+    },
+    "notAbleToDrink": {
+      "labels": [
+        "not able to drink or breastfeed",
+        "not able to drink",
+        "unable to drink",
+        "cannot drink",
+        "can't drink",
+        "does not drink",
+        "not drinking",
+        "not able to breastfeed",
+        "unable to breastfeed",
+        "not breastfeeding",
+        "unable to suck or swallow",
+        "cannot suck or swallow",
+        "cannot breastfeed"
+      ],
+      "absent": [
+        "drinks normally",
+        "drinks well",
+        "drinking well",
+        "able to drink",
+        "able to breastfeed",
+        "breastfeeds well"
+      ],
+      "definition": "A child shows signs of not being able to drink or breastfeed if they are not able to suck or swallow when offered a drink or breast-milk."
+    },
+    "vomitsEverything": {
+      "labels": [
+        "vomiting everything",
+        "vomits everything",
+        "vomits all",
+        "keeps nothing down",
+        "cannot keep anything down",
+        "cannot hold anything down",
+        "vomits everything taken",
+        "unable to keep anything down"
+      ],
+      "absent": [
+        "no vomiting",
+        "not vomiting",
+        "does not vomit",
+        "not vomiting everything",
+        "keeps fluids down",
+        "able to keep fluids down"
+      ],
+      "definition": "The child is reported to be vomiting everything (not able to hold anything down at all)."
+    },
+    "oralFluidTest": {
+      "labels": [
+        "oral fluid test result",
+        "oral fluid test",
+        "fluid test",
+        "watched the child drink"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "completely unable to drink",
+          "labels": [
+            "completely unable to drink",
+            "unable to drink at all",
+            "cannot drink at all"
+          ]
+        },
+        {
+          "value": "vomits immediately or everything",
+          "labels": [
+            "vomits immediately",
+            "vomits immediately after drinking"
+          ]
+        },
+        {
+          "value": "drinks poorly",
+          "labels": [
+            "drinks poorly",
+            "drinking poorly",
+            "cannot drink without help",
+            "swallows only if fluid put in mouth"
+          ]
+        },
+        {
+          "value": "drinks eagerly or thirstily",
+          "labels": [
+            "drinks eagerly",
+            "drinks thirstily",
+            "drinking eagerly",
+            "reaches for the cup",
+            "drinking thirstily",
+            "wants to drink more"
+          ]
+        },
+        {
+          "value": "drinks normally",
+          "labels": [
+            "drinks normally",
+            "drinking normally"
+          ]
+        },
+        {
+          "value": "unable to do the test",
+          "labels": [
+            "unable to do the test",
+            "oral fluid test not done"
+          ]
+        }
+      ],
+      "definition": "If the child is unconscious, do not try to carry out an oral fluid test because it could cause the child to choke or fluid to get into their lungs.\nAsk the mother to offer the child some water in a cup or spoon (or breastfeed for a child under 6 months). Watch the child drink. \nA child is not able to drink if they are not able to suck or swallow when offered a drink. A child may not be able to drink because they are lethargic or unconscious.\nA child is drinking poorly if the child is weak and cannot drink without help. They may be able to swallow only if fluid is put in their mouth.\nA child has the sign drinking eagerly and acts thirsty if it is clear that the child wants to drink. Look to see if the child reaches out for the cup or spoon when you offer them water. When the water is taken away, see if the child is unhappy because they want to drink more.\nIf the child takes a drink only with encouragement and does not want to drink more, they do not have the sign of drinking eagerly and looking thirsty."
+    },
+    "feverReported": {
+      "labels": [
+        "fever reported",
+        "fever",
+        "feverish",
+        "febrile",
+        "high temperature",
+        "hot",
+        "history of fever",
+        "reported fever",
+        "fever in this illness"
+      ],
+      "absent": [
+        "no fever",
+        "not feverish",
+        "afebrile",
+        "no history of fever",
+        "no reported fever",
+        "no fever reported"
+      ],
+      "definition": "The child has \"Fever reported\" (history of fever) if the child has had any fever with this illness."
+    },
+    "axillaryTemperature": {
+      "labels": [
+        "axillary temperature",
+        "axillary",
+        "under the arm",
+        "armpit",
+        "axillary temp",
+        "temperature under the arm",
+        "armpit temperature"
+      ],
+      "absent": [],
+      "definition": "The child's axillary temperature (temperature taken under the armpit), measured in °C."
+    },
+    "rectalTemperature": {
+      "labels": [
+        "rectal temperature",
+        "rectal",
+        "rectally",
+        "rectal temp",
+        "temperature per rectum"
+      ],
+      "absent": [],
+      "definition": "The child's rectal temperature (temperature taken in the rectum), measured in °C. Only consider taking rectal temperature if trained."
+    },
+    "thermometerNotAvailable": {
+      "labels": [
+        "no thermometer available",
+        "no thermometer",
+        "without a thermometer",
+        "thermometer not available",
+        "thermometer unavailable",
+        "no thermometer to measure temperature"
+      ],
+      "absent": [],
+      "definition": "A thermometer is not available to measure the child's temperature."
+    },
+    "hotToTouch": {
+      "labels": [
+        "hot to touch",
+        "hot to the touch",
+        "feels hot",
+        "warm to touch",
+        "feels hot to touch",
+        "skin feels hot"
+      ],
+      "absent": [
+        "not hot to touch",
+        "cool to touch"
+      ],
+      "definition": "The child is hot to touch."
+    },
+    "malariaRisk": {
+      "labels": [
+        "malaria risk of the area",
+        "malaria risk",
+        "risk area",
+        "malaria area",
+        "area malaria risk"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "high",
+          "labels": [
+            "high risk",
+            "high malaria",
+            "high transmission",
+            "high malaria risk",
+            "high malaria transmission"
+          ]
+        },
+        {
+          "value": "low",
+          "labels": [
+            "low risk",
+            "low malaria",
+            "low transmission",
+            "low malaria risk",
+            "low malaria transmission"
+          ]
+        },
+        {
+          "value": "no",
+          "labels": [
+            "no malaria risk",
+            "no malaria",
+            "no risk",
+            "malaria free",
+            "no malaria transmission",
+            "non-malarious area",
+            "malaria-free area"
+          ]
+        }
+      ],
+      "definition": "The country/region/facility's malaria risk"
+    },
+    "travelToHighRiskArea": {
+      "labels": [
+        "travel to a high malaria risk area in the last 2 weeks",
+        "travel",
+        "travelled",
+        "traveled",
+        "trip",
+        "visited",
+        "travelled to a high malaria risk area",
+        "recent travel to a high malaria risk area"
+      ],
+      "absent": [
+        "no travel",
+        "not travelled",
+        "not traveled",
+        "did not travel",
+        "no travel in the last 2 weeks"
+      ],
+      "definition": "The child has recently travelled (in the last 2 weeks) to a high malaria risk area."
+    },
+    "obviousCause": {
+      "labels": [
+        "obvious cause of fever",
+        "obvious cause",
+        "other cause",
+        "cause of fever",
+        "clear cause of fever",
+        "apparent cause of fever"
+      ],
+      "absent": [
+        "no obvious cause",
+        "no other cause",
+        "no clear cause of fever",
+        "fever without focus"
+      ]
+    },
+    "feverDuration": {
+      "labels": [
+        "fever for how long",
+        "fever",
+        "feverish",
+        "febrile",
+        "hot",
+        "duration of fever",
+        "days of fever",
+        "fever duration"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "7 days or less",
+          "labels": [
+            "fever for 7 days or less",
+            "fever for 1 week or less",
+            "fever less than 7 days",
+            "fever less than a week"
+          ],
+          "maxDays": 7
+        },
+        {
+          "value": "more than 7 days",
+          "labels": [
+            "fever for more than 7 days",
+            "fever for more than a week",
+            "fever for over a week",
+            "fever for 2 weeks"
+          ],
+          "minDays": 8
+        }
+      ],
+      "definition": "Length of time the child has had fever\n- 7 days or less (1 week or less)\n- More than 7 days (more than 1 week)"
+    },
+    "feverEveryDay": {
+      "labels": [
+        "fever present every day for more than 7 days",
+        "every day",
+        "daily",
+        "each day",
+        "fever every day",
+        "daily fever",
+        "fever daily for more than 7 days"
+      ],
+      "absent": [
+        "not every day",
+        "fever not every day",
+        "fever not daily",
+        "fever on some days only"
+      ],
+      "definition": "If the fever has been present for more than 7 days, ask if the fever has been present every day. A fever that has been present every day for more than 7 days can mean that the child has a more severe disease, such as typhoid fever. The child will need referral for further assessment."
+    },
+    "stiffNeck": {
+      "labels": [
+        "stiff neck",
+        "neck stiffness",
+        "neck stiff",
+        "nuchal rigidity",
+        "neck rigidity",
+        "resistance to neck flexion"
+      ],
+      "absent": [
+        "no stiff neck",
+        "supple neck",
+        "neck supple",
+        "bends neck easily",
+        "no nuchal rigidity",
+        "no neck stiffness"
+      ],
+      "definition": "A stiff neck may be a sign of meningitis, cerebral malaria or another very severe febrile disease. It requires urgent treatment with injectable antibiotics and referral to a hospital.\nWATCH THE CHILD: While you talk with the caregiver during the assessment, look to see if the child moves and bends their neck easily when looking around. If the child is moving and bending their neck, the child does not have a stiff neck.\nTEST THE CHILD: If you did not see any movement, or if you are not sure, draw the child’s attention to their umbilicus or toes. For example, you can shine a flashlight on the toes or umbilicus or tickle the toes to encourage the child to look down. Look to see if the child can bend their neck when looking down at their umbilicus or toe.\nFEEL FOR A STIFF NECK:If you still have not seen the child bend their  neck , ask the caregiver to help you lay the child on their back. Lean over the child, and gently support the child’s back and shoulders with one hand. With the other hand, hold the child’s head. Then carefully bend the head forward towards the child’s chest. If the neck bends easily, the child does not have a stiff neck. If the neck feels stiff and there is resistance to bending, the child has a stiff neck. Often a child with a stiff neck will cry when you try to bend the neck."
+    },
+    "refusalToUseLimb": {
+      "labels": [
+        "refusal to use a limb",
+        "refuses to use",
+        "refusal to use",
+        "does not use",
+        "not using",
+        "limp",
+        "limping",
+        "unable to use a limb",
+        "refuses to use arm",
+        "refuses to use leg",
+        "not using the arm",
+        "not using the leg"
+      ],
+      "absent": [
+        "uses all limbs",
+        "moves all limbs normally"
+      ],
+      "definition": "The child is unable to use a limb (arm or leg) on examination. It is important to assess for refusal to use a limb, which could be a sign of a bone or joint infection when the child has reported or measured fever."
+    },
+    "warmTenderJoint": {
+      "labels": [
+        "swollen",
+        "swelling",
+        "tender",
+        "warm joint",
+        "joint",
+        "swollen joint",
+        "tender joint",
+        "joint swelling",
+        "bone tenderness"
+      ],
+      "absent": [],
+      "definition": "The child has a warm, tender or swollen joint or bone, which could be a sign of a infection when the child has reported or measured fever."
+    },
+    "painPassingUrine": {
+      "labels": [
+        "passing urine",
+        "passes urine",
+        "urination",
+        "urinating",
+        "dysuria",
+        "pain passing urine",
+        "difficulty passing urine",
+        "painful urination",
+        "cries when passing urine",
+        "burning on urination"
+      ],
+      "absent": [
+        "no dysuria",
+        "no pain passing urine"
+      ],
+      "definition": "The child is reported to have or appears to have pain or difficulty passing urine (in younger children this may appear as crying when passing urine)."
+    },
+    "cough": {
+      "labels": [
+        "cough",
+        "coughing",
+        "has a cough"
+      ],
+      "absent": [
+        "no cough",
+        "not coughing"
+      ],
+      "definition": "The caregiver reports that the child has a cough, or you see that the child has a cough."
+    },
+    "runnyNose": {
+      "labels": [
+        "runny nose",
+        "running nose",
+        "nasal discharge",
+        "rhinorrhoea",
+        "rhinorrhea"
+      ],
+      "absent": [
+        "no runny nose",
+        "no nasal discharge",
+        "no rhinorrhoea"
+      ],
+      "definition": "The child has a runny nose."
+    },
+    "redEyes": {
+      "labels": [
+        "red eyes",
+        "red eye",
+        "eyes are red",
+        "redness of the eyes",
+        "bloodshot eyes",
+        "conjunctival injection",
+        "conjunctival redness"
+      ],
+      "absent": [
+        "no red eyes",
+        "eyes not red"
+      ],
+      "definition": "The child has “red eyes” if there is redness in the white part of the eye. In a healthy eye, the white part of the eye is clearly white and not discoloured."
+    },
+    "otherSevereClassification": {
+      "labels": [
+        "severe classification from another part of the assessment",
+        "severe classification",
+        "severe pneumonia",
+        "mastoiditis",
+        "severe acute malnutrition",
+        "other severe classification"
+      ],
+      "absent": [
+        "no other severe classification"
+      ],
+      "definition": "The child has a severe classification other than severe dehydration."
+    },
+    "malariaTest": {
+      "labels": [
+        "malaria test result",
+        "malaria test",
+        "rapid test",
+        "rdt",
+        "smear",
+        "test",
+        "malaria rdt",
+        "mrdt",
+        "blood smear for malaria"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "positive",
+          "labels": [
+            "positive",
+            "malaria positive",
+            "rdt positive",
+            "positive for malaria"
+          ]
+        },
+        {
+          "value": "negative",
+          "labels": [
+            "negative",
+            "malaria negative",
+            "rdt negative",
+            "negative for malaria"
+          ]
+        },
+        {
+          "value": "unknown",
+          "labels": [
+            "not done",
+            "not available",
+            "no test",
+            "unavailable",
+            "invalid",
+            "malaria test not done",
+            "rdt not done"
+          ]
+        }
+      ],
+      "definition": "This element is referencing the malaria test from the group questions."
+    },
+    "highParasiteDensity": {
+      "labels": [
+        "high parasite density",
+        "parasite density",
+        "parasite count",
+        "parasitaemia",
+        "parasitemia",
+        "high parasitaemia",
+        "hyperparasitaemia",
+        "hyperparasitemia",
+        "high parasite count"
+      ],
+      "absent": [
+        "low parasite density",
+        "low parasitaemia"
+      ],
+      "definition": "The child has a high parasite density."
+    },
+    "skinProblem": {
+      "labels": [
+        "skin problem",
+        "rash",
+        "skin",
+        "skin rash",
+        "skin lesions"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "generalized",
+          "labels": [
+            "generalized",
+            "generalised",
+            "widespread",
+            "rash all over the body",
+            "generalized rash",
+            "generalised rash"
+          ]
+        },
+        {
+          "value": "localized",
+          "labels": [
+            "localized",
+            "localised",
+            "localized rash",
+            "rash limited to one area",
+            "localised rash"
+          ]
+        },
+        {
+          "value": "none",
+          "labels": [
+            "no rash",
+            "no skin problem",
+            "no skin lesions",
+            "normal skin"
+          ]
+        }
+      ],
+      "definition": "A generalized skin problem is a skin problem that affects the whole body, a large area of the body or several parts of the body, whereas a localized skin problem is limited to one area of the body.\nThis question is prompted either if a skin problem has been noted already, or if the child has fever with one or more of cough, runny nose or red eyes (to assess for measles)"
+    },
+    "measlesRash": {
+      "labels": [
+        "measles rash",
+        "like measles",
+        "measles like",
+        "measles-like rash",
+        "morbilliform rash",
+        "rash starting behind the ears"
+      ],
+      "absent": [
+        "no measles rash"
+      ],
+      "definition": "In measles, a rash begins behind the ears and on the neck. It spreads to the face. During the next day, the rash spreads to the rest of the body, arms and legs. After 4–5 days, the rash starts to fade and the skin may peel."
+    },
+    "measlesRecent": {
+      "labels": [
+        "measles within the last 3 months",
+        "had measles",
+        "measles within",
+        "measles in the past",
+        "measles in the last 3 months"
+      ],
+      "absent": [
+        "no measles in the last 3 months"
+      ],
+      "definition": "Ask the caregiver or check the child's health record to see if they have had measles in the last 3 months. If the caregiver is not sure, explain the symptoms (a generalized rash all over the body, starting from behind the ears and on the neck, spreading to the face, then the body, arms and legs, accompanied by a runny nose, red eyes or cough)."
+    },
+    "mouthUlcers": {
+      "labels": [
+        "oral sores or mouth ulcers",
+        "mouth ulcers",
+        "mouth sores",
+        "oral sores",
+        "ulcers",
+        "thrush",
+        "oral ulcers",
+        "sores in the mouth",
+        "ulcers in the mouth"
+      ],
+      "absent": [],
+      "values": [
+        {
+          "value": "none",
+          "labels": [
+            "no ulcers",
+            "no mouth ulcers",
+            "no mouth sores",
+            "no oral ulcers"
+          ]
+        },
+        {
+          "value": "oral thrush",
+          "labels": [
+            "oral thrush",
+            "thrush",
+            "oral candidiasis"
+          ]
+        },
+        {
+          "value": "deep and extensive",
+          "labels": [
+            "deep",
+            "extensive",
+            "deep extensive ulcers"
+          ]
+        },
+        {
+          "value": "not deep and extensive",
+          "labels": [
+            "not deep",
+            "shallow",
+            "superficial mouth ulcers",
+            "mouth ulcers not deep"
+          ]
+        }
+      ],
+      "definition": "Examination for oral sores or mouth ulcers should be carried out at the end of the physical examination so as not to upset or aggitate the child before completing other physical examinations."
+    },
+    "pusFromEye": {
+      "labels": [
+        "pus draining from the eye",
+        "pus",
+        "eye discharge",
+        "discharge from the eye",
+        "pus from the eye",
+        "purulent eye discharge",
+        "pus on the eyelids"
+      ],
+      "absent": [
+        "no pus from the eye",
+        "no eye discharge"
+      ],
+      "definition": "Pus draining from the eye is a sign of conjunctivitis. Conjunctivitis is an infection of the conjunctiva, the inside surface of the eyelid and the white part of the eye.\nIf you do not see pus draining from the eye, look for pus on the conjunctiva or on the eyelids. Often the pus forms a crust when the child is sleeping and seals the eye shut. You can gently open the eye, making sure that your hands are clean.\nWash your hands after examining the eye of any child with pus draining from the eye."
+    },
+    "corneaClouding": {
+      "labels": [
+        "clouding of the cornea",
+        "cornea clouding",
+        "cloudy cornea",
+        "corneal clouding",
+        "hazy cornea",
+        "clouded cornea",
+        "corneal haze"
+      ],
+      "absent": [
+        "cornea is clear",
+        "clear cornea",
+        "no corneal clouding",
+        "no clouding of the cornea",
+        "corneas clear"
+      ],
+      "definition": "The cornea is usually clear. When clouding of the cornea is present, the cornea may appear clouded or hazy. The cornea may look the way a glass of water looks when you add a small amount of milk. Clouding may occur in one or both eyes.\nA child with corneal clouding may keep their eyes tightly shut when exposed to light. The light may cause irritation and pain to the child’s eyes. To check the child’s eyes, wait for the child to open their eye or gently pull down the lower eyelid to look for clouding.\nCorneal clouding is a dangerous condition. It may be the result of vitamin A deficiency that has been made worse by measles. If corneal clouding is not treated, the cornea can ulcerate and cause blindness. A child with clouding of the cornea needs urgent treatment with vitamin A."
+    },
+    "vitaminARecent": {
+      "labels": [
+        "vitamin a",
+        "vitamin a in the past month",
+        "vit a in the past month"
+      ],
+      "absent": [
+        "no vitamin a in the past month"
+      ]
+    }
+  }
+}

@@ -24,6 +24,7 @@
 #   3. Conditions: named yes/no questions about the form data.
 #   4. Classification tables: their rows (the classifications), qualifiers and treatments.
 #   5. Provenance: the DAK documents and entries that parts 2 to 4 come from.
+#   6. Words: how a note in free text states each field (skos:altLabel), for reading notes.
 #
 # A condition is a yes/no question about the form data. It has one of these forms:
 #   [ imci:field <path> ; imci:equals <value> ]
@@ -43,6 +44,7 @@
 @prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 
 # ---------------------------------------------------------------------------
@@ -78,6 +80,19 @@ imci:qualifiers  a rdf:Property ; rdfs:label "qualifiers" ; rdfs:domain imci:Cla
 imci:treatments  a rdf:Property ; rdfs:label "treatments" ; rdfs:domain imci:Classification ;
   rdfs:comment "An ordered list of treatments." .
 imci:severity    a rdf:Property ; rdfs:label "severity" ; rdfs:range imci:Severity .
+
+# Words (part 6). skos:altLabel on a field (its sh:path) gives the words that state the field in a
+# note: for a yes/no field, the words that state the sign is present. The terms below add what
+# SKOS has no term for.
+imci:absentLabel a rdf:Property ; rdfs:label "absent label" ; rdfs:subPropertyOf skos:altLabel ;
+  rdfs:comment "Words that state that a yes/no sign is absent, for example \"drinks well\" for not able to drink." .
+imci:valueLabel  a rdf:Property ; rdfs:label "value label" ;
+  rdfs:comment "The words for one allowed value of a field: imci:value and its skos:altLabel." .
+imci:value       a rdf:Property ; rdfs:label "value" ; rdfs:comment "An allowed value (sh:in) of the field." .
+imci:minDays     a rdf:Property ; rdfs:label "minimum days" ; rdfs:range xsd:integer ;
+  rdfs:comment "A duration of at least this many days has this value." .
+imci:maxDays     a rdf:Property ; rdfs:label "maximum days" ; rdfs:range xsd:integer ;
+  rdfs:comment "A duration of at most this many days has this value." .
 
 # ---------------------------------------------------------------------------
 # 2. Fields
@@ -658,3 +673,170 @@ dak:CHE.B25.H.DE01   a prov:Entity ; rdfs:label "CHE.B25.H.DE01" ;   prov:hadPri
 dak:CHE.B27.G.DE01   a prov:Entity ; rdfs:label "CHE.B27.G.DE01" ;   prov:hadPrimarySource dak:DataDictionary .
 dak:CHE.B27.G.DE05   a prov:Entity ; rdfs:label "CHE.B27.G.DE05" ;   prov:hadPrimarySource dak:DataDictionary .
 dak:CHE.B27.G.DE06   a prov:Entity ; rdfs:label "CHE.B27.G.DE06" ;   prov:hadPrimarySource dak:DataDictionary .
+
+# ---------------------------------------------------------------------------
+# 6. Words
+# ---------------------------------------------------------------------------
+# How a health worker's note states each field: the words that need judgement. Code adds the
+# deterministic ones: each field's own label (sh:name) and, for the form, the definition of its DAK
+# data element (generator/join-dak.ts). The words below are synonyms, words for absence, words for
+# values and abbreviations. The words directly below were written by a coding agent in one session,
+# before the extract-words skill existed (.claude/skills/extract-words in the repository); the skill
+# adds its words below them, each run under its own header, after consensus and automatic checks.
+
+imci:convulsingNow skos:altLabel "convulsing right now", "fitting now", "seizing now" .
+imci:convulsions skos:altLabel "convulsion", "convulsions", "convulsed", "fit", "fits", "seizure", "seizures" ;
+  imci:absentLabel "no convulsions", "no convulsion", "no fits", "no seizures" .
+imci:convulsionCount skos:altLabel "convulsion", "convulsions", "fit", "fits", "seizure", "seizures" ;
+  imci:valueLabel [ imci:value "one" ; skos:altLabel "one", "once", "a single", "a convulsion", "a fit", "a seizure" ] ,
+                  [ imci:value "two or more" ; skos:altLabel "two", "twice", "three", "several", "multiple", "repeated" ] .
+imci:convulsionLong skos:altLabel "15 minutes", "long convulsion", "prolonged", "lasted" ;
+  imci:absentLabel "less than a minute" .
+imci:lethargic skos:altLabel "lethargic", "lethargy", "unconscious", "abnormally sleepy", "very sleepy", "difficult to wake", "difficult to awaken", "unresponsive" ;
+  imci:absentLabel "not lethargic" .
+imci:notAbleToDrink skos:altLabel "not able to drink", "unable to drink", "cannot drink", "can't drink", "does not drink", "not drinking", "not able to breastfeed", "unable to breastfeed", "not breastfeeding" ;
+  imci:absentLabel "drinks well", "drinking well", "drinks normally", "able to drink" .
+imci:vomitsEverything skos:altLabel "vomits everything", "vomits all", "keeps nothing down", "cannot keep anything down" ;
+  imci:absentLabel "no vomiting", "not vomiting", "does not vomit" .
+imci:oralFluidTest skos:altLabel "oral fluid test", "fluid test" ;
+  imci:valueLabel [ imci:value "completely unable to drink" ; skos:altLabel "completely unable to drink" ] ,
+                  [ imci:value "vomits immediately or everything" ; skos:altLabel "vomits immediately" ] ,
+                  [ imci:value "drinks poorly" ; skos:altLabel "drinks poorly" ] ,
+                  [ imci:value "drinks eagerly or thirstily" ; skos:altLabel "drinks eagerly", "drinks thirstily" ] ,
+                  [ imci:value "drinks normally" ; skos:altLabel "drinks normally" ] ,
+                  [ imci:value "unable to do the test" ; skos:altLabel "unable to do the test" ] .
+imci:feverReported skos:altLabel "fever", "feverish", "febrile", "high temperature", "hot" ;
+  imci:absentLabel "no fever", "not feverish", "afebrile" .
+imci:axillaryTemperature skos:altLabel "axillary", "under the arm", "armpit" .
+imci:rectalTemperature skos:altLabel "rectal", "rectally" .
+imci:thermometerNotAvailable skos:altLabel "no thermometer", "without a thermometer", "thermometer not available" .
+imci:hotToTouch skos:altLabel "hot to the touch", "feels hot", "warm to touch" .
+imci:malariaRisk skos:altLabel "malaria risk", "risk area", "malaria area" ;
+  imci:valueLabel [ imci:value "high" ; skos:altLabel "high risk", "high malaria", "high transmission" ] ,
+                  [ imci:value "low" ; skos:altLabel "low risk", "low malaria", "low transmission" ] ,
+                  [ imci:value "no" ; skos:altLabel "no malaria risk", "no malaria", "no risk", "malaria free" ] .
+imci:travelToHighRiskArea skos:altLabel "travel", "travelled", "traveled", "trip", "visited" ;
+  imci:absentLabel "no travel", "not travelled", "not traveled", "did not travel" .
+imci:obviousCause skos:altLabel "obvious cause", "other cause", "cause of fever" ;
+  imci:absentLabel "no obvious cause", "no other cause" .
+imci:feverDuration skos:altLabel "fever", "feverish", "febrile", "hot" ;
+  imci:valueLabel [ imci:value "7 days or less" ; imci:maxDays 7 ] ,
+                  [ imci:value "more than 7 days" ; imci:minDays 8 ] .
+imci:feverEveryDay skos:altLabel "every day", "daily", "each day" ;
+  imci:absentLabel "not every day" .
+imci:stiffNeck skos:altLabel "neck stiffness", "neck stiff" ;
+  imci:absentLabel "no stiff neck", "supple neck" .
+imci:refusalToUseLimb skos:altLabel "refuses to use", "refusal to use", "does not use", "not using", "limp", "limping" .
+imci:warmTenderJoint skos:altLabel "swollen", "swelling", "tender", "warm joint", "joint" .
+imci:painPassingUrine skos:altLabel "passing urine", "passes urine", "urination", "urinating", "dysuria" .
+imci:cough skos:altLabel "coughing" ;
+  imci:absentLabel "no cough" .
+imci:runnyNose skos:altLabel "running nose", "nasal discharge" ;
+  imci:absentLabel "no runny nose" .
+imci:redEyes skos:altLabel "red eye", "eyes are red" ;
+  imci:absentLabel "no red eyes" .
+imci:otherSevereClassification skos:altLabel "severe classification", "severe pneumonia", "mastoiditis", "severe acute malnutrition" .
+imci:malariaTest skos:altLabel "malaria test", "rapid test", "rdt", "smear", "test" ;
+  imci:valueLabel [ imci:value "positive" ; skos:altLabel "positive" ] ,
+                  [ imci:value "negative" ; skos:altLabel "negative" ] ,
+                  [ imci:value "unknown" ; skos:altLabel "not done", "not available", "no test", "unavailable", "invalid" ] .
+imci:highParasiteDensity skos:altLabel "parasite density", "parasite count", "parasitaemia", "parasitemia" .
+imci:skinProblem skos:altLabel "rash", "skin" ;
+  imci:valueLabel [ imci:value "generalized" ; skos:altLabel "generalized", "generalised", "widespread" ] ,
+                  [ imci:value "localized" ; skos:altLabel "localized", "localised" ] ,
+                  [ imci:value "none" ; skos:altLabel "no rash", "no skin problem" ] .
+imci:measlesRash skos:altLabel "like measles", "measles like" .
+imci:measlesRecent skos:altLabel "had measles", "measles within", "measles in the past" .
+imci:mouthUlcers skos:altLabel "mouth ulcers", "mouth sores", "oral sores", "ulcers", "thrush" ;
+  imci:valueLabel [ imci:value "none" ; skos:altLabel "no ulcers", "no mouth ulcers" ] ,
+                  [ imci:value "oral thrush" ; skos:altLabel "thrush", "oral thrush" ] ,
+                  [ imci:value "deep and extensive" ; skos:altLabel "deep", "extensive" ] ,
+                  [ imci:value "not deep and extensive" ; skos:altLabel "not deep", "shallow" ] .
+imci:pusFromEye skos:altLabel "pus", "eye discharge", "discharge from the eye" .
+imci:corneaClouding skos:altLabel "cornea clouding", "cloudy cornea", "corneal clouding" ;
+  imci:absentLabel "cornea is clear", "clear cornea" .
+imci:vitaminARecent skos:altLabel "vitamin a" .
+
+# Words added by the extract-words skill on 2026-10-01: 3 runs, 201 of 344
+# proposed words made by at least two runs. Record: extract-words/runs/2026-10-01/record.md
+imci:convulsingNow skos:altLabel "currently convulsing", "actively convulsing", "convulsing at present" ;
+  imci:absentLabel "not convulsing now", "not currently convulsing" .
+imci:convulsions skos:altLabel "had a convulsion", "had a fit", "history of convulsions", "had convulsions", "had fits", "had spasms" ;
+  imci:absentLabel "no history of convulsions", "has not convulsed" .
+imci:convulsionCount skos:altLabel "number of fits", "how many convulsions" ;
+  imci:valueLabel [ imci:value "one" ; skos:altLabel "one convulsion", "convulsed once", "single convulsion", "one fit" ] ;
+  imci:valueLabel [ imci:value "two or more" ; skos:altLabel "more than one convulsion", "convulsed twice", "repeated convulsions", "multiple convulsions" ] .
+imci:convulsionLong skos:altLabel "convulsion lasting 15 minutes or more", "seizure lasting over 15 minutes" ;
+  imci:absentLabel "convulsion lasted less than 15 minutes", "convulsion under 15 minutes" .
+imci:lethargic skos:altLabel "no interest in surroundings" .
+imci:notAbleToDrink skos:altLabel "unable to suck or swallow", "cannot suck or swallow", "cannot breastfeed" ;
+  imci:absentLabel "able to breastfeed", "breastfeeds well" .
+imci:vomitsEverything skos:altLabel "cannot hold anything down", "vomits everything taken", "unable to keep anything down" ;
+  imci:absentLabel "not vomiting everything", "keeps fluids down", "able to keep fluids down" .
+imci:oralFluidTest skos:altLabel "watched the child drink" ;
+  imci:valueLabel [ imci:value "completely unable to drink" ; skos:altLabel "unable to drink at all", "cannot drink at all" ] ;
+  imci:valueLabel [ imci:value "drinks poorly" ; skos:altLabel "drinking poorly", "cannot drink without help", "swallows only if fluid put in mouth" ] ;
+  imci:valueLabel [ imci:value "drinks eagerly or thirstily" ; skos:altLabel "drinking eagerly", "reaches for the cup", "drinking thirstily", "wants to drink more" ] ;
+  imci:valueLabel [ imci:value "drinks normally" ; skos:altLabel "drinking normally" ] ;
+  imci:valueLabel [ imci:value "unable to do the test" ; skos:altLabel "oral fluid test not done" ] ;
+  imci:valueLabel [ imci:value "vomits immediately or everything" ; skos:altLabel "vomits immediately after drinking" ] .
+imci:feverReported skos:altLabel "history of fever", "reported fever", "fever in this illness" ;
+  imci:absentLabel "no history of fever", "no reported fever", "no fever reported" .
+imci:axillaryTemperature skos:altLabel "axillary temp", "temperature under the arm", "armpit temperature" .
+imci:rectalTemperature skos:altLabel "rectal temp", "temperature per rectum" .
+imci:thermometerNotAvailable skos:altLabel "thermometer unavailable", "no thermometer to measure temperature" .
+imci:hotToTouch skos:altLabel "feels hot to touch", "skin feels hot" ;
+  imci:absentLabel "not hot to touch", "cool to touch" .
+imci:malariaRisk skos:altLabel "area malaria risk" ;
+  imci:valueLabel [ imci:value "high" ; skos:altLabel "high malaria risk", "high malaria transmission" ] ;
+  imci:valueLabel [ imci:value "low" ; skos:altLabel "low malaria risk", "low malaria transmission" ] ;
+  imci:valueLabel [ imci:value "no" ; skos:altLabel "no malaria transmission", "non-malarious area", "malaria-free area" ] .
+imci:travelToHighRiskArea skos:altLabel "travelled to a high malaria risk area", "recent travel to a high malaria risk area" ;
+  imci:absentLabel "no travel in the last 2 weeks" .
+imci:obviousCause skos:altLabel "clear cause of fever", "apparent cause of fever" ;
+  imci:absentLabel "no clear cause of fever", "fever without focus" .
+imci:feverDuration skos:altLabel "duration of fever", "days of fever", "fever duration" ;
+  imci:valueLabel [ imci:value "7 days or less" ; skos:altLabel "fever for 7 days or less", "fever for 1 week or less", "fever less than 7 days", "fever less than a week" ] ;
+  imci:valueLabel [ imci:value "more than 7 days" ; skos:altLabel "fever for more than 7 days", "fever for more than a week", "fever for over a week", "fever for 2 weeks" ] .
+imci:feverEveryDay skos:altLabel "fever every day", "daily fever", "fever daily for more than 7 days" ;
+  imci:absentLabel "fever not every day", "fever not daily", "fever on some days only" .
+imci:stiffNeck skos:altLabel "nuchal rigidity", "neck rigidity", "resistance to neck flexion" ;
+  imci:absentLabel "neck supple", "bends neck easily", "no nuchal rigidity", "no neck stiffness" .
+imci:refusalToUseLimb skos:altLabel "unable to use a limb", "refuses to use arm", "refuses to use leg", "not using the arm", "not using the leg" ;
+  imci:absentLabel "uses all limbs", "moves all limbs normally" .
+imci:warmTenderJoint skos:altLabel "swollen joint", "tender joint", "joint swelling", "bone tenderness" .
+imci:painPassingUrine skos:altLabel "pain passing urine", "difficulty passing urine", "painful urination", "cries when passing urine", "burning on urination" ;
+  imci:absentLabel "no dysuria", "no pain passing urine" .
+imci:cough skos:altLabel "has a cough" ;
+  imci:absentLabel "not coughing" .
+imci:runnyNose skos:altLabel "rhinorrhoea", "rhinorrhea" ;
+  imci:absentLabel "no nasal discharge", "no rhinorrhoea" .
+imci:redEyes skos:altLabel "redness of the eyes", "bloodshot eyes", "conjunctival injection", "conjunctival redness" ;
+  imci:absentLabel "eyes not red" .
+imci:otherSevereClassification skos:altLabel "other severe classification" ;
+  imci:absentLabel "no other severe classification" .
+imci:malariaTest skos:altLabel "malaria rdt", "mrdt", "blood smear for malaria" ;
+  imci:valueLabel [ imci:value "positive" ; skos:altLabel "malaria positive", "rdt positive", "positive for malaria" ] ;
+  imci:valueLabel [ imci:value "negative" ; skos:altLabel "malaria negative", "rdt negative", "negative for malaria" ] ;
+  imci:valueLabel [ imci:value "unknown" ; skos:altLabel "malaria test not done", "rdt not done" ] .
+imci:highParasiteDensity skos:altLabel "high parasitaemia", "hyperparasitaemia", "hyperparasitemia", "high parasite count" ;
+  imci:absentLabel "low parasite density", "low parasitaemia" .
+imci:skinProblem skos:altLabel "skin rash", "skin lesions" ;
+  imci:valueLabel [ imci:value "generalized" ; skos:altLabel "rash all over the body", "generalized rash", "generalised rash" ] ;
+  imci:valueLabel [ imci:value "localized" ; skos:altLabel "localized rash", "rash limited to one area", "localised rash" ] ;
+  imci:valueLabel [ imci:value "none" ; skos:altLabel "no skin lesions", "normal skin" ] .
+imci:measlesRash skos:altLabel "measles-like rash", "morbilliform rash", "rash starting behind the ears" ;
+  imci:absentLabel "no measles rash" .
+imci:measlesRecent skos:altLabel "measles in the last 3 months" ;
+  imci:absentLabel "no measles in the last 3 months" .
+imci:mouthUlcers skos:altLabel "oral ulcers", "sores in the mouth", "ulcers in the mouth" ;
+  imci:valueLabel [ imci:value "none" ; skos:altLabel "no mouth sores", "no oral ulcers" ] ;
+  imci:valueLabel [ imci:value "oral thrush" ; skos:altLabel "oral candidiasis" ] ;
+  imci:valueLabel [ imci:value "deep and extensive" ; skos:altLabel "deep extensive ulcers" ] ;
+  imci:valueLabel [ imci:value "not deep and extensive" ; skos:altLabel "superficial mouth ulcers", "mouth ulcers not deep" ] .
+imci:pusFromEye skos:altLabel "pus from the eye", "purulent eye discharge", "pus on the eyelids" ;
+  imci:absentLabel "no pus from the eye", "no eye discharge" .
+imci:corneaClouding skos:altLabel "hazy cornea", "clouded cornea", "corneal haze" ;
+  imci:absentLabel "no corneal clouding", "no clouding of the cornea", "corneas clear" .
+imci:vitaminARecent skos:altLabel "vitamin a in the past month", "vit a in the past month" ;
+  imci:absentLabel "no vitamin a in the past month" .

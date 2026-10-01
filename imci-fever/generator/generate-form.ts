@@ -26,7 +26,8 @@ export function fields(o: Ontology) {
   };
 }
 
-export function generateForm(o: Ontology) {
+// definitions: the DAK definition of each field (join-dak.ts). A field's own sh:description wins.
+export function generateForm(o: Ontology, definitions: Record<string, string> = {}) {
   const { title, fields: all } = fields(o);
 
   const schema = {
@@ -40,7 +41,8 @@ export function generateForm(o: Ontology) {
           : { type: datatypes[o.text(node, `${SH}datatype`)!] };
         if (!property.type) throw new Error(`The field ${name} has no type`);
         property.title = o.text(node, `${SH}name`);
-        if (o.one(node, `${SH}description`)) property.description = o.text(node, `${SH}description`);
+        const description = o.text(node, `${SH}description`) ?? definitions[name];
+        if (description) property.description = description;
         if (o.one(node, `${SH}minInclusive`)) property.minimum = o.number(node, `${SH}minInclusive`);
         if (o.one(node, `${SH}maxInclusive`)) property.maximum = o.number(node, `${SH}maxInclusive`);
         return [name, property];

@@ -1,0 +1,3712 @@
+{
+  "$comment": "Extracted from the WHO DAK core data dictionary by generator/extract-dak.ts. Do not edit.",
+  "source": {
+    "title": "Digital adaptation kit for child health in humanitarian emergencies: operational requirements for implementing WHO recommendations in digital systems\nCore data dictionary",
+    "version": "smart.who.int/dak/ccc/v1.7.0/CCC_DAK_core data dictionary.xlsx"
+  },
+  "elements": [
+    {
+      "id": "CHE.A.DE01",
+      "sheet": "CHE.A.Registration",
+      "label": "National unique identification",
+      "definition": "Unique identifier provided or a universal ID, if used in the country",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE02",
+      "sheet": "CHE.A.Registration",
+      "label": "First name",
+      "definition": "Child's first name",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE03",
+      "sheet": "CHE.A.Registration",
+      "label": "Middle name",
+      "definition": "Child's middle name",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE04",
+      "sheet": "CHE.A.Registration",
+      "label": "Last name",
+      "definition": "Child's family name or last name",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE05",
+      "sheet": "CHE.A.Registration",
+      "label": "Date of birth",
+      "definition": "Child's date of birth, if known",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE06",
+      "sheet": "CHE.A.Registration",
+      "label": "Time of birth",
+      "definition": "Child's time of birth (if <1 day old)",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE07",
+      "sheet": "CHE.A.Registration",
+      "label": "Age",
+      "definition": "Age of the child auto-calculated (presented as number of years, months, days) based on their date of birth",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE08",
+      "sheet": "CHE.A.Registration",
+      "label": "Age category",
+      "definition": "Age category auto-calculated based on the child's age",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE16",
+      "sheet": "CHE.A.Registration",
+      "label": "Sex",
+      "definition": "Sex of the child",
+      "options": "- Female\n- Male\n- Not specified"
+    },
+    {
+      "id": "CHE.A.DE17",
+      "sheet": "CHE.A.Registration",
+      "label": "Female",
+      "definition": "The child is female.",
+      "options": "- Female"
+    },
+    {
+      "id": "CHE.A.DE18",
+      "sheet": "CHE.A.Registration",
+      "label": "Male",
+      "definition": "The child is male.",
+      "options": "- Male"
+    },
+    {
+      "id": "CHE.A.DE19",
+      "sheet": "CHE.A.Registration",
+      "label": "Not specified",
+      "definition": "The child's sex is not specified.",
+      "options": "- Not specified"
+    },
+    {
+      "id": "CHE.A.DE20",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver first name",
+      "definition": "The first name of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE21",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver middle name",
+      "definition": "The middle name of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE22",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver last name",
+      "definition": "The last name of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE23",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver's relationship to child",
+      "definition": "The relationship of the caregiver to the child.",
+      "options": "- Mother\n- Father\n- Sibling\n- Extended family\n'- Legal guardian\n- Friend\n- Not related"
+    },
+    {
+      "id": "CHE.A.DE24",
+      "sheet": "CHE.A.Registration",
+      "label": "Mother",
+      "definition": "The caregiver is the child's mother.",
+      "options": "- Mother"
+    },
+    {
+      "id": "CHE.A.DE25",
+      "sheet": "CHE.A.Registration",
+      "label": "Father",
+      "definition": "The caregiver is the child's father.",
+      "options": "- Father"
+    },
+    {
+      "id": "CHE.A.DE26",
+      "sheet": "CHE.A.Registration",
+      "label": "Sibling",
+      "definition": "The caregiver is the child's sibling.",
+      "options": "- Sibling"
+    },
+    {
+      "id": "CHE.A.DE27",
+      "sheet": "CHE.A.Registration",
+      "label": "Extended family",
+      "definition": "The caregiver is the child's extended family.",
+      "options": "- Extended family"
+    },
+    {
+      "id": "CHE.A.DE28",
+      "sheet": "CHE.A.Registration",
+      "label": "Legal guardian",
+      "definition": "The caregiver is the child's legal guardian.",
+      "options": "- Legal guardian"
+    },
+    {
+      "id": "CHE.A.DE29",
+      "sheet": "CHE.A.Registration",
+      "label": "Not related",
+      "definition": "The caregiver is not related to the child.",
+      "options": "- Not related"
+    },
+    {
+      "id": "CHE.A.DE30",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver's mobile phone number",
+      "definition": "The mobile phone number of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE31",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver's second telephone number",
+      "definition": "The second telephone number of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE32",
+      "sheet": "CHE.A.Registration",
+      "label": "Caregiver's third telephone number",
+      "definition": "The third telephone number of the child's caregiver.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.A.DE33",
+      "sheet": "CHE.A.Registration",
+      "label": "Person/people accompanying child today?",
+      "definition": "The person/people accompanying the child during the visit.",
+      "options": "- Mother\n- Father\n- Sibling\n- Extended family\n'- Legal guardian\n- Friend\n- Not related"
+    },
+    {
+      "id": "CHE.A.DE34",
+      "sheet": "CHE.A.Registration",
+      "label": "Biological mother's vital status",
+      "definition": "The vital status of the child's mother",
+      "options": "- Biological mother alive \n- Biological mother alive but not caring for the child\n- Biological mother dead"
+    },
+    {
+      "id": "CHE.A.DE35",
+      "sheet": "CHE.A.Registration",
+      "label": "Biological mother dead",
+      "definition": "The child's biological mother is dead",
+      "options": "- Biological mother dead"
+    },
+    {
+      "id": "CHE.A.DE36",
+      "sheet": "CHE.A.Registration",
+      "label": "Biological mother alive but not caring for child",
+      "definition": "The child's biological mother is alive but is not caring for the child",
+      "options": "- Biological mother alive but not caring for child"
+    },
+    {
+      "id": "CHE.A.DE37",
+      "sheet": "CHE.A.Registration",
+      "label": "Biological mother alive",
+      "definition": "The child's mother is alive",
+      "options": "- Biological mother alive"
+    },
+    {
+      "id": "CHE.A.DE38",
+      "sheet": "CHE.A.Registration",
+      "label": "Visit date",
+      "definition": "The date and time of the child's visit",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B3.DE01",
+      "sheet": "CHE.A.Registration",
+      "label": "Reason for consultation",
+      "definition": "The reason for the child's consultation.",
+      "options": "- Life-threatening emergency\n- Sick child\n- Well child"
+    },
+    {
+      "id": "CHE.B3.DE02",
+      "sheet": "CHE.A.Registration",
+      "label": "Life-threatening emergency",
+      "definition": "The child had a life-threatening emergency.",
+      "options": "- Life-threatening emergency"
+    },
+    {
+      "id": "CHE.B3.DE03",
+      "sheet": "CHE.A.Registration",
+      "label": "Sick child",
+      "definition": "The child's visit is for a sick child consultation.",
+      "options": "- Sick child"
+    },
+    {
+      "id": "CHE.B3.DE04",
+      "sheet": "CHE.A.Registration",
+      "label": "Routine visit (well child/infant)",
+      "definition": "The child's visit is for a well child consultation.",
+      "options": "- Well child"
+    },
+    {
+      "id": "CHE.B3.DE05",
+      "sheet": "CHE.A.Registration",
+      "label": "Is the child sick today?",
+      "definition": "The child's visit is for a well child but the child is also presenting as sick.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B3.DE06",
+      "sheet": "CHE.A.Registration",
+      "label": "Type of consultation",
+      "definition": "The child's visit is for a new consultation.",
+      "options": "- New consultation\n- Follow-up"
+    },
+    {
+      "id": "CHE.B3.DE07",
+      "sheet": "CHE.A.Registration",
+      "label": "Initial visit",
+      "definition": "The child's visit is for an initial visit.",
+      "options": "- New consultation"
+    },
+    {
+      "id": "CHE.B3.DE08",
+      "sheet": "CHE.A.Registration",
+      "label": "Follow-up",
+      "definition": "The child's visit is for a follow-up consultation.",
+      "options": "- Follow-up"
+    },
+    {
+      "id": "CHE.B7.DE01",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Obstructed or absent breathing",
+      "definition": "The child has obstructed or absent breathing. --> Treat immediately. Refer link for treatment.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B7.DE02",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Convulsing now",
+      "definition": "The child is convulsing now --> Treat immediately\n\nDuring a convulsion, the child’s arms and legs stiffen because the muscles are contracting. The child may lose consciousness or cannot respond to spoken directions.\n\nIf the child is convulsing now:\n- Turn the child to their side and clear the airway. Avoid putting things in the mouth.\n- Give 0.5 mg/kg diazepam rectally.\n- Check for low blood sugar, then treat or prevent.\n- Give oxygen and REFER.\n- If convulsions have not stopped after 10 minutes repeat diazepam dose.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B7.B8.B9.DE01",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Continue to assess sick child",
+      "definition": "The health worker chooses if they will continue to assess the sick child with a life-threatening illness.",
+      "options": "- Stabilized, continue consultation\n- End consultation\n- Entered response in error"
+    },
+    {
+      "id": "CHE.B7.B8.B9.DE02",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Stabilized, continue consultation",
+      "definition": "The child has been stabilized and the health worker will continues the consultation.",
+      "options": "- Stabilized, continue consultation"
+    },
+    {
+      "id": "CHE.B7.B8.B9.DE03",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "End consultation",
+      "definition": "The child has not been stabilized and the health worker ends the consultation.",
+      "options": "- End consultation"
+    },
+    {
+      "id": "CHE.B7.B8.B9.DE04",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Entered response in error",
+      "definition": "The health worker entered the response for a life-threatening illness in error.",
+      "options": "'- Entered response in error"
+    },
+    {
+      "id": "CHE.B7.DE03A",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Select all danger signs that apply",
+      "definition": "The danger signs that are observed or reported in the child",
+      "options": "- Convulsion(s) in this illness\n- Unconscious or lethargic\n- Not able to drink or breastfeed\n- Vomitting everything\n- Vomitting but not everything"
+    },
+    {
+      "id": "CHE.B7.DE03",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Convulsion(s) in this Illness",
+      "definition": "The child has had one or more convulsions.\nDuring a convulsion, the child’s arms and legs stiffen because the muscles are contracting. The child may lose consciousness or cannot respond to spoken directions. Use words the caregiver understands. For example, the caregiver may call convulsions “fits” or “spasms”.",
+      "options": "- Convulsion(s) in this Illness"
+    },
+    {
+      "id": "CHE.B7.DE04",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Unconscious or lethargic",
+      "definition": "A lethargic child is not awake and alert when they should be. The child is drowsy and does not show interest in what is happening around them.\n\nOften the lethargic child does not look at their caregiver or watch your face when you talk, or will not respond if you clap or snap your fingers. The child may stare blankly and appear not to notice what is going on around them.\n\nAn unconscious child cannot be wakened. They do not respond when they are touched, shaken or spoken to. Ask the caregiver if the child seems unusually sleepy or if they cannot wake the child. Look to see if the child wakens when the caregiver talks to or shakes the child or when you clap your hands.",
+      "options": "- Unconscious or lethargic"
+    },
+    {
+      "id": "CHE.B7.DE05",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Not able to drink or breastfeed",
+      "definition": "A child shows signs of not being able to drink or breastfeed if they are not able to suck or swallow when offered a drink or breast-milk.\n\nWhen you ask the caregiver if the child is able to drink, make sure that they understands the question. If they say that the child is not able to drink or breastfeed, ask them to describe what happens when they offers the child something to drink. For example, is the child able to take fluid into their mouth and swallow it?\nIf you are not sure about the caregiver’s answer, ask them to offer the child a drink of clean water or breast-milk. Look to see if the child is swallowing the water or breast milk.\n\nA child who is breastfed may have difficulty sucking when their nose is blocked. If the child’s nose is blocked, clear it. If the child can breastfeed after the nose is cleared, the child does not have the danger sign “not able to drink or breastfeed.”",
+      "options": "- Not able to drink or breastfeed"
+    },
+    {
+      "id": "CHE.B7.DE06",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Vomiting everything",
+      "definition": "The child is reported to be vomiting everything (not able to hold anything down at all).",
+      "options": "- Vomiting everything"
+    },
+    {
+      "id": "CHE.B7.DE07",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Vomiting but not everything",
+      "definition": "The child is reported to be vomiting, but not everything.",
+      "options": "- Vomiting but not everything"
+    },
+    {
+      "id": "CHE.B7.DE08",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Number of convulsions in this Illness",
+      "definition": "",
+      "options": "- One convulsion\n- Two or more convulsions"
+    },
+    {
+      "id": "CHE.B7.DE09",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "One convulsion",
+      "definition": "The child has had one convulsion in this illness.",
+      "options": "- One convulsion"
+    },
+    {
+      "id": "CHE.B7.DE10",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Two or more convulsions",
+      "definition": "The child has had two or more convulsions in this illness.",
+      "options": "- Two or more convulsions"
+    },
+    {
+      "id": "CHE.B7.DE11",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Convulsion(s) lasting 15 minutes or longer",
+      "definition": "The child has had one or more convulsions lasting 15 minutes or longer.",
+      "options": "- Yes\n- No"
+    },
+    {
+      "id": "CHE.B24.DE02",
+      "sheet": "CHE.B7-9.LTI-DangerSigns",
+      "label": "Oral fluid test",
+      "definition": "This element is referencing the oral fluid test from Group question.",
+      "options": ""
+    },
+    {
+      "id": "CHE.B6.DE01",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Axillary temperature (°C)",
+      "definition": "The child's axillary temperature (temperature taken under the armpit), measured in °C.\n\nTemperature ranges for children 2–59 months:\n- Under 35.5: hypothermia (low body temperature)\n- 35.5 to 37.4: normal \n- 37.5 to 38.4: fever\n- 38.5 and above: high fever \nIf hypothermia, keep the child warm. If high fever, give paracetamol.\n\nTemperature ranges for young infants under 2 months:\n- Under 35.5: hypothermia (low body temperature)\n- 35.5 to 37.9: normal \n- 38.0 and above: fever\nIf a high or low temperature is the only severe sign, repeat the measurement after 30 minutes. In the meantime, remove clothing and let the baby who has fever cool. If the baby has hypothermia in winter, wrap the baby to warm them. Use the second reading to decide if the infant has a fever or low temperature.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE02",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Prefer to take rectal temperature",
+      "definition": "The health worker prefers to take the child's rectal temperature.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE03",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Rectal temperature (°C)",
+      "definition": "The child's rectal temperature (temperature taken in the rectum), measured in °C. Only consider taking rectal temperature if trained.\n\nTemperature ranges for children 2–59 months:\n- Under 36.0: hypothermia (low body temperature)\n- 36.0 to 38.0: normal \n- 38.0 to 39.0: fever\n- 39.0 and above: high fever \nIf hypothermia, keep the child warm. If high fever, give paracetamol.\n\nTemperature ranges for young infants under 2 months:\n- Under 36.0: hypothermia (low body temperature)\n- 36.0 to 38.5: normal \n- 38.5 and above: fever\nIf a high or low temperature is the only severe sign, repeat the measurement after 30 minutes. In the meantime, remove clothing and let the baby who has a fever cool. If the baby has hypothermia in winter, wrap the baby to warm them. Use the second reading to decide if the infant has a fever or low temperature.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE04",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Measured temperature",
+      "definition": "Auto-calculated temperature range based on axillary temperature in °C (add 0.5 for rectal temperature)\n\nFor children 2–59 months:\n- Under 35.5: low\n- 35.5 to 37.4: normal \n- 37.5 to 38.4: high\n- 38.5 and over: very high\n \nFor young infants under 2 months:\n- Under 35.5: low body temperature (hypothermia)\n- 35.5 to 37.9: normal\n- 38.0 and above: fever\n\nIf the infant has a fever, remove a layer of clothing and let the baby cool. If the body temperature is low, wrap the baby in additional clothing to warm them. If there are no other signs of severe illness indicating need for urgent referral besides fever or low body temperature, retake the temperature again in 30 minutes. Use the second reading to decide if the infant has a fever or low body temperature.",
+      "options": "- Low\n- Normal\n- High\n- Very high"
+    },
+    {
+      "id": "CHE.B6.DE05",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Thermometer not available",
+      "definition": "A thermometer is not available to measure the child's temperature.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE06",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Hot to touch",
+      "definition": "The child is hot to touch.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE07",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Weight (kilograms)",
+      "definition": "The child's weight in kilograms, to one decimal place.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE08",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Weight cannot be measured",
+      "definition": "The child's weight cannot be measured today. This should only be selected if there are no scales available to properly weight the child. An estimated weight will be calculated for the purposes of medication dosing.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE09",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Estimated weight",
+      "definition": "Estimated weight is calculated for the purposes of medication dosing only, based on the following order: \n1. If a recent* weight is available, the weight for age z-score at the time of the measurement is used today to estimate the weight based on the age today.\n2. If no recent* weight is available, for a child aged 2 months older, weight is estimated based on height/length, using weight for height/length z-score, and for young infants or if no height/length available, based on age, using the weight for age z-score. \n- In this case, the z-score is adjusted down if the child has wasting, based on MUAC (for children aged 6 months and older) or visual assessment (for children under 6 months old, or when MUAC is not available).\n\n*Recent weight is considered to be within the last 2 months for infants under the age of 4 months, within the last 3 months for infants under 6 months, within the last 4 months for infants under 12 months and within the last 6 months for children 12–59 monhts of age.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE10",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Height (cm)",
+      "definition": "The child's height, measured in centimetres.\nHeight is used for children aged 2 years and older. The assistant should\nhold the child’s knees to keep the legs straight with one hand, and the other hand on the shins to keep the heels against the back and base of the board. The measurer should hold one hand on the child’s chin and the other on the headpiece to read the height. The child’s eyes should be at the in horizontal level and the body flat against the board.\n\nProvided that weight has been measured, the height for weight z-score will be calculated automatically.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE11",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Prefer to measure length",
+      "definition": "Length is automatically prompted for children under 2 years of age. For children 2 years of age and older, length can be measured if the child is unable to stand.\nIf length is measured instead of height, 0.7 cm will automatically be subtracted before the z-score calculation.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE12",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Height cannot be measured",
+      "definition": "The child's height cannot be measured.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE13",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Length (cm)",
+      "definition": "The child's length, measured in centimetres.\nLength is used for children under 2 years or those too weak or unable to stand. One assistant should hold the child’s head over the ears and with straight arms. The measurer should keep one hand on the child’s knees keeping the legs straight and the other on the foot to read the length. The child should lie flat on the board.\n\nProvided that the weight has been measured, the length for weight z-score will be calculated automatically.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE14",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Prefer to measure height",
+      "definition": "",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE15",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Length cannot be measured",
+      "definition": "The child's length cannot be measured.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE16",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Weight for height (WFH) z-score",
+      "definition": "This score is  calculated automatically, to compare the WFH of the child against standard scores. A low z-score indicates that the child has low weight for their height. \nWFH z-score below −3: severe acute malnutrition\nWFH z-score between −2 and −3: moderate acute malnutrition\nWFH z-score −2: not malnourished, but continue to check routinely as nutrition status can change rapidly.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE17",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Weight for length (WFL) z-score",
+      "definition": "This score is  calculated automatically to compare the WFL of the child against standard scores. A low z-score indicates that the child has low weight for their length. \nWFL z-score below −3: severe acute malnutrition\nWFL z-score between −2 and −3: moderate acute malnutrition\nWFL z-score −2: not malnourished, but continue to check routinely as nutrition status can change rapidly.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE18",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Weight for age (WFA) z-score",
+      "definition": "This score is  calculated automatically to compare the WFA of the child against standard scores. A low z-score indicates that the child has low weight for their age. \nWFA z-score below −3: very low weight for age\nWFA z-score between −2 and −3: low weight for age\nWFA z-score −2: normal weight for age",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE19",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Mid-upper arm circumference (MUAC) (mm)",
+      "definition": "MUAC is an important indicator of acute malnutrition in children aged 6–59 months.\nTo measure:\n- Find the midpoint of the child’s upper arm between the shoulder and elbow.\n- Use the MUAC tape to mark the midpoint on the child’s arm.\n- Hold the large end of the strap against the arm at the midpoint of the arm.\n- Put the other end of the strap around the child’s arm. Thread the end up through the second small slit in the strap. The end will come from behind.\n- Pull both ends until the strap fits closely. It should not be so tight that it makes\nfolds in the skin. It should also not be too loose.\n- Gently press the window. At the marks, note the measurement and colour.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B6.DE20",
+      "sheet": "CHE.B6.Measurements",
+      "label": "MUAC cannot be measured",
+      "definition": "The child's MUAC cannot be measured",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B6.DE21",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Visually assess whether underweight (for drug dose calculation)",
+      "definition": "The health worker visually assesses whether underweight (to help estimate weight for medication dosing).",
+      "options": "- Not underweight\n- Underweight\n- Severely underweight"
+    },
+    {
+      "id": "CHE.B6.DE22",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Does not appear to be underweight",
+      "definition": "The child is visually assessed for whether underweight by the health care worker and does not appear to be underweight (estimated weight based on height or age would be Equivalent to WHZ = 0/WAZ = 0) (for drug dosing calculations).",
+      "options": "- Not underweight"
+    },
+    {
+      "id": "CHE.B6.DE23",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Appears to be underweight",
+      "definition": "The child is visually assessed for whether underweight by the health care worker and appears to be underweight (as an aide for dosing calculations) (estimated weight based on height or age would be Equivalent to WHZ = −1/WAZ = −1) (for drug dosing calculations).",
+      "options": "- Underweight"
+    },
+    {
+      "id": "CHE.B6.DE24",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Appears to be severely underweight",
+      "definition": "The child is visually assessed for whether underweight and appears to be severely underweight (as an aide for dosing calculations) (estimated weight based on height or age would be Equivalent to WHZ = −2/WAZ = −2) (for drug dosing calculations).",
+      "options": "- Severely underweight"
+    },
+    {
+      "id": "CHE.B6.DE25",
+      "sheet": "CHE.B6.Measurements",
+      "label": "Date of measurement",
+      "definition": "The date when the measurement was taken",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B10S1.DE05",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Symptoms",
+      "definition": "The symptoms that are observed/reported by the caregiver",
+      "options": "- Cough\n- Difficulty breathing\n- Diarrhoea\n- Fever reported\n- Ear problem\n- Eye problem\n- Skin problem"
+    },
+    {
+      "id": "CHE.B10S1.DE05A",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Cough",
+      "definition": "The caregiver reports that the child has a cough, or you see that the child has a cough.",
+      "options": "- Cough"
+    },
+    {
+      "id": "CHE.B10S1.DE01",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Difficulty breathing",
+      "definition": "Difficult breathing is any unusual pattern of breathing. Caregivers describe this in different ways. They may say that their child’s breathing is fast or noisy or interrupted. If a mother answers no, look to see if you think the child has cough or difficult breathing.",
+      "options": "- Difficulty breathing"
+    },
+    {
+      "id": "CHE.B11S1.DE01",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Diarrhoea",
+      "definition": "Diarrhoea occurs when stools contain more water than normal, and are loose or watery.  \nIn children, diarrhoea is defined as three or more loose or watery stools in a 24-hour period.\nIn young infants, diarrhoea is defined as stools that have changed from the usual pattern and are many and watery. This means more water than faecal matter. The normally frequent or semi-solid stools of a breastfed baby are not diarrhoea.",
+      "options": "- Diarrhoea"
+    },
+    {
+      "id": "CHE.B11S1.DE02",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Fever reported",
+      "definition": "The child has \"Fever reported\" (history of fever) if the child has had any fever with this illness.",
+      "options": "- Fever reported"
+    },
+    {
+      "id": "CHE.B13S1.DE01",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Ear problem",
+      "definition": "To determine if a child has an ear problem, you should ask, look and feel.\nEar problems are common. Although ear infections rarely cause death, they are the main cause of deafness and can cause learning problems at school. It is very important to assess, classify and treat ear problems to prevent pain in the short term, and more serious consequences in the long term.",
+      "options": "- Ear problem"
+    },
+    {
+      "id": "CHE.B14S1.DE01",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Eye problem",
+      "definition": "The child is reported to have or appears to have an eye problem.",
+      "options": "- Ear problem"
+    },
+    {
+      "id": "CHE.B14S1.DE02",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Skin problem",
+      "definition": "The child is reported to have or appears to have a skin problem.",
+      "options": "- Skin problem"
+    },
+    {
+      "id": "CHE.B10S1.DE06",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Cough for how long?",
+      "definition": "Length of time the child has had the cough\n- 14 days or less (2 weeks or less)\n- More than 14 days (more than 2 weeks)",
+      "options": "- 14 days or less\n- More than 14 days"
+    },
+    {
+      "id": "CHE.B10S1.DE07",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "14 days or less",
+      "definition": "The child has had cough for 14 days or less (2 weeks or less).",
+      "options": "- 14 days or less"
+    },
+    {
+      "id": "CHE.B10S1.DE08",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "More than 14 days",
+      "definition": "The child has had cough for more than 14 days (more than 2 weeks).",
+      "options": "- More than 14 days"
+    },
+    {
+      "id": "CHE.B10S1.DE02",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Difficulty breathing for how long?",
+      "definition": "Length of time the child has had difficulty breathing:\n- 14 days or less (2 weeks or less)\n- More than 14 days (more than 2 weeks)",
+      "options": "- 14 days or less\n- More than 14 days"
+    },
+    {
+      "id": "CHE.B10S1.DE03",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "14 days or less",
+      "definition": "The child has had difficulty breathing for 14 days or less (2 weeks or less).",
+      "options": "- 14 days or less"
+    },
+    {
+      "id": "CHE.B10S1.DE04",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "More than 14 days",
+      "definition": "The child has had difficulty breathing for more than 14 days (more than 2 weeks).",
+      "options": "- More than 14 days"
+    },
+    {
+      "id": "CHE.B11S1.DE02",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Diarrhoea for how long?",
+      "definition": "Length of time the child has had diarrhoea\n- Less than 14 days (less than 2 weeks)\n- 14 days or more (2 weeks or more)",
+      "options": "- Less than 14 days\n- 14 days or more"
+    },
+    {
+      "id": "CHE.B11S1.DE03",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Less than 14 days",
+      "definition": "The child has had diarrhoea for less than 14 days (less than 2 weeks).",
+      "options": "- Less than 14 days"
+    },
+    {
+      "id": "CHE.B11S1.DE04",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "14 days or more",
+      "definition": "The child has had diarrhoea for 14 days or more (2 weeks or more).",
+      "options": "- 14 days or more"
+    },
+    {
+      "id": "CHE.B11S1.DE05",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Blood in the stool in this Illness",
+      "definition": "The child has had blood in the stool in this illness.",
+      "options": "- Yes\n- No"
+    },
+    {
+      "id": "CHE.B12S1.DE03",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Fever for how long?",
+      "definition": "Length of time the child has had fever\n- 7 days or less (1 week or less)\n- More than 7 days (more than 1 week)",
+      "options": "- 7 days or less\n- More than 7 days"
+    },
+    {
+      "id": "CHE.B12S1.DE04",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "7 days or less",
+      "definition": "The child has had fever for 7 days or less (1 week or less).",
+      "options": "- 7 days or less"
+    },
+    {
+      "id": "CHE.B12S1.DE05",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "More than 7 days",
+      "definition": "The child has had fever for more than 7 days (more than 1 week).",
+      "options": "- More than 7 days"
+    },
+    {
+      "id": "CHE.B12S1.DE06",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Has fever been present every day for more than 7 days?",
+      "definition": "If the fever has been present for more than 7 days, ask if the fever has been present every day. A fever that has been present every day for more than 7 days can mean that the child has a more severe disease, such as typhoid fever. The child will need referral for further assessment.",
+      "options": "- Yes\n- No"
+    },
+    {
+      "id": "CHE.B12S1.DE08",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Pain",
+      "definition": "The child is reported to have or appears to be in pain. It is important to assess for pain that could be a sign of a source of infection when the child has reported or measured fever.",
+      "options": "- No pain\n- Joint or bone pain\n- Pain or difficulty passing urine\n- Skin pain\n- Ear pain\n- Other"
+    },
+    {
+      "id": "CHE.B12S1.DE09",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "No Pain",
+      "definition": "The child is not reported to have any pain and does not appear to be in pain.",
+      "options": "- No pain"
+    },
+    {
+      "id": "CHE.B12S1.DE10",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Joint or bone pain",
+      "definition": "The child is reported to have or appears to have joint or bone pain.",
+      "options": "- Joint or bone pain"
+    },
+    {
+      "id": "CHE.B12S1.DE11",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Pain or difficulty passing urine or crying when passing urine",
+      "definition": "The child is reported to have or appears to have pain or difficulty passing urine (in younger children this may appear as crying when passing urine).",
+      "options": "- Pain or difficulty passing urine"
+    },
+    {
+      "id": "CHE.B12S1.DE12",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Skin problem",
+      "definition": "The child is reported to have or appears to have painful skin or a skin problem.",
+      "options": "- Skin pain"
+    },
+    {
+      "id": "CHE.B12S1.DE13",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Ear pain",
+      "definition": "The child is reported to have or appears to have ear pain.",
+      "options": "- Ear pain"
+    },
+    {
+      "id": "CHE.B12S1.DE14",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Other",
+      "definition": "The child is reported to have or appears to have pain which does not fit into the other categories.",
+      "options": "- Other"
+    },
+    {
+      "id": "CHE.B12S1.DE15",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Malaria risk",
+      "definition": "The area is a high/low/no malaria risk area",
+      "options": "- High malaria risk\n- Low malaria risk\n- No malaria risk"
+    },
+    {
+      "id": "CHE.B12S1.DE16",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "High malaria risk",
+      "definition": "High malaria risk: in an area where more than 5% of fever cases in children 2–59 months are attributable to malaria",
+      "options": "- High malaria risk"
+    },
+    {
+      "id": "CHE.B12S1.DE17",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Low malaria risk",
+      "definition": "Low malaria risk: in an area where fewer than 5% of fever cases in children 2–59 months are attributable to malaria, but where the risk is not negligible.",
+      "options": "- Low malaria risk"
+    },
+    {
+      "id": "CHE.B12S1.DE18",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "No malaria risk",
+      "definition": "No malaria risk: malaria transmission does not normally occur in the area and imported malaria is uncommon.",
+      "options": "- No malaria risk"
+    },
+    {
+      "id": "CHE.B12S1.DE19",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Recent travel to a high malaria risk area",
+      "definition": "The child has recently travelled (in the last 2 weeks) to a high malaria risk area.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S1.DE02",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Ear pain",
+      "definition": "Ear pain can mean that the child has an ear infection. If the caregiver is not sure that the child has ear pain, ask if the child has been irritable and rubbing his ear.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S1.DE03",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Ear discharge",
+      "definition": "The child is reported or appears to have pus discharging from the ear. Use words the caregiver understands.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S1.DE04",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Ear discharge for how long?",
+      "definition": "How long the child has had the discharge from the ear. \n- Less than 14 days (less than 2 weeks)\n- 14 days or more (2 weeks or more)",
+      "options": "- Less than 14 days\n- 14 days or more"
+    },
+    {
+      "id": "CHE.B13S1.DE05",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "Less than 14 days",
+      "definition": "The child has had ear discharge for less than 14 days (less than 2 weeks).",
+      "options": "- Less than 14 days"
+    },
+    {
+      "id": "CHE.B13S1.DE06",
+      "sheet": "CHE.B10-14.Symptoms ≥2 mths",
+      "label": "14 days or more",
+      "definition": "The child has had ear discharge for 14 days or more (2 weeks or more).",
+      "options": "- 14 days or more"
+    },
+    {
+      "id": "CHE.B24.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Respiratory rate",
+      "definition": "This element is referencing the respiratory rate test from the group questions.",
+      "options": ""
+    },
+    {
+      "id": "CHE.B10S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Chest indrawing",
+      "definition": "NORMAL: When child breathes IN, chest wall moves OUT\nCHEST INDRAWING: When child breathes IN, chest wall moves IN\n\nChest indrawing occurs when the child needs to make a greater effort than normal to breathe in. Look for chest indrawing when the child breathes IN.\n\nIn normal breathing, the whole chest wall (upper and lower) and the abdomen move OUT when the child breathes IN. The child has chest indrawing if the lower chest wall (lower ribs) goes IN when the child breathes IN.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B10S2.DE04",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Stridor in a calm child",
+      "definition": "Stridor is a harsh noise made when a child breathes IN.\nPut your ear near the child’s mouth because stridor can be difficult to hear. Sometimes you will hear a wet noise if the child’s nose is blocked. Clear the nose and listen again.\n\nBe sure to look and listen for stridor when the child is calm. \nA child who is not very ill may have stridor only when they are crying or upset. However, a child who is calm and also has stridor has a dangerous situation.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B10S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Wheezing",
+      "definition": "Wheeze is a high-pitched whistling or musical sound heard at the end of the breathing OUT. The child’s small air passages narrow thus causing wheezing.\nTo hear wheezing, put your ear near to the child’s mouth when the child is calm. Look at the child’s breathing while you listen to check that the sound mainly occurs when the child breathes out.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B10S2.DE06",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Recurrent wheeze",
+      "definition": "Recurrent wheezing can be a sign of asthma, tuberculosis or other important health problems that require further assessment.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B10S2.DE07",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oxygen saturation (%)",
+      "definition": "If a pulse oximeter is available, determine oxygen saturation (SpO2). \nAfter turning the oximeter on, position the appropriate probe based on the child's size. If using on a finger or toe, make sure the area is clean and without nail varnish. Ensure that a good (even) pulse signal (waveform) is displayed before taking the reading. If uncertain that the probe is working, check by testing on your own finger. \nNormal oxygen saturation at sea level is 95–100%. Oxygen should be given if saturation drops to less than 90% and may be needed for children with severe illness if the SpO2 <94%. Different cut-offs may be used at high altitude.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B10S2.DE08",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oxygen saturation <90 %",
+      "definition": "ALERT: Check that the value you have entered is correct. Children with oxygen saturation <90% need oxygen if available and urgent referral.",
+      "options": "- <90%"
+    },
+    {
+      "id": "CHE.B10S2.DE09",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oxygen saturation not measured",
+      "definition": "The child's oxygen saturation was not measured.",
+      "options": "- Oxygen saturation not measured"
+    },
+    {
+      "id": "CHE.B11S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Sunken eyes",
+      "definition": "The eyes of a child who is dehydrated may look sunken. Decide if you think the eyes are sunken. Then ask the mother if she thinks her child’s eyes look unusual. Her opinion can help you confirm.\nNOTE: In a severely malnourished child with wasting, the eyes may look sunken, even if the child is not dehydrated. Still use the sign to classify dehydration but only if the caregiver confirms that their child's eyes have only recently started looking like this (hours/days) and make sure to also consider this sign in combination with a good history of fluid loss and other signs.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B11S2.DE02",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin pinch of abdomen",
+      "definition": "To assess dehydration using the skin pinch:\n1. ASK the mother to place the child on the examining table so that the child is flat on their back with their arms at their sides (not over their head) and their legs straight, or ask the mother to hold the child so they are lying flat on her lap.\n2. USE YOUR THUMB AND FIRST FINGER to locate the area on the child’s abdomen halfway between the umbilicus and the side of the abdomen. Do not use your fingertips because this will cause pain. The fold of the skin should be in a line up and down the child’s body.\n3. PICK UP all the layers of skin and the tissue underneath them.\n4. HOLD the pinch for one second. Then release it.\n5.. LOOK to see if the skin pinch goes back very slowly (more than 2 seconds), slowly (fewer than 2 seconds, but not immediately) or immediately. If the skin stays up for even a brief time after you release it, decide that the skin pinch goes back slowly.\nNote:In a severely malnourished child with wasting, the eyes may look sunken, even if the child is not dehydrated. Still use the sign to classify dehydration but only if the caregiver confirms that their child's eyes have only recently started looking like this (hours/days) and make sure to also consider this sign in combination with a good history of fluid loss and other signs.",
+      "options": "Skin pinch goes back very slowly (more than 2 seconds)\nSkin pinch goes back slowly (2 seconds or fewer, but not immediately)\nGoes back normally (immediately)"
+    },
+    {
+      "id": "CHE.B11S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Goes back normally (immediately)",
+      "definition": "The child's skin goes back normally (immediately) after pinching the skin of the abdomen.",
+      "options": "- Goes back normally (immediately)"
+    },
+    {
+      "id": "CHE.B11S2.DE04",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin pinch goes back slowly (2 seconds or fewer, but not immediately)",
+      "definition": "The child's skin goes back slowly after pinching the skin of the abdomen (2 seconds or less, but not immediately).",
+      "options": "- Skin pinch goes back slowly (2 seconds or fewer, but not immediately)"
+    },
+    {
+      "id": "CHE.B11S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin pinch goes back very slowly (more than 2 seconds)",
+      "definition": "The child's skin goes back very slowly after pinching the skin of the abdomen (more than 2 seconds).",
+      "options": "- Skin pinch goes back very slowly (more than 2 seconds)"
+    },
+    {
+      "id": "CHE.B11S2.DE06",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Restless and irritable",
+      "definition": "A child is restless and irritable if they are restless and irritable all the time or every time the are touched and handled. If an infant or child is calm when breastfeeding but again restless and irritable when they stops breastfeeding, they should show signs of restlessness and irritability. Many children are upset just because they are in the clinic. Usually these children can be consoled and calmed, and do not have this sign.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B12S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Stiff neck",
+      "definition": "A stiff neck may be a sign of meningitis, cerebral malaria or another very severe febrile disease. It requires urgent treatment with injectable antibiotics and referral to a hospital.\nWATCH THE CHILD: While you talk with the caregiver during the assessment, look to see if the child moves and bends their neck easily when looking around. If the child is moving and bending their neck, the child does not have a stiff neck.\nTEST THE CHILD: If you did not see any movement, or if you are not sure, draw the child’s attention to their umbilicus or toes. For example, you can shine a flashlight on the toes or umbilicus or tickle the toes to encourage the child to look down. Look to see if the child can bend their neck when looking down at their umbilicus or toe.\nFEEL FOR A STIFF NECK:If you still have not seen the child bend their  neck , ask the caregiver to help you lay the child on their back. Lean over the child, and gently support the child’s back and shoulders with one hand. With the other hand, hold the child’s head. Then carefully bend the head forward towards the child’s chest. If the neck bends easily, the child does not have a stiff neck. If the neck feels stiff and there is resistance to bending, the child has a stiff neck. Often a child with a stiff neck will cry when you try to bend the neck.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B12S2.DE02",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Refusal to use a limb",
+      "definition": "The child is unable to use a limb (arm or leg) on examination. It is important to assess for refusal to use a limb, which could be a sign of a bone or joint infection when the child has reported or measured fever.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B12S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Warm, tender or swollen joint or bone",
+      "definition": "The child has a warm, tender or swollen joint or bone, which could be a sign of a infection when the child has reported or measured fever.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B12S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Runny nose",
+      "definition": "The child has a runny nose.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Tender swelling behind the ear",
+      "definition": "If both tenderness and swelling are present, the child may have mastoiditis, a deep infection in the mastoid bone. Feel behind both ears. Compare them and decide if there is tender swelling of the mastoid bone. In infants, the swelling may be above the ear. Do not confuse this swelling of the bone with swollen lymph nodes.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S2.DE02",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Pus seen draining from the ear",
+      "definition": "Look inside the child’s ear to see if pus is draining. this is a sign of infection, even if the child is not feeling any pain. Draining pus is a sign of infection.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B13S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Pus seen draining from the ear for how long?",
+      "definition": "How long the child has had the discharge from the ear? \n- Fewer than 14 days (fewer than 2 weeks)\n- 14 days or more (2 weeks or more)",
+      "options": "- Fewer than 14 days\n- 14 days or more"
+    },
+    {
+      "id": "CHE.B13S2.DE04",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Less than 14 days",
+      "definition": "The child has had ear discharge for fewer than 14 days (fewer than 2 weeks).",
+      "options": "- Fewer than 14 days"
+    },
+    {
+      "id": "CHE.B13S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "14 days or more",
+      "definition": "The child has had ear discharge for 14 days or more (2 weeks or more).",
+      "options": "- 14 days or more"
+    },
+    {
+      "id": "CHE.B14S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Red eyes",
+      "definition": "The child has “red eyes” if there is redness in the white part of the eye. In a healthy eye, the white part of the eye is clearly white and not discoloured.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE02",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Pus  draining from the eye",
+      "definition": "Pus draining from the eye is a sign of conjunctivitis. Conjunctivitis is an infection of the conjunctiva, the inside surface of the eyelid and the white part of the eye.\nIf you do not see pus draining from the eye, look for pus on the conjunctiva or on the eyelids. Often the pus forms a crust when the child is sleeping and seals the eye shut. You can gently open the eye, making sure that your hands are clean.\nWash your hands after examining the eye of any child with pus draining from the eye.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Clouding of the cornea",
+      "definition": "The cornea is usually clear. When clouding of the cornea is present, the cornea may appear clouded or hazy. The cornea may look the way a glass of water looks when you add a small amount of milk. Clouding may occur in one or both eyes.\nA child with corneal clouding may keep their eyes tightly shut when exposed to light. The light may cause irritation and pain to the child’s eyes. To check the child’s eyes, wait for the child to open their eye or gently pull down the lower eyelid to look for clouding.\nCorneal clouding is a dangerous condition. It may be the result of vitamin A deficiency that has been made worse by measles. If corneal clouding is not treated, the cornea can ulcerate and cause blindness. A child with clouding of the cornea needs urgent treatment with vitamin A.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE04",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Is clouding of the cornea a new problem?",
+      "definition": "If there is clouding of the cornea, ask the caregiver how long clouding has been present. If the caregiver is certain that clouding has been there for some time, ask if clouding has already been assessed and treated at the hospital. If it has, you do not need to refer this child again for corneal clouding.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Has clouding of the cornea previously been treated?",
+      "definition": "If clouding has already been assessed and treated at the hospital, you do not need to refer this child again for corneal clouding.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE06",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Generalized or localized skin problem",
+      "definition": "A generalized skin problem is a skin problem that affects the whole body, a large area of the body or several parts of the body, whereas a localized skin problem is limited to one area of the body.\nThis question is prompted either if a skin problem has been noted already, or if the child has fever with one or more of cough, runny nose or red eyes (to assess for measles)",
+      "options": "Generalized skin problem\nLocalized skin problem\nNo skin problem"
+    },
+    {
+      "id": "CHE.B14S2.DE07",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Generalized skin problem",
+      "definition": "The child has a generalized skin problem that affects  the whole body, a large area of the body or several parts of the body.",
+      "options": "- Generalized skin problem"
+    },
+    {
+      "id": "CHE.B14S2.DE08",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Localized skin problem",
+      "definition": "The child has a localized skin problem that is limited to one area of the body.",
+      "options": "- Localized skin problem"
+    },
+    {
+      "id": "CHE.B14S2.DE09",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No problem",
+      "definition": "The child does not have a skin problem on examination.",
+      "options": "- No skin problem"
+    },
+    {
+      "id": "CHE.B14S2.DE10",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Measles rash",
+      "definition": "In measles, a rash begins behind the ears and on the neck. It spreads to the face. During the next day, the rash spreads to the rest of the body, arms and legs. After 4–5 days, the rash starts to fade and the skin may peel.\n\nSome children with severe infection may have more extended rash spread over more of the body. The rash becomes more discoloured (dark brown or blackish) and there is more peeling of the skin. A measles rash does not have vesicles (blisters) or pustules. The rash does not itch.\n\nDo not confuse measles with other common childhood rashes such as chickenpox, scabies or a heat rash. Chickenpox rash is a generalized rash with vesicles. Scabies occurs on the hands, feet, ankles, elbows, buttocks and axilla (underarms). It also itches. Heat rash can be a generalized rash with small bumps and vesicles that itch. A child with a heat rash is not sick.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE11",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Measles within the last 3 months",
+      "definition": "Ask the caregiver or check the child's health record to see if they have had measles in the last 3 months. If the caregiver is not sure, explain the symptoms (a generalized rash all over the body, starting from behind the ears and on the neck, spreading to the face, then the body, arms and legs, accompanied by a runny nose, red eyes or cough).",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE11A",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Itchy skin",
+      "definition": "The child is reported to have or appears to have itchy skin.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE012",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Blisters, sores or pustules",
+      "definition": "The child has skin blisters, sores or pustules.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE13",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Type of skin problem",
+      "definition": "Common skin problems are:\n- Abscess – Hot tender swelling\n- Cellulitis – Red tender skin\n- Papular itching rash (prurigo) – Itching rash with small papules and scratch marks. Dark spots with pale centre \n- Ringworm (tinea) – An itchy circular lesion with a raised edge and fine scaly area in the centre with loss of hair.  May also be found on the body or web of feet\n- Scabies – Rash and excoriations on the torso; burrows in the web space and wrists, face is spared\n- Chickenpox – Vesicles over body.  Vesicles appear progressively over days and form scabs after they rupture\n- Herpes zoster virus –  Vesicles in one area on one side of the body with intense pain or scars plus shooting pain.  Uncommon in children except where they are immunocompromised (e.g. if infected with HIV)\n- Impetigo or folliculitis – Red, tender, warm crusts or small lesions\n- Molluscum contagiosum (poxvirus) – Skin coloured as pearly white papules with central umbilication. Most commonly seen on the face and trunk in children.\n- Warts – Papules or nodules with a rough (verrucous) surface\n- Seborrhoea – Greasy scales and redness on the centre of the face and body folds\n- Fixed drug reactions – Generalized red rash, widespread with small bumps or blisters or one or more dark skin areas\n- Eczema – Wet oozing sores or excoriated, thick patches\n- Stevens–Johnson syndrome – Severe reaction due to cotrimoxazole or nevirapine involving the skin as well as the eyes and the mouth.  Might cause difficulty in breathing.\n- Dermatoses associated with severe acute malnutrition ('kwashiorkor skin lesions')",
+      "options": "- Abscess – Hot tender swelling\n- Cellulitis – Red tender skin\n- Papular itching rash (prurigo) – Itching rash with small papules and scratch marks. Dark spots with pale centre \n- Ringworm (tinea) – An itchy circular lesion with a raised edge and fine scaly area in the centre with loss of hair.  May also be found on body or web of feet\n- Scabies – Rash and excoriations on torso; burrows in web space and wrists, face spared\n- Chickenpox – Vesicles over the body.  Vesicles appear progressively over days and form scabs after they rupture\n- Herpes zoster –  Vesicles in one area on one side of the body with intense pain or scars plus shooting pain.  \nUncommon in children except where they are immunocompromised (e.g. if infected with HIV)\n- Impetigo or folliculitis – Red, tender, warm crusts or small lesions\n- Molluscum contagiosum (poxvirus) – Skin coloured with pearly white papules with central umbilication. Most commonly seen on the face and trunk in children.\n- Warts – Papules or nodules with a rough (verrucous) surface\n- Seborrhoea – Greasy scales and redness on the central face and body folds\n- Fixed drug reactions – Generalized red, widespread with small bumps or blisters, or one or more dark skin areas\n- Eczema – Wet oozing sores or excoriated, thick patches\n- Stevens–Johnson syndrome – Severe reaction due to cotrimoxazole or nevirapine involving the skin as well as the eyes and the mouth.  Might cause difficulty in breathing"
+    },
+    {
+      "id": "CHE.B14S2.DE14",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Abscess – Hot tender swelling",
+      "definition": "The child has an abscess – Hot tender swelling.",
+      "options": "- Abscess – Hot tender swelling"
+    },
+    {
+      "id": "CHE.B14S2.DE15",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Deep or extends to muscle",
+      "definition": "The child has an abscess that is deep or extends to the muscle.",
+      "options": "- Deep or extends to the muscle"
+    },
+    {
+      "id": "CHE.B14S2.DE16",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Cellulitis – hot tender skin",
+      "definition": "The child has cellulitis – warm or hot tender skin that appears red in paler skin tones and dark red, dark brown, grey or purple in darker skin tones.",
+      "options": "- Cellulitis – Hot tender swelling"
+    },
+    {
+      "id": "CHE.B14S2.DE17",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Rapidly spreading, extensive or not responding to oral antibiotics",
+      "definition": "The child has cellulitis that is rapidly spreading, extensive or not responding to oral antibiotics.",
+      "options": "- Rapidly spreading, extensive or not responding to oral antibiotics"
+    },
+    {
+      "id": "CHE.B14S2.DE18",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Papular itching rash\n(prurigo). Itching rash with small papules and scratch marks. Dark spots with pale centre",
+      "definition": "Papular itching rash (prurigo) – Itching rash with small papules and scratch marks. Dark spots with pale centre",
+      "options": "- Papular itching rash (prurigo) – Itching rash with small papules and scratch marks. Dark spots with pale centre"
+    },
+    {
+      "id": "CHE.B14S2.DE19",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Ringworm (tinea). An itchy circular lesion with a raised edge and fine scaly area in the centre with loss of hair.  May also be found on body or web of feet.",
+      "definition": "Ringworm (tinea) – An itchy circular lesion with a raised edge and fine \nscaly area in the centre, with loss of hair.  May also be found on body or web of feet.",
+      "options": "- Ringworm (tinea) – An itchy circular lesion with a raised edge and fine scaly area in the centre, with loss of hair. May also be found on the body or web of feet"
+    },
+    {
+      "id": "CHE.B14S2.DE20",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Extensive ringworm (Tinea)",
+      "definition": "The child has extensive ringworm.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE21",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Scabies. Rash and excoriations on the torso; burrows in web space and wrists, face spared",
+      "definition": "The child has scabies – Rash and excoriations on torso; burrows in web space and wrists, face spared.",
+      "options": "- Scabies – Rash and excoriations on the torso; burrows in web space and wrists, face spared"
+    },
+    {
+      "id": "CHE.B14S2.DE22",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Chickenpox. Vesicles over body.  Vesicles appear progressively over days and form scabs after they rupture",
+      "definition": "The child has chickenpox – Vesicles over the body.  Vesicles appear progressively over days and form scabs after they rupture.",
+      "options": "- Chickenpox – Vesicles over body.  Vesicles appear progressively over days and form scabs after they rupture"
+    },
+    {
+      "id": "CHE.B14S2.DE23",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Herpes zoster.  Vesicles in one area on one side of body with intense pain or scars plus shooting pain.  \nUncommon in children except where they are immunocompromised (e.g. if infected with HIV)",
+      "definition": "The child has Herpes zoster virus –  Vesicles in one area on one side of the body with intense pain or scars plus shooting pain.  \nUncommon in children except where they are immunocompromised (e.g. if infected with HIV)",
+      "options": "- Herpes zoster virus –  Vesicles in one area on one side of body with intense pain or scars plus shooting pain.  \nUncommon in children except where they are immunocompromised (e.g. if infected with HIV)"
+    },
+    {
+      "id": "CHE.B14S2.DE24",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Eye involvement",
+      "definition": "The child has Herpes zoster virus with eye involvement.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE25",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Impetigo or folliculitis. Red, tender, warm crusts or small lesions",
+      "definition": "The child has impetigo or folliculitis – Red, tender, warm crusts or small lesions.",
+      "options": "- Impetigo or folliculitis – Red, tender, warm crusts or small lesions"
+    },
+    {
+      "id": "CHE.B14S2.DE26",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Signs of severe impetigo or folliculitis",
+      "definition": "Signs of severe impetigo or folliculitis include:\n- Skin lesions 4 cm or larger\n- Red skin streaks\n- Tender nodes (nodules) under the skin\n- Skin infection extends to the muscle\n- No signs of severe impetigo or folliculitis",
+      "options": "- Skin lesions ≥4 cm\n- Red skin streaks\n- Tender nodes (nodules) under the skin\n- Skin infection extends to the muscle\n- No signs of severe impetigo or folliculitis"
+    },
+    {
+      "id": "CHE.B14S2.DE27",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin lesions ≥4 cm",
+      "definition": "The impetigo skin lesions cover an area of 4 cm or larger.",
+      "options": "- Skin lesions ≥4 cm"
+    },
+    {
+      "id": "CHE.B14S2.DE28",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Red skin streaks",
+      "definition": "Impetigo is associated with red skin streaks.",
+      "options": "- Red skin streaks"
+    },
+    {
+      "id": "CHE.B14S2.DE29",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Tender nodes (nodules) under the skin",
+      "definition": "Impetigo is associated with tender nodes (nodules) under the skin.",
+      "options": "- Tender nodes (nodules) under the skin"
+    },
+    {
+      "id": "CHE.B14S2.DE30",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin infection extends to muscle",
+      "definition": "The skin Infection extends to the muscle.",
+      "options": "- Skin infection extends to to the muscle"
+    },
+    {
+      "id": "CHE.B14S2.DE30a",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No signs of severe impetigo or folliculitis",
+      "definition": "The child does not have any signs of severe impetigo or folliculitis.",
+      "options": "- No signs of severe impetigo or folliculitis"
+    },
+    {
+      "id": "CHE.B14S2.DE31",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Molluscum contagiosum. Skin-coloured pearly white papules with central umbilication. Most commonly seen on the face and trunk in children.",
+      "definition": "The child has molluscum contagiosum (poxvirus) – Skin coloured with pearly white papules with central umbilication. Most commonly seen on the face and trunk in children.",
+      "options": "- Molluscum contagiosum (poxvirus) – Skin coloured with pearly white papules with central umbilication. Most commonly seen on the face and trunk in children."
+    },
+    {
+      "id": "CHE.B14S2.DE32",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Warts. Papules or nodules with a rough (verrucous) surface",
+      "definition": "The child has warts – Papules or nodules with a rough (verrucous) surface.",
+      "options": "- Warts – Papules or nodules with a rough (verrucous) surface"
+    },
+    {
+      "id": "CHE.B14S2.DE33",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Seborrhoea. Greasy scales and redness on central face and body folds",
+      "definition": "The child has seborrhoea – Greasy scales and redness on central face and body folds.",
+      "options": "- Seborrhoea – Greasy scales and redness on the central face and body folds"
+    },
+    {
+      "id": "CHE.B14S2.DE34",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Severe seborrhoea",
+      "definition": "The child has severe seborrhoea requiring referral.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B14S2.DE35",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Fixed drug reactions. Generalized red, widespread with small bumps or blisters, or one or more dark skin areas",
+      "definition": "The child has a fixed drug reaction – Generalized red rash, widespread with small bumps or blisters, or one or more dark skin areas.",
+      "options": "- Fixed drug reactions – Generalized red, widespread with small bumps or blisters, or one or more dark skin areas"
+    },
+    {
+      "id": "CHE.B14S2.DE36",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Eczema. Wet oozing sores or excoriated, thick patches",
+      "definition": "The child has eczema – Wet oozing sores or excoriated, thick patches.",
+      "options": "- Eczema – Wet oozing sores or excoriated, thick patches"
+    },
+    {
+      "id": "CHE.B14S2.DE37",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Stevens–Johnson syndrome",
+      "definition": "The child has Stevens–Johnson syndrome – Severe reaction due to cotrimoxazole or nevirapine involving the skin as well as the eyes and mouth.  Might cause difficulty in breathing",
+      "options": "- Stevens–Johnson syndrome – Severe reaction due to cotrimoxazole or nevirapine involving the skin as well as the eyes and the mouth.  Might cause difficulty in breathing"
+    },
+    {
+      "id": "CHE.B14S2.DE37a",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Dermatoses associated with severe acute malnutrition ('kwashiorkor skin lesions')",
+      "definition": "The child has dermatoses characterized by hypo- or hyper-pigmentation, desquamation that flakes or peels, and in extreme cases ulceration that may spread to any area of the body. Epidermal ulceration gives way to exudative open skin lesions, resembling burns. Lesions can easily become infected with bacteria and candida. Check for signs of surinfection.",
+      "options": "-Dermatoses associated with severe acute malnutrition ('kwashiorkor skin lesions')"
+    },
+    {
+      "id": "CHE.B14S2.DE38",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oral sores or mouth ulcers",
+      "definition": "Examination for oral sores or mouth ulcers should be carried out at the end of the physical examination so as not to upset or aggitate the child before completing other physical examinations. \n\nUlcers are painful open sores on the inside of the mouth and lips or the tongue. They may be red or have a white coating. Severe mouth ulcers are 'deep and extensive' and require referral.\n\nIf the child has measles, note that mouth ulcers are different than the small, irregular, bright red spots with a white spot in the centre, called Koplik spots, which occur inside the cheek during the early stages of the measles infection. They do not interfere with drinking or eating. They do not need treatment.",
+      "options": "- No oral sores or mouth ulcers\n- Oral thrush\n- Mouth sores or mouth ulcers – Deep and extensive\n- Mouth sores or mouth ulcers – Not deep and extensive"
+    },
+    {
+      "id": "CHE.B14S2.DE39",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No sores or mouth ulcers",
+      "definition": "The child does not have oral sores or mouth ulcers.",
+      "options": "- No oral sores or mouth ulcers"
+    },
+    {
+      "id": "CHE.B14S2.DE40",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oral thrush",
+      "definition": "The child has oral thrush.",
+      "options": "- Oral thrush"
+    },
+    {
+      "id": "CHE.B14S2.DE41",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Mouth sores or mouth ulcers – deep and extensive",
+      "definition": "The child has mouth sores or ulcers that are deep and extensive  (severe, requiring referral).",
+      "options": "- Mouth sores or mouth ulcers – Deep and extensive"
+    },
+    {
+      "id": "CHE.B14S2.DE42",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Mouth sores or mouth ulcers – not deep and extensive",
+      "definition": "The child has mouth sores or ulcers that are not deep and extensive (not severe, not requiring referral).",
+      "options": "- Mouth sores or mouth ulcers – Not deep and extensive"
+    },
+    {
+      "id": "CHE.B14S2.DE43",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Add a skin or mouth or eye problem",
+      "definition": "On examination, the child has a skin, mouth or eye problem not reported by the caregiver, or not already assessed.",
+      "options": "- Skin problem\n- Oral sores or mouth ulcers\n- Eye problem\n- No – Do not add a skin or mouth or eye problem"
+    },
+    {
+      "id": "CHE.B14S2.DE44",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Skin problem",
+      "definition": "The child has a skin problem.",
+      "options": "- Skin problem"
+    },
+    {
+      "id": "CHE.B14S2.DE45",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oral sores or mouth ulcers",
+      "definition": "The child has oral sores or mouth ulcers.",
+      "options": "- Oral sores or mouth ulcers"
+    },
+    {
+      "id": "CHE.B14S2.DE46",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Eye problem",
+      "definition": "The child has an eye problem.",
+      "options": "- Eye problem"
+    },
+    {
+      "id": "CHE.B14S2.DE47",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No. Do not add a skin or mouth or eye problem",
+      "definition": "A skin or mouth or eye problem does not need to be added.",
+      "options": "- No - Do not add a skin or mouth or eye problem"
+    },
+    {
+      "id": "CHE.B15S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Palmar pallor",
+      "definition": "LOOK at the skin of the child’s palm. Hold the child’s palm open by grasping it gently from the side. Do not stretch the fingers backwards. This may cause pallor by blocking the blood supply. Compare the colour of the child’s palm with your own palm and with the palms of other children. The child has some palmar pallor if the skin of the child’s palm is pale. The child has severe palmar pallor if the skin of the palm is very pale or so pale that it looks white.",
+      "options": "- Severe palmar pallor\n- Some palmar pallor\n- No palmar pallor"
+    },
+    {
+      "id": "CHE.B15S2.DE02",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Severe palmar pallor",
+      "definition": "The child has severe palmar pallor if the skin of the palm is very pale or so pale that it looks white.",
+      "options": "- Severe palmar pallor"
+    },
+    {
+      "id": "CHE.B15S2.DE03",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Some palmar pallor",
+      "definition": "The child has some palmar pallor if the skin of the child’s palm is pale but not very pale or so pale that it looks white.",
+      "options": "- Some palmar pallor"
+    },
+    {
+      "id": "CHE.B15S2.DE04",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No palmar pallor",
+      "definition": "The child does not have palmar pallor.",
+      "options": "- No palmar pallor"
+    },
+    {
+      "id": "CHE.B15S2.DE05",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Malaria risk",
+      "definition": "The area is a high/low/no malaria risk area",
+      "options": "- High malaria risk\n- Low malaria risk\n- No malaria risk"
+    },
+    {
+      "id": "CHE.B15S2.DE06",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "High malaria risk",
+      "definition": "High malaria risk",
+      "options": "- High malaria risk"
+    },
+    {
+      "id": "CHE.B15S2.DE07",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Low malaria risk",
+      "definition": "Low malaria risk",
+      "options": "- Low malaria risk"
+    },
+    {
+      "id": "CHE.B15S2.DE08",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "No malaria risk",
+      "definition": "No malaria risk",
+      "options": "- No malaria risk"
+    },
+    {
+      "id": "CHE.B16S2.DE01",
+      "sheet": "CHE.B10-16.Signs ≥2 mths",
+      "label": "Oedema of both feet",
+      "definition": "Oedema of both feet means severe acute malnutrition.\nLOOK and FEEL to determine if the child has oedema of both feet. Using your thumbs, press the top of both feet simultaneously for 3 seconds on the top of each foot. The child has oedema if a dent remains in the child’s foot when you lift your thumb.\nOedema is when an unusually large amount of fluid gathers in the child’s tissues. The tissues become filled with the fluid and look swollen or puffed up. If a child has oedema of both feet they should be referred to inpatient care.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B18S1.DE01",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Convulsions in this illness",
+      "definition": "Use words the caregiver understands. For example, the caregiver may know convulsions as “fits” or “spasms”. During a convulsion, the young infant’s arms and legs may become stiff. The infant may stop breathing and turn blue. Many times there may only be rhythmic movements of a part of the body, such as rhythmic twitching of the mouth or eye blinking. The young infant may lose consciousness.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B18S1.DE02",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Difficulty with feeding",
+      "definition": "Any difficulty mentioned by the caregiver is important. A newborn that has not been able to feed since birth may be premature or may have complications such as birth asphyxia. These infants who are either not able to feed or are not feeding well should be referred urgently to the hospital.\n\nThe caregiver may also mention difficulties such as her infant feeding too frequently (or not frequently enough), not having enough milk, her nipples being sore or having flat or inverted nipples. You will assess these difficulties later during the breastfeeding assessment. These problems do not mean that the infant is not feeding well or not feeding at all.",
+      "options": "- Not able to feed at all\n- Not feeding well\n- Feeding well"
+    },
+    {
+      "id": "CHE.B18S1.DE03",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Feeding well",
+      "definition": "The infant is reported to be feeding well.",
+      "options": "- Feeding well"
+    },
+    {
+      "id": "CHE.B18S1.DE04",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Not feeding well",
+      "definition": "The infant is reported to not be feeding well.",
+      "options": "- Not feeding well"
+    },
+    {
+      "id": "CHE.B18S1.DE05",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Not able to feed at all",
+      "definition": "The infant is reported not to be able to feed at all.",
+      "options": "- Not able to feed at all"
+    },
+    {
+      "id": "CHE.B20S1.DE01",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Diarrhoea",
+      "definition": "A young infant has diarrhoea if the stools have changed from the usual pattern, and are many and watery. This means more water than faecal matter. The normally frequent or semi-solid stools of a breastfed baby are not diarrhoea. The mother of a breastfed young infant can recognize diarrhoea because the consistency or frequency of the stools is different than normal.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B21S1.DE06",
+      "sheet": "CHE.B18-21.Symptoms <2 mths",
+      "label": "Breastfed",
+      "definition": "Ask the caregiver if the infant is breastfed. This includes both exclusive breastfeeding or receiving breast milk and other foods or fluids.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.DE01",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Respiratory rate",
+      "definition": "This element is referencing the respiratory rate test from the group questions",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B18S2.DE07",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Severe chest indrawing",
+      "definition": "The young infant must be calm while you assess for severe chest indrawing.  Lift the young infant’s shirt. \n\nLook for chest indrawing when the young infant breathes in. Lower chest wall indrawing is the inward movement of the bony structure of the chest wall when the child breathes in. Look at the lower chest wall (lower ribs). The child has chest indrawing if the lower chest wall goes IN when the child breathes IN.\nIn normal breathing, the whole chest wall (upper and lower) and the abdomen move OUT when the child breathes IN. \n\nMild chest indrawing is normal in a young infant because the chest wall is soft. Severe chest indrawing is very deep and easy to see.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B21S2.DE08",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Infant's movements",
+      "definition": "Look at the young infant’s movements. Does the young infant move on their own? Does the infant move only when stimulated but then stops? Does the infant not move at all?\nYoung infants often sleep most of the time, and this is not a sign of illness. It is not necessary for the infant to be awake if they are moving spontaneously. \nIf a young infant is not moving spontaneously and does not wake up during the assessment, ask the caregiver to wake them. An awake young infant will normally move their arms or legs or turn their head several times in a  minute if you watch them closely. If the infant is awake but has no spontaneous movements, gently stimulate the young infant. Stimulation  is a gentle, painless touching of the baby with enough pressure that would evoke movements, sound-making and eye-opening. The presence of any movement such as a grimace of the face, eye-opening or movement of a limb will qualify as \"movement only when stimulated but then stops\".  An infant who cannot be woken up even after stimulation is considered to have the sign \"does not move even with stimulation. \"\"",
+      "options": "- No movement at all\n- Movement only when stimulated but then stops\n- Moves on their own or move spontaneously or without stimulation"
+    },
+    {
+      "id": "CHE.B18S2.DE09",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Moves on their own or moves spontaneously or without stimulation",
+      "definition": "The young infant moves on their own or moves spontaneously or without stimulation.",
+      "options": "- Moves on their own or moves spontaneously or without stimulation"
+    },
+    {
+      "id": "CHE.B18S2.DE10",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Movement only when stimulated but then stops",
+      "definition": "The young infant has movement but only when stimulated and then movement stops.",
+      "options": "- Movement only when stimulated but then stops"
+    },
+    {
+      "id": "CHE.B18S2.DE11",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "No movement at all",
+      "definition": "The young infant has no movement at all even after stimulation.",
+      "options": "- No movement at all"
+    },
+    {
+      "id": "CHE.B18S2.DE12",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Umbilicus red or pus draining",
+      "definition": "The umbilical cord usually separates one week after birth and the wound heals within 15 days. \nRedness of the end of the umbilicus or pus draining from the umbilicus are signs of umbilical infection.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B18S2.DE13",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Skin pustules",
+      "definition": "Examine the skin on the entire body. Skin pustules are red spots or blisters that contain pus.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B19S2.DE01",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Yellow skin",
+      "definition": "Jaundice is a yellow discoloration of skin and mucus membranes. It is important to look for jaundice in natural light. To look for jaundice, press the infant’s skin over the forehead with your fingers to blanch, remove your fingers and look for yellow discolouration. If there is yellow discoloration, the infant has jaundice.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B19S2.DE02",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Yellow palms or yellow soles",
+      "definition": "Jaundice is a yellow discolouration of skin and mucus membranes. Jaundice in the palms of the hands or soles of the feet is a sign of severe jaundice.  It is important to look for jaundice in natural light. To assess for severe jaundice, press the infant's skin in the palm of their hand and then in the sole of their feet with your fingers to blanch, remove your fingers and look for yellow dicoulouration in the palm or the sole. If there is yellow discolouration of the palm or sole, the infant has severe jaundice.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B19S2.DE04",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "When did the jaundice first appear?",
+      "definition": "Ask the caregiver when the baby's skin first turned yellowish. If the caregiver did not notice the yellow discolouration or cannot remember when it started, select \"don't know\". \nJaundice that appears in less than 24 hours after birth is always due to an underlying disease. These infants should be referred urgently. \nMany normal infants, particularly small infants, may have jaundice during the first week of life. This jaundice usually appears on the third or fourth day of life and is mild and disappears before the age of 2–3 weeks. It does not need any treatment.",
+      "options": "- Within less than 24 hours of birth\n- 24 hours or more after birth\n- Unknown when jaundice first appeared"
+    },
+    {
+      "id": "CHE.B19S2.DE05",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Within less than 24 hours of birth",
+      "definition": "The young infant's jaundice appeared less than 24 hours after birth.",
+      "options": "- Within less than 24 hours of birth"
+    },
+    {
+      "id": "CHE.B19S2.DE06",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "24 hours or more after birth",
+      "definition": "The young infant's jaundice appeared 24 hours or more after birth.",
+      "options": "- 24 hours or more after birth"
+    },
+    {
+      "id": "CHE.B19S2.DE07",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Unknown when jaundice first appeared",
+      "definition": "The caregiver does not know when the Jaundice first appeared if it is a first visit for jaundice and in the first 3 weeks of life.",
+      "options": "- Unknown when jaundice first appeared"
+    },
+    {
+      "id": "CHE.B20S2.DE01",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Sunken eyes",
+      "definition": "The eyes of a dehydrated infant may look sunken. In a low-weight infant, the eyes may always look sunken, even if the young infant is not dehydrated. Even though the sign “sunken eyes” is less reliable in a low-weight infant, it can still be used to classify the young infant‘s dehydration. \n\nDecide if you think the eyes are sunken. Then ask the mother if she thinks her child’s eyes look unusual. Her opinion can help you confirm.",
+      "options": "- Yes\n- NO"
+    },
+    {
+      "id": "CHE.B20S2.DE02",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Skin pinch of abdomen",
+      "definition": "Locate the area on the infant’s abdomen halfway between the umbilicus and the side of the abdomen. To do the skin pinch, use your thumb and first finger. Do not use your fingertips because this will cause pain. Place \nyour hand so that when you pinch the skin, the fold of skin will be in a line up and down the child’s body and not across the child’s \nbody. Firmly pick up all of the layers of skin and the tissue under them. Pinch the skin for \none second and then release it. When you release the skin, look to see if the skin pinch \ngoes back:\n• immediately\n• slowly (2 seconds or fewer, but not immediately)\n• very slowly (longer than 2 seconds)\nIf the skin stays up for even a brief time after you release it, decide that the skin pinch goes back slowly",
+      "options": "- Goes back very slowly (more than 2 seconds)\n- Goes back slowly (2 seconds or fewer, but not immediately)\n- Goes back normally (immediately)"
+    },
+    {
+      "id": "CHE.B20S2.DE05",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Goes back normally (immediately)",
+      "definition": "The young infant's skin goes back normally after skin pinch of the abdomen (immediately).",
+      "options": "- Goes back normally (immediately)"
+    },
+    {
+      "id": "CHE.B20S2.DE04",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Goes back slowly (2 seconds or fewer, but not immediately)",
+      "definition": "The young infant's skin goes back slowly after skin pinch of the abdomen (2 seconds or fewer, but not immediately).",
+      "options": "- Goes back slowly (2 seconds or fewer, but not immediately)"
+    },
+    {
+      "id": "CHE.B20S2.DE03",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Goes back very slowly (more than 2 seconds)",
+      "definition": "The young infant's skin goes back very slowly after skin pinch of the abdomen (more than 2 seconds).",
+      "options": "- Goes back very slowly (more than 2 seconds)"
+    },
+    {
+      "id": "CHE.B20S2.DE06",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Restless and irritable",
+      "definition": "Look at the young infant's general condition. Is the infant restless and irritable? \nAn infant has the sign \"restless and irritable\" if the infant is restless and irritable all the time or every time they are touched and handled. If an infant is calm when breastfeeding but again restless and irritable when they stop breastfeeding, they have the sign “restless and irritable”. A healthy infant will be consoled when put on the breast.",
+      "options": "- Yes\n- NO"
+    },
+    {
+      "id": "CHE.B21S2.DE01",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Weight status",
+      "definition": "Weight status is auto-calculated based on the young infant's weight for age z-score, which is determined from a standardized chart of weight -for-age for the infant's sex. \nA young infant is low weight for age if the z-score is below −2. \nA young infant who is less than 7 days old and weighs less than 2 kg is considered very low weight.\nSome young infants who are low weight for age were born with a low birth weight. Some did not gain weight well after birth.",
+      "options": "- Very low weight for age\n- Low weight for age\n- Normal weight for age"
+    },
+    {
+      "id": "CHE.B21S2.DE02",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Very low weight for age",
+      "definition": "A young infant who is less than 7 days old and weighs less than 2 kg.",
+      "options": "- Very low weight for age"
+    },
+    {
+      "id": "CHE.B21S2.DE03",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Low weight for age",
+      "definition": "A young infant with a weight for age z-score below −2.",
+      "options": "- Low weight for age"
+    },
+    {
+      "id": "CHE.B21S2.DE04",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Normal weight for age",
+      "definition": "A young infant with normal weight for age (z-score −2 or above)",
+      "options": "- Normal weight for age"
+    },
+    {
+      "id": "CHE.B21S2.DE05",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Breastfed how many times in 24 hours?",
+      "definition": "Ask the caregiver how many times in 24 hours (one day and one night) they usually breastfeed the young infant. The recommendation is that the young infant be breastfed as often and for as long as the infant wants, day and night. This should be eight or more times in 24 hours.",
+      "options": "Whole number"
+    },
+    {
+      "id": "CHE.B21S2.DE06",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Sufficient feeds",
+      "definition": "The young infant is breastfed eight or more times in 24 hours (auto-calculated).",
+      "options": "- Sufficient feeds"
+    },
+    {
+      "id": "CHE.B21S2.DE07",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Insufficient feeds",
+      "definition": "The young infant is breastfed fewer than eight times in 24 hours (auto-calculated)",
+      "options": "- Insufficient feeds"
+    },
+    {
+      "id": "CHE.B21S2.DE08",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Young Infant receives food or fluids other than breast milk",
+      "definition": "Find out if the young infant is receiving any other foods or drinks, such as other milk, juice, tea, thin porridge, dilute cereal or even water. Ask how often they receive it and the amount. You need to know if the infant is mostly breastfed, or mostly fed on other foods.",
+      "options": "- Yes\n- NO"
+    },
+    {
+      "id": "CHE.B21S2.DE09",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "What milk is being given as a replacement feed?",
+      "definition": "Ask the mother questions to determine what replacement milk or milks are used. It may be a breast milk replacement, animal milk or some other fluid or some combination thereof. Determine if this type of replacement feed is appropriate or not appropriate in your setting.",
+      "options": "- Inappropriate replacement milk\n- Appropriate replacement milk"
+    },
+    {
+      "id": "CHE.B21S2.DE10",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Appropriate replacement milk",
+      "definition": "The caregiver is giving appropriate  replacement milk.",
+      "options": "- Appropriate replacement milk"
+    },
+    {
+      "id": "CHE.B21S2.DE11",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Inappropriate replacement milk",
+      "definition": "The caregiver is giving inappropriate replacement milk.",
+      "options": "- Inappropriate replacement milk"
+    },
+    {
+      "id": "CHE.B21S2.DE12",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "How many replacement feeds during the day and night (24 hours)?",
+      "definition": "A young infant up to 1 month of age should be fed eight times and a young infant between 1 and 2 months of age should be fed seven times in 24 hours.",
+      "options": "Whole number"
+    },
+    {
+      "id": "CHE.B21S2.DE13",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Sufficient replacement feeds (in 24 hours)",
+      "definition": "The young infant is given a sufficient number of replacement feeds (eight or more times in 24 hours for a young infant under 1 month of age; seven or more times for a young infant between 1 and 2 months of age) (auto-calculated)",
+      "options": "- Sufficient replacement feeds (in 24 hours)"
+    },
+    {
+      "id": "CHE.B21S2.DE14",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Insufficient replacement feeds (in 24 hours)",
+      "definition": "The young infant is not given a sufficient number of replacement feeds (fewer than eight times in 24 hours for a young infant under 1 month of age; fewer than seven times for a young infant between 1 and 2 months of age) (auto-calculated).",
+      "options": "- Insufficient replacement feeds (in 24 hours)"
+    },
+    {
+      "id": "CHE.B21S2.DE15",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "How much milk is given at each feed?",
+      "definition": "A young infant up to 1 month of age should be given approximately 60 ml per feed, eight times per day, and a young infant between 1 and 2 months of age approximately 90 ml at each feed, seven times per day. It is helpful to have common bottles or cups available so that a mother can show you the amount that she gives.",
+      "options": "- Sufficient replacement feeds\n- Insufficient replacement feeds"
+    },
+    {
+      "id": "CHE.B21S2.DE16",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Sufficient replacement feeds",
+      "definition": "The caregiver is giving sufficient replacement feeds (approximately 60 ml per feed, eight times per day for a young infant up to 1 month of age; approximately 90 ml per feed, seven times per day for a young infant between 1 and 2 months of age).",
+      "options": "- Sufficient replacement feeds"
+    },
+    {
+      "id": "CHE.B21S2.DE17",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Insufficient replacement feeds",
+      "definition": "The caregiver is not giving sufficient replacement feeds (i.e. less than 60 ml per feed, eight times per day for a young infant up to 1 month of age; less than 90 ml per feed, seven times per day for a young infant between 1 and 2 months of age).",
+      "options": "- Insufficient replacement feeds"
+    },
+    {
+      "id": "CHE.B21S2.DE18",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "How is the milk prepared?",
+      "definition": "Ask the mother to demonstrate or explain how a feed is prepared and how she gives it to the infant. Determine if the breast milk substitute is being prepared correctly and hygienically.",
+      "options": "- Correct and hygenic feed preparation\n- Incorrectly and unhygenic feed preparation"
+    },
+    {
+      "id": "CHE.B21S2.DE19",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Correct or hygienic feed preparation",
+      "definition": "The caregiver is preparing the milk correctly and hygenically.",
+      "options": "- Correct and hygienic feed preparation"
+    },
+    {
+      "id": "CHE.B21S2.DE20",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Incorrect or unhygienic feed preparation",
+      "definition": "The caregiver is not preparing the milk correctly and hygenically.",
+      "options": "- Incorrect or unhygienic feed preparation"
+    },
+    {
+      "id": "CHE.B21S2.DE21",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "How is the milk given?",
+      "definition": "Ask the caregiver how they give milk to the young infant.",
+      "options": "- Cup\n- Bottle"
+    },
+    {
+      "id": "CHE.B21S2.DE22",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Cup",
+      "definition": "The milk is given to the young infant using a cup.",
+      "options": "- Cup"
+    },
+    {
+      "id": "CHE.B21S2.DE23",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Bottle",
+      "definition": "The milk is given to the young infant using a bottle.",
+      "options": "- Bottle"
+    },
+    {
+      "id": "CHE.B21S2.DE24",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "How are the feeding utensils cleaned?",
+      "definition": "Ask the caregiver how they clear the feeding utensils. Determine if this is a safe and hygienic cleaning method.",
+      "options": "- Feeding utensils cleaned hygienically\n- Feeding utensils not cleaned hygienically"
+    },
+    {
+      "id": "CHE.B21S2.DE25",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Feeding utensils cleaned hygienically",
+      "definition": "The caregiver is cleaning the feeding utensils hygienically.",
+      "options": "- Feeding utensils cleaned hygienically"
+    },
+    {
+      "id": "CHE.B21S2.DE26",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Feeding utensils not cleaned hygienically",
+      "definition": "The caregiver is not cleaning the feeding utensils hygienically.",
+      "options": "- Feeding utensils not cleaned hygienically"
+    },
+    {
+      "id": "CHE.B21S2.DE24",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Is infant given any breast milk at all?",
+      "definition": "Does the caregiver give the young infant any breast milk at all?",
+      "options": "- Breast milk also given\n- No breast milk at all"
+    },
+    {
+      "id": "CHE.B21S2.DE28",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Breastmilk also given",
+      "definition": "Breast milk is also given to the young infant.",
+      "options": "- Breast milk also given"
+    },
+    {
+      "id": "CHE.B21S2.DE29",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "No breast milk at all",
+      "definition": "No breast milk is given to the young infant at all.",
+      "options": "- No breast milk at all"
+    },
+    {
+      "id": "CHE.B21S2.DE30",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Ulcers or white patches in mouth",
+      "definition": "Look inside the mouth at the tongue and inside of the cheek. Thrush looks like milk curds on the inside of the cheek, or a thick white coating of the tongue. Try to wipe the white off. The white patches of thrush will remain.",
+      "options": "- Yes\n- NO"
+    },
+    {
+      "id": "CHE.B21S2.DE31",
+      "sheet": "CHE.B18-21.Signs <2 mths",
+      "label": "Unable to check if ulcers or white patches in mouth",
+      "definition": "The health worker is unable to check if the young infant has ulcers or white patches in the mouth.",
+      "options": "- Yes\n- NO"
+    },
+    {
+      "id": "CHE.B17.DE01",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Date of last vitamin  A supplementation",
+      "definition": "Ask to see the child's health record to determine the last date of vitamin A supplementation. If it is not available, ask the caregiver if they knows.",
+      "options": "- Less than 1 month ago\n - 1–5 months ago\n - More than 6 months ago\n - Vitamin A supplementation not previously given\n - Date unknown"
+    },
+    {
+      "id": "CHE.B17.DE02",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Less than 1 month ago",
+      "definition": "The caregiver is able to tell the health worker that the last dose was given less than 1 month ago.",
+      "options": "- Less than 1 month ago"
+    },
+    {
+      "id": "CHE.B17.DE03",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "1–5 months ago",
+      "definition": "The caregiver is able to tell the health worker that the last dose was given between 1 and 5 months ago.",
+      "options": "- 1–5 months ago"
+    },
+    {
+      "id": "CHE.B17.DE04",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "More than 6 months ago",
+      "definition": "The caregiver is able to tell the health worker that the last dose was given more than 6 months ago.",
+      "options": "- More than 6 months ago"
+    },
+    {
+      "id": "CHE.B17.DE05",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Vitamin A supplementation not previously given",
+      "definition": "The child has not previously been given vitamin A supplementation.",
+      "options": "- Vitamin A supplementation not previously given"
+    },
+    {
+      "id": "CHE.B17.DE06",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Date unknown",
+      "definition": "The date that the child's profile records vitamin A supplementation being given is unknown.",
+      "options": "- Date unknown"
+    },
+    {
+      "id": "CHE.B17.DE07",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Can record of vitamin A supplementation be obtained at a future visit?",
+      "definition": "The healthcare worker asks if the child's caregiver can provide a record of vitamin A supplementation at a future visit.",
+      "options": "- Yes. Date documented but not here\n- No. Do not know when last dose was given"
+    },
+    {
+      "id": "CHE.B17.DE08",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Yes. Date documented, but not here.",
+      "definition": "The caregiver is able to provide the vitamin A supplement date but not today.",
+      "options": "- Yes. Date documented but not here"
+    },
+    {
+      "id": "CHE.B17.DE09",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No. Do not know when last dose was given.",
+      "definition": "The caregiver is not able to tell the health worker when the last dose was given.",
+      "options": "- No. Do not know when last dose was given"
+    },
+    {
+      "id": "CHE.B17.DE10",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Treatment for malnutrition containing vitamin A received in the past month?",
+      "definition": "Treatment for malnutrition containing vitamin A include F-75, F-100 or ready-to-use therapeutic food that complies with WHO specifications (and therefore already contains sufficient vitamin A), or vitamin A is part of other daily supplements.",
+      "options": "- YES \n- NO"
+    },
+    {
+      "id": "CHE.B17.DE11",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Date of last deworming treatment",
+      "definition": "Ask to see the child's health record to determine the last date of deworming treatment. If it is not available, ask the caregiver if they know.",
+      "options": "- Less than 6 months ago\n - More than 6 months ago\n - Deworming treatment not previously given\n - Date unknown"
+    },
+    {
+      "id": "CHE.B17.DE12",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Less than 6 months ago",
+      "definition": "The caregiver is able to tell the health worker that the last dose was given less than 6 months ago.",
+      "options": "- Less than 6 months ago"
+    },
+    {
+      "id": "CHE.B17.DE13",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "More than 6 months ago",
+      "definition": "The caregiver is able to tell the health worker that the last dose was given more than 6 months ago.",
+      "options": "- More than 6 months ago"
+    },
+    {
+      "id": "CHE.B17.DE14",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Deworming treatment not previously given",
+      "definition": "The child has not previously been given deworming treatment.",
+      "options": "- Deworming treatment not previously given"
+    },
+    {
+      "id": "CHE.B17.DE15",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Date unknown",
+      "definition": "The date that the child's profile records deworming being given is unknown.",
+      "options": "- Date unknown"
+    },
+    {
+      "id": "CHE.B17.DE16",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Can record of deworming treatment be obtained at a future visit?",
+      "definition": "The health worker asks if the child's caregiver can provide a record of deworming treatment at a future visit.",
+      "options": "- Yes. Date documented, but not here\n- No. Do not know when last dose was given"
+    },
+    {
+      "id": "CHE.B17.DE17",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Yes. Date documented, but not here.",
+      "definition": "The caregiver is able to provide the deworming treatment date, but not today.",
+      "options": "- Yes. Date documented, but not here"
+    },
+    {
+      "id": "CHE.B17.DE18",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No. Do not know when last dose was given.",
+      "definition": "The caregiver is not able to tell the health worker when the last dose was given.",
+      "options": "- No. Do not know when last dose was given"
+    },
+    {
+      "id": "CHE.B17.DE22",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "HIV prevalence",
+      "definition": "The prevalence of HIV in the area of the child",
+      "options": "- High HIV risk\n- Low HIV risk"
+    },
+    {
+      "id": "CHE.B17.DE23",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "High HIV risk",
+      "definition": "The child is in an area of HIV prevalence of high HIV risk.",
+      "options": "- High HIV risk"
+    },
+    {
+      "id": "CHE.B17.DE24",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Low HIV risk",
+      "definition": "The child is in an area of HIV prevalence of low HIV risk.",
+      "options": "- Low HIV risk"
+    },
+    {
+      "id": "CHE.B17.DE25",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Mother's HIV status",
+      "definition": "The child's mother's HIV status",
+      "options": "- Mother HIV-positive\n- Mother HIV-negative\n- Mother HIV status unknown or not tested\n- Mother HIV status – Declined to answer"
+    },
+    {
+      "id": "CHE.B17.DE26",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Mother HIV-positive",
+      "definition": "The child's mother is HIV-positive.",
+      "options": "- Mother HIV-positive"
+    },
+    {
+      "id": "CHE.B17.DE27",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Mother HIV-negative",
+      "definition": "The child's mother is HIV-negative.",
+      "options": "- Mother HIV-negative"
+    },
+    {
+      "id": "CHE.B17.DE28",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Mother HIV Status unknown or not tested",
+      "definition": "The child's mother's HIV status is unknown or not tested.",
+      "options": "- Mother HIV status unknown or not tested"
+    },
+    {
+      "id": "CHE.B17.DE29",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Mother HIV status – Declined to answer",
+      "definition": "The child's mother has declined to answer regarding HIV Status.",
+      "options": "- Mother HIV status – Declined to answer"
+    },
+    {
+      "id": "CHE.B17.DE30",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child's last HIV test results",
+      "definition": "The child's last HIV test results",
+      "options": "- Child HIV-positive – virological\n- Child HIV-positive – serological\n- Child HIV-positive – unknown type of test\n- Child HIV-negative\n- Child HIV status unknown or not tested\n- Child HIV status – Declined to answer"
+    },
+    {
+      "id": "CHE.B17.DE31",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV-positive – Virological",
+      "definition": "The child is HIV-positive (virological test).",
+      "options": "-Child HIV-positive – virological"
+    },
+    {
+      "id": "CHE.B17.DE32",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV-positive – Serological",
+      "definition": "The child is HIV-positive (serological test)",
+      "options": "- Child HIV-positive – serological"
+    },
+    {
+      "id": "CHE.B17.DE33",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV-positive – Unknown type of test",
+      "definition": "The child is HIV-positive (unknown type of test).",
+      "options": "- Child HIV-positive – unknown type of test"
+    },
+    {
+      "id": "CHE.B17.DE34",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV-negative",
+      "definition": "The child is HIV-negative.",
+      "options": "- Child HIV-negative"
+    },
+    {
+      "id": "CHE.B17.DE35",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV status – Unknown or not tested",
+      "definition": "The child's HIV status is unknown or the child has not been tested.",
+      "options": "- Child HIV status unknown or not tested"
+    },
+    {
+      "id": "CHE.B17.DE36",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child HIV status – Declined to answer",
+      "definition": "The child's mother has declined to answer regarding HIV Status.",
+      "options": "- Child HIV status – Declined to answer"
+    },
+    {
+      "id": "CHE.B17.DE37",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child breastfed at the time or 6 weeks before HIV test",
+      "definition": "The health worker asks the caregiver if the child was breastfed at the time or 6 weeks before the HIV test.",
+      "options": "- Yes\n- No\n- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE38",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Yes",
+      "definition": "The child was breastfed at the time or 6 weeks before the HIV test.",
+      "options": "- Yes"
+    },
+    {
+      "id": "CHE.B17.DE39",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No",
+      "definition": "The child was not breastfed at the time or 6 weeks before the HIV test.",
+      "options": "- No"
+    },
+    {
+      "id": "CHE.B17.DE40",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Unknown",
+      "definition": "It is unknown if the child was breastfed at the time or 6 weeks before the HIV test.",
+      "options": "- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE41",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Child 18 months or older when last tested for HIV",
+      "definition": "The health worker asks the caregiver if the child was 18 months or older when last tested for HIV.",
+      "options": "- Yes\n- No\n- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE42",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Yes",
+      "definition": "The child was 18 months or older when last tested for HIV.",
+      "options": "- Yes"
+    },
+    {
+      "id": "CHE.B17.DE43",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No",
+      "definition": "The child was not 18 months or older when last tested for HIV.",
+      "options": "- No"
+    },
+    {
+      "id": "CHE.B17.DE44",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Unknown",
+      "definition": "It is unknown if the child was 18 months or older when last tested for HIV.",
+      "options": "- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE45",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Check the child’s vaccination record: has the child received all vaccines they are eligible for?",
+      "definition": "The health worker check's the child’s vaccination record and compares it with the vaccination schedule to ensure the child has received vaccinations they are eligible for.",
+      "options": "- Yes\n-  No, incomplete vaccination\n-  No, the child has never received any vaccination to date\n- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE46",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Yes",
+      "definition": "The child has received all vaccinations for age.",
+      "options": "- Yes"
+    },
+    {
+      "id": "CHE.B17.DE47",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No, incomplete vaccination",
+      "definition": "The child has not received all vaccinations for age.",
+      "options": "- No, incomplete vaccination"
+    },
+    {
+      "id": "CHE.B17.DE48",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "No, the child has never received any vaccinations to date.",
+      "definition": "The child has never received any vaccinations to date.",
+      "options": "- No, the child has never received any vaccination to date"
+    },
+    {
+      "id": "CHE.B17.DE49",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Unknown",
+      "definition": "It is not known if the child has received any vaccination.",
+      "options": "- Unknown"
+    },
+    {
+      "id": "CHE.B17.DE50",
+      "sheet": "CHE.B17.Health Promotion",
+      "label": "Immunizations for age",
+      "definition": "The application shows the health worker a table of the immunizations the child should have had for their age. Link for the vaccine schedule.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE01",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Respiratory rate",
+      "definition": "This element is referencing the respiratory rate test from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE02",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Oral fluid test results",
+      "definition": "This element is referencing the oral fluid test from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE03",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Inhaled bronchodilator trial",
+      "definition": "This element is referencing the inhaled bronchodilator trial test from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE04",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Appetite test (using RUTF)",
+      "definition": "This element is referencing the appetite test (using RUTF) from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE05",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Breastfeeding assessment",
+      "definition": "This element is referencing the breastfeeding assessment from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE06",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Second temperature measurement",
+      "definition": "This element is referencing the second temperature measurement test from the group questions.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.DE07",
+      "sheet": "CHE.B22.Assessments-Tests",
+      "label": "Malaria test",
+      "definition": "This element is referencing the malaria test from the group questions.",
+      "options": "- Malaria-positive\n- Malaria-negative\n- Malaria status unknown/unavailable/invalid/not feasible"
+    },
+    {
+      "id": "CHE.B23.DE01",
+      "sheet": "CHE.B23.Classification",
+      "label": "Very severe disease",
+      "definition": "The child has a very severe disease",
+      "options": "Very severe disease"
+    },
+    {
+      "id": "CHE.B23.DE02",
+      "sheet": "CHE.B23.Classification",
+      "label": "History of obstructed or absent breathing",
+      "definition": "The child has a history of obstructed or absent breathing that is now stabilized",
+      "options": "History of Obstructed or Absent Breathing"
+    },
+    {
+      "id": "CHE.B23.DE03",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe pneumonia or very severe disease",
+      "definition": "The child has severe pneumonia or very severe disease",
+      "options": "Severe pneumonia or very severe disease"
+    },
+    {
+      "id": "CHE.B23.DE04",
+      "sheet": "CHE.B23.Classification",
+      "label": "With low oxygen saturation (SPO2 <90%)",
+      "definition": "The child has severe pneumonia or very severe disease with low oxygen saturation (SPO2 <90%)",
+      "options": "With low oxygen saturation (SPO2 <90%)"
+    },
+    {
+      "id": "CHE.B23.DE05",
+      "sheet": "CHE.B23.Classification",
+      "label": "With wheezing",
+      "definition": "The child has severe pneumonia or very severe disease with wheezing",
+      "options": "With wheezing"
+    },
+    {
+      "id": "CHE.B23.DE06",
+      "sheet": "CHE.B23.Classification",
+      "label": "Pneumonia",
+      "definition": "The child has pneumonia",
+      "options": "Pneumonia"
+    },
+    {
+      "id": "CHE.B23.DE07",
+      "sheet": "CHE.B23.Classification",
+      "label": "With wheezing",
+      "definition": "The child has pneumonia with wheezing",
+      "options": "With wheezing"
+    },
+    {
+      "id": "CHE.B23.DE08",
+      "sheet": "CHE.B23.Classification",
+      "label": "With cough or difficulty breathing for more than 14 days or recurrent wheeze",
+      "definition": "The child has pneumonia with cough or difficulty breathing for more than 14 days or recurrent wheeze",
+      "options": "With cough or difficulty breathing for more than 14 days or recurrent wheeze"
+    },
+    {
+      "id": "CHE.B23.DE09",
+      "sheet": "CHE.B23.Classification",
+      "label": "With chest indrawing in HIV exposed/infected child",
+      "definition": "The child has pneumonia with chest indrawing and HIV exposed/infected",
+      "options": "With chest indrawing and HIV exposed/infected"
+    },
+    {
+      "id": "CHE.B23.DE10",
+      "sheet": "CHE.B23.Classification",
+      "label": "Cough or cold",
+      "definition": "The child has cough or cold with wheezing",
+      "options": "Cough or cold"
+    },
+    {
+      "id": "CHE.B23.DE11",
+      "sheet": "CHE.B23.Classification",
+      "label": "With wheezing",
+      "definition": "The child has cough or cold with wheezing",
+      "options": "With wheezing"
+    },
+    {
+      "id": "CHE.B23.DE12",
+      "sheet": "CHE.B23.Classification",
+      "label": "With cough or difficulty breathing for more than 14 days or recurrent wheeze",
+      "definition": "The child has cough or cold with cough or difficulty breathing for more than 14 days or recurrent wheezing",
+      "options": "With cough or difficulty breathing for more than 14 days or recurrent wheeze"
+    },
+    {
+      "id": "CHE.B23.DE13",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe dehydration",
+      "definition": "The child has severe dehydration",
+      "options": "Severe dehydration"
+    },
+    {
+      "id": "CHE.B23.DE14",
+      "sheet": "CHE.B23.Classification",
+      "label": "Some dehydration",
+      "definition": "The child has some dehydration",
+      "options": "Some dehydration"
+    },
+    {
+      "id": "CHE.B23.DE15",
+      "sheet": "CHE.B23.Classification",
+      "label": "No dehydration",
+      "definition": "The child has no dehydration",
+      "options": "No dehydration"
+    },
+    {
+      "id": "CHE.B23.DE16",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe persistent diarrhoea",
+      "definition": "The child has severe persistent diarrhoea",
+      "options": "Severe persistent diarrhoea"
+    },
+    {
+      "id": "CHE.B23.DE17",
+      "sheet": "CHE.B23.Classification",
+      "label": "Persistent diarrhoea",
+      "definition": "The child has persistent diarrhoea",
+      "options": "Persistent diarrhoea"
+    },
+    {
+      "id": "CHE.B23.DE18",
+      "sheet": "CHE.B23.Classification",
+      "label": "Dysentery",
+      "definition": "The child has dysentery",
+      "options": "Dysentery"
+    },
+    {
+      "id": "CHE.B23.DE19",
+      "sheet": "CHE.B23.Classification",
+      "label": "Very severe febrile disease",
+      "definition": "The child has very severe febrile disease",
+      "options": "Very severe febrile disease"
+    },
+    {
+      "id": "CHE.B23.DE20",
+      "sheet": "CHE.B23.Classification",
+      "label": "Malaria",
+      "definition": "The child has malaria",
+      "options": "Malaria"
+    },
+    {
+      "id": "CHE.B23.DE21",
+      "sheet": "CHE.B23.Classification",
+      "label": "High parasite density",
+      "definition": "The child has malaria with a high parasite count",
+      "options": "High parasite count"
+    },
+    {
+      "id": "CHE.B23.DE22",
+      "sheet": "CHE.B23.Classification",
+      "label": "Malaria unconfirmed (no test available or performed)",
+      "definition": "The health worker is unable to confirm that the child has malaria as there is not test available or performed.",
+      "options": "Malaria unconfirmed (no test available or performed)"
+    },
+    {
+      "id": "CHE.B23.DE23",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fever present every day for more than 7 days",
+      "definition": "The child has malaria with a fever that has been present every day for more than 7 days.",
+      "options": "Fever present every day for more than 7 days"
+    },
+    {
+      "id": "CHE.B23.DE24",
+      "sheet": "CHE.B23.Classification",
+      "label": "Possible bone/joint infection",
+      "definition": "The child has possible bone/joint infection.",
+      "options": "Possible bone/joint infection"
+    },
+    {
+      "id": "CHE.B23.DE25",
+      "sheet": "CHE.B23.Classification",
+      "label": "Possible urine infection",
+      "definition": "The child has possible urine infection",
+      "options": "Possible urine infection"
+    },
+    {
+      "id": "CHE.B23.DE26",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fever: no malaria",
+      "definition": "The child has fever: no malaria",
+      "options": "Fever: no malaria"
+    },
+    {
+      "id": "CHE.B23.DE27",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fever present every day for more than 7 days",
+      "definition": "The child has fever: no malaria with a fever that has been present every day for more than 7 days.",
+      "options": "Fever present every day for more than 7 days"
+    },
+    {
+      "id": "CHE.B23.DE28",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fever",
+      "definition": "The child has fever.",
+      "options": "Fever"
+    },
+    {
+      "id": "CHE.B23.DE29",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fever present every day for more than 7 days",
+      "definition": "The child has fever, with a fever that has been present every day for more than 7 days.",
+      "options": "Fever present every day for more than 7 days"
+    },
+    {
+      "id": "CHE.B23.DE30",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe complicated measles",
+      "definition": "The child has severe complicated measles.",
+      "options": "Severe complicated measles"
+    },
+    {
+      "id": "CHE.B23.DE31",
+      "sheet": "CHE.B23.Classification",
+      "label": "Measles with eye or mouth complications",
+      "definition": "The child has measles with eye or mouth complication.",
+      "options": "Measles with eye or mouth complication"
+    },
+    {
+      "id": "CHE.B23.DE32",
+      "sheet": "CHE.B23.Classification",
+      "label": "Measles",
+      "definition": "The child has measles.",
+      "options": "Measles"
+    },
+    {
+      "id": "CHE.B23.DE33",
+      "sheet": "CHE.B23.Classification",
+      "label": "Mastoiditis",
+      "definition": "The child has mastoiditis.",
+      "options": "Mastoiditis"
+    },
+    {
+      "id": "CHE.B23.DE34",
+      "sheet": "CHE.B23.Classification",
+      "label": "Acute ear infection",
+      "definition": "The child has acute ear infection.",
+      "options": "Acute ear infection"
+    },
+    {
+      "id": "CHE.B23.DE35",
+      "sheet": "CHE.B23.Classification",
+      "label": "Chronic ear infection",
+      "definition": "The child has chronic ear infection.",
+      "options": "Chronic ear infection"
+    },
+    {
+      "id": "CHE.B23.DE36",
+      "sheet": "CHE.B23.Classification",
+      "label": "No ear infection",
+      "definition": "The child does not have an ear infection.",
+      "options": "No ear infection"
+    },
+    {
+      "id": "CHE.B23.DE37",
+      "sheet": "CHE.B23.Classification",
+      "label": "Eye infection",
+      "definition": "The child has an eye infection.",
+      "options": "Eye infection"
+    },
+    {
+      "id": "CHE.B23.DE38",
+      "sheet": "CHE.B23.Classification",
+      "label": "Clouding of the cornea",
+      "definition": "The child has clouding of the cornea.",
+      "options": "Clouding of the cornea"
+    },
+    {
+      "id": "CHE.B23.DE39",
+      "sheet": "CHE.B23.Classification",
+      "label": "New and not previously treated",
+      "definition": "The child has clouding of the cornea that is new and not previously treated.",
+      "options": "New and not previously treated"
+    },
+    {
+      "id": "CHE.B23.DE40",
+      "sheet": "CHE.B23.Classification",
+      "label": "Abscess",
+      "definition": "The child has an abscess.",
+      "options": "Abscess"
+    },
+    {
+      "id": "CHE.B23.DE41",
+      "sheet": "CHE.B23.Classification",
+      "label": "Deep or extends to muscle, or with measured fever",
+      "definition": "The child has an abscess that is deep or extends to the muscle or with measured fever.",
+      "options": "Deep or extends to the muscle, or with measured fever"
+    },
+    {
+      "id": "CHE.B23.DE42",
+      "sheet": "CHE.B23.Classification",
+      "label": "Cellulitis",
+      "definition": "The child has cellulitis.",
+      "options": "Cellulitis"
+    },
+    {
+      "id": "CHE.B23.DE43",
+      "sheet": "CHE.B23.Classification",
+      "label": "Rapidly spreading, extensive or not responding to oral antibiotics",
+      "definition": "The child has cellulitis that is rapidly spreading, extensive or not responding to oral antibiotics.",
+      "options": "Rapidly spreading, extensive or not responding to oral antibiotics"
+    },
+    {
+      "id": "CHE.B23.DE44",
+      "sheet": "CHE.B23.Classification",
+      "label": "Papular itching rash (prurigo)",
+      "definition": "The child has papular itching rash (prurigo).",
+      "options": "Papular itching rash (prurigo)"
+    },
+    {
+      "id": "CHE.B23.DE45",
+      "sheet": "CHE.B23.Classification",
+      "label": "Ringworm (tinea)",
+      "definition": "The child has ringworm (tinea).",
+      "options": "Ringworm (Tinea)"
+    },
+    {
+      "id": "CHE.B23.DE46",
+      "sheet": "CHE.B23.Classification",
+      "label": "Extensive ringworm (tinea)",
+      "definition": "The child has ringworm (tinea) that is extensive.",
+      "options": "Extensive ringworm (Tinea)"
+    },
+    {
+      "id": "CHE.B23.DE47",
+      "sheet": "CHE.B23.Classification",
+      "label": "Scabies",
+      "definition": "The child has scabies",
+      "options": "Scabies"
+    },
+    {
+      "id": "CHE.B23.DE48",
+      "sheet": "CHE.B23.Classification",
+      "label": "Chickenpox",
+      "definition": "The child has chickenpox.",
+      "options": "Chickenpox"
+    },
+    {
+      "id": "CHE.B23.DE49",
+      "sheet": "CHE.B23.Classification",
+      "label": "With pneumonia",
+      "definition": "The child has chickenpox with pneumonia.",
+      "options": "With pneumonia"
+    },
+    {
+      "id": "CHE.B23.DE50",
+      "sheet": "CHE.B23.Classification",
+      "label": "Herpes zoster",
+      "definition": "The child has herpes zoster.",
+      "options": "Herpes zoster"
+    },
+    {
+      "id": "CHE.B23.DE51",
+      "sheet": "CHE.B23.Classification",
+      "label": "With eye involvement",
+      "definition": "The child has herpes zoster with eye involvement.",
+      "options": "With eye involvement"
+    },
+    {
+      "id": "CHE.B23.DE52",
+      "sheet": "CHE.B23.Classification",
+      "label": "Impetigo or folliculitis",
+      "definition": "The child has impetigo or folliculitis.",
+      "options": "Impetigo or folliculitis"
+    },
+    {
+      "id": "CHE.B23.DE53",
+      "sheet": "CHE.B23.Classification",
+      "label": "Extends to muscle or with measured fever",
+      "definition": "The child has impetigo or folliculitis that extends to the muscle or with measured fever.",
+      "options": "Extends to the muscle or with measured fever"
+    },
+    {
+      "id": "CHE.B23.DE54",
+      "sheet": "CHE.B23.Classification",
+      "label": "Size larger than 4 cm, red streaks, tender nodes or multiple abscesses",
+      "definition": "The child has impetigo or folliculitis whose size is larger than 4 cm, red streaks, tender nodes or multiple abscesses.",
+      "options": "Size larger than 4 cm, red streaks, tender nodes or multiple abscesses"
+    },
+    {
+      "id": "CHE.B23.DE55",
+      "sheet": "CHE.B23.Classification",
+      "label": "Molluscum contagiosum (poxvirus)",
+      "definition": "The child has molluscum contagiosum.",
+      "options": "Molluscum contagiosum"
+    },
+    {
+      "id": "CHE.B23.DE56",
+      "sheet": "CHE.B23.Classification",
+      "label": "Warts",
+      "definition": "The child has warts.",
+      "options": "Warts"
+    },
+    {
+      "id": "CHE.B23.DE57",
+      "sheet": "CHE.B23.Classification",
+      "label": "Seborrhoea",
+      "definition": "The child has seborrhoea.",
+      "options": "Seborrhoea"
+    },
+    {
+      "id": "CHE.B23.DE58",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe seborrhoea",
+      "definition": "The child has severe seborrhoea.",
+      "options": "Severe seborrhoea"
+    },
+    {
+      "id": "CHE.B23.DE59",
+      "sheet": "CHE.B23.Classification",
+      "label": "Fixed drug reactions",
+      "definition": "The child has fixed drug reactions.",
+      "options": "Fixed drug reactions"
+    },
+    {
+      "id": "CHE.B23.DE60",
+      "sheet": "CHE.B23.Classification",
+      "label": "Eczema",
+      "definition": "The child has eczema.",
+      "options": "Eczema"
+    },
+    {
+      "id": "CHE.B23.DE61",
+      "sheet": "CHE.B23.Classification",
+      "label": "Steven–Johnson syndrome",
+      "definition": "The child has Stevens–Johnson syndrome",
+      "options": "Stevens–Johnson syndrome"
+    },
+    {
+      "id": "CHE.B23.DE62",
+      "sheet": "CHE.B23.Classification",
+      "label": "Mouth sores or ulcer",
+      "definition": "The child has mouth sores or ulcer.",
+      "options": "Mouth sores or ulcer"
+    },
+    {
+      "id": "CHE.B23.DE63",
+      "sheet": "CHE.B23.Classification",
+      "label": "Deep or extensive",
+      "definition": "The child has deep and extensive mouth sores or ulcers.",
+      "options": "Deep or extensive"
+    },
+    {
+      "id": "CHE.B23.DE64",
+      "sheet": "CHE.B23.Classification",
+      "label": "Oral thrush",
+      "definition": "The child has oral thrush.",
+      "options": "Oral thrush"
+    },
+    {
+      "id": "CHE.B23.DE65",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe anaemia",
+      "definition": "The child has severe anaemia.",
+      "options": "Severe anaemia"
+    },
+    {
+      "id": "CHE.B23.DE66",
+      "sheet": "CHE.B23.Classification",
+      "label": "Anaemia",
+      "definition": "The child has anaemia.",
+      "options": "Anaemia"
+    },
+    {
+      "id": "CHE.B23.DE67",
+      "sheet": "CHE.B23.Classification",
+      "label": "No anaemia",
+      "definition": "The child does not have anaemia.",
+      "options": "No anaemia"
+    },
+    {
+      "id": "CHE.B23.DE68",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe acute malnutrition (or very low weight for age [WFA] if less than 12 months old) with medical complications",
+      "definition": "The child has severe acute malnutrition (or very low WFA if less than 12 months old) with medical complications.",
+      "options": "Severe acute malnutrition (or very low WFA if less than 12 months old) with medical complications"
+    },
+    {
+      "id": "CHE.B23.DE69",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe acute malnutrition (or very low WFA if less than 12 months old)",
+      "definition": "The child has severe acute malnutrition (or very low WFA if less than 12 months old).",
+      "options": "Severe acute malnutrition (or very low WFA if less than 12 months old)"
+    },
+    {
+      "id": "CHE.B23.DE70",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe acute malnutrition (or very low WFA if less than 12 months old) with medical complications",
+      "definition": "The child has severe acute malnutrition (or very low WFA if <12 months old) without medical complications.",
+      "options": "Severe acute malnutrition (or very low WFA if less than 12 months old) without medical complications"
+    },
+    {
+      "id": "CHE.B23.DE71",
+      "sheet": "CHE.B23.Classification",
+      "label": "Moderate acute malnutrition",
+      "definition": "The child has moderate acute malnutrition.",
+      "options": "Moderate acute malnutrition"
+    },
+    {
+      "id": "CHE.B23.DE72",
+      "sheet": "CHE.B23.Classification",
+      "label": "No acute malnutrition",
+      "definition": "The child has no acute malnutrution.",
+      "options": "No acute malnutrition"
+    },
+    {
+      "id": "CHE.B23.DE73",
+      "sheet": "CHE.B23.Classification",
+      "label": "Nutritional status not assessed",
+      "definition": "The child's nutritional status was not assessed.",
+      "options": "Nutritional status not assessed"
+    },
+    {
+      "id": "CHE.B23.DE75",
+      "sheet": "CHE.B23.Classification",
+      "label": "Health promotion, screening and other problems",
+      "definition": "The child's health promotion, screening and other problems.",
+      "options": "Health promotion"
+    },
+    {
+      "id": "CHE.B23.DE76",
+      "sheet": "CHE.B23.Classification",
+      "label": "Immunization(s) incomplete for age",
+      "definition": "The child's vaccine record indicates that their vaccination status is not up to date for their age, and the child is eligible to receive one or more immunizations today.",
+      "options": "Immunization(s) incomplete for age"
+    },
+    {
+      "id": "CHE.B23.DE77",
+      "sheet": "CHE.B23.Classification",
+      "label": "Immunization status unknown",
+      "definition": "The child's immunization status is unknown.",
+      "options": "Immunization status unknown"
+    },
+    {
+      "id": "CHE.B23.DE78",
+      "sheet": "CHE.B23.Classification",
+      "label": "Vitamin A needed",
+      "definition": "The child needs vitamin A.",
+      "options": "Vitamin A"
+    },
+    {
+      "id": "CHE.B23.DE79",
+      "sheet": "CHE.B23.Classification",
+      "label": "Deworming needed",
+      "definition": "The child needs deworming.",
+      "options": "Deworming"
+    },
+    {
+      "id": "CHE.B23.DE80",
+      "sheet": "CHE.B23.Classification",
+      "label": "Confirmed HIV infection",
+      "definition": "The child has an HIV infection.",
+      "options": "Confirmed HIV infection"
+    },
+    {
+      "id": "CHE.B23.DE81",
+      "sheet": "CHE.B23.Classification",
+      "label": "HIV exposed",
+      "definition": "The child is HIV exposed.",
+      "options": "HIV exposed"
+    },
+    {
+      "id": "CHE.B23.DE82",
+      "sheet": "CHE.B23.Classification",
+      "label": "HIV infection unlikely",
+      "definition": "An HIV infection is unlikely for the child.",
+      "options": "HIV infection unlikely"
+    },
+    {
+      "id": "CHE.B23.DE83",
+      "sheet": "CHE.B23.Classification",
+      "label": "HIV infection status unknown",
+      "definition": "The child's HIV infection status is unknown.",
+      "options": "HIV infection status unknown"
+    },
+    {
+      "id": "CHE.B23.DE84",
+      "sheet": "CHE.B23.Classification",
+      "label": "",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B23.DE85",
+      "sheet": "CHE.B23.Classification",
+      "label": "History of obstructed or absent breathing",
+      "definition": "The child has a history of obstructed or absent breathing.",
+      "options": "History of obstructed or absent breathing"
+    },
+    {
+      "id": "CHE.B23.DE86",
+      "sheet": "CHE.B23.Classification",
+      "label": "Possible serious bacterial infection OR very severe disease",
+      "definition": "The child has possible serious bacterial infection or very serious disease.",
+      "options": "Possible serious bacterial infection OR very severe disease"
+    },
+    {
+      "id": "CHE.B23.DE87",
+      "sheet": "CHE.B23.Classification",
+      "label": "Pneumonia",
+      "definition": "The child has pneumonia.",
+      "options": "Pneumonia"
+    },
+    {
+      "id": "CHE.B23.DE88",
+      "sheet": "CHE.B23.Classification",
+      "label": "Localized infection",
+      "definition": "The child has localized infection.",
+      "options": "Localized bacterial infection"
+    },
+    {
+      "id": "CHE.B23.DE89",
+      "sheet": "CHE.B23.Classification",
+      "label": "Infection unlikely",
+      "definition": "The child does not have signs of localized infection, pneumonia or possible serious bacterial infection or severe disease.",
+      "options": "Infection unlikely"
+    },
+    {
+      "id": "CHE.B23.DE90",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe jaundice",
+      "definition": "The child has severe jaundice.",
+      "options": "Severe jaundice"
+    },
+    {
+      "id": "CHE.B23.DE91",
+      "sheet": "CHE.B23.Classification",
+      "label": "Jaundice",
+      "definition": "The child has jaundice.",
+      "options": "Jaundice"
+    },
+    {
+      "id": "CHE.B23.DE92",
+      "sheet": "CHE.B23.Classification",
+      "label": "Prolonged jaundice",
+      "definition": "The child has prolonged jaundice.",
+      "options": "Prolonged jaundice"
+    },
+    {
+      "id": "CHE.B23.DE93",
+      "sheet": "CHE.B23.Classification",
+      "label": "No jaundice",
+      "definition": "The child does not have jaundice.",
+      "options": "No jaundice"
+    },
+    {
+      "id": "CHE.B23.DE94",
+      "sheet": "CHE.B23.Classification",
+      "label": "Severe dehydration",
+      "definition": "The child has severe dehydration.",
+      "options": "Severe dehydration"
+    },
+    {
+      "id": "CHE.B23.DE95",
+      "sheet": "CHE.B23.Classification",
+      "label": "Some dehydration",
+      "definition": "The child has some dehydration.",
+      "options": "Some dehydration"
+    },
+    {
+      "id": "CHE.B23.DE96",
+      "sheet": "CHE.B23.Classification",
+      "label": "No dehydration",
+      "definition": "The child has no dehydration.",
+      "options": "No dehydration"
+    },
+    {
+      "id": "CHE.B23.DE97",
+      "sheet": "CHE.B23.Classification",
+      "label": "Very low WFA",
+      "definition": "The child has very low WFA.",
+      "options": "Very low WFA"
+    },
+    {
+      "id": "CHE.B23.DE98",
+      "sheet": "CHE.B23.Classification",
+      "label": "Feeding problem and / or low WFA",
+      "definition": "The child has feeding problem or low WFA.",
+      "options": "Feeding problem or low WFA"
+    },
+    {
+      "id": "CHE.B23.DE99",
+      "sheet": "CHE.B23.Classification",
+      "label": "Feeding problem",
+      "definition": "The child has has feeding problem or low WFA qualified by a feeding problem.",
+      "options": "Feeding problem"
+    },
+    {
+      "id": "CHE.B23.DE100",
+      "sheet": "CHE.B23.Classification",
+      "label": "Low WFA",
+      "definition": "The child has has feeding problem or low WFA qualified by low WFA.",
+      "options": "Low WFA"
+    },
+    {
+      "id": "CHE.B23.DE101",
+      "sheet": "CHE.B23.Classification",
+      "label": "Oral thrush",
+      "definition": "The child has feeding problem or low WFA qualified by oral trush.",
+      "options": "Oral thrush"
+    },
+    {
+      "id": "CHE.B23.DE102",
+      "sheet": "CHE.B23.Classification",
+      "label": "No feeding problem",
+      "definition": "The child has no feeding problem and has no low WFA.",
+      "options": "No feeding problem"
+    },
+    {
+      "id": "CHE.B23.DE103",
+      "sheet": "CHE.B23.Classification",
+      "label": "",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B23.DE104",
+      "sheet": "CHE.B23.Classification",
+      "label": "Add classification",
+      "definition": "The health worker would like to add a classification.",
+      "options": "Provide a list of all the classifications specific for the age group of the child as per the data elements above."
+    },
+    {
+      "id": "CHE.B24.DE01",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Respiratory rate",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE01",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Respiratory rate (breaths per minute)",
+      "definition": "Count the number of breaths the child takes per minute to determine if fast breathing is present.\nIt is very important that the child is calm and still. If the child is moving or crying, you will not be able to get an accurate breath count.\nTo count the breaths per minute, use a watch with a second hand or a digital watch. Look for the breathing movement anywhere on the child’s chest or abdomen. \n\nCaution: The rise and fall of the chest or abdomen counts as one breath, not two.\n\nThe number of breaths for fast breathing depends on the child’s age. \n- Under 2 months: greater than or equal to 60 breaths per minute*\n- 2–11 months: greater than or equal to 50 breaths per minute\n- 12–59 months: greater than or equal to 40 breaths per minute\n\n*In young infants, a second measurement should be taken to confirm, unless there is already another sign of possible serious bacterial infection",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE02",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Unable to perform respiratory rate at this time",
+      "definition": "If the child is not calm and it is not possible to measure the respiratory rate, ask the mother to help calm the child and take the measurement later during the consultation.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE03",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Respiratory rate second count (breaths per minute)",
+      "definition": "In young infants, a second respiratory rate measurement should be taken to confirm fast breathing (60 breaths per minute or more) found at the first measurement, unless there is already another sign of possible serious bacterial infection. Fast breathing is confirmed if the respiratory rate is 60 breaths per minute or more at the second count. \n\nTo measure the respiratory rate:\nCount the number of breaths the child takes per minute to determine if fast breathing is present.\nIt is very important that the child is calm and still. If the child is moving or crying, you will not be able to get an accurate breath count of breaths. \nTo count the breaths per minute, use a watch with a second hand or a digital watch. Look for the breathing movement anywhere on the child’s chest or abdomen.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE04",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Respiratory rate second count not possible",
+      "definition": "The child's second respiratory rate is not possible to measure.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE05",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Fast breathing",
+      "definition": "Fast breathing is auto-calculated based on the respiratory rate and the child's age: \n- Under 2 months: greater than or equal to 60 breaths per minute*\n- 2–11 months: greater than or equal to 50 breaths per minute\n- 12–59 months: greater than or equal to 40 breaths per minute\n\n*In young infants, a second measurement should be taken to confirm, unless there is already another sign of possible serious bacterial infection",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.DE02",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Oral fluid test results",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE07",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Oral fluid test results",
+      "definition": "If the child is unconscious, do not try to carry out an oral fluid test because it could cause the child to choke or fluid to get into their lungs.\nAsk the mother to offer the child some water in a cup or spoon (or breastfeed for a child under 6 months). Watch the child drink. \nA child is not able to drink if they are not able to suck or swallow when offered a drink. A child may not be able to drink because they are lethargic or unconscious.\nA child is drinking poorly if the child is weak and cannot drink without help. They may be able to swallow only if fluid is put in their mouth.\nA child has the sign drinking eagerly and acts thirsty if it is clear that the child wants to drink. Look to see if the child reaches out for the cup or spoon when you offer them water. When the water is taken away, see if the child is unhappy because they want to drink more.\nIf the child takes a drink only with encouragement and does not want to drink more, they do not have the sign of drinking eagerly and looking thirsty.",
+      "options": "- Completely unable to drink\n- Vomits immediately/everything\n- Drinks poorly\n- Drinks eagerly/thirstily\n- Drinks normally\n- Unable to perform the oral fluid test"
+    },
+    {
+      "id": "CHE.B24.G.DE08",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Completely unable to drink",
+      "definition": "The child is completely unable to drink.",
+      "options": "- Completely unable to drink"
+    },
+    {
+      "id": "CHE.B24.G.DE09",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Vomits immediately/everything",
+      "definition": "The child vomits immediately/everything.",
+      "options": "- Vomits immediately/everything"
+    },
+    {
+      "id": "CHE.B24.G.DE10",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Drinks poorly",
+      "definition": "The child drinks poorly.",
+      "options": "- Drinks poorly"
+    },
+    {
+      "id": "CHE.B24.G.DE11",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Drinks eagerly/thirstily",
+      "definition": "The child drinks eagerly/thirstily.",
+      "options": "- Drinks eagerly/thirstily"
+    },
+    {
+      "id": "CHE.B24.G.DE12",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Drinks normally",
+      "definition": "The child drinks normally.",
+      "options": "- Drinks normally"
+    },
+    {
+      "id": "CHE.B24.G.DE13",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Unable to perform oral fluid test",
+      "definition": "The health worker is unable to perform an oral fluid test.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE14",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Completely unable to drink or vomits everything",
+      "definition": "When danger signs are present when the health worker is unable to perform an oral fluid test, it is assumed that the child is completely unable to drink or vomits everything.",
+      "options": "- Completely unable to drink or vomits immediately/everything"
+    },
+    {
+      "id": "CHE.B24.G.DE15",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Has the child had anything to drink today?",
+      "definition": "When it is not possible to conduct an oral fluid test, ask when the child last drank as part of a dehydration assessment.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE16",
+      "sheet": "CHE.B24.Group questions",
+      "label": "How did the child last drink?",
+      "definition": "When it is not possible to conduct an oral fluid test, ask how the child last drank as part of a dehydration assessment.",
+      "options": "- Completely unable to drink\n- Vomits immediately/everything\n- Drinks poorly\n- Drinks eagerly/thirstily\n- Drinks normally\n- Unable to perform oral fluid test"
+    },
+    {
+      "id": "CHE.B24.DE03",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Inhaled bronchodilator trial",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE17",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Inhaled bronchodilator trial results",
+      "definition": "To administer a bronchodilator trial:\n- Give two puffs from a salbutamol-metered dose inhaler (100 μg per puff) using a spacer*\n- Repeat up to three times every 15–20 minutes\n- Reassess respiratory rate and chest indrawing\n\n*A spacer is a way of delivering the bronchodilator medicines effectively into the lungs. A spacer works as well as a nebulizer if correctly used. No child under 5 should be given an inhaler without a spacer.\n\nIf commercial spacers are not available, spacers can be easily made with a drink bottle (500 ml) or something similar. Using a sharp knife, cut a hole in the bottle base in the same shape as the mouthpiece of the inhaler. Cut the bottle between the upper quarter and the lower three quarters. Disregard the upper quarter of the bottle. Cut a small V in the border of the large open part of the bottle to fit to the child’s nose and to be used as a mask. Flame the edge of the cut bottle with a candle or a lighter to soften it. In a small baby, a mask can be made by making a similar hole in a plastic (not polystyrene) cup.\n\nTo use an inhaler with a spacer:\n- Remove the inhaler cap. Shake the inhaler well.\n- Insert the mouthpiece of the inhaler through the hole in the bottle or plastic cup.\n- The child should put the opening of the bottle into their mouth and breathe in and out through the mouth.\n- A carer then presses down the inhaler and sprays into the bottle while the child continues to breath normally.\n- Wait for three to four breaths and repeat.\n- For younger children place the cup over the child’s mouth and use as a spacer in the same way.\n- If a spacer is being used for the first time, prime with 4–5 extra puffs from the inhaler.",
+      "options": "- Inhaled bronchodilator trial not feasible or available\n- Fast breathing (after the inhaled bronchodilator trial)\n- Chest indrawing (after the inhaled bronchodilator trial)\n- No fast breathing and no chest indrawing"
+    },
+    {
+      "id": "CHE.B24.G.DE18",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Chest indrawing (after the inhaled bronchodilator trial)",
+      "definition": "NORMAL: When the child breathes IN, the chest wall moves OUT.\nCHEST INDRAWING: When the child breaths IN, the chest wall moves IN.\n\nChest indrawing occurs when the child needs to make a greater effort than normal to breathe in. You will look for chest indrawing when the child breathes IN.\n\nIn normal breathing, the whole chest wall (upper and lower) and the abdomen move OUT when the child breathes IN. The child has chest indrawing if the lower chest wall (lower ribs) goes IN when the child breathes IN.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE19",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Respiratory rate (after the inhaled bronchodilator trial)",
+      "definition": "Count the number of breaths the child takes per minute to determine if fast breathing is present after the bronchodilator trial.\nIt is very important that the child is calm and still. If the child is moving or crying, you will not be able to get an accurate breath count.\nTo count the breaths per minute, use a watch with a second hand or a digital watch. Look for the breathing movement anywhere on the child’s chest or abdomen. \nThe number of breaths for fast breathing depends on the child’s age. \n- 2–11 months: more than 50 breaths per minute\n- 12–59 months: more than 40 breaths per minute",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE20",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Fast breathing (after the inhaled bronchodilator trial)",
+      "definition": "Fast breathing after the bronchodilator trial is auto-calculated based on the respiratory rate and the child's age: \n- 2–11 months: more than 50 breaths per minute\n- 12–59 months: more than 40 breaths per minute",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE21",
+      "sheet": "CHE.B24.Group questions",
+      "label": "No fast breathing and no chest indrawing (after the inhaled bronchodilator trial)",
+      "definition": "The child has no fast breathing and no chest indrawing after the bronchodilator trial.",
+      "options": "- Yes\n- No"
+    },
+    {
+      "id": "CHE.B24.G.DE22",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Inhaled bronchodilator trial not feasible or available",
+      "definition": "The inhaled bronchodilator trial was not feasible or available.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.DE04",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Appetite test (using ready-to-use therapeutic food [RUTF])",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE23",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Appetite test (using RUTF) results",
+      "definition": "To carry out the appetite test, follow the steps listed below:\n1. Conduct in a separate quiet area.\n2. Explain to the caregiver the purpose of the appetite test and how it will be carried out.\n3. The caregiver should wash their hands.\n4. The caregiver should sit comfortably with the child on their lap. They should offer the RUTF from the packet or put a small amount on their finger and give it to the child.\n5. The caregiver should offer the child the RUTF gently, encouraging all the time. If the child refuses, then the caregiver should continue to quietly encourage the child. They can take time for the test. The child must not be forced to take the RUTF.\n6. The child needs to be given plenty of water from a cup as they are taking the RUTF.\n\nTo pass the appetite test, the child must willingly finish the minimum amount of RUTF, that is, at least one-third of a packet of RUTF portion (92 g) or three teaspoons from a pot within 30 minutes (detailed amounts according to the child's weight shown below):\n- Under 4 kg : 1/8 to 1/4 sachet\n- 4–6.9 kg : 1/4 to 1/3 sachet\n- 7–9.9 kg: 1/3 to 1/2 sachet\n- 10–14.9 kg: 1/2 to 3/4 sachet\n- 15 kg and above: 3/4 to 1 sachet",
+      "options": "- Able to finish RUTF\n- Unable to finish RUTF\n- RUTF not available"
+    },
+    {
+      "id": "CHE.B24.G.DE24",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Able to finish RUTF",
+      "definition": "The child was able to finish the minimum portion of RUTF (based on 92-g sachets) according to their weight within 30 minutes:\n- Under 4 kg : 1/8 to 1/4 sachet\n- 4–6.9 kg : 1/4 to 1/3 sachet\n- 7–9.9 kg: 1/3 to 1/2 sachet\n- 10–14.9 kg: 1/2 to 3/4 sachet\n- 15 kg and above: 3/4 to 1 sachet",
+      "options": "- Able to finish RUTF"
+    },
+    {
+      "id": "CHE.B24.G.DE25",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Unable to finish RUTF",
+      "definition": "The child was not able to finish the minimum portion of RUTF (based on 92-g sachets) according to their weight within 30 minutes:\n- Under 4 kg : 1/8 to 1/4 sachet\n- 4–6.9 kg : 1/4 to 1/3 sachet\n- 7–9.9 kg: 1/3 to 1/2 sachet\n- 10–14.9 kg: 1/2 to 3/4 sachet\n- 15 kg and above: 3/4 to 1 sachet",
+      "options": "- Unable to finish RUTF"
+    },
+    {
+      "id": "CHE.B24.G.DE26",
+      "sheet": "CHE.B24.Group questions",
+      "label": "RUTF not available",
+      "definition": "It was not possible to carry out the appetite test.",
+      "options": "- RUTF not available"
+    },
+    {
+      "id": "CHE.B24.DE05",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Breastfeeding assessment",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE27",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Breastfeeding assessment",
+      "definition": "If the infant has not fed in the previous hour, they may be willing to breastfeed. Ask the mother to put her infant to the breast. Observe a whole breastfeed if possible, or observe for at least 4 minutes.\nSit quietly and watch the infant being breastfeed.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE28",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Mother reports difficulty breastfeeding",
+      "definition": "The mother may also mention feeding difficulties, such as her infant feeding too frequently (or not frequently enough), not having enough milk, nipples being sore, or having flat or inverted nipples.",
+      "options": "- YES \n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE29",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Good attachment",
+      "definition": "The infant is considered to have good attachment if all four of the following signs are present:\n- more areola seen above the infant’s top lip than below the bottom lip;\n- mouth wide open;\n- lower lip turned outwards;\n- chin touching the breast.",
+      "options": "-YES\n-NO"
+    },
+    {
+      "id": "CHE.B24.G.DE30",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Sucking effectively",
+      "definition": "The infant is sucking effectively if there are taking slow, deep sucks, sometimes pausing.",
+      "options": "-YES\n-NO"
+    },
+    {
+      "id": "CHE.B24.G.DE31",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Difficulty breastfeeding reported",
+      "definition": "The breastfeeding assessment was not observed; however, the caregiver has reported difficulty breastfeeding.",
+      "options": "-YES\n-NO"
+    },
+    {
+      "id": "CHE.B24.G.DE32",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Difficulty breastfeeding observed",
+      "definition": "The health worker has observed that the infant has difficulty breastfeeding.",
+      "options": "-'Yes\n-No"
+    },
+    {
+      "id": "CHE.B24.G.DE33",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Breastfeeding assessment not possible",
+      "definition": "The breastfeeding assessment was not possible.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.DE06",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Second temperature measurement",
+      "definition": "",
+      "options": ""
+    },
+    {
+      "id": "CHE.B24.G.DE39",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Axillary temperature (second measurement)",
+      "definition": "The infant's axillary temperature (temperature taken under the armpit), measured in °C.\nA second temperature measurement is required to confirm fever or low body temperature in a young infant, if it is the only severe sign (of possible severe bacterial infection), 30 minutes after the first measurement and after removing clothing to let the baby who has a fever cool down, or wrapping the baby who has a low body temperature.\n\nTemperature ranges for young infants under 2 months:\n- Under 35.5 °C: hypothermia (low body temperature)\n- 35.5–37.9 °C: normal \n- 38.0 °C and above: fever",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE40",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Prefer to take rectal temperature (second measurement)",
+      "definition": "The health worker prefers to take the child's rectal temperature.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE41",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Rectal temperature (second measurement)",
+      "definition": "The child's rectal temperature (temperature taken in the rectum), measured in °C. Only consider taking rectal temperature if trained.\nA second temperature measurement is required to confirm fever or low body temperature in a young infant, if it is the only severe sign (of possible severe bacterial infection), 30 minutes after the first measurement and after removing clothing to let the baby who has a fever cool down, or wrapping the baby who has low body temperature.\n\nTemperature ranges for young infants under 2 months:\n- Under 36.0 °C: hypothermia (low body temperature)\n- 36.0–38.5 °C: normal \n- 38.5 °C and above: fever",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE42",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Second temperature measurement not feasible",
+      "definition": "The second temperature measurement is not feasible.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE43",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Measured temperature (second measurement)",
+      "definition": "Auto-calculated temperature range based on axillary temperature in °C (add 0.5 °C for rectal temperature)\n \nTemperature ranges for young infants under 2 months:\n- Under 35.5 °C: low body temperature (hypothermia)\n- 35.5–37.9 °C: normal\n- 38.0 °C and above: fever\n\nIf the infant has a fever, remove a layer of clothing and let the baby cool. If the body temperature is low, wrap the baby in additional clothing to warm them.",
+      "options": "- Low\n- Normal\n- High\n- Very high"
+    },
+    {
+      "id": "CHE.B24.DE07",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Malaria test",
+      "definition": "",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE44",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Malaria test",
+      "definition": "There are two ways of doing a malaria test:\n1. Examining a blood slide for malaria parasites using a microscope\n2. Using an RDT to check blood for malaria antigens\nAlways check the quality of your blood slides if using microscopy or RDTs to ensure that the test results are\nreliable. Enter the results of the test as:\n- POSITIVE – if there are malaria parasites or the RDT is positive. Note if it is P. falciparum or P. vivax if able to do so, especially when using microscopy.\n- NEGATIVE – If there are no parasites seen using microscopy or the RDT is negative",
+      "options": "- Malaria-positive\n- Malaria-negative\n- Malaria status Unknown/unavailable/invalid/not feasible"
+    },
+    {
+      "id": "CHE.B24.G.DE45",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Malaria-positive",
+      "definition": "The child's malaria test is positive – there are malaria parasites on microscopy or the RDT is positive.",
+      "options": "- Malaria-positive"
+    },
+    {
+      "id": "CHE.B24.G.DE46",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Malaria-negative",
+      "definition": "The child's malaria test is negative – there are no parasites seen on microscopy, or the RDT is negative.",
+      "options": "- Malaria-negative"
+    },
+    {
+      "id": "CHE.B24.G.DE47",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Malaria status unknown/unavailable/invalid/not feasible",
+      "definition": "The child's malaria test. Results are status unknown/unavailable/invalid/not feasible.",
+      "options": "- Malaria status unknown/unavailable/invalid/not feasible"
+    },
+    {
+      "id": "CHE.B24.G.DE48",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Type of malaria test",
+      "definition": "The type of malaria test performed.",
+      "options": "- RDT\n- Microscopy\n- Not recorded/unsure"
+    },
+    {
+      "id": "CHE.B24.G.DE49",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Rapid diagnostic test (RDT)",
+      "definition": "A malaria RDT was performed.",
+      "options": "- RDT"
+    },
+    {
+      "id": "CHE.B24.G.DE50",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Microscopy",
+      "definition": "A malaria blood film (microscopy) was performed.",
+      "options": "- Microscopy"
+    },
+    {
+      "id": "CHE.B24.G.DE51",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Not recorded/unsure",
+      "definition": "The type of test the client had was not recorded/unsure what type of test.",
+      "options": "- Not recorded/unsure"
+    },
+    {
+      "id": "CHE.B24.G.DE52",
+      "sheet": "CHE.B24.Group questions",
+      "label": "RDT species results",
+      "definition": "Results of client's RDT species test.",
+      "options": "- P. falciparum \n- Non-P. falciparum \n- P. vivax \n- P. ovale \n- P. malariae \n- P. knowlesi"
+    },
+    {
+      "id": "CHE.B24.G.DE53",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Plasmodium falciparum",
+      "definition": "The child's RDT species result is P. falciparum.",
+      "options": "- P. falciparum"
+    },
+    {
+      "id": "CHE.B24.G.DE54",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Non- P. falciparum",
+      "definition": "The child's RDT species result is non-P. falciparum",
+      "options": "- Non-P. falciparum"
+    },
+    {
+      "id": "CHE.B24.G.DE55",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Plasmodium vivax",
+      "definition": "The child's RDT species result is P. vivax.",
+      "options": "- P. vivax"
+    },
+    {
+      "id": "CHE.B24.G.DE56",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Plasmodium ovale",
+      "definition": "The child's RDT species result is P. ovale.",
+      "options": "- P. ovale"
+    },
+    {
+      "id": "CHE.B24.G.DE57",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Plasmodium malariae",
+      "definition": "The child's RDT species result is P. malariae.",
+      "options": "- P. malariae"
+    },
+    {
+      "id": "CHE.B24.G.DE58",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Plasmodium knowlesi",
+      "definition": "The child's RDT species result is P. knowlesi.",
+      "options": "- P. knowlesi"
+    },
+    {
+      "id": "CHE.B24.G.DE59",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Microscopy species results",
+      "definition": "The child's microscopy species result.",
+      "options": "- P. falciparum\n- P. vivax\n- P. malariae\n- P. ovale\n- P. knowlesi\n- Mixed infection with unknown species types\n- No species reported"
+    },
+    {
+      "id": "CHE.B24.G.DE60",
+      "sheet": "CHE.B24.Group questions",
+      "label": "P. falciparum",
+      "definition": "The child's microscopy species result is P. falciparum.",
+      "options": "- P. falciparum"
+    },
+    {
+      "id": "CHE.B24.G.DE61",
+      "sheet": "CHE.B24.Group questions",
+      "label": "P. vivax",
+      "definition": "The child's microscopy species result is P. vivax.",
+      "options": "- P. vivax"
+    },
+    {
+      "id": "CHE.B24.G.DE62",
+      "sheet": "CHE.B24.Group questions",
+      "label": "P. malariae",
+      "definition": "The child's microscopy species result is P. malariae.",
+      "options": "- P. malariae"
+    },
+    {
+      "id": "CHE.B24.G.DE63",
+      "sheet": "CHE.B24.Group questions",
+      "label": "P. ovale",
+      "definition": "The child's microscopy species result is P. ovale.",
+      "options": "- P. ovale"
+    },
+    {
+      "id": "CHE.B24.G.DE64",
+      "sheet": "CHE.B24.Group questions",
+      "label": "P. knowlesi",
+      "definition": "The child's microscopy species result is P. knowlesi.",
+      "options": "- P. knowlesi"
+    },
+    {
+      "id": "CHE.B24.G.DE65",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Mixed infection with unknown species types",
+      "definition": "The child's microscopy species result is mixed infection with unknown species types.",
+      "options": "- Mixed infection unknown species types"
+    },
+    {
+      "id": "CHE.B24.G.DE66",
+      "sheet": "CHE.B24.Group questions",
+      "label": "No species reported",
+      "definition": "The child's microscopy species result is no species reported.",
+      "options": "- No species reported"
+    },
+    {
+      "id": "CHE.B24.G.DE67",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Parasite density (%)",
+      "definition": "The child's result for parasite density in percentage.",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE68",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Parasite density unknown",
+      "definition": "The child's result for parasite density is unknown.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE69",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Prefer to provide per microlitre (μL)",
+      "definition": "The health worker would prefer to enter the parasite density per microlitre (μL).",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B24.G.DE70",
+      "sheet": "CHE.B24.Group questions",
+      "label": "Parasite density (μL)",
+      "definition": "The child's result for parasite density per microlitre (μL).",
+      "options": "N/A"
+    },
+    {
+      "id": "CHE.B24.G.DE71",
+      "sheet": "CHE.B24.Group questions",
+      "label": "High parasite density",
+      "definition": "The child has a high parasite density.",
+      "options": "- High parasite density"
+    },
+    {
+      "id": "CHE.B25.H.DE01",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Malaria risk",
+      "definition": "The country/region/facility's malaria risk",
+      "options": "- High malaria risk\n- Low malaria risk\n- No malaria risk"
+    },
+    {
+      "id": "CHE.B25.H.DE02",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "High malaria risk",
+      "definition": "An area is considered as a high malaria risk area when more than 5% of fever cases in children aged 2–59 months are attributable to malaria.",
+      "options": "- High malaria risk"
+    },
+    {
+      "id": "CHE.B25.H.DE03",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Low malaria risk",
+      "definition": "An area is considered as a low malaria risk area when fewer than 5% of fever cases in children aged 2–59 months are attributable to malaria, but where the risk is not negligible.",
+      "options": "- Low malaria risk"
+    },
+    {
+      "id": "CHE.B25.H.DE04",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "No malaria risk",
+      "definition": "Malaria transmission does not normally occur in the area; imported malaria is uncommon.",
+      "options": "- No malaria risk"
+    },
+    {
+      "id": "CHE.B25.H.DE05",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Types of malaria test available within 2 hours and quality-assured at primary care",
+      "definition": "The country/region/facility's types of malaria test available within 2 hours and quality-assured at primary care",
+      "options": "- RDT only\n- Microscopy only\n- RDT and microscopy"
+    },
+    {
+      "id": "CHE.B25.H.DE06",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Rapid diagnostic test (RDT) only",
+      "definition": "The country/region/facility has RDT tests available.",
+      "options": "- RDT only"
+    },
+    {
+      "id": "CHE.B25.H.DE07",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Microscopy only",
+      "definition": "The country/region/facility has microscopy tests available.",
+      "options": "- Microscopy only"
+    },
+    {
+      "id": "CHE.B25.H.DE08",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "RDT and microscopy",
+      "definition": "The country/region/facility has RDT and microscopy tests available.",
+      "options": "- RDT and microscopy"
+    },
+    {
+      "id": "CHE.B25.H.DE09",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "RDTs in use allow for species identification",
+      "definition": "The country/region/facility has RDT tests in use that allow for species identification.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B25.H.DE10",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Species that can be differentiated on RDT",
+      "definition": "The species that can be differentiated on RDT",
+      "options": "- P. falciparum \n- Non-P. falciparum \n- P. vivax \n- P. ovale \n- P. malariae \n- P. knowlesi"
+    },
+    {
+      "id": "CHE.B25.H.DE11",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Plasmodium falciparum",
+      "definition": "The species that can be differentiated on RDT is P. falciparum.",
+      "options": "- P. falciparum"
+    },
+    {
+      "id": "CHE.B25.H.DE12",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Non-P. falciparum",
+      "definition": "The species that can be differentiated on RDT is non-P. falciparum",
+      "options": "- Non-P. falciparum"
+    },
+    {
+      "id": "CHE.B25.H.DE13",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Plasmodium vivax",
+      "definition": "The species that can be differentiated on RDT is P. vivax.",
+      "options": "- P. vivax"
+    },
+    {
+      "id": "CHE.B25.H.DE14",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Plasmodium ovale",
+      "definition": "The species that can be differentiated on RDT is P. ovale.",
+      "options": "- P. ovale"
+    },
+    {
+      "id": "CHE.B25.H.DE15",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Plasmodium malariae",
+      "definition": "The species that can be differentiated on RDT is P. malariae.",
+      "options": "- P. malariae"
+    },
+    {
+      "id": "CHE.B25.H.DE16",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Plasmodium knowlesi",
+      "definition": "The species that can be differentiated on RDT is P. knowlesi.",
+      "options": "- P. knowlesi"
+    },
+    {
+      "id": "CHE.B25.H.DE17",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Microscopists expected to differentiate species",
+      "definition": "The country/region/facility has microscopists who are expected to differentiate species.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B25.H.DE18",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "What species should be included in the microscopy evaluation?",
+      "definition": "The microscopy test species options for the country/region/facility",
+      "options": "- P. falciparum\n- P. vivax\n- P. malariae\n- P. ovale\n- P. knowlesi"
+    },
+    {
+      "id": "CHE.B25.H.DE19",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "P. falciparum",
+      "definition": "The country/region/facility identifies P. falciparum.",
+      "options": "- P. falciparum"
+    },
+    {
+      "id": "CHE.B25.H.DE20",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "P. vivax",
+      "definition": "The country/region/facility identifies P. vivax.",
+      "options": "- P. vivax"
+    },
+    {
+      "id": "CHE.B25.H.DE21",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "P. malariae",
+      "definition": "The country/region/facility identifies P. malariae.",
+      "options": "- P. malariae"
+    },
+    {
+      "id": "CHE.B25.H.DE22",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "P. ovale",
+      "definition": "The country/region/ facility identifies P. ovale.",
+      "options": "- P. ovale"
+    },
+    {
+      "id": "CHE.B25.H.DE23",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "P. knowlesi",
+      "definition": "The country/region/facility identifies P. knowlesi.",
+      "options": "- P. knowlesi"
+    },
+    {
+      "id": "CHE.B25.H.DE24",
+      "sheet": "CHE.B25.Population-Malaria",
+      "label": "Microscopists expected to evaluate parasite density",
+      "definition": "The country/region/facility has microscopists who are expected to evaluate parasite density",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B26.I.DE01",
+      "sheet": "CHE.B.26.Population-HIV",
+      "label": "HIV prevalence",
+      "definition": "Proportion of the population living with HIV in the specified geographical area (country/region/facility catchment area).",
+      "options": "- High HIV prevalence\n- Low HIV prevalence\n- No HIV prevalence"
+    },
+    {
+      "id": "CHE.B26.I.DE02",
+      "sheet": "CHE.B.26.Population-HIV",
+      "label": "High HIV prevalence",
+      "definition": "Proportion of the population living with HIV in the specified geographical area  (country/region/facility catchment area) is high.",
+      "options": "- High HIV prevalence"
+    },
+    {
+      "id": "CHE.B26.I.DE03",
+      "sheet": "CHE.B.26.Population-HIV",
+      "label": "Low HIV prevalence",
+      "definition": "Proportion of the population living with HIV in the specified geographical area  (country/region/facility catchment area) is low.",
+      "options": "- Low HIV prevalence"
+    },
+    {
+      "id": "CHE.B26.I.DE04",
+      "sheet": "CHE.B.26.Population-HIV",
+      "label": "No HIV prevalence",
+      "definition": "Proportion of the population living with HIV in the specified geographical area (country/region/facility catchment area) is 0 or very low.",
+      "options": "- No HIV prevalence"
+    },
+    {
+      "id": "CHE.B27.G.DE01",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Danger signs",
+      "definition": "The child has one or more general danger signs.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE02",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "History of obstructed or absent breathing",
+      "definition": "The child had obstructed or absent breathing, which is subsequently stabilized.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE03",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Severe acute malnutrition",
+      "definition": "The child has severe acute malnutrition.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE04",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Medical complications of severe acute malnutrition",
+      "definition": "The child has one or more medical complications of severe acute malnutrition:\n- any general danger sign;\n- any severe classification;\n- pneumonia​, persistent diarrhoea​, dysentery​, malaria, measles;\n- oedema of both feet.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE05",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "2–59 months – Severe classification other than severe dehydration",
+      "definition": "The child has a severe classification other than severe dehydration.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE06",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Fever",
+      "definition": "The child has a fever (reported or measured).",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE07",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Severe dehydration with unconscious/lethargy or unable to drink AND no other signs of very severe disease",
+      "definition": "",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE08",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "Possible serious bacterial infection (PSBI) other than temperature",
+      "definition": "The infant has signs of PSBI, other than measured temperature.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE09",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "PSBI",
+      "definition": "The infant has signs of PSBI.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE10",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "YI severe classification other than severe dehydration",
+      "definition": "The child has a severe classification other than severe dehydration.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B27.G.DE11",
+      "sheet": "CHE.B27.Combined Data Element",
+      "label": "YI severe classification including severe dehydration",
+      "definition": "The child has a severe classification other than severe dehydration.",
+      "options": "- YES\n- NO"
+    },
+    {
+      "id": "CHE.B28.K.DE01",
+      "sheet": "CHE.B28.Country Configuration",
+      "label": "Population mean",
+      "definition": "The country's population mean",
+      "options": "N/A"
+    }
+  ]
+}

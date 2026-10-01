@@ -23,7 +23,7 @@ const ajv = createAjv();
 const matches = (condition: ConditionSchema, data: Assessment) => ajv.validate(condition, data) as boolean;
 
 // Remove the values of hidden fields. One field can hide another, so repeat until nothing changes.
-function visibleOnly(data: Assessment): Assessment {
+export function visibleOnly(data: Assessment): Assessment {
   const visible = { ...data };
   let changed = true;
   while (changed) {

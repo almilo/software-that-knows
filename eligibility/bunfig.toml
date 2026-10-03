@@ -1,0 +1,3 @@
+[test]
+# Oxigraph's WebAssembly must load before any test uses the model.
+preload = ["./test-setup.ts"]

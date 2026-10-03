@@ -1,0 +1,26 @@
+{
+  "name": "eligibility",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun generator/generate.ts",
+    "dev": "bun run generate && bun dev.ts",
+    "build": "bun run generate && bun build.ts",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@jsonforms/core": "^3.8.0",
+    "@jsonforms/react": "^3.8.0",
+    "@jsonforms/vanilla-renderers": "^3.8.0",
+    "oxigraph": "^0.5.11",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^7.0.2"
+  }
+}

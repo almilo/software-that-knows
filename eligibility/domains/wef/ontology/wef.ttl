@@ -1,0 +1,629 @@
+# A knowledge model of the early withdrawal of pension money for a home in Switzerland
+# (Wohneigentumsförderung, WEF), from:
+#   BVG   Federal Act on Occupational Retirement, Survivors' and Disability Pension Plans
+#         (SR 831.40), Art. 30a to 30g, and Art. 83a for the tax
+#   WEFV  Ordinance on the Promotion of Home Ownership with Occupational Pension Funds (SR 831.411)
+# Each field, finding, next step and value names the articles it comes from (prov:wasDerivedFrom).
+# Part 5 lists them. The texts are in English, German, French and Italian; they are not official
+# translations.
+#
+# Laws and ordinances are not protected by copyright in Switzerland (URG Art. 5), so this model is
+# MIT licensed, like the code. It is not an official text. Demonstration only: not legal or
+# financial advice, and not checked by a lawyer or a pension fund. The articles were checked against
+# the consolidated texts on fedlex.admin.ch on 4 October 2026 (BVG in force since 1 January 2025,
+# WEFV in force since 1 October 2017).
+#
+# Scope and readings of the law:
+#   - Only the early withdrawal (Vorbezug). Pledging (BVG Art. 30b), the repayment process
+#     (Art. 30d) and divorce (Art. 30c para. 6) are left out, except where a next step names them.
+#     So are the participations other than housing cooperative shares (WEFV Art. 3 b and c) and
+#     withdrawals from a vested benefits institution (WEFV Art. 5 para. 2).
+#   - The date of the application is the date of the evaluation (form:today).
+#   - "Until 3 years before the right to retirement benefits begins" (BVG Art. 30c para. 1): the
+#     last day to apply is the day on which the person reaches the reference age of the fund's
+#     regulations minus 3 years: the ordinary age, not the earliest age for early retirement. The
+#     form asks for that age in years and months (the reference age of women born from 1961 to
+#     1963 is 64 and 3, 6 or 9 months, AHVG Art. 21 and its transitional provisions).
+#   - "Over 50" ("das 50. Altersjahr überschritten", BVG Art. 30c para. 2): from the 50th birthday.
+#   - A birthday on 29 February falls on 28 February in other years (XPath date arithmetic).
+#   - The person gives the vested benefit (Freizügigkeitsleistung) from the pension certificate.
+#     Up to 50, it is the maximum (BVG Art. 30c para. 2).
+#   - Over 50, the maximum is the higher of (WEFV Art. 5 para. 4): a. the vested benefit at 50, plus
+#     repayments and minus withdrawals since then, which the person gets from the fund; b. half of
+#     the difference between today's vested benefit and the pension money already in the home.
+#   - The 18 years of the date check are a plausibility check of the answers, not a rule of the law.
+#
+# The vocabulary of the app is in form.ttl. This file has five parts:
+#   1. Choices: the possible answers, and what the law says about them.
+#   2. Fields: one SHACL shape, its groups and its questions.
+#   3. Rules: SPARQL CONSTRUCT queries (SHACL Advanced Features) that derive the values, the
+#      findings and the next steps from the answers.
+#   4. Values, findings and next steps: what the rules can derive, with their texts.
+#   5. Provenance: the articles.
+
+@prefix form: <https://example.org/form#> .
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix wef:  <https://example.org/wef#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# The prefixes that the SPARQL queries of this model use (sh:prefixes wef:).
+wef: a owl:Ontology ;
+  rdfs:label "Pension money for a home" ;
+  owl:imports form: ;
+  sh:declare [ sh:prefix "wef" ; sh:namespace "https://example.org/wef#"^^xsd:anyURI ] .
+
+# ---------------------------------------------------------------------------
+# 1. Choices
+# ---------------------------------------------------------------------------
+# The rules test these classes, not the single choices: the knowledge "an apartment qualifies" is
+# a triple here, not a condition in a query.
+
+wef:PropertyPurpose a rdfs:Class ;
+  rdfs:comment "The money goes into a property: the kind of home and the form of ownership count, and the minimum applies." ;
+  prov:wasDerivedFrom law:WEFV-1-1 , law:WEFV-5-2 .
+wef:EligibleProperty a rdfs:Class ; prov:wasDerivedFrom law:WEFV-2-1 .
+wef:EligibleOwnership a rdfs:Class ; prov:wasDerivedFrom law:WEFV-2-2 .
+
+wef:buyOrBuild a wef:PropertyPurpose ;
+  wef:requires wef:AttachPurchaseContract , wef:LandRegister ;
+  rdfs:label "Buy or build a home"@en , "Wohneigentum erwerben oder erstellen"@de ,
+             "Acquérir ou construire un logement"@fr , "Acquistare o costruire un'abitazione"@it .
+wef:repayMortgage a wef:PropertyPurpose ;
+  wef:requires wef:AttachLoanContract , wef:LandRegister ;
+  rdfs:label "Repay a mortgage"@en , "Hypothekardarlehen zurückzahlen"@de ,
+             "Rembourser un prêt hypothécaire"@fr , "Rimborsare un mutuo ipotecario"@it .
+wef:cooperativeShares
+  wef:requires wef:AttachShares ;
+  rdfs:label "Buy shares in a housing cooperative"@en , "Anteilscheine einer Wohnbaugenossenschaft erwerben"@de ,
+             "Acquérir des parts sociales d'une coopérative de construction et d'habitation"@fr ,
+             "Acquistare quote di partecipazione ad una cooperativa di costruzione di abitazioni"@it ;
+  prov:wasDerivedFrom law:BVG-30c-3 , law:WEFV-3 .
+
+wef:apartment a wef:EligibleProperty ;
+  rdfs:label "An apartment"@en , "Eine Wohnung"@de , "Un appartement"@fr , "Un appartamento"@it .
+wef:house a wef:EligibleProperty ;
+  rdfs:label "A single-family house"@en , "Ein Einfamilienhaus"@de , "Une maison familiale"@fr , "Una casa unifamiliare"@it .
+wef:otherProperty
+  rdfs:label "Something else"@en , "Etwas anderes"@de , "Autre chose"@fr , "Altro"@it .
+
+wef:soleOwnership a wef:EligibleOwnership ;
+  rdfs:label "Sole ownership"@en , "Alleineigentum"@de , "Propriété individuelle"@fr , "Proprietà individuale"@it .
+wef:coOwnership a wef:EligibleOwnership ;
+  rdfs:label "Co-ownership, for example a condominium"@en , "Miteigentum, zum Beispiel Stockwerkeigentum"@de ,
+             "Copropriété, par exemple propriété par étages"@fr , "Comproprietà, ad esempio proprietà per piani"@it .
+wef:jointOwnership a wef:EligibleOwnership ;
+  rdfs:label "Joint ownership with your spouse or registered partner"@en ,
+             "Gesamteigentum mit Ihrem Ehe- oder eingetragenen Partner"@de ,
+             "Propriété commune avec votre conjoint ou partenaire enregistré"@fr ,
+             "Proprietà comune con il coniuge o il partner registrato"@it .
+wef:buildingRight a wef:EligibleOwnership ;
+  rdfs:label "Independent and permanent building right"@en , "Selbständiges und dauerndes Baurecht"@de ,
+             "Droit de superficie distinct et permanent"@fr , "Diritto di superficie per sé stante e permanente"@it .
+wef:otherOwnership
+  rdfs:label "Something else"@en , "Etwas anderes"@de , "Autre chose"@fr , "Altro"@it .
+
+wef:requires a rdf:Property ;
+  rdfs:range form:NextStep ;
+  rdfs:comment "An answer that requires a next step: the rule 'answers that require a next step' derives it." .
+
+# ---------------------------------------------------------------------------
+# 2. Fields
+# ---------------------------------------------------------------------------
+
+wef:you a sh:PropertyGroup ; sh:order 1 ;
+  rdfs:label "You"@en , "Ihre Angaben"@de , "Vos données"@fr , "I suoi dati"@it .
+wef:home a sh:PropertyGroup ; sh:order 2 ;
+  rdfs:label "Home"@en , "Wohneigentum"@de , "Logement"@fr , "Abitazione"@it .
+wef:pensionFund a sh:PropertyGroup ; sh:order 3 ;
+  rdfs:label "Pension fund"@en , "Pensionskasse"@de , "Caisse de pension"@fr , "Cassa pensioni"@it .
+
+wef:Application a rdfs:Class ; rdfs:comment "An application for an early withdrawal." .
+
+wef:ApplicationShape a sh:NodeShape ;
+  sh:targetClass wef:Application ;
+  form:region "CH" ;
+  rdfs:label "Pension money for a home"@en , "Vorsorgegeld für Wohneigentum"@de ,
+             "Argent de la prévoyance pour un logement"@fr , "Fondi della previdenza per un'abitazione"@it ;
+  rdfs:comment
+    "Demonstration only. Not legal or financial advice. Simplified from BVG Art. 30a–30g and the WEFV, and not checked by a lawyer or a pension fund. Your pension fund's regulations decide."@en ,
+    "Nur zur Demonstration. Keine Rechts- oder Finanzberatung. Vereinfacht nach BVG Art. 30a–30g und WEFV, nicht von einer Anwältin oder einer Pensionskasse geprüft. Massgebend ist das Reglement Ihrer Pensionskasse."@de ,
+    "Démonstration uniquement. Pas un conseil juridique ou financier. Simplifié d'après les art. 30a à 30g LPP et l'OEPL, non vérifié par un avocat ni par une caisse de pension. Le règlement de votre caisse de pension fait foi."@fr ,
+    "Solo a scopo dimostrativo. Non è una consulenza legale o finanziaria. Semplificato dagli art. 30a–30g LPP e dall'OPPA, non verificato da un avvocato né da una cassa pensioni. Fa stato il regolamento della sua cassa pensioni."@it ;
+  sh:property
+    [ sh:path wef:birthDate ; sh:datatype xsd:date ; sh:minCount 1 ;
+      sh:group wef:you ; sh:order 1 ;
+      sh:name "Date of birth"@en , "Geburtsdatum"@de , "Date de naissance"@fr , "Data di nascita"@it ;
+      prov:wasDerivedFrom law:BVG-30c-1 , law:BVG-30c-2 ] ,
+    [ sh:path wef:retirementAge ; sh:datatype xsd:integer ; sh:minInclusive 58 ; sh:maxInclusive 70 ; sh:minCount 1 ;
+      sh:group wef:you ; sh:order 2 ;
+      sh:name "Reference age in your pension fund's regulations (years)"@en ,
+              "Referenzalter gemäss Reglement Ihrer Pensionskasse (Jahre)"@de ,
+              "Âge de référence selon le règlement de votre caisse de pension (ans)"@fr ,
+              "Età di riferimento secondo il regolamento della sua cassa pensioni (anni)"@it ;
+      sh:description "Usually 65."@en , "Meistens 65."@de , "En général 65 ans."@fr , "Di solito 65 anni."@it ;
+      prov:wasDerivedFrom law:BVG-30c-1 , law:BVG-13 ] ,
+    [ sh:path wef:retirementAgeMonths ; sh:datatype xsd:integer ; sh:minInclusive 0 ; sh:maxInclusive 11 ;
+      sh:group wef:you ; sh:order 3 ;
+      sh:name "And months, if any"@en , "Und Monate, falls vorhanden"@de ,
+              "Et mois, le cas échéant"@fr , "E mesi, se del caso"@it ;
+      sh:description "For example 3 for 64 years and 3 months, the reference age of women born in 1961."@en ,
+                     "Zum Beispiel 3 für 64 Jahre und 3 Monate, das Referenzalter der Frauen mit Jahrgang 1961."@de ,
+                     "Par exemple 3 pour 64 ans et 3 mois, l'âge de référence des femmes nées en 1961."@fr ,
+                     "Ad esempio 3 per 64 anni e 3 mesi, l'età di riferimento delle donne nate nel 1961."@it ;
+      prov:wasDerivedFrom law:BVG-13 ] ,
+    [ sh:path wef:married ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:you ; sh:order 4 ;
+      sh:name "Are you married or in a registered partnership?"@en ,
+              "Sind Sie verheiratet oder leben Sie in eingetragener Partnerschaft?"@de ,
+              "Êtes-vous marié ou lié par un partenariat enregistré ?"@fr ,
+              "È sposato o vive in unione domestica registrata?"@it ;
+      prov:wasDerivedFrom law:BVG-30c-5 ] ,
+    [ sh:path wef:spouseConsent ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:you ; sh:order 5 ;
+      form:askedWhen [ sh:prefixes wef: , form: ; sh:ask "ASK { $this wef:married form:yes }" ] ;
+      sh:name "Does your spouse or partner agree in writing?"@en ,
+              "Stimmt Ihr Ehe- oder eingetragener Partner schriftlich zu?"@de ,
+              "Votre conjoint ou partenaire enregistré donne-t-il son consentement écrit ?"@fr ,
+              "Il coniuge o il partner registrato dà il consenso scritto?"@it ;
+      prov:wasDerivedFrom law:BVG-30c-5 ] ,
+
+    [ sh:path wef:purpose ; sh:in ( wef:buyOrBuild wef:repayMortgage wef:cooperativeShares ) ; sh:minCount 1 ;
+      sh:group wef:home ; sh:order 1 ;
+      sh:name "What is the money for?"@en , "Wofür ist das Geld?"@de ,
+              "À quoi l'argent est-il destiné ?"@fr , "A che cosa serve il denaro?"@it ;
+      prov:wasDerivedFrom law:WEFV-1-1 , law:BVG-30c-3 , law:WEFV-3 ] ,
+    [ sh:path wef:propertyType ; sh:in ( wef:apartment wef:house wef:otherProperty ) ; sh:minCount 1 ;
+      sh:group wef:home ; sh:order 2 ;
+      form:askedWhen [ sh:prefixes wef: ; sh:ask "ASK { $this wef:purpose/a wef:PropertyPurpose }" ] ;
+      sh:name "What kind of home is it?"@en , "Um welche Art von Wohneigentum handelt es sich?"@de ,
+              "De quel type de logement s'agit-il ?"@fr , "Di che tipo di abitazione si tratta?"@it ;
+      prov:wasDerivedFrom law:WEFV-2-1 ] ,
+    [ sh:path wef:ownership ;
+      sh:in ( wef:soleOwnership wef:coOwnership wef:jointOwnership wef:buildingRight wef:otherOwnership ) ; sh:minCount 1 ;
+      sh:group wef:home ; sh:order 3 ;
+      form:askedWhen [ sh:prefixes wef: ; sh:ask "ASK { $this wef:purpose/a wef:PropertyPurpose }" ] ;
+      sh:name "How will you own it?"@en , "In welcher Form sind Sie Eigentümer?"@de ,
+              "Sous quelle forme en êtes-vous propriétaire ?"@fr , "In quale forma ne è proprietario?"@it ;
+      prov:wasDerivedFrom law:WEFV-2-2 ] ,
+    [ sh:path wef:ownUse ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:home ; sh:order 4 ;
+      sh:name "Will you live there yourself?"@en , "Werden Sie selbst dort wohnen?"@de ,
+              "Allez-vous y habiter vous-même ?"@fr , "Ci abiterà lei stesso?"@it ;
+      sh:description "Where you live or usually stay; a holiday home does not count. You may let the home only while you prove that you cannot live there for a time."@en ,
+                     "Am Ort Ihres Wohnsitzes oder gewöhnlichen Aufenthalts; eine Ferienwohnung zählt nicht. Vermieten dürfen Sie nur, solange Sie nachweisen, dass Sie vorübergehend nicht dort wohnen können."@de ,
+                     "Au lieu de votre domicile ou de votre résidence habituelle ; une résidence secondaire ne compte pas. Vous ne pouvez louer le logement que tant que vous prouvez ne pas pouvoir y habiter temporairement."@fr ,
+                     "Nel luogo del suo domicilio o della sua dimora abituale; una casa di vacanza non conta. Può locare l'abitazione solo finché dimostra di non poterci abitare temporaneamente."@it ;
+      prov:wasDerivedFrom law:BVG-30c-1 , law:WEFV-4 ] ,
+
+    [ sh:path wef:vestedBenefit ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 1 ;
+      sh:name "Your vested benefit today (CHF)"@en , "Ihre heutige Freizügigkeitsleistung (CHF)"@de ,
+              "Votre prestation de libre passage actuelle (CHF)"@fr , "La sua prestazione di libero passaggio attuale (CHF)"@it ;
+      sh:description "On your pension certificate."@en , "Auf Ihrem Vorsorgeausweis."@de ,
+                     "Sur votre certificat de prévoyance."@fr , "Sul suo certificato di previdenza."@it ;
+      prov:wasDerivedFrom law:BVG-30c-2 ] ,
+    [ sh:path wef:vestedBenefitAt50 ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 2 ;
+      form:askedWhen [ sh:prefixes wef: ; sh:ask "ASK { $this wef:over50 true }" ] ;
+      sh:name "Your vested benefit at age 50 (CHF)"@en , "Ihre Freizügigkeitsleistung im Alter 50 (CHF)"@de ,
+              "Votre prestation de libre passage à 50 ans (CHF)"@fr , "La sua prestazione di libero passaggio a 50 anni (CHF)"@it ;
+      sh:description "As your pension fund states it: plus what you paid back since 50, minus what you withdrew for your home since 50."@en ,
+                     "Wie Ihre Pensionskasse sie ausweist: zuzüglich der Rückzahlungen seit 50, abzüglich der Vorbezüge für Wohneigentum seit 50."@de ,
+                     "Tel que votre caisse de pension l'indique : augmentée des remboursements depuis 50 ans, diminuée des versements anticipés pour le logement depuis 50 ans."@fr ,
+                     "Come la indica la sua cassa pensioni: aumentata dei rimborsi dopo i 50 anni, diminuita dei prelievi anticipati per l'abitazione dopo i 50 anni."@it ;
+      prov:wasDerivedFrom law:BVG-30c-2 , law:WEFV-5-4 ] ,
+    [ sh:path wef:requestedAmount ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 3 ;
+      sh:name "The amount you want to withdraw (CHF)"@en , "Gewünschter Vorbezug (CHF)"@de ,
+              "Montant du versement anticipé souhaité (CHF)"@fr , "Importo del prelievo anticipato desiderato (CHF)"@it ;
+      prov:wasDerivedFrom law:BVG-30c-2 , law:WEFV-5-1 ] ,
+    [ sh:path wef:withdrawnBefore ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 4 ;
+      sh:name "Did you withdraw pension money for a home before?"@en ,
+              "Haben Sie schon früher einen Vorbezug für Wohneigentum bezogen?"@de ,
+              "Avez-vous déjà obtenu un versement anticipé pour un logement ?"@fr ,
+              "Ha già ottenuto un prelievo anticipato per un'abitazione?"@it ;
+      prov:wasDerivedFrom law:WEFV-5-3 ] ,
+    [ sh:path wef:lastWithdrawal ; sh:datatype xsd:date ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 5 ;
+      form:askedWhen [ sh:prefixes wef: , form: ; sh:ask "ASK { $this wef:withdrawnBefore form:yes }" ] ;
+      sh:name "Date of the last withdrawal"@en , "Datum des letzten Vorbezugs"@de ,
+              "Date du dernier versement anticipé"@fr , "Data dell'ultimo prelievo anticipato"@it ;
+      prov:wasDerivedFrom law:WEFV-5-3 ] ,
+    [ sh:path wef:alreadyInvested ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 6 ;
+      form:askedWhen [ sh:prefixes wef: , form: ; sh:ask "ASK { $this wef:over50 true ; wef:withdrawnBefore form:yes }" ] ;
+      sh:name "Pension money already in your home (CHF)"@en , "Bereits im Wohneigentum eingesetztes Vorsorgegeld (CHF)"@de ,
+              "Argent de la prévoyance déjà investi dans votre logement (CHF)"@fr ,
+              "Fondi della previdenza già investiti nella sua abitazione (CHF)"@it ;
+      sh:description "Earlier withdrawals that you have not paid back."@en , "Frühere Vorbezüge, die Sie nicht zurückbezahlt haben."@de ,
+                     "Les versements anticipés antérieurs que vous n'avez pas remboursés."@fr ,
+                     "I prelievi anticipati precedenti che non ha rimborsato."@it ;
+      prov:wasDerivedFrom law:WEFV-5-4 ] ,
+    [ sh:path wef:otherHome ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 7 ;
+      form:askedWhen [ sh:prefixes wef: , form: ; sh:ask "ASK { $this wef:withdrawnBefore form:yes }" ] ;
+      sh:name "Is earlier pension money still in another home?"@en , "Steckt früheres Vorsorgegeld noch in einem anderen Objekt?"@de ,
+              "De l'argent de la prévoyance est-il encore investi dans un autre logement ?"@fr ,
+              "Fondi della previdenza sono ancora investiti in un'altra abitazione?"@it ;
+      prov:wasDerivedFrom law:WEFV-1-2 ] ,
+    [ sh:path wef:fundUnderfunded ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group wef:pensionFund ; sh:order 8 ;
+      form:askedWhen [ sh:prefixes wef: ; sh:ask "ASK { $this wef:purpose wef:repayMortgage }" ] ;
+      sh:name "Is your pension fund underfunded?"@en , "Ist Ihre Pensionskasse in Unterdeckung?"@de ,
+              "Votre caisse de pension est-elle en découvert ?"@fr , "La sua cassa pensioni è in copertura insufficiente?"@it ;
+      sh:description "Its coverage ratio is below 100 %. The annual report gives it."@en ,
+                     "Ihr Deckungsgrad liegt unter 100 %. Der Jahresbericht nennt ihn."@de ,
+                     "Son degré de couverture est inférieur à 100 %. Le rapport annuel l'indique."@fr ,
+                     "Il suo grado di copertura è inferiore al 100 %. Il rapporto annuale lo indica."@it ;
+      prov:wasDerivedFrom law:WEFV-6a ] .
+
+# ---------------------------------------------------------------------------
+# 3. Rules
+# ---------------------------------------------------------------------------
+# $this is the application. The rules only add triples, so their order does not change the result;
+# sh:order only saves passes. Dates are compared and added to durations as in XPath.
+
+wef:ApplicationShape sh:rule
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes wef: , form: ;
+    rdfs:comment "The last day to apply: the reference age, in years and months, minus 3 years." ;
+    sh:construct """
+      CONSTRUCT { $this wef:lastDayToApply ?last }
+      WHERE {
+        $this wef:birthDate ?birth ; wef:retirementAge ?age .
+        OPTIONAL { $this wef:retirementAgeMonths ?m }
+        BIND (?birth + STRDT(CONCAT("P", STR(?age - 3), "Y", STR(COALESCE(?m, 0)), "M"), xsd:duration) AS ?last)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes wef: , form: ;
+    rdfs:comment "Over 50 from the 50th birthday." ;
+    sh:construct """
+      CONSTRUCT { $this wef:over50 true }
+      WHERE {
+        $this wef:birthDate ?birth ; form:today ?today .
+        FILTER (?today >= ?birth + "P50Y"^^xsd:duration)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes wef: , form: ;
+    rdfs:comment "Up to 50, the maximum is the vested benefit." ;
+    sh:construct """
+      CONSTRUCT { $this wef:maximumAmount ?benefit }
+      WHERE {
+        $this wef:birthDate ?birth ; form:today ?today ; wef:vestedBenefit ?benefit .
+        FILTER (?today < ?birth + "P50Y"^^xsd:duration)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes wef: , form: ;
+    rdfs:comment "Over 50, the maximum is the higher of the vested benefit at 50 and half of today's vested benefit minus the pension money already in the home." ;
+    sh:construct """
+      CONSTRUCT { $this wef:maximumAmount ?maximum }
+      WHERE {
+        $this wef:over50 true ; wef:vestedBenefit ?benefit ; wef:vestedBenefitAt50 ?at50 .
+        { $this wef:withdrawnBefore form:no BIND (0 AS ?used) } UNION { $this wef:alreadyInvested ?used }
+        BIND ((?benefit - ?used) / 2 AS ?half)
+        BIND (IF(?at50 > ?half, ?at50, ?half) AS ?maximum)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes wef: , form: ;
+    rdfs:comment "The next withdrawal is possible 5 years after the last one." ;
+    sh:construct """
+      CONSTRUCT { $this wef:nextPossibleWithdrawal ?next }
+      WHERE {
+        $this wef:lastWithdrawal ?last .
+        BIND (?last + "P5Y"^^xsd:duration AS ?next)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:TooCloseToRetirement }
+      WHERE { $this form:today ?today ; wef:lastDayToApply ?last . FILTER (?today > ?last) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:NotOwnUse }
+      WHERE { $this wef:ownUse form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    rdfs:comment "A property, but not an eligible kind of home or form of ownership. Shares are not a property." ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:HomeNotEligible }
+      WHERE {
+        $this wef:purpose/a wef:PropertyPurpose .
+        { $this wef:propertyType ?type FILTER NOT EXISTS { ?type a wef:EligibleProperty } }
+        UNION
+        { $this wef:ownership ?ownership FILTER NOT EXISTS { ?ownership a wef:EligibleOwnership } }
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:TooSoon }
+      WHERE { $this form:today ?today ; wef:nextPossibleWithdrawal ?next . FILTER (?today < ?next) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    rdfs:comment "The minimum applies to a property, not to shares." ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:BelowMinimum }
+      WHERE { $this wef:purpose/a wef:PropertyPurpose ; wef:requestedAmount ?amount . FILTER (?amount < 20000) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:AboveMaximum }
+      WHERE { $this wef:requestedAmount ?amount ; wef:maximumAmount ?maximum . FILTER (?amount > ?maximum) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:OtherHome }
+      WHERE { $this wef:otherHome form:yes }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:ConsentMissing }
+      WHERE { $this wef:married form:yes ; wef:spouseConsent form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    rdfs:comment "A plausibility check of the answers, not a rule of the law." ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:CheckDates }
+      WHERE {
+        { $this form:today ?today ; wef:birthDate ?birth FILTER (?today < ?birth + "P18Y"^^xsd:duration) }
+        UNION
+        { $this form:today ?today ; wef:lastWithdrawal ?last FILTER (?last > ?today) }
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding wef:MayBeLimited }
+      WHERE { $this wef:purpose wef:repayMortgage ; wef:fundUnderfunded form:yes }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    rdfs:comment "Answers that require a next step (wef:requires)." ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep ?step }
+      WHERE { $this ?field ?answer . ?answer wef:requires ?step }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep wef:AttachConsent }
+      WHERE { $this wef:married form:yes }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes wef: , form: ;
+    rdfs:comment "The next steps of every withdrawal." ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep wef:BenefitsReduced , wef:Tax , wef:Repayment , wef:PaymentTime }
+      WHERE { }""" ] .
+
+# ---------------------------------------------------------------------------
+# 4. Values, findings and next steps
+# ---------------------------------------------------------------------------
+
+wef:over50 a rdf:Property ;
+  rdfs:comment "True from the 50th birthday." ;
+  prov:wasDerivedFrom law:BVG-30c-2 .
+
+wef:lastDayToApply a form:Value ; sh:order 1 ;
+  rdfs:label "Last day to apply"@en , "Letzter Tag für das Gesuch"@de ,
+             "Dernier jour pour la demande"@fr , "Ultimo giorno per la domanda"@it ;
+  prov:wasDerivedFrom law:BVG-30c-1 .
+wef:maximumAmount a form:Value ; sh:order 2 ;
+  rdfs:label "Maximum withdrawal (CHF)"@en , "Maximaler Vorbezug (CHF)"@de ,
+             "Versement anticipé maximal (CHF)"@fr , "Prelievo anticipato massimo (CHF)"@it ;
+  prov:wasDerivedFrom law:BVG-30c-2 , law:WEFV-5-4 .
+wef:nextPossibleWithdrawal a form:Value ; sh:order 3 ;
+  rdfs:label "Next withdrawal possible from"@en , "Nächster Vorbezug möglich ab"@de ,
+             "Prochain versement anticipé possible dès le"@fr , "Prossimo prelievo anticipato possibile dal"@it ;
+  prov:wasDerivedFrom law:WEFV-5-3 .
+
+wef:TooCloseToRetirement a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Too close to retirement"@en , "Zu nahe am Rentenalter"@de ,
+             "Trop proche de la retraite"@fr , "Troppo vicino al pensionamento"@it ;
+  rdfs:comment "A withdrawal is possible until 3 years before the retirement age in your fund's regulations."@en ,
+               "Ein Vorbezug ist bis 3 Jahre vor dem reglementarischen Rentenalter möglich."@de ,
+               "Un versement anticipé est possible jusqu'à 3 ans avant l'âge de la retraite fixé par le règlement."@fr ,
+               "Un prelievo anticipato è possibile fino a 3 anni prima dell'età di pensionamento prevista dal regolamento."@it ;
+  prov:wasDerivedFrom law:BVG-30c-1 .
+wef:NotOwnUse a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Not a home for your own use"@en , "Kein selbst genutztes Wohneigentum"@de ,
+             "Pas un logement pour votre propre usage"@fr , "Non un'abitazione per uso proprio"@it ;
+  rdfs:comment "Pension money can only finance a home where you live yourself."@en ,
+               "Vorsorgegeld kann nur Wohneigentum finanzieren, das Sie selbst bewohnen."@de ,
+               "L'argent de la prévoyance ne peut financer qu'un logement que vous habitez vous-même."@fr ,
+               "I fondi della previdenza possono finanziare solo un'abitazione in cui abita lei stesso."@it ;
+  prov:wasDerivedFrom law:BVG-30c-1 , law:WEFV-4 .
+wef:HomeNotEligible a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "This property does not qualify"@en , "Dieses Objekt ist nicht zulässig"@de ,
+             "Ce bien ne remplit pas les conditions"@fr , "Questo immobile non è ammesso"@it ;
+  rdfs:comment "Allowed are an apartment or a single-family house, in sole ownership, co-ownership, joint ownership with your spouse or partner, or with a building right."@en ,
+               "Zulässig sind eine Wohnung oder ein Einfamilienhaus, im Allein-, Mit- oder Gesamteigentum mit dem Ehe- oder eingetragenen Partner oder im Baurecht."@de ,
+               "Sont admis un appartement ou une maison individuelle, en propriété individuelle, en copropriété, en propriété commune avec le conjoint ou le partenaire enregistré, ou en droit de superficie."@fr ,
+               "Sono ammessi un appartamento o una casa unifamiliare, in proprietà individuale, in comproprietà, in proprietà comune con il coniuge o il partner registrato, o in diritto di superficie."@it ;
+  prov:wasDerivedFrom law:WEFV-2-1 , law:WEFV-2-2 .
+wef:TooSoon a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Less than 5 years since the last withdrawal"@en , "Weniger als 5 Jahre seit dem letzten Vorbezug"@de ,
+             "Moins de 5 ans depuis le dernier versement anticipé"@fr , "Meno di 5 anni dall'ultimo prelievo anticipato"@it ;
+  rdfs:comment "You can withdraw once every 5 years."@en , "Ein Vorbezug ist alle 5 Jahre möglich."@de ,
+               "Un versement anticipé est possible tous les 5 ans."@fr , "Un prelievo anticipato è possibile ogni 5 anni."@it ;
+  prov:wasDerivedFrom law:WEFV-5-3 .
+wef:BelowMinimum a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Below the minimum of CHF 20 000"@en , "Unter dem Mindestbetrag von CHF 20 000"@de ,
+             "Inférieur au minimum de CHF 20 000"@fr , "Inferiore al minimo di CHF 20 000"@it ;
+  rdfs:comment "Ask for at least CHF 20 000. The minimum does not apply to shares in a housing cooperative."@en ,
+               "Beantragen Sie mindestens CHF 20 000. Der Mindestbetrag gilt nicht für Anteilscheine einer Wohnbaugenossenschaft."@de ,
+               "Demandez au moins CHF 20 000. Le minimum ne s'applique pas aux parts sociales d'une coopérative de construction et d'habitation."@fr ,
+               "Chieda almeno CHF 20 000. Il minimo non si applica alle quote di partecipazione ad una cooperativa di costruzione di abitazioni."@it ;
+  prov:wasDerivedFrom law:WEFV-5-1 , law:WEFV-5-2 .
+wef:AboveMaximum a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Above the maximum"@en , "Über dem Höchstbetrag"@de , "Supérieur au maximum"@fr , "Superiore al massimo"@it ;
+  rdfs:comment "Ask for no more than the maximum withdrawal."@en , "Beantragen Sie höchstens den maximalen Vorbezug."@de ,
+               "Demandez au plus le versement anticipé maximal."@fr , "Chieda al massimo il prelievo anticipato massimo."@it ;
+  prov:wasDerivedFrom law:BVG-30c-2 .
+wef:ConsentMissing a form:Finding ; form:severity form:NotYet ;
+  rdfs:label "Written consent missing"@en , "Schriftliche Zustimmung fehlt"@de ,
+             "Consentement écrit manquant"@fr , "Consenso scritto mancante"@it ;
+  rdfs:comment "Your spouse or registered partner must agree in writing. If you cannot get the consent, you can ask the civil court."@en ,
+               "Ihr Ehe- oder eingetragener Partner muss schriftlich zustimmen. Können Sie die Zustimmung nicht einholen, können Sie das Zivilgericht anrufen."@de ,
+               "Votre conjoint ou partenaire enregistré doit donner son consentement écrit. Si vous ne pouvez pas l'obtenir, vous pouvez en appeler au tribunal civil."@fr ,
+               "Il coniuge o il partner registrato deve dare il consenso scritto. Se non può ottenerlo, può rivolgersi al giudice civile."@it ;
+  prov:wasDerivedFrom law:BVG-30c-5 .
+wef:OtherHome a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Pension money is still in another home"@en , "Vorsorgegeld steckt noch in einem anderen Objekt"@de ,
+             "De l'argent de la prévoyance est encore investi dans un autre logement"@fr ,
+             "Fondi della previdenza sono ancora investiti in un'altra abitazione"@it ;
+  rdfs:comment "Pension money can be used for only one home at a time."@en ,
+               "Vorsorgegeld darf gleichzeitig nur für ein Objekt verwendet werden."@de ,
+               "L'argent de la prévoyance ne peut être utilisé que pour un seul objet à la fois."@fr ,
+               "I fondi della previdenza possono essere utilizzati solo per un oggetto alla volta."@it ;
+  prov:wasDerivedFrom law:WEFV-1-2 .
+wef:CheckDates a form:Finding ; form:severity form:NotYet ;
+  rdfs:label "Check the dates"@en , "Daten prüfen"@de , "Vérifiez les dates"@fr , "Verifichi le date"@it ;
+  rdfs:comment "Your date of birth gives an age below 18, or the last withdrawal is after today."@en ,
+               "Ihr Geburtsdatum ergibt ein Alter unter 18 Jahren, oder der letzte Vorbezug liegt nach dem heutigen Datum."@de ,
+               "Votre date de naissance donne un âge inférieur à 18 ans, ou le dernier versement anticipé est postérieur à aujourd'hui."@fr ,
+               "La sua data di nascita dà un'età inferiore a 18 anni, oppure l'ultimo prelievo anticipato è posteriore a oggi."@it .
+wef:MayBeLimited a form:Finding ; form:severity form:Notice ;
+  rdfs:label "Your fund can limit the withdrawal"@en , "Ihre Pensionskasse kann den Vorbezug einschränken"@de ,
+             "Votre caisse peut limiter le versement anticipé"@fr , "La sua cassa può limitare il prelievo anticipato"@it ;
+  rdfs:comment "If its regulations provide for it, your fund can limit or refuse a withdrawal for a mortgage repayment, but only while it is underfunded."@en ,
+               "Sofern ihr Reglement dies vorsieht, kann Ihre Pensionskasse einen Vorbezug zur Rückzahlung eines Hypothekardarlehens einschränken oder verweigern, aber nur für die Dauer der Unterdeckung."@de ,
+               "Si son règlement le prévoit, votre caisse peut limiter ou refuser un versement anticipé destiné au remboursement d'un prêt hypothécaire, mais seulement pendant la durée du découvert."@fr ,
+               "Se il suo regolamento lo prevede, la sua cassa può limitare o rifiutare un prelievo anticipato destinato al rimborso di un mutuo ipotecario, ma solo per la durata della copertura insufficiente."@it ;
+  prov:wasDerivedFrom law:WEFV-6a .
+
+wef:AttachPurchaseContract a form:NextStep ; sh:order 1 ;
+  rdfs:label "Attach the purchase contract or the construction contract."@en , "Legen Sie den Kauf- oder Werkvertrag bei."@de ,
+             "Joignez le contrat de vente ou le contrat d'entreprise."@fr ,
+             "Alleghi il contratto di compravendita o il contratto d'appalto."@it ;
+  prov:wasDerivedFrom law:WEFV-10 .
+wef:AttachLoanContract a form:NextStep ; sh:order 2 ;
+  rdfs:label "Attach the mortgage loan contract."@en , "Legen Sie den Hypothekarvertrag bei."@de ,
+             "Joignez le contrat de prêt hypothécaire."@fr , "Alleghi il contratto di mutuo ipotecario."@it ;
+  prov:wasDerivedFrom law:WEFV-10 .
+wef:AttachShares a form:NextStep ; sh:order 3 ;
+  rdfs:label "Attach the share certificates. Your pension fund keeps them."@en ,
+             "Legen Sie die Anteilscheine bei. Ihre Pensionskasse hinterlegt sie."@de ,
+             "Joignez les parts sociales. Votre caisse de pension les garde en dépôt."@fr ,
+             "Alleghi le quote. La sua cassa pensioni le tiene in deposito."@it ;
+  prov:wasDerivedFrom law:WEFV-10 , law:WEFV-16 .
+wef:AttachConsent a form:NextStep ; sh:order 4 ;
+  rdfs:label "Attach the written consent of your spouse or registered partner."@en ,
+             "Legen Sie die schriftliche Zustimmung Ihres Ehe- oder eingetragenen Partners bei."@de ,
+             "Joignez le consentement écrit de votre conjoint ou partenaire enregistré."@fr ,
+             "Alleghi il consenso scritto del coniuge o del partner registrato."@it ;
+  prov:wasDerivedFrom law:BVG-30c-5 .
+wef:LandRegister a form:NextStep ; sh:order 5 ;
+  rdfs:label "A restriction on sale is entered in the land register."@en ,
+             "Im Grundbuch wird eine Veräusserungsbeschränkung angemerkt."@de ,
+             "Une restriction du droit d'aliéner est mentionnée au registre foncier."@fr ,
+             "Una restrizione del diritto di alienazione è menzionata nel registro fondiario."@it ;
+  prov:wasDerivedFrom law:BVG-30e-2 .
+wef:BenefitsReduced a form:NextStep ; sh:order 6 ;
+  rdfs:label "Your pension benefits are reduced. Your fund offers or arranges extra insurance for death and disability."@en ,
+             "Ihre Vorsorgeleistungen werden gekürzt. Ihre Pensionskasse bietet eine Zusatzversicherung für Tod und Invalidität an oder vermittelt sie."@de ,
+             "Vos prestations de prévoyance sont réduites. Votre caisse propose ou procure une assurance complémentaire pour le décès et l'invalidité."@fr ,
+             "Le sue prestazioni di previdenza sono ridotte. La sua cassa offre o procura un'assicurazione complementare per il decesso e l'invalidità."@it ;
+  prov:wasDerivedFrom law:BVG-30c-4 .
+wef:Tax a form:NextStep ; sh:order 7 ;
+  rdfs:label "The withdrawal is taxed as a capital benefit."@en , "Der Vorbezug wird als Kapitalleistung besteuert."@de ,
+             "Le versement anticipé est imposé comme prestation en capital."@fr ,
+             "Il prelievo anticipato è tassato come prestazione in capitale."@it ;
+  prov:wasDerivedFrom law:BVG-83a .
+wef:Repayment a form:NextStep ; sh:order 8 ;
+  rdfs:label "You must pay the amount back if you sell the home or grant rights that amount to a sale; your heirs must if no pension benefit is due at your death. After a sale, at most the proceeds; to put them into a new home within 2 years, you can transfer them to a vested benefits institution in the meantime."@en ,
+             "Sie müssen den Betrag zurückzahlen, wenn Sie das Wohneigentum veräussern oder Rechte daran einräumen, die wirtschaftlich einer Veräusserung gleichkommen; Ihre Erben müssen es, wenn bei Ihrem Tod keine Vorsorgeleistung fällig wird. Nach einem Verkauf höchstens den Erlös; wollen Sie ihn innert zwei Jahren wieder für Wohneigentum einsetzen, können Sie ihn so lange auf eine Freizügigkeitseinrichtung überweisen."@de ,
+             "Vous devez rembourser le montant si vous aliénez le logement ou concédez des droits équivalant économiquement à une aliénation ; vos héritiers le doivent si aucune prestation de prévoyance n'est exigible à votre décès. Après une vente, au plus le produit ; pour le réinvestir dans un logement dans les deux ans, vous pouvez le verser entre-temps à une institution de libre passage."@fr ,
+             "Deve rimborsare l'importo se aliena l'abitazione o concede diritti equiparabili economicamente a un'alienazione; i suoi eredi devono farlo se al suo decesso non è esigibile alcuna prestazione di previdenza. Dopo una vendita, al massimo il ricavo; per reinvestirlo in un'abitazione entro due anni, può versarlo nel frattempo a un istituto di libero passaggio."@it ;
+  prov:wasDerivedFrom law:BVG-30d .
+wef:PaymentTime a form:NextStep ; sh:order 9 ;
+  rdfs:label "Your fund pays at the latest 6 months after your application."@en ,
+             "Ihre Pensionskasse zahlt spätestens 6 Monate nach Ihrem Gesuch aus."@de ,
+             "Votre caisse paie au plus tard 6 mois après votre demande."@fr ,
+             "La sua cassa paga al più tardi 6 mesi dopo la sua domanda."@it ;
+  prov:wasDerivedFrom law:WEFV-6-1 .
+
+# ---------------------------------------------------------------------------
+# 5. Provenance
+# ---------------------------------------------------------------------------
+# The labels use the abbreviations of each language: BVG and WEFV in German, LPP and OEPL in
+# French, LPP and OPPA in Italian. The comments are short summaries in English, not official texts.
+
+law:BVG a prov:Entity ;
+  rdfs:label "BVG (SR 831.40)"@en , "BVG (SR 831.40)"@de , "LPP (RS 831.40)"@fr , "LPP (RS 831.40)"@it ;
+  rdfs:comment "Federal Act on Occupational Retirement, Survivors' and Disability Pension Plans." .
+law:WEFV a prov:Entity ;
+  rdfs:label "WEFV (SR 831.411)"@en , "WEFV (SR 831.411)"@de , "OEPL (RS 831.411)"@fr , "OPPA (RS 831.411)"@it ;
+  rdfs:comment "Ordinance on the Promotion of Home Ownership with Occupational Pension Funds." .
+
+law:BVG-13 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 13"@en , "BVG Art. 13"@de , "LPP art. 13"@fr , "LPP art. 13"@it ;
+  rdfs:comment "The reference age of occupational pensions is the reference age of the AHV (AHVG Art. 21 para. 1). Funds can set a lower age within limits." .
+law:BVG-30c-1 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 1"@en , "BVG Art. 30c Abs. 1"@de , "LPP art. 30c al. 1"@fr , "LPP art. 30c cpv. 1"@it ;
+  rdfs:comment "Until 3 years before the right to retirement benefits begins, an insured person can ask for an amount for a home for their own use." .
+law:BVG-30c-2 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 2"@en , "BVG Art. 30c Abs. 2"@de , "LPP art. 30c al. 2"@fr , "LPP art. 30c cpv. 2"@it ;
+  rdfs:comment "Up to age 50: up to the vested benefit. Over 50: at most the vested benefit at age 50, or half of the vested benefit at the time of the withdrawal." .
+law:BVG-30c-3 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 3"@en , "BVG Art. 30c Abs. 3"@de , "LPP art. 30c al. 3"@fr , "LPP art. 30c cpv. 3"@it ;
+  rdfs:comment "The amount can also buy shares in a housing cooperative or similar participations, if the person lives in the home they help to finance." .
+law:BVG-30c-4 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 4"@en , "BVG Art. 30c Abs. 4"@de , "LPP art. 30c al. 4"@fr , "LPP art. 30c cpv. 4"@it ;
+  rdfs:comment "The withdrawal reduces the benefits. The fund offers or arranges extra insurance for death and disability." .
+law:BVG-30c-5 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 5"@en , "BVG Art. 30c Abs. 5"@de , "LPP art. 30c al. 5"@fr , "LPP art. 30c cpv. 5"@it ;
+  rdfs:comment "A married person or a person in a registered partnership needs the written consent of the spouse or partner, for the withdrawal and for every later mortgage on the home. Without it, they can ask the civil court." .
+law:BVG-30d a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30d"@en , "BVG Art. 30d"@de , "LPP art. 30d"@fr , "LPP art. 30d"@it ;
+  rdfs:comment "The amount must be paid back if the home is sold, if rights are granted that amount to a sale, or if no pension benefit is due at death (para. 1). After a sale, at most the proceeds (para. 5); proceeds to be put into a new home within 2 years can go to a vested benefits institution (para. 4)." .
+law:BVG-30e-2 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30e para. 2"@en , "BVG Art. 30e Abs. 2"@de , "LPP art. 30e al. 2"@fr , "LPP art. 30e cpv. 2"@it ;
+  rdfs:comment "The restriction on sale is noted in the land register." .
+law:BVG-83a a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 83a"@en , "BVG Art. 83a"@de , "LPP art. 83a"@fr , "LPP art. 83a"@it ;
+  rdfs:comment "The withdrawal is taxed as a capital benefit from pension provision." .
+
+law:WEFV-1-1 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 1 para. 1"@en , "WEFV Art. 1 Abs. 1"@de , "OEPL art. 1 al. 1"@fr , "OPPA art. 1 cpv. 1"@it ;
+  rdfs:comment "Allowed purposes: buying or building a home, participations in home ownership, repaying mortgage loans." .
+law:WEFV-1-2 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 1 para. 2"@en , "WEFV Art. 1 Abs. 2"@de , "OEPL art. 1 al. 2"@fr , "OPPA art. 1 cpv. 2"@it ;
+  rdfs:comment "Pension money can be used for only one property at a time." .
+law:WEFV-2-1 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 2 para. 1"@en , "WEFV Art. 2 Abs. 1"@de , "OEPL art. 2 al. 1"@fr , "OPPA art. 2 cpv. 1"@it ;
+  rdfs:comment "Allowed homes: an apartment or a single-family house." .
+law:WEFV-2-2 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 2 para. 2"@en , "WEFV Art. 2 Abs. 2"@de , "OEPL art. 2 al. 2"@fr , "OPPA art. 2 cpv. 2"@it ;
+  rdfs:comment "Allowed forms: sole ownership, co-ownership (for example condominium), joint ownership with the spouse or registered partner, independent and permanent building right." .
+law:WEFV-3 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 3"@en , "WEFV Art. 3"@de , "OEPL art. 3"@fr , "OPPA art. 3"@it ;
+  rdfs:comment "Allowed participations: shares in a housing cooperative, shares in a tenants' company, participating loans to a non-profit housing developer." .
+law:WEFV-4 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 4"@en , "WEFV Art. 4"@de , "OEPL art. 4"@fr , "OPPA art. 4"@it ;
+  rdfs:comment "Own use: the person uses the home where they live or usually stay. Letting is allowed while the person proves that they cannot use it for a time." .
+law:WEFV-5-1 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 5 para. 1"@en , "WEFV Art. 5 Abs. 1"@de , "OEPL art. 5 al. 1"@fr , "OPPA art. 5 cpv. 1"@it ;
+  rdfs:comment "The minimum withdrawal is CHF 20 000." .
+law:WEFV-5-2 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 5 para. 2"@en , "WEFV Art. 5 Abs. 2"@de , "OEPL art. 5 al. 2"@fr , "OPPA art. 5 cpv. 2"@it ;
+  rdfs:comment "The minimum does not apply to shares in housing cooperatives and similar participations, nor to claims against vested benefits institutions." .
+law:WEFV-5-3 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 5 para. 3"@en , "WEFV Art. 5 Abs. 3"@de , "OEPL art. 5 al. 3"@fr , "OPPA art. 5 cpv. 3"@it ;
+  rdfs:comment "A withdrawal can be asked for every 5 years." .
+law:WEFV-5-4 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 5 para. 4"@en , "WEFV Art. 5 Abs. 4"@de , "OEPL art. 5 al. 4"@fr , "OPPA art. 5 cpv. 4"@it ;
+  rdfs:comment "Over 50, at most the higher of: a. the vested benefit at 50, plus repayments and minus withdrawals and pledge enforcements for the home since then; b. half of the difference between the vested benefit at the time of the withdrawal and the vested benefit already used for the home." .
+law:WEFV-6-1 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 6 para. 1"@en , "WEFV Art. 6 Abs. 1"@de , "OEPL art. 6 al. 1"@fr , "OPPA art. 6 cpv. 1"@it ;
+  rdfs:comment "The fund pays at the latest 6 months after the person asked for the withdrawal." .
+law:WEFV-6a a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 6a"@en , "WEFV Art. 6a"@de , "OEPL art. 6a"@fr , "OPPA art. 6a"@it ;
+  rdfs:comment "If its regulations provide for it, an underfunded fund can limit a withdrawal that repays a mortgage loan in time and amount, or refuse it; only for the duration of the underfunding." .
+law:WEFV-10 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 10"@en , "WEFV Art. 10"@de , "OEPL art. 10"@fr , "OPPA art. 10"@it ;
+  rdfs:comment "The person proves that the conditions are met." .
+law:WEFV-16 a prov:Entity ; prov:wasDerivedFrom law:WEFV ;
+  rdfs:label "WEFV Art. 16"@en , "WEFV Art. 16"@de , "OEPL art. 16"@fr , "OPPA art. 16"@it ;
+  rdfs:comment "Shares bought with pension money are deposited with the pension fund." .

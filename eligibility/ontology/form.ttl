@@ -1,0 +1,138 @@
+# The form vocabulary: the few terms that the generic app understands, in addition to SHACL,
+# SHACL Advanced Features (sh:rule, sh:SPARQLRule) and PROV-O. A domain model
+# (domains/<name>/ontology/) uses them.
+# Nothing in the app knows the domain: change the domain model, and the app follows.
+#
+# How the app reads a domain model:
+#   1. The fields: the sh:property shapes of the one sh:NodeShape, in groups (sh:PropertyGroup).
+#      The generator makes the JSON Forms schema and UI schema from them.
+#   2. The answers become triples about one focus node, $this, of the shape's sh:targetClass. The
+#      app adds the date of the evaluation: $this form:today "YYYY-MM-DD"^^xsd:date.
+#   3. The rules of the shape (sh:rule, each a sh:SPARQLRule with a CONSTRUCT query) add triples,
+#      in their sh:order, again and again until no rule adds a new triple.
+#   4. A field with form:askedWhen is asked only when its ASK query is true. The answer to a field
+#      that is not asked does not count: the app removes it and runs the rules again.
+#   5. The app shows what the rules derived: the form:Value properties of $this, its findings
+#      (form:finding) and its next steps (form:nextStep).
+#   6. The app writes dates and numbers as they are written in the shape's form:region.
+# A text with a language tag is for the person who uses the app, and must exist in each language
+# that the model uses. A text without a language tag is a note for the authors of the model.
+
+@prefix form: <https://example.org/form#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+form: a owl:Ontology ;
+  rdfs:label "Form vocabulary" ;
+  sh:declare [ sh:prefix "form" ; sh:namespace "https://example.org/form#"^^xsd:anyURI ] ,
+             [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ] .
+
+form:today a rdf:Property ;
+  rdfs:range xsd:date ;
+  rdfs:comment "The date of the evaluation. The app adds it to $this; the person does not enter it." .
+
+form:region a rdf:Property ;
+  rdfs:domain sh:NodeShape ;
+  rdfs:comment "The region whose way of writing dates and numbers the app uses: a two-letter code (ISO 3166-1), for example CH." .
+
+form:askedWhen a rdf:Property ;
+  rdfs:domain sh:PropertyShape ;
+  rdfs:comment "A SPARQL ASK query about $this (sh:ask, with sh:prefixes). The field is asked only when it is true." .
+
+form:Value a rdfs:Class ;
+  rdfs:comment "A property of $this that the rules derive and the app shows, in sh:order." .
+
+form:Finding a rdfs:Class ;
+  rdfs:comment "Something that the rules found about the answers: a reason to refuse, or a note." .
+form:finding a rdf:Property ;
+  rdfs:range form:Finding ;
+  rdfs:comment "A rule derives $this form:finding <finding> when the finding applies." .
+form:severity a rdf:Property ;
+  rdfs:domain form:Finding ;
+  rdfs:range form:Severity .
+
+form:NextStep a rdfs:Class ;
+  rdfs:comment "What follows when the application is allowed: a document to attach, or a consequence to know. In sh:order." .
+form:nextStep a rdf:Property ;
+  rdfs:range form:NextStep ;
+  rdfs:comment "A rule derives $this form:nextStep <step> when the step applies." .
+
+form:Severity a rdfs:Class ;
+  rdfs:comment "How serious a finding is. The most serious come first (sh:order)." .
+form:blocks a rdf:Property ;
+  rdfs:domain form:Severity ;
+  rdfs:range xsd:boolean ;
+  rdfs:comment "A finding of this severity stops the application." .
+
+form:Refusal a form:Severity ;
+  form:blocks true ;
+  sh:order 1 ;
+  rdfs:label "Not possible"@en , "Nicht möglich"@de , "Pas possible"@fr , "Non possibile"@it .
+form:NotYet a form:Severity ;
+  form:blocks true ;
+  sh:order 2 ;
+  rdfs:label "Not possible yet"@en , "Noch nicht möglich"@de , "Pas encore possible"@fr , "Non ancora possibile"@it .
+form:Notice a form:Severity ;
+  form:blocks false ;
+  sh:order 3 ;
+  rdfs:label "Note"@en , "Hinweis"@de , "Remarque"@fr , "Nota"@it .
+
+# Answers to yes/no questions.
+form:yes rdfs:label "Yes"@en , "Ja"@de , "Oui"@fr , "Sì"@it .
+form:no  rdfs:label "No"@en , "Nein"@de , "Non"@fr , "No"@it .
+
+# Texts of the app itself: its buttons, headings and messages. The app shows them as it shows the
+# texts of a domain model, in the languages of the domain; each must exist in each of them.
+
+form:Text a rdfs:Class ;
+  rdfs:comment "A text of the app itself, in rdfs:label. {name} marks a value that the app fills in." .
+
+form:language a form:Text ;
+  rdfs:label "English"@en , "Deutsch"@de , "Français"@fr , "Italiano"@it .
+form:choose a form:Text ;
+  rdfs:label "Choose…"@en , "Bitte wählen…"@de , "Choisir…"@fr , "Scegliere…"@it .
+form:next a form:Text ;
+  rdfs:label "Next"@en , "Weiter"@de , "Suivant"@fr , "Avanti"@it .
+form:back a form:Text ;
+  rdfs:label "Back"@en , "Zurück"@de , "Retour"@fr , "Indietro"@it .
+form:review a form:Text ;
+  rdfs:label "Review and submit"@en , "Prüfen und einreichen"@de , "Vérifier et envoyer"@fr , "Verificare e inviare"@it .
+form:change a form:Text ;
+  rdfs:label "Change"@en , "Ändern"@de , "Modifier"@fr , "Modificare"@it .
+form:openQuestions a form:Text ;
+  rdfs:label "Answer the questions marked above to continue."@en , "Beantworten Sie die markierten Fragen, um weiterzufahren."@de , "Répondez aux questions marquées pour continuer."@fr , "Risponda alle domande segnate per continuare."@it .
+form:outcome a form:Text ;
+  rdfs:label "Outcome"@en , "Ergebnis"@de , "Résultat"@fr , "Risultato"@it .
+form:allowed a form:Text ;
+  rdfs:label "No rule stops this application. You can submit it."@en , "Keine Regel verhindert diesen Antrag. Sie können ihn einreichen."@de , "Aucune règle n'empêche cette demande. Vous pouvez l'envoyer."@fr , "Nessuna regola impedisce questa domanda. Può inviarla."@it .
+form:nextSteps a form:Text ;
+  rdfs:label "Next steps"@en , "Nächste Schritte"@de , "Prochaines étapes"@fr , "Prossimi passi"@it .
+form:submit a form:Text ;
+  rdfs:label "Submit the application"@en , "Antrag einreichen"@de , "Envoyer la demande"@fr , "Inviare la domanda"@it .
+form:demo a form:Text ;
+  rdfs:label "This demo sends and stores nothing. A real service would check the application again on its own server."@en , "Diese Demo sendet und speichert nichts. Ein echter Dienst würde den Antrag auf seinem eigenen Server nochmals prüfen."@de , "Cette démo n'envoie et n'enregistre rien. Un vrai service vérifierait à nouveau la demande sur son propre serveur."@fr , "Questa demo non invia e non salva nulla. Un servizio reale verificherebbe di nuovo la domanda sul proprio server."@it .
+form:received a form:Text ;
+  rdfs:label "Application received"@en , "Antrag erhalten"@de , "Demande reçue"@fr , "Domanda ricevuta"@it .
+form:receipt a form:Text ;
+  rdfs:label "Reference {reference}, {date}. The answers were checked again against the form and the rules."@en , "Referenz {reference}, {date}. Die Antworten wurden nochmals mit dem Formular und den Regeln geprüft."@de , "Référence {reference}, {date}. Les réponses ont été vérifiées à nouveau avec le formulaire et les règles."@fr , "Riferimento {reference}, {date}. Le risposte sono state verificate di nuovo con il modulo e le regole."@it .
+form:invalid a form:Text ;
+  rdfs:label "The answers do not match the form."@en , "Die Antworten passen nicht zum Formular."@de , "Les réponses ne correspondent pas au formulaire."@fr , "Le risposte non corrispondono al modulo."@it .
+form:incomplete a form:Text ;
+  rdfs:label "The application is not complete."@en , "Der Antrag ist nicht vollständig."@de , "La demande n'est pas complète."@fr , "La domanda non è completa."@it .
+form:refused a form:Text ;
+  rdfs:label "The rules do not allow this application."@en , "Die Regeln erlauben diesen Antrag nicht."@de , "Les règles ne permettent pas cette demande."@fr , "Le regole non permettono questa domanda."@it .
+form:answerError a form:Text ;
+  rdfs:label "needs an answer"@en , "braucht eine Antwort"@de , "nécessite une réponse"@fr , "richiede una risposta"@it .
+form:minimumError a form:Text ;
+  rdfs:label "must be at least {limit}"@en , "muss mindestens {limit} sein"@de , "doit être au moins {limit}"@fr , "deve essere almeno {limit}"@it .
+form:maximumError a form:Text ;
+  rdfs:label "must be at most {limit}"@en , "darf höchstens {limit} sein"@de , "doit être au plus {limit}"@fr , "deve essere al massimo {limit}"@it .
+form:typeError a form:Text ;
+  rdfs:label "has the wrong type"@en , "hat den falschen Typ"@de , "n'a pas le bon type"@fr , "ha il tipo sbagliato"@it .
+form:formatError a form:Text ;
+  rdfs:label "is not a valid date"@en , "ist kein gültiges Datum"@de , "n'est pas une date valide"@fr , "non è una data valida"@it .
+form:enumError a form:Text ;
+  rdfs:label "is not one of the choices"@en , "ist keine der Auswahlmöglichkeiten"@de , "n'est pas l'un des choix"@fr , "non è una delle scelte"@it .

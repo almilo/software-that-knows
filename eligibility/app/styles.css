@@ -1,0 +1,52 @@
+body { margin: 0; font: 15px/1.4 system-ui, sans-serif; background: #fafafa; color: #222; }
+[hidden] { display: none !important; }
+main { max-width: 680px; margin: 0 auto; padding: 16px; }
+header { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 8px; margin-bottom: 16px; }
+h1 { margin: 0; font-size: 26px; }
+header select { margin-top: 6px; }
+.warning { grid-column: 1 / -1; margin: 0; padding: 8px 12px; border: 1px solid #e0a800; border-radius: 4px; background: #fff8e1; color: #6b3d00; }
+
+/* JSON Forms: the vanilla controls */
+.control { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #eee; }
+.control .input-description { grid-column: 1 / -1; color: #666; font-size: 13px; }
+.control .validation { grid-column: 1 / -1; color: #b00020; font-size: 13px; }
+/* JSON Forms shows a description and an error in the same element: a description is grey */
+.control .validation.input-description { color: #666; }
+.control input { width: 140px; }
+.control select { width: 240px; max-width: 50vw; }
+
+/* The outcome: one card for each finding, in the colour of its severity (form.ttl) */
+article { border-left: 8px solid; border-radius: 4px; padding: 8px 12px; margin-bottom: 12px; background: #fff; }
+article h4 { font-size: 15px; margin: 0 0 4px; }
+article p { margin: 0 0 4px; }
+article ul { margin: 0 0 4px; padding-left: 20px; }
+small { color: #666; font-size: 12px; }
+.Refusal { border-color: #d64545; background: #fdeaea; }
+.NotYet { border-color: #e6b800; background: #fff8d6; }
+.Notice { border-color: #3d7fc4; background: #eaf2fb; }
+.allowed { border-color: #3a9d4a; background: #e6f4e8; }
+
+/* The wizard: the steps, the questions of one step, the review */
+button { font: inherit; padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; cursor: pointer; }
+button:disabled { cursor: default; opacity: 0.5; }
+button.primary, .steps [aria-current="step"] button { background: #222; color: #fff; border-color: #222; }
+.steps { display: flex; flex-wrap: wrap; gap: 4px; margin: 0 0 16px; padding: 0; list-style: none; }
+.step h2 { font-size: 18px; margin: 0 0 8px; }
+.step h3 { display: flex; align-items: center; gap: 8px; font-size: 15px; margin: 16px 0 6px; }
+.step h3 button { padding: 2px 8px; font-size: 13px; font-weight: 400; color: #555; }
+.step .error { margin-top: 12px; }
+.nav { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; }
+.summary dl, .values { margin: 0; }
+.summary div, .values div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+.summary div { border-bottom: 1px solid #eee; }
+.summary dt, .values dt { color: #444; }
+.summary dd, .values dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; }
+.values { margin-bottom: 16px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.values dd { font-weight: 600; }
+.values dd small { display: block; font-weight: 400; }
+.hint { margin: 0; color: #666; font-size: 13px; }
+.apply { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+.receipt { padding: 8px 12px; border: 1px solid #3a9d4a; border-radius: 4px; background: #fff; }
+.receipt h3 { margin: 0 0 4px; }
+.receipt p { margin: 0; }
+.error { margin: 0; padding: 6px 10px; border: 1px solid #e0a0a0; border-radius: 4px; background: #fdecec; color: #8a1c1c; font-size: 13px; }

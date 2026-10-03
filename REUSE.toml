@@ -11,7 +11,7 @@ SPDX-License-Identifier = "MIT"
 # are adaptations of the WHO Digital adaptation kit for child health (0-59
 # months) in humanitarian emergencies (2024), so they keep its licence.
 [[annotations]]
-path = ["**/ontology/**", "**/generated/**", "**/source/**"]
+path = ["imci-fever/ontology/**", "imci-fever/generated/**", "imci-fever/source/**"]
 precedence = "override"
 SPDX-FileCopyrightText = ["2024 World Health Organization", "2026 almilo"]
 SPDX-License-Identifier = "CC-BY-NC-SA-3.0-IGO"

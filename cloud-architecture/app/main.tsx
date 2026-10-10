@@ -20,7 +20,10 @@ function App() {
           <a href="https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/">
             Microservices VS Serverless VS Modular Monolith
           </a>{" "}
-          and the heuristics of the post that goes with it, written down as an ontology. The rules decide, and say why.
+          and the heuristics of the post that goes with it, written down as an{" "}
+          <a href="https://github.com/almilo/software-that-knows/tree/main/cloud-architecture/ontology">ontology</a>. The
+          rules decide, and say why.{" "}
+          <a href="https://github.com/almilo/software-that-knows/tree/main/cloud-architecture">Code on GitHub</a>
         </p>
       </header>
       <Questions answers={answers} onChange={setAnswers} />

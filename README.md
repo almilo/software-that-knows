@@ -7,17 +7,19 @@ Each folder is one self-contained demo.
 | Demo | What it shows |
 | --- | --- |
 | [`imci-fever/`](imci-fever/) | A knowledge model of the fever part of WHO's IMCI guidance, and an app generated from it |
+| [`cloud-architecture/`](cloud-architecture/) | A diagram that compares architecture styles, and its author's heuristics, as an ontology; an app that recommends a style for a team, asking only the questions that matter |
 
 > **Demonstrations only. Not medical devices.** Do not use them to assess or treat anyone.
 
 ## Licences
 
-This repository has two licences. [`REUSE.toml`](REUSE.toml) says which one covers each file.
+This repository has two licences, and some files that are not licensed. [`REUSE.toml`](REUSE.toml) says which covers each file.
 
 | What | Licence |
 | --- | --- |
 | Code and documentation | [MIT](LICENSES/MIT.txt) |
-| Knowledge models (`*/ontology/`) and the files generated from them (`*/generated/`) | [CC BY-NC-SA 3.0 IGO](LICENSES/CC-BY-NC-SA-3.0-IGO.txt) |
+| The IMCI knowledge model (`imci-fever/ontology/`) and the files generated from it (`imci-fever/generated/`) | [CC BY-NC-SA 3.0 IGO](LICENSES/CC-BY-NC-SA-3.0-IGO.txt) |
+| The ontology extracted from Alok Sharan's diagram, and the generated file that holds its content (`cloud-architecture/`) | [Not licensed](LICENSES/LicenseRef-NotLicensed.txt): all rights stay with its author |
 
 The knowledge models are adapted from the
 [WHO Digital adaptation kit for child health (0–59 months) in humanitarian emergencies](https://www.who.int/publications/i/item/9789240089907)

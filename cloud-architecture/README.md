@@ -40,7 +40,7 @@ flowchart TB
 
 | Folder | What it holds |
 | --- | --- |
-| `ontology/` | The knowledge, in Turtle. `cloud-native-architecture.ttl`: the diagram, each style with its characteristics per dimension and its tools. `criteria.ttl`: the questions about the team's situation, each answer with a definition. `rules.ttl`: the author's heuristics as rules over the answers, each with the words it stands for |
+| `ontology/` | The knowledge, in Turtle ([how it works](ontology/README.md)). `cloud-native-architecture.ttl`: the diagram, each style with its characteristics per dimension and its tools. `criteria.ttl`: the questions about the team's situation, each answer with a definition. `rules.ttl`: the author's heuristics as rules over the answers, each with the words it stands for |
 | `generator/` | Reads the ontology and writes `generated/decision.json`. Git tracks it; a test fails when it is out of date |
 | `generated/` | `decision.json`: the questions, the styles and the rules, the only file that the code reads |
 | `decide/` | The decision, without UI: the outcome of the answers, the outcomes still possible and the questions that can change them (`decide.ts`), the explanation (`explain.ts`), the architecture decision record (`adr.ts`) |

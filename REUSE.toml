@@ -25,10 +25,10 @@ SPDX-FileCopyrightText = "2026 almilo"
 SPDX-License-Identifier = "MIT"
 
 # Except the ontology extracted from Alok Sharan's infographic "Microservices VS Serverless VS
-# Modular Monolith" (LinkedIn, 2026). The source states no licence, so all rights stay with its
-# author.
+# Modular Monolith" (LinkedIn, 2026), and the generated file that holds its content. The source
+# states no licence, so all rights stay with its author.
 [[annotations]]
-path = "cloud-architecture/ontology/cloud-native-architecture.ttl"
+path = ["cloud-architecture/ontology/cloud-native-architecture.ttl", "cloud-architecture/generated/decision.json"]
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Alok Sharan"
 SPDX-License-Identifier = "LicenseRef-NotLicensed"

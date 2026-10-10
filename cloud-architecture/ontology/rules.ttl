@@ -1,0 +1,121 @@
+@prefix :        <https://example.org/cloud-native-architecture#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# Alok Sharan's heuristics, from the post that goes with the diagram, as rules over the answers of
+# criteria.ttl. His view, in his words:
+#   "Start with modular clarity.
+#    Use serverless for event-driven execution.
+#    Move to microservices when scale, ownership, and domain boundaries justify the operational cost."
+# The mapping of his words to answers is ours: each rule says which answers stand for which words.
+
+<https://example.org/cloud-native-architecture/rules>
+    a owl:Ontology ;
+    rdfs:label "Alok Sharan's heuristics for the architecture decision"@en ;
+    dcterms:source <https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/> .
+
+# ---------------------------------------------------------------------------
+# 1. Vocabulary
+# ---------------------------------------------------------------------------
+
+:Rule a owl:Class ;
+    rdfs:label "Rule"@en ;
+    rdfs:comment "A heuristic of the post. It applies when all its conditions hold; a rule without conditions always applies."@en .
+
+:StyleRule a owl:Class ; rdfs:subClassOf :Rule ;
+    rdfs:label "Style rule"@en ;
+    rdfs:comment "Chooses the architecture style of the system. The first style rule that applies, by sh:order, decides."@en .
+
+:PartRule a owl:Class ; rdfs:subClassOf :Rule ;
+    rdfs:label "Part rule"@en ;
+    rdfs:comment "Adds a style for one part of the system. Every part rule that applies adds its part."@en .
+
+:Caution a owl:Class ; rdfs:subClassOf :Rule ;
+    rdfs:label "Caution"@en ;
+    rdfs:comment "A warning that comes with the recommendation. Every caution that applies is shown."@en .
+
+:recommends a owl:ObjectProperty ; rdfs:label "recommends"@en ;
+    rdfs:comment "The architecture style that the rule recommends, for the system or for its part."@en .
+:part a owl:DatatypeProperty ; rdfs:label "part"@en ;
+    rdfs:comment "The part of the system that a part rule is about."@en .
+:when a owl:ObjectProperty ; rdfs:label "when"@en ;
+    rdfs:comment "A condition of the rule: either one criterion with its matching answers (:criterion, :in), or several such conditions of which one is enough (:anyOf)."@en .
+:criterion a owl:ObjectProperty ; rdfs:label "criterion"@en .
+:in a owl:ObjectProperty ; rdfs:label "in"@en ; rdfs:comment "The answers of the criterion that meet the condition, as an RDF list."@en .
+:anyOf a owl:ObjectProperty ; rdfs:label "any of"@en ; rdfs:comment "Conditions of which one is enough, as an RDF list."@en .
+:quote a owl:DatatypeProperty ; rdfs:label "quote"@en ;
+    rdfs:comment "The words of the post or the diagram that the rule stands for."@en .
+:onPlatform a owl:ObjectProperty ; rdfs:label "on platform"@en ;
+    rdfs:comment "The platform that a tool of the diagram belongs to: the app names the tool that fits the team's platform."@en .
+
+# ---------------------------------------------------------------------------
+# 2. The style of the system
+# ---------------------------------------------------------------------------
+
+:MoveToMicroservices a :StyleRule ; sh:order 1 ;
+    rdfs:label "Microservices: scale, ownership and domain boundaries justify the operational cost"@en ;
+    :recommends :Microservices ;
+    :quote "Move to microservices when scale, ownership, and domain boundaries justify the operational cost."@en ;
+    rdfs:comment "Scale: high expected growth or a large team. Ownership: more than one team. Domain boundaries: business areas that could be built and released by different teams. The operational cost is justified only for a team that already runs distributed systems."@en ;
+    :when [ :anyOf ( [ :criterion :ExpectedScale ; :in ( :ScaleHigh ) ]
+                     [ :criterion :TeamSize ; :in ( :TeamSizeLarge ) ] ) ] ,
+          [ :criterion :Teams ; :in ( :TeamsTwoOrThree :TeamsMoreThanThree ) ] ,
+          [ :criterion :DomainSeparation ; :in ( :DomainsClearlySeparate ) ] ,
+          [ :criterion :OpsMaturity ; :in ( :OpsMedium :OpsHigh ) ] .
+
+:StartModular a :StyleRule ; sh:order 2 ;
+    rdfs:label "Modular monolith: start with modular clarity"@en ;
+    :recommends :ModularMonolith ;
+    :quote "Start with modular clarity."@en ;
+    rdfs:comment "For many startups, internal tools, and early-stage products, this is often the smartest starting point."@en .
+
+# ---------------------------------------------------------------------------
+# 3. Parts of the system
+# ---------------------------------------------------------------------------
+
+:ServerlessForEvents a :PartRule ; sh:order 1 ;
+    rdfs:label "Serverless for scheduled and event-driven jobs"@en ;
+    :recommends :Serverless ;
+    :part "scheduled and event-driven jobs"@en ;
+    :quote "Use serverless for event-driven execution."@en ;
+    rdfs:comment "Serverless works well for automation, background jobs and integrations."@en ;
+    :when [ :criterion :BackgroundWork ; :in ( :BackgroundScheduledOrEvent ) ] .
+
+:ServerlessForUnpredictableTraffic a :PartRule ; sh:order 2 ;
+    rdfs:label "Serverless for the parts with unpredictable traffic"@en ;
+    :recommends :Serverless ;
+    :part "the parts with unpredictable traffic"@en ;
+    :quote "It works well for automation, lightweight APIs, background jobs, integrations, and unpredictable traffic patterns."@en ;
+    rdfs:comment "Serverless scales automatically and handles traffic spikes; watch provider limits, cold starts and quotas."@en ;
+    :when [ :criterion :Traffic ; :in ( :TrafficUnpredictable ) ] .
+
+# ---------------------------------------------------------------------------
+# 4. Cautions
+# ---------------------------------------------------------------------------
+
+:MicroservicesNeedOperations a :Caution ; sh:order 1 ;
+    rdfs:label "Microservices would fit, but not yet"@en ;
+    :quote "Move to microservices when scale, ownership, and domain boundaries justify the operational cost."@en ;
+    rdfs:comment "Scale, teams and domains point to microservices, but the team has little experience running distributed systems: service communication, distributed tracing, network failures and security across services. Build that experience first."@en ;
+    :when [ :anyOf ( [ :criterion :ExpectedScale ; :in ( :ScaleHigh ) ]
+                     [ :criterion :TeamSize ; :in ( :TeamSizeLarge ) ] ) ] ,
+          [ :criterion :Teams ; :in ( :TeamsTwoOrThree :TeamsMoreThanThree ) ] ,
+          [ :criterion :DomainSeparation ; :in ( :DomainsClearlySeparate ) ] ,
+          [ :criterion :OpsMaturity ; :in ( :OpsLow ) ] .
+
+:NoServerlessForSustainedLoad a :Caution ; sh:order 2 ;
+    rdfs:label "Keep continuous processing off serverless"@en ;
+    :quote "Costly at sustained scale"@en ;
+    rdfs:comment "Serverless costs per execution: for processing that runs all the time, always-running infrastructure costs less. The post warns of cost surprises if usage grows in the wrong pattern."@en ;
+    :when [ :criterion :BackgroundWork ; :in ( :BackgroundHeavyContinuous ) ] .
+
+# ---------------------------------------------------------------------------
+# 5. The serverless tools of the diagram, by platform
+# ---------------------------------------------------------------------------
+
+:AwsLambda         :onPlatform :PlatformAws .
+:AzureFunctions    :onPlatform :PlatformAzure .
+:GoogleCloudRun    :onPlatform :PlatformGcp .
+:CloudflareWorkers :onPlatform :PlatformCloudflare .

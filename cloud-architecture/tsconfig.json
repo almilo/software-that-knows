@@ -9,5 +9,5 @@
     "noEmit": true,
     "types": ["bun"]
   },
-  "include": ["generator"]
+  "include": ["decide", "generator"]
 }

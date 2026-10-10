@@ -3,11 +3,12 @@
     "target": "ESNext",
     "module": "Preserve",
     "moduleResolution": "bundler",
+    "jsx": "react-jsx",
     "strict": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "noEmit": true,
     "types": ["bun"]
   },
-  "include": ["decide", "generator"]
+  "include": ["app", "decide", "generator"]
 }

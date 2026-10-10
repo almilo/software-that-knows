@@ -1,4 +1,5 @@
 import { type Answers, criteria, notSure, type Outcome, possibleOutcomes, questionsThatMatter, rules, styles } from "../decide/decide";
+import { adr } from "../decide/adr";
 import { explain } from "../decide/explain";
 
 // The dimensions of the diagram that say what a team takes on with a style.
@@ -87,8 +88,19 @@ function Decided({ answers, outcome }: { answers: Answers; outcome: Outcome }) {
           </ul>
         </div>
       ))}
+      <button type="button" className="download" onClick={() => download(adr(answers, e, new Date().toISOString().slice(0, 10)))}>
+        Download as an architecture decision record
+      </button>
     </article>
   );
+}
+
+function download(markdown: string) {
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(new Blob([markdown], { type: "text/markdown" }));
+  link.download = "architecture-decision.md";
+  link.click();
+  URL.revokeObjectURL(link.href);
 }
 
 function styleLabel(o: Outcome) {

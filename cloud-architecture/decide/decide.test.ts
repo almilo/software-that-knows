@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { type Answers, criteria, describeClause, evaluate, possibleOutcomes, questionsThatMatter, rules } from "./decide";
+import { type Answers, criteria, describeClause, evaluate, possibleOutcomes, questionsThatMatter, rules, stylesOf } from "./decide";
 
 // A team that meets every condition of microservices: large, several teams, separate domains,
 // growing, experienced. Each test changes what it is about.
@@ -77,6 +77,12 @@ describe("possibleOutcomes()", () => {
   test("keeps every outcome that a not sure answer allows", () => {
     const outcomes = possibleOutcomes({ ...microservicesTeam, domainSeparation: "not_sure" });
     expect(outcomes.map((o) => o.style).sort()).toEqual(["MoveToMicroservices", "StartModular"]);
+  });
+});
+
+describe("stylesOf()", () => {
+  test("names the style of the system, and the style of its parts", () => {
+    expect(stylesOf(evaluate({ ...microservicesTeam, opsMaturity: "low", backgroundWork: "scheduled_or_event" }))).toEqual({ system: "ModularMonolith", parts: ["Serverless"] });
   });
 });
 

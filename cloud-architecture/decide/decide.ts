@@ -23,6 +23,14 @@ export function evaluate(answers: Answers): Outcome {
   };
 }
 
+// The styles of the diagram that an outcome uses: the style of the system, and the other styles
+// of its parts.
+export function stylesOf(outcome: Outcome) {
+  const system = rules.style.find((r) => r.id === outcome.style)!.recommends!;
+  const parts = rules.parts.filter((r) => outcome.parts.includes(r.id)).map((r) => r.recommends!);
+  return { system, parts: [...new Set(parts)].filter((p) => p !== system) };
+}
+
 // Every outcome that the open answers (missing or "not sure") still allow, without repeats.
 export function possibleOutcomes(answers: Answers) {
   const outcomes = completions(answers, open(answers)).map(evaluate);

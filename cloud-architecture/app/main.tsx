@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { createRoot } from "react-dom/client";
-import type { Answers } from "../decide/decide";
+import { type Answers, possibleOutcomes } from "../decide/decide";
+import { Compare } from "./Compare";
 import { Questions } from "./Questions";
 import { Recommendation } from "./Recommendation";
 
 // The questions on the left, asked one at a time and only while they can change the
-// recommendation; the recommendation on the right, updated at every answer.
+// recommendation; the recommendation on the right, updated at every answer; the diagram below.
 function App() {
   const [answers, setAnswers] = useState<Answers>({});
+  const outcomes = possibleOutcomes(answers);
 
   return (
     <main>
@@ -23,6 +25,7 @@ function App() {
       </header>
       <Questions answers={answers} onChange={setAnswers} />
       <Recommendation answers={answers} />
+      <Compare outcome={outcomes.length === 1 ? outcomes[0] : undefined} />
     </main>
   );
 }

@@ -1,0 +1,211 @@
+@prefix :        <https://example.org/cloud-native-architecture#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# ─────────────────────────────────────────────────────────────
+# Ontology header and provenance
+# ─────────────────────────────────────────────────────────────
+
+<https://example.org/cloud-native-architecture>
+    a owl:Ontology ;
+    rdfs:label "Microservices vs Serverless vs Modular Monolith"@en ;
+    rdfs:comment "Extracted from the infographic 'Microservices VS Serverless VS Modular Monolith: Best for Cloud-Native Application Decisions'. The source states no licence; all rights stay with its author."@en ;
+    dcterms:source <https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/> ;
+    dcterms:creator "Alok Sharan (@alok-sharan), author of the source diagram" .
+
+# ─────────────────────────────────────────────────────────────
+# Core classes
+# ─────────────────────────────────────────────────────────────
+
+:ArchitectureStyle a owl:Class ;
+    rdfs:label "Architecture style"@en ;
+    rdfs:comment "An operating model for building a cloud-native application."@en .
+
+:Characteristic a owl:Class ;
+    rdfs:label "Characteristic"@en ;
+    rdfs:comment "A trait of an architecture style along one decision dimension."@en .
+
+:Tool a owl:Class ;
+    rdfs:label "Tool or platform"@en .
+
+# One subclass of Characteristic per branch of the diagram (the 9 decision dimensions)
+
+:CorePurpose           a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Core purpose"@en .
+:ArchitectureStructure a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Architecture structure"@en .
+:DeploymentModel       a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Deployment model"@en .
+:Scalability           a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Scalability"@en .
+:Complexity            a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Complexity"@en .
+:CostModel             a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Cost model"@en .
+:SecurityLevel         a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Security level"@en .
+:BestFor               a owl:Class ; rdfs:subClassOf :Characteristic ; rdfs:label "Best for"@en ;
+    rdfs:comment "A situation or kind of system the style suits."@en .
+
+# ─────────────────────────────────────────────────────────────
+# Properties
+# ─────────────────────────────────────────────────────────────
+
+:hasCharacteristic a owl:ObjectProperty ;
+    rdfs:label "has characteristic"@en ;
+    rdfs:domain :ArchitectureStyle ;
+    rdfs:range  :Characteristic .
+
+:hasCorePurpose        a owl:ObjectProperty ; sh:order 1 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :CorePurpose ;           rdfs:label "has core purpose"@en .
+:hasStructure          a owl:ObjectProperty ; sh:order 2 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :ArchitectureStructure ; rdfs:label "has structure"@en .
+:hasDeploymentModel    a owl:ObjectProperty ; sh:order 3 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :DeploymentModel ;       rdfs:label "has deployment model"@en .
+:hasScalability        a owl:ObjectProperty ; sh:order 4 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :Scalability ;           rdfs:label "has scalability trait"@en .
+:hasComplexity         a owl:ObjectProperty ; sh:order 5 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :Complexity ;            rdfs:label "has complexity"@en .
+:hasCostModel          a owl:ObjectProperty ; sh:order 6 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :CostModel ;             rdfs:label "has cost trait"@en .
+:hasSecurityTrait      a owl:ObjectProperty ; sh:order 7 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :SecurityLevel ;         rdfs:label "has security trait"@en .
+:isBestFor             a owl:ObjectProperty ; sh:order 8 ; rdfs:subPropertyOf :hasCharacteristic ; rdfs:range :BestFor ;               rdfs:label "is best for"@en .
+
+:supportedBy a owl:ObjectProperty ;
+    rdfs:label "supported by tool"@en ;
+    rdfs:domain :ArchitectureStyle ;
+    rdfs:range  :Tool ;
+    owl:inverseOf :supports .
+
+:supports a owl:ObjectProperty ; rdfs:label "supports style"@en .
+
+# ─────────────────────────────────────────────────────────────
+# The three architecture styles
+# ─────────────────────────────────────────────────────────────
+
+:Microservices a :ArchitectureStyle ; sh:order 1 ;
+    rdfs:label "Microservices"@en ;
+    :hasCorePurpose     :BuildIndependentServicesAroundCapabilities ;
+    :hasStructure       :ApiBasedCommunication , :DistributedArchitecture , :MultipleIndependentServices ;
+    :hasDeploymentModel :EachServiceDeploysIndependently ;
+    :hasScalability     :SupportsHeavyWorkloads , :ScaleIndividualServices , :RequiresOrchestration ;
+    :hasComplexity      :HighDistributedSystemComplexity ;
+    :hasCostModel       :ContinuousInfrastructureCost , :HigherOperationalOverhead , :EfficientAtLargeScale ;
+    :hasSecurityTrait   :FineGrainedPermissions , :ServiceLevelAuthentication , :LargerAttackSurface ;
+    :isBestFor          :IndependentReleaseCycles , :LargeEngineeringTeams , :ComplexBusinessDomains , :HighScalePlatforms ;
+    :supportedBy        :Kubernetes , :Docker , :Istio , :ApacheKafka .
+
+:Serverless a :ArchitectureStyle ; sh:order 2 ;
+    rdfs:label "Serverless"@en ;
+    :hasCorePurpose     :RunCodeOnDemand ;
+    :hasStructure       :EventDrivenFunctions , :ManagedCloudServices , :StatelessExecution ;
+    :hasDeploymentModel :EachFunctionDeploysIndependently ;
+    :hasScalability     :AutomaticScaling , :LimitedByCloudQuotas , :HandlesTrafficSpikes ;
+    :hasComplexity      :ModerateEventAndCloudComplexity ;
+    :hasCostModel       :MinimalIdleCost , :PayPerExecution , :CostlyAtSustainedScale ;
+    :hasSecurityTrait   :PermissionSprawlRisk , :IamBasedSecurity , :ManagedInfrastructure ;
+    :isBestFor          :EventDrivenSystems , :AutomationWorkflows , :LightweightApis , :UnpredictableWorkloads ;
+    :supportedBy        :AwsLambda , :CloudflareWorkers , :AzureFunctions , :GoogleCloudRun .
+
+:ModularMonolith a :ArchitectureStyle ; sh:order 3 ;
+    rdfs:label "Modular monolith"@en ;
+    :hasCorePurpose     :OrganizeOneApplicationIntoModules ;
+    :hasStructure       :SingleApplication , :ClearModuleBoundaries , :InProcessCommunication ;
+    :hasDeploymentModel :WholeApplicationDeploysTogether ;
+    :hasScalability     :LimitedScalingFlexibility , :ScalesAsOneUnit , :SimplerHorizontalScaling ;
+    :hasComplexity      :LowerDevelopmentAndOperationalComplexity ;
+    :hasCostModel       :CostEffectiveForGrowth , :PredictableHostingCost , :LowerOperationalOverhead ;
+    :hasSecurityTrait   :SimplerAccessControl , :FewerExposedEndpoints , :CentralizedSecurity ;
+    :isBestFor          :RapidProductDevelopment , :SmallEngineeringTeams , :ConnectedBusinessDomains , :StartupsAndMvps ;
+    :supportedBy        :SpringModulith , :AspNetCore , :NestJs , :Django .
+
+# ─────────────────────────────────────────────────────────────
+# Characteristics (labels as written in the diagram)
+# ─────────────────────────────────────────────────────────────
+
+# Core purpose
+:BuildIndependentServicesAroundCapabilities a :CorePurpose ; rdfs:label "Build independent services around business capabilities"@en .
+:RunCodeOnDemand                            a :CorePurpose ; rdfs:label "Run code on demand without managing servers"@en .
+:OrganizeOneApplicationIntoModules          a :CorePurpose ; rdfs:label "Organize one application into independent modules"@en .
+
+# Architecture structure
+:ApiBasedCommunication       a :ArchitectureStructure ; rdfs:label "API-based communication"@en .
+:DistributedArchitecture     a :ArchitectureStructure ; rdfs:label "Distributed architecture"@en .
+:MultipleIndependentServices a :ArchitectureStructure ; rdfs:label "Multiple independent services"@en .
+:EventDrivenFunctions        a :ArchitectureStructure ; rdfs:label "Event-driven functions"@en .
+:ManagedCloudServices        a :ArchitectureStructure ; rdfs:label "Managed cloud services"@en .
+:StatelessExecution          a :ArchitectureStructure ; rdfs:label "Stateless execution"@en .
+:SingleApplication           a :ArchitectureStructure ; rdfs:label "Single application"@en .
+:ClearModuleBoundaries       a :ArchitectureStructure ; rdfs:label "Clear module boundaries"@en .
+:InProcessCommunication      a :ArchitectureStructure ; rdfs:label "In-process communication"@en .
+
+# Deployment model
+:EachServiceDeploysIndependently  a :DeploymentModel ; rdfs:label "Each service deploys independently"@en .
+:EachFunctionDeploysIndependently a :DeploymentModel ; rdfs:label "Each function deploys independently"@en .
+:WholeApplicationDeploysTogether  a :DeploymentModel ; rdfs:label "The complete application deploys together"@en .
+
+# Scalability
+:SupportsHeavyWorkloads    a :Scalability ; rdfs:label "Supports heavy workloads"@en .
+:ScaleIndividualServices   a :Scalability ; rdfs:label "Scale individual services"@en .
+:RequiresOrchestration     a :Scalability ; rdfs:label "Requires orchestration"@en .
+:AutomaticScaling          a :Scalability ; rdfs:label "Automatic scaling"@en .
+:LimitedByCloudQuotas      a :Scalability ; rdfs:label "Limited by cloud quotas"@en .
+:HandlesTrafficSpikes      a :Scalability ; rdfs:label "Handles traffic spikes"@en .
+:LimitedScalingFlexibility a :Scalability ; rdfs:label "Limited scaling flexibility"@en .
+:ScalesAsOneUnit           a :Scalability ; rdfs:label "Scales as one unit"@en .
+:SimplerHorizontalScaling  a :Scalability ; rdfs:label "Simpler horizontal scaling"@en .
+
+# Complexity
+:HighDistributedSystemComplexity          a :Complexity ; rdfs:label "High distributed-system complexity"@en .
+:ModerateEventAndCloudComplexity          a :Complexity ; rdfs:label "Moderate event and cloud complexity"@en .
+:LowerDevelopmentAndOperationalComplexity a :Complexity ; rdfs:label "Lower development and operational complexity"@en .
+
+# Cost model
+:ContinuousInfrastructureCost a :CostModel ; rdfs:label "Continuous infrastructure cost"@en .
+:HigherOperationalOverhead    a :CostModel ; rdfs:label "Higher operational overhead"@en .
+:EfficientAtLargeScale        a :CostModel ; rdfs:label "Efficient at large scale"@en .
+:MinimalIdleCost              a :CostModel ; rdfs:label "Minimal idle cost"@en .
+:PayPerExecution              a :CostModel ; rdfs:label "Pay per execution"@en .
+:CostlyAtSustainedScale       a :CostModel ; rdfs:label "Costly at sustained scale"@en .
+:CostEffectiveForGrowth       a :CostModel ; rdfs:label "Cost-effective for growth"@en .
+:PredictableHostingCost       a :CostModel ; rdfs:label "Predictable hosting cost"@en .
+:LowerOperationalOverhead     a :CostModel ; rdfs:label "Lower operational overhead"@en .
+
+# Security level
+:FineGrainedPermissions     a :SecurityLevel ; rdfs:label "Fine-grained permissions"@en .
+:ServiceLevelAuthentication a :SecurityLevel ; rdfs:label "Service-level authentication"@en .
+:LargerAttackSurface        a :SecurityLevel ; rdfs:label "Larger attack surface"@en .
+:PermissionSprawlRisk       a :SecurityLevel ; rdfs:label "Permission sprawl risk"@en .
+:IamBasedSecurity           a :SecurityLevel ; rdfs:label "IAM-based security"@en .
+:ManagedInfrastructure      a :SecurityLevel ; rdfs:label "Managed infrastructure"@en .
+:SimplerAccessControl       a :SecurityLevel ; rdfs:label "Simpler access control"@en .
+:FewerExposedEndpoints      a :SecurityLevel ; rdfs:label "Fewer exposed endpoints"@en .
+:CentralizedSecurity        a :SecurityLevel ; rdfs:label "Centralized security"@en .
+
+# Best for
+:IndependentReleaseCycles a :BestFor ; rdfs:label "Independent release cycles"@en .
+:LargeEngineeringTeams    a :BestFor ; rdfs:label "Large engineering teams"@en .
+:ComplexBusinessDomains   a :BestFor ; rdfs:label "Complex business domains"@en .
+:HighScalePlatforms       a :BestFor ; rdfs:label "High-scale platforms"@en .
+:EventDrivenSystems       a :BestFor ; rdfs:label "Event-driven systems"@en .
+:AutomationWorkflows      a :BestFor ; rdfs:label "Automation workflows"@en .
+:LightweightApis          a :BestFor ; rdfs:label "Lightweight APIs"@en .
+:UnpredictableWorkloads   a :BestFor ; rdfs:label "Unpredictable workloads"@en .
+:RapidProductDevelopment  a :BestFor ; rdfs:label "Rapid product development"@en .
+:SmallEngineeringTeams    a :BestFor ; rdfs:label "Small engineering teams"@en .
+:ConnectedBusinessDomains a :BestFor ; rdfs:label "Connected business domains"@en .
+:StartupsAndMvps          a :BestFor ; rdfs:label "Startups and MVPs"@en .
+
+# Opposing pairs the diagram implies across styles
+:LargeEngineeringTeams     skos:related :SmallEngineeringTeams .
+:ComplexBusinessDomains    skos:related :ConnectedBusinessDomains .
+:HigherOperationalOverhead skos:related :LowerOperationalOverhead .
+:LargerAttackSurface       skos:related :FewerExposedEndpoints .
+
+# ─────────────────────────────────────────────────────────────
+# Tools and platforms
+# ─────────────────────────────────────────────────────────────
+
+:Kubernetes        a :Tool ; rdfs:label "Kubernetes" .
+:Docker            a :Tool ; rdfs:label "Docker" .
+:Istio             a :Tool ; rdfs:label "Istio" .
+:ApacheKafka       a :Tool ; rdfs:label "Apache Kafka" .
+:AwsLambda         a :Tool ; rdfs:label "AWS Lambda" .
+:CloudflareWorkers a :Tool ; rdfs:label "Cloudflare Workers" .
+:AzureFunctions    a :Tool ; rdfs:label "Azure Functions" .
+:GoogleCloudRun    a :Tool ; rdfs:label "Google Cloud Run" .
+:SpringModulith    a :Tool ; rdfs:label "Spring Modulith" .
+:AspNetCore        a :Tool ; rdfs:label "ASP.NET Core" .
+:NestJs            a :Tool ; rdfs:label "NestJS" .
+:Django            a :Tool ; rdfs:label "Django" .

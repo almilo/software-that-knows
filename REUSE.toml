@@ -15,3 +15,20 @@ path = ["**/ontology/**", "**/generated/**", "**/source/**"]
 precedence = "override"
 SPDX-FileCopyrightText = ["2024 World Health Organization", "2026 almilo"]
 SPDX-License-Identifier = "CC-BY-NC-SA-3.0-IGO"
+
+# The architecture decision demo is ours (MIT), including its ontology folder, which the rule above
+# would otherwise give the WHO licence. The last matching annotation wins.
+[[annotations]]
+path = "cloud-architecture/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 almilo"
+SPDX-License-Identifier = "MIT"
+
+# Except the ontology extracted from Alok Sharan's infographic "Microservices VS Serverless VS
+# Modular Monolith" (LinkedIn, 2026). The source states no licence, so all rights stay with its
+# author.
+[[annotations]]
+path = "cloud-architecture/ontology/cloud-native-architecture.ttl"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Alok Sharan"
+SPDX-License-Identifier = "LicenseRef-NotLicensed"

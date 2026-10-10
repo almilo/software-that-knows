@@ -1,0 +1,6 @@
+No licence is granted.
+
+The files marked with this identifier are derived from third-party material
+whose author has not published it under any licence. All rights remain with
+that author. You may not copy, modify or redistribute these files without the
+author's permission.

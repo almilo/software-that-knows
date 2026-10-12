@@ -9,7 +9,7 @@ Each folder is one self-contained demo.
 | [`imci-fever/`](imci-fever/) | A knowledge model of the fever part of WHO's IMCI guidance, and an app generated from it |
 | [`cloud-architecture/`](cloud-architecture/) | A diagram that compares architecture styles, and its author's heuristics, as an ontology; an app that recommends a style for a team, asking only the questions that matter |
 
-> **Demonstrations only. Not medical devices.** Do not use them to assess or treat anyone.
+> **IMCI fever is a demonstration only, not a medical device.** Do not use it to assess or treat anyone.
 
 ## Licences
 

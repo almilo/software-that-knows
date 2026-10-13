@@ -32,3 +32,26 @@ path = ["cloud-architecture/ontology/cloud-native-architecture.ttl", "cloud-arch
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Alok Sharan"
 SPDX-License-Identifier = "LicenseRef-NotLicensed"
+
+# The generic decision app is ours (MIT), including its ontology folders.
+[[annotations]]
+path = "choices/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 almilo"
+SPDX-License-Identifier = "MIT"
+
+# Except the files extracted from Alok Sharan's two diagrams, "Microservices VS Serverless VS
+# Modular Monolith" and "ChatGPT Model Tree" (LinkedIn, 2026), and the generated files that hold
+# their content. The sources state no licence, so all rights stay with their author.
+[[annotations]]
+path = [
+  "choices/domains/cloud-architecture/ontology/facts.ttl",
+  "choices/domains/chatgpt-models/ontology/facts.ttl",
+  "choices/domains/chatgpt-models/ontology/questions.ttl",
+  "choices/domains/chatgpt-models/ontology/rules.ttl",
+  "choices/domains/chatgpt-models/test/drawn/**",
+  "choices/domains/*/generated/**",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Alok Sharan"
+SPDX-License-Identifier = "LicenseRef-NotLicensed"

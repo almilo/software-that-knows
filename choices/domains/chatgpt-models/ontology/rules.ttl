@@ -1,0 +1,134 @@
+@prefix :        <https://example.org/chatgpt-models#> .
+@prefix choice:  <https://example.org/choice#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# Alok Sharan's decision tree, his advice on the plans, and his effort ladder, as rules over the
+# answers of questions.ttl. The quotes are his words, from the post and the diagram.
+#
+# Two places where we read the drawing, rather than transcribe it. The tests keep the drawing as
+# it is (test/drawn/rules.ttl) and show what the checks find in it.
+#   1. The tree. As drawn, "Is it scoped, repeatable or high-volume?" has only a "No" arrow, and
+#      "Ambiguous, high-stakes or exacting?" has two "Yes" arrows: one to GPT-6 Luna, one to
+#      GPT-6 Astra. Our reading: the "Yes" to GPT-6 Luna belongs to the scoped question.
+#   2. The ladder. As drawn, rung 3 is GPT-6.1 Sol at Extra high and rung 4 is GPT-6.1 Sol at Low,
+#      in a ladder from "lightest to heaviest". Our reading: the two effort badges are swapped,
+#      because the column of GPT-6.1 Sol says "Effort: Medium, Extra high to polish", and rung 4
+#      is "Polished deliverables".
+#
+# Open questions, not modelled: which of the Work & Codex models the Free and Go plans have,
+# besides GPT-6 Luna in the desktop app; and the Medium effort of GPT-6.1 Sol in its column, where
+# the ladder starts it at Low.
+
+<https://example.org/chatgpt-models/rules>
+    a owl:Ontology ;
+    rdfs:label "Alok Sharan's decision tree for ChatGPT models"@en ;
+    dcterms:source <https://lnkd.in/p/efs4j4NS> .
+
+# ---------------------------------------------------------------------------
+# 1. The tree: each arrow of the drawing, from a question, for one answer
+# ---------------------------------------------------------------------------
+
+:FinishedWork     choice:branch [ choice:answer choice:no  ; choice:to :CarefulReasoning ] ,
+                                [ choice:answer choice:yes ; choice:to :Scoped ] .
+:CarefulReasoning choice:branch [ choice:answer choice:no  ; choice:to :QuickAnswers ] ,
+                                [ choice:answer choice:yes ; choice:to :Hardest ] .
+:Hardest          choice:branch [ choice:answer choice:no  ; choice:to :DeeperAnswers ] ,
+                                [ choice:answer choice:yes ; choice:to :HardestProblem ] .
+:Scoped           choice:branch [ choice:answer choice:yes ; choice:to :ScopedWork ] ,         # our reading (1)
+                                [ choice:answer choice:no  ; choice:to :Ambiguous ] .
+:Ambiguous        choice:branch [ choice:answer choice:yes ; choice:to :AmbiguousWork ] ,
+                                [ choice:answer choice:no  ; choice:to :RefinedDeliverables ] .
+
+# ---------------------------------------------------------------------------
+# 2. The end of each path: the model
+# ---------------------------------------------------------------------------
+
+:QuickAnswers a choice:ChoiceRule ; sh:order 1 ;
+    rdfs:label "Instant: quick questions, rewrites and summaries"@en ;
+    choice:recommends :Instant ;
+    choice:quote "Instant for quick questions, rewrites, and summaries."@en ;
+    rdfs:comment "An answer, not finished work, that needs no careful reasoning: fast everyday answers."@en .
+
+:DeeperAnswers a choice:ChoiceRule ; sh:order 2 ;
+    rdfs:label "Thinking: analysis, planning and constraints"@en ;
+    choice:recommends :Thinking ;
+    choice:quote "Thinking for analysis, planning, and working through constraints."@en ;
+    rdfs:comment "An answer that needs careful reasoning, but not your hardest problem: slower, deeper answers."@en .
+
+:HardestProblem a choice:ChoiceRule ; sh:order 3 ;
+    rdfs:label "GPT-6 Pro: particularly difficult questions"@en ;
+    choice:recommends :Pro ;
+    choice:quote "GPT-6 Pro for particularly difficult questions that need deeper work."@en ;
+    rdfs:comment "Your hardest problem, as an answer in Chat."@en .
+
+:ScopedWork a choice:ChoiceRule ; sh:order 4 ;
+    rdfs:label "GPT-6 Luna: focused tasks and repeatable workflows"@en ;
+    choice:recommends :Luna ;
+    choice:quote "GPT-6 Luna for focused tasks and repeatable workflows."@en ;
+    rdfs:comment "Finished work that is scoped, repeatable or high-volume: smart and efficient."@en .
+
+:RefinedDeliverables a choice:ChoiceRule ; sh:order 5 ;
+    rdfs:label "GPT-6.1 Sol: documents, coding and deliverables you will refine"@en ;
+    choice:recommends :Sol ;
+    choice:quote "GPT-6.1 Sol for documents, coding, and deliverables you will refine."@en ;
+    rdfs:comment "Finished work, not scoped and not ambiguous: the Work all-rounder."@en .
+
+:AmbiguousWork a choice:ChoiceRule ; sh:order 6 ;
+    rdfs:label "GPT-6 Astra: ambiguous problems and demanding, multi-step work"@en ;
+    choice:recommends :Astra ;
+    choice:quote "GPT-6 Astra for ambiguous problems and demanding, multi-step work."@en ;
+    rdfs:comment "Finished work that is ambiguous, high-stakes or exacting: the smartest model."@en .
+
+# ---------------------------------------------------------------------------
+# 3. Cautions: the plans that the columns of the diagram name
+# ---------------------------------------------------------------------------
+
+:ProNeedsPlan a choice:Caution ; sh:order 1 ;
+    rdfs:label "GPT-6 Pro is not on your plan"@en ;
+    choice:whenChosen :HardestProblem ;
+    choice:when [ choice:criterion :Plan ; choice:in ( :PlanFreeOrGo :PlanPlus ) ] ;
+    choice:quote "Pro, Business and Enterprise plans"@en ;
+    rdfs:comment "The diagram has GPT-6 Pro on the Pro, Business and Enterprise plans only."@en .
+
+:ExtraHighNeedsPlan a choice:Caution ; sh:order 2 ;
+    rdfs:label "Extra High is not on your plan"@en ;
+    choice:whenChosen :DeeperAnswers ;
+    choice:when [ choice:criterion :Plan ; choice:in ( :PlanFreeOrGo :PlanPlus ) ] ;
+    choice:quote "Extra High needs Pro, Business or Enterprise"@en ;
+    rdfs:comment "On your plan, Thinking steps up to High effort, not further."@en .
+
+:LunaOnDesktop a choice:Caution ; sh:order 3 ;
+    rdfs:label "Use the desktop app"@en ;
+    choice:whenChosen :ScopedWork ;
+    choice:when [ choice:criterion :Plan ; choice:in ( :PlanFreeOrGo ) ] ;
+    choice:quote "Free & Go get Luna in the desktop app"@en ;
+    rdfs:comment "On the Free and Go plans, GPT-6 Luna is in the desktop app."@en .
+
+:AstraLimitedOnPlus a choice:Caution ; sh:order 4 ;
+    rdfs:label "Limited usage on your plan"@en ;
+    choice:whenChosen :AmbiguousWork ;
+    choice:when [ choice:criterion :Plan ; choice:in ( :PlanPlus ) ] ;
+    choice:quote "Limited usage on Plus"@en ;
+    rdfs:comment "On the Plus plan, the usage of GPT-6 Astra is limited. The words are partly hidden in the screenshot; completed by us."@en .
+
+# ---------------------------------------------------------------------------
+# 4. The effort ladder: "Model + reasoning effort in Work & Codex, lightest to heaviest"
+# ---------------------------------------------------------------------------
+
+:Rung1 a choice:Step ; sh:order 1 ; choice:option :Luna ;  choice:level :Low ;
+    rdfs:comment "Small edits, simple data extraction"@en .
+:Rung2 a choice:Step ; sh:order 2 ; choice:option :Luna ;  choice:level :Medium ;
+    rdfs:comment "Finding context across apps, prioritizing"@en .
+:Rung3 a choice:Step ; sh:order 3 ; choice:option :Sol ;   choice:level :Low ;         # our reading (2): drawn "Extra high"
+    rdfs:comment "Complex technical work, drafts you will revise"@en .
+:Rung4 a choice:Step ; sh:order 4 ; choice:option :Sol ;   choice:level :ExtraHigh ;   # our reading (2): drawn "low"
+    rdfs:comment "Polished deliverables, conflicting evidence"@en .
+:Rung5 a choice:Step ; sh:order 5 ; choice:option :Astra ; choice:level :Low ;
+    rdfs:comment "Concise writing that keeps facts and nuance"@en .
+:Rung6 a choice:Step ; sh:order 6 ; choice:option :Astra ; choice:level :Medium ;
+    rdfs:comment "Ambitious projects needing broad context"@en .
+:Rung7 a choice:Step ; sh:order 7 ; choice:option :Astra ; choice:level :ExtraHigh ;   # badge partly hidden: "E…"
+    rdfs:comment "Deep analysis, exacting requirements"@en .

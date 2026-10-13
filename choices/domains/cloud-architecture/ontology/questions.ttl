@@ -1,0 +1,115 @@
+@prefix :        <https://example.org/cloud-native-architecture#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The questions a team answers about its situation, before the tool recommends an architecture
+# style. The post that goes with the diagram names the criteria of the decision (team size, domain
+# complexity, scaling needs, deployment frequency, security model, cost structure, operational
+# maturity, long-term maintainability) but not their values; the answers and their definitions
+# below are ours.
+
+<https://example.org/cloud-native-architecture/criteria>
+    a owl:Ontology ;
+    rdfs:label "Criteria of the architecture decision"@en ;
+    dcterms:source <https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/> .
+
+# ---------------------------------------------------------------------------
+# 1. Vocabulary
+# ---------------------------------------------------------------------------
+
+:Criterion a owl:Class ;
+    rdfs:label "Criterion"@en ;
+    rdfs:comment "A question about the team's situation. skos:notation is its key in the answers, sh:order its place in the form."@en .
+
+:Answer a owl:Class ;
+    rdfs:label "Answer"@en ;
+    rdfs:comment "An allowed answer to one criterion. skos:notation is its code in the answers."@en .
+
+:answers a owl:ObjectProperty ;
+    rdfs:label "answers"@en ;
+    rdfs:domain :Criterion ;
+    rdfs:comment "The allowed answers of a criterion, as an RDF list in the order the form shows them. Every criterion also accepts \"not sure\", which the generator adds."@en .
+
+# ---------------------------------------------------------------------------
+# 2. Criteria and their answers
+# ---------------------------------------------------------------------------
+
+:TeamSize a :Criterion ; skos:notation "teamSize" ; sh:order 1 ;
+    rdfs:label "Team size"@en ;
+    skos:definition "The number of developers who build and run the system."@en ;
+    :answers ( :TeamSizeSmall :TeamSizeMedium :TeamSizeLarge ) .
+:TeamSizeSmall  a :Answer ; skos:notation "small" ;  rdfs:label "Small"@en ;  skos:definition "1 to 3 developers."@en .
+:TeamSizeMedium a :Answer ; skos:notation "medium" ; rdfs:label "Medium"@en ; skos:definition "4 to 10 developers."@en .
+:TeamSizeLarge  a :Answer ; skos:notation "large" ;  rdfs:label "Large"@en ;  skos:definition "More than 10 developers."@en .
+
+:Teams a :Criterion ; skos:notation "teams" ; sh:order 2 ;
+    rdfs:label "Number of teams"@en ;
+    skos:definition "The number of separate teams that work on the system, each with its own backlog."@en ;
+    :answers ( :TeamsOne :TeamsTwoOrThree :TeamsMoreThanThree ) .
+:TeamsOne           a :Answer ; skos:notation "one" ;             rdfs:label "One"@en ;            skos:definition "A single team works on the whole system."@en .
+:TeamsTwoOrThree    a :Answer ; skos:notation "two_or_three" ;    rdfs:label "Two or three"@en ;   skos:definition "Two or three teams share the system."@en .
+:TeamsMoreThanThree a :Answer ; skos:notation "more_than_three" ; rdfs:label "More than three"@en ; skos:definition "More than three teams share the system."@en .
+
+:DomainSeparation a :Criterion ; skos:notation "domainSeparation" ; sh:order 3 ;
+    rdfs:label "Domain separation"@en ;
+    skos:definition "How independent the business areas of the system are from each other."@en ;
+    :answers ( :DomainsConnected :DomainsPartlySeparate :DomainsClearlySeparate ) .
+:DomainsConnected       a :Answer ; skos:notation "connected" ;        rdfs:label "Connected"@en ;
+    skos:definition "The business areas share data and change together."@en .
+:DomainsPartlySeparate  a :Answer ; skos:notation "partly_separate" ;  rdfs:label "Partly separate"@en ;
+    skos:definition "Some business areas could stand alone, others share data and change together."@en .
+:DomainsClearlySeparate a :Answer ; skos:notation "clearly_separate" ; rdfs:label "Clearly separate"@en ;
+    skos:definition "Each business area could be built and released by a different team."@en .
+
+:Traffic a :Criterion ; skos:notation "traffic" ; sh:order 4 ;
+    rdfs:label "Traffic"@en ;
+    skos:definition "How the load from users changes over time."@en ;
+    :answers ( :TrafficSteady :TrafficSpikyPredictable :TrafficUnpredictable ) .
+:TrafficSteady           a :Answer ; skos:notation "steady" ;            rdfs:label "Steady"@en ;
+    skos:definition "The load stays about the same."@en .
+:TrafficSpikyPredictable a :Answer ; skos:notation "spiky_predictable" ; rdfs:label "Spiky, at known times"@en ;
+    skos:definition "The load has peaks at times the team knows in advance."@en .
+:TrafficUnpredictable    a :Answer ; skos:notation "unpredictable" ;     rdfs:label "Unpredictable"@en ;
+    skos:definition "The load has peaks the team cannot foresee."@en .
+
+:BackgroundWork a :Criterion ; skos:notation "backgroundWork" ; sh:order 5 ;
+    rdfs:label "Background work"@en ;
+    skos:definition "Work the system does that a user request does not trigger."@en ;
+    :answers ( :BackgroundNone :BackgroundScheduledOrEvent :BackgroundHeavyContinuous ) .
+:BackgroundNone             a :Answer ; skos:notation "none" ;               rdfs:label "None"@en ;
+    skos:definition "All work happens in answer to a user request."@en .
+:BackgroundScheduledOrEvent a :Answer ; skos:notation "scheduled_or_event" ; rdfs:label "Scheduled or event-driven jobs"@en ;
+    skos:definition "Jobs that run on a schedule or when an event happens."@en .
+:BackgroundHeavyContinuous  a :Answer ; skos:notation "heavy_continuous" ;   rdfs:label "Heavy, continuous processing"@en ;
+    skos:definition "Processing that runs all the time, such as streams or queues with constant load."@en .
+
+:Platform a :Criterion ; skos:notation "platform" ; sh:order 6 ;
+    rdfs:label "Platform"@en ;
+    skos:definition "The cloud or hosting the team already uses."@en ;
+    :answers ( :PlatformAws :PlatformAzure :PlatformGcp :PlatformCloudflare :PlatformOnPremises :PlatformOther ) .
+:PlatformAws         a :Answer ; skos:notation "aws" ;         rdfs:label "AWS"@en ;          skos:definition "Amazon Web Services."@en .
+:PlatformAzure       a :Answer ; skos:notation "azure" ;       rdfs:label "Azure"@en ;        skos:definition "Microsoft Azure."@en .
+:PlatformGcp         a :Answer ; skos:notation "gcp" ;         rdfs:label "Google Cloud"@en ; skos:definition "Google Cloud Platform."@en .
+:PlatformCloudflare  a :Answer ; skos:notation "cloudflare" ;  rdfs:label "Cloudflare"@en ;   skos:definition "Cloudflare's developer platform."@en .
+:PlatformOnPremises  a :Answer ; skos:notation "on_premises" ; rdfs:label "On premises"@en ;  skos:definition "The team's own servers or data centre."@en .
+:PlatformOther       a :Answer ; skos:notation "other" ;       rdfs:label "Other"@en ;        skos:definition "Another cloud or hosting provider."@en .
+
+:ExpectedScale a :Criterion ; skos:notation "expectedScale" ; sh:order 7 ;
+    rdfs:label "Expected scale"@en ;
+    skos:definition "How much the usage of the system is expected to grow."@en ;
+    :answers ( :ScaleLow :ScaleMedium :ScaleHigh ) .
+:ScaleLow    a :Answer ; skos:notation "low" ;    rdfs:label "Low"@en ;    skos:definition "Usage stays small, for example an internal tool."@en .
+:ScaleMedium a :Answer ; skos:notation "medium" ; rdfs:label "Medium"@en ; skos:definition "Usage grows steadily, within what one deployment can serve."@en .
+:ScaleHigh   a :Answer ; skos:notation "high" ;   rdfs:label "High"@en ;   skos:definition "Usage is expected to grow a lot, beyond what one deployment can serve."@en .
+
+:OpsMaturity a :Criterion ; skos:notation "opsMaturity" ; sh:order 8 ;
+    rdfs:label "Operations maturity"@en ;
+    skos:definition "The team's experience running distributed systems in production: monitoring, tracing, on-call, orchestration."@en ;
+    :answers ( :OpsLow :OpsMedium :OpsHigh ) .
+:OpsLow    a :Answer ; skos:notation "low" ;    rdfs:label "Low"@en ;    skos:definition "Little or no experience running distributed systems."@en .
+:OpsMedium a :Answer ; skos:notation "medium" ; rdfs:label "Medium"@en ; skos:definition "Some experience, for example with managed cloud services."@en .
+:OpsHigh   a :Answer ; skos:notation "high" ;   rdfs:label "High"@en ;   skos:definition "The team already runs and monitors many services or a container orchestrator."@en .

@@ -1,0 +1,653 @@
+{
+  "$comment": "Generated from ontology/ and domains/cloud-architecture/ontology/ by generator/generate.ts. Do not edit.",
+  "domain": {
+    "title": "Microservices, serverless or a modular monolith?",
+    "intro": "A recommendation for your team, from Alok Sharan's diagram and the heuristics of the post that goes with it.",
+    "author": "Alok Sharan",
+    "source": "https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/",
+    "sourceTitle": "Microservices VS Serverless VS Modular Monolith",
+    "optionsTitle": "The three styles, from the diagram",
+    "additionsTitle": "For parts of the system",
+    "recordTitle": "Architecture style",
+    "recordName": "an architecture decision record",
+    "recordFile": "architecture-decision.md"
+  },
+  "notSure": "not_sure",
+  "criteria": [
+    {
+      "key": "teamSize",
+      "label": "Team size",
+      "definition": "The number of developers who build and run the system.",
+      "answers": [
+        {
+          "code": "small",
+          "label": "Small",
+          "definition": "1 to 3 developers."
+        },
+        {
+          "code": "medium",
+          "label": "Medium",
+          "definition": "4 to 10 developers."
+        },
+        {
+          "code": "large",
+          "label": "Large",
+          "definition": "More than 10 developers."
+        }
+      ]
+    },
+    {
+      "key": "teams",
+      "label": "Number of teams",
+      "definition": "The number of separate teams that work on the system, each with its own backlog.",
+      "answers": [
+        {
+          "code": "one",
+          "label": "One",
+          "definition": "A single team works on the whole system."
+        },
+        {
+          "code": "two_or_three",
+          "label": "Two or three",
+          "definition": "Two or three teams share the system."
+        },
+        {
+          "code": "more_than_three",
+          "label": "More than three",
+          "definition": "More than three teams share the system."
+        }
+      ]
+    },
+    {
+      "key": "domainSeparation",
+      "label": "Domain separation",
+      "definition": "How independent the business areas of the system are from each other.",
+      "answers": [
+        {
+          "code": "connected",
+          "label": "Connected",
+          "definition": "The business areas share data and change together."
+        },
+        {
+          "code": "partly_separate",
+          "label": "Partly separate",
+          "definition": "Some business areas could stand alone, others share data and change together."
+        },
+        {
+          "code": "clearly_separate",
+          "label": "Clearly separate",
+          "definition": "Each business area could be built and released by a different team."
+        }
+      ]
+    },
+    {
+      "key": "traffic",
+      "label": "Traffic",
+      "definition": "How the load from users changes over time.",
+      "answers": [
+        {
+          "code": "steady",
+          "label": "Steady",
+          "definition": "The load stays about the same."
+        },
+        {
+          "code": "spiky_predictable",
+          "label": "Spiky, at known times",
+          "definition": "The load has peaks at times the team knows in advance."
+        },
+        {
+          "code": "unpredictable",
+          "label": "Unpredictable",
+          "definition": "The load has peaks the team cannot foresee."
+        }
+      ]
+    },
+    {
+      "key": "backgroundWork",
+      "label": "Background work",
+      "definition": "Work the system does that a user request does not trigger.",
+      "answers": [
+        {
+          "code": "none",
+          "label": "None",
+          "definition": "All work happens in answer to a user request."
+        },
+        {
+          "code": "scheduled_or_event",
+          "label": "Scheduled or event-driven jobs",
+          "definition": "Jobs that run on a schedule or when an event happens."
+        },
+        {
+          "code": "heavy_continuous",
+          "label": "Heavy, continuous processing",
+          "definition": "Processing that runs all the time, such as streams or queues with constant load."
+        }
+      ]
+    },
+    {
+      "key": "platform",
+      "label": "Platform",
+      "definition": "The cloud or hosting the team already uses.",
+      "answers": [
+        {
+          "code": "aws",
+          "label": "AWS",
+          "definition": "Amazon Web Services."
+        },
+        {
+          "code": "azure",
+          "label": "Azure",
+          "definition": "Microsoft Azure."
+        },
+        {
+          "code": "gcp",
+          "label": "Google Cloud",
+          "definition": "Google Cloud Platform."
+        },
+        {
+          "code": "cloudflare",
+          "label": "Cloudflare",
+          "definition": "Cloudflare's developer platform."
+        },
+        {
+          "code": "on_premises",
+          "label": "On premises",
+          "definition": "The team's own servers or data centre."
+        },
+        {
+          "code": "other",
+          "label": "Other",
+          "definition": "Another cloud or hosting provider."
+        }
+      ]
+    },
+    {
+      "key": "expectedScale",
+      "label": "Expected scale",
+      "definition": "How much the usage of the system is expected to grow.",
+      "answers": [
+        {
+          "code": "low",
+          "label": "Low",
+          "definition": "Usage stays small, for example an internal tool."
+        },
+        {
+          "code": "medium",
+          "label": "Medium",
+          "definition": "Usage grows steadily, within what one deployment can serve."
+        },
+        {
+          "code": "high",
+          "label": "High",
+          "definition": "Usage is expected to grow a lot, beyond what one deployment can serve."
+        }
+      ]
+    },
+    {
+      "key": "opsMaturity",
+      "label": "Operations maturity",
+      "definition": "The team's experience running distributed systems in production: monitoring, tracing, on-call, orchestration.",
+      "answers": [
+        {
+          "code": "low",
+          "label": "Low",
+          "definition": "Little or no experience running distributed systems."
+        },
+        {
+          "code": "medium",
+          "label": "Medium",
+          "definition": "Some experience, for example with managed cloud services."
+        },
+        {
+          "code": "high",
+          "label": "High",
+          "definition": "The team already runs and monitors many services or a container orchestrator."
+        }
+      ]
+    }
+  ],
+  "options": [
+    {
+      "id": "Microservices",
+      "label": "Microservices",
+      "dimensions": [
+        {
+          "label": "Core purpose",
+          "inRecommendation": false,
+          "characteristics": [
+            "Build independent services around business capabilities"
+          ]
+        },
+        {
+          "label": "Architecture structure",
+          "inRecommendation": false,
+          "characteristics": [
+            "API-based communication",
+            "Distributed architecture",
+            "Multiple independent services"
+          ]
+        },
+        {
+          "label": "Deployment model",
+          "inRecommendation": false,
+          "characteristics": [
+            "Each service deploys independently"
+          ]
+        },
+        {
+          "label": "Scalability",
+          "inRecommendation": true,
+          "characteristics": [
+            "Requires orchestration",
+            "Scale individual services",
+            "Supports heavy workloads"
+          ]
+        },
+        {
+          "label": "Complexity",
+          "inRecommendation": true,
+          "characteristics": [
+            "High distributed-system complexity"
+          ]
+        },
+        {
+          "label": "Cost model",
+          "inRecommendation": true,
+          "characteristics": [
+            "Continuous infrastructure cost",
+            "Efficient at large scale",
+            "Higher operational overhead"
+          ]
+        },
+        {
+          "label": "Security level",
+          "inRecommendation": true,
+          "characteristics": [
+            "Fine-grained permissions",
+            "Larger attack surface",
+            "Service-level authentication"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Complex business domains",
+            "High-scale platforms",
+            "Independent release cycles",
+            "Large engineering teams"
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "label": "Apache Kafka"
+        },
+        {
+          "label": "Docker"
+        },
+        {
+          "label": "Istio"
+        },
+        {
+          "label": "Kubernetes"
+        }
+      ]
+    },
+    {
+      "id": "Serverless",
+      "label": "Serverless",
+      "dimensions": [
+        {
+          "label": "Core purpose",
+          "inRecommendation": false,
+          "characteristics": [
+            "Run code on demand without managing servers"
+          ]
+        },
+        {
+          "label": "Architecture structure",
+          "inRecommendation": false,
+          "characteristics": [
+            "Event-driven functions",
+            "Managed cloud services",
+            "Stateless execution"
+          ]
+        },
+        {
+          "label": "Deployment model",
+          "inRecommendation": false,
+          "characteristics": [
+            "Each function deploys independently"
+          ]
+        },
+        {
+          "label": "Scalability",
+          "inRecommendation": true,
+          "characteristics": [
+            "Automatic scaling",
+            "Handles traffic spikes",
+            "Limited by cloud quotas"
+          ]
+        },
+        {
+          "label": "Complexity",
+          "inRecommendation": true,
+          "characteristics": [
+            "Moderate event and cloud complexity"
+          ]
+        },
+        {
+          "label": "Cost model",
+          "inRecommendation": true,
+          "characteristics": [
+            "Costly at sustained scale",
+            "Minimal idle cost",
+            "Pay per execution"
+          ]
+        },
+        {
+          "label": "Security level",
+          "inRecommendation": true,
+          "characteristics": [
+            "IAM-based security",
+            "Managed infrastructure",
+            "Permission sprawl risk"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Automation workflows",
+            "Event-driven systems",
+            "Lightweight APIs",
+            "Unpredictable workloads"
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "label": "AWS Lambda",
+          "availableWith": {
+            "criterion": "platform",
+            "answer": "aws"
+          }
+        },
+        {
+          "label": "Azure Functions",
+          "availableWith": {
+            "criterion": "platform",
+            "answer": "azure"
+          }
+        },
+        {
+          "label": "Cloudflare Workers",
+          "availableWith": {
+            "criterion": "platform",
+            "answer": "cloudflare"
+          }
+        },
+        {
+          "label": "Google Cloud Run",
+          "availableWith": {
+            "criterion": "platform",
+            "answer": "gcp"
+          }
+        }
+      ]
+    },
+    {
+      "id": "ModularMonolith",
+      "label": "Modular monolith",
+      "dimensions": [
+        {
+          "label": "Core purpose",
+          "inRecommendation": false,
+          "characteristics": [
+            "Organize one application into independent modules"
+          ]
+        },
+        {
+          "label": "Architecture structure",
+          "inRecommendation": false,
+          "characteristics": [
+            "Clear module boundaries",
+            "In-process communication",
+            "Single application"
+          ]
+        },
+        {
+          "label": "Deployment model",
+          "inRecommendation": false,
+          "characteristics": [
+            "The complete application deploys together"
+          ]
+        },
+        {
+          "label": "Scalability",
+          "inRecommendation": true,
+          "characteristics": [
+            "Limited scaling flexibility",
+            "Scales as one unit",
+            "Simpler horizontal scaling"
+          ]
+        },
+        {
+          "label": "Complexity",
+          "inRecommendation": true,
+          "characteristics": [
+            "Lower development and operational complexity"
+          ]
+        },
+        {
+          "label": "Cost model",
+          "inRecommendation": true,
+          "characteristics": [
+            "Cost-effective for growth",
+            "Lower operational overhead",
+            "Predictable hosting cost"
+          ]
+        },
+        {
+          "label": "Security level",
+          "inRecommendation": true,
+          "characteristics": [
+            "Centralized security",
+            "Fewer exposed endpoints",
+            "Simpler access control"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Connected business domains",
+            "Rapid product development",
+            "Small engineering teams",
+            "Startups and MVPs"
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "label": "ASP.NET Core"
+        },
+        {
+          "label": "Django"
+        },
+        {
+          "label": "NestJS"
+        },
+        {
+          "label": "Spring Modulith"
+        }
+      ]
+    }
+  ],
+  "rules": {
+    "choice": [
+      {
+        "id": "MoveToMicroservices",
+        "label": "Microservices: scale, ownership and domain boundaries justify the operational cost",
+        "recommends": "Microservices",
+        "quote": "Move to microservices when scale, ownership, and domain boundaries justify the operational cost.",
+        "explanation": "Scale: high expected growth or a large team. Ownership: more than one team. Domain boundaries: business areas that could be built and released by different teams. The operational cost is justified only for a team that already runs distributed systems.",
+        "when": [
+          [
+            {
+              "criterion": "expectedScale",
+              "answers": [
+                "high"
+              ]
+            },
+            {
+              "criterion": "teamSize",
+              "answers": [
+                "large"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "teams",
+              "answers": [
+                "two_or_three",
+                "more_than_three"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "domainSeparation",
+              "answers": [
+                "clearly_separate"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "opsMaturity",
+              "answers": [
+                "medium",
+                "high"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "StartModular",
+        "label": "Modular monolith: start with modular clarity",
+        "recommends": "ModularMonolith",
+        "quote": "Start with modular clarity.",
+        "explanation": "For many startups, internal tools, and early-stage products, this is often the smartest starting point.",
+        "when": []
+      }
+    ],
+    "additions": [
+      {
+        "id": "ServerlessForEvents",
+        "label": "Serverless for scheduled and event-driven jobs",
+        "recommends": "Serverless",
+        "part": "scheduled and event-driven jobs",
+        "quote": "Use serverless for event-driven execution.",
+        "explanation": "Serverless works well for automation, background jobs and integrations.",
+        "when": [
+          [
+            {
+              "criterion": "backgroundWork",
+              "answers": [
+                "scheduled_or_event"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "ServerlessForUnpredictableTraffic",
+        "label": "Serverless for the parts with unpredictable traffic",
+        "recommends": "Serverless",
+        "part": "the parts with unpredictable traffic",
+        "quote": "It works well for automation, lightweight APIs, background jobs, integrations, and unpredictable traffic patterns.",
+        "explanation": "Serverless scales automatically and handles traffic spikes; watch provider limits, cold starts and quotas.",
+        "when": [
+          [
+            {
+              "criterion": "traffic",
+              "answers": [
+                "unpredictable"
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "cautions": [
+      {
+        "id": "MicroservicesNeedOperations",
+        "label": "Microservices would fit, but not yet",
+        "quote": "Move to microservices when scale, ownership, and domain boundaries justify the operational cost.",
+        "explanation": "Scale, teams and domains point to microservices, but the team has little experience running distributed systems: service communication, distributed tracing, network failures and security across services. Build that experience first.",
+        "when": [
+          [
+            {
+              "criterion": "expectedScale",
+              "answers": [
+                "high"
+              ]
+            },
+            {
+              "criterion": "teamSize",
+              "answers": [
+                "large"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "teams",
+              "answers": [
+                "two_or_three",
+                "more_than_three"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "domainSeparation",
+              "answers": [
+                "clearly_separate"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "opsMaturity",
+              "answers": [
+                "low"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "NoServerlessForSustainedLoad",
+        "label": "Keep continuous processing off serverless",
+        "quote": "Costly at sustained scale",
+        "explanation": "Serverless costs per execution: for processing that runs all the time, always-running infrastructure costs less. The post warns of cost surprises if usage grows in the wrong pattern.",
+        "when": [
+          [
+            {
+              "criterion": "backgroundWork",
+              "answers": [
+                "heavy_continuous"
+              ]
+            }
+          ]
+        ]
+      }
+    ]
+  },
+  "ladder": []
+}

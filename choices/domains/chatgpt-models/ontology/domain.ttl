@@ -1,0 +1,32 @@
+@prefix :        <https://example.org/chatgpt-models#> .
+@prefix choice:  <https://example.org/choice#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The words of the page. This domain uses the choice vocabulary (ontology/choice.ttl) directly, so
+# it needs no mapping.
+
+<https://example.org/chatgpt-models/domain>
+    a choice:Domain ;
+    rdfs:label "Which ChatGPT model for this task?"@en ;
+    choice:intro "A recommendation for your task, from Alok Sharan's decision tree and the post that goes with it."@en ;
+    choice:author "Alok Sharan" ;
+    choice:sourceTitle "ChatGPT Model Tree"@en ;
+    dcterms:source <https://lnkd.in/p/efs4j4NS> ;
+    choice:startsAt :FinishedWork ;
+    choice:optionsTitle "The six models, from the diagram"@en ;
+    choice:ladderTitle "The effort ladder"@en ;
+    choice:ladderQuote "Increase capability when the output falls short, rather than defaulting to maximum effort."@en ;
+    choice:recordTitle "Model"@en ;
+    choice:recordName "a brief"@en ;
+    choice:recordFile "brief.md" ;
+    choice:recordAppendix """## Your brief
+
+“Start with a clear brief. Share the goal, relevant context, constraints, and what a good result looks like.” (Alok Sharan)
+
+- Goal:
+- Relevant context:
+- Constraints:
+- A good result looks like:
+
+“Keep human review in the workflow, especially when the outcome matters.”"""@en .

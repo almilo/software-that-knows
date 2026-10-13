@@ -1,0 +1,50 @@
+@prefix :        <https://example.org/chatgpt-models#> .
+@prefix choice:  <https://example.org/choice#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The questions about the task. The first five are the questions of the tree, as written; their
+# definitions are ours. The last one, the plan, is not in the tree: the post says "Availability
+# depends on your plan and workspace", and the diagram names plans in its columns.
+
+<https://example.org/chatgpt-models/questions>
+    a owl:Ontology ;
+    rdfs:label "Questions of the model choice"@en ;
+    dcterms:source <https://lnkd.in/p/efs4j4NS> .
+
+:FinishedWork a choice:Criterion ; skos:notation "finishedWork" ; sh:order 1 ;
+    rdfs:label "Do you need finished work, not just an answer?"@en ;
+    skos:definition "Finished work is a deliverable, such as a document, a deck, code or an automation. An answer is a reply in the chat."@en ;
+    choice:answers ( choice:yes choice:no ) .
+
+:CarefulReasoning a choice:Criterion ; skos:notation "carefulReasoning" ; sh:order 2 ;
+    rdfs:label "Does it need careful reasoning?"@en ;
+    skos:definition "Careful reasoning: analysis, planning, or working through constraints, not a quick question or a rewrite."@en ;
+    choice:answers ( choice:yes choice:no ) .
+
+:Hardest a choice:Criterion ; skos:notation "hardest" ; sh:order 3 ;
+    rdfs:label "Is it your hardest problem?"@en ;
+    skos:definition "A particularly difficult question that needs deeper work."@en ;
+    choice:answers ( choice:yes choice:no ) .
+
+:Scoped a choice:Criterion ; skos:notation "scoped" ; sh:order 4 ;
+    rdfs:label "Is it scoped, repeatable or high-volume?"@en ;
+    skos:definition "A focused task with a clear limit, a task that comes back often, or many small tasks of the same kind."@en ;
+    choice:answers ( choice:yes choice:no ) .
+
+:Ambiguous a choice:Criterion ; skos:notation "ambiguous" ; sh:order 5 ;
+    rdfs:label "Ambiguous, high-stakes or exacting?"@en ;
+    skos:definition "The problem is not clear yet, a mistake is expensive, or the result must meet strict requirements."@en ;
+    choice:answers ( choice:yes choice:no ) .
+
+:Plan a choice:Criterion ; skos:notation "plan" ; sh:order 6 ;
+    rdfs:label "Your plan"@en ;
+    skos:definition "The ChatGPT plan of your account or workspace."@en ;
+    choice:answers ( :PlanFreeOrGo :PlanPlus :PlanPro :PlanBusinessOrEnterprise ) .
+:PlanFreeOrGo             a choice:Answer ; skos:notation "free_go" ;             rdfs:label "Free or Go"@en .
+:PlanPlus                 a choice:Answer ; skos:notation "plus" ;                rdfs:label "Plus"@en .
+:PlanPro                  a choice:Answer ; skos:notation "pro" ;                 rdfs:label "Pro"@en .
+:PlanBusinessOrEnterprise a choice:Answer ; skos:notation "business_enterprise" ; rdfs:label "Business or Enterprise"@en .

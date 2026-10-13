@@ -1,0 +1,55 @@
+@prefix :        <https://example.org/cloud-native-architecture#> .
+@prefix choice:  <https://example.org/choice#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The words of the page, and the mapping of the architecture vocabulary of part 7 to the choice
+# vocabulary (ontology/choice.ttl). The other three files of this folder are the files of part 7
+# (cloud-architecture/ontology/), unchanged: a test checks that they are byte for byte the same.
+#   facts.ttl      = cloud-native-architecture.ttl  the diagram
+#   questions.ttl  = criteria.ttl                   the questions for the team
+#   rules.ttl      = rules.ttl                      the heuristics of the post
+
+<https://example.org/cloud-native-architecture/domain>
+    a choice:Domain ;
+    rdfs:label "Microservices, serverless or a modular monolith?"@en ;
+    choice:intro "A recommendation for your team, from Alok Sharan's diagram and the heuristics of the post that goes with it."@en ;
+    choice:author "Alok Sharan" ;
+    choice:sourceTitle "Microservices VS Serverless VS Modular Monolith"@en ;
+    dcterms:source <https://www.linkedin.com/feed/update/urn:li:activity:7514433067860582400/> ;
+    choice:optionsTitle "The three styles, from the diagram"@en ;
+    choice:additionsTitle "For parts of the system"@en ;
+    choice:recordTitle "Architecture style"@en ;
+    choice:recordName "an architecture decision record"@en ;
+    choice:recordFile "architecture-decision.md" .
+
+# ---------------------------------------------------------------------------
+# The mapping: each word of part 7 is a special case of a choice word
+# ---------------------------------------------------------------------------
+
+:ArchitectureStyle rdfs:subClassOf choice:Option .
+:Criterion         rdfs:subClassOf choice:Criterion .
+:Answer            rdfs:subClassOf choice:Answer .
+:StyleRule         rdfs:subClassOf choice:ChoiceRule .
+:PartRule          rdfs:subClassOf choice:AdditionRule .
+:Caution           rdfs:subClassOf choice:Caution .
+
+:answers           rdfs:subPropertyOf choice:answers .
+:hasCharacteristic rdfs:subPropertyOf choice:hasCharacteristic .
+:supportedBy       rdfs:subPropertyOf choice:supportedBy .
+:onPlatform        rdfs:subPropertyOf choice:availableWith .
+:recommends        rdfs:subPropertyOf choice:recommends .
+:part              rdfs:subPropertyOf choice:part .
+:quote             rdfs:subPropertyOf choice:quote .
+:when              rdfs:subPropertyOf choice:when .
+:criterion         rdfs:subPropertyOf choice:criterion .
+:in                rdfs:subPropertyOf choice:in .
+:anyOf             rdfs:subPropertyOf choice:anyOf .
+
+# The dimensions of the diagram that say what a team takes on with a style: the recommendation
+# shows them too. In part 7 this list was in the code of the app (app/Recommendation.tsx).
+:hasScalability   choice:inRecommendation true .
+:hasComplexity    choice:inRecommendation true .
+:hasCostModel     choice:inRecommendation true .
+:hasSecurityTrait choice:inRecommendation true .

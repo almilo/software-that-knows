@@ -1,0 +1,107 @@
+@prefix :        <https://example.org/chatgpt-models#> .
+@prefix choice:  <https://example.org/choice#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The six models of the diagram, with what each column says about them, and the effort levels.
+# Transcribed from a screenshot of the infographic, as written. Model names and plans change
+# often: this is the state of October 2026. Where the screenshot hides part of a text (the column
+# of GPT-6 Astra is partly covered), the hidden words are completed by us, and a comment says so.
+
+<https://example.org/chatgpt-models>
+    a owl:Ontology ;
+    rdfs:label "ChatGPT Model Tree"@en ;
+    rdfs:comment "Extracted from the infographic 'ChatGPT Model Tree: six ways to run ChatGPT today: three in Chat, three in Work & Codex. Pick by the job, not the name.' The source states no licence; all rights stay with its author."@en ;
+    dcterms:source <https://lnkd.in/p/efs4j4NS> ;
+    dcterms:creator "Alok Sharan (@alok-sharan), author of the source diagram" ;
+    dcterms:date "2026-10" .
+
+# ─────────────────────────────────────────────────────────────
+# The rows of the table: what the diagram says about each model
+# ─────────────────────────────────────────────────────────────
+
+:where         a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 1 ; rdfs:label "Where"@en .
+:inShort       a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 2 ; rdfs:label "In short"@en ;
+    choice:inRecommendation true .
+:bestFor       a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 3 ; rdfs:label "Best for"@en .
+:plans         a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 4 ; rdfs:label "Plans"@en ;
+    choice:inRecommendation true .
+:effort        a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 5 ; rdfs:label "Effort"@en ;
+    choice:inRecommendation true .
+:howToUse      a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 6 ; rdfs:label "How to use"@en ;
+    choice:inRecommendation true .
+:promptExample a owl:DatatypeProperty ; rdfs:subPropertyOf choice:hasCharacteristic ; sh:order 7 ; rdfs:label "Prompt example"@en ;
+    choice:inRecommendation true .
+
+# ─────────────────────────────────────────────────────────────
+# The six models
+# ─────────────────────────────────────────────────────────────
+
+:Instant a choice:Option ; sh:order 1 ;
+    rdfs:label "Instant"@en ;
+    :where "Chat"@en ;
+    :inShort "Fast everyday answers"@en ;
+    :bestFor "Quick questions, rewrites, summaries"@en ;
+    :plans "Runs GPT-5.6 Sol, GPT-5.6 Luna on Free & Go"@en ;
+    :howToUse "Add Search for anything recent"@en ;
+    :promptExample "Rewrite this [text] for [audience]. Keep it under [length]. Tone: [casual/formal]. No preamble. Just the output."@en .
+
+:Thinking a choice:Option ; sh:order 2 ;
+    rdfs:label "Thinking"@en ;
+    :where "Chat"@en ;
+    :inShort "Slower, deeper answers"@en ;
+    :bestFor "Analysis, planning, tricky writing"@en ;
+    :plans "Extra High needs Pro, Business or Enterprise"@en ;
+    :effort "Medium, High, Extra High. Step up only if the answer falls short."@en ;
+    :howToUse "Use deep research for cited reports"@en ;
+    :promptExample "I want [result] with [constraints]. Ask me questions before you start, then show your reasoning."@en .
+
+:Pro a choice:Option ; sh:order 3 ;
+    rdfs:label "GPT-6 Pro"@en ;
+    :where "Chat"@en ;
+    :inShort "Astra, inside Chat"@en ;
+    :bestFor "The hardest questions you ask in Chat"@en ;
+    :plans "Pro, Business and Enterprise plans"@en ;
+    :howToUse "Allowance is capped. Save it for the 10% that need it."@en ;
+    :promptExample "Here is my goal: [goal]. Constraints: [constraints]. Think through the tradeoffs, propose 2–3 approaches, recommend one."@en .
+
+:Luna a choice:Option ; sh:order 4 ;
+    rdfs:label "GPT-6 Luna"@en ;
+    :where "Work & Codex"@en ;
+    :inShort "Smart and efficient"@en ;
+    :bestFor "Scoped tasks, triage, frequent automations"@en ;
+    :plans "Free & Go get Luna in the desktop app"@en ;
+    :effort "Low for edits and data extraction"@en ;
+    :howToUse "Put it on a Scheduled task"@en ;
+    :promptExample "Every weekday at [time], check [app] and send me the 5 items that need a reply."@en .
+
+:Sol a choice:Option ; sh:order 5 ;
+    rdfs:label "GPT-6.1 Sol"@en ;
+    :where "Work & Codex"@en ;
+    :inShort "The Work all-rounder"@en ;
+    :bestFor "Decks, reports, sites and builds you will revise"@en ;
+    :effort "Medium, Extra high to polish"@en ;
+    :howToUse "Start in Plan mode"@en , "Add Plugins and Skills"@en ;
+    :promptExample "Turn [files] into a [board deck]. Do NOT start yet. Ask me clarifying questions and show the plan first."@en .
+
+# The words in brackets are hidden in the screenshot; completed by us.
+:Astra a choice:Option ; sh:order 6 ;
+    rdfs:label "GPT-6 Astra"@en ;
+    :where "Work & Codex"@en ;
+    :inShort "The smartest model"@en ;
+    :bestFor "Ambiguous problems, deep analysis, ambitious deliverables"@en ;
+    :plans "Limited usage on Plus"@en ;                              # Li[mi]ted usage on Plu[s]
+    :howToUse "Let it run long, end to end"@en ,                     # Let it run [long], end to [end]
+              "When Sol gets stuck, escalate here"@en ;              # When Sol gets [st]uck, [es]calate here
+    :promptExample "Goal: [goal]. Context: [files, apps]. Work end to end, check your own output and flag what you are unsure of."@en .  # [files, app]s. W[or]k end to end, ch[e]ck yo[u]r own …
+
+# ─────────────────────────────────────────────────────────────
+# Reasoning effort, lightest first
+# ─────────────────────────────────────────────────────────────
+
+:Low       a choice:Level ; sh:order 1 ; rdfs:label "Low"@en .
+:Medium    a choice:Level ; sh:order 2 ; rdfs:label "Medium"@en .
+:High      a choice:Level ; sh:order 3 ; rdfs:label "High"@en .
+:ExtraHigh a choice:Level ; sh:order 4 ; rdfs:label "Extra high"@en .

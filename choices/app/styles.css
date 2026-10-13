@@ -1,0 +1,77 @@
+body { margin: 0; font: 15px/1.45 system-ui, sans-serif; background: #fafafa; color: #222; }
+main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; max-width: 1000px; margin: 0 auto; padding: 16px; }
+header { grid-column: 1 / -1; }
+h1 { margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 0 0 8px; }
+a { color: #0b5cd5; }
+.intro { margin: 4px 0 0; color: #444; }
+.hint { margin: 8px 0; color: #666; font-size: 13px; }
+button { font: inherit; padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; color: #222; cursor: pointer; }
+@media (max-width: 700px) { main { grid-template-columns: minmax(0, 1fr); } }
+
+/* The questions: the answered ones, one line each, then the next one */
+.question { margin: 0 0 12px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.question.next { border: 2px solid #0b5cd5; padding: 9px 11px; }
+/* The question's title inside the box, not on its border */
+.question legend { float: left; width: 100%; margin: 0 0 2px; padding: 0; font-weight: 600; }
+.question legend + * { clear: both; }
+.definition { margin: 0 0 8px; color: #666; font-size: 13px; }
+.answers { display: flex; flex-direction: column; gap: 4px; }
+.answers button { display: flex; flex-direction: column; align-items: flex-start; text-align: left; }
+.answers button small { color: #666; font-size: 12px; }
+.answers button[aria-pressed="true"] { background: #222; color: #fff; border-color: #222; }
+.answers button[aria-pressed="true"] small { color: #ddd; }
+.answers .not-sure { color: #666; }
+.answered { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 12px; margin: 0 0 6px; padding: 6px 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.answered span { color: #666; }
+.answered button { padding: 2px 8px; color: #666; font-size: 13px; }
+.not-needed { margin: 8px 0; color: #666; font-size: 13px; }
+.start-over { color: #666; }
+
+/* The recommendation */
+.recommendation article { padding: 12px 16px; border-left: 8px solid #0b5cd5; border-radius: 4px; background: #fff; }
+.recommendation h3 { margin: 0 0 6px; font-size: 20px; }
+.recommendation h4 { margin: 14px 0 4px; font-size: 14px; }
+.recommendation ul { margin: 0; padding-left: 20px; }
+.recommendation blockquote { margin: 0; color: #444; font-style: italic; }
+.recommendation cite { font-style: normal; color: #666; font-size: 13px; }
+.recommendation cite::before { content: "— "; }
+.quote { color: #666; font-style: italic; }
+.tools { margin: 4px 0 0; font-size: 13px; }
+.caution { margin: 12px 0 0; padding: 8px 12px; border: 1px solid #e0a800; border-radius: 4px; background: #fff8e1; color: #6b3d00; }
+.recommendation dl { margin: 0; }
+.recommendation dl div { display: grid; grid-template-columns: 120px 1fr; gap: 8px; padding: 3px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+.recommendation dt { color: #666; }
+.recommendation dd { margin: 0; }
+.undecided { padding: 12px 16px; border: 1px dashed #bbb; border-radius: 4px; background: #fff; }
+.undecided p { margin: 0; }
+.download { margin-top: 16px; }
+
+/* The diagram as a table */
+.compare { grid-column: 1 / -1; }
+.compare .table { overflow-x: auto; }
+.compare table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+.compare th, .compare td { padding: 6px 8px; border: 1px solid #e3e3e3; text-align: left; vertical-align: top; }
+.compare thead th { font-size: 14px; }
+.compare tbody th { color: #666; font-weight: 600; white-space: nowrap; }
+.compare .recommended { background: #eef4fd; }
+.compare thead .recommended { box-shadow: inset 0 4px 0 #0b5cd5; }
+.compare .for-parts { background: #f6f9fe; }
+.compare thead .for-parts { box-shadow: inset 0 2px 0 #8fb3ea; }
+.compare small { color: #0b5cd5; font-weight: 400; }
+.not-needed ul { margin: 2px 0 0; padding-left: 20px; }
+.step { margin: 0; }
+.step-up { margin: 4px 0 0; color: #666; font-size: 13px; }
+
+/* The ladder: the steps in order, the step to start at marked */
+.ladder { grid-column: 1 / -1; }
+.ladder blockquote { margin: 0 0 8px; color: #444; font-style: italic; }
+.ladder cite { font-style: normal; color: #666; font-size: 13px; }
+.ladder cite::before { content: "— "; }
+.ladder ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: step; }
+.ladder li { display: flex; flex-direction: column; gap: 2px; padding: 8px; border: 1px solid #e3e3e3; border-radius: 4px; background: #fff; font-size: 13px; counter-increment: step; }
+.ladder li::before { content: "Step " counter(step); color: #666; font-size: 11px; text-transform: uppercase; }
+.ladder .level { color: #666; }
+.ladder .start { background: #eef4fd; box-shadow: inset 0 4px 0 #0b5cd5; }
+.ladder .next { background: #f6f9fe; box-shadow: inset 0 2px 0 #8fb3ea; }
+.ladder small { color: #0b5cd5; }

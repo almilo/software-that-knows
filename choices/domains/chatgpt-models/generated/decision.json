@@ -1,0 +1,760 @@
+{
+  "$comment": "Generated from ontology/ and domains/chatgpt-models/ontology/ by generator/generate.ts. Do not edit.",
+  "domain": {
+    "title": "Which ChatGPT model for this task?",
+    "intro": "A recommendation for your task, from Alok Sharan's decision tree and the post that goes with it.",
+    "author": "Alok Sharan",
+    "source": "https://lnkd.in/p/efs4j4NS",
+    "sourceTitle": "ChatGPT Model Tree",
+    "optionsTitle": "The six models, from the diagram",
+    "ladderTitle": "The effort ladder",
+    "ladderQuote": "Increase capability when the output falls short, rather than defaulting to maximum effort.",
+    "recordTitle": "Model",
+    "recordName": "a brief",
+    "recordFile": "brief.md",
+    "recordAppendix": "## Your brief\n\n“Start with a clear brief. Share the goal, relevant context, constraints, and what a good result looks like.” (Alok Sharan)\n\n- Goal:\n- Relevant context:\n- Constraints:\n- A good result looks like:\n\n“Keep human review in the workflow, especially when the outcome matters.”"
+  },
+  "notSure": "not_sure",
+  "criteria": [
+    {
+      "key": "finishedWork",
+      "label": "Do you need finished work, not just an answer?",
+      "definition": "Finished work is a deliverable, such as a document, a deck, code or an automation. An answer is a reply in the chat.",
+      "answers": [
+        {
+          "code": "yes",
+          "label": "Yes"
+        },
+        {
+          "code": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "carefulReasoning",
+      "label": "Does it need careful reasoning?",
+      "definition": "Careful reasoning: analysis, planning, or working through constraints, not a quick question or a rewrite.",
+      "answers": [
+        {
+          "code": "yes",
+          "label": "Yes"
+        },
+        {
+          "code": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "hardest",
+      "label": "Is it your hardest problem?",
+      "definition": "A particularly difficult question that needs deeper work.",
+      "answers": [
+        {
+          "code": "yes",
+          "label": "Yes"
+        },
+        {
+          "code": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "scoped",
+      "label": "Is it scoped, repeatable or high-volume?",
+      "definition": "A focused task with a clear limit, a task that comes back often, or many small tasks of the same kind.",
+      "answers": [
+        {
+          "code": "yes",
+          "label": "Yes"
+        },
+        {
+          "code": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "ambiguous",
+      "label": "Ambiguous, high-stakes or exacting?",
+      "definition": "The problem is not clear yet, a mistake is expensive, or the result must meet strict requirements.",
+      "answers": [
+        {
+          "code": "yes",
+          "label": "Yes"
+        },
+        {
+          "code": "no",
+          "label": "No"
+        }
+      ]
+    },
+    {
+      "key": "plan",
+      "label": "Your plan",
+      "definition": "The ChatGPT plan of your account or workspace.",
+      "answers": [
+        {
+          "code": "free_go",
+          "label": "Free or Go"
+        },
+        {
+          "code": "plus",
+          "label": "Plus"
+        },
+        {
+          "code": "pro",
+          "label": "Pro"
+        },
+        {
+          "code": "business_enterprise",
+          "label": "Business or Enterprise"
+        }
+      ]
+    }
+  ],
+  "options": [
+    {
+      "id": "Instant",
+      "label": "Instant",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Chat"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "Fast everyday answers"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Quick questions, rewrites, summaries"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": [
+            "Runs GPT-5.6 Sol, GPT-5.6 Luna on Free & Go"
+          ]
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": []
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Add Search for anything recent"
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "Rewrite this [text] for [audience]. Keep it under [length]. Tone: [casual/formal]. No preamble. Just the output."
+          ]
+        }
+      ],
+      "tools": []
+    },
+    {
+      "id": "Thinking",
+      "label": "Thinking",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Chat"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "Slower, deeper answers"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Analysis, planning, tricky writing"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": [
+            "Extra High needs Pro, Business or Enterprise"
+          ]
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": [
+            "Medium, High, Extra High. Step up only if the answer falls short."
+          ]
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Use deep research for cited reports"
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "I want [result] with [constraints]. Ask me questions before you start, then show your reasoning."
+          ]
+        }
+      ],
+      "tools": []
+    },
+    {
+      "id": "Pro",
+      "label": "GPT-6 Pro",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Chat"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "Astra, inside Chat"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "The hardest questions you ask in Chat"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": [
+            "Pro, Business and Enterprise plans"
+          ]
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": []
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Allowance is capped. Save it for the 10% that need it."
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "Here is my goal: [goal]. Constraints: [constraints]. Think through the tradeoffs, propose 2–3 approaches, recommend one."
+          ]
+        }
+      ],
+      "tools": []
+    },
+    {
+      "id": "Luna",
+      "label": "GPT-6 Luna",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Work & Codex"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "Smart and efficient"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Scoped tasks, triage, frequent automations"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": [
+            "Free & Go get Luna in the desktop app"
+          ]
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": [
+            "Low for edits and data extraction"
+          ]
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Put it on a Scheduled task"
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "Every weekday at [time], check [app] and send me the 5 items that need a reply."
+          ]
+        }
+      ],
+      "tools": []
+    },
+    {
+      "id": "Sol",
+      "label": "GPT-6.1 Sol",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Work & Codex"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "The Work all-rounder"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Decks, reports, sites and builds you will revise"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": []
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": [
+            "Medium, Extra high to polish"
+          ]
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Add Plugins and Skills",
+            "Start in Plan mode"
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "Turn [files] into a [board deck]. Do NOT start yet. Ask me clarifying questions and show the plan first."
+          ]
+        }
+      ],
+      "tools": []
+    },
+    {
+      "id": "Astra",
+      "label": "GPT-6 Astra",
+      "dimensions": [
+        {
+          "label": "Where",
+          "inRecommendation": false,
+          "characteristics": [
+            "Work & Codex"
+          ]
+        },
+        {
+          "label": "In short",
+          "inRecommendation": true,
+          "characteristics": [
+            "The smartest model"
+          ]
+        },
+        {
+          "label": "Best for",
+          "inRecommendation": false,
+          "characteristics": [
+            "Ambiguous problems, deep analysis, ambitious deliverables"
+          ]
+        },
+        {
+          "label": "Plans",
+          "inRecommendation": true,
+          "characteristics": [
+            "Limited usage on Plus"
+          ]
+        },
+        {
+          "label": "Effort",
+          "inRecommendation": true,
+          "characteristics": []
+        },
+        {
+          "label": "How to use",
+          "inRecommendation": true,
+          "characteristics": [
+            "Let it run long, end to end",
+            "When Sol gets stuck, escalate here"
+          ]
+        },
+        {
+          "label": "Prompt example",
+          "inRecommendation": true,
+          "characteristics": [
+            "Goal: [goal]. Context: [files, apps]. Work end to end, check your own output and flag what you are unsure of."
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ],
+  "rules": {
+    "choice": [
+      {
+        "id": "QuickAnswers",
+        "label": "Instant: quick questions, rewrites and summaries",
+        "recommends": "Instant",
+        "quote": "Instant for quick questions, rewrites, and summaries.",
+        "explanation": "An answer, not finished work, that needs no careful reasoning: fast everyday answers.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "no"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "carefulReasoning",
+              "answers": [
+                "no"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "DeeperAnswers",
+        "label": "Thinking: analysis, planning and constraints",
+        "recommends": "Thinking",
+        "quote": "Thinking for analysis, planning, and working through constraints.",
+        "explanation": "An answer that needs careful reasoning, but not your hardest problem: slower, deeper answers.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "no"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "carefulReasoning",
+              "answers": [
+                "yes"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "hardest",
+              "answers": [
+                "no"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "HardestProblem",
+        "label": "GPT-6 Pro: particularly difficult questions",
+        "recommends": "Pro",
+        "quote": "GPT-6 Pro for particularly difficult questions that need deeper work.",
+        "explanation": "Your hardest problem, as an answer in Chat.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "no"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "carefulReasoning",
+              "answers": [
+                "yes"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "hardest",
+              "answers": [
+                "yes"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "ScopedWork",
+        "label": "GPT-6 Luna: focused tasks and repeatable workflows",
+        "recommends": "Luna",
+        "quote": "GPT-6 Luna for focused tasks and repeatable workflows.",
+        "explanation": "Finished work that is scoped, repeatable or high-volume: smart and efficient.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "yes"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "scoped",
+              "answers": [
+                "yes"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "RefinedDeliverables",
+        "label": "GPT-6.1 Sol: documents, coding and deliverables you will refine",
+        "recommends": "Sol",
+        "quote": "GPT-6.1 Sol for documents, coding, and deliverables you will refine.",
+        "explanation": "Finished work, not scoped and not ambiguous: the Work all-rounder.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "yes"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "scoped",
+              "answers": [
+                "no"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "ambiguous",
+              "answers": [
+                "no"
+              ]
+            }
+          ]
+        ]
+      },
+      {
+        "id": "AmbiguousWork",
+        "label": "GPT-6 Astra: ambiguous problems and demanding, multi-step work",
+        "recommends": "Astra",
+        "quote": "GPT-6 Astra for ambiguous problems and demanding, multi-step work.",
+        "explanation": "Finished work that is ambiguous, high-stakes or exacting: the smartest model.",
+        "when": [
+          [
+            {
+              "criterion": "finishedWork",
+              "answers": [
+                "yes"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "scoped",
+              "answers": [
+                "no"
+              ]
+            }
+          ],
+          [
+            {
+              "criterion": "ambiguous",
+              "answers": [
+                "yes"
+              ]
+            }
+          ]
+        ]
+      }
+    ],
+    "additions": [],
+    "cautions": [
+      {
+        "id": "ProNeedsPlan",
+        "label": "GPT-6 Pro is not on your plan",
+        "quote": "Pro, Business and Enterprise plans",
+        "explanation": "The diagram has GPT-6 Pro on the Pro, Business and Enterprise plans only.",
+        "when": [
+          [
+            {
+              "criterion": "plan",
+              "answers": [
+                "free_go",
+                "plus"
+              ]
+            }
+          ]
+        ],
+        "whenChosen": "HardestProblem"
+      },
+      {
+        "id": "ExtraHighNeedsPlan",
+        "label": "Extra High is not on your plan",
+        "quote": "Extra High needs Pro, Business or Enterprise",
+        "explanation": "On your plan, Thinking steps up to High effort, not further.",
+        "when": [
+          [
+            {
+              "criterion": "plan",
+              "answers": [
+                "free_go",
+                "plus"
+              ]
+            }
+          ]
+        ],
+        "whenChosen": "DeeperAnswers"
+      },
+      {
+        "id": "LunaOnDesktop",
+        "label": "Use the desktop app",
+        "quote": "Free & Go get Luna in the desktop app",
+        "explanation": "On the Free and Go plans, GPT-6 Luna is in the desktop app.",
+        "when": [
+          [
+            {
+              "criterion": "plan",
+              "answers": [
+                "free_go"
+              ]
+            }
+          ]
+        ],
+        "whenChosen": "ScopedWork"
+      },
+      {
+        "id": "AstraLimitedOnPlus",
+        "label": "Limited usage on your plan",
+        "quote": "Limited usage on Plus",
+        "explanation": "On the Plus plan, the usage of GPT-6 Astra is limited. The words are partly hidden in the screenshot; completed by us.",
+        "when": [
+          [
+            {
+              "criterion": "plan",
+              "answers": [
+                "plus"
+              ]
+            }
+          ]
+        ],
+        "whenChosen": "AmbiguousWork"
+      }
+    ]
+  },
+  "ladder": [
+    {
+      "id": "Rung1",
+      "option": "Luna",
+      "level": "Low",
+      "levelOrder": 1,
+      "explanation": "Small edits, simple data extraction"
+    },
+    {
+      "id": "Rung2",
+      "option": "Luna",
+      "level": "Medium",
+      "levelOrder": 2,
+      "explanation": "Finding context across apps, prioritizing"
+    },
+    {
+      "id": "Rung3",
+      "option": "Sol",
+      "level": "Low",
+      "levelOrder": 1,
+      "explanation": "Complex technical work, drafts you will revise"
+    },
+    {
+      "id": "Rung4",
+      "option": "Sol",
+      "level": "Extra high",
+      "levelOrder": 4,
+      "explanation": "Polished deliverables, conflicting evidence"
+    },
+    {
+      "id": "Rung5",
+      "option": "Astra",
+      "level": "Low",
+      "levelOrder": 1,
+      "explanation": "Concise writing that keeps facts and nuance"
+    },
+    {
+      "id": "Rung6",
+      "option": "Astra",
+      "level": "Medium",
+      "levelOrder": 2,
+      "explanation": "Ambitious projects needing broad context"
+    },
+    {
+      "id": "Rung7",
+      "option": "Astra",
+      "level": "Extra high",
+      "levelOrder": 4,
+      "explanation": "Deep analysis, exacting requirements"
+    }
+  ]
+}

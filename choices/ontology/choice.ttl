@@ -1,0 +1,133 @@
+@prefix :        <https://example.org/choice#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The vocabulary of a choice: the words that the generator, the decision code and the app know.
+# A domain (domains/<name>/ontology/) uses these words directly, or maps its own words to them
+# with rdfs:subClassOf and rdfs:subPropertyOf (see domains/cloud-architecture/ontology/domain.ttl).
+# Nothing here knows about architecture styles or models.
+#
+# Every resource also uses the common words: rdfs:label for its name, sh:order for its place,
+# skos:notation for its key in the answers, skos:definition and rdfs:comment for its explanation.
+
+<https://example.org/choice>
+    a owl:Ontology ;
+    rdfs:label "Choice: questions, options and rules"@en .
+
+# ---------------------------------------------------------------------------
+# 1. The domain: the words of its page
+# ---------------------------------------------------------------------------
+
+:Domain a owl:Class ; rdfs:label "Domain"@en ;
+    rdfs:comment "One set of questions, options and rules, with one page. rdfs:label is the title of the page."@en .
+
+:intro a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "intro"@en ;
+    rdfs:comment "The first sentence of the page, before the link to the source."@en .
+:author a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "author"@en ;
+    rdfs:comment "The author of the source, whose words the quotes of the rules are."@en .
+:sourceTitle a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "source title"@en ;
+    rdfs:comment "The title of the source; dcterms:source is its address."@en .
+:optionsTitle a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "options title"@en ;
+    rdfs:comment "The title of the table that compares the options."@en .
+:additionsTitle a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "additions title"@en ;
+    rdfs:comment "The title above the additions in a recommendation."@en .
+:ladderTitle a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "ladder title"@en .
+:ladderQuote a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "ladder quote"@en ;
+    rdfs:comment "The words of the source about how to use the ladder."@en .
+:recordTitle a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "record title"@en ;
+    rdfs:comment "The first words of the title of the record that a person downloads, before the option."@en .
+:recordName a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "record name"@en ;
+    rdfs:comment "What the record is, in the text of the download button: \"an architecture decision record\"."@en .
+:recordFile a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "record file"@en .
+:recordAppendix a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:label "record appendix"@en ;
+    rdfs:comment "Markdown that the record ends with."@en .
+
+# ---------------------------------------------------------------------------
+# 2. Questions
+# ---------------------------------------------------------------------------
+
+:Criterion a owl:Class ; rdfs:label "Criterion"@en ;
+    rdfs:comment "A question about the situation. skos:notation is its key in the answers, sh:order its place in the form."@en .
+
+:Answer a owl:Class ; rdfs:label "Answer"@en ;
+    rdfs:comment "An allowed answer to a criterion. skos:notation is its code in the answers."@en .
+
+:answers a owl:ObjectProperty ; rdfs:domain :Criterion ; rdfs:label "answers"@en ;
+    rdfs:comment "The allowed answers of a criterion, as an RDF list in the order the form shows them. Every criterion also accepts \"not sure\", which the generator adds."@en .
+
+:yes a :Answer ; skos:notation "yes" ; rdfs:label "Yes"@en .
+:no  a :Answer ; skos:notation "no" ;  rdfs:label "No"@en .
+
+# ---------------------------------------------------------------------------
+# 3. Options
+# ---------------------------------------------------------------------------
+
+:Option a owl:Class ; rdfs:label "Option"@en ;
+    rdfs:comment "One of the things to choose from. The table of the page compares the options."@en .
+
+:hasCharacteristic a owl:ObjectProperty ; rdfs:domain :Option ; rdfs:label "has characteristic"@en ;
+    rdfs:comment "Each subproperty with a sh:order is one row of the table: a dimension. Its name is the rdfs:label of its range, or its own. A value is a resource with a rdfs:label, or text."@en .
+
+:inRecommendation a owl:DatatypeProperty ; rdfs:range xsd:boolean ; rdfs:label "in recommendation"@en ;
+    rdfs:comment "True on a dimension that the recommendation shows too, not only the table."@en .
+
+:supportedBy a owl:ObjectProperty ; rdfs:domain :Option ; rdfs:label "supported by"@en ;
+    rdfs:comment "A tool for the option. rdfs:label is its name."@en .
+
+:availableWith a owl:ObjectProperty ; rdfs:range :Answer ; rdfs:label "available with"@en ;
+    rdfs:comment "The answer that a tool fits, for example a platform. A recommendation names the tools that fit the answers, or all of them when none does."@en .
+
+# ---------------------------------------------------------------------------
+# 4. Rules
+# ---------------------------------------------------------------------------
+
+:Rule a owl:Class ; rdfs:label "Rule"@en ;
+    rdfs:comment "It applies when all its conditions hold; a rule without conditions always applies. :quote holds the words of the source, rdfs:comment the explanation."@en .
+
+:ChoiceRule a owl:Class ; rdfs:subClassOf :Rule ; rdfs:label "Choice rule"@en ;
+    rdfs:comment "Chooses the option. The first choice rule that applies, by sh:order, decides; a choice rule without conditions is the default."@en .
+
+:AdditionRule a owl:Class ; rdfs:subClassOf :Rule ; rdfs:label "Addition rule"@en ;
+    rdfs:comment "Adds another option for a part. Every addition rule that applies adds its part."@en .
+
+:Caution a owl:Class ; rdfs:subClassOf :Rule ; rdfs:label "Caution"@en ;
+    rdfs:comment "A warning that comes with the recommendation. Every caution that applies is shown."@en .
+
+:recommends a owl:ObjectProperty ; rdfs:range :Option ; rdfs:label "recommends"@en .
+:part a owl:DatatypeProperty ; rdfs:label "part"@en ;
+    rdfs:comment "The part that an addition rule is about."@en .
+:quote a owl:DatatypeProperty ; rdfs:label "quote"@en .
+:when a owl:ObjectProperty ; rdfs:label "when"@en ;
+    rdfs:comment "A condition: either one criterion with its matching answers (:criterion, :in), or several such conditions of which one is enough (:anyOf)."@en .
+:criterion a owl:ObjectProperty ; rdfs:range :Criterion ; rdfs:label "criterion"@en .
+:in a owl:ObjectProperty ; rdfs:label "in"@en ; rdfs:comment "The answers that meet the condition, as an RDF list."@en .
+:anyOf a owl:ObjectProperty ; rdfs:label "any of"@en ; rdfs:comment "Conditions of which one is enough, as an RDF list."@en .
+:whenChosen a owl:ObjectProperty ; rdfs:domain :Caution ; rdfs:range :ChoiceRule ; rdfs:label "when chosen"@en ;
+    rdfs:comment "A further condition of a caution: the choice rule that decided."@en .
+
+# ---------------------------------------------------------------------------
+# 5. A decision tree: another way to write the conditions of choice rules
+# ---------------------------------------------------------------------------
+
+:startsAt a owl:ObjectProperty ; rdfs:domain :Domain ; rdfs:range :Criterion ; rdfs:label "starts at"@en ;
+    rdfs:comment "The first question of the tree."@en .
+
+:branch a owl:ObjectProperty ; rdfs:domain :Criterion ; rdfs:label "branch"@en ;
+    rdfs:comment "An arrow of the tree: for one :answer of the criterion, where to go :to, the next criterion or a choice rule. The generator writes the conditions of each choice rule from the path that leads to it, and stops when a criterion does not have exactly one branch per answer, or a choice rule does not have exactly one path."@en .
+:answer a owl:ObjectProperty ; rdfs:range :Answer ; rdfs:label "answer"@en .
+:to a owl:ObjectProperty ; rdfs:label "to"@en .
+
+# ---------------------------------------------------------------------------
+# 6. A ladder: where to start, and what to try next
+# ---------------------------------------------------------------------------
+
+:Step a owl:Class ; rdfs:label "Step"@en ;
+    rdfs:comment "A step of the ladder, in sh:order: an :option at a :level, with what it suits in rdfs:comment. A recommendation starts at the first step of its option, and steps up only when the result falls short."@en .
+:option a owl:ObjectProperty ; rdfs:domain :Step ; rdfs:range :Option ; rdfs:label "option"@en .
+:level a owl:ObjectProperty ; rdfs:domain :Step ; rdfs:range :Level ; rdfs:label "level"@en .
+
+:Level a owl:Class ; rdfs:label "Level"@en ;
+    rdfs:comment "How much effort a step takes. sh:order orders the levels, lightest first: along the ladder, the levels of one option must go up."@en .

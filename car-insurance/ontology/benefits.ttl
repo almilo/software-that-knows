@@ -124,6 +124,19 @@
 :Customs a ins:Concept ; rdfs:label "Customs and scrapping"@en ; ins:order 15 .
 :TotalLimit a ins:Concept ; rdfs:label "Limit for all benefits"@en ; ins:order 16 .
 
+# The benefits of the covers that the claim check does not calculate: it shows them with the sums
+# of the certificate.
+:LiabilityBenefit a ins:Benefit ; rdfs:label "Zurich pays justified claims, defends you against unjustified claims, and conducts the civil proceedings"@en ;
+    ins:benefitOf :ThirdPartyLiability ; ins:source art:103, art:10.2 .
+:LiabilityLimit a ins:Benefit ; rdfs:label "Up to 100 million CHF per event"@en ; ins:limit 100000000 ; ins:per "event" ;
+    ins:benefitOf :ThirdPartyLiability ; ins:source art:103 .
+:MedicalBenefit a ins:Benefit ; rdfs:label "The necessary costs of treatment, for 5 years after the accident, after social security"@en ;
+    ins:benefitOf :MedicalExpenses ; ins:source art:303.5 .
+:OtherVehiclesBenefit a ins:Benefit ; rdfs:label "Death 30,000 CHF, disability 60,000 CHF"@en ;
+    ins:benefitOf :OtherPeoplesVehicles ; ins:source art:301.3 .
+:LegalBenefit a ins:Benefit ; rdfs:label "Lawyer, expert opinions, court costs, and the collection of the claim"@en ; ins:limit 500000 ; ins:per "legal case" ;
+    ins:benefitOf :VehicleLegalProtection ; ins:source art:504 .
+
 # ---------------------------------------------------------------------------
 # 4. Comparisons
 # ---------------------------------------------------------------------------

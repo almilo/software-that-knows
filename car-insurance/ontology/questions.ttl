@@ -13,13 +13,13 @@
 # 1. The claim: what happened
 # ---------------------------------------------------------------------------
 
-:vehicleClass a ins:ClaimFact ; ins:key "vehicleClass" ; ins:order 1 ; ins:required true ; ins:kind "choice" ;
+:vehicleClass a ins:CertificateFact ; ins:key "vehicleClass" ; ins:order 1 ; ins:required true ; ins:kind "choice" ;
     rdfs:label "Which vehicle is insured?"@en ;
     ins:value ( :PassengerCar :Motorcycle :OtherVehicle ) .
 
 :event a ins:ClaimFact ; ins:key "event" ; ins:order 2 ; ins:required true ; ins:kind "choice" ;
-    rdfs:label "What happened to the vehicle?"@en ;
-    ins:value ( :CollisionEvent :TheftEvent :FireEvent :HazardEvent :GlassEvent :AnimalEvent :VandalismEvent :MartenEvent :ParkingEvent :ItemsEvent :ClothingEvent ) .
+    rdfs:label "What happened?"@en ;
+    ins:value ( :CollisionEvent :TheftEvent :FireEvent :HazardEvent :GlassEvent :AnimalEvent :VandalismEvent :MartenEvent :ParkingEvent :ItemsEvent :ClothingEvent :BreakdownEvent :InjuryEvent :LiabilityEvent :LegalEvent ) .
 :CollisionEvent rdfs:label "Collision or accident"@en ; ins:help "Impact, collision, rollover, falling, sinking."@en .
 :TheftEvent rdfs:label "Theft"@en ; ins:help "The vehicle or parts of it were stolen or used without permission, or somebody tried to."@en .
 :FireEvent rdfs:label "Fire"@en ; ins:help "Fire, explosion, lightning, short circuit."@en .
@@ -31,11 +31,16 @@
 :ParkingEvent rdfs:label "Parking damage"@en ; ins:help "Damage by an unknown vehicle or person while the vehicle was parked."@en .
 :ItemsEvent rdfs:label "Items in the vehicle"@en ; ins:help "Items of the passengers were damaged or stolen."@en .
 :ClothingEvent rdfs:label "Motorcycle protective clothing"@en ; ins:help "Helmet, suit, protectors, boots or gloves."@en .
+:BreakdownEvent rdfs:label "Breakdown"@en ; ins:help "The vehicle broke down or will not start, without an accident: I need help on the road or a tow."@en .
+:InjuryEvent rdfs:label "A person was injured"@en ; ins:help "In an accident with the vehicle."@en .
+:LiabilityEvent rdfs:label "Another person claims damages from me"@en ; ins:help "I caused damage or injury with the vehicle, or somebody says that I did."@en .
+:LegalEvent rdfs:label "I need legal help"@en ; ins:help "I want to claim damages from another person, or I must defend myself in proceedings."@en .
 
 :theftKind a ins:ClaimFact ; ins:key "theftKind" ; ins:order 3 ; ins:kind "choice" ; ins:closedList :TheftList ;
     rdfs:label "What kind of theft?"@en ;
-    ins:value ( :VehicleStolen :TheftAttempt :FuelOnly :HouseholdUse ) .
-:VehicleStolen rdfs:label "The vehicle or parts of it were stolen"@en ; ins:help "Or a stranger used it without permission, or robbed it."@en .
+    ins:value ( :VehicleStolen :ItemsStolen :TheftAttempt :FuelOnly :HouseholdUse ) .
+:VehicleStolen rdfs:label "The vehicle or parts of it were stolen"@en ; ins:help "Parts of the vehicle: for example the wheels or the radio that is built in. Or a stranger used the vehicle without permission, or robbed it."@en .
+:ItemsStolen rdfs:label "Items in the vehicle were stolen"@en ; ins:help "For example a laptop or a bag: things that are not part of the vehicle."@en .
 :TheftAttempt rdfs:label "Damage from an attempt"@en ; ins:help "Somebody tried to steal, use or rob the vehicle."@en .
 :FuelOnly rdfs:label "Only fuel was stolen"@en .
 :HouseholdUse rdfs:label "A person of my household used it without permission"@en .
@@ -59,10 +64,11 @@
 
 :hazardKind a ins:ClaimFact ; ins:key "hazardKind" ; ins:order 6 ; ins:kind "choice" ; ins:closedList :HazardList ;
     rdfs:label "Which natural hazard?"@en ;
-    ins:value ( :Storm :Hail :Flood :Rockslide :Avalanche :FallingAircraft :OtherHazard ) .
+    ins:value ( :Storm :Hail :Flood :DroveIntoWater :Rockslide :Avalanche :FallingAircraft :OtherHazard ) .
 :Storm rdfs:label "Storm"@en ; ins:help "Wind of at least 75 km/h."@en .
 :Hail rdfs:label "Hail"@en .
-:Flood rdfs:label "High water or flood"@en .
+:Flood rdfs:label "High water or a flood reached the vehicle"@en ; ins:help "The vehicle was parked or stopped, and the water came to it."@en .
+:DroveIntoWater rdfs:label "The vehicle was driven into water"@en ; ins:help "For example through a flooded road or underpass."@en .
 :Rockslide rdfs:label "Rockslide, falling stones or landslide"@en .
 :Avalanche rdfs:label "Avalanche, snow slide, falling ice or snow pressure"@en .
 :FallingAircraft rdfs:label "Falling aircraft or spacecraft"@en .
@@ -126,6 +132,22 @@
 :TheftLocked rdfs:label "Stolen from a locked container on the motorcycle, or a helmet with a helmet lock"@en .
 :TheftUnlocked rdfs:label "Stolen in another way"@en .
 
+:injuredPerson a ins:ClaimFact ; ins:key "injuredPerson" ; ins:order 13.5 ; ins:kind "choice" ;
+    rdfs:label "Who was injured?"@en ;
+    ins:value ( :Driver :Passenger :Helper :InOtherVehicle ) .
+:Driver rdfs:label "The driver of the insured vehicle"@en .
+:Passenger rdfs:label "A passenger of the insured vehicle"@en .
+:Helper rdfs:label "A person who helped at an accident or breakdown of the insured vehicle"@en ; ins:help "Not police, paramedics or other professional helpers."@en .
+:InOtherVehicle rdfs:label "I, or a person of my household, in another person's vehicle"@en ; ins:help "A car or van of up to 3500 kg and 9 seats."@en .
+
+:legalKind a ins:ClaimFact ; ins:key "legalKind" ; ins:order 13.6 ; ins:kind "choice" ;
+    rdfs:label "What legal help do you need?"@en ;
+    ins:value ( :ClaimDamages :Defence :LicenceConfiscated :VehicleContract ) .
+:ClaimDamages rdfs:label "Claim damages from a person who damaged my vehicle or injured me"@en .
+:Defence rdfs:label "Defend myself in criminal or administrative proceedings"@en .
+:LicenceConfiscated rdfs:label "My licence or registration documents were confiscated"@en .
+:VehicleContract rdfs:label "A dispute about buying, renting, leasing or repairing the vehicle"@en .
+
 :place a ins:ClaimFact ; ins:key "place" ; ins:order 15 ; ins:kind "choice" ;
     rdfs:label "Where did it happen?"@en ;
     ins:value ( :CHFL :Europe :ExcludedCountry :Elsewhere ) .
@@ -135,24 +157,51 @@
 :Elsewhere rdfs:label "Somewhere else"@en .
 
 # ---------------------------------------------------------------------------
-# 2. The claim: options of the policy. Asked only when the cover of the event is an option.
+# 2. The certificate: the modules and options of one policy. The applications read them from the
+#    certificate (certificate.ttl); the claim check asks one only if the certificate misses it.
 # ---------------------------------------------------------------------------
 
-:hasGlassPlus a ins:ClaimFact ; ins:key "hasGlassPlus" ; ins:order 30 ; ins:kind "choice" ; ins:optionOf :GlassPlus ;
-    rdfs:label "Does your policy include Glass PLUS?"@en ; ins:value ( :Yes :No ) .
-:hasMartens a ins:ClaimFact ; ins:key "hasMartens" ; ins:order 31 ; ins:kind "choice" ; ins:optionOf :Martens ;
-    rdfs:label "Does your policy include Martens?"@en ; ins:value ( :Yes :No ) .
-:hasParkingDamage a ins:ClaimFact ; ins:key "hasParkingDamage" ; ins:order 32 ; ins:kind "choice" ; ins:optionOf :ParkingDamage ;
-    rdfs:label "Does your policy include Parking damage?"@en ; ins:value ( :Yes :No ) .
-:hasItemsTransported a ins:ClaimFact ; ins:key "hasItemsTransported" ; ins:order 33 ; ins:kind "choice" ; ins:optionOf :ItemsTransported ;
-    rdfs:label "Does your policy include Items transported?"@en ; ins:value ( :Yes :No ) .
-:hasProtectiveClothing a ins:ClaimFact ; ins:key "hasProtectiveClothing" ; ins:order 34 ; ins:kind "choice" ; ins:optionOf :ProtectiveClothing ;
-    rdfs:label "Does your policy include Protective clothing?"@en ; ins:value ( :Yes :No ) .
-:hasParkingDamagePlus a ins:ClaimFact ; ins:key "hasParkingDamagePlus" ; ins:order 35 ; ins:kind "choice" ; ins:optionOf :ParkingDamagePlus ;
-    rdfs:label "Does your policy include Parking damage PLUS?"@en ; ins:value ( :Yes :No ) ;
-    ins:askWhen [ ins:fact :hasParkingDamage ; ins:in ( :Yes ) ] .
-:hasCollisionGrossNegligence a ins:ClaimFact ; ins:key "hasCollisionGrossNegligence" ; ins:order 36 ; ins:kind "choice" ; ins:optionOf :CollisionGrossNegligence ;
-    rdfs:label "Does your policy include Coverage for gross negligence (collision)?"@en ; ins:value ( :Yes :No ) .
+:hasCollision a ins:CertificateFact ; ins:key "hasCollision" ; ins:order 20 ; ins:kind "choice" ; ins:moduleOf :CollisionModule ;
+    rdfs:label "Collision (full casco)"@en ; ins:value ( :Yes :No ) .
+:hasPartialCasco a ins:CertificateFact ; ins:key "hasPartialCasco" ; ins:order 21 ; ins:kind "choice" ; ins:moduleOf :PartialCascoModule ;
+    rdfs:label "Partial casco"@en ; ins:value ( :Yes :No ) .
+:hasAccident a ins:CertificateFact ; ins:key "hasAccident" ; ins:order 22 ; ins:kind "choice" ; ins:moduleOf :AccidentModule ;
+    rdfs:label "Accident insurance"@en ; ins:value ( :Yes :No ) .
+:hasRoadside a ins:CertificateFact ; ins:key "hasRoadside" ; ins:order 23 ; ins:kind "choice" ; ins:moduleOf :RoadsideModule ;
+    rdfs:label "Roadside assistance"@en ; ins:value ( :Yes :No ) .
+:hasLegal a ins:CertificateFact ; ins:key "hasLegal" ; ins:order 24 ; ins:kind "choice" ; ins:moduleOf :LegalModule ;
+    rdfs:label "Legal protection"@en ; ins:value ( :Yes :No ) .
+:hasHelpPoint a ins:CertificateFact ; ins:key "hasHelpPoint" ; ins:order 25 ; ins:kind "choice" ;
+    rdfs:label "Help Point PLUS"@en ; ins:value ( :Yes :No ) .
+:accidentPersons a ins:CertificateFact ; ins:key "accidentPersons" ; ins:order 26 ; ins:kind "choice" ;
+    rdfs:label "Insured persons of the accident insurance"@en ;
+    ins:value ( :DriverAndPassengers :DriverOnly ) .
+:DriverAndPassengers rdfs:label "Driver and passengers"@en .
+:DriverOnly rdfs:label "Driver only"@en .
+:deathSum a ins:CertificateFact ; ins:key "deathSum" ; ins:order 27 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+    rdfs:label "Sum insured in the event of death"@en .
+:disabilitySum a ins:CertificateFact ; ins:key "disabilitySum" ; ins:order 28 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+    rdfs:label "Sum insured in the event of disability"@en .
+:dailyAllowance a ins:CertificateFact ; ins:key "dailyAllowance" ; ins:order 29 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+    rdfs:label "Daily allowance"@en .
+:hospitalAllowance a ins:CertificateFact ; ins:key "hospitalAllowance" ; ins:order 29.5 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+    rdfs:label "Daily allowance in hospital"@en .
+
+:hasGlassPlus a ins:CertificateFact ; ins:key "hasGlassPlus" ; ins:order 30 ; ins:kind "choice" ; ins:optionOf :GlassPlus ;
+    rdfs:label "Glass PLUS"@en ; ins:value ( :Yes :No ) .
+:hasMartens a ins:CertificateFact ; ins:key "hasMartens" ; ins:order 31 ; ins:kind "choice" ; ins:optionOf :Martens ;
+    rdfs:label "Martens"@en ; ins:value ( :Yes :No ) .
+:hasParkingDamage a ins:CertificateFact ; ins:key "hasParkingDamage" ; ins:order 32 ; ins:kind "choice" ; ins:optionOf :ParkingDamage ;
+    rdfs:label "Parking damage"@en ; ins:value ( :Yes :No ) .
+:hasItemsTransported a ins:CertificateFact ; ins:key "hasItemsTransported" ; ins:order 33 ; ins:kind "choice" ; ins:optionOf :ItemsTransported ;
+    rdfs:label "Items transported"@en ; ins:value ( :Yes :No ) .
+:hasProtectiveClothing a ins:CertificateFact ; ins:key "hasProtectiveClothing" ; ins:order 34 ; ins:kind "choice" ; ins:optionOf :ProtectiveClothing ;
+    rdfs:label "Protective clothing"@en ; ins:value ( :Yes :No ) .
+:hasParkingDamagePlus a ins:CertificateFact ; ins:key "hasParkingDamagePlus" ; ins:order 35 ; ins:kind "choice" ; ins:optionOf :ParkingDamagePlus ;
+    rdfs:label "Parking damage PLUS"@en ; ins:value ( :Yes :No ) ; ins:neededFor "vehicle" ;
+    ins:askWhen [ ins:fact :event ; ins:in ( :ParkingEvent ) ] .
+:hasCollisionGrossNegligence a ins:CertificateFact ; ins:key "hasCollisionGrossNegligence" ; ins:order 36 ; ins:kind "choice" ; ins:optionOf :CollisionGrossNegligence ;
+    rdfs:label "Coverage for gross negligence (collision)"@en ; ins:value ( :Yes :No ) .
 
 # ---------------------------------------------------------------------------
 # 3. The claim: the facts of the exclusions and reductions
@@ -201,10 +250,11 @@
 
 :operation a ins:ClaimFact ; ins:key "operation" ; ins:order 46 ; ins:kind "choice" ;
     rdfs:label "Is the damage one of these?"@en ;
-    ins:value ( :NotOperation :AfterBreakdown :WearOrBreakdown :TyresOrBatteryOnly :LoadedGoods ) .
+    ins:value ( :NotOperation :AfterBreakdown :WearOrBreakdown :WaterInEngine :TyresOrBatteryOnly :LoadedGoods ) .
 :NotOperation rdfs:label "None of these"@en .
 :AfterBreakdown rdfs:label "A collision as the consequence of a breakage or of wear"@en ; ins:help "For example a tyre burst and the car hit a wall."@en .
 :WearOrBreakdown rdfs:label "The breakage or the wear itself"@en ; ins:help "Wear and tear, operation, wrong handling or fuel, lack of oil or coolant."@en .
+:WaterInEngine rdfs:label "Water drawn into the engine while driving through water"@en .
 :TyresOrBatteryOnly rdfs:label "Damage only to the tyres or the batteries"@en .
 :LoadedGoods rdfs:label "Damage caused by the load"@en .
 
@@ -216,44 +266,42 @@
 :Intent rdfs:label "Intent"@en .
 
 # ---------------------------------------------------------------------------
-# 4. The claim: the amounts. No rule uses them; the calculation does (engine/benefit.ts).
+# 4. The claim: the amounts. No rule uses them; the calculation of the cover does
+#    (engine/benefit.ts). ins:neededFor names the calculations that need them.
 # ---------------------------------------------------------------------------
 
-:theftRecovered a ins:ClaimFact ; ins:key "theftRecovered" ; ins:order 60 ; ins:kind "choice" ;
+:theftRecovered a ins:ClaimFact ; ins:key "theftRecovered" ; ins:order 60 ; ins:kind "choice" ; ins:neededFor "vehicle" ;
     rdfs:label "Was the vehicle found within 30 days after you reported the theft?"@en ;
     ins:askWhen [ ins:fact :theftKind ; ins:in ( :VehicleStolen ) ] ;
     ins:value ( :Recovered :NotRecovered ) .
 :Recovered rdfs:label "Yes"@en .
 :NotRecovered rdfs:label "No"@en .
 
-:monthsOfService a ins:ClaimFact ; ins:key "monthsOfService" ; ins:order 61 ; ins:kind "number" ; ins:unit "months" ;
-    rdfs:label "How many months ago was the vehicle first put on the road?"@en ;
-    ins:askWhen [ ins:fact :event ; ins:notIn ( :ItemsEvent :ClothingEvent ) ] .
-:catalogPrice a ins:ClaimFact ; ins:key "catalogPrice" ; ins:order 62 ; ins:kind "number" ; ins:unit "CHF" ;
+:monthsOfService a ins:ClaimFact ; ins:key "monthsOfService" ; ins:order 61 ; ins:kind "number" ; ins:unit "months" ; ins:neededFor "vehicle" ;
+    rdfs:label "How many months ago was the vehicle first put on the road?"@en ; .
+:catalogPrice a ins:ClaimFact ; ins:key "catalogPrice" ; ins:order 62 ; ins:kind "number" ; ins:unit "CHF" ; ins:neededFor "vehicle" ;
     rdfs:label "What is the catalogue price of the vehicle, with accessories?"@en ;
-    ins:help "The official list price with VAT at the first registration."@en ;
-    ins:askWhen [ ins:fact :event ; ins:notIn ( :ItemsEvent :ClothingEvent ) ] .
-:marketValue a ins:ClaimFact ; ins:key "marketValue" ; ins:order 63 ; ins:kind "number" ; ins:unit "CHF" ;
+    ins:help "The official list price with VAT at the first registration."@en ; .
+:marketValue a ins:ClaimFact ; ins:key "marketValue" ; ins:order 63 ; ins:kind "number" ; ins:unit "CHF" ; ins:neededFor "vehicle" ;
     rdfs:label "What is the replacement value of the vehicle?"@en ;
     ins:help "The price of an equivalent vehicle on the open market on the day of the loss."@en ;
     ins:askWhen [ ins:fact :monthsOfService ; ins:atLeast 24 ] .
-:repairCost a ins:ClaimFact ; ins:key "repairCost" ; ins:order 64 ; ins:kind "number" ; ins:unit "CHF" ;
+:repairCost a ins:ClaimFact ; ins:key "repairCost" ; ins:order 64 ; ins:kind "number" ; ins:unit "CHF" ; ins:neededFor "vehicle", "item" ;
     rdfs:label "What do the repair or the replacement cost?"@en ;
     ins:askWhen [ ins:fact :theftRecovered ; ins:notIn ( :NotRecovered ) ] .
-:deductible a ins:ClaimFact ; ins:key "deductible" ; ins:order 65 ; ins:kind "number" ; ins:unit "CHF" ;
-    rdfs:label "What deductible does your policy give for this cover?"@en ;
-    ins:askWhen [ ins:fact :event ; ins:notIn ( :ItemsEvent :ClothingEvent ) ] .
-:claimFreeYears a ins:ClaimFact ; ins:key "claimFreeYears" ; ins:order 66 ; ins:kind "number" ; ins:unit "years" ;
+:deductible a ins:ClaimFact ; ins:key "deductible" ; ins:order 65 ; ins:kind "number" ; ins:unit "CHF" ; ins:neededFor "vehicle" ;
+    rdfs:label "What deductible does your policy give for this cover?"@en ; .
+:claimFreeYears a ins:ClaimFact ; ins:key "claimFreeYears" ; ins:order 66 ; ins:kind "number" ; ins:unit "years" ; ins:neededFor "vehicle" ;
     rdfs:label "How many full insurance years without a liability or collision claim do you have?"@en ;
     ins:help "A year counts if it lasted at least eleven months."@en ;
     ins:askWhen [ ins:anyOf ( [ ins:fact :event ; ins:in ( :CollisionEvent ) ] [ ins:fact :animalKind ; ins:in ( :Swerved ) ] ) ] .
-:helpPoint a ins:ClaimFact ; ins:key "helpPoint" ; ins:order 67 ; ins:kind "choice" ;
-    rdfs:label "Does your policy include Help Point PLUS?"@en ;
-    ins:askWhen [ ins:fact :event ; ins:notIn ( :ItemsEvent :ClothingEvent ) ] ;
-    ins:value ( :NoHelpPoint :HelpPointFollowed :HelpPointNotFollowed ) .
-:NoHelpPoint rdfs:label "No"@en .
-:HelpPointFollowed rdfs:label "Yes, and I reported it and used the garage that Zurich specified"@en .
-:HelpPointNotFollowed rdfs:label "Yes, but I did not use the help point or the garage"@en .
+:helpPoint a ins:ClaimFact ; ins:key "helpPoint" ; ins:order 67 ; ins:kind "choice" ; ins:neededFor "vehicle" ;
+    rdfs:label "Did you follow the rules of Help Point PLUS?"@en ;
+    ins:help "Report the damage by phone or at a help point, and repair at the garage that Zurich specifies."@en ;
+    ins:askWhen [ ins:fact :hasHelpPoint ; ins:in ( :Yes ) ] ;
+    ins:value ( :HelpPointFollowed :HelpPointNotFollowed ) .
+:HelpPointFollowed rdfs:label "Yes"@en .
+:HelpPointNotFollowed rdfs:label "No"@en .
 
 # ---------------------------------------------------------------------------
 # 5. The guide after an event
@@ -263,7 +311,6 @@
 :stolen a ins:GuideFact ; ins:key "stolen" ; ins:order 2 ; ins:kind "choice" ; rdfs:label "Something was stolen"@en ; ins:value ( :Yes :No ) .
 :animal a ins:GuideFact ; ins:key "animal" ; ins:order 3 ; ins:kind "choice" ; rdfs:label "An animal was involved"@en ; ins:value ( :Yes :No ) .
 :damaged a ins:GuideFact ; ins:key "damaged" ; ins:order 4 ; ins:kind "choice" ; rdfs:label "My vehicle is damaged"@en ; ins:value ( :Yes :No ) .
-:helpPointAgreed a ins:GuideFact ; ins:key "helpPointAgreed" ; ins:order 5 ; ins:kind "choice" ; rdfs:label "My policy includes Help Point PLUS"@en ; ins:value ( :Yes :No ) .
 :unusable a ins:GuideFact ; ins:key "unusable" ; ins:order 6 ; ins:kind "choice" ; rdfs:label "I cannot drive on"@en ; ins:value ( :Yes :No ) .
 :otherParty a ins:GuideFact ; ins:key "otherParty" ; ins:order 7 ; ins:kind "choice" ; rdfs:label "Another person says I must pay for their damage"@en ; ins:value ( :Yes :No ) .
 :legalDispute a ins:GuideFact ; ins:key "legalDispute" ; ins:order 8 ; ins:kind "choice" ; rdfs:label "I need a lawyer, or the police opened proceedings"@en ; ins:value ( :Yes :No ) .

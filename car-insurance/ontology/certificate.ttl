@@ -1,0 +1,55 @@
+@prefix :        <https://example.org/zurich-motor-2015#> .
+@prefix ins:     <https://example.org/insurance#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Certificates: what one policy includes. The General Conditions say what each module and option
+# covers; a certificate says which of them a policy has, with its sums. The applications read the
+# certificate and do not ask about it.
+
+:ExampleCertificate a ins:Certificate ; ins:order 1 ;
+    rdfs:label "Example: a passenger car with partial casco, collision, accident and Help Point PLUS"@en ;
+    rdfs:comment "No roadside assistance, no legal protection, no items transported. The certificate of the evaluation cases."@en ;
+    ins:answer
+        [ ins:fact :vehicleClass ; ins:is :PassengerCar ] ,
+        [ ins:fact :hasCollision ; ins:is :Yes ] ,
+        [ ins:fact :hasPartialCasco ; ins:is :Yes ] ,
+        [ ins:fact :hasAccident ; ins:is :Yes ] ,
+        [ ins:fact :hasRoadside ; ins:is :No ] ,
+        [ ins:fact :hasLegal ; ins:is :No ] ,
+        [ ins:fact :hasHelpPoint ; ins:is :Yes ] ,
+        [ ins:fact :accidentPersons ; ins:is :DriverAndPassengers ] ,
+        [ ins:fact :deathSum ; ins:amount 30000 ] ,
+        [ ins:fact :disabilitySum ; ins:amount 60000 ] ,
+        [ ins:fact :dailyAllowance ; ins:amount 25 ] ,
+        [ ins:fact :hospitalAllowance ; ins:amount 25 ] ,
+        [ ins:fact :hasGlassPlus ; ins:is :No ] ,
+        [ ins:fact :hasMartens ; ins:is :No ] ,
+        [ ins:fact :hasParkingDamage ; ins:is :No ] ,
+        [ ins:fact :hasParkingDamagePlus ; ins:is :No ] ,
+        [ ins:fact :hasItemsTransported ; ins:is :No ] ,
+        [ ins:fact :hasProtectiveClothing ; ins:is :No ] ,
+        [ ins:fact :hasCollisionGrossNegligence ; ins:is :No ] .
+
+:FullCertificate a ins:Certificate ; ins:order 2 ;
+    rdfs:label "Every module and option, for a passenger car"@en ;
+    rdfs:comment "To explore the rules of all covers."@en ;
+    ins:answer
+        [ ins:fact :vehicleClass ; ins:is :PassengerCar ] ,
+        [ ins:fact :hasCollision ; ins:is :Yes ] ,
+        [ ins:fact :hasPartialCasco ; ins:is :Yes ] ,
+        [ ins:fact :hasAccident ; ins:is :Yes ] ,
+        [ ins:fact :hasRoadside ; ins:is :Yes ] ,
+        [ ins:fact :hasLegal ; ins:is :Yes ] ,
+        [ ins:fact :hasHelpPoint ; ins:is :No ] ,
+        [ ins:fact :accidentPersons ; ins:is :DriverAndPassengers ] ,
+        [ ins:fact :deathSum ; ins:amount 100000 ] ,
+        [ ins:fact :disabilitySum ; ins:amount 200000 ] ,
+        [ ins:fact :dailyAllowance ; ins:amount 50 ] ,
+        [ ins:fact :hospitalAllowance ; ins:amount 50 ] ,
+        [ ins:fact :hasGlassPlus ; ins:is :Yes ] ,
+        [ ins:fact :hasMartens ; ins:is :Yes ] ,
+        [ ins:fact :hasParkingDamage ; ins:is :Yes ] ,
+        [ ins:fact :hasParkingDamagePlus ; ins:is :Yes ] ,
+        [ ins:fact :hasItemsTransported ; ins:is :Yes ] ,
+        [ ins:fact :hasProtectiveClothing ; ins:is :No ] ,
+        [ ins:fact :hasCollisionGrossNegligence ; ins:is :Yes ] .

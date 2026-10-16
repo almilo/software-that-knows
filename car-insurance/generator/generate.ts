@@ -12,7 +12,7 @@ import { loadModel } from "./rdf";
 
 export const root = new URL("..", import.meta.url).pathname;
 
-export const ontologyFiles = ["insurance.ttl", "policy.ttl", "questions.ttl", "rules.ttl", "benefits.ttl", "obligations.ttl"];
+export const ontologyFiles = ["insurance.ttl", "policy.ttl", "questions.ttl", "rules.ttl", "benefits.ttl", "obligations.ttl", "certificate.ttl"];
 
 export async function readModel() {
   return loadModel(await Promise.all(ontologyFiles.map((f) => Bun.file(`${root}ontology/${f}`).text())));

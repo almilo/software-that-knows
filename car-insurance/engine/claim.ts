@@ -4,18 +4,20 @@
 //
 // The decision, in order:
 //   1. the cover: the first cover rule that holds says which cover the event is a case of;
-//   2. the policy: the cover must be basic for the vehicle class, or an option that the policy
-//      includes (the first answer of the option question means "included");
+//   2. the policy: the cover must be insurable for the vehicle class, its module must be in the
+//      policy, and an optional cover must be in the policy too. The certificate gives these answers
+//      (the first answer of a module or option fact means "included");
 //   3. the exclusions and territory rules of the cover: one that holds excludes the claim, unless a
 //      precedence lets another statement that holds win over it;
 //   4. the reductions: one that holds reduces the benefit, unless a waiver wins over it;
-//   5. the amount (benefit.ts), when the answers for it are there.
+//   5. the amount (benefit.ts) for a cover with a calculation, when the answers for it are there;
+//      the benefits of the cover, with the sums of the certificate, for a cover without one.
 // A question is asked only when a rule that can still apply needs its answer: next() gives it.
 import { type Amount, calculate } from "./benefit";
 import { all, openFacts } from "./conditions";
 import type { Answers, Cover, Fact, Policy, Precedence, Rule } from "./model";
 
-export type Status = "open" | "covered" | "reduced" | "excluded" | "noCover" | "notInsurable" | "notAgreed";
+export type Status = "open" | "covered" | "reduced" | "excluded" | "noCover" | "notInsurable" | "moduleNotActive" | "notAgreed";
 
 export type Applied = {
   rule: Rule;
@@ -33,12 +35,17 @@ export type ClaimResult = {
   pending: string[];
   amountPending: string[];
   amount?: Amount;
+  // For a cover without a calculation: what it pays, from the model and the certificate.
+  benefits?: { label: string; amount?: number; per?: string; sources: string[] }[];
 };
 
 export type Claim = ReturnType<typeof createClaim>;
 
 export function createClaim(policy: Policy) {
-  const facts = policy.facts.filter((f) => f.group === "claim");
+  // The questions of a claim, and the facts of the certificate: the app gives these, and the claim
+  // check asks one only if the certificate misses it.
+  const facts = policy.facts.filter((f) => f.group === "claim" || f.group === "certificate").sort((a, b) => a.order - b.order);
+  const module = new Map(policy.modules.map((m) => [m.id, m]));
   const fact = new Map(facts.map((f) => [f.id, f]));
   const cover = new Map(policy.covers.map((c) => [c.id, c]));
   const rule = new Map(policy.rules.map((r) => [r.id, r]));
@@ -69,11 +76,17 @@ export function createClaim(policy: Policy) {
     // 2. The policy
     const availability = c.availability[String(answers.vehicleClass)] ?? "none";
     if (availability === "none") return { status: "notInsurable", cover: c, applied, pending: [], amountPending: [] };
+    if (!module.get(c.module)?.mandatory) {
+      const fact = facts.find((f) => f.moduleOf === c.module);
+      const included = fact && answers[fact.id];
+      if (fact && included === undefined) return { ...open(applied, [fact.id]), cover: c };
+      if (!fact || included !== fact.values[0]!.id) return { status: "moduleNotActive", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
+    }
     if (availability === "option") {
       const option = facts.find((f) => f.optionOf === c.id);
       const included = option && answers[option.id];
       if (option && included === undefined) return { ...open(applied, [option.id]), cover: c };
-      if (!option || included !== option.values[0]!.id) return { status: "notAgreed", cover: c, applied, pending: [], amountPending: [] };
+      if (!option || included !== option.values[0]!.id) return { status: "notAgreed", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
     }
 
     // 3 and 4. Exclusions and reductions, with precedence
@@ -93,21 +106,29 @@ export function createClaim(policy: Policy) {
 
     // 5. The amount
     const status = applied.some((a) => a.role === "reduces") ? "reduced" : "covered";
+    if (!c.calculation) return { status, cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
     const amountPending = facts
-      .filter((f) => f.askWhen.length && !f.optionOf && answers[f.id] === undefined && all(f.askWhen, answers, true) === "met")
+      .filter((f) => f.neededFor.includes(c.calculation!) && answers[f.id] === undefined && all(f.askWhen, answers, true) === "met")
       .map((f) => f.id);
-    const optionPending = facts
-      .filter((f) => f.optionOf && f.askWhen.length && answers[f.id] === undefined && all(f.askWhen, answers, true) === "met")
-      .map((f) => f.id);
-    const waiting = [...optionPending, ...amountPending];
     return {
       status,
       cover: c,
       applied,
       pending: [],
-      amountPending: waiting,
-      ...(waiting.length ? {} : { amount: calculate(policy, c, answers) }),
+      amountPending,
+      ...(amountPending.length ? {} : { amount: calculate(policy, c, answers) }),
     };
+  }
+
+  // The benefits of a cover, and the sums of the certificate for the covers of its module.
+  function benefits(c: Cover, answers: Answers): NonNullable<ClaimResult["benefits"]> {
+    const sameModule = new Set(policy.covers.filter((x) => x.module === c.module).map((x) => x.id));
+    return [
+      ...policy.benefits.filter((b) => b.covers.includes(c.id)).map((b) => ({ label: b.label, amount: b.limit, per: b.per, sources: b.sources })),
+      ...facts
+        .filter((f) => f.sumOf && sameModule.has(f.sumOf) && answers[f.id] !== undefined)
+        .map((f) => ({ label: `${f.label}, in your policy`, amount: Number(answers[f.id]), sources: cover.get(f.sumOf!)!.sources })),
+    ];
   }
 
   // No cover rule holds. If an exclusion of a cover that the event almost matched holds, it says

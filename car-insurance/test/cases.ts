@@ -8,6 +8,11 @@ import type { Answers } from "../engine/model";
 
 export type Case = {
   name: string;
+  // The certificate of the policy (an id of certificate.ttl). The answers of the claim come after
+  // it and can replace its answers.
+  certificate?: string;
+  // For the evaluation cases: the question in the words of a user.
+  question?: string;
   answers: Answers;
   status: Status;
   cover?: string;
@@ -29,13 +34,16 @@ const normal: Answers = {
   fault: "NoFault",
 };
 
-const car = { vehicleClass: "PassengerCar" };
+// A policy with every module; the claims give the options they need.
+const modules: Answers = { hasCollision: "Yes", hasPartialCasco: "Yes", hasAccident: "Yes", hasRoadside: "Yes", hasLegal: "Yes", hasHelpPoint: "No", accidentPersons: "DriverAndPassengers" };
+const car = { vehicleClass: "PassengerCar", ...modules };
+const motorcycle = { vehicleClass: "Motorcycle", ...modules };
 const collision = { ...car, event: "CollisionEvent" };
 
 export const cases: Case[] = [
   {
     name: "Collision, partial loss, deductible reduced after 4 claim-free years",
-    answers: { ...collision, ...normal, monthsOfService: 30, catalogPrice: 40000, marketValue: 25000, repairCost: 6000, deductible: 1000, claimFreeYears: 4, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, monthsOfService: 30, catalogPrice: 40000, marketValue: 25000, repairCost: 6000, deductible: 1000, claimFreeYears: 4 },
     status: "covered",
     cover: "Collision",
     rules: ["CollisionRule"],
@@ -43,14 +51,14 @@ export const cases: Case[] = [
   },
   {
     name: "Collision in the first year: total loss at 65% of the table value",
-    answers: { ...collision, ...normal, monthsOfService: 6, catalogPrice: 50000, repairCost: 40000, deductible: 1000, claimFreeYears: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, monthsOfService: 6, catalogPrice: 50000, repairCost: 40000, deductible: 1000, claimFreeYears: 0 },
     status: "covered",
     cover: "Collision",
     payment: 49000,
   },
   {
     name: "Collision in the middle of year 2: 90% of the catalogue price, pro rata",
-    answers: { ...collision, ...normal, monthsOfService: 18, catalogPrice: 50000, repairCost: 30000, deductible: 1000, claimFreeYears: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, monthsOfService: 18, catalogPrice: 50000, repairCost: 30000, deductible: 1000, claimFreeYears: 0 },
     status: "covered",
     payment: 44000,
   },
@@ -62,7 +70,7 @@ export const cases: Case[] = [
   },
   {
     name: "Collision under the influence, below 1.6 per mille",
-    answers: { ...collision, ...normal, alcohol: "Influenced", monthsOfService: 10, catalogPrice: 30000, repairCost: 4000, deductible: 500, claimFreeYears: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, alcohol: "Influenced", monthsOfService: 10, catalogPrice: 30000, repairCost: 4000, deductible: 500, claimFreeYears: 0 },
     status: "reduced",
     rules: ["CollisionRule", "AlcoholReduction"],
     payment: 3500,
@@ -79,7 +87,6 @@ export const cases: Case[] = [
       repairCost: 4000,
       deductible: 500,
       claimFreeYears: 0,
-      helpPoint: "NoHelpPoint",
     },
     status: "covered",
     overridden: ["GrossNegligenceReduction"],
@@ -87,7 +94,7 @@ export const cases: Case[] = [
   },
   {
     name: "Gross negligence, without coverage for gross negligence",
-    answers: { ...collision, ...normal, fault: "GrossNegligence", hasCollisionGrossNegligence: "No", monthsOfService: 10, catalogPrice: 30000, repairCost: 4000, deductible: 500, claimFreeYears: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, fault: "GrossNegligence", hasCollisionGrossNegligence: "No", monthsOfService: 10, catalogPrice: 30000, repairCost: 4000, deductible: 500, claimFreeYears: 0 },
     status: "reduced",
     rules: ["CollisionRule", "GrossNegligenceReduction"],
   },
@@ -99,14 +106,14 @@ export const cases: Case[] = [
   },
   {
     name: "Motorcycle stolen outside without the steering lock",
-    answers: { vehicleClass: "Motorcycle", event: "TheftEvent", theftKind: "VehicleStolen", motorcycleSecured: "NotSecured" },
+    answers: { ...motorcycle, event: "TheftEvent", theftKind: "VehicleStolen", motorcycleSecured: "NotSecured" },
     status: "excluded",
     cover: "Theft",
     rules: ["TheftRule", "MotorcycleNotSecured"],
   },
   {
     name: "Car stolen and not found within 30 days: total loss in year 4",
-    answers: { ...car, event: "TheftEvent", theftKind: "VehicleStolen", ...normal, theftRecovered: "NotRecovered", monthsOfService: 40, catalogPrice: 60000, marketValue: 30000, deductible: 200, helpPoint: "NoHelpPoint" },
+    answers: { ...car, event: "TheftEvent", theftKind: "VehicleStolen", ...normal, theftRecovered: "NotRecovered", monthsOfService: 40, catalogPrice: 60000, marketValue: 30000, deductible: 200 },
     status: "covered",
     cover: "Theft",
     payment: 42800,
@@ -119,7 +126,7 @@ export const cases: Case[] = [
   },
   {
     name: "Tyres punctured by a vandal: the list wins over the tyre exclusion (our interpretation)",
-    answers: { ...car, event: "VandalismEvent", vandalismKind: "PuncturedTyres", ...normal, operation: "TyresOrBatteryOnly", monthsOfService: 10, catalogPrice: 30000, repairCost: 800, deductible: 200, helpPoint: "NoHelpPoint" },
+    answers: { ...car, event: "VandalismEvent", vandalismKind: "PuncturedTyres", ...normal, operation: "TyresOrBatteryOnly", monthsOfService: 10, catalogPrice: 30000, repairCost: 800, deductible: 200 },
     status: "covered",
     cover: "Vandalism",
     overridden: ["TyresOrBatteries"],
@@ -133,7 +140,7 @@ export const cases: Case[] = [
   },
   {
     name: "A broken headlight on a motorcycle: Glass PLUS is basic",
-    answers: { vehicleClass: "Motorcycle", event: "GlassEvent", glassPart: "OtherGlass", glassCost: "BelowValue", ...normal, monthsOfService: 30, catalogPrice: 20000, marketValue: 12000, repairCost: 400, deductible: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...motorcycle, event: "GlassEvent", glassPart: "OtherGlass", glassCost: "BelowValue", ...normal, monthsOfService: 30, catalogPrice: 20000, marketValue: 12000, repairCost: 400, deductible: 0 },
     status: "covered",
     cover: "GlassPlus",
     payment: 400,
@@ -164,7 +171,6 @@ export const cases: Case[] = [
       marketValue: 18000,
       repairCost: 2500,
       deductible: 0,
-      helpPoint: "NoHelpPoint",
     },
     status: "covered",
     payment: 1000,
@@ -182,7 +188,7 @@ export const cases: Case[] = [
   },
   {
     name: "Swerved to avoid a deer: collision damage, deductible not below 0",
-    answers: { ...car, event: "AnimalEvent", animalKind: "Swerved", ...normal, monthsOfService: 12, catalogPrice: 30000, repairCost: 3000, deductible: 500, claimFreeYears: 6, helpPoint: "NoHelpPoint" },
+    answers: { ...car, event: "AnimalEvent", animalKind: "Swerved", ...normal, monthsOfService: 12, catalogPrice: 30000, repairCost: 3000, deductible: 500, claimFreeYears: 6 },
     status: "covered",
     cover: "Collision",
     rules: ["SwervedForAnimal"],
@@ -190,7 +196,7 @@ export const cases: Case[] = [
   },
   {
     name: "A laptop in a truck",
-    answers: { vehicleClass: "OtherVehicle", event: "ItemsEvent", hasItemsTransported: "Yes", itemsKind: "Electronics" },
+    answers: { vehicleClass: "OtherVehicle", ...modules, event: "ItemsEvent", hasItemsTransported: "Yes", itemsKind: "Electronics" },
     status: "excluded",
     rules: ["ItemsRule", "ElectronicsInOtherVehicle"],
   },
@@ -209,13 +215,13 @@ export const cases: Case[] = [
   },
   {
     name: "A tyre burst and the car hit a wall: collision as a consequence of wear",
-    answers: { ...collision, ...normal, operation: "AfterBreakdown", monthsOfService: 10, catalogPrice: 30000, repairCost: 5000, deductible: 1000, claimFreeYears: 0, helpPoint: "NoHelpPoint" },
+    answers: { ...collision, ...normal, operation: "AfterBreakdown", monthsOfService: 10, catalogPrice: 30000, repairCost: 5000, deductible: 1000, claimFreeYears: 0 },
     status: "covered",
     payment: 4000,
   },
   {
     name: "Help Point PLUS not followed: 500 CHF more deductible",
-    answers: { ...collision, ...normal, monthsOfService: 5, catalogPrice: 40000, repairCost: 5000, deductible: 1000, claimFreeYears: 3, helpPoint: "HelpPointNotFollowed" },
+    answers: { ...collision, ...normal, monthsOfService: 5, catalogPrice: 40000, repairCost: 5000, deductible: 1000, claimFreeYears: 3, hasHelpPoint: "Yes", helpPoint: "HelpPointNotFollowed" },
     status: "covered",
     payment: 4000,
   },
@@ -227,7 +233,7 @@ export const cases: Case[] = [
   },
   {
     name: "Fire during civil unrest, with precautions; after 7 years: the replacement value",
-    answers: { ...car, event: "FireEvent", fireKind: "Flames", ...normal, emergency: "UnrestPrecautions", monthsOfService: 100, catalogPrice: 30000, marketValue: 5000, repairCost: 6000, deductible: 300, helpPoint: "NoHelpPoint" },
+    answers: { ...car, event: "FireEvent", fireKind: "Flames", ...normal, emergency: "UnrestPrecautions", monthsOfService: 100, catalogPrice: 30000, marketValue: 5000, repairCost: 6000, deductible: 300 },
     status: "covered",
     cover: "Fire",
     payment: 4700,
@@ -237,5 +243,82 @@ export const cases: Case[] = [
     answers: { ...collision, ...normal, fault: "Intent" },
     status: "excluded",
     rules: ["CollisionRule", "Intent"],
+  },
+
+  // The evaluation cases: questions of users, on the example certificate (certificate.ttl). The
+  // answers are the ones that the question gives.
+  {
+    name: "Evaluation 21: driving on a flooded road",
+    question: "Is damage from driving on a flooded road covered?",
+    certificate: "ExampleCertificate",
+    answers: { event: "HazardEvent", hazardKind: "DroveIntoWater" },
+    status: "excluded",
+    cover: "NaturalHazards",
+    rules: ["DrivingIntoWater"],
+  },
+  {
+    name: "Evaluation 21b: water drawn into the engine, as a collision",
+    question: "Is damage from driving on a flooded road covered?",
+    certificate: "ExampleCertificate",
+    answers: { event: "CollisionEvent", ...normal, operation: "WaterInEngine" },
+    status: "excluded",
+    cover: "Collision",
+    rules: ["WaterIntoEngine"],
+  },
+  {
+    name: "Evaluation 22: suing a person who damaged my car",
+    question: "Can I use my motor insurance to sue someone who damaged my car and refuses to pay?",
+    certificate: "ExampleCertificate",
+    answers: { event: "LegalEvent", legalKind: "ClaimDamages" },
+    status: "moduleNotActive",
+    cover: "VehicleLegalProtection",
+  },
+  {
+    name: "Evaluation 22b: a person claims damages from me: the liability insurance defends",
+    certificate: "ExampleCertificate",
+    answers: { event: "LiabilityEvent", ...normal },
+    status: "covered",
+    cover: "ThirdPartyLiability",
+  },
+  {
+    name: "Evaluation 23: injured as a passenger in my own car",
+    question: "If I'm injured as a passenger in my own car when my partner is driving, are my medical expenses covered by the auto insurance?",
+    certificate: "ExampleCertificate",
+    answers: { event: "InjuryEvent", injuredPerson: "Passenger", ...normal },
+    status: "covered",
+    cover: "MedicalExpenses",
+    rules: ["InjuryInVehicle"],
+  },
+  {
+    name: "Evaluation 23b: a passenger, when the policy insures the driver only",
+    certificate: "ExampleCertificate",
+    answers: { event: "InjuryEvent", injuredPerson: "Passenger", accidentPersons: "DriverOnly" },
+    status: "excluded",
+    rules: ["PassengerNotInsured"],
+  },
+  {
+    name: "Evaluation 24: a breakdown on the autobahn",
+    question: "My car broke down on the autobahn and won't start — will Zurich send someone to tow me to a garage?",
+    certificate: "ExampleCertificate",
+    answers: { event: "BreakdownEvent", place: "Europe" },
+    status: "moduleNotActive",
+    cover: "RoadsideEurope",
+  },
+  {
+    name: "Evaluation 25: a laptop stolen from the car",
+    question: "Someone smashed my car window and stole my laptop from the back seat — am I covered for the laptop?",
+    certificate: "ExampleCertificate",
+    answers: { event: "TheftEvent", theftKind: "ItemsStolen" },
+    status: "notAgreed",
+    cover: "ItemsTransported",
+    rules: ["ItemsStolenFromVehicle"],
+  },
+  {
+    name: "Evaluation 25b: the smashed window of the same claim",
+    certificate: "ExampleCertificate",
+    answers: { event: "GlassEvent", glassPart: "Windows", glassCost: "BelowValue", ...normal, monthsOfService: 30, catalogPrice: 40000, marketValue: 20000, repairCost: 900, deductible: 0, helpPoint: "HelpPointFollowed" },
+    status: "covered",
+    cover: "Glass",
+    payment: 900,
   },
 ];

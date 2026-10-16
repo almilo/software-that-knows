@@ -5,9 +5,10 @@
 
 # The statements of the document as rules over the facts of questions.ttl. A rule applies when all
 # its conditions (ins:when) hold. The engine decides a claim from them; the checks compare them.
-# Cover rules and exclusions are written for accidental damage insurance (Art. 201 to 204), which
-# the claim check decides. The territory rules and the exclusions that Art. 304 and 407 use again
-# also name the other parts, so that the checks see them.
+# Accidental damage insurance (Art. 201 to 204) is written rule by rule. For the other modules, the
+# cover rules say which cover an event belongs to, so that the claim check can say whether the policy
+# includes it; their exclusions are the ones of Art. 204 that Art. 304 and 407 use again, and the
+# territory.
 
 # ---------------------------------------------------------------------------
 # 1. Cover rules: which cover an event is a case of
@@ -38,8 +39,8 @@
     ins:when [ ins:fact :event ; ins:in ( :FireEvent ) ] , [ ins:fact :fireKind ; ins:in ( :Flames :Explosion :Lightning :ShortCircuit :Extinguishing ) ] .
 
 :HazardRule a ins:CoverRule ; ins:order 7 ; rdfs:label "A natural hazard of the list"@en ;
-    ins:covers :NaturalHazards ; ins:source art:202.3c ;
-    ins:when [ ins:fact :event ; ins:in ( :HazardEvent ) ] , [ ins:fact :hazardKind ; ins:in ( :Storm :Hail :Flood :Rockslide :Avalanche :FallingAircraft ) ] .
+    ins:covers :NaturalHazards ; ins:source art:202.3c ; ins:mentions :Flooding ;
+    ins:when [ ins:fact :event ; ins:in ( :HazardEvent ) ] , [ ins:fact :hazardKind ; ins:in ( :Storm :Hail :Flood :DroveIntoWater :Rockslide :Avalanche :FallingAircraft ) ] .
 
 :GlassRule a ins:CoverRule ; ins:order 8 ; rdfs:label "Breakage of the windows"@en ;
     ins:covers :Glass ; ins:source art:202.3d ;
@@ -57,6 +58,10 @@
     ins:covers :Vandalism ; ins:source art:202.3f ; ins:mentions :Tyres ;
     ins:when [ ins:fact :event ; ins:in ( :VandalismEvent ) ] , [ ins:fact :vandalismKind ; ins:in ( :PuncturedTyres ) ] .
 
+:ItemsStolenFromVehicle a ins:CoverRule ; ins:order 11.5 ; rdfs:label "Items stolen from the vehicle: a case of items transported, not of theft"@en ;
+    ins:covers :ItemsTransported ; ins:source art:202.4d, art:202.3a ;
+    ins:when [ ins:fact :event ; ins:in ( :TheftEvent ) ] , [ ins:fact :theftKind ; ins:in ( :ItemsStolen ) ] .
+
 :MartenRule a ins:CoverRule ; ins:order 12 ; rdfs:label "Damage by martens or rodents"@en ;
     ins:covers :Martens ; ins:source art:202.4b ;
     ins:when [ ins:fact :event ; ins:in ( :MartenEvent ) ] .
@@ -72,6 +77,32 @@
 :ClothingRule a ins:CoverRule ; ins:order 15 ; rdfs:label "Protective clothing of the driver and passengers"@en ;
     ins:covers :ProtectiveClothing ; ins:source art:202.4e ;
     ins:when [ ins:fact :event ; ins:in ( :ClothingEvent ) ] .
+
+# The events of the other modules.
+
+:BreakdownInCHFL a ins:CoverRule ; ins:order 20 ; rdfs:label "A breakdown in Switzerland or Liechtenstein"@en ;
+    ins:covers :RoadsideCHFL ; ins:source art:403, art:405 ;
+    ins:when [ ins:fact :event ; ins:in ( :BreakdownEvent ) ] , [ ins:fact :place ; ins:in ( :CHFL ) ] .
+
+:BreakdownInEurope a ins:CoverRule ; ins:order 21 ; rdfs:label "A breakdown in Europe"@en ;
+    ins:covers :RoadsideEurope ; ins:source art:403, art:406 ;
+    ins:when [ ins:fact :event ; ins:in ( :BreakdownEvent ) ] , [ ins:fact :place ; ins:in ( :Europe ) ] .
+
+:InjuryInVehicle a ins:CoverRule ; ins:order 22 ; rdfs:label "Injury of the driver, a passenger or a helper: medical expenses"@en ;
+    ins:covers :MedicalExpenses ; ins:source art:301.1, art:301.2, art:302, art:303.5 ;
+    ins:when [ ins:fact :event ; ins:in ( :InjuryEvent ) ] , [ ins:fact :injuredPerson ; ins:in ( :Driver :Passenger :Helper ) ] .
+
+:InjuryInOtherVehicle a ins:CoverRule ; ins:order 23 ; rdfs:label "Injury in another person's vehicle"@en ;
+    ins:covers :OtherPeoplesVehicles ; ins:source art:301.3 ;
+    ins:when [ ins:fact :event ; ins:in ( :InjuryEvent ) ] , [ ins:fact :injuredPerson ; ins:in ( :InOtherVehicle ) ] .
+
+:ClaimAgainstMe a ins:CoverRule ; ins:order 24 ; rdfs:label "Claims for damages against an insured person: Zurich pays justified claims and defends against unjustified ones"@en ;
+    ins:covers :ThirdPartyLiability ; ins:source art:101, art:103, art:10.2 ;
+    ins:when [ ins:fact :event ; ins:in ( :LiabilityEvent ) ] .
+
+:LegalCase a ins:CoverRule ; ins:order 25 ; rdfs:label "A legal case of the vehicle"@en ;
+    ins:covers :VehicleLegalProtection ; ins:source art:502.1, art:502.3, art:502.4, art:502.8 ;
+    ins:when [ ins:fact :event ; ins:in ( :LegalEvent ) ] , [ ins:fact :legalKind ; ins:in ( :ClaimDamages :Defence :LicenceConfiscated :VehicleContract ) ] .
 
 # ---------------------------------------------------------------------------
 # 2. Exclusions of one cover
@@ -178,6 +209,18 @@
     ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.9, art:304, art:407 ;
     ins:when [ ins:fact :emergency ; ins:in ( :UnrestNoPrecautions ) ] .
 
+:DrivingIntoWater a ins:Exclusion ; rdfs:label "Driving into water: damage due to the operation of the vehicle"@en ;
+    ins:appliesTo :NaturalHazards ; ins:source art:204.1 ; ins:mentions :Flooding ;
+    ins:when [ ins:fact :hazardKind ; ins:in ( :DroveIntoWater ) ] .
+
+:WaterIntoEngine a ins:Exclusion ; rdfs:label "Water drawn into the engine: damage due to the operation of the vehicle"@en ;
+    ins:appliesTo :AccidentalDamage ; ins:source art:204.1 ;
+    ins:when [ ins:fact :operation ; ins:in ( :WaterInEngine ) ] .
+
+:PassengerNotInsured a ins:Exclusion ; rdfs:label "Passengers are not insured persons of this policy"@en ;
+    ins:appliesTo :Accident ; ins:source art:301.1 ;
+    ins:when [ ins:fact :injuredPerson ; ins:in ( :Passenger ) ] , [ ins:fact :accidentPersons ; ins:in ( :DriverOnly ) ] .
+
 :Intent a ins:Exclusion ; rdfs:label "Damage caused with intent"@en ;
     ins:appliesTo :AccidentalDamage ; ins:source art:203.7 ;
     ins:when [ ins:fact :fault ; ins:in ( :Intent ) ] .
@@ -239,6 +282,10 @@
     ins:winner :GrossNegligenceWaiver ; ins:loser :GrossNegligenceReduction ; ins:basis ins:Text ;
     rdfs:comment "Art. 202.2: if the option is agreed, Zurich does not reduce collision benefits for gross negligence."@en .
 
+:WaterPrecedence a ins:Precedence ;
+    ins:winner :DrivingIntoWater ; ins:loser :HazardRule ; ins:basis ins:Interpretation ;
+    rdfs:comment "Art. 202.3 c covers damage as a direct consequence of high water and floods; Art. 204.1 excludes damage due to the operation of the vehicle. The document does not say where a vehicle that is driven into water belongs. We read it as damage due to operation, as the usual practice does: the water did not come to the vehicle, the driver drove into it."@en .
+
 # ---------------------------------------------------------------------------
 # 7. Closed lists: the document calls them exhaustive and conclusive
 # ---------------------------------------------------------------------------
@@ -264,6 +311,7 @@
 # ---------------------------------------------------------------------------
 
 :Tyres a ins:Concept ; rdfs:label "Tyres"@en .
+:Flooding a ins:Concept ; rdfs:label "Water and floods"@en .
 :WearAndTear a ins:Concept ; rdfs:label "Breakage and wear"@en .
 :Scratching a ins:Concept ; rdfs:label "Scratching"@en .
 :Alcohol a ins:Concept ; rdfs:label "Alcohol"@en .

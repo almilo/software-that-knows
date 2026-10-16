@@ -17,6 +17,7 @@ test.each(runChecks(policy, cases).map((c) => [c.title, c] as const))("%s: no op
 test("the checks find the places where the document needs a decision", () => {
   const decided = runChecks(policy, cases).flatMap((c) => c.findings.filter((f) => f.status === "resolved").map((f) => `${c.id}: ${f.basis}: ${f.sources.join(" ")}`));
   expect(decided.sort()).toEqual([
+    "contradictions: interpretation: 202.3c 204.1",
     "contradictions: interpretation: 202.3f 204.1",
     "contradictions: interpretation: 3 406",
     "contradictions: text: 202.2 203.7",

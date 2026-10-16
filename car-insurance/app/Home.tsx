@@ -16,11 +16,11 @@ export function Home() {
     {
       path: "claim",
       title: "Claim check",
-      question: "Is this damage covered, and how much does the insurer pay?",
+      question: "Is this covered by my policy, and how much does the insurer pay?",
       shows:
-        "A decision for a claim of accidental damage insurance, with the articles that make it. The check asks only the questions that can still change the decision, then calculates the payment step by step: total loss or repair, compensation table, limits, deductible.",
-      interface: "One question at a time on the left. On the right, the decision as it builds up: the cover, the exclusions and reductions that hold, the statements that a precedence sets aside, the amount. A record of the decision to download.",
-      model: `${count("cover")} cover rules, ${count("exclusion")} exclusions, ${count("reduction")} reductions, the product overview, the compensation table and ${policy.parameters.length} numbers. A test claim needs ${perClaim} of the ${claimFacts} questions on average.`,
+        "A decision for a claim, with the articles that make it: which cover the event belongs to, whether the certificate of your policy includes its module and option, and which exclusions and reductions apply. For accidental damage, the payment step by step: total loss or repair, compensation table, limits, deductible. For the other modules, what the cover pays, with the sums of your policy.",
+      interface: "Your policy (the certificate) at the top. One question at a time on the left. On the right, the decision as it builds up: the cover, the exclusions and reductions that hold, the statements that a precedence sets aside, the amount. A record of the decision to download.",
+      model: `${count("cover")} cover rules, ${count("exclusion")} exclusions, ${count("reduction")} reductions, ${policy.modules.length} modules, the product overview, the compensation table, ${policy.parameters.length} numbers and ${policy.certificates.length} example certificates. A test claim needs ${perClaim} of the ${claimFacts} questions on average.`,
     },
     {
       path: "guide",
@@ -109,7 +109,7 @@ export function Home() {
         <ol className="pipeline">
           <li>
             <strong>Knowledge</strong>
-            <span>6 Turtle files in ontology/: the words of insurance, the product, the questions, the rules, the numbers, the obligations</span>
+            <span>7 Turtle files in ontology/: the words of insurance, the product, the questions, the rules, the numbers, the obligations, the certificates</span>
           </li>
           <li>
             <strong>Generator</strong>
@@ -129,10 +129,10 @@ export function Home() {
           </li>
         </ol>
         <p>
-          The engine knows the words of an insurance policy (cover, exclusion, reduction, precedence, deadline), not this
-          product. Accidental damage insurance (Art. 201 to 204) is modelled rule by rule, so the claim check decides its
-          claims. The other parts are in the model with their covers, benefits, articles and some rules, so the other views
-          and the checks use them.
+          The engine knows the words of an insurance policy (module, cover, exclusion, reduction, precedence, deadline), not
+          this product. The General Conditions say what each module covers; the certificate of a policy says which modules
+          and options it has. Accidental damage insurance (Art. 201 to 204) is modelled rule by rule, with the amount. For
+          the other modules, the model says which events belong to them, their exclusions and their benefits.
         </p>
         <p className="status-line">
           Checks now: {checks.filter((c) => status(c) === "ok").length} pass, {checks.filter((c) => status(c) === "resolved").length} pass with decisions

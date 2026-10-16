@@ -1,11 +1,11 @@
-// Interprets a note with Claude Haiku 4.5: the app's prompt (fields, rules, one example, all from the
+// Interprets a note with Claude Haiku 5.5: the app's prompt (fields, rules, one example, all from the
 // generated files), a JSON Schema for the reply, and the app's checks (check.ts: allowed values,
 // quote in the note). Used by the server (main.ts) and by eval/claude-eval.ts.
 import Anthropic from "@anthropic-ai/sdk";
 import { check, type Interpretation } from "../note/check";
 import { buildMessages, replySchema } from "./prompt";
 
-export const claudeModel = { id: "claude-haiku-4-5", price: { input: 1 / 1e6, output: 5 / 1e6 } }; // US dollars per token
+export const claudeModel = { id: "claude-haiku-5-5", price: { input: 0.1 / 1e6, output: 0.5 / 1e6 } }; // US dollars per token, for prompts up to 100,000 tokens
 
 export type ClaudeResult = { r: Interpretation; reply: string; model: string; usage: Anthropic.Beta.BetaUsage; ms: number };
 

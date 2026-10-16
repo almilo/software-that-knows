@@ -17,7 +17,7 @@ async function load(path: string) {
 }
 
 console.log("interpreter\tset\tfully correct\tfound\tcorrect of proposed\tdanger signs wrong (invented or denied)");
-for (const [name, path] of [["claude-haiku-4-5", "claude-results-claude-haiku-4-5.json"], ["gpt-6-luna", "openai-results-gpt-6-luna.json"]]) {
+for (const [name, path] of [["claude-haiku-4-5", "claude-results-claude-haiku-4-5.json"], ["claude-haiku-5-5", "claude-results-claude-haiku-5-5.json"], ["gpt-6-luna", "openai-results-gpt-6-luna.json"]]) {
   const rs = await load(path!);
   for (const set of rs ? sets : []) {
     const r = rs.filter((x: { set: string }) => x.set === set);

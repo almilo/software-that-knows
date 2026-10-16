@@ -27,7 +27,7 @@ export const cloudInterpreters: InterpreterInfo[] = [
   },
   {
     id: "haiku",
-    name: "Claude Haiku 4.5",
+    name: "Claude Haiku 5.5",
     kind: "a small frontier model",
     provider: "Anthropic",
     key: "ANTHROPIC_API_KEY",

@@ -1,4 +1,4 @@
-// Measurement only: Claude Haiku 4.5 on the eval notes, through the Claude API. Not part of the app:
+// Measurement only: Claude Haiku 5.5 on the eval notes, through the Claude API. Not part of the app:
 // the notes leave the device. The API key comes from ANTHROPIC_API_KEY.
 //   bun eval/claude-eval.ts count   counts the input tokens of every request (free), estimates the cost
 //   bun eval/claude-eval.ts run     runs the eval (paid), saves the replies and prints the scores

@@ -17,7 +17,7 @@ type Interpreting =
 
 // A note in free text instead of the form. An interpreter turns it into proposed form answers, each
 // with where it comes from, and the user confirms them. The words of the knowledge model interpret in
-// the browser; the cloud interpreters (Jev, Claude Haiku 4.5, gpt-6-luna) run through the server. The
+// the browser; the cloud interpreters (Jev, Claude Haiku 5.5, gpt-6-luna) run through the server. The
 // classification still comes from the rules.
 export function NotePanel({ data, onApply }: { data: Assessment; onApply: (next: Assessment) => void }) {
   const [text, setText] = useState("");

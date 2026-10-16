@@ -173,8 +173,8 @@ There are four interpreters:
 | --- | --- | --- | --- | --- |
 | Words of the knowledge model | no AI | In the browser: the words of part 6 of the ontology | a quote | none |
 | Jev (TypeSafe) | a System 1 model: fast, typed decisions | Completes the words: one typed question for each field that the words leave empty, kept at 95% confidence or more | a confidence | `TYPESAFE_API_KEY` |
-| Claude Haiku 4.5 (Anthropic) | a small frontier model | The whole note with every field | a quote | `ANTHROPIC_API_KEY` |
-| gpt-6-luna (OpenAI) | a small frontier model | The same as Claude Haiku 4.5 | a quote | `OPENAI_API_KEY` |
+| Claude Haiku 5.5 (Anthropic) | a small frontier model | The whole note with every field | a quote | `ANTHROPIC_API_KEY` |
+| gpt-6-luna (OpenAI) | a small frontier model | The same as Claude Haiku 5.5 | a quote | `OPENAI_API_KEY` |
 
 `note/interpreters.ts` describes them once, for the app and the server.
 
@@ -241,7 +241,7 @@ The evaluations of the cloud interpreters use the same code as the server (`serv
 
 | Script | Interpreter | Key |
 | --- | --- | --- |
-| `eval/claude-eval.ts` | Claude Haiku 4.5, with the server's prompt and checks (`server/claude.ts`); `count` estimates the cost first | `ANTHROPIC_API_KEY` |
+| `eval/claude-eval.ts` | Claude Haiku 5.5, with the server's prompt and checks (`server/claude.ts`); `count` estimates the cost first | `ANTHROPIC_API_KEY` |
 | `eval/openai-eval.ts` | gpt-6-luna, with the server's prompt and checks (`server/openai.ts`) | `OPENAI_API_KEY` |
 | `eval/jev-eval.ts` | TypeSafe Jev, a System 1 model, answering one typed question per field (`server/jev-questions.ts`), with the words, at several confidence thresholds: the threshold of the app (95%) was chosen on the development notes | `TYPESAFE_API_KEY` |
 
@@ -325,7 +325,7 @@ whose interpreter you want to use.
    | Interpreter | Provider | Environment variable |
    | --- | --- | --- |
    | Jev | TypeSafe | `TYPESAFE_API_KEY` |
-   | Claude Haiku 4.5 | Anthropic | `ANTHROPIC_API_KEY` |
+   | Claude Haiku 5.5 | Anthropic | `ANTHROPIC_API_KEY` |
    | gpt-6-luna | OpenAI | `OPENAI_API_KEY` |
 
    For example: `export OPENAI_API_KEY=...`. Each interpretation is billed to your account by the

@@ -1,0 +1,26 @@
+# A shared module: the articles of the DBG (SR 642.11) that the domains cite (prov:wasDerivedFrom),
+# with their labels in the abbreviations of each language.
+# NOT CHECKED against the consolidated text: written from memory, because fedlex.admin.ch was not
+# reachable when this module was written. Check every article before relying on it.
+# The comments are short summaries in English, not official texts.
+
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/ch-law/dbg> a owl:Ontology ;
+  rdfs:label "DBG (SR 642.11)" .
+
+law:DBG a prov:Entity ;
+  rdfs:label "DBG (SR 642.11)"@en , "DBG (SR 642.11)"@de , "LIFD (RS 642.11)"@fr , "LIFD (RS 642.11)"@it ;
+  rdfs:comment "Federal Act on Direct Federal Taxation." .
+law:DBG-38 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
+  rdfs:label "DBG Art. 38"@en , "DBG Art. 38"@de , "LIFD art. 38"@fr , "LIFD art. 38"@it ;
+  rdfs:comment "Capital benefits from pension provision are taxed separately from other income, at a reduced rate." .
+law:DBG-95 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
+  rdfs:label "DBG Art. 95"@en , "DBG Art. 95"@de , "LIFD art. 95"@fr , "LIFD art. 95"@it ;
+  rdfs:comment "Persons resident abroad who receive pension benefits from an earlier public-law employment are taxed at source." .
+law:DBG-96 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
+  rdfs:label "DBG Art. 96"@en , "DBG Art. 96"@de , "LIFD art. 96"@fr , "LIFD art. 96"@it ;
+  rdfs:comment "Persons resident abroad who receive benefits from a private-law occupational pension institution are taxed at source." .

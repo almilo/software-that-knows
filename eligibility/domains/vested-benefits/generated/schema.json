@@ -1,0 +1,88 @@
+{
+  "$comment": "Generated from domains/vested-benefits/ontology/ by generator/generate.ts. Do not edit.",
+  "type": "object",
+  "i18n": "ApplicationShape",
+  "properties": {
+    "birthDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "retirementAge": {
+      "type": "integer",
+      "minimum": 58,
+      "maximum": 70
+    },
+    "retirementAgeMonths": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 11
+    },
+    "married": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "spouseConsent": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "heldBy": {
+      "type": "string",
+      "enum": [
+        "inPensionFund",
+        "inVestedBenefitsInstitution"
+      ]
+    },
+    "leaving": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "enum": [
+        "leavingSwitzerland",
+        "selfEmployment",
+        "smallAmount",
+        "otherReason"
+      ]
+    },
+    "destination": {
+      "type": "string",
+      "enum": [
+        "euEfta",
+        "otherCountry"
+      ]
+    },
+    "insuredAbroad": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "stillMandatory": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "vestedBenefit": {
+      "type": "number",
+      "minimum": 0
+    },
+    "annualContribution": {
+      "type": "number",
+      "minimum": 0
+    }
+  },
+  "additionalProperties": false
+}

@@ -17,9 +17,10 @@ Art. 83a, and the Ordinance on the Promotion of Home Ownership with Occupational
 
 | File | What it holds |
 | --- | --- |
-| `ontology/wef.ttl` | The model: choices, fields, rules (SPARQL), values, findings, next steps, articles |
+| `ontology/wef.ttl` | The model: choices, fields, rules (SPARQL), values, findings, next steps, and the legal basis of the shared parts |
+| `../../modules/` | The shared modules that it imports: `person.ttl` (date of birth, marriage, consent), `pension.ttl` (reference age, vested benefit), `law/bvg.ttl` and `law/wefv.ttl` (the articles) |
 | `generated/` | `schema.json`, `uischema.json`, `messages.json`, `domain.json`, written by `bun run generate` |
-| `domain.ts`, `main.tsx`, `index.html` | The domain as the app and the tests use it, and its page |
+| `domain.ts`, `main.tsx`, `index.html` | The domain with its modules, as the app and the tests use it, and its page |
 | `test/paths.test.ts` | One test for each rule, named after its articles |
 | `test/invariants.test.ts` | The law written again in TypeScript, compared with the engine on 1,000 random applications |
 | `test/model.test.ts` | The texts in four languages, the steps, and a label for every source |

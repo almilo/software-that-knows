@@ -1,0 +1,44 @@
+# A shared module: the articles of the EOG (SR 834.1) that the domains cite (prov:wasDerivedFrom),
+# with their labels in the abbreviations of each language.
+# NOT CHECKED against the consolidated text: written from memory, because fedlex.admin.ch was not
+# reachable when this module was written. Check every article, and its number, before relying on it.
+# The comments are short summaries in English, not official texts.
+
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/ch-law/eog> a owl:Ontology ;
+  rdfs:label "EOG (SR 834.1)" .
+
+law:EOG a prov:Entity ;
+  rdfs:label "EOG (SR 834.1)"@en , "EOG (SR 834.1)"@de , "LAPG (RS 834.1)"@fr , "LIPG (RS 834.1)"@it ;
+  rdfs:comment "Federal Act on Compensation for Loss of Earnings (income compensation for persons in service, maternity and paternity)." .
+law:EOG-16b-1 a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16b para. 1"@en , "EOG Art. 16b Abs. 1"@de , "LAPG art. 16b al. 1"@fr , "LIPG art. 16b cpv. 1"@it ;
+  rdfs:comment "A mother is entitled if she was insured under the AHV for the 9 months before the birth, worked for at least 5 of them, and at the birth is employed or self-employed." .
+law:EOG-16c-1 a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16c para. 1"@en , "EOG Art. 16c Abs. 1"@de , "LAPG art. 16c al. 1"@fr , "LIPG art. 16c cpv. 1"@it ;
+  rdfs:comment "The mother's entitlement begins on the day of the birth." .
+law:EOG-16d a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16d"@en , "EOG Art. 16d"@de , "LAPG art. 16d"@fr , "LIPG art. 16d"@it ;
+  rdfs:comment "The mother's entitlement ends on the 98th day after it began, or earlier if she starts working again." .
+law:EOG-16e a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16e"@en , "EOG Art. 16e"@de , "LAPG art. 16e"@fr , "LIPG art. 16e"@it ;
+  rdfs:comment "The maternity allowance is 80 % of the average income earned before the entitlement began." .
+law:EOG-16f a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16f"@en , "EOG Art. 16f"@de , "LAPG art. 16f"@fr , "LIPG art. 16f"@it ;
+  rdfs:comment "The maternity allowance is at most CHF 220 a day." .
+law:EOG-16i a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16i"@en , "EOG Art. 16i"@de , "LAPG art. 16i"@fr , "LIPG art. 16i"@it ;
+  rdfs:comment "A father is entitled if he is the child's legal father at the birth or becomes it within 6 months, was insured under the AHV for the 9 months before the birth, worked for at least 5 of them, and at the birth is employed or self-employed." .
+law:EOG-16j a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16j"@en , "EOG Art. 16j"@de , "LAPG art. 16j"@fr , "LIPG art. 16j"@it ;
+  rdfs:comment "The father takes the allowance within 6 months of the birth, at once or as single days; then the entitlement ends." .
+law:EOG-16k a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16k"@en , "EOG Art. 16k"@de , "LAPG art. 16k"@fr , "LIPG art. 16k"@it ;
+  rdfs:comment "The father receives at most 14 daily allowances." .
+law:EOG-16l a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16l"@en , "EOG Art. 16l"@de , "LAPG art. 16l"@fr , "LIPG art. 16l"@it ;
+  rdfs:comment "The paternity allowance is 80 % of the average income earned before the birth, at most CHF 220 a day." .

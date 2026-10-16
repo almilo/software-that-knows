@@ -1,0 +1,110 @@
+{
+  "$comment": "Generated from domains/wef/ontology/ by generator/generate.ts. Do not edit.",
+  "type": "object",
+  "i18n": "ApplicationShape",
+  "properties": {
+    "birthDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "retirementAge": {
+      "type": "integer",
+      "minimum": 58,
+      "maximum": 70
+    },
+    "retirementAgeMonths": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 11
+    },
+    "married": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "spouseConsent": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "purpose": {
+      "type": "string",
+      "enum": [
+        "buyOrBuild",
+        "repayMortgage",
+        "cooperativeShares"
+      ]
+    },
+    "propertyType": {
+      "type": "string",
+      "enum": [
+        "apartment",
+        "house",
+        "otherProperty"
+      ]
+    },
+    "ownership": {
+      "type": "string",
+      "enum": [
+        "soleOwnership",
+        "coOwnership",
+        "jointOwnership",
+        "buildingRight",
+        "otherOwnership"
+      ]
+    },
+    "ownUse": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "vestedBenefit": {
+      "type": "number",
+      "minimum": 0
+    },
+    "vestedBenefitAt50": {
+      "type": "number",
+      "minimum": 0
+    },
+    "requestedAmount": {
+      "type": "number",
+      "minimum": 0
+    },
+    "withdrawnBefore": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "lastWithdrawal": {
+      "type": "string",
+      "format": "date"
+    },
+    "alreadyInvested": {
+      "type": "number",
+      "minimum": 0
+    },
+    "otherHome": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    },
+    "fundUnderfunded": {
+      "type": "string",
+      "enum": [
+        "yes",
+        "no"
+      ]
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,347 @@
+# A knowledge model of the maternity allowance and the other parent's allowance in Switzerland
+# (Mutterschaftsentschädigung, Entschädigung des andern Elternteils), from:
+#   EOG   Federal Act on Compensation for Loss of Earnings (SR 834.1), Art. 16b to 16l
+#
+# Demonstration only: not legal or financial advice, not checked by a lawyer or a compensation
+# office. The articles were checked against the consolidated text on fedlex.admin.ch on
+# 16 October 2026 (in force since 1 June 2026).
+#
+# Reuse: this domain shares almost no knowledge with wef and vested-benefits. It imports no module
+# but its law: no date of birth of the applicant, no marriage, no pension fund. It reuses the app,
+# the engine and the form vocabulary (form.ttl): the steps, the yes/no answers, the severities, the
+# texts of the app in four languages. It is the other end of the scale from vested-benefits.
+#
+# Scope and readings of the law:
+#   - The mother and the other parent: since 2024 the law gives the leave to "the legal other
+#     parent", the father or the mother's wife (EOG Art. 16i).
+#   - Left out: the longer maternity allowance while the newborn is in hospital (Art. 16c para. 3),
+#     a birth before the 9th month of pregnancy (which shortens the 9 months of insurance,
+#     Art. 16b para. 2, 16i para. 2), the extra daily allowances when a parent dies, unemployed
+#     parents and parents unable to work: the model tells them to ask their AHV compensation office.
+#   - The average daily income: a monthly income divided by 30, an annual income from
+#     self-employment divided by 360. Rounding is left out.
+#   - The mother's last day is the 98th day of the allowance, the day of the birth being the first:
+#     the date of birth plus 97 days (Art. 16c para. 2). It ends earlier if she starts working again.
+#   - The other parent's framework period of 6 months begins on the day of the birth (Art. 16j). Our
+#     reading of its last day: the day before the same date 6 months later, as for other framework
+#     periods of the social insurances. The law and the leaflet of the compensation offices give no
+#     example.
+
+@prefix eo:   <https://example.org/parental-allowance#> .
+@prefix form: <https://example.org/form#> .
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+eo: a owl:Ontology ;
+  rdfs:label "Maternity and other parent's allowance" ;
+  owl:imports form: , <https://example.org/ch-law/eog> ;
+  sh:declare [ sh:prefix "eo" ; sh:namespace "https://example.org/parental-allowance#"^^xsd:anyURI ] .
+
+# ---------------------------------------------------------------------------
+# 1. Choices
+# ---------------------------------------------------------------------------
+
+eo:mother rdfs:label "The mother"@en , "Die Mutter"@de , "La mère"@fr , "La madre"@it .
+eo:otherParent
+  rdfs:label "The other parent: the father, or the mother's wife"@en , "Der andere Elternteil: der Vater oder die Ehefrau der Mutter"@de ,
+             "L'autre parent : le père ou l'épouse de la mère"@fr , "L'altro genitore: il padre o la moglie della madre"@it .
+
+eo:employed rdfs:label "Employed"@en , "Angestellt"@de , "Salarié"@fr , "Dipendente"@it .
+eo:selfEmployed rdfs:label "Self-employed"@en , "Selbständigerwerbend"@de , "Indépendant"@fr , "Indipendente"@it .
+eo:spouseBusiness
+  rdfs:label "Working in my spouse's business, for a cash wage"@en , "Mitarbeit im Betrieb meines Ehepartners, mit Barlohn"@de ,
+             "Je travaille dans l'entreprise de mon conjoint, contre un salaire en espèces"@fr , "Lavoro nell'azienda del mio coniuge, con un salario in contanti"@it .
+eo:otherStatus
+  rdfs:label "Something else, for example unemployed"@en , "Etwas anderes, zum Beispiel arbeitslos"@de ,
+             "Autre chose, par exemple au chômage"@fr , "Altro, ad esempio disoccupato"@it .
+
+# ---------------------------------------------------------------------------
+# 2. Fields
+# ---------------------------------------------------------------------------
+
+eo:birth a sh:PropertyGroup ; sh:order 1 ;
+  rdfs:label "Birth"@en , "Geburt"@de , "Naissance"@fr , "Nascita"@it .
+eo:work a sh:PropertyGroup ; sh:order 2 ;
+  rdfs:label "Work"@en , "Erwerbstätigkeit"@de , "Activité lucrative"@fr , "Attività lucrativa"@it .
+eo:income a sh:PropertyGroup ; sh:order 3 ;
+  rdfs:label "Income"@en , "Einkommen"@de , "Revenu"@fr , "Reddito"@it .
+
+eo:Application a rdfs:Class ; rdfs:comment "An application for the maternity allowance or the other parent's allowance." .
+
+eo:ApplicationShape a sh:NodeShape ;
+  sh:targetClass eo:Application ;
+  form:region "CH" ;
+  rdfs:label "Maternity and other parent's allowance"@en , "Mutterschaftsentschädigung und Entschädigung des andern Elternteils"@de ,
+             "Allocation de maternité et allocation de l'autre parent"@fr , "Indennità di maternità e indennità per l'altro genitore"@it ;
+  form:summary
+    "The maternity allowance and the other parent's allowance after a birth: who is entitled, how much a day and until when."@en ,
+    "Die Mutterschaftsentschädigung und die Entschädigung des andern Elternteils nach einer Geburt: wer Anspruch hat, wie viel pro Tag und bis wann."@de ,
+    "L'allocation de maternité et l'allocation de l'autre parent après une naissance : qui y a droit, combien par jour et jusqu'à quand."@fr ,
+    "L'indennità di maternità e l'indennità per l'altro genitore dopo una nascita: chi vi ha diritto, quanto al giorno e fino a quando."@it ;
+  rdfs:comment
+    "Demonstration only. Not legal or financial advice. Simplified from EOG Art. 16b–16l, and not checked by a lawyer or a compensation office. Your AHV compensation office decides."@en ,
+    "Nur zur Demonstration. Keine Rechts- oder Finanzberatung. Vereinfacht nach EOG Art. 16b–16l, nicht von einer Anwältin oder einer Ausgleichskasse geprüft. Massgebend ist der Entscheid Ihrer AHV-Ausgleichskasse."@de ,
+    "Démonstration uniquement. Pas un conseil juridique ou financier. Simplifié d'après les art. 16b à 16l LAPG, non vérifié par un avocat ni par une caisse de compensation. La décision de votre caisse de compensation AVS fait foi."@fr ,
+    "Solo a scopo dimostrativo. Non è una consulenza legale o finanziaria. Semplificato dagli art. 16b–16l LIPG, non verificato da un avvocato né da una cassa di compensazione. Fa stato la decisione della sua cassa di compensazione AVS."@it ;
+  sh:property
+    [ sh:path eo:parent ; sh:in ( eo:mother eo:otherParent ) ; sh:minCount 1 ;
+      sh:group eo:birth ; sh:order 1 ;
+      sh:name "Are you the mother or the other parent?"@en , "Sind Sie die Mutter oder der andere Elternteil?"@de ,
+              "Êtes-vous la mère ou l'autre parent ?"@fr , "È la madre o l'altro genitore?"@it ;
+      prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i ] ,
+    [ sh:path eo:childBirthDate ; sh:datatype xsd:date ; sh:minCount 1 ;
+      sh:group eo:birth ; sh:order 2 ;
+      sh:name "Date of birth of the child"@en , "Geburtsdatum des Kindes"@de ,
+              "Date de naissance de l'enfant"@fr , "Data di nascita del bambino"@it ;
+      prov:wasDerivedFrom law:EOG-16c-1 , law:EOG-16j ] ,
+    [ sh:path eo:legalParent ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group eo:birth ; sh:order 3 ;
+      form:askedWhen [ sh:prefixes eo: ; sh:ask "ASK { $this eo:parent eo:otherParent }" ] ;
+      sh:name "Are you the child's legal other parent, or will you be within 6 months of the birth?"@en ,
+              "Sind Sie rechtlich der andere Elternteil des Kindes, oder werden Sie es innerhalb von 6 Monaten nach der Geburt?"@de ,
+              "Êtes-vous juridiquement l'autre parent de l'enfant, ou le deviendrez-vous dans les 6 mois suivant la naissance ?"@fr ,
+              "È giuridicamente l'altro genitore del bambino, o lo diventerà entro 6 mesi dalla nascita?"@it ;
+      prov:wasDerivedFrom law:EOG-16i ] ,
+    [ sh:path eo:leaveStart ; sh:datatype xsd:date ; sh:minCount 1 ;
+      sh:group eo:birth ; sh:order 4 ;
+      form:askedWhen [ sh:prefixes eo: ; sh:ask "ASK { $this eo:parent eo:otherParent }" ] ;
+      sh:name "First day of your leave"@en , "Erster Tag Ihres Urlaubs"@de ,
+              "Premier jour de votre congé"@fr , "Primo giorno del suo congedo"@it ;
+      sh:description "You take the 2 weeks within the 6 months after the birth, as weeks or as single days."@en ,
+                     "Sie beziehen die 2 Wochen innerhalb der 6 Monate nach der Geburt, wochenweise oder tageweise."@de ,
+                     "Vous prenez les 2 semaines dans les 6 mois suivant la naissance, par semaines ou par jours."@fr ,
+                     "Prende le 2 settimane entro i 6 mesi dopo la nascita, a settimane o a giorni."@it ;
+      prov:wasDerivedFrom law:EOG-16j ] ,
+
+    [ sh:path eo:insured ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group eo:work ; sh:order 1 ;
+      sh:name "In the 9 months before the birth, were you insured under the AHV?"@en ,
+              "Waren Sie in den 9 Monaten vor der Geburt in der AHV versichert?"@de ,
+              "Durant les 9 mois précédant la naissance, étiez-vous assuré à l'AVS ?"@fr ,
+              "Nei 9 mesi prima della nascita era assicurato all'AVS?"@it ;
+      sh:description "Insured under the mandatory scheme, for example because you lived or worked in Switzerland."@en ,
+                     "Obligatorisch versichert, zum Beispiel weil Sie in der Schweiz wohnten oder arbeiteten."@de ,
+                     "Assuré obligatoirement, par exemple parce que vous habitiez ou travailliez en Suisse."@fr ,
+                     "Assicurato obbligatoriamente, ad esempio perché abitava o lavorava in Svizzera."@it ;
+      prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i ] ,
+    [ sh:path eo:worked ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group eo:work ; sh:order 2 ;
+      sh:name "Did you work for at least 5 of those 9 months?"@en , "Haben Sie in diesen 9 Monaten mindestens 5 Monate gearbeitet?"@de ,
+              "Avez-vous travaillé au moins 5 mois durant ces 9 mois ?"@fr , "Ha lavorato almeno 5 mesi in questi 9 mesi?"@it ;
+      prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i ] ,
+    [ sh:path eo:status ; sh:in ( eo:employed eo:selfEmployed eo:spouseBusiness eo:otherStatus ) ; sh:minCount 1 ;
+      sh:group eo:work ; sh:order 3 ;
+      sh:name "What was your situation on the day of the birth?"@en , "Wie war Ihre Situation am Tag der Geburt?"@de ,
+              "Quelle était votre situation le jour de la naissance ?"@fr , "Qual era la sua situazione il giorno della nascita?"@it ;
+      prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i ] ,
+
+    [ sh:path eo:monthlyIncome ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group eo:income ; sh:order 1 ;
+      form:askedWhen [ sh:prefixes eo: ; sh:ask "ASK { $this eo:status ?s FILTER (?s IN (eo:employed, eo:spouseBusiness)) }" ] ;
+      sh:name "Your average monthly income before the birth (CHF)"@en , "Ihr durchschnittliches Monatseinkommen vor der Geburt (CHF)"@de ,
+              "Votre revenu mensuel moyen avant la naissance (CHF)"@fr , "Il suo reddito mensile medio prima della nascita (CHF)"@it ;
+      sh:description "Gross, as on your payslips; your employer confirms it."@en , "Brutto, wie auf Ihren Lohnabrechnungen; Ihr Arbeitgeber bestätigt es."@de ,
+                     "Brut, comme sur vos fiches de salaire ; votre employeur le confirme."@fr , "Lordo, come sulle sue buste paga; il suo datore di lavoro lo conferma."@it ;
+      prov:wasDerivedFrom law:EOG-16e , law:EOG-16l ] ,
+    [ sh:path eo:annualIncome ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group eo:income ; sh:order 2 ;
+      form:askedWhen [ sh:prefixes eo: ; sh:ask "ASK { $this eo:status eo:selfEmployed }" ] ;
+      sh:name "Your annual income from self-employment (CHF)"@en , "Ihr Jahreseinkommen aus selbständiger Erwerbstätigkeit (CHF)"@de ,
+              "Votre revenu annuel d'activité indépendante (CHF)"@fr , "Il suo reddito annuo da attività indipendente (CHF)"@it ;
+      sh:description "The income on which you pay AHV contributions."@en , "Das Einkommen, auf dem Sie AHV-Beiträge bezahlen."@de ,
+                     "Le revenu sur lequel vous payez des cotisations AVS."@fr , "Il reddito sul quale paga i contributi AVS."@it ;
+      prov:wasDerivedFrom law:EOG-16e , law:EOG-16l ] .
+
+# ---------------------------------------------------------------------------
+# 3. Rules
+# ---------------------------------------------------------------------------
+# $this is the application. Dates are compared and added to durations as in XPath.
+
+eo:ApplicationShape sh:rule
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    rdfs:comment "The average daily income of a person with a wage: the monthly income divided by 30." ;
+    sh:construct """
+      CONSTRUCT { $this eo:dailyIncome ?daily }
+      WHERE {
+        $this eo:status ?status ; eo:monthlyIncome ?monthly
+        FILTER (?status IN (eo:employed, eo:spouseBusiness))
+        BIND (?monthly / 30 AS ?daily)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    rdfs:comment "The average daily income of a self-employed person: the annual income divided by 360." ;
+    sh:construct """
+      CONSTRUCT { $this eo:dailyIncome ?daily }
+      WHERE { $this eo:status eo:selfEmployed ; eo:annualIncome ?annual BIND (?annual / 360 AS ?daily) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes eo: , form: ;
+    rdfs:comment "80 % of the average daily income, at most CHF 220." ;
+    sh:construct """
+      CONSTRUCT { $this eo:dailyAllowance ?allowance }
+      WHERE {
+        $this eo:dailyIncome ?daily .
+        BIND (?daily * 0.8 AS ?share)
+        BIND (IF(?share > 220, 220, ?share) AS ?allowance)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this eo:days 98 ; eo:lastAllowanceDay ?last }
+      WHERE { $this eo:parent eo:mother ; eo:childBirthDate ?birth BIND (?birth + "P97D"^^xsd:dayTimeDuration AS ?last) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this eo:days 14 ; eo:lastLeaveDay ?last }
+      WHERE {
+        $this eo:parent eo:otherParent ; eo:childBirthDate ?birth
+        BIND ((?birth + "P6M"^^xsd:yearMonthDuration) - "P1D"^^xsd:dayTimeDuration AS ?last)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this eo:totalAllowance ?total }
+      WHERE { $this eo:days ?days ; eo:dailyAllowance ?allowance BIND (?days * ?allowance AS ?total) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:NotBornYet }
+      WHERE { $this eo:childBirthDate ?birth ; form:today ?today FILTER (?birth > ?today) }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:NotInsured }
+      WHERE { $this eo:insured form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:NotEnoughWork }
+      WHERE { $this eo:worked form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:AskOffice }
+      WHERE { $this eo:status eo:otherStatus }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:NotLegalParent }
+      WHERE { $this eo:parent eo:otherParent ; eo:legalParent form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes eo: , form: ;
+    rdfs:comment "The leave starts within the 6 months after the birth." ;
+    sh:construct """
+      CONSTRUCT { $this form:finding eo:LeaveOutsidePeriod }
+      WHERE {
+        $this eo:childBirthDate ?birth ; eo:leaveStart ?start ; eo:lastLeaveDay ?last .
+        FILTER (?start < ?birth || ?start > ?last)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep eo:Claim }
+      WHERE { }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep eo:EndsEarly }
+      WHERE { $this eo:parent eo:mother }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes eo: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep eo:TakeWithinSixMonths }
+      WHERE { $this eo:parent eo:otherParent }""" ] .
+
+# ---------------------------------------------------------------------------
+# 4. Values, findings and next steps
+# ---------------------------------------------------------------------------
+
+eo:dailyIncome a rdf:Property ;
+  rdfs:comment "The average daily income before the birth." ;
+  prov:wasDerivedFrom law:EOG-16e , law:EOG-16l .
+
+eo:dailyAllowance a form:Value ; sh:order 1 ;
+  rdfs:label "Daily allowance (CHF)"@en , "Taggeld (CHF)"@de , "Allocation journalière (CHF)"@fr , "Indennità giornaliera (CHF)"@it ;
+  prov:wasDerivedFrom law:EOG-16e , law:EOG-16f , law:EOG-16l .
+eo:days a form:Value ; sh:order 2 ;
+  rdfs:label "Number of daily allowances"@en , "Anzahl Taggelder"@de ,
+             "Nombre d'allocations journalières"@fr , "Numero di indennità giornaliere"@it ;
+  prov:wasDerivedFrom law:EOG-16d , law:EOG-16k .
+eo:totalAllowance a form:Value ; sh:order 3 ;
+  rdfs:label "Total, at most (CHF)"@en , "Gesamtbetrag, höchstens (CHF)"@de , "Montant total, au plus (CHF)"@fr , "Importo totale, al massimo (CHF)"@it ;
+  prov:wasDerivedFrom law:EOG-16d , law:EOG-16k .
+eo:lastAllowanceDay a form:Value ; sh:order 4 ;
+  rdfs:label "Last day of the allowance, at the latest"@en , "Letzter Tag der Entschädigung, spätestens"@de ,
+             "Dernier jour de l'allocation, au plus tard"@fr , "Ultimo giorno dell'indennità, al più tardi"@it ;
+  prov:wasDerivedFrom law:EOG-16c-2 , law:EOG-16d .
+eo:lastLeaveDay a form:Value ; sh:order 5 ;
+  rdfs:label "Last day to take the leave"@en , "Letzter Tag für den Urlaub"@de ,
+             "Dernier jour pour prendre le congé"@fr , "Ultimo giorno per prendere il congedo"@it ;
+  prov:wasDerivedFrom law:EOG-16j .
+
+eo:NotBornYet a form:Finding ; form:severity form:NotYet ;
+  rdfs:label "The child is not born yet"@en , "Das Kind ist noch nicht geboren"@de , "L'enfant n'est pas encore né"@fr , "Il bambino non è ancora nato"@it ;
+  rdfs:comment "The entitlement begins with the birth. Apply after it."@en , "Der Anspruch beginnt mit der Geburt. Stellen Sie den Antrag danach."@de ,
+               "Le droit naît avec la naissance. Faites la demande après celle-ci."@fr , "Il diritto nasce con la nascita. Presenti la domanda dopo di essa."@it ;
+  prov:wasDerivedFrom law:EOG-16c-1 , law:EOG-16i .
+eo:NotInsured a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Not insured under the AHV for 9 months"@en , "Nicht 9 Monate in der AHV versichert"@de ,
+             "Pas assuré 9 mois à l'AVS"@fr , "Non assicurato 9 mesi all'AVS"@it ;
+  rdfs:comment "The allowance needs 9 months of AHV insurance immediately before the birth."@en ,
+               "Die Entschädigung setzt 9 Monate AHV-Versicherung unmittelbar vor der Geburt voraus."@de ,
+               "L'allocation suppose 9 mois d'assurance AVS immédiatement avant la naissance."@fr ,
+               "L'indennità presuppone 9 mesi di assicurazione AVS immediatamente prima della nascita."@it ;
+  prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i .
+eo:NotEnoughWork a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Less than 5 months of work"@en , "Weniger als 5 Monate Erwerbstätigkeit"@de ,
+             "Moins de 5 mois d'activité lucrative"@fr , "Meno di 5 mesi di attività lucrativa"@it ;
+  rdfs:comment "The allowance needs at least 5 months of work in the 9 months before the birth."@en ,
+               "Die Entschädigung setzt mindestens 5 Monate Erwerbstätigkeit in den 9 Monaten vor der Geburt voraus."@de ,
+               "L'allocation suppose au moins 5 mois d'activité lucrative durant les 9 mois précédant la naissance."@fr ,
+               "L'indennità presuppone almeno 5 mesi di attività lucrativa nei 9 mesi prima della nascita."@it ;
+  prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i .
+eo:NotLegalParent a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Not the legal other parent"@en , "Rechtlich nicht der andere Elternteil"@de ,
+             "Pas juridiquement l'autre parent"@fr , "Non giuridicamente l'altro genitore"@it ;
+  rdfs:comment "The other parent's allowance is for the child's legal other parent, at the birth or within the 6 months after it."@en ,
+               "Die Entschädigung des andern Elternteils ist für den rechtlichen andern Elternteil des Kindes, bei der Geburt oder in den 6 Monaten danach."@de ,
+               "L'allocation de l'autre parent est pour l'autre parent juridique de l'enfant, à la naissance ou dans les 6 mois qui suivent."@fr ,
+               "L'indennità per l'altro genitore è per l'altro genitore giuridico del bambino, alla nascita o nei 6 mesi successivi."@it ;
+  prov:wasDerivedFrom law:EOG-16i .
+eo:LeaveOutsidePeriod a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "The leave is outside the 6 months after the birth"@en , "Der Urlaub liegt ausserhalb der 6 Monate nach der Geburt"@de ,
+             "Le congé est en dehors des 6 mois suivant la naissance"@fr , "Il congedo è fuori dai 6 mesi dopo la nascita"@it ;
+  rdfs:comment "Take the leave within the 6 months after the birth; after them, the entitlement ends."@en ,
+               "Beziehen Sie den Urlaub innerhalb der 6 Monate nach der Geburt; danach endet der Anspruch."@de ,
+               "Prenez le congé dans les 6 mois suivant la naissance ; ensuite, le droit prend fin."@fr ,
+               "Prenda il congedo entro i 6 mesi dopo la nascita; in seguito il diritto si estingue."@it ;
+  prov:wasDerivedFrom law:EOG-16j .
+eo:AskOffice a form:Finding ; form:severity form:Notice ;
+  rdfs:label "Ask your AHV compensation office"@en , "Fragen Sie Ihre AHV-Ausgleichskasse"@de ,
+             "Demandez à votre caisse de compensation AVS"@fr , "Chieda alla sua cassa di compensazione AVS"@it ;
+  rdfs:comment "Other situations, for example unemployment or inability to work at the birth, have their own conditions, which this demonstration leaves out."@en ,
+               "Andere Situationen, zum Beispiel Arbeitslosigkeit oder Arbeitsunfähigkeit bei der Geburt, haben eigene Voraussetzungen, die diese Demo nicht abbildet."@de ,
+               "D'autres situations, par exemple le chômage ou une incapacité de travail à la naissance, ont leurs propres conditions, que cette démo ne couvre pas."@fr ,
+               "Altre situazioni, ad esempio la disoccupazione o l'incapacità al lavoro alla nascita, hanno condizioni proprie, che questa demo non copre."@it ;
+  prov:wasDerivedFrom law:EOG-16b-1 , law:EOG-16i .
+
+eo:Claim a form:NextStep ; sh:order 1 ;
+  rdfs:label "Your employer, or you if you are self-employed, claims the allowance with the form of your AHV compensation office."@en ,
+             "Ihr Arbeitgeber, oder Sie selbst als Selbständigerwerbende, machen den Anspruch mit dem Formular Ihrer AHV-Ausgleichskasse geltend."@de ,
+             "Votre employeur, ou vous-même si vous êtes indépendant, fait valoir le droit avec le formulaire de votre caisse de compensation AVS."@fr ,
+             "Il suo datore di lavoro, o lei stesso se è indipendente, fa valere il diritto con il modulo della sua cassa di compensazione AVS."@it ;
+  prov:wasDerivedFrom law:EOG .
+eo:EndsEarly a form:NextStep ; sh:order 2 ;
+  rdfs:label "The allowance ends early if you start working again."@en , "Die Entschädigung endet vorzeitig, wenn Sie die Erwerbstätigkeit wieder aufnehmen."@de ,
+             "L'allocation prend fin plus tôt si vous reprenez une activité lucrative."@fr , "L'indennità termina prima se riprende un'attività lucrativa."@it ;
+  prov:wasDerivedFrom law:EOG-16d .
+eo:TakeWithinSixMonths a form:NextStep ; sh:order 3 ;
+  rdfs:label "Take the 14 daily allowances within the 6 months after the birth: 7 for each week of leave, or 2 more for each 5 days taken as single days."@en ,
+             "Beziehen Sie die 14 Taggelder innerhalb der 6 Monate nach der Geburt: 7 pro Woche Urlaub, oder 2 zusätzliche pro 5 einzeln bezogene Tage."@de ,
+             "Prenez les 14 allocations journalières dans les 6 mois suivant la naissance : 7 par semaine de congé, ou 2 de plus pour 5 jours pris séparément."@fr ,
+             "Prenda le 14 indennità giornaliere entro i 6 mesi dopo la nascita: 7 per settimana di congedo, oppure 2 in più per 5 giorni presi singolarmente."@it ;
+  prov:wasDerivedFrom law:EOG-16j , law:EOG-16k .

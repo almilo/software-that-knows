@@ -1,0 +1,47 @@
+# A shared module: the articles of the EOG (SR 834.1) that the domains cite (prov:wasDerivedFrom),
+# with their labels in the abbreviations of each language.
+# Checked against the consolidated text on fedlex.admin.ch on 16 October 2026 (in force since
+# 1 June 2026).
+# The comments are short summaries in English, not official texts.
+
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/ch-law/eog> a owl:Ontology ;
+  rdfs:label "EOG (SR 834.1)" .
+
+law:EOG a prov:Entity ;
+  rdfs:label "EOG (SR 834.1)"@en , "EOG (SR 834.1)"@de , "LAPG (RS 834.1)"@fr , "LIPG (RS 834.1)"@it ;
+  rdfs:comment "Federal Act on Compensation for Loss of Earnings: for persons in service, for maternity, for the other parent, and more." .
+law:EOG-16b-1 a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16b para. 1"@en , "EOG Art. 16b Abs. 1"@de , "LAPG art. 16b al. 1"@fr , "LIPG art. 16b cpv. 1"@it ;
+  rdfs:comment "A mother is entitled if she was insured under the AHV for the 9 months immediately before the birth, worked for at least 5 of them, and at the birth is employed, self-employed, or works in her spouse's business for a cash wage." .
+law:EOG-16c-1 a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16c para. 1"@en , "EOG Art. 16c Abs. 1"@de , "LAPG art. 16c al. 1"@fr , "LIPG art. 16c cpv. 1"@it ;
+  rdfs:comment "The mother's entitlement begins on the day of the birth." .
+law:EOG-16c-2 a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16c para. 2"@en , "EOG Art. 16c Abs. 2"@de , "LAPG art. 16c al. 2"@fr , "LIPG art. 16c cpv. 2"@it ;
+  rdfs:comment "The maternity allowance is paid on 98 consecutive days from the beginning of the entitlement." .
+law:EOG-16d a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16d"@en , "EOG Art. 16d"@de , "LAPG art. 16d"@fr , "LIPG art. 16d"@it ;
+  rdfs:comment "The mother's entitlement ends on the 98th day after it began (later while the newborn is in hospital), or earlier if she starts working again or dies." .
+law:EOG-16e a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16e"@en , "EOG Art. 16e"@de , "LAPG art. 16e"@fr , "LIPG art. 16e"@it ;
+  rdfs:comment "The maternity allowance is 80 % of the average income earned before the entitlement began." .
+law:EOG-16f a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16f"@en , "EOG Art. 16f"@de , "LAPG art. 16f"@fr , "LIPG art. 16f"@it ;
+  rdfs:comment "The maternity allowance is at most CHF 220 a day; a higher one is reduced." .
+law:EOG-16i a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16i"@en , "EOG Art. 16i"@de , "LAPG art. 16i"@fr , "LIPG art. 16i"@it ;
+  rdfs:comment "The other parent is entitled who is the child's legal other parent at the birth or becomes it within the 6 months after it, was insured under the AHV for the 9 months immediately before the birth, worked for at least 5 of them, and at the birth is employed, self-employed, or works in the wife's business for a cash wage." .
+law:EOG-16j a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16j"@en , "EOG Art. 16j"@de , "LAPG art. 16j"@fr , "LIPG art. 16j"@it ;
+  rdfs:comment "The other parent's allowance has a framework period of 6 months, which begins on the day of the birth. The entitlement ends when the period ends or the daily allowances are used up." .
+law:EOG-16k a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16k"@en , "EOG Art. 16k"@de , "LAPG art. 16k"@fr , "LIPG art. 16k"@it ;
+  rdfs:comment "The other parent receives at most 14 daily allowances: 7 for each week of leave, or 2 more for each 5 days taken as single days." .
+law:EOG-16l a prov:Entity ; prov:wasDerivedFrom law:EOG ;
+  rdfs:label "EOG Art. 16l"@en , "EOG Art. 16l"@de , "LAPG art. 16l"@fr , "LIPG art. 16l"@it ;
+  rdfs:comment "The other parent's allowance is 80 % of the average income earned before the entitlement began, at most the amount of Art. 16f." .

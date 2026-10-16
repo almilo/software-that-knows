@@ -1,0 +1,95 @@
+{
+  "$comment": "Generated from domains/wef/ontology/ by generator/generate.ts. Do not edit.",
+  "type": "Categorization",
+  "elements": [
+    {
+      "type": "Category",
+      "label": "you",
+      "i18n": "you",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/birthDate"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/retirementAge"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/retirementAgeMonths"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/married"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/spouseConsent"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "home",
+      "i18n": "home",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/purpose"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/propertyType"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/ownership"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/ownUse"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "pensionFund",
+      "i18n": "pensionFund",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/vestedBenefit"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/vestedBenefitAt50"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/requestedAmount"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/withdrawnBefore"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/lastWithdrawal"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/alreadyInvested"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/otherHome"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/fundUnderfunded"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+# A shared module: the articles of the BVG (SR 831.40) that the domains cite (prov:wasDerivedFrom), with
+# their labels in the abbreviations of each language. Checked against the consolidated text on fedlex.admin.ch
+# on 4 October 2026 (in force since 1 January 2025).
+# The comments are short summaries in English, not official texts.
+
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/ch-law/bvg> a owl:Ontology ;
+  rdfs:label "BVG (SR 831.40)" .
+
+law:BVG a prov:Entity ;
+  rdfs:label "BVG (SR 831.40)"@en , "BVG (SR 831.40)"@de , "LPP (RS 831.40)"@fr , "LPP (RS 831.40)"@it ;
+  rdfs:comment "Federal Act on Occupational Retirement, Survivors' and Disability Pension Plans." .
+law:BVG-13 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 13"@en , "BVG Art. 13"@de , "LPP art. 13"@fr , "LPP art. 13"@it ;
+  rdfs:comment "The reference age of occupational pensions is the reference age of the AHV (AHVG Art. 21 para. 1). Funds can set a lower age within limits." .
+law:BVG-30c-1 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 1"@en , "BVG Art. 30c Abs. 1"@de , "LPP art. 30c al. 1"@fr , "LPP art. 30c cpv. 1"@it ;
+  rdfs:comment "Until 3 years before the right to retirement benefits begins, an insured person can ask for an amount for a home for their own use." .
+law:BVG-30c-2 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 2"@en , "BVG Art. 30c Abs. 2"@de , "LPP art. 30c al. 2"@fr , "LPP art. 30c cpv. 2"@it ;
+  rdfs:comment "Up to age 50: up to the vested benefit. Over 50: at most the vested benefit at age 50, or half of the vested benefit at the time of the withdrawal." .
+law:BVG-30c-3 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 3"@en , "BVG Art. 30c Abs. 3"@de , "LPP art. 30c al. 3"@fr , "LPP art. 30c cpv. 3"@it ;
+  rdfs:comment "The amount can also buy shares in a housing cooperative or similar participations, if the person lives in the home they help to finance." .
+law:BVG-30c-4 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 4"@en , "BVG Art. 30c Abs. 4"@de , "LPP art. 30c al. 4"@fr , "LPP art. 30c cpv. 4"@it ;
+  rdfs:comment "The withdrawal reduces the benefits. The fund offers or arranges extra insurance for death and disability." .
+law:BVG-30c-5 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30c para. 5"@en , "BVG Art. 30c Abs. 5"@de , "LPP art. 30c al. 5"@fr , "LPP art. 30c cpv. 5"@it ;
+  rdfs:comment "A married person or a person in a registered partnership needs the written consent of the spouse or partner, for the withdrawal and for every later mortgage on the home. Without it, they can ask the civil court." .
+law:BVG-30d a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30d"@en , "BVG Art. 30d"@de , "LPP art. 30d"@fr , "LPP art. 30d"@it ;
+  rdfs:comment "The amount must be paid back if the home is sold, if rights are granted that amount to a sale, or if no pension benefit is due at death (para. 1). After a sale, at most the proceeds (para. 5); proceeds to be put into a new home within 2 years can go to a vested benefits institution (para. 4)." .
+law:BVG-30e-2 a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 30e para. 2"@en , "BVG Art. 30e Abs. 2"@de , "LPP art. 30e al. 2"@fr , "LPP art. 30e cpv. 2"@it ;
+  rdfs:comment "The restriction on sale is noted in the land register." .
+law:BVG-83a a prov:Entity ; prov:wasDerivedFrom law:BVG ;
+  rdfs:label "BVG Art. 83a"@en , "BVG Art. 83a"@de , "LPP art. 83a"@fr , "LPP art. 83a"@it ;
+  rdfs:comment "The withdrawal is taxed as a capital benefit from pension provision." .
+

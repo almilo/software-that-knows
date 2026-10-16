@@ -1,0 +1,79 @@
+{
+  "$comment": "Generated from domains/vested-benefits/ontology/ by generator/generate.ts. Do not edit.",
+  "type": "Categorization",
+  "elements": [
+    {
+      "type": "Category",
+      "label": "you",
+      "i18n": "you",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/birthDate"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/retirementAge"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/retirementAgeMonths"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/married"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/spouseConsent"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "cashPayment",
+      "i18n": "cashPayment",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/heldBy"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/leaving"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/reason"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/destination"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/insuredAbroad"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/stillMandatory"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "pensionFund",
+      "i18n": "pensionFund",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/vestedBenefit"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/annualContribution"
+        }
+      ]
+    }
+  ]
+}

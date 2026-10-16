@@ -1,0 +1,82 @@
+# A shared module: the person who applies for themself. A domain gets its fields and rules by
+# making its class a subclass of person:PersonalApplication (for SHACL, a shape for a class also
+# applies to the members of its subclasses), and by importing this module.
+#
+# The module states what the concepts are, not why a process needs them: it has no
+# prov:wasDerivedFrom. Each domain states the legal basis of the fields, findings and next steps
+# that it uses, for example:
+#   person:ConsentMissing prov:wasDerivedFrom law:BVG-30c-5 .   (wef)
+#   person:ConsentMissing prov:wasDerivedFrom law:FZG-5-2 .     (vested-benefits)
+# The texts were in the wef model first; they are the same, so the wef domain did not change.
+#
+# Field orders leave room for the fields of other modules in the same group: pension.ttl puts the
+# reference age at 2 and 3.
+
+@prefix form:   <https://example.org/form#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix pension: <https://example.org/pension#> .
+@prefix person: <https://example.org/person#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+person: a owl:Ontology ;
+  rdfs:label "The person who applies" ;
+  owl:imports form: ;
+  sh:declare [ sh:prefix "person" ; sh:namespace "https://example.org/person#"^^xsd:anyURI ] .
+
+person:PersonalApplication a rdfs:Class ;
+  rdfs:comment "An application that a person makes for themself: their own data are part of it." .
+
+person:you a sh:PropertyGroup ; sh:order 1 ;
+  rdfs:label "You"@en , "Ihre Angaben"@de , "Vos données"@fr , "I suoi dati"@it .
+
+person:PersonalApplicationShape a sh:NodeShape ;
+  sh:targetClass person:PersonalApplication ;
+  sh:property person:BirthDate , person:Married , person:SpouseConsent ;
+  sh:rule
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes person: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding person:ConsentMissing }
+      WHERE { $this person:married form:yes ; person:spouseConsent form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 3 ; sh:prefixes person: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep person:AttachConsent }
+      WHERE { $this person:married form:yes }""" ] .
+
+person:BirthDate a sh:PropertyShape ;
+  sh:path person:birthDate ; sh:datatype xsd:date ; sh:minCount 1 ;
+  sh:group person:you ; sh:order 1 ;
+  sh:name "Date of birth"@en , "Geburtsdatum"@de , "Date de naissance"@fr , "Data di nascita"@it .
+
+person:Married a sh:PropertyShape ;
+  sh:path person:married ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+  sh:group person:you ; sh:order 4 ;
+  sh:name "Are you married or in a registered partnership?"@en ,
+          "Sind Sie verheiratet oder leben Sie in eingetragener Partnerschaft?"@de ,
+          "Êtes-vous marié ou lié par un partenariat enregistré ?"@fr ,
+          "È sposato o vive in unione domestica registrata?"@it .
+
+person:SpouseConsent a sh:PropertyShape ;
+  sh:path person:spouseConsent ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+  sh:group person:you ; sh:order 5 ;
+  form:askedWhen [ sh:prefixes person: , form: ; sh:ask "ASK { $this person:married form:yes }" ] ;
+  sh:name "Does your spouse or partner agree in writing?"@en ,
+          "Stimmt Ihr Ehe- oder eingetragener Partner schriftlich zu?"@de ,
+          "Votre conjoint ou partenaire enregistré donne-t-il son consentement écrit ?"@fr ,
+          "Il coniuge o il partner registrato dà il consenso scritto?"@it .
+
+person:ConsentMissing a form:Finding ; form:severity form:NotYet ;
+  rdfs:label "Written consent missing"@en , "Schriftliche Zustimmung fehlt"@de ,
+             "Consentement écrit manquant"@fr , "Consenso scritto mancante"@it ;
+  rdfs:comment "Your spouse or registered partner must agree in writing. If you cannot get the consent, you can ask the civil court."@en ,
+               "Ihr Ehe- oder eingetragener Partner muss schriftlich zustimmen. Können Sie die Zustimmung nicht einholen, können Sie das Zivilgericht anrufen."@de ,
+               "Votre conjoint ou partenaire enregistré doit donner son consentement écrit. Si vous ne pouvez pas l'obtenir, vous pouvez en appeler au tribunal civil."@fr ,
+               "Il coniuge o il partner registrato deve dare il consenso scritto. Se non può ottenerlo, può rivolgersi al giudice civile."@it .
+
+person:AttachConsent a form:NextStep ; sh:order 4 ;
+  rdfs:label "Attach the written consent of your spouse or registered partner."@en ,
+             "Legen Sie die schriftliche Zustimmung Ihres Ehe- oder eingetragenen Partners bei."@de ,
+             "Joignez le consentement écrit de votre conjoint ou partenaire enregistré."@fr ,
+             "Alleghi il consenso scritto del coniuge o del partner registrato."@it .

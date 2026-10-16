@@ -1,9 +1,12 @@
 [versions]
 spring-boot = "4.1.1"
 vaadin = "25.3.2"
+flowable = "8.0.0"
 jena = "6.2.0"
 junit = "6.1.3"
 jackson = "2.22.3"
+htmx = "2.0.11"
+bpmn-js = "18.18.0"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
@@ -12,7 +15,13 @@ vaadin-bom = { module = "com.vaadin:vaadin-bom", version.ref = "vaadin" }
 vaadin-spring-boot-starter = { module = "com.vaadin:vaadin-spring-boot-starter" }
 vaadin-dev = { module = "com.vaadin:vaadin-dev" }
 vaadin-browserless-spring = { module = "com.vaadin:browserless-test-spring", version.ref = "vaadin" }
+flowable-starter-process = { module = "org.flowable:flowable-spring-boot-starter-process", version.ref = "flowable" }
 spring-boot-starter-webmvc = { module = "org.springframework.boot:spring-boot-starter-webmvc" }
+spring-boot-starter-webmvc-test = { module = "org.springframework.boot:spring-boot-starter-webmvc-test" }
+spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf" }
+webjars-locator-lite = { module = "org.webjars:webjars-locator-lite" }
+htmx = { module = "org.webjars.npm:htmx.org", version.ref = "htmx" }
+bpmn-js = { module = "org.webjars.npm:bpmn-js", version.ref = "bpmn-js" }
 h2 = { module = "com.h2database:h2" }
 jena-arq = { module = "org.apache.jena:jena-arq", version.ref = "jena" }
 jackson-databind = { module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jackson" }

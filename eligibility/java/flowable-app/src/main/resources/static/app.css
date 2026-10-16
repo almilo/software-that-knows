@@ -1,0 +1,86 @@
+/* The look of react-bun/app/styles.css and of the Vaadin app, for plain HTML */
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; background: #fafafa; color: #222; }
+main { max-width: 900px; margin: 0 auto; padding: 16px; }
+main.narrow { max-width: 680px; }
+h1 { margin: 0 0 8px; font-size: 26px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+h2 { margin: 24px 0 8px; font-size: 18px; }
+h3 { margin: 0 0 4px; font-size: 17px; }
+a { color: #0b5cd5; }
+code { font-size: 12px; color: #666; }
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; padding: 8px 16px; background: #fff; border-bottom: 1px solid #ddd; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 16px; align-items: baseline; }
+.top nav a { text-decoration: none; color: #444; }
+.top nav a.current { color: #222; font-weight: 600; }
+.top .brand { font-weight: 700; color: #222; }
+.switches { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: 13px; }
+.switches label { display: flex; gap: 6px; align-items: center; color: #555; }
+.intro { margin: 0 0 8px; color: #444; }
+.kicker { margin: 0; color: #666; font-size: 13px; }
+.meta { color: #666; font-size: 13px; margin: 0 0 4px; }
+.hint { margin: 0; color: #666; font-size: 13px; }
+.processes { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.processes .card { border: 1px solid #ddd; display: flex; flex-direction: column; }
+.processes .card p { flex: 1; color: #444; }
+.card { border-left: 8px solid #ddd; border-radius: 4px; padding: 10px 14px; margin: 0 0 12px; background: #fff; }
+.card h4 { font-size: 15px; margin: 0 0 4px; }
+.card p { margin: 0 0 4px; }
+.card ul { margin: 0 0 4px; padding-left: 20px; }
+.sources { color: #666; font-size: 12px; }
+.Refusal { border-color: #d64545; background: #fdeaea; }
+.NotYet { border-color: #e6b800; background: #fff8d6; }
+.Notice { border-color: #3d7fc4; background: #eaf2fb; }
+.allowed { border-color: #3a9d4a; background: #e6f4e8; }
+.values { margin: 0 0 16px; padding: 8px 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.values > div { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
+.values > div:last-child { border-bottom: 0; }
+.values dt { color: #444; }
+.values dd { margin: 0; text-align: right; font-weight: 600; }
+.values .sources { display: block; font-weight: 400; }
+.state { font-size: 13px; font-weight: 600; padding: 2px 8px; border-radius: 10px; background: #eee; white-space: nowrap; }
+.state.review { background: #fff3c4; }
+.state.complete { background: #e3ecfa; }
+.state.approved { background: #d7efdb; }
+.state.rejected, .state.refused { background: #f9d9d9; }
+.badge.overdue { font-size: 12px; font-weight: 600; color: #8a1c1c; background: #fdecec; padding: 1px 6px; border-radius: 8px; }
+.form .group { margin-bottom: 8px; }
+.question { display: flex; flex-direction: column; gap: 4px; margin: 0 0 14px; }
+.question fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.question legend, .question > label { padding: 0; font-weight: 500; color: #333; }
+.question .help { margin: 0; font-size: 13px; color: #666; }
+.question .choice { display: flex; gap: 6px; align-items: center; }
+.question.missing input, .question.missing select { border-color: #d64545; }
+.required { color: #d64545; margin-left: 2px; }
+input[type="text"], input[type="number"], input[type="date"], select, textarea { font: inherit; padding: 6px 8px; border: 1px solid #bbb; border-radius: 4px; background: #fff; max-width: 100%; }
+input[type="number"], input[type="date"], select { width: 260px; }
+textarea { width: 100%; min-height: 70px; }
+button, .button { font: inherit; padding: 6px 14px; border: 1px solid #bbb; border-radius: 4px; background: #fff; color: #222; cursor: pointer; text-decoration: none; display: inline-block; }
+button.primary, .button.primary { background: #0b5cd5; border-color: #0b5cd5; color: #fff; }
+button.danger { background: #c43a3a; border-color: #c43a3a; color: #fff; }
+button.link { border: 0; background: none; color: #0b5cd5; padding: 0 4px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; margin-top: 12px; }
+.error { margin: 12px 0; padding: 6px 10px; border: 1px solid #e0a0a0; border-radius: 4px; background: #fdecec; color: #8a1c1c; font-size: 13px; }
+.question .error { margin: 0; padding: 0; border: 0; background: none; }
+.panel { padding: 4px 16px 12px; margin: 16px 0; border: 1px solid #c9d8f0; border-radius: 4px; background: #f5f9ff; }
+.check { padding: 10px 14px; margin: 0 0 8px; background: #fff; border: 1px solid #ddd; border-left: 6px solid #ccc; border-radius: 4px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; }
+.check strong { flex: 1 1 100%; font-weight: 600; }
+.check.open { border-left-color: #e6b800; }
+.check.fulfilled { border-left-color: #3a9d4a; }
+.check.unfulfilled { border-left-color: #d64545; }
+.check .note { flex: 1 1 100%; margin: 0; font-size: 13px; }
+.task { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; margin: 0 0 6px; }
+.task .meta { margin: 0; }
+form.inline { display: inline-flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 4px 0; }
+form.stacked { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #ddd; font-size: 14px; }
+th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+th { color: #555; font-weight: 600; background: #f6f6f6; }
+.diagram { height: 360px; background: #fff; border: 1px solid #ddd; border-radius: 4px; margin: 12px 0 16px; }
+.diagram .djs-element.done .djs-visual > :nth-child(1) { stroke: #3a9d4a !important; fill: #eef8f0 !important; }
+.diagram .djs-connection.done .djs-visual > path { stroke: #3a9d4a !important; }
+.diagram .djs-element.active .djs-visual > :nth-child(1) { stroke: #e6a700 !important; stroke-width: 3px !important; fill: #fff6d6 !important; }
+@media (max-width: 600px) {
+  .diagram { height: 240px; }
+  input[type="number"], input[type="date"], select { width: 100%; }
+  table { font-size: 13px; }
+}

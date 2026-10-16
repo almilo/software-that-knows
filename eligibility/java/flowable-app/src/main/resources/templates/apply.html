@@ -1,0 +1,12 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}" th:with="pageTitle=${@model.title(form.domain)}">
+  <head th:replace="~{layout :: head(${pageTitle})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <main class="narrow">
+      <p class="kicker" th:text="#{apply.heading}">New application</p>
+      <h1 th:text="${@model.title(form.domain)}">Process</h1>
+      <form th:replace="~{form :: form}"></form>
+    </main>
+  </body>
+</html>

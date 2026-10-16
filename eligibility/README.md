@@ -1,8 +1,8 @@
 # eligibility
 
-One knowledge model, two stacks. A knowledge model describes processes under Swiss law (a
+One knowledge model, three stacks. A knowledge model describes processes under Swiss law (a
 *domain* each): their questions, their rules (SPARQL), what follows, and the articles that each part
-comes from. Two applications run the same model, and the same test cases check that they decide
+comes from. Three applications run the same model, and the same test cases check that they decide
 the same. It is a demonstration of the approach, not an application for real use.
 
 | Domain | Process | Shared modules |
@@ -20,7 +20,7 @@ the same. It is a demonstration of the approach, not an application for real use
 | [`knowledge/`](knowledge/) | The only source of truth, for every stack: the form vocabulary (`ontology/form.ttl`), the shared modules (`modules/`) and the domains (`domains/<name>/ontology/`) |
 | [`conformance/`](conformance/) | The shared test cases: for each domain, applications and what every stack must decide for them |
 | [`react-bun/`](react-bun/) | The browser stack: React, JSON Forms and Oxigraph (WebAssembly). A generator writes its files from the model; the rules run in the browser. [Its README](react-bun/README.md) describes the model, the modules, the engine and the wizard in detail |
-| [`java/`](java/) | The Java stack, one Gradle build: `eligibility-core` (Apache Jena) and `vaadin-app` (Vaadin + Spring Boot) |
+| [`java/`](java/) | The Java stacks, one Gradle build: `eligibility-core` (Apache Jena), `vaadin-app` (Vaadin + Spring Boot) and `flowable-app` (Spring Boot + Flowable) |
 
 ## The stacks
 
@@ -28,11 +28,16 @@ the same. It is a demonstration of the approach, not an application for real use
 | --- | --- | --- | --- |
 | React + Bun | In the browser (Oxigraph, WebAssembly) | A static site: the list of processes and a wizard for each, generated from the model | http://127.0.0.1:3518/ |
 | Vaadin + Spring Boot | On the server (Jena) | The same list and wizard, built from the model at startup, with no generated files | http://localhost:3520/ |
+| Spring Boot + Flowable + htmx | On the server (Jena), in a BPMN process | Applications through a process: the model decides in a service task, missing answers go back to the applicant, each next step of the model is a task of the office, and a reviewer decides. Pages rendered on the server, with htmx and the BPMN diagram. [Its README](java/flowable-app/README.md) | http://localhost:3521/ |
 
 No stack knows a domain. The TypeScript core (`react-bun/core/`) and the Java core
 (`java/eligibility-core/`) do the same four things: load a domain with the modules that it imports,
 read its form (SHACL), run its rules until nothing new is derived, and read back the values, the
 findings and the next steps.
+
+The Flowable process (`java/flowable-app/src/main/resources/processes/application.bpmn20.xml`) is
+the same for every domain: submitted, decided by the model, completed by the applicant, refused or
+checked step by step, then approved, rejected or returned.
 
 ## The shared test cases
 
@@ -69,6 +74,7 @@ cd react-bun && bun run conformance             # record the shared cases again
 
 cd java && ./gradlew build                      # Java tests, the shared cases included
 cd java && ./gradlew :vaadin-app:bootRun        # http://localhost:3520/
+cd java && ./gradlew :flowable-app:bootRun      # http://localhost:3521/
 ```
 
 The Java builds need Java 21; Gradle downloads the rest. The Vaadin app's first start downloads

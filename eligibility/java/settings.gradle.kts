@@ -2,4 +2,4 @@
 // applications that use it.
 rootProject.name = "eligibility-java"
 
-include("eligibility-core", "vaadin-app")
+include("eligibility-core", "vaadin-app", "flowable-app")

@@ -13,14 +13,20 @@ import java.util.stream.Collectors;
 // Every Java application starts from it; adding a domain to the knowledge adds it, with no code.
 public final class Catalog {
 
-    public record Process(String name, Shape shape, Map<String, Map<String, String>> texts, Engine engine) {
+    // version: the first 12 hex digits of the SHA-256 of the files that the process reads, so that a
+    // decision can name the model that made it.
+    public record Process(String name, Shape shape, Map<String, Map<String, String>> texts, Engine engine, String version) {
 
         public List<String> languages() {
             return List.copyOf(texts.keySet());
         }
 
         public Evaluation evaluate(Map<String, ?> answers) {
-            return engine.evaluate(answers, LocalDate.now());
+            return evaluate(answers, LocalDate.now());
+        }
+
+        public Evaluation evaluate(Map<String, ?> answers, LocalDate today) {
+            return engine.evaluate(answers, today);
         }
 
         public String text(String language, String key) {
@@ -55,7 +61,7 @@ public final class Catalog {
         final var model = Knowledge.at(knowledge);
         this.processes = model.domains().stream().map(name -> {
             final var engine = model.engine(name);
-            return new Process(name, engine.shape(), Texts.read(engine.model(), engine.shape()), engine);
+            return new Process(name, engine.shape(), Texts.read(engine.model(), engine.shape()), engine, version(model.texts(name)));
         }).collect(Collectors.toMap(Process::name, Function.identity(), (a, b) -> a, TreeMap::new));
     }
 
@@ -70,5 +76,15 @@ public final class Catalog {
     // The languages that every process has.
     public List<String> commonLanguages() {
         return all().stream().map(Process::languages).reduce((a, b) -> a.stream().filter(b::contains).toList()).orElse(List.of());
+    }
+
+    private static String version(List<String> texts) {
+        try {
+            final var digest = java.security.MessageDigest.getInstance("SHA-256");
+            texts.forEach(t -> digest.update(t.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+            return java.util.HexFormat.of().formatHex(digest.digest()).substring(0, 12);
+        } catch (java.security.NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

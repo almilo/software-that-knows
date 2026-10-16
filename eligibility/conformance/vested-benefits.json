@@ -1,0 +1,6203 @@
+{
+  "$comment": "Shared test cases of vested-benefits: what every stack must decide. Recorded by react-bun/generator/conformance.ts. Do not edit.",
+  "domain": "vested-benefits",
+  "cases": [
+    {
+      "id": "vested-benefits-001",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2010-05-01",
+        "retirementAge": 70,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "otherReason",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2010-05-01",
+          "retirementAge": 70,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "otherReason"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-002",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1976-10-03",
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "destination": "liechtenstein",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1976-10-03",
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "retirementAge",
+          "reason"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-003",
+      "date": "2026-10-02",
+      "answers": {
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "otherReason",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "otherReason",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-004",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2021-10-02",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "liechtenstein",
+        "stillMandatory": "yes",
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2021-10-02",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "liechtenstein"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-005",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 64,
+        "married": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 64,
+          "married": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "spouseConsent"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-006",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-10-02",
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-10-02",
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "yes",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-007",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1990-01-31",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1990-01-31",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-008",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "liechtenstein",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "retirementAge"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-009",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1986-03-15",
+        "retirementAge": 70,
+        "retirementAgeMonths": 11,
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "smallAmount",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1986-03-15",
+          "retirementAge": 70,
+          "retirementAgeMonths": 11,
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "smallAmount",
+          "vestedBenefit": 20000,
+          "annualContribution": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "married"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-010",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 400000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "married"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-011",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "retirementAge",
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-012",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "otherReason",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 1000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "otherReason",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-013",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 400000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-014",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "reason": "selfEmployment",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 150000,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-015",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "smallAmount",
+          "vestedBenefit": 1000,
+          "annualContribution": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "retirementAge"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-016",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2010-05-01",
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "liechtenstein",
+        "vestedBenefit": 0,
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2010-05-01",
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "reason": "selfEmployment",
+          "vestedBenefit": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy",
+          "stillMandatory"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-017",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAge": 58,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAge": 58,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "yes",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-018",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-019",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1976-10-03",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1976-10-03",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "leaving",
+          "reason"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-020",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-10-02",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-10-02",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 150000,
+          "annualContribution": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "married"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-021",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2027-01-01",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "otherReason",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 400000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2027-01-01",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "otherReason",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-022",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 400000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "liechtenstein",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-023",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2021-10-02",
+        "retirementAge": 64,
+        "married": "yes",
+        "spouseConsent": "no",
+        "leaving": "no",
+        "reason": "otherReason",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2021-10-02",
+          "retirementAge": 64,
+          "married": "yes",
+          "spouseConsent": "no",
+          "reason": "otherReason",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-024",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2024-08-29",
+        "retirementAge": 70,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "vestedBenefit": 1000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2024-08-29",
+          "retirementAge": 70,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-025",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1990-01-31",
+        "retirementAge": 64,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1990-01-31",
+          "retirementAge": 64,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-026",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 64,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 50000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 64,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-027",
+      "date": "2026-10-02",
+      "answers": {
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "selfEmployment",
+          "stillMandatory": "no"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-028",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1976-10-03",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1976-10-03",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-029",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1986-03-15",
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 19999,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1986-03-15",
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-030",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1964-10-01",
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "otherReason",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1964-10-01",
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "otherReason",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "married"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-031",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 400000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "reason"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-032",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2027-01-01",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "stillMandatory": "yes",
+        "vestedBenefit": 400000,
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2027-01-01",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-033",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2010-05-01",
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2010-05-01",
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "retirementAge"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-034",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-08-31",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "otherReason",
+        "destination": "liechtenstein",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 150000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-08-31",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "otherReason",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-035",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2021-10-02",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 400000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2021-10-02",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 400000,
+          "annualContribution": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-036",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-10-02",
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-10-02",
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "yes"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "retirementAge",
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-037",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2019-01-01",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2019-01-01",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-038",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2010-05-01",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2010-05-01",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-039",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "married"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-040",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "liechtenstein",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-041",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "reason"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-042",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 64,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 64,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-043",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1986-03-15",
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1986-03-15",
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-044",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2019-01-01",
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "vestedBenefit": 400000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2019-01-01",
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "smallAmount",
+          "vestedBenefit": 400000,
+          "annualContribution": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "retirementAge"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-045",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "destination": "liechtenstein",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "reason"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-046",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-10-02",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-10-02",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-047",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 64,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 64,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-048",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "yes"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "married",
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-049",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "otherReason",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 50000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "otherReason",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-050",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1976-10-03",
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1976-10-03",
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 20000,
+          "annualContribution": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "retirementAge"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-051",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "no",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-052",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2027-01-01",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000,
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2027-01-01",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "spouseConsent",
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-053",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1986-03-15",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 50000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1986-03-15",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "reason"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-054",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2024-08-29",
+        "retirementAge": 70,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2024-08-29",
+          "retirementAge": 70,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "reason"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-055",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 70,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 0,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 70,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "vestedBenefit": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "leaving",
+          "reason"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-056",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "stillMandatory": "yes",
+        "vestedBenefit": 19999,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-057",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1964-10-02",
+        "retirementAge": 58,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1964-10-02",
+          "retirementAge": 58,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "reason"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-058",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "liechtenstein",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 150000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "liechtenstein",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          },
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-059",
+      "date": "2026-10-02",
+      "answers": {
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "reason": "smallAmount",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 400000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "reason": "smallAmount",
+          "vestedBenefit": 400000,
+          "annualContribution": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "birthDate",
+          "retirementAge",
+          "leaving"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-060",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-061",
+      "date": "2027-03-01",
+      "answers": {
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-062",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2019-01-01",
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2019-01-01",
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-063",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 400000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "no",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "leaving"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-064",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1986-03-15",
+        "retirementAge": 70,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1986-03-15",
+          "retirementAge": 70,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-065",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-01-31",
+        "retirementAge": 64,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "yes",
+        "reason": "smallAmount",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 0,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-01-31",
+          "retirementAge": 64,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 0,
+          "annualContribution": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-066",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1990-01-31",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "leavingSwitzerland",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "vestedBenefit": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1990-01-31",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "otherCountry",
+          "vestedBenefit": 400000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-067",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1964-10-02",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "liechtenstein",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1964-10-02",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "smallAmount",
+          "vestedBenefit": 150000,
+          "annualContribution": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-068",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1964-10-01",
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 150000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1964-10-01",
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "yes",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-069",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "otherCountry",
+        "insuredAbroad": "yes",
+        "vestedBenefit": 1000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "smallAmount",
+          "vestedBenefit": 1000,
+          "annualContribution": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-070",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1962-03-15",
+        "retirementAge": 58,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "reason": "smallAmount",
+        "destination": "otherCountry",
+        "insuredAbroad": "no",
+        "vestedBenefit": 50000,
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1962-03-15",
+          "retirementAge": 58,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 50000,
+          "annualContribution": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "AtReferenceAge",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "BVG-13",
+              "FZG-2-1"
+            ]
+          },
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-071",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "stillMandatory": "yes",
+        "vestedBenefit": 50000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "leavingSwitzerland",
+          "destination": "eu",
+          "insuredAbroad": "no",
+          "vestedBenefit": 50000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-072",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2024-08-29",
+        "retirementAge": 64,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "no",
+        "leaving": "yes",
+        "reason": "leavingSwitzerland",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 150000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2024-08-29",
+          "retirementAge": 64,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "no",
+          "reason": "leavingSwitzerland",
+          "destination": "icelandNorway",
+          "insuredAbroad": "yes",
+          "vestedBenefit": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "destination",
+          "insuredAbroad",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          },
+          {
+            "id": "MandatoryPartStays",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "FZG-4-1",
+              "FZG-25f-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfDeparture",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          },
+          {
+            "id": "SourceTax",
+            "sources": [
+              "DBG-95",
+              "DBG-96"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-073",
+      "date": "2026-10-02",
+      "answers": {
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "annualContribution": 20000
+      },
+      "expected": {
+        "answers": {
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inVestedBenefitsInstitution"
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "birthDate",
+          "reason",
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-074",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1972-02-29",
+        "retirementAge": 58,
+        "retirementAgeMonths": 11,
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "selfEmployment",
+        "destination": "eu",
+        "insuredAbroad": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 1000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1972-02-29",
+          "retirementAge": 58,
+          "retirementAgeMonths": 11,
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "selfEmployment",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [
+          "married",
+          "stillMandatory"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-075",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1964-10-01",
+        "retirementAge": 70,
+        "retirementAgeMonths": 6,
+        "married": "yes",
+        "spouseConsent": "no",
+        "leaving": "yes",
+        "reason": "smallAmount",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000,
+        "annualContribution": 0
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1964-10-01",
+          "retirementAge": 70,
+          "retirementAgeMonths": 6,
+          "married": "yes",
+          "spouseConsent": "no",
+          "reason": "smallAmount",
+          "vestedBenefit": 20000,
+          "annualContribution": 0
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "heldBy"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotSmall",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-076",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "2026-08-31",
+        "retirementAge": 64,
+        "retirementAgeMonths": 6,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "reason": "smallAmount",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "annualContribution": 19999
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2026-08-31",
+          "retirementAge": 64,
+          "retirementAgeMonths": 6,
+          "married": "no",
+          "heldBy": "inPensionFund",
+          "reason": "smallAmount",
+          "annualContribution": 19999
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [
+          "leaving",
+          "vestedBenefit"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-077",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2010-05-01",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "smallAmount",
+        "destination": "eu",
+        "insuredAbroad": "yes",
+        "stillMandatory": "yes",
+        "vestedBenefit": 0,
+        "annualContribution": 150000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2010-05-01",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "smallAmount",
+          "vestedBenefit": 0,
+          "annualContribution": 150000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "reason",
+          "vestedBenefit",
+          "annualContribution"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-078",
+      "date": "2027-03-01",
+      "answers": {
+        "birthDate": "1960-06-15",
+        "retirementAge": 70,
+        "retirementAgeMonths": 0,
+        "married": "no",
+        "spouseConsent": "yes",
+        "heldBy": "inVestedBenefitsInstitution",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "icelandNorway",
+        "insuredAbroad": "no",
+        "stillMandatory": "no",
+        "vestedBenefit": 20000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1960-06-15",
+          "retirementAge": 70,
+          "retirementAgeMonths": 0,
+          "married": "no",
+          "heldBy": "inVestedBenefitsInstitution",
+          "reason": "selfEmployment",
+          "stillMandatory": "no",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "heldBy",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "vested-benefits-079",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "2024-08-29",
+        "retirementAge": 64,
+        "retirementAgeMonths": 0,
+        "married": "yes",
+        "spouseConsent": "yes",
+        "heldBy": "inPensionFund",
+        "leaving": "yes",
+        "reason": "otherReason",
+        "destination": "icelandNorway",
+        "insuredAbroad": "yes",
+        "stillMandatory": "no",
+        "vestedBenefit": 1000,
+        "annualContribution": 400000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "2024-08-29",
+          "retirementAge": 64,
+          "retirementAgeMonths": 0,
+          "married": "yes",
+          "spouseConsent": "yes",
+          "heldBy": "inPensionFund",
+          "leaving": "yes",
+          "reason": "otherReason",
+          "vestedBenefit": 1000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NoReason",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-3-1",
+              "FZG-4-1",
+              "FZG-5-1"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "vested-benefits-080",
+      "date": "2026-10-02",
+      "answers": {
+        "birthDate": "1976-10-03",
+        "retirementAge": 64,
+        "retirementAgeMonths": 11,
+        "married": "yes",
+        "spouseConsent": "no",
+        "heldBy": "inPensionFund",
+        "leaving": "no",
+        "reason": "selfEmployment",
+        "destination": "otherCountry",
+        "stillMandatory": "yes",
+        "vestedBenefit": 20000,
+        "annualContribution": 50000
+      },
+      "expected": {
+        "answers": {
+          "birthDate": "1976-10-03",
+          "retirementAge": 64,
+          "retirementAgeMonths": 11,
+          "married": "yes",
+          "spouseConsent": "no",
+          "heldBy": "inPensionFund",
+          "leaving": "no",
+          "reason": "selfEmployment",
+          "stillMandatory": "yes",
+          "vestedBenefit": 20000
+        },
+        "shown": [
+          "birthDate",
+          "retirementAge",
+          "retirementAgeMonths",
+          "married",
+          "spouseConsent",
+          "heldBy",
+          "leaving",
+          "reason",
+          "stillMandatory",
+          "vestedBenefit"
+        ],
+        "missing": [],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLeaving",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-2-1",
+              "FZG-2-3"
+            ]
+          },
+          {
+            "id": "StillInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "ConsentMissing",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "FZG-5-2",
+              "FZG-5-3"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "ProofOfSelfEmployment",
+            "sources": [
+              "FZG-5-1"
+            ]
+          },
+          {
+            "id": "AttachConsent",
+            "sources": [
+              "FZG-5-2"
+            ]
+          },
+          {
+            "id": "Interest",
+            "sources": [
+              "FZG-2-3",
+              "FZG-2-4"
+            ]
+          },
+          {
+            "id": "CapitalTax",
+            "sources": [
+              "DBG-38"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    }
+  ]
+}

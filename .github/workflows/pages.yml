@@ -28,15 +28,16 @@ jobs:
 
       - name: Check and build each demo
         run: |
-          for demo in imci-fever cloud-architecture choices eligibility; do
+          for demo in imci-fever cloud-architecture choices eligibility/react-bun; do
             (cd "$demo" && bun install --frozen-lockfile && bun run typecheck && bun run test && bun run build)
           done
 
       - name: Assemble site
         run: |
           for demo in imci-fever cloud-architecture choices eligibility; do
+            app="$demo"; [ "$demo" = eligibility ] && app=eligibility/react-bun
             mkdir -p "_site/$demo"
-            cp -r "$demo/dist/." "_site/$demo/"
+            cp -r "$app/dist/." "_site/$demo/"
           done
           cp -r site/. _site/
 

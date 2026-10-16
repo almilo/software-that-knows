@@ -1,0 +1,63 @@
+{
+  "$comment": "Generated from knowledge/domains/parental-allowance/ontology/ by generator/generate.ts. Do not edit.",
+  "type": "Categorization",
+  "elements": [
+    {
+      "type": "Category",
+      "label": "birth",
+      "i18n": "birth",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/parent"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/childBirthDate"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/legalParent"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/leaveStart"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "work",
+      "i18n": "work",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/insured"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/worked"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/status"
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "income",
+      "i18n": "income",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/monthlyIncome"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/annualIncome"
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,8 @@ export type Value = { id: string; label: string; help?: string };
 
 export type Fact = {
   id: string;
-  group: "claim" | "guide" | "date";
+  // claim, guide and date facts are asked; certificate facts come from the certificate of a policy.
+  group: "claim" | "guide" | "date" | "certificate";
   label: string;
   help?: string;
   kind: "choice" | "number" | "date";
@@ -20,8 +21,13 @@ export type Fact = {
   required: boolean;
   // Asked only when these conditions hold; for the facts that no rule uses, such as amounts.
   askWhen: Condition[];
-  // The optional cover that the answer says is in the policy, or not.
+  // The optional cover, or the module, that the answer says is in the policy (first answer) or not.
   optionOf?: string;
+  moduleOf?: string;
+  // The cover that this number is a sum insured of.
+  sumOf?: string;
+  // The calculations of an amount that need this answer.
+  neededFor: string[];
   closedList?: string;
 };
 
@@ -31,9 +37,13 @@ export type Cover = {
   id: string;
   label: string;
   part: string;
+  module: string;
   group?: string;
   order: number;
-  // By vehicle class: the product overview.
+  // How the engine calculates an amount: vehicle (repair or total loss) or item. Without it, the
+  // claim check shows the benefits of the cover.
+  calculation?: "vehicle" | "item";
+  // By vehicle class: the product overview. Basic: in the policy when its module is.
   availability: Record<string, Availability>;
   note?: string;
   noDeductible: boolean;
@@ -83,6 +93,9 @@ export type Article = {
 };
 
 export type Part = { id: string; label: string; modelled: boolean };
+export type Module = { id: string; label: string; part: string; mandatory: boolean; sources: string[] };
+// What one policy includes: its answers to the certificate facts.
+export type Certificate = { id: string; label: string; comment?: string; answers: Answers };
 export type VehicleClass = { id: string; label: string; help?: string };
 
 export type Policy = {
@@ -91,6 +104,8 @@ export type Policy = {
   source: string;
   parts: Part[];
   vehicleClasses: VehicleClass[];
+  modules: Module[];
+  certificates: Certificate[];
   covers: Cover[];
   facts: Fact[];
   rules: Rule[];

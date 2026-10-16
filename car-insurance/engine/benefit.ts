@@ -20,7 +20,7 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
   const notes: Amount["notes"] = [];
 
   // Items and protective clothing: the cost of an equivalent item, no deductible.
-  if (n("catalogPrice") === undefined) {
+  if (cover.calculation === "item") {
     steps.push({ label: "Cost of an equivalent item, or of the repair", amount: n("repairCost") ?? 0, sources: ["203.5"] });
     notes.push({ text: "No deductible applies to items transported and protective clothing.", sources: ["6.5"] });
     notes.push({ text: "Zurich pays up to the sum insured in the policy.", sources: ["203.5"] });

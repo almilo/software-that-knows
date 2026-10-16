@@ -35,7 +35,7 @@
         },
         {
           "status": "ok",
-          "text": "154 statements cite 78 of the 135 articles of the model.",
+          "text": "171 statements cite 90 of the 141 articles of the model.",
           "sources": []
         }
       ]
@@ -54,6 +54,24 @@
       ]
     },
     {
+      "id": "certificates",
+      "title": "The certificates agree with the product",
+      "what": "Each certificate answers every fact of a certificate, and includes an option only where the product overview offers it, with its module.",
+      "why": "The General Conditions say what each module covers; the certificate says what one policy has. A decision is wrong when it reads one as the other.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "Example: a passenger car with partial casco, collision, accident and Help Point PLUS: complete. Modules: accident insurance, partial casco, collision (full casco), third party liability.",
+          "sources": []
+        },
+        {
+          "status": "ok",
+          "text": "Every module and option, for a passenger car: complete. Modules: legal protection, roadside assistance, accident insurance, partial casco, collision (full casco), third party liability.",
+          "sources": []
+        }
+      ]
+    },
+    {
       "id": "questions",
       "title": "No dead questions, no dead rules",
       "what": "Every question of the claim check is needed by a rule or a calculation, and every rule can apply in at least one situation.",
@@ -61,7 +79,7 @@
       "findings": [
         {
           "status": "ok",
-          "text": "All 38 questions of the claim check are used, and all 47 rules can apply in at least one situation.",
+          "text": "All 32 questions of the claim check are used, and all 57 rules can apply in at least one situation.",
           "sources": []
         }
       ]
@@ -109,6 +127,16 @@
             "202.1",
             "204.1"
           ]
+        },
+        {
+          "status": "resolved",
+          "text": "Water and floods: “A natural hazard of the list” (Art. 202.3 c) and “Driving into water: damage due to the operation of the vehicle” (Art. 204.1) can apply in the same situation, with opposite effects.",
+          "sources": [
+            "202.3c",
+            "204.1"
+          ],
+          "basis": "interpretation",
+          "resolution": "Art. 202.3 c covers damage as a direct consequence of high water and floods; Art. 204.1 excludes damage due to the operation of the vehicle. The document does not say where a vehicle that is driven into water belongs. We read it as damage due to operation, as the usual practice does: the water did not come to the vehicle, the driver drove into it."
         },
         {
           "status": "resolved",
@@ -170,33 +198,33 @@
       "findings": [
         {
           "status": "ok",
-          "text": "28 test claims, 318 questions in all: 11.4 per claim, of the 38 questions that the model has.",
+          "text": "37 test claims, 317 questions in all: 8.6 per claim, of the 32 questions that the model has. The certificate gives the other facts.",
           "sources": []
         },
         {
           "status": "ok",
-          "text": "Collision, partial loss, deductible reduced after 4 claim-free years: covered (Collision), CHF 5500, after 18 questions.",
+          "text": "Collision, partial loss, deductible reduced after 4 claim-free years: covered (Collision), CHF 5500, after 16 questions.",
           "sources": [
             "202.1"
           ]
         },
         {
           "status": "ok",
-          "text": "Collision in the first year: total loss at 65% of the table value: covered (Collision), CHF 49000, after 17 questions.",
+          "text": "Collision in the first year: total loss at 65% of the table value: covered (Collision), CHF 49000, after 15 questions.",
           "sources": [
             "202.1"
           ]
         },
         {
           "status": "ok",
-          "text": "Collision in the middle of year 2: 90% of the catalogue price, pro rata: covered (Collision), CHF 44000, after 17 questions.",
+          "text": "Collision in the middle of year 2: 90% of the catalogue price, pro rata: covered (Collision), CHF 44000, after 15 questions.",
           "sources": [
             "202.1"
           ]
         },
         {
           "status": "ok",
-          "text": "Collision with 1.6 per mille or more: excluded (Collision), after 7 questions.",
+          "text": "Collision with 1.6 per mille or more: excluded (Collision), after 6 questions.",
           "sources": [
             "202.1",
             "204.6",
@@ -206,7 +234,7 @@
         },
         {
           "status": "ok",
-          "text": "Collision under the influence, below 1.6 per mille: covered, with a reduction (Collision), CHF 3500, after 17 questions.",
+          "text": "Collision under the influence, below 1.6 per mille: covered, with a reduction (Collision), CHF 3500, after 15 questions.",
           "sources": [
             "202.1",
             "202.2"
@@ -214,7 +242,7 @@
         },
         {
           "status": "ok",
-          "text": "Gross negligence, with coverage for gross negligence: covered (Collision), CHF 3500, after 18 questions.",
+          "text": "Gross negligence, with coverage for gross negligence: covered (Collision), CHF 3500, after 15 questions.",
           "sources": [
             "202.1",
             "203.7"
@@ -222,7 +250,7 @@
         },
         {
           "status": "ok",
-          "text": "Gross negligence, without coverage for gross negligence: covered, with a reduction (Collision), CHF 3500, after 18 questions.",
+          "text": "Gross negligence, without coverage for gross negligence: covered, with a reduction (Collision), CHF 3500, after 15 questions.",
           "sources": [
             "202.1",
             "203.7"
@@ -230,14 +258,14 @@
         },
         {
           "status": "ok",
-          "text": "Theft of fuel: excluded, after 3 questions.",
+          "text": "Theft of fuel: excluded, after 2 questions.",
           "sources": [
             "204.7"
           ]
         },
         {
           "status": "ok",
-          "text": "Motorcycle stolen outside without the steering lock: excluded (Theft), after 4 questions.",
+          "text": "Motorcycle stolen outside without the steering lock: excluded (Theft), after 3 questions.",
           "sources": [
             "202.3a",
             "204.7"
@@ -245,21 +273,21 @@
         },
         {
           "status": "ok",
-          "text": "Car stolen and not found within 30 days: total loss in year 4: covered (Theft), CHF 42800, after 18 questions.",
+          "text": "Car stolen and not found within 30 days: total loss in year 4: covered (Theft), CHF 42800, after 16 questions.",
           "sources": [
             "202.3a"
           ]
         },
         {
           "status": "ok",
-          "text": "Paintwork scratched: not in the closed list of vandalism: excluded, after 3 questions.",
+          "text": "Paintwork scratched: not in the closed list of vandalism: excluded, after 2 questions.",
           "sources": [
             "202.3f"
           ]
         },
         {
           "status": "ok",
-          "text": "Tyres punctured by a vandal: the list wins over the tyre exclusion (our interpretation): covered (Vandalism), CHF 600, after 17 questions.",
+          "text": "Tyres punctured by a vandal: the list wins over the tyre exclusion (our interpretation): covered (Vandalism), CHF 600, after 15 questions.",
           "sources": [
             "202.3f",
             "204.1"
@@ -267,56 +295,56 @@
         },
         {
           "status": "ok",
-          "text": "A broken headlight, without Glass PLUS: option not in the policy (Glass PLUS), after 4 questions.",
+          "text": "A broken headlight, without Glass PLUS: option not in the policy (Glass PLUS), after 2 questions.",
           "sources": [
             "202.4a"
           ]
         },
         {
           "status": "ok",
-          "text": "A broken headlight on a motorcycle: Glass PLUS is basic: covered (Glass PLUS), CHF 400, after 19 questions.",
+          "text": "A broken headlight on a motorcycle: Glass PLUS is basic: covered (Glass PLUS), CHF 400, after 17 questions.",
           "sources": [
             "202.4a"
           ]
         },
         {
           "status": "ok",
-          "text": "Protective clothing for a car: not insurable (Protective clothing), after 2 questions.",
+          "text": "Protective clothing for a car: not insurable (Protective clothing), after 1 questions.",
           "sources": [
             "202.4e"
           ]
         },
         {
           "status": "ok",
-          "text": "The third parking damage of the year: excluded (Parking damage), after 4 questions.",
+          "text": "The third parking damage of the year: excluded (Parking damage), after 2 questions.",
           "sources": [
             "202.4c"
           ]
         },
         {
           "status": "ok",
-          "text": "Parking damage above the limit, without PLUS: covered (Parking damage), CHF 1000, after 20 questions.",
+          "text": "Parking damage above the limit, without PLUS: covered (Parking damage), CHF 1000, after 16 questions.",
           "sources": [
             "202.4c"
           ]
         },
         {
           "status": "ok",
-          "text": "Parking damage, without the option: option not in the policy (Parking damage), after 3 questions.",
+          "text": "Parking damage, without the option: option not in the policy (Parking damage), after 1 questions.",
           "sources": [
             "202.4c"
           ]
         },
         {
           "status": "ok",
-          "text": "Wind below 75 km/h: excluded, after 3 questions.",
+          "text": "Wind below 75 km/h: excluded, after 2 questions.",
           "sources": [
             "202.3c"
           ]
         },
         {
           "status": "ok",
-          "text": "Swerved to avoid a deer: collision damage, deductible not below 0: covered (Collision), CHF 3000, after 18 questions.",
+          "text": "Swerved to avoid a deer: collision damage, deductible not below 0: covered (Collision), CHF 3000, after 16 questions.",
           "sources": [
             "202.1",
             "202.3e"
@@ -324,21 +352,21 @@
         },
         {
           "status": "ok",
-          "text": "A laptop in a truck: excluded (Items transported), after 4 questions.",
+          "text": "A laptop in a truck: excluded (Items transported), after 2 questions.",
           "sources": [
             "202.4d"
           ]
         },
         {
           "status": "ok",
-          "text": "Luggage stolen from the locked car: no deductible: covered (Items transported), CHF 1200, after 15 questions.",
+          "text": "Luggage stolen from the locked car: no deductible: covered (Items transported), CHF 1200, after 13 questions.",
           "sources": [
             "202.4d"
           ]
         },
         {
           "status": "ok",
-          "text": "Collision in an excluded country: excluded (Collision), after 3 questions.",
+          "text": "Collision in an excluded country: excluded (Collision), after 2 questions.",
           "sources": [
             "202.1",
             "3"
@@ -346,38 +374,116 @@
         },
         {
           "status": "ok",
-          "text": "A tyre burst and the car hit a wall: collision as a consequence of wear: covered (Collision), CHF 4000, after 17 questions.",
+          "text": "A tyre burst and the car hit a wall: collision as a consequence of wear: covered (Collision), CHF 4000, after 15 questions.",
           "sources": [
             "202.1"
           ]
         },
         {
           "status": "ok",
-          "text": "Help Point PLUS not followed: 500 CHF more deductible: covered (Collision), CHF 4000, after 17 questions.",
+          "text": "Help Point PLUS not followed: 500 CHF more deductible: covered (Collision), CHF 4000, after 15 questions.",
           "sources": [
             "202.1"
           ]
         },
         {
           "status": "ok",
-          "text": "A person of the household used the car without permission: excluded, after 3 questions.",
+          "text": "A person of the household used the car without permission: excluded, after 2 questions.",
           "sources": [
             "202.3a"
           ]
         },
         {
           "status": "ok",
-          "text": "Fire during civil unrest, with precautions; after 7 years: the replacement value: covered (Fire), CHF 4700, after 18 questions.",
+          "text": "Fire during civil unrest, with precautions; after 7 years: the replacement value: covered (Fire), CHF 4700, after 16 questions.",
           "sources": [
             "202.3b"
           ]
         },
         {
           "status": "ok",
-          "text": "Damage with intent: excluded (Collision), after 11 questions.",
+          "text": "Damage with intent: excluded (Collision), after 10 questions.",
           "sources": [
             "202.1",
             "203.7"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 21: driving on a flooded road: excluded (Natural hazards), after 2 questions.",
+          "sources": [
+            "202.3c",
+            "204.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 21b: water drawn into the engine, as a collision: excluded (Collision), after 9 questions.",
+          "sources": [
+            "202.1",
+            "204.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 22: suing a person who damaged my car: module not in the policy (Vehicle legal protection), after 2 questions.",
+          "sources": [
+            "502.1",
+            "502.3",
+            "502.4",
+            "502.8"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 22b: a person claims damages from me: the liability insurance defends: covered (Third party liability), after 3 questions.",
+          "sources": [
+            "10.2",
+            "101",
+            "103"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 23: injured as a passenger in my own car: covered (Medical expenses), after 9 questions.",
+          "sources": [
+            "301.1",
+            "301.2",
+            "302",
+            "303.5"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 23b: a passenger, when the policy insures the driver only: excluded (Medical expenses), after 2 questions.",
+          "sources": [
+            "301.1",
+            "301.2",
+            "302",
+            "303.5"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 24: a breakdown on the autobahn: module not in the policy (Roadside assistance Europe), after 2 questions.",
+          "sources": [
+            "403",
+            "406"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 25: a laptop stolen from the car: option not in the policy (Items transported), after 2 questions.",
+          "sources": [
+            "202.3a",
+            "202.4d"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Evaluation 25b: the smashed window of the same claim: covered (Glass), CHF 900, after 17 questions.",
+          "sources": [
+            "202.3d"
           ]
         }
       ]

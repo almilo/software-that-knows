@@ -7,7 +7,10 @@
 
 # The product: Zurich motor vehicle insurance, General Conditions of Insurance (GCI), edition
 # 01/2015, English version. The parts, the vehicle classes, the covers of the product overview
-# (page 3), and the articles with a summary in our words.
+# (page 3), the modules that a policy includes or not, and the articles with a summary in our words.
+# In the product overview, a dot means "in the basic scope of the module", not "in every policy":
+# only third party liability is in every policy. The certificate (certificate.ttl) says which
+# modules and options one policy includes.
 
 <https://example.org/zurich-motor-2015>
     a owl:Ontology ;
@@ -30,6 +33,13 @@
 :Roadside a ins:Part ; rdfs:label "Roadside assistance"@en ; ins:order 4 ; ins:modelled false .
 :Legal a ins:Part ; rdfs:label "Legal protection insurance"@en ; ins:order 5 ; ins:modelled false .
 
+:LiabilityModule a ins:Module ; rdfs:label "Third party liability"@en ; ins:part :Liability ; ins:mandatory true ; ins:source art:1 .
+:CollisionModule a ins:Module ; rdfs:label "Collision (full casco)"@en ; ins:part :AccidentalDamage ; ins:source art:202.1 .
+:PartialCascoModule a ins:Module ; rdfs:label "Partial casco"@en ; ins:part :AccidentalDamage ; ins:source art:202.3 .
+:AccidentModule a ins:Module ; rdfs:label "Accident insurance"@en ; ins:part :Accident ; ins:source art:301 .
+:RoadsideModule a ins:Module ; rdfs:label "Roadside assistance"@en ; ins:part :Roadside ; ins:source art:404 .
+:LegalModule a ins:Module ; rdfs:label "Legal protection"@en ; ins:part :Legal ; ins:source art:502 .
+
 :PassengerCar a ins:VehicleClass ; rdfs:label "Passenger car or van"@en ; ins:order 1 .
 :Motorcycle a ins:VehicleClass ; rdfs:label "Motorcycle"@en ; ins:order 2 .
 :OtherVehicle a ins:VehicleClass ; rdfs:label "Other motor vehicle"@en ; ins:order 3 ;
@@ -39,63 +49,63 @@
 # 2. The covers: the lines of the product overview (page 3)
 # ---------------------------------------------------------------------------
 
-:ThirdPartyLiability a ins:Cover ; rdfs:label "Third party liability"@en ; ins:part :Liability ; ins:order 1 ;
+:ThirdPartyLiability a ins:Cover ; rdfs:label "Third party liability"@en ; ins:part :Liability ; ins:module :LiabilityModule ; ins:order 1 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:101 .
-:LiabilityGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (liability)"@en ; ins:part :Liability ; ins:order 2 ;
+:LiabilityGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (liability)"@en ; ins:part :Liability ; ins:module :LiabilityModule ; ins:order 2 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:101.3 .
-:WorkAccidentRisk a ins:Cover ; rdfs:label "Work accident risk"@en ; ins:part :Liability ; ins:order 3 ;
+:WorkAccidentRisk a ins:Cover ; rdfs:label "Work accident risk"@en ; ins:part :Liability ; ins:module :LiabilityModule ; ins:order 3 ;
     ins:optionFor :PassengerCar, :OtherVehicle ; ins:notInsurableFor :Motorcycle ; ins:source art:101 .
-:HazardousLoads a ins:Cover ; rdfs:label "Transportation of hazardous loads"@en ; ins:part :Liability ; ins:order 4 ;
+:HazardousLoads a ins:Cover ; rdfs:label "Transportation of hazardous loads"@en ; ins:part :Liability ; ins:module :LiabilityModule ; ins:order 4 ;
     ins:optionFor :PassengerCar, :OtherVehicle ; ins:notInsurableFor :Motorcycle ; ins:source art:101 .
 
-:Collision a ins:Cover ; rdfs:label "Collision"@en ; ins:part :AccidentalDamage ; ins:order 10 ;
+:Collision a ins:Cover ; rdfs:label "Collision"@en ; ins:part :AccidentalDamage ; ins:module :CollisionModule ; ins:calculation "vehicle" ; ins:order 10 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:reducibleDeductible true ; ins:source art:202.1 .
-:CollisionGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (collision)"@en ; ins:part :AccidentalDamage ; ins:order 11 ;
+:CollisionGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (collision)"@en ; ins:part :AccidentalDamage ; ins:module :CollisionModule ; ins:calculation "vehicle" ; ins:order 11 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.2 .
-:Theft a ins:Cover ; rdfs:label "Theft"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 12 ;
+:Theft a ins:Cover ; rdfs:label "Theft"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 12 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3a .
-:Fire a ins:Cover ; rdfs:label "Fire"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 13 ;
+:Fire a ins:Cover ; rdfs:label "Fire"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 13 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3b .
-:Vandalism a ins:Cover ; rdfs:label "Vandalism"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 14 ;
+:Vandalism a ins:Cover ; rdfs:label "Vandalism"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 14 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3f .
-:Animals a ins:Cover ; rdfs:label "Animals"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 15 ;
+:Animals a ins:Cover ; rdfs:label "Animals"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 15 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3e .
-:NaturalHazards a ins:Cover ; rdfs:label "Natural hazards"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 16 ;
+:NaturalHazards a ins:Cover ; rdfs:label "Natural hazards"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 16 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3c ;
     ins:note "For passenger cars, natural hazards and glass also exist as a minimal partial casco."@en .
-:Glass a ins:Cover ; rdfs:label "Glass"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 17 ;
+:Glass a ins:Cover ; rdfs:label "Glass"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 17 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3d ;
     ins:note "For passenger cars, natural hazards and glass also exist as a minimal partial casco."@en .
-:GlassPlus a ins:Cover ; rdfs:label "Glass PLUS"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 18 ;
+:GlassPlus a ins:Cover ; rdfs:label "Glass PLUS"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 18 ;
     ins:optionFor :PassengerCar, :OtherVehicle ; ins:basicFor :Motorcycle ; ins:source art:202.4a, art:202.3d ;
     ins:note "For motorcycles, glass has the scope of Glass PLUS (Art. 202.3 d)."@en .
-:Martens a ins:Cover ; rdfs:label "Martens"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 19 ;
+:Martens a ins:Cover ; rdfs:label "Martens"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 19 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4b .
-:ParkingDamage a ins:Cover ; rdfs:label "Parking damage"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 20 ;
+:ParkingDamage a ins:Cover ; rdfs:label "Parking damage"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 20 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4c .
-:ParkingDamagePlus a ins:Cover ; rdfs:label "Parking damage PLUS"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 21 ;
+:ParkingDamagePlus a ins:Cover ; rdfs:label "Parking damage PLUS"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "vehicle" ; ins:group "Partial casco" ; ins:order 21 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4c .
-:ItemsTransported a ins:Cover ; rdfs:label "Items transported"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 22 ;
+:ItemsTransported a ins:Cover ; rdfs:label "Items transported"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "item" ; ins:group "Partial casco" ; ins:order 22 ;
     ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:noDeductible true ; ins:source art:202.4d, art:6.5 ;
     ins:note "Electronic devices only for passenger cars, vans and motorcycles."@en .
-:ProtectiveClothing a ins:Cover ; rdfs:label "Protective clothing"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 23 ;
+:ProtectiveClothing a ins:Cover ; rdfs:label "Protective clothing"@en ; ins:part :AccidentalDamage ; ins:module :PartialCascoModule ; ins:calculation "item" ; ins:group "Partial casco" ; ins:order 23 ;
     ins:optionFor :Motorcycle ; ins:notInsurableFor :PassengerCar, :OtherVehicle ; ins:noDeductible true ; ins:source art:202.4e, art:6.5 .
 
-:MedicalExpenses a ins:Cover ; rdfs:label "Medical expenses"@en ; ins:part :Accident ; ins:order 30 ;
+:MedicalExpenses a ins:Cover ; rdfs:label "Medical expenses"@en ; ins:part :Accident ; ins:module :AccidentModule ; ins:order 30 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:303.5 .
-:DeathDisability a ins:Cover ; rdfs:label "Death, disability, daily allowance, hospital allowance"@en ; ins:part :Accident ; ins:order 31 ;
+:DeathDisability a ins:Cover ; rdfs:label "Death, disability, daily allowance, hospital allowance"@en ; ins:part :Accident ; ins:module :AccidentModule ; ins:order 31 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:303.1, art:303.2, art:303.3, art:303.4 .
-:OtherPeoplesVehicles a ins:Cover ; rdfs:label "In other people's vehicles"@en ; ins:part :Accident ; ins:order 32 ;
+:OtherPeoplesVehicles a ins:Cover ; rdfs:label "In other people's vehicles"@en ; ins:part :Accident ; ins:module :AccidentModule ; ins:order 32 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:301.3 .
-:TransportedPets a ins:Cover ; rdfs:label "Transported pets"@en ; ins:part :Accident ; ins:order 33 ;
+:TransportedPets a ins:Cover ; rdfs:label "Transported pets"@en ; ins:part :Accident ; ins:module :AccidentModule ; ins:order 33 ;
     ins:basicFor :PassengerCar ; ins:notInsurableFor :Motorcycle, :OtherVehicle ; ins:source art:303.6 .
 
-:RoadsideCHFL a ins:Cover ; rdfs:label "Roadside assistance CH/FL"@en ; ins:part :Roadside ; ins:order 40 ;
+:RoadsideCHFL a ins:Cover ; rdfs:label "Roadside assistance CH/FL"@en ; ins:part :Roadside ; ins:module :RoadsideModule ; ins:order 40 ;
     ins:basicFor :PassengerCar, :Motorcycle ; ins:notInsurableFor :OtherVehicle ; ins:source art:405 .
-:RoadsideEurope a ins:Cover ; rdfs:label "Roadside assistance Europe"@en ; ins:part :Roadside ; ins:order 41 ;
+:RoadsideEurope a ins:Cover ; rdfs:label "Roadside assistance Europe"@en ; ins:part :Roadside ; ins:module :RoadsideModule ; ins:order 41 ;
     ins:basicFor :PassengerCar, :Motorcycle ; ins:notInsurableFor :OtherVehicle ; ins:source art:406 .
 
-:VehicleLegalProtection a ins:Cover ; rdfs:label "Vehicle legal protection"@en ; ins:part :Legal ; ins:order 50 ;
+:VehicleLegalProtection a ins:Cover ; rdfs:label "Vehicle legal protection"@en ; ins:part :Legal ; ins:module :LegalModule ; ins:order 50 ;
     ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:502 .
 
 # ---------------------------------------------------------------------------
@@ -257,6 +267,10 @@ art:204.9 a ins:Article ; ins:number "204.9" ; rdfs:label "State of emergency"@e
     ins:summary "War, revolution, earthquakes, volcanic eruptions, nuclear damage. Civil unrest unless reasonable precautions were taken."@en .
 
 art:301 a ins:Article ; ins:number "301" ; rdfs:label "Insured persons"@en ; ins:part :Accident ; ins:page 12 .
+art:301.1 a ins:Article ; ins:number "301.1" ; rdfs:label "Insured persons under the policy"@en ; ins:within art:301 ;
+    ins:summary "The persons that the policy names, for example the driver and the passengers."@en .
+art:301.2 a ins:Article ; ins:number "301.2" ; rdfs:label "Helpers at accidents and breakdowns"@en ; ins:within art:301 ;
+    ins:summary "Persons who help at an accident or a breakdown of the insured vehicle, but not professional helpers."@en .
 art:301.3 a ins:Article ; ins:number "301.3" ; rdfs:label "Persons travelling in other people's vehicles"@en ; ins:within art:301 ;
     ins:summary "Death 30,000 CHF, disability 60,000 CHF. Worldwide, for up to six weeks after leaving the territory."@en .
 art:302 a ins:Article ; ins:number "302" ; rdfs:label "Insured accidents"@en ; ins:part :Accident ; ins:page 12 .
@@ -321,6 +335,13 @@ art:408 a ins:Article ; ins:number "408" ; rdfs:label "Claims against third part
 art:501 a ins:Article ; ins:number "501" ; rdfs:label "Insured persons"@en ; ins:part :Legal ; ins:page 16 .
 art:502 a ins:Article ; ins:number "502" ; rdfs:label "Scope of insurance"@en ; ins:part :Legal ; ins:page 16 ;
     ins:summary "Damages, criminal charges, defence, licence confiscation, social and other insurance law, medical law, vehicle contracts, garage rental."@en .
+art:502.1 a ins:Article ; ins:number "502.1" ; rdfs:label "Law of damages"@en ; ins:within art:502 ;
+    ins:summary "Claims for damages against other persons for damage to property or injury in a traffic accident."@en .
+art:502.3 a ins:Article ; ins:number "502.3" ; rdfs:label "Defense"@en ; ins:within art:502 ;
+    ins:summary "Defence in criminal or administrative proceedings after a traffic accident or a violation of traffic rules."@en .
+art:502.4 a ins:Article ; ins:number "502.4" ; rdfs:label "Confiscation of driver's license"@en ; ins:within art:502 .
+art:502.8 a ins:Article ; ins:number "502.8" ; rdfs:label "Vehicle contract law"@en ; ins:within art:502 ;
+    ins:summary "Disputes about the purchase, rental, loan, leasing, deposit or repair of the insured vehicle."@en .
 art:503 a ins:Article ; ins:number "503" ; rdfs:label "Period of coverage and insured event"@en ; ins:part :Legal ; ins:page 16 ;
     ins:summary "Cases that arise during the contract. No cover for cases reported more than 6 months after the end of the contract."@en .
 art:504 a ins:Article ; ins:number "504" ; rdfs:label "Insurance benefits"@en ; ins:part :Legal ; ins:page 16 ;

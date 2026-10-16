@@ -39,11 +39,18 @@ ins:modelled a owl:DatatypeProperty ; rdfs:label "modelled"@en ;
 
 ins:VehicleClass a owl:Class ; rdfs:label "Vehicle class"@en .
 
+ins:Module a owl:Class ; rdfs:label "Module"@en ;
+    rdfs:comment "A unit of the product that a policy includes or not, for example roadside assistance. The product overview shows what each module covers; the certificate of a policy says which modules it includes."@en .
+ins:module a owl:ObjectProperty ; rdfs:label "module"@en ; rdfs:comment "The module that a cover belongs to."@en .
+ins:mandatory a owl:DatatypeProperty ; rdfs:label "mandatory"@en ; rdfs:comment "Every policy includes the module, by law."@en .
+ins:calculation a owl:DatatypeProperty ; rdfs:label "calculation"@en ;
+    rdfs:comment "How the engine calculates the amount of a claim of this cover: vehicle (repair or total loss) or item (an equivalent item). A cover without a calculation shows its benefits and limits."@en .
+
 ins:Cover a owl:Class ; rdfs:label "Cover"@en ;
     rdfs:comment "A benefit of the product that a policy includes or not, for example glass. A line of the product overview."@en .
 ins:group a owl:DatatypeProperty ; rdfs:label "group"@en ; rdfs:comment "The heading of the cover in the product overview, for example partial casco."@en .
-ins:basicFor a owl:ObjectProperty ; rdfs:label "basic for"@en ; rdfs:comment "The cover is in every policy for this vehicle class."@en .
-ins:optionFor a owl:ObjectProperty ; rdfs:label "option for"@en ; rdfs:comment "The cover is in the policy for this vehicle class only if it is agreed."@en .
+ins:basicFor a owl:ObjectProperty ; rdfs:label "basic for"@en ; rdfs:comment "For this vehicle class, the cover is in the basic scope of its module: a policy has it when the policy has the module."@en .
+ins:optionFor a owl:ObjectProperty ; rdfs:label "option for"@en ; rdfs:comment "For this vehicle class, the cover is an option of its module: a policy has it only when its certificate includes the option."@en .
 ins:notInsurableFor a owl:ObjectProperty ; rdfs:label "not insurable for"@en .
 ins:note a owl:DatatypeProperty ; rdfs:label "note"@en .
 ins:noDeductible a owl:DatatypeProperty ; rdfs:label "no deductible"@en ; rdfs:comment "No deductible applies to claims of this cover."@en .
@@ -58,6 +65,8 @@ ins:Fact a owl:Class ; rdfs:label "Fact"@en ;
 ins:ClaimFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of a claim"@en .
 ins:GuideFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of the guide after an event"@en .
 ins:DateFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Date of the contract or of a claim"@en .
+ins:CertificateFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of the certificate"@en ;
+    rdfs:comment "A fact of one policy, from its certificate: the vehicle, the modules and options it includes, its sums. The applications read it from the certificate and do not ask it."@en .
 ins:key a owl:DatatypeProperty ; rdfs:label "key"@en .
 ins:help a owl:DatatypeProperty ; rdfs:label "help"@en .
 ins:kind a owl:DatatypeProperty ; rdfs:label "kind"@en ; rdfs:comment "choice, number or date."@en .
@@ -67,6 +76,11 @@ ins:askWhen a owl:ObjectProperty ; rdfs:label "ask when"@en ; rdfs:comment "A co
 ins:required a owl:DatatypeProperty ; rdfs:label "required"@en ; rdfs:comment "The fact is always asked."@en .
 ins:optionOf a owl:ObjectProperty ; rdfs:label "option of"@en ; rdfs:comment "The fact says whether the optional cover is in the policy (yes or no)."@en .
 ins:closedList a owl:ObjectProperty ; rdfs:label "closed list"@en ; rdfs:comment "The answers of this fact come from a list that the document calls exhaustive."@en .
+
+ins:Certificate a owl:Class ; rdfs:label "Certificate"@en ;
+    rdfs:comment "The certificate of one policy: its answers to the certificate facts (ins:answer)."@en .
+ins:answer a owl:ObjectProperty ; rdfs:label "answer"@en ; rdfs:comment "One answer: ins:fact, with ins:is (a value) or ins:amount (a number)."@en .
+ins:is a owl:ObjectProperty ; rdfs:label "is"@en .
 
 # ---------------------------------------------------------------------------
 # 4. Rules

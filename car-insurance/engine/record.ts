@@ -12,6 +12,7 @@ export const statusWords: Record<ClaimResult["status"], string> = {
   excluded: "Not covered: an exclusion applies",
   noCover: "Not covered: no cover of the policy includes this event",
   notInsurable: "Not covered: this cover is not insurable for this vehicle",
+  moduleNotActive: "Not covered: the module is not in the policy",
   notAgreed: "Not covered: the option is not in the policy",
 };
 
@@ -32,7 +33,7 @@ export function record(policy: Policy, claim: Claim, answers: Answers, result: C
     "",
     "## Situation",
     "",
-    ...claim.asked(answers).map((f) => `- ${f.label} ${answer(f.id)}`),
+    ...claim.asked(answers).filter((f) => f.group === "claim").map((f) => `- ${f.label} ${answer(f.id)}`),
     "",
     "## Decision",
     "",
@@ -55,6 +56,9 @@ export function record(policy: Policy, claim: Claim, answers: Answers, result: C
           "",
           ...result.amount.notes.map((n) => `- ${n.text} (${arts(n.sources)})`),
         ]
+      : []),
+    ...(result.benefits?.length
+      ? ["", "## Benefits", "", ...result.benefits.map((b) => `- ${b.label}${b.amount !== undefined ? `: CHF ${chf(b.amount)}${b.per ? ` per ${b.per}` : ""}` : ""} (${arts(b.sources)})`)]
       : []),
     "",
     "## Source",

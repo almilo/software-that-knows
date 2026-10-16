@@ -214,3 +214,13 @@ section + section { margin-top: 24px; }
 .findings li { padding: 6px 0; border-top: 1px solid #eee; font-size: 14px; }
 .findings .resolution { margin: 4px 0 0 0; padding: 6px 10px; border-left: 3px solid #e0a800; background: var(--warn-soft); color: #4a3200; font-size: 13px; }
 details summary { margin-top: 8px; color: var(--muted); font-size: 13px; cursor: pointer; }
+
+/* The certificate panel */
+.certificate { margin: 0 0 16px; padding: 8px 12px; border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 4px; background: var(--paper); font-size: 14px; }
+.certificate summary { cursor: pointer; }
+.certificate .row { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: center; margin: 6px 0; }
+.certificate select, .certificate input[type="number"] { font: inherit; max-width: 260px; padding: 3px 6px; border: 1px solid #ccc; border-radius: 4px; }
+.certificate fieldset { margin: 8px 0; padding: 6px 10px; border: 1px solid #eee; border-radius: 4px; }
+.certificate legend { color: var(--muted); font-size: 12px; text-transform: uppercase; }
+.certificate .check { display: inline-flex; gap: 6px; align-items: center; margin: 2px 14px 2px 0; }
+.benefits li { margin-bottom: 4px; color: var(--text); }

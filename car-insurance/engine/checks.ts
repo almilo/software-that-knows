@@ -15,7 +15,7 @@ export type Finding = { status: "ok" | "resolved" | "open"; text: string; source
 export type Check = { id: string; title: string; what: string; why: string; findings: Finding[] };
 
 export function runChecks(policy: Policy, cases: Case[]): Check[] {
-  return [sources(policy), overview(policy), questions(policy), contradictions(policy), repeated(policy), table(policy), claims(policy, cases)];
+  return [sources(policy), overview(policy), certificates(policy), questions(policy), contradictions(policy), repeated(policy), table(policy), claims(policy, cases)];
 }
 
 export function status(check: Check): Finding["status"] {
@@ -85,6 +85,36 @@ function overview(p: Policy): Check {
   };
 }
 
+// 2b. Each certificate answers every certificate fact, and includes only options that the product
+//     overview offers for its vehicle class.
+function certificates(p: Policy): Check {
+  const findings: Finding[] = [];
+  const facts = p.facts.filter((f) => f.group === "certificate");
+  for (const c of p.certificates) {
+    const missing = facts.filter((f) => c.answers[f.id] === undefined);
+    if (missing.length) findings.push({ status: "open", text: `${c.label}: no answer for ${missing.map((f) => f.label.toLowerCase()).join(", ")}.`, sources: [] });
+    const vehicle = String(c.answers.vehicleClass);
+    for (const f of facts.filter((f) => f.optionOf && c.answers[f.id] === f.values[0]!.id)) {
+      const cover = p.covers.find((x) => x.id === f.optionOf)!;
+      const status = cover.availability[vehicle];
+      if (status !== "option") findings.push({ status: "open", text: `${c.label}: includes ${cover.label}, which is ${status === "basic" ? "basic, not an option," : "not insurable"} for this vehicle class.`, sources: cover.sources });
+      const module = facts.find((m) => m.moduleOf === cover.module);
+      if (module && c.answers[module.id] !== module.values[0]!.id) findings.push({ status: "open", text: `${c.label}: includes ${cover.label}, but not its module.`, sources: cover.sources });
+    }
+    if (!findings.some((x) => x.text.startsWith(`${c.label}:`))) {
+      const modules = p.modules.filter((m) => m.mandatory || facts.some((f) => f.moduleOf === m.id && c.answers[f.id] === f.values[0]!.id));
+      findings.push({ status: "ok", text: `${c.label}: complete. Modules: ${modules.map((m) => m.label.toLowerCase()).join(", ")}.`, sources: [] });
+    }
+  }
+  return {
+    id: "certificates",
+    title: "The certificates agree with the product",
+    what: "Each certificate answers every fact of a certificate, and includes an option only where the product overview offers it, with its module.",
+    why: "The General Conditions say what each module covers; the certificate says what one policy has. A decision is wrong when it reads one as the other.",
+    findings,
+  };
+}
+
 // 3. Every question of the claim check is used, and every cover rule can apply.
 function questions(p: Policy): Check {
   const findings: Finding[] = [];
@@ -94,7 +124,7 @@ function questions(p: Policy): Check {
   ]);
   const claimFacts = p.facts.filter((f) => f.group === "claim");
   for (const f of claimFacts) {
-    const asked = f.required || f.askWhen.length > 0 || f.optionOf !== undefined || used.has(f.id);
+    const asked = f.required || f.askWhen.length > 0 || f.neededFor.length > 0 || used.has(f.id);
     if (!asked) findings.push({ status: "open", text: `The question "${f.label}" is never asked: no rule needs it.`, sources: [] });
     if (f.optionOf && !Object.values(p.covers.find((c) => c.id === f.optionOf)!.availability).includes("option"))
       findings.push({ status: "open", text: `The question "${f.label}" is about a cover that is an option for no vehicle class.`, sources: [] });
@@ -217,28 +247,30 @@ function claims(p: Policy, cases: Case[]): Check {
   const claim = createClaim(p);
   let questions = 0;
   const findings: Finding[] = cases.map((c) => {
-    const answers: Answers = {};
+    const given: Answers = { ...(c.certificate ? p.certificates.find((x) => x.id === c.certificate)!.answers : {}), ...c.answers };
+    // The certificate is there before the first question, as in the app.
+    const answers: Answers = Object.fromEntries(Object.entries(given).filter(([id]) => p.facts.find((f) => f.id === id)?.group === "certificate"));
     for (;;) {
       const next = claim.next(answers);
       if (!next) break;
-      if (c.answers[next.id] === undefined) {
+      if (given[next.id] === undefined) {
         const decided = claim.evaluate(answers).status !== "open";
         if (decided && c.payment === undefined) break;
         return { status: "open", text: `${c.name}: the claim check asks “${next.label}”, and the test claim has no answer.`, sources: [] };
       }
-      answers[next.id] = c.answers[next.id]!;
-      questions++;
+      answers[next.id] = given[next.id]!;
+      if (next.group === "claim") questions++;
     }
     const result = claim.evaluate(answers);
     const problems = expectations(c, result);
     const sources = [...new Set(result.applied.flatMap((a) => a.rule.sources))];
     return problems.length
       ? { status: "open", text: `${c.name}: ${problems.join("; ")}.`, sources }
-      : { status: "ok", text: `${c.name}: ${describe(result)}, after ${Object.keys(answers).length} questions.`, sources };
+      : { status: "ok", text: `${c.name}: ${describe(result)}, after ${claim.asked(answers).filter((f) => f.group === "claim").length} questions.`, sources };
   });
   findings.unshift({
     status: "ok",
-    text: `${cases.length} test claims, ${questions} questions in all: ${(questions / cases.length).toFixed(1)} per claim, of the ${claim.facts.length} questions that the model has.`,
+    text: `${cases.length} test claims, ${questions} questions in all: ${(questions / cases.length).toFixed(1)} per claim, of the ${claim.facts.filter((f) => f.group === "claim").length} questions that the model has. The certificate gives the other facts.`,
     sources: [],
   });
   return {
@@ -269,6 +301,7 @@ function describe(r: ClaimResult) {
     noCover: "no cover",
     notInsurable: "not insurable",
     notAgreed: "option not in the policy",
+    moduleNotActive: "module not in the policy",
     open: "undecided",
   };
   return `${words[r.status]}${r.cover ? ` (${r.cover.label})` : ""}${r.amount ? `, CHF ${r.amount.payment}` : ""}`;

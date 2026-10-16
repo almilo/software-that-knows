@@ -3,6 +3,7 @@ import { chf } from "../engine/benefit";
 import { type Applied, type ClaimResult, createClaim, keep } from "../engine/claim";
 import type { Answers, Fact } from "../engine/model";
 import { record, statusWords } from "../engine/record";
+import { CertificatePanel, changeCertificate, isCertificateFact, useCertificate } from "./certificate";
 import { policy } from "./data";
 import { Badge, basisWords, Page, Sources } from "./ui";
 
@@ -11,16 +12,25 @@ const claim = createClaim(policy);
 // The claim check: the answered questions, one line each, then the next question that the
 // decision needs. On the right, the decision as it builds up.
 export function Claim() {
-  const [answers, setAnswers] = useState<Answers>({});
+  const certificate = useCertificate().answers;
+  // The answers of the user; the certificate comes before them.
+  const [own, setOwn] = useState<Answers>({});
   const [editing, setEditing] = useState<string>();
-  const asked = claim.asked(answers);
+  const answers = { ...certificate, ...own };
+  const asked = claim.asked(answers).filter((f) => !isCertificateFact(f.id));
   const next = claim.next(answers);
   const result = claim.evaluate(answers);
+  // After a change, the answers that the questions no longer need are dropped.
+  const store = (a: Answers) => setOwn(Object.fromEntries(Object.entries(keep(claim, { ...certificate, ...a })).filter(([id]) => !isCertificateFact(id))));
+  const pick = (e: (typeof examples)[number]) => {
+    if (e.certificate) changeCertificate(e.certificate);
+    else if (certificate.vehicleClass !== "PassengerCar") changeCertificate({ vehicleClass: "PassengerCar" });
+    setOwn(e.answers);
+  };
 
   const answer = (id: string, value: string | number) => {
     setEditing(undefined);
-    // After a change, the answers that the questions no longer need are dropped.
-    setAnswers((a) => keep(claim, { ...a, [id]: value }));
+    store({ ...own, [id]: value });
   };
 
   return (
@@ -28,17 +38,19 @@ export function Claim() {
       title="Claim check"
       intro={
         <>
-          Accidental damage insurance (Art. 201 to 204): collision, theft, fire, natural hazards, glass, animals, vandalism
-          and the options. The check asks only the questions that a rule which can still apply needs: here {asked.length} so
-          far, of the {claim.facts.length} questions of the model.
+          Is it covered, by which module of your policy, and how much does the insurer pay? Accidental damage (Art. 201 to
+          204) is decided rule by rule, with the amount; a breakdown, an injury or a legal case goes to its module. The check
+          reads your policy from its certificate, and asks only the questions that a rule which can still apply needs: here{" "}
+          {asked.length} so far, of the {claim.facts.filter((f) => !isCertificateFact(f.id)).length} questions of the model.
         </>
       }
       wide
     >
       <div className="columns">
         <section className="questions">
+          <CertificatePanel />
           <h2>Your claim</h2>
-          {asked.length === 0 && <Examples onPick={(a) => setAnswers(keep(claim, a))} />}
+          {asked.length === 0 && <Examples onPick={pick} />}
           {asked.map((f) =>
             f.id === editing ? (
               <Question key={f.id} fact={f} value={answers[f.id]} onAnswer={(v) => answer(f.id, v)} />
@@ -54,11 +66,11 @@ export function Claim() {
           )}
           {next && <Question key={next.id} fact={next} next onAnswer={(v) => answer(next.id, v)} />}
           {asked.length > 0 && (
-            <button type="button" className="start-over" onClick={() => setAnswers({})}>
+            <button type="button" className="start-over" onClick={() => setOwn({})}>
               Start over
             </button>
           )}
-          {asked.length > 0 && <Examples onPick={(a) => setAnswers(keep(claim, a))} />}
+          {asked.length > 0 && <Examples onPick={pick} />}
         </section>
         <Decision result={result} answers={answers} done={!next} />
       </div>
@@ -128,7 +140,13 @@ function Decision({ result, answers, done }: { result: ClaimResult; answers: Ans
           </p>
         )}
         {!decided && <p className="hint">{result.cover ? "The next answers can still change the decision." : "Answer the questions to find the cover."}</p>}
-        {result.status === "notAgreed" && <p>This cover is an option, and your policy does not include it.</p>}
+        {result.status === "notAgreed" && <p>This cover is an option, and the certificate of your policy does not include it.</p>}
+        {result.status === "moduleNotActive" && result.cover && (
+          <p>
+            This cover belongs to the module <strong>{policy.modules.find((m) => m.id === result.cover!.module)!.label}</strong>, and the
+            certificate of your policy does not include it.
+          </p>
+        )}
         {result.status === "notInsurable" && <p>The product overview says that this cover is not insurable for this vehicle class.</p>}
         {result.status === "reduced" && (
           <p className="caution">The amount of the reduction depends on the degree of fault. The model cannot decide it: a person at Zurich decides it.</p>
@@ -163,6 +181,26 @@ function Decision({ result, answers, done }: { result: ClaimResult; answers: Ans
         </>
       )}
 
+      {result.benefits && result.benefits.length > 0 && (
+        <>
+          <h4>{result.status === "moduleNotActive" || result.status === "notAgreed" ? "What the cover would pay" : "What the cover pays"}</h4>
+          <ul className="notes benefits">
+            {result.benefits.map((b) => (
+              <li key={b.label}>
+                {b.label}
+                {b.amount !== undefined && (
+                  <strong>
+                    {" "}
+                    CHF {chf(b.amount)}
+                    {b.per ? ` per ${b.per}` : ""}
+                  </strong>
+                )}{" "}
+                <Sources ids={b.sources} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       {result.amount ? (
         <>
           <h4>Amount</h4>
@@ -192,7 +230,8 @@ function Decision({ result, answers, done }: { result: ClaimResult; answers: Ans
         </>
       ) : (
         decided &&
-        (result.status === "covered" || result.status === "reduced") && <p className="hint">Answer the questions about the amounts to see the payment.</p>
+        (result.status === "covered" || result.status === "reduced") &&
+        result.cover?.calculation && <p className="hint">Answer the questions about the amounts to see the payment.</p>
       )}
       {decided && done && (
         <button type="button" className="download" onClick={download}>
@@ -215,26 +254,31 @@ function Reason({ a }: { a: Applied }) {
 // Example claims that show the special cases of the model: they fill the answers, and the user can
 // change any of them.
 const normal: Answers = { place: "CHFL", use: "NormalUse", driver: "Licensed", journey: "Permitted", alcohol: "Sober", crime: "NoCrime", emergency: "NoEmergency", operation: "NotOperation", fault: "NoFault" };
-const examples: { label: string; answers: Answers }[] = [
+// Example claims on the example certificate. Some change the certificate (a motorcycle).
+const examples: { label: string; answers: Answers; certificate?: Answers }[] = [
+  { label: "Driving into a flooded road", answers: { event: "HazardEvent", hazardKind: "DroveIntoWater" } },
+  { label: "Sue a person who damaged my car", answers: { event: "LegalEvent", legalKind: "ClaimDamages" } },
+  { label: "Injured as a passenger in my own car", answers: { event: "InjuryEvent", injuredPerson: "Passenger", ...normal } },
+  { label: "A breakdown on the autobahn", answers: { event: "BreakdownEvent", place: "Europe" } },
+  { label: "A laptop stolen from the car", answers: { event: "TheftEvent", theftKind: "ItemsStolen" } },
   {
     label: "A collision in year 2: total loss",
-    answers: { vehicleClass: "PassengerCar", event: "CollisionEvent", ...normal, monthsOfService: 18, catalogPrice: 50000, repairCost: 30000, deductible: 1000, claimFreeYears: 3, helpPoint: "NoHelpPoint" },
+    answers: { event: "CollisionEvent", ...normal, monthsOfService: 18, catalogPrice: 50000, repairCost: 30000, deductible: 1000, claimFreeYears: 3, helpPoint: "HelpPointFollowed" },
   },
   {
     label: "Tyres punctured by a vandal",
-    answers: { vehicleClass: "PassengerCar", event: "VandalismEvent", vandalismKind: "PuncturedTyres", ...normal, operation: "TyresOrBatteryOnly", monthsOfService: 10, catalogPrice: 30000, repairCost: 800, deductible: 200, helpPoint: "NoHelpPoint" },
+    answers: { event: "VandalismEvent", vandalismKind: "PuncturedTyres", ...normal, operation: "TyresOrBatteryOnly", monthsOfService: 10, catalogPrice: 30000, repairCost: 800, deductible: 200, helpPoint: "HelpPointFollowed" },
   },
-  { label: "Paintwork scratched", answers: { vehicleClass: "PassengerCar", event: "VandalismEvent", vandalismKind: "Scratched" } },
-  { label: "A motorcycle stolen outside", answers: { vehicleClass: "Motorcycle", event: "TheftEvent", theftKind: "VehicleStolen", motorcycleSecured: "NotSecured" } },
-  { label: "Gross negligence, without the option", answers: { vehicleClass: "PassengerCar", event: "CollisionEvent", ...normal, fault: "GrossNegligence", hasCollisionGrossNegligence: "No" } },
+  { label: "Paintwork scratched", answers: { event: "VandalismEvent", vandalismKind: "Scratched" } },
+  { label: "A motorcycle stolen outside", certificate: { vehicleClass: "Motorcycle" }, answers: { event: "TheftEvent", theftKind: "VehicleStolen", motorcycleSecured: "NotSecured" } },
 ];
 
-function Examples({ onPick }: { onPick: (a: Answers) => void }) {
+function Examples({ onPick }: { onPick: (e: (typeof examples)[number]) => void }) {
   return (
     <div className="examples">
       <span>Examples:</span>
       {examples.map((e) => (
-        <button key={e.label} type="button" onClick={() => onPick(e.answers)}>
+        <button key={e.label} type="button" onClick={() => onPick(e)}>
           {e.label}
         </button>
       ))}

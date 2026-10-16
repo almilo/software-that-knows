@@ -5,7 +5,7 @@ import { concept, cover, policy } from "./data";
 import { Badge, basisWords, Page, Sources } from "./ui";
 
 const symbols: Record<Availability, string> = { basic: "●", option: "○", none: "–" };
-const words: Record<Availability, string> = { basic: "basic", option: "option", none: "not insurable" };
+const words: Record<Availability, string> = { basic: "in the basic scope of the module", option: "option of the module", none: "not insurable" };
 
 // The product overview for each vehicle class, and two covers side by side, benefit by benefit.
 export function Compare() {
@@ -51,7 +51,7 @@ export function Compare() {
                         <td>
                           {c.group && <span className="group">{c.group}: </span>}
                           {c.label}
-                          {c.note && <small className="note">{c.note}</small>}
+                          <small className="note">Module: {policy.modules.find((m) => m.id === c.module)!.label}{c.note ? `. ${c.note}` : ""}</small>
                         </td>
                         {policy.vehicleClasses.map((v) => (
                           <td key={v.id} className={`status ${c.availability[v.id]}${v.id === vehicle ? " marked" : ""}`} title={words[c.availability[v.id]!]}>
@@ -67,7 +67,7 @@ export function Compare() {
               ))}
           </table>
         </div>
-        <p className="legend">● basic · ○ option · – not insurable</p>
+        <p className="legend">● in the basic scope of the module · ○ option · – not insurable. A policy has a cover only when its certificate includes the module (and the option); only third party liability is in every policy.</p>
       </section>
 
       <section>

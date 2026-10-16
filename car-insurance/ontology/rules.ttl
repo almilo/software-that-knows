@@ -1,0 +1,272 @@
+@prefix :        <https://example.org/zurich-motor-2015#> .
+@prefix art:     <https://example.org/zurich-motor-2015/article/> .
+@prefix ins:     <https://example.org/insurance#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# The statements of the document as rules over the facts of questions.ttl. A rule applies when all
+# its conditions (ins:when) hold. The engine decides a claim from them; the checks compare them.
+# Cover rules and exclusions are written for accidental damage insurance (Art. 201 to 204), which
+# the claim check decides. The territory rules and the exclusions that Art. 304 and 407 use again
+# also name the other parts, so that the checks see them.
+
+# ---------------------------------------------------------------------------
+# 1. Cover rules: which cover an event is a case of
+# ---------------------------------------------------------------------------
+
+:CollisionRule a ins:CoverRule ; ins:order 1 ; rdfs:label "Collision"@en ;
+    ins:covers :Collision ; ins:source art:202.1 ;
+    ins:when [ ins:fact :event ; ins:in ( :CollisionEvent ) ] .
+
+:CollisionAfterBreakdown a ins:CoverRule ; ins:order 2 ; rdfs:label "Collision as the consequence of breakage or wear"@en ;
+    ins:covers :Collision ; ins:source art:202.1 ; ins:mentions :WearAndTear ;
+    ins:when [ ins:fact :event ; ins:in ( :CollisionEvent ) ] , [ ins:fact :operation ; ins:in ( :AfterBreakdown ) ] .
+
+:SwervedForAnimal a ins:CoverRule ; ins:order 3 ; rdfs:label "Swerving to avoid an animal is collision damage"@en ;
+    ins:covers :Collision ; ins:source art:202.3e, art:202.1 ;
+    ins:when [ ins:fact :event ; ins:in ( :AnimalEvent ) ] , [ ins:fact :animalKind ; ins:in ( :Swerved ) ] .
+
+:AnimalRule a ins:CoverRule ; ins:order 4 ; rdfs:label "Collision with an animal"@en ;
+    ins:covers :Animals ; ins:source art:202.3e ;
+    ins:when [ ins:fact :event ; ins:in ( :AnimalEvent ) ] , [ ins:fact :animalKind ; ins:in ( :HitAnimal ) ] .
+
+:TheftRule a ins:CoverRule ; ins:order 5 ; rdfs:label "Theft, use without permission, robbery, and their attempts"@en ;
+    ins:covers :Theft ; ins:source art:202.3a ;
+    ins:when [ ins:fact :event ; ins:in ( :TheftEvent ) ] , [ ins:fact :theftKind ; ins:in ( :VehicleStolen :TheftAttempt ) ] .
+
+:FireRule a ins:CoverRule ; ins:order 6 ; rdfs:label "Fire, explosion, lightning, short circuit, extinguishing"@en ;
+    ins:covers :Fire ; ins:source art:202.3b ;
+    ins:when [ ins:fact :event ; ins:in ( :FireEvent ) ] , [ ins:fact :fireKind ; ins:in ( :Flames :Explosion :Lightning :ShortCircuit :Extinguishing ) ] .
+
+:HazardRule a ins:CoverRule ; ins:order 7 ; rdfs:label "A natural hazard of the list"@en ;
+    ins:covers :NaturalHazards ; ins:source art:202.3c ;
+    ins:when [ ins:fact :event ; ins:in ( :HazardEvent ) ] , [ ins:fact :hazardKind ; ins:in ( :Storm :Hail :Flood :Rockslide :Avalanche :FallingAircraft ) ] .
+
+:GlassRule a ins:CoverRule ; ins:order 8 ; rdfs:label "Breakage of the windows"@en ;
+    ins:covers :Glass ; ins:source art:202.3d ;
+    ins:when [ ins:fact :event ; ins:in ( :GlassEvent ) ] , [ ins:fact :glassPart ; ins:in ( :Windows ) ] .
+
+:GlassPlusRule a ins:CoverRule ; ins:order 9 ; rdfs:label "Breakage of another vehicle part of glass"@en ;
+    ins:covers :GlassPlus ; ins:source art:202.4a ;
+    ins:when [ ins:fact :event ; ins:in ( :GlassEvent ) ] , [ ins:fact :glassPart ; ins:in ( :OtherGlass ) ] .
+
+:VandalismRule a ins:CoverRule ; ins:order 10 ; rdfs:label "Vandalism of the list"@en ;
+    ins:covers :Vandalism ; ins:source art:202.3f ;
+    ins:when [ ins:fact :event ; ins:in ( :VandalismEvent ) ] , [ ins:fact :vandalismKind ; ins:in ( :BrokeOff :Painted :SlashedRoof :FuelTankSubstance ) ] .
+
+:VandalismTyres a ins:CoverRule ; ins:order 11 ; rdfs:label "Puncturing the tyres"@en ;
+    ins:covers :Vandalism ; ins:source art:202.3f ; ins:mentions :Tyres ;
+    ins:when [ ins:fact :event ; ins:in ( :VandalismEvent ) ] , [ ins:fact :vandalismKind ; ins:in ( :PuncturedTyres ) ] .
+
+:MartenRule a ins:CoverRule ; ins:order 12 ; rdfs:label "Damage by martens or rodents"@en ;
+    ins:covers :Martens ; ins:source art:202.4b ;
+    ins:when [ ins:fact :event ; ins:in ( :MartenEvent ) ] .
+
+:ParkingRule a ins:CoverRule ; ins:order 13 ; rdfs:label "Damage by unknown persons or vehicles while parked"@en ;
+    ins:covers :ParkingDamage ; ins:source art:202.4c ;
+    ins:when [ ins:fact :event ; ins:in ( :ParkingEvent ) ] .
+
+:ItemsRule a ins:CoverRule ; ins:order 14 ; rdfs:label "Items of the passengers"@en ;
+    ins:covers :ItemsTransported ; ins:source art:202.4d ;
+    ins:when [ ins:fact :event ; ins:in ( :ItemsEvent ) ] .
+
+:ClothingRule a ins:CoverRule ; ins:order 15 ; rdfs:label "Protective clothing of the driver and passengers"@en ;
+    ins:covers :ProtectiveClothing ; ins:source art:202.4e ;
+    ins:when [ ins:fact :event ; ins:in ( :ClothingEvent ) ] .
+
+# ---------------------------------------------------------------------------
+# 2. Exclusions of one cover
+# ---------------------------------------------------------------------------
+
+:HouseholdUseNotTheft a ins:Exclusion ; rdfs:label "Use by a person of the household is not theft"@en ;
+    ins:appliesTo :Theft ; ins:source art:202.3a ;
+    ins:when [ ins:fact :theftKind ; ins:in ( :HouseholdUse ) ] .
+
+:FuelTheft a ins:Exclusion ; rdfs:label "Theft of fuel"@en ;
+    ins:appliesTo :Theft ; ins:source art:204.7 ;
+    ins:when [ ins:fact :theftKind ; ins:in ( :FuelOnly ) ] .
+
+:MotorcycleNotSecured a ins:Exclusion ; rdfs:label "Theft of a motorcycle that was not secured"@en ;
+    ins:appliesTo :Theft ; ins:source art:204.7 ;
+    ins:when [ ins:fact :vehicleClass ; ins:in ( :Motorcycle ) ] , [ ins:fact :theftKind ; ins:in ( :VehicleStolen ) ] , [ ins:fact :motorcycleSecured ; ins:in ( :NotSecured ) ] .
+
+:Singeing a ins:Exclusion ; rdfs:label "Singeing damage"@en ;
+    ins:appliesTo :Fire ; ins:source art:202.3b ;
+    ins:when [ ins:fact :fireKind ; ins:in ( :Singeing ) ] .
+
+:InternalDefect a ins:Exclusion ; rdfs:label "Damage to electronics from an internal defect"@en ;
+    ins:appliesTo :Fire ; ins:source art:202.3b ;
+    ins:when [ ins:fact :fireKind ; ins:in ( :InternalDefect ) ] .
+
+:OtherHazards a ins:Exclusion ; rdfs:label "All other natural hazards"@en ;
+    ins:appliesTo :NaturalHazards ; ins:source art:202.3c ;
+    ins:when [ ins:fact :hazardKind ; ins:in ( :OtherHazard ) ] .
+
+:GlassAtValue a ins:Exclusion ; rdfs:label "Glass repair that reaches the replacement value"@en ;
+    ins:appliesTo :Glass, :GlassPlus ; ins:source art:202.3d ;
+    ins:when [ ins:fact :glassCost ; ins:in ( :AtValue ) ] .
+
+:NotInVandalismList a ins:Exclusion ; rdfs:label "Scratching, and other acts not in the list of vandalism"@en ;
+    ins:appliesTo :Vandalism ; ins:source art:202.3f ; ins:mentions :Scratching ;
+    ins:when [ ins:fact :vandalismKind ; ins:in ( :Scratched :OtherVandalism ) ] .
+
+:ThirdParkingDamage a ins:Exclusion ; rdfs:label "More than two parking damages in a calendar year"@en ;
+    ins:appliesTo :ParkingDamage ; ins:source art:202.4c ;
+    ins:when [ ins:fact :parkingCount ; ins:in ( :ThirdOrMore ) ] .
+
+:ExcludedItems a ins:Exclusion ; rdfs:label "Cash, cards, jewellery, data, vehicles, animals and similar items"@en ;
+    ins:appliesTo :ItemsTransported ; ins:source art:202.4d ;
+    ins:when [ ins:fact :itemsKind ; ins:in ( :ExcludedItems ) ] .
+
+:ElectronicsInOtherVehicle a ins:Exclusion ; rdfs:label "Electronics and goods in a vehicle that is not a car, van or motorcycle"@en ;
+    ins:appliesTo :ItemsTransported ; ins:source art:202.4d ;
+    ins:when [ ins:fact :vehicleClass ; ins:in ( :OtherVehicle ) ] , [ ins:fact :itemsKind ; ins:in ( :Electronics ) ] .
+
+:ItemsOtherTheft a ins:Exclusion ; rdfs:label "Items stolen without forcing open the locked vehicle"@en ;
+    ins:appliesTo :ItemsTransported ; ins:source art:202.4d ;
+    ins:when [ ins:fact :itemsHow ; ins:in ( :OtherItemsTheft ) ] .
+
+:OpticalDamage a ins:Exclusion ; rdfs:label "Only optical damage to protective clothing"@en ;
+    ins:appliesTo :ProtectiveClothing ; ins:source art:202.4e ;
+    ins:when [ ins:fact :clothingHow ; ins:in ( :OpticalOnly ) ] .
+
+:ClothingTheftUnlocked a ins:Exclusion ; rdfs:label "Theft of clothing that was not locked"@en ;
+    ins:appliesTo :ProtectiveClothing ; ins:source art:202.4e ;
+    ins:when [ ins:fact :clothingHow ; ins:in ( :TheftUnlocked ) ] .
+
+# ---------------------------------------------------------------------------
+# 3. Exclusions of a whole part. Art. 304 and 407 use the exclusions of Art. 204 again: one rule,
+#    three parts, three sources.
+# ---------------------------------------------------------------------------
+
+:CommercialUse a ins:Exclusion ; rdfs:label "Commercial use that the policy does not include"@en ;
+    ins:appliesTo :Liability, :AccidentalDamage, :Accident, :Roadside, :Legal ; ins:source art:1 ;
+    ins:when [ ins:fact :use ; ins:in ( :CommercialNotAgreed ) ] .
+
+:VehicleOperation a ins:Exclusion ; rdfs:label "Operation, breakage, wear, wrong handling, lack of oil or coolant, the load"@en ;
+    ins:appliesTo :AccidentalDamage ; ins:source art:204.1 ; ins:mentions :WearAndTear ;
+    ins:when [ ins:fact :operation ; ins:in ( :WearOrBreakdown :LoadedGoods ) ] .
+
+:TyresOrBatteries a ins:Exclusion ; rdfs:label "Damage only to the tyres or the batteries"@en ;
+    ins:appliesTo :AccidentalDamage ; ins:source art:204.1 ; ins:mentions :Tyres ;
+    ins:when [ ins:fact :operation ; ins:in ( :TyresOrBatteryOnly ) ] .
+
+:Races a ins:Exclusion ; rdfs:label "Races and similar rides"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.3, art:304, art:407 ;
+    ins:when [ ins:fact :use ; ins:in ( :Race ) ] .
+
+:IllegalDriving a ins:Exclusion ; rdfs:label "Illegal driving that the insured person should have noticed"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.4, art:304, art:407 ;
+    ins:when [ ins:fact :driver ; ins:in ( :UnlicensedKnown ) ] .
+
+:UnauthorizedDriving a ins:Exclusion ; rdfs:label "Journeys that are not permitted"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.5, art:304, art:407 ;
+    ins:when [ ins:fact :journey ; ins:in ( :NotPermitted ) ] .
+
+:HighAlcohol a ins:Exclusion ; rdfs:label "1.6 per mille or more, drugs, flagrant speeding, illegal races"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.6, art:304, art:407 ; ins:mentions :Alcohol ;
+    ins:when [ ins:fact :alcohol ; ins:in ( :HighAlcohol ) ] .
+
+:CriminalOffence a ins:Exclusion ; rdfs:label "Criminal offences"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.8, art:304, art:407 ;
+    ins:when [ ins:fact :crime ; ins:in ( :Crime ) ] .
+
+:WarOrDisaster a ins:Exclusion ; rdfs:label "War, revolution, earthquake, volcanic eruption, nuclear damage"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.9, art:304, art:407 ;
+    ins:when [ ins:fact :emergency ; ins:in ( :WarOrDisaster ) ] .
+
+:UnrestWithoutPrecautions a ins:Exclusion ; rdfs:label "Civil unrest without reasonable precautions"@en ;
+    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.9, art:304, art:407 ;
+    ins:when [ ins:fact :emergency ; ins:in ( :UnrestNoPrecautions ) ] .
+
+:Intent a ins:Exclusion ; rdfs:label "Damage caused with intent"@en ;
+    ins:appliesTo :AccidentalDamage ; ins:source art:203.7 ;
+    ins:when [ ins:fact :fault ; ins:in ( :Intent ) ] .
+
+# ---------------------------------------------------------------------------
+# 4. Reductions and waivers. The amount of a reduction depends on the degree of fault: a person
+#    decides it, not the model.
+# ---------------------------------------------------------------------------
+
+:AlcoholReduction a ins:Reduction ; rdfs:label "Collision under the influence of alcohol: reduced by the degree of fault"@en ;
+    ins:appliesTo :Collision ; ins:source art:202.2 ; ins:mentions :Alcohol ;
+    ins:when [ ins:fact :alcohol ; ins:in ( :Influenced ) ] .
+
+:GrossNegligenceReduction a ins:Reduction ; rdfs:label "Gross negligence: reduced by the degree of fault"@en ;
+    ins:appliesTo :AccidentalDamage ; ins:source art:203.7 ; ins:mentions :GrossNegligenceConcept ;
+    ins:when [ ins:fact :fault ; ins:in ( :GrossNegligence ) ] .
+
+:GrossNegligenceWaiver a ins:Waiver ; rdfs:label "Coverage for gross negligence: no reduction of collision benefits"@en ;
+    ins:appliesTo :Collision ; ins:source art:202.2 ; ins:mentions :GrossNegligenceConcept ;
+    ins:when [ ins:fact :hasCollisionGrossNegligence ; ins:in ( :Yes ) ] .
+
+# ---------------------------------------------------------------------------
+# 5. Territory (Art. 3)
+# ---------------------------------------------------------------------------
+
+:OutsideTerritory a ins:TerritoryRule ; rdfs:label "Outside the territorial scope"@en ;
+    ins:appliesTo :Liability, :AccidentalDamage, :Accident, :Roadside, :Legal ; ins:source art:3 ; ins:mentions :OutsideScope ;
+    ins:when [ ins:fact :place ; ins:in ( :ExcludedCountry :Elsewhere ) ] .
+
+:RoadsideOnlyCHFL a ins:TerritoryRule ; rdfs:label "Roadside assistance only in Switzerland and Liechtenstein"@en ;
+    ins:appliesTo :Roadside ; ins:source art:3 ; ins:mentions :EuropeConcept ;
+    ins:when [ ins:fact :place ; ins:notIn ( :CHFL ) ] .
+
+:RoadsideInEurope a ins:TerritoryRule ; rdfs:label "Roadside assistance Europe within Europe"@en ;
+    ins:covers :RoadsideEurope ; ins:source art:406 ; ins:mentions :EuropeConcept ;
+    ins:when [ ins:fact :place ; ins:in ( :CHFL :Europe ) ] .
+
+:OtherVehiclesWorldwide a ins:TerritoryRule ; rdfs:label "Accidents in other people's vehicles: worldwide, for six weeks"@en ;
+    ins:covers :OtherPeoplesVehicles ; ins:source art:301.3 ; ins:mentions :OutsideScope ;
+    ins:when [ ins:fact :place ; ins:in ( :ExcludedCountry :Elsewhere ) ] .
+
+# ---------------------------------------------------------------------------
+# 6. Precedence: which statement wins where two apply
+# ---------------------------------------------------------------------------
+
+:TyresPrecedence a ins:Precedence ;
+    ins:winner :VandalismTyres ; ins:loser :TyresOrBatteries ; ins:basis ins:Interpretation ;
+    rdfs:comment "Art. 202.3 f covers punctured tyres; Art. 204.1 excludes damage only to the tyres. The document does not say which one wins. We read the closed list of vandalism as the specific rule, so it wins."@en .
+
+:RoadsidePrecedence a ins:Precedence ;
+    ins:winner :RoadsideInEurope ; ins:loser :RoadsideOnlyCHFL ; ins:basis ins:Interpretation ;
+    rdfs:comment "Art. 3 says that roadside assistance is valid only in Switzerland and Liechtenstein; Art. 406 extends roadside assistance Europe to Europe as set out in Art. 3. We read the sentence of Art. 3 as about roadside assistance CH/FL."@en .
+
+:WorldwidePrecedence a ins:Precedence ;
+    ins:winner :OtherVehiclesWorldwide ; ins:loser :OutsideTerritory ; ins:basis ins:Text ;
+    rdfs:comment "Art. 301.3 says that this insurance applies worldwide, for up to six weeks after leaving the territory."@en .
+
+:GrossNegligencePrecedence a ins:Precedence ;
+    ins:winner :GrossNegligenceWaiver ; ins:loser :GrossNegligenceReduction ; ins:basis ins:Text ;
+    rdfs:comment "Art. 202.2: if the option is agreed, Zurich does not reduce collision benefits for gross negligence."@en .
+
+# ---------------------------------------------------------------------------
+# 7. Closed lists: the document calls them exhaustive and conclusive
+# ---------------------------------------------------------------------------
+
+:TheftList a ins:ClosedList ; rdfs:label "Theft"@en ; ins:source art:202.3a ;
+    ins:item "Theft", "Use without permission", "Robbery", "Attempted theft, use without permission or robbery" .
+:HazardList a ins:ClosedList ; rdfs:label "Natural hazards"@en ; ins:source art:202.3c ;
+    ins:item "Storm (wind of at least 75 km/h)", "Hail", "High water, floods", "Rockslides, falling stones, landslides", "Avalanches, snow slides, falling ice, snow pressure" ;
+    ins:note "The document does not call this list exhaustive. It says that all other natural hazards are excluded, which has the same effect."@en .
+:GlassList a ins:ClosedList ; rdfs:label "Glass"@en ; ins:source art:202.3d ;
+    ins:item "Windscreen", "Side windows", "Roof windows", "Rear windows" .
+:VandalismList a ins:ClosedList ; rdfs:label "Vandalism"@en ; ins:source art:202.3f ;
+    ins:item "Breaking off antennas, rear-view mirrors, wipers or trim", "Painting or spraying the paintwork (not scratching)", "Puncturing the tyres", "Slashing the convertible roof", "Pouring damaging substances into the fuel tank" .
+:ClothingList a ins:ClosedList ; rdfs:label "Protective clothing"@en ; ins:source art:202.4e ;
+    ins:item "Helmets", "Motorcycle suits with protectors", "Safety suits", "Boots", "Gloves" .
+:KeysList a ins:ClosedList ; rdfs:label "Loss of keys"@en ; ins:source art:405.7, art:406.7 ;
+    ins:item "On-the-spot roadside assistance", "Towing to the nearest repair shop", "Retrieving or forwarding the spare key", "Continuing the journey by public transport, and accommodation" .
+:VehicleContractsList a ins:ClosedList ; rdfs:label "Vehicle contract law"@en ; ins:source art:502 ;
+    ins:item "Purchase", "Rental", "Loan", "Leasing", "Deposit", "Repairs" .
+
+# ---------------------------------------------------------------------------
+# 8. The concepts that statements name
+# ---------------------------------------------------------------------------
+
+:Tyres a ins:Concept ; rdfs:label "Tyres"@en .
+:WearAndTear a ins:Concept ; rdfs:label "Breakage and wear"@en .
+:Scratching a ins:Concept ; rdfs:label "Scratching"@en .
+:Alcohol a ins:Concept ; rdfs:label "Alcohol"@en .
+:GrossNegligenceConcept a ins:Concept ; rdfs:label "Gross negligence"@en .
+:OutsideScope a ins:Concept ; rdfs:label "Outside the territorial scope"@en .
+:EuropeConcept a ins:Concept ; rdfs:label "Roadside assistance in Europe"@en .

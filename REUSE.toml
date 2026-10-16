@@ -55,3 +55,19 @@ path = [
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Alok Sharan"
 SPDX-License-Identifier = "LicenseRef-NotLicensed"
+
+# The car insurance demo is ours (MIT), including its ontology and generated folders.
+[[annotations]]
+path = "car-insurance/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 almilo"
+SPDX-License-Identifier = "MIT"
+
+# Except the model of Zurich's General Conditions of Insurance for motor vehicles (edition 01/2015),
+# and the generated files that hold its content. The summaries are ours, but the content is a model of
+# their document, so all rights stay with its author.
+[[annotations]]
+path = ["car-insurance/ontology/**", "car-insurance/generated/**"]
+precedence = "override"
+SPDX-FileCopyrightText = "2015 Zurich Insurance Company Ltd"
+SPDX-License-Identifier = "LicenseRef-NotLicensed"

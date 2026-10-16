@@ -1,0 +1,5621 @@
+{
+  "$comment": "Generated from ontology/ by generator/generate.ts. Do not edit.",
+  "title": "Motor vehicle insurance, General Conditions of Insurance (GCI), edition 01/2015",
+  "publisher": "Zurich Insurance Company Ltd; for legal protection, Orion Legal Expenses Insurance Ltd",
+  "source": "Zurich Insurance Company Ltd, Motor vehicle insurance: Customer information, General Conditions of Insurance (GCI), Edition 01/2015 (English version; the German version prevails)",
+  "parts": [
+    {
+      "id": "Common",
+      "label": "Common provisions",
+      "modelled": false
+    },
+    {
+      "id": "Liability",
+      "label": "Third party liability insurance",
+      "modelled": false
+    },
+    {
+      "id": "AccidentalDamage",
+      "label": "Accidental damage insurance",
+      "modelled": true
+    },
+    {
+      "id": "Accident",
+      "label": "Accident insurance",
+      "modelled": false
+    },
+    {
+      "id": "Roadside",
+      "label": "Roadside assistance",
+      "modelled": false
+    },
+    {
+      "id": "Legal",
+      "label": "Legal protection insurance",
+      "modelled": false
+    }
+  ],
+  "vehicleClasses": [
+    {
+      "id": "PassengerCar",
+      "label": "Passenger car or van"
+    },
+    {
+      "id": "Motorcycle",
+      "label": "Motorcycle"
+    },
+    {
+      "id": "OtherVehicle",
+      "label": "Other motor vehicle",
+      "help": "Trucks, buses, agricultural motor vehicles, industrial machines and other special vehicles."
+    }
+  ],
+  "covers": [
+    {
+      "id": "ThirdPartyLiability",
+      "label": "Third party liability",
+      "part": "Liability",
+      "order": 1,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "101"
+      ]
+    },
+    {
+      "id": "LiabilityGrossNegligence",
+      "label": "Coverage for gross negligence (liability)",
+      "part": "Liability",
+      "order": 2,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "101.3"
+      ]
+    },
+    {
+      "id": "WorkAccidentRisk",
+      "label": "Work accident risk",
+      "part": "Liability",
+      "order": 3,
+      "availability": {
+        "OtherVehicle": "option",
+        "PassengerCar": "option",
+        "Motorcycle": "none"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "101"
+      ]
+    },
+    {
+      "id": "HazardousLoads",
+      "label": "Transportation of hazardous loads",
+      "part": "Liability",
+      "order": 4,
+      "availability": {
+        "OtherVehicle": "option",
+        "PassengerCar": "option",
+        "Motorcycle": "none"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "101"
+      ]
+    },
+    {
+      "id": "Collision",
+      "label": "Collision",
+      "part": "AccidentalDamage",
+      "order": 10,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": true,
+      "sources": [
+        "202.1"
+      ]
+    },
+    {
+      "id": "CollisionGrossNegligence",
+      "label": "Coverage for gross negligence (collision)",
+      "part": "AccidentalDamage",
+      "order": 11,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.2"
+      ]
+    },
+    {
+      "id": "Theft",
+      "label": "Theft",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 12,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3a"
+      ]
+    },
+    {
+      "id": "Fire",
+      "label": "Fire",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 13,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3b"
+      ]
+    },
+    {
+      "id": "Vandalism",
+      "label": "Vandalism",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 14,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3f"
+      ]
+    },
+    {
+      "id": "Animals",
+      "label": "Animals",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 15,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3e"
+      ]
+    },
+    {
+      "id": "NaturalHazards",
+      "label": "Natural hazards",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 16,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "note": "For passenger cars, natural hazards and glass also exist as a minimal partial casco.",
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3c"
+      ]
+    },
+    {
+      "id": "Glass",
+      "label": "Glass",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 17,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "note": "For passenger cars, natural hazards and glass also exist as a minimal partial casco.",
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3d"
+      ]
+    },
+    {
+      "id": "GlassPlus",
+      "label": "Glass PLUS",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 18,
+      "availability": {
+        "Motorcycle": "basic",
+        "OtherVehicle": "option",
+        "PassengerCar": "option"
+      },
+      "note": "For motorcycles, glass has the scope of Glass PLUS (Art. 202.3 d).",
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.3d",
+        "202.4a"
+      ]
+    },
+    {
+      "id": "Martens",
+      "label": "Martens",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 19,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.4b"
+      ]
+    },
+    {
+      "id": "ParkingDamage",
+      "label": "Parking damage",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 20,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.4c"
+      ]
+    },
+    {
+      "id": "ParkingDamagePlus",
+      "label": "Parking damage PLUS",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 21,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "202.4c"
+      ]
+    },
+    {
+      "id": "ItemsTransported",
+      "label": "Items transported",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 22,
+      "availability": {
+        "OtherVehicle": "option",
+        "Motorcycle": "option",
+        "PassengerCar": "option"
+      },
+      "note": "Electronic devices only for passenger cars, vans and motorcycles.",
+      "noDeductible": true,
+      "reducibleDeductible": false,
+      "sources": [
+        "6.5",
+        "202.4d"
+      ]
+    },
+    {
+      "id": "ProtectiveClothing",
+      "label": "Protective clothing",
+      "part": "AccidentalDamage",
+      "group": "Partial casco",
+      "order": 23,
+      "availability": {
+        "Motorcycle": "option",
+        "OtherVehicle": "none",
+        "PassengerCar": "none"
+      },
+      "noDeductible": true,
+      "reducibleDeductible": false,
+      "sources": [
+        "6.5",
+        "202.4e"
+      ]
+    },
+    {
+      "id": "MedicalExpenses",
+      "label": "Medical expenses",
+      "part": "Accident",
+      "order": 30,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "303.5"
+      ]
+    },
+    {
+      "id": "DeathDisability",
+      "label": "Death, disability, daily allowance, hospital allowance",
+      "part": "Accident",
+      "order": 31,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "303.1",
+        "303.2",
+        "303.3",
+        "303.4"
+      ]
+    },
+    {
+      "id": "OtherPeoplesVehicles",
+      "label": "In other people's vehicles",
+      "part": "Accident",
+      "order": 32,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "301.3"
+      ]
+    },
+    {
+      "id": "TransportedPets",
+      "label": "Transported pets",
+      "part": "Accident",
+      "order": 33,
+      "availability": {
+        "PassengerCar": "basic",
+        "OtherVehicle": "none",
+        "Motorcycle": "none"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "303.6"
+      ]
+    },
+    {
+      "id": "RoadsideCHFL",
+      "label": "Roadside assistance CH/FL",
+      "part": "Roadside",
+      "order": 40,
+      "availability": {
+        "Motorcycle": "basic",
+        "PassengerCar": "basic",
+        "OtherVehicle": "none"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "405"
+      ]
+    },
+    {
+      "id": "RoadsideEurope",
+      "label": "Roadside assistance Europe",
+      "part": "Roadside",
+      "order": 41,
+      "availability": {
+        "Motorcycle": "basic",
+        "PassengerCar": "basic",
+        "OtherVehicle": "none"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "406"
+      ]
+    },
+    {
+      "id": "VehicleLegalProtection",
+      "label": "Vehicle legal protection",
+      "part": "Legal",
+      "order": 50,
+      "availability": {
+        "OtherVehicle": "basic",
+        "Motorcycle": "basic",
+        "PassengerCar": "basic"
+      },
+      "noDeductible": false,
+      "reducibleDeductible": false,
+      "sources": [
+        "502"
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "vehicleClass",
+      "group": "claim",
+      "label": "Which vehicle is insured?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "PassengerCar",
+          "label": "Passenger car or van"
+        },
+        {
+          "id": "Motorcycle",
+          "label": "Motorcycle"
+        },
+        {
+          "id": "OtherVehicle",
+          "label": "Other motor vehicle",
+          "help": "Trucks, buses, agricultural motor vehicles, industrial machines and other special vehicles."
+        }
+      ],
+      "order": 1,
+      "required": true,
+      "askWhen": []
+    },
+    {
+      "id": "event",
+      "group": "claim",
+      "label": "What happened to the vehicle?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "CollisionEvent",
+          "label": "Collision or accident",
+          "help": "Impact, collision, rollover, falling, sinking."
+        },
+        {
+          "id": "TheftEvent",
+          "label": "Theft",
+          "help": "The vehicle or parts of it were stolen or used without permission, or somebody tried to."
+        },
+        {
+          "id": "FireEvent",
+          "label": "Fire",
+          "help": "Fire, explosion, lightning, short circuit."
+        },
+        {
+          "id": "HazardEvent",
+          "label": "Natural hazard",
+          "help": "Storm, hail, flood, rockslide, avalanche."
+        },
+        {
+          "id": "GlassEvent",
+          "label": "Broken glass"
+        },
+        {
+          "id": "AnimalEvent",
+          "label": "Animal",
+          "help": "A collision with an animal, or a manoeuvre to avoid one."
+        },
+        {
+          "id": "VandalismEvent",
+          "label": "Vandalism"
+        },
+        {
+          "id": "MartenEvent",
+          "label": "Martens or rodents",
+          "help": "Cables or hoses bitten."
+        },
+        {
+          "id": "ParkingEvent",
+          "label": "Parking damage",
+          "help": "Damage by an unknown vehicle or person while the vehicle was parked."
+        },
+        {
+          "id": "ItemsEvent",
+          "label": "Items in the vehicle",
+          "help": "Items of the passengers were damaged or stolen."
+        },
+        {
+          "id": "ClothingEvent",
+          "label": "Motorcycle protective clothing",
+          "help": "Helmet, suit, protectors, boots or gloves."
+        }
+      ],
+      "order": 2,
+      "required": true,
+      "askWhen": []
+    },
+    {
+      "id": "theftKind",
+      "group": "claim",
+      "label": "What kind of theft?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "VehicleStolen",
+          "label": "The vehicle or parts of it were stolen",
+          "help": "Or a stranger used it without permission, or robbed it."
+        },
+        {
+          "id": "TheftAttempt",
+          "label": "Damage from an attempt",
+          "help": "Somebody tried to steal, use or rob the vehicle."
+        },
+        {
+          "id": "FuelOnly",
+          "label": "Only fuel was stolen"
+        },
+        {
+          "id": "HouseholdUse",
+          "label": "A person of my household used it without permission"
+        }
+      ],
+      "order": 3,
+      "required": false,
+      "askWhen": [],
+      "closedList": "TheftList"
+    },
+    {
+      "id": "motorcycleSecured",
+      "group": "claim",
+      "label": "Where was the motorcycle?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Secured",
+          "label": "In a locked private garage or room, or with the steering lock on"
+        },
+        {
+          "id": "NotSecured",
+          "label": "Outside, in a shared garage or an unlocked room, without the steering lock"
+        }
+      ],
+      "order": 4,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "fireKind",
+      "group": "claim",
+      "label": "What caused the damage?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Flames",
+          "label": "Fire"
+        },
+        {
+          "id": "Explosion",
+          "label": "Explosion"
+        },
+        {
+          "id": "Lightning",
+          "label": "Lightning"
+        },
+        {
+          "id": "ShortCircuit",
+          "label": "Short circuit"
+        },
+        {
+          "id": "Extinguishing",
+          "label": "Fire extinguishing"
+        },
+        {
+          "id": "Singeing",
+          "label": "Singeing damage",
+          "help": "Scorch marks without fire, for example from a cigarette."
+        },
+        {
+          "id": "InternalDefect",
+          "label": "Damage to electronics from an internal defect"
+        }
+      ],
+      "order": 5,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "hazardKind",
+      "group": "claim",
+      "label": "Which natural hazard?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Storm",
+          "label": "Storm",
+          "help": "Wind of at least 75 km/h."
+        },
+        {
+          "id": "Hail",
+          "label": "Hail"
+        },
+        {
+          "id": "Flood",
+          "label": "High water or flood"
+        },
+        {
+          "id": "Rockslide",
+          "label": "Rockslide, falling stones or landslide"
+        },
+        {
+          "id": "Avalanche",
+          "label": "Avalanche, snow slide, falling ice or snow pressure"
+        },
+        {
+          "id": "FallingAircraft",
+          "label": "Falling aircraft or spacecraft"
+        },
+        {
+          "id": "OtherHazard",
+          "label": "Another natural hazard",
+          "help": "For example wind below 75 km/h, or frost."
+        }
+      ],
+      "order": 6,
+      "required": false,
+      "askWhen": [],
+      "closedList": "HazardList"
+    },
+    {
+      "id": "glassPart",
+      "group": "claim",
+      "label": "Which glass broke?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Windows",
+          "label": "The windscreen, a side, roof or rear window"
+        },
+        {
+          "id": "OtherGlass",
+          "label": "Another part of glass",
+          "help": "For example a headlight or the glass of a mirror."
+        }
+      ],
+      "order": 7,
+      "required": false,
+      "askWhen": [],
+      "closedList": "GlassList"
+    },
+    {
+      "id": "glassCost",
+      "group": "claim",
+      "label": "Do the repair costs reach the replacement value of the vehicle?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "BelowValue",
+          "label": "No"
+        },
+        {
+          "id": "AtValue",
+          "label": "Yes, or the parts cannot be replaced or repaired"
+        }
+      ],
+      "order": 8,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "animalKind",
+      "group": "claim",
+      "label": "What happened with the animal?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "HitAnimal",
+          "label": "The vehicle hit the animal"
+        },
+        {
+          "id": "Swerved",
+          "label": "The driver swerved to avoid it and the vehicle hit something else"
+        }
+      ],
+      "order": 9,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "vandalismKind",
+      "group": "claim",
+      "label": "What did the vandal do?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "BrokeOff",
+          "label": "Broke off an antenna, a mirror, a wiper or trim"
+        },
+        {
+          "id": "Painted",
+          "label": "Painted or sprayed the paintwork"
+        },
+        {
+          "id": "PuncturedTyres",
+          "label": "Punctured the tyres"
+        },
+        {
+          "id": "SlashedRoof",
+          "label": "Slashed the convertible roof"
+        },
+        {
+          "id": "FuelTankSubstance",
+          "label": "Poured a substance into the fuel tank"
+        },
+        {
+          "id": "Scratched",
+          "label": "Scratched the paintwork"
+        },
+        {
+          "id": "OtherVandalism",
+          "label": "Something else"
+        }
+      ],
+      "order": 10,
+      "required": false,
+      "askWhen": [],
+      "closedList": "VandalismList"
+    },
+    {
+      "id": "parkingCount",
+      "group": "claim",
+      "label": "Which parking damage of this calendar year is it?",
+      "help": "The date when you report the damage counts.",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "FirstOrSecond",
+          "label": "The first or the second"
+        },
+        {
+          "id": "ThirdOrMore",
+          "label": "The third or a later one"
+        }
+      ],
+      "order": 11,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "itemsKind",
+      "group": "claim",
+      "label": "Which items?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "OrdinaryItems",
+          "label": "Personal items, such as luggage or clothes"
+        },
+        {
+          "id": "Electronics",
+          "label": "Electronics or commercial goods",
+          "help": "Sound, image and data carriers, computers, phones, navigation devices, goods or tools of a trade."
+        },
+        {
+          "id": "ExcludedItems",
+          "label": "Cash, cards, jewellery, data, vehicles, animals and similar items"
+        }
+      ],
+      "order": 12,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "itemsHow",
+      "group": "claim",
+      "label": "How were the items damaged or lost?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "WithVehicle",
+          "label": "Damaged together with the vehicle"
+        },
+        {
+          "id": "BreakIn",
+          "label": "Stolen by forcing open the locked vehicle or a locked container"
+        },
+        {
+          "id": "OtherItemsTheft",
+          "label": "Stolen in another way",
+          "help": "For example from an unlocked vehicle."
+        }
+      ],
+      "order": 13,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "clothingHow",
+      "group": "claim",
+      "label": "What happened to the clothing?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "AccidentDamage",
+          "label": "Damaged in an accident with the motorcycle"
+        },
+        {
+          "id": "OpticalOnly",
+          "label": "Only optical damage",
+          "help": "The clothing still protects."
+        },
+        {
+          "id": "TheftLocked",
+          "label": "Stolen from a locked container on the motorcycle, or a helmet with a helmet lock"
+        },
+        {
+          "id": "TheftUnlocked",
+          "label": "Stolen in another way"
+        }
+      ],
+      "order": 14,
+      "required": false,
+      "askWhen": [],
+      "closedList": "ClothingList"
+    },
+    {
+      "id": "place",
+      "group": "claim",
+      "label": "Where did it happen?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "CHFL",
+          "label": "Switzerland or Liechtenstein"
+        },
+        {
+          "id": "Europe",
+          "label": "Another country of Europe, or around the Mediterranean",
+          "help": "Including the islands of the Mediterranean."
+        },
+        {
+          "id": "ExcludedCountry",
+          "label": "Belarus, Moldova, Ukraine, Russia, Georgia, Armenia, Azerbaijan, Kazakhstan, Egypt, Algeria, Lebanon, Libya or Syria"
+        },
+        {
+          "id": "Elsewhere",
+          "label": "Somewhere else"
+        }
+      ],
+      "order": 15,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "hasGlassPlus",
+      "group": "claim",
+      "label": "Does your policy include Glass PLUS?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 30,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "GlassPlus"
+    },
+    {
+      "id": "hasMartens",
+      "group": "claim",
+      "label": "Does your policy include Martens?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 31,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "Martens"
+    },
+    {
+      "id": "hasParkingDamage",
+      "group": "claim",
+      "label": "Does your policy include Parking damage?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 32,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "ParkingDamage"
+    },
+    {
+      "id": "hasItemsTransported",
+      "group": "claim",
+      "label": "Does your policy include Items transported?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 33,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "ItemsTransported"
+    },
+    {
+      "id": "hasProtectiveClothing",
+      "group": "claim",
+      "label": "Does your policy include Protective clothing?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 34,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "ProtectiveClothing"
+    },
+    {
+      "id": "hasParkingDamagePlus",
+      "group": "claim",
+      "label": "Does your policy include Parking damage PLUS?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 35,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "hasParkingDamage",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "optionOf": "ParkingDamagePlus"
+    },
+    {
+      "id": "hasCollisionGrossNegligence",
+      "group": "claim",
+      "label": "Does your policy include Coverage for gross negligence (collision)?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 36,
+      "required": false,
+      "askWhen": [],
+      "optionOf": "CollisionGrossNegligence"
+    },
+    {
+      "id": "use",
+      "group": "claim",
+      "label": "How was the vehicle used?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NormalUse",
+          "label": "Normal use"
+        },
+        {
+          "id": "Race",
+          "label": "In a race, a rally, a competition or on a racetrack",
+          "help": "Or the authorities had requisitioned it."
+        },
+        {
+          "id": "CommercialNotAgreed",
+          "label": "Commercial use that the policy does not include",
+          "help": "Passenger transport for money, rental to self-drive customers, driving school."
+        }
+      ],
+      "order": 40,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "driver",
+      "group": "claim",
+      "label": "Did the driver have the required licence?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Licensed",
+          "label": "Yes"
+        },
+        {
+          "id": "UnlicensedKnown",
+          "label": "No, and the insured person knew or should have known",
+          "help": "No licence, a learner without the accompanying person, or unlawful passengers."
+        },
+        {
+          "id": "UnlicensedUnknown",
+          "label": "No, and the insured person could not know"
+        }
+      ],
+      "order": 41,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "journey",
+      "group": "claim",
+      "label": "Did the law and the authorities permit the journey?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Permitted",
+          "label": "Yes"
+        },
+        {
+          "id": "NotPermitted",
+          "label": "No"
+        }
+      ],
+      "order": 42,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "alcohol",
+      "group": "claim",
+      "label": "Alcohol, drugs and serious traffic offences",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Sober",
+          "label": "None"
+        },
+        {
+          "id": "Influenced",
+          "label": "The driver was under the influence of alcohol or unfit, below the limits of the next answer"
+        },
+        {
+          "id": "HighAlcohol",
+          "label": "1.6 per mille or more, drugs, flagrant speeding, illegal races"
+        }
+      ],
+      "order": 43,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "crime",
+      "group": "claim",
+      "label": "Was the damage connected with a crime of the insured person or the driver?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NoCrime",
+          "label": "No"
+        },
+        {
+          "id": "Crime",
+          "label": "Yes, an intentional or attempted criminal offence or misdemeanour"
+        }
+      ],
+      "order": 44,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "emergency",
+      "group": "claim",
+      "label": "Was there a war, a disaster or civil unrest?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NoEmergency",
+          "label": "No"
+        },
+        {
+          "id": "WarOrDisaster",
+          "label": "War, revolution, earthquake, volcanic eruption, nuclear damage"
+        },
+        {
+          "id": "UnrestNoPrecautions",
+          "label": "Civil unrest, and no reasonable precautions were taken"
+        },
+        {
+          "id": "UnrestPrecautions",
+          "label": "Civil unrest, but reasonable precautions were taken"
+        }
+      ],
+      "order": 45,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "operation",
+      "group": "claim",
+      "label": "Is the damage one of these?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NotOperation",
+          "label": "None of these"
+        },
+        {
+          "id": "AfterBreakdown",
+          "label": "A collision as the consequence of a breakage or of wear",
+          "help": "For example a tyre burst and the car hit a wall."
+        },
+        {
+          "id": "WearOrBreakdown",
+          "label": "The breakage or the wear itself",
+          "help": "Wear and tear, operation, wrong handling or fuel, lack of oil or coolant."
+        },
+        {
+          "id": "TyresOrBatteryOnly",
+          "label": "Damage only to the tyres or the batteries"
+        },
+        {
+          "id": "LoadedGoods",
+          "label": "Damage caused by the load"
+        }
+      ],
+      "order": 46,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "fault",
+      "group": "claim",
+      "label": "Was the insured person at fault?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NoFault",
+          "label": "No, or only slight negligence"
+        },
+        {
+          "id": "GrossNegligence",
+          "label": "Gross negligence",
+          "help": "A serious violation of the care that anybody must take."
+        },
+        {
+          "id": "Intent",
+          "label": "Damage caused with intent"
+        }
+      ],
+      "order": 47,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "theftRecovered",
+      "group": "claim",
+      "label": "Was the vehicle found within 30 days after you reported the theft?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Recovered",
+          "label": "Yes"
+        },
+        {
+          "id": "NotRecovered",
+          "label": "No"
+        }
+      ],
+      "order": 60,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "theftKind",
+          "in": [
+            "VehicleStolen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "monthsOfService",
+      "group": "claim",
+      "label": "How many months ago was the vehicle first put on the road?",
+      "kind": "number",
+      "unit": "months",
+      "values": [],
+      "order": 61,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "event",
+          "notIn": [
+            "ItemsEvent",
+            "ClothingEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "catalogPrice",
+      "group": "claim",
+      "label": "What is the catalogue price of the vehicle, with accessories?",
+      "help": "The official list price with VAT at the first registration.",
+      "kind": "number",
+      "unit": "CHF",
+      "values": [],
+      "order": 62,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "event",
+          "notIn": [
+            "ItemsEvent",
+            "ClothingEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "marketValue",
+      "group": "claim",
+      "label": "What is the replacement value of the vehicle?",
+      "help": "The price of an equivalent vehicle on the open market on the day of the loss.",
+      "kind": "number",
+      "unit": "CHF",
+      "values": [],
+      "order": 63,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "monthsOfService",
+          "atLeast": 24
+        }
+      ]
+    },
+    {
+      "id": "repairCost",
+      "group": "claim",
+      "label": "What do the repair or the replacement cost?",
+      "kind": "number",
+      "unit": "CHF",
+      "values": [],
+      "order": 64,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "theftRecovered",
+          "notIn": [
+            "NotRecovered"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deductible",
+      "group": "claim",
+      "label": "What deductible does your policy give for this cover?",
+      "kind": "number",
+      "unit": "CHF",
+      "values": [],
+      "order": 65,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "event",
+          "notIn": [
+            "ItemsEvent",
+            "ClothingEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "claimFreeYears",
+      "group": "claim",
+      "label": "How many full insurance years without a liability or collision claim do you have?",
+      "help": "A year counts if it lasted at least eleven months.",
+      "kind": "number",
+      "unit": "years",
+      "values": [],
+      "order": 66,
+      "required": false,
+      "askWhen": [
+        {
+          "anyOf": [
+            {
+              "fact": "event",
+              "in": [
+                "CollisionEvent"
+              ]
+            },
+            {
+              "fact": "animalKind",
+              "in": [
+                "Swerved"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "helpPoint",
+      "group": "claim",
+      "label": "Does your policy include Help Point PLUS?",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "NoHelpPoint",
+          "label": "No"
+        },
+        {
+          "id": "HelpPointFollowed",
+          "label": "Yes, and I reported it and used the garage that Zurich specified"
+        },
+        {
+          "id": "HelpPointNotFollowed",
+          "label": "Yes, but I did not use the help point or the garage"
+        }
+      ],
+      "order": 67,
+      "required": false,
+      "askWhen": [
+        {
+          "fact": "event",
+          "notIn": [
+            "ItemsEvent",
+            "ClothingEvent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renewalDate",
+      "group": "date",
+      "label": "Next premium due date",
+      "help": "The first day of the next insurance year.",
+      "kind": "date",
+      "values": [],
+      "order": 1,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "contractEnd",
+      "group": "date",
+      "label": "End of the contract",
+      "kind": "date",
+      "values": [],
+      "order": 2,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "claimFreeSince",
+      "group": "date",
+      "label": "Start of the first insurance year without a claim",
+      "kind": "date",
+      "values": [],
+      "order": 3,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "accidentDate",
+      "group": "date",
+      "label": "Date of an accident with injury",
+      "kind": "date",
+      "values": [],
+      "order": 4,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "claimPaid",
+      "group": "date",
+      "label": "Date when Zurich paid a claim",
+      "kind": "date",
+      "values": [],
+      "order": 5,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "theftReported",
+      "group": "date",
+      "label": "Date when Zurich received the notice of a theft",
+      "kind": "date",
+      "values": [],
+      "order": 6,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "deductibleNotice",
+      "group": "date",
+      "label": "Date of Zurich's notice to pay back a deductible",
+      "kind": "date",
+      "values": [],
+      "order": 7,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "platesDeposited",
+      "group": "date",
+      "label": "Date when the licence plates were deposited",
+      "kind": "date",
+      "values": [],
+      "order": 8,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "registrationDate",
+      "group": "date",
+      "label": "Date of registration with a proof of insurance",
+      "kind": "date",
+      "values": [],
+      "order": 9,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "injury",
+      "group": "guide",
+      "label": "Somebody is injured",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 1,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "stolen",
+      "group": "guide",
+      "label": "Something was stolen",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 2,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "animal",
+      "group": "guide",
+      "label": "An animal was involved",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 3,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "damaged",
+      "group": "guide",
+      "label": "My vehicle is damaged",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 4,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "helpPointAgreed",
+      "group": "guide",
+      "label": "My policy includes Help Point PLUS",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 5,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "unusable",
+      "group": "guide",
+      "label": "I cannot drive on",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 6,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "otherParty",
+      "group": "guide",
+      "label": "Another person says I must pay for their damage",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 7,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "legalDispute",
+      "group": "guide",
+      "label": "I need a lawyer, or the police opened proceedings",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 8,
+      "required": false,
+      "askWhen": []
+    },
+    {
+      "id": "abroad",
+      "group": "guide",
+      "label": "I am outside Switzerland",
+      "kind": "choice",
+      "values": [
+        {
+          "id": "Yes",
+          "label": "Yes"
+        },
+        {
+          "id": "No",
+          "label": "No"
+        }
+      ],
+      "order": 9,
+      "required": false,
+      "askWhen": []
+    }
+  ],
+  "rules": [
+    {
+      "id": "CollisionRule",
+      "kind": "cover",
+      "label": "Collision",
+      "covers": "Collision",
+      "appliesTo": [
+        "Collision"
+      ],
+      "appliesToNamed": [
+        "Collision"
+      ],
+      "when": [
+        {
+          "fact": "event",
+          "in": [
+            "CollisionEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.1"
+      ],
+      "mentions": [],
+      "order": 1
+    },
+    {
+      "id": "CollisionAfterBreakdown",
+      "kind": "cover",
+      "label": "Collision as the consequence of breakage or wear",
+      "covers": "Collision",
+      "appliesTo": [
+        "Collision"
+      ],
+      "appliesToNamed": [
+        "Collision"
+      ],
+      "when": [
+        {
+          "fact": "operation",
+          "in": [
+            "AfterBreakdown"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "CollisionEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.1"
+      ],
+      "mentions": [
+        "WearAndTear"
+      ],
+      "order": 2
+    },
+    {
+      "id": "SwervedForAnimal",
+      "kind": "cover",
+      "label": "Swerving to avoid an animal is collision damage",
+      "covers": "Collision",
+      "appliesTo": [
+        "Collision"
+      ],
+      "appliesToNamed": [
+        "Collision"
+      ],
+      "when": [
+        {
+          "fact": "animalKind",
+          "in": [
+            "Swerved"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "AnimalEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.1",
+        "202.3e"
+      ],
+      "mentions": [],
+      "order": 3
+    },
+    {
+      "id": "AnimalRule",
+      "kind": "cover",
+      "label": "Collision with an animal",
+      "covers": "Animals",
+      "appliesTo": [
+        "Animals"
+      ],
+      "appliesToNamed": [
+        "Animals"
+      ],
+      "when": [
+        {
+          "fact": "animalKind",
+          "in": [
+            "HitAnimal"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "AnimalEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3e"
+      ],
+      "mentions": [],
+      "order": 4
+    },
+    {
+      "id": "TheftRule",
+      "kind": "cover",
+      "label": "Theft, use without permission, robbery, and their attempts",
+      "covers": "Theft",
+      "appliesTo": [
+        "Theft"
+      ],
+      "appliesToNamed": [
+        "Theft"
+      ],
+      "when": [
+        {
+          "fact": "theftKind",
+          "in": [
+            "VehicleStolen",
+            "TheftAttempt"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "TheftEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3a"
+      ],
+      "mentions": [],
+      "order": 5
+    },
+    {
+      "id": "FireRule",
+      "kind": "cover",
+      "label": "Fire, explosion, lightning, short circuit, extinguishing",
+      "covers": "Fire",
+      "appliesTo": [
+        "Fire"
+      ],
+      "appliesToNamed": [
+        "Fire"
+      ],
+      "when": [
+        {
+          "fact": "fireKind",
+          "in": [
+            "Flames",
+            "Explosion",
+            "Lightning",
+            "ShortCircuit",
+            "Extinguishing"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "FireEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3b"
+      ],
+      "mentions": [],
+      "order": 6
+    },
+    {
+      "id": "HazardRule",
+      "kind": "cover",
+      "label": "A natural hazard of the list",
+      "covers": "NaturalHazards",
+      "appliesTo": [
+        "NaturalHazards"
+      ],
+      "appliesToNamed": [
+        "NaturalHazards"
+      ],
+      "when": [
+        {
+          "fact": "hazardKind",
+          "in": [
+            "Storm",
+            "Hail",
+            "Flood",
+            "Rockslide",
+            "Avalanche",
+            "FallingAircraft"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "HazardEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3c"
+      ],
+      "mentions": [],
+      "order": 7
+    },
+    {
+      "id": "GlassRule",
+      "kind": "cover",
+      "label": "Breakage of the windows",
+      "covers": "Glass",
+      "appliesTo": [
+        "Glass"
+      ],
+      "appliesToNamed": [
+        "Glass"
+      ],
+      "when": [
+        {
+          "fact": "glassPart",
+          "in": [
+            "Windows"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "GlassEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3d"
+      ],
+      "mentions": [],
+      "order": 8
+    },
+    {
+      "id": "GlassPlusRule",
+      "kind": "cover",
+      "label": "Breakage of another vehicle part of glass",
+      "covers": "GlassPlus",
+      "appliesTo": [
+        "GlassPlus"
+      ],
+      "appliesToNamed": [
+        "GlassPlus"
+      ],
+      "when": [
+        {
+          "fact": "glassPart",
+          "in": [
+            "OtherGlass"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "GlassEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4a"
+      ],
+      "mentions": [],
+      "order": 9
+    },
+    {
+      "id": "VandalismRule",
+      "kind": "cover",
+      "label": "Vandalism of the list",
+      "covers": "Vandalism",
+      "appliesTo": [
+        "Vandalism"
+      ],
+      "appliesToNamed": [
+        "Vandalism"
+      ],
+      "when": [
+        {
+          "fact": "vandalismKind",
+          "in": [
+            "BrokeOff",
+            "Painted",
+            "SlashedRoof",
+            "FuelTankSubstance"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "VandalismEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3f"
+      ],
+      "mentions": [],
+      "order": 10
+    },
+    {
+      "id": "VandalismTyres",
+      "kind": "cover",
+      "label": "Puncturing the tyres",
+      "covers": "Vandalism",
+      "appliesTo": [
+        "Vandalism"
+      ],
+      "appliesToNamed": [
+        "Vandalism"
+      ],
+      "when": [
+        {
+          "fact": "vandalismKind",
+          "in": [
+            "PuncturedTyres"
+          ]
+        },
+        {
+          "fact": "event",
+          "in": [
+            "VandalismEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3f"
+      ],
+      "mentions": [
+        "Tyres"
+      ],
+      "order": 11
+    },
+    {
+      "id": "MartenRule",
+      "kind": "cover",
+      "label": "Damage by martens or rodents",
+      "covers": "Martens",
+      "appliesTo": [
+        "Martens"
+      ],
+      "appliesToNamed": [
+        "Martens"
+      ],
+      "when": [
+        {
+          "fact": "event",
+          "in": [
+            "MartenEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4b"
+      ],
+      "mentions": [],
+      "order": 12
+    },
+    {
+      "id": "ParkingRule",
+      "kind": "cover",
+      "label": "Damage by unknown persons or vehicles while parked",
+      "covers": "ParkingDamage",
+      "appliesTo": [
+        "ParkingDamage"
+      ],
+      "appliesToNamed": [
+        "ParkingDamage"
+      ],
+      "when": [
+        {
+          "fact": "event",
+          "in": [
+            "ParkingEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4c"
+      ],
+      "mentions": [],
+      "order": 13
+    },
+    {
+      "id": "ItemsRule",
+      "kind": "cover",
+      "label": "Items of the passengers",
+      "covers": "ItemsTransported",
+      "appliesTo": [
+        "ItemsTransported"
+      ],
+      "appliesToNamed": [
+        "ItemsTransported"
+      ],
+      "when": [
+        {
+          "fact": "event",
+          "in": [
+            "ItemsEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4d"
+      ],
+      "mentions": [],
+      "order": 14
+    },
+    {
+      "id": "ClothingRule",
+      "kind": "cover",
+      "label": "Protective clothing of the driver and passengers",
+      "covers": "ProtectiveClothing",
+      "appliesTo": [
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "ProtectiveClothing"
+      ],
+      "when": [
+        {
+          "fact": "event",
+          "in": [
+            "ClothingEvent"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4e"
+      ],
+      "mentions": [],
+      "order": 15
+    },
+    {
+      "id": "Intent",
+      "kind": "exclusion",
+      "label": "Damage caused with intent",
+      "appliesTo": [
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "fault",
+          "in": [
+            "Intent"
+          ]
+        }
+      ],
+      "sources": [
+        "203.7"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "UnrestWithoutPrecautions",
+      "kind": "exclusion",
+      "label": "Civil unrest without reasonable precautions",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "emergency",
+          "in": [
+            "UnrestNoPrecautions"
+          ]
+        }
+      ],
+      "sources": [
+        "204.9",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "WarOrDisaster",
+      "kind": "exclusion",
+      "label": "War, revolution, earthquake, volcanic eruption, nuclear damage",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "emergency",
+          "in": [
+            "WarOrDisaster"
+          ]
+        }
+      ],
+      "sources": [
+        "204.9",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "CriminalOffence",
+      "kind": "exclusion",
+      "label": "Criminal offences",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "crime",
+          "in": [
+            "Crime"
+          ]
+        }
+      ],
+      "sources": [
+        "204.8",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "HighAlcohol",
+      "kind": "exclusion",
+      "label": "1.6 per mille or more, drugs, flagrant speeding, illegal races",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "alcohol",
+          "in": [
+            "HighAlcohol"
+          ]
+        }
+      ],
+      "sources": [
+        "204.6",
+        "304",
+        "407"
+      ],
+      "mentions": [
+        "Alcohol"
+      ],
+      "order": 0
+    },
+    {
+      "id": "UnauthorizedDriving",
+      "kind": "exclusion",
+      "label": "Journeys that are not permitted",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "journey",
+          "in": [
+            "NotPermitted"
+          ]
+        }
+      ],
+      "sources": [
+        "204.5",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "IllegalDriving",
+      "kind": "exclusion",
+      "label": "Illegal driving that the insured person should have noticed",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "driver",
+          "in": [
+            "UnlicensedKnown"
+          ]
+        }
+      ],
+      "sources": [
+        "204.4",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "Races",
+      "kind": "exclusion",
+      "label": "Races and similar rides",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "Roadside",
+        "Accident",
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "use",
+          "in": [
+            "Race"
+          ]
+        }
+      ],
+      "sources": [
+        "204.3",
+        "304",
+        "407"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "TyresOrBatteries",
+      "kind": "exclusion",
+      "label": "Damage only to the tyres or the batteries",
+      "appliesTo": [
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "operation",
+          "in": [
+            "TyresOrBatteryOnly"
+          ]
+        }
+      ],
+      "sources": [
+        "204.1"
+      ],
+      "mentions": [
+        "Tyres"
+      ],
+      "order": 0
+    },
+    {
+      "id": "VehicleOperation",
+      "kind": "exclusion",
+      "label": "Operation, breakage, wear, wrong handling, lack of oil or coolant, the load",
+      "appliesTo": [
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "operation",
+          "in": [
+            "WearOrBreakdown",
+            "LoadedGoods"
+          ]
+        }
+      ],
+      "sources": [
+        "204.1"
+      ],
+      "mentions": [
+        "WearAndTear"
+      ],
+      "order": 0
+    },
+    {
+      "id": "CommercialUse",
+      "kind": "exclusion",
+      "label": "Commercial use that the policy does not include",
+      "appliesTo": [
+        "VehicleLegalProtection",
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing",
+        "ThirdPartyLiability",
+        "LiabilityGrossNegligence",
+        "WorkAccidentRisk",
+        "HazardousLoads"
+      ],
+      "appliesToNamed": [
+        "Legal",
+        "Roadside",
+        "Accident",
+        "AccidentalDamage",
+        "Liability"
+      ],
+      "when": [
+        {
+          "fact": "use",
+          "in": [
+            "CommercialNotAgreed"
+          ]
+        }
+      ],
+      "sources": [
+        "1"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "ClothingTheftUnlocked",
+      "kind": "exclusion",
+      "label": "Theft of clothing that was not locked",
+      "appliesTo": [
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "ProtectiveClothing"
+      ],
+      "when": [
+        {
+          "fact": "clothingHow",
+          "in": [
+            "TheftUnlocked"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4e"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "OpticalDamage",
+      "kind": "exclusion",
+      "label": "Only optical damage to protective clothing",
+      "appliesTo": [
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "ProtectiveClothing"
+      ],
+      "when": [
+        {
+          "fact": "clothingHow",
+          "in": [
+            "OpticalOnly"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4e"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "ItemsOtherTheft",
+      "kind": "exclusion",
+      "label": "Items stolen without forcing open the locked vehicle",
+      "appliesTo": [
+        "ItemsTransported"
+      ],
+      "appliesToNamed": [
+        "ItemsTransported"
+      ],
+      "when": [
+        {
+          "fact": "itemsHow",
+          "in": [
+            "OtherItemsTheft"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4d"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "ElectronicsInOtherVehicle",
+      "kind": "exclusion",
+      "label": "Electronics and goods in a vehicle that is not a car, van or motorcycle",
+      "appliesTo": [
+        "ItemsTransported"
+      ],
+      "appliesToNamed": [
+        "ItemsTransported"
+      ],
+      "when": [
+        {
+          "fact": "itemsKind",
+          "in": [
+            "Electronics"
+          ]
+        },
+        {
+          "fact": "vehicleClass",
+          "in": [
+            "OtherVehicle"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4d"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "ExcludedItems",
+      "kind": "exclusion",
+      "label": "Cash, cards, jewellery, data, vehicles, animals and similar items",
+      "appliesTo": [
+        "ItemsTransported"
+      ],
+      "appliesToNamed": [
+        "ItemsTransported"
+      ],
+      "when": [
+        {
+          "fact": "itemsKind",
+          "in": [
+            "ExcludedItems"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4d"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "ThirdParkingDamage",
+      "kind": "exclusion",
+      "label": "More than two parking damages in a calendar year",
+      "appliesTo": [
+        "ParkingDamage"
+      ],
+      "appliesToNamed": [
+        "ParkingDamage"
+      ],
+      "when": [
+        {
+          "fact": "parkingCount",
+          "in": [
+            "ThirdOrMore"
+          ]
+        }
+      ],
+      "sources": [
+        "202.4c"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "NotInVandalismList",
+      "kind": "exclusion",
+      "label": "Scratching, and other acts not in the list of vandalism",
+      "appliesTo": [
+        "Vandalism"
+      ],
+      "appliesToNamed": [
+        "Vandalism"
+      ],
+      "when": [
+        {
+          "fact": "vandalismKind",
+          "in": [
+            "Scratched",
+            "OtherVandalism"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3f"
+      ],
+      "mentions": [
+        "Scratching"
+      ],
+      "order": 0
+    },
+    {
+      "id": "GlassAtValue",
+      "kind": "exclusion",
+      "label": "Glass repair that reaches the replacement value",
+      "appliesTo": [
+        "GlassPlus",
+        "Glass"
+      ],
+      "appliesToNamed": [
+        "GlassPlus",
+        "Glass"
+      ],
+      "when": [
+        {
+          "fact": "glassCost",
+          "in": [
+            "AtValue"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3d"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "OtherHazards",
+      "kind": "exclusion",
+      "label": "All other natural hazards",
+      "appliesTo": [
+        "NaturalHazards"
+      ],
+      "appliesToNamed": [
+        "NaturalHazards"
+      ],
+      "when": [
+        {
+          "fact": "hazardKind",
+          "in": [
+            "OtherHazard"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3c"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "InternalDefect",
+      "kind": "exclusion",
+      "label": "Damage to electronics from an internal defect",
+      "appliesTo": [
+        "Fire"
+      ],
+      "appliesToNamed": [
+        "Fire"
+      ],
+      "when": [
+        {
+          "fact": "fireKind",
+          "in": [
+            "InternalDefect"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3b"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "Singeing",
+      "kind": "exclusion",
+      "label": "Singeing damage",
+      "appliesTo": [
+        "Fire"
+      ],
+      "appliesToNamed": [
+        "Fire"
+      ],
+      "when": [
+        {
+          "fact": "fireKind",
+          "in": [
+            "Singeing"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3b"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "MotorcycleNotSecured",
+      "kind": "exclusion",
+      "label": "Theft of a motorcycle that was not secured",
+      "appliesTo": [
+        "Theft"
+      ],
+      "appliesToNamed": [
+        "Theft"
+      ],
+      "when": [
+        {
+          "fact": "motorcycleSecured",
+          "in": [
+            "NotSecured"
+          ]
+        },
+        {
+          "fact": "theftKind",
+          "in": [
+            "VehicleStolen"
+          ]
+        },
+        {
+          "fact": "vehicleClass",
+          "in": [
+            "Motorcycle"
+          ]
+        }
+      ],
+      "sources": [
+        "204.7"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "FuelTheft",
+      "kind": "exclusion",
+      "label": "Theft of fuel",
+      "appliesTo": [
+        "Theft"
+      ],
+      "appliesToNamed": [
+        "Theft"
+      ],
+      "when": [
+        {
+          "fact": "theftKind",
+          "in": [
+            "FuelOnly"
+          ]
+        }
+      ],
+      "sources": [
+        "204.7"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "HouseholdUseNotTheft",
+      "kind": "exclusion",
+      "label": "Use by a person of the household is not theft",
+      "appliesTo": [
+        "Theft"
+      ],
+      "appliesToNamed": [
+        "Theft"
+      ],
+      "when": [
+        {
+          "fact": "theftKind",
+          "in": [
+            "HouseholdUse"
+          ]
+        }
+      ],
+      "sources": [
+        "202.3a"
+      ],
+      "mentions": [],
+      "order": 0
+    },
+    {
+      "id": "GrossNegligenceReduction",
+      "kind": "reduction",
+      "label": "Gross negligence: reduced by the degree of fault",
+      "appliesTo": [
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing"
+      ],
+      "appliesToNamed": [
+        "AccidentalDamage"
+      ],
+      "when": [
+        {
+          "fact": "fault",
+          "in": [
+            "GrossNegligence"
+          ]
+        }
+      ],
+      "sources": [
+        "203.7"
+      ],
+      "mentions": [
+        "GrossNegligenceConcept"
+      ],
+      "order": 0
+    },
+    {
+      "id": "AlcoholReduction",
+      "kind": "reduction",
+      "label": "Collision under the influence of alcohol: reduced by the degree of fault",
+      "appliesTo": [
+        "Collision"
+      ],
+      "appliesToNamed": [
+        "Collision"
+      ],
+      "when": [
+        {
+          "fact": "alcohol",
+          "in": [
+            "Influenced"
+          ]
+        }
+      ],
+      "sources": [
+        "202.2"
+      ],
+      "mentions": [
+        "Alcohol"
+      ],
+      "order": 0
+    },
+    {
+      "id": "GrossNegligenceWaiver",
+      "kind": "waiver",
+      "label": "Coverage for gross negligence: no reduction of collision benefits",
+      "appliesTo": [
+        "Collision"
+      ],
+      "appliesToNamed": [
+        "Collision"
+      ],
+      "when": [
+        {
+          "fact": "hasCollisionGrossNegligence",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "202.2"
+      ],
+      "mentions": [
+        "GrossNegligenceConcept"
+      ],
+      "order": 0
+    },
+    {
+      "id": "OtherVehiclesWorldwide",
+      "kind": "territory",
+      "label": "Accidents in other people's vehicles: worldwide, for six weeks",
+      "covers": "OtherPeoplesVehicles",
+      "appliesTo": [
+        "OtherPeoplesVehicles"
+      ],
+      "appliesToNamed": [
+        "OtherPeoplesVehicles"
+      ],
+      "when": [
+        {
+          "fact": "place",
+          "in": [
+            "ExcludedCountry",
+            "Elsewhere"
+          ]
+        }
+      ],
+      "sources": [
+        "301.3"
+      ],
+      "mentions": [
+        "OutsideScope"
+      ],
+      "order": 0
+    },
+    {
+      "id": "RoadsideInEurope",
+      "kind": "territory",
+      "label": "Roadside assistance Europe within Europe",
+      "covers": "RoadsideEurope",
+      "appliesTo": [
+        "RoadsideEurope"
+      ],
+      "appliesToNamed": [
+        "RoadsideEurope"
+      ],
+      "when": [
+        {
+          "fact": "place",
+          "in": [
+            "CHFL",
+            "Europe"
+          ]
+        }
+      ],
+      "sources": [
+        "406"
+      ],
+      "mentions": [
+        "EuropeConcept"
+      ],
+      "order": 0
+    },
+    {
+      "id": "RoadsideOnlyCHFL",
+      "kind": "territory",
+      "label": "Roadside assistance only in Switzerland and Liechtenstein",
+      "appliesTo": [
+        "RoadsideCHFL",
+        "RoadsideEurope"
+      ],
+      "appliesToNamed": [
+        "Roadside"
+      ],
+      "when": [
+        {
+          "fact": "place",
+          "notIn": [
+            "CHFL"
+          ]
+        }
+      ],
+      "sources": [
+        "3"
+      ],
+      "mentions": [
+        "EuropeConcept"
+      ],
+      "order": 0
+    },
+    {
+      "id": "OutsideTerritory",
+      "kind": "territory",
+      "label": "Outside the territorial scope",
+      "appliesTo": [
+        "VehicleLegalProtection",
+        "RoadsideCHFL",
+        "RoadsideEurope",
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets",
+        "Collision",
+        "CollisionGrossNegligence",
+        "Theft",
+        "Fire",
+        "Vandalism",
+        "Animals",
+        "NaturalHazards",
+        "Glass",
+        "GlassPlus",
+        "Martens",
+        "ParkingDamage",
+        "ParkingDamagePlus",
+        "ItemsTransported",
+        "ProtectiveClothing",
+        "ThirdPartyLiability",
+        "LiabilityGrossNegligence",
+        "WorkAccidentRisk",
+        "HazardousLoads"
+      ],
+      "appliesToNamed": [
+        "Legal",
+        "Roadside",
+        "Accident",
+        "AccidentalDamage",
+        "Liability"
+      ],
+      "when": [
+        {
+          "fact": "place",
+          "in": [
+            "ExcludedCountry",
+            "Elsewhere"
+          ]
+        }
+      ],
+      "sources": [
+        "3"
+      ],
+      "mentions": [
+        "OutsideScope"
+      ],
+      "order": 0
+    }
+  ],
+  "precedences": [
+    {
+      "id": "KeysJourneyPrecedence",
+      "winner": "EUKeysJourneyLimited",
+      "loser": "EUKeysJourney",
+      "basis": "interpretation",
+      "comment": "Art. 406.7 lists the onward journey and accommodation twice: once without a limit, once up to 2000 CHF. We apply the limit of 2000 CHF: an item without a limit would make the limited item useless."
+    },
+    {
+      "id": "GrossNegligencePrecedence",
+      "winner": "GrossNegligenceWaiver",
+      "loser": "GrossNegligenceReduction",
+      "basis": "text",
+      "comment": "Art. 202.2: if the option is agreed, Zurich does not reduce collision benefits for gross negligence."
+    },
+    {
+      "id": "WorldwidePrecedence",
+      "winner": "OtherVehiclesWorldwide",
+      "loser": "OutsideTerritory",
+      "basis": "text",
+      "comment": "Art. 301.3 says that this insurance applies worldwide, for up to six weeks after leaving the territory."
+    },
+    {
+      "id": "RoadsidePrecedence",
+      "winner": "RoadsideInEurope",
+      "loser": "RoadsideOnlyCHFL",
+      "basis": "interpretation",
+      "comment": "Art. 3 says that roadside assistance is valid only in Switzerland and Liechtenstein; Art. 406 extends roadside assistance Europe to Europe as set out in Art. 3. We read the sentence of Art. 3 as about roadside assistance CH/FL."
+    },
+    {
+      "id": "TyresPrecedence",
+      "winner": "VandalismTyres",
+      "loser": "TyresOrBatteries",
+      "basis": "interpretation",
+      "comment": "Art. 202.3 f covers punctured tyres; Art. 204.1 excludes damage only to the tyres. The document does not say which one wins. We read the closed list of vandalism as the specific rule, so it wins."
+    }
+  ],
+  "closedLists": [
+    {
+      "id": "VehicleContractsList",
+      "label": "Vehicle contract law",
+      "items": [
+        "Repairs",
+        "Deposit",
+        "Leasing",
+        "Loan",
+        "Rental",
+        "Purchase"
+      ],
+      "sources": [
+        "502"
+      ]
+    },
+    {
+      "id": "KeysList",
+      "label": "Loss of keys",
+      "items": [
+        "Continuing the journey by public transport, and accommodation",
+        "Retrieving or forwarding the spare key",
+        "Towing to the nearest repair shop",
+        "On-the-spot roadside assistance"
+      ],
+      "sources": [
+        "405.7",
+        "406.7"
+      ]
+    },
+    {
+      "id": "ClothingList",
+      "label": "Protective clothing",
+      "items": [
+        "Gloves",
+        "Boots",
+        "Safety suits",
+        "Motorcycle suits with protectors",
+        "Helmets"
+      ],
+      "sources": [
+        "202.4e"
+      ]
+    },
+    {
+      "id": "VandalismList",
+      "label": "Vandalism",
+      "items": [
+        "Pouring damaging substances into the fuel tank",
+        "Slashing the convertible roof",
+        "Puncturing the tyres",
+        "Painting or spraying the paintwork (not scratching)",
+        "Breaking off antennas, rear-view mirrors, wipers or trim"
+      ],
+      "sources": [
+        "202.3f"
+      ]
+    },
+    {
+      "id": "GlassList",
+      "label": "Glass",
+      "items": [
+        "Rear windows",
+        "Roof windows",
+        "Side windows",
+        "Windscreen"
+      ],
+      "sources": [
+        "202.3d"
+      ]
+    },
+    {
+      "id": "HazardList",
+      "label": "Natural hazards",
+      "items": [
+        "Avalanches, snow slides, falling ice, snow pressure",
+        "Rockslides, falling stones, landslides",
+        "High water, floods",
+        "Hail",
+        "Storm (wind of at least 75 km/h)"
+      ],
+      "sources": [
+        "202.3c"
+      ],
+      "note": "The document does not call this list exhaustive. It says that all other natural hazards are excluded, which has the same effect."
+    },
+    {
+      "id": "TheftList",
+      "label": "Theft",
+      "items": [
+        "Attempted theft, use without permission or robbery",
+        "Robbery",
+        "Use without permission",
+        "Theft"
+      ],
+      "sources": [
+        "202.3a"
+      ]
+    }
+  ],
+  "concepts": [
+    {
+      "id": "CountedYear",
+      "label": "An insurance year that counts",
+      "order": 0
+    },
+    {
+      "id": "EuropeConcept",
+      "label": "Roadside assistance in Europe",
+      "order": 0
+    },
+    {
+      "id": "OutsideScope",
+      "label": "Outside the territorial scope",
+      "order": 0
+    },
+    {
+      "id": "GrossNegligenceConcept",
+      "label": "Gross negligence",
+      "order": 0
+    },
+    {
+      "id": "Alcohol",
+      "label": "Alcohol",
+      "order": 0
+    },
+    {
+      "id": "Scratching",
+      "label": "Scratching",
+      "order": 0
+    },
+    {
+      "id": "WearAndTear",
+      "label": "Breakage and wear",
+      "order": 0
+    },
+    {
+      "id": "Tyres",
+      "label": "Tyres",
+      "order": 0
+    },
+    {
+      "id": "OnTheSpot",
+      "label": "On-the-spot assistance",
+      "order": 1
+    },
+    {
+      "id": "ParkingAmount",
+      "label": "Amount per event",
+      "order": 1
+    },
+    {
+      "id": "WindowsConcept",
+      "label": "Windows",
+      "order": 1
+    },
+    {
+      "id": "Recovery",
+      "label": "Recovery",
+      "order": 2
+    },
+    {
+      "id": "ParkingEvents",
+      "label": "Events per year",
+      "order": 2
+    },
+    {
+      "id": "OtherGlassConcept",
+      "label": "Other glass parts",
+      "order": 2
+    },
+    {
+      "id": "Towing",
+      "label": "Towing",
+      "order": 3
+    },
+    {
+      "id": "BulbsConcept",
+      "label": "Light bulbs",
+      "order": 3
+    },
+    {
+      "id": "Storage",
+      "label": "Storage",
+      "order": 4
+    },
+    {
+      "id": "GlassValueConcept",
+      "label": "Repair at the replacement value",
+      "order": 4
+    },
+    {
+      "id": "AdditionalCosts",
+      "label": "Additional costs",
+      "order": 5
+    },
+    {
+      "id": "ReplacementDriver",
+      "label": "Replacement driver",
+      "order": 6
+    },
+    {
+      "id": "LossOfKeys",
+      "label": "Loss of keys",
+      "order": 7
+    },
+    {
+      "id": "KeysJourney",
+      "label": "Onward journey after the loss of keys",
+      "order": 8
+    },
+    {
+      "id": "LackOfFuel",
+      "label": "Lack of fuel, empty battery",
+      "order": 9
+    },
+    {
+      "id": "Pets",
+      "label": "Pets",
+      "order": 10
+    },
+    {
+      "id": "Ferries",
+      "label": "Car ferries and car trains",
+      "order": 11
+    },
+    {
+      "id": "SpareParts",
+      "label": "Spare parts",
+      "order": 12
+    },
+    {
+      "id": "ExtentOfDamage",
+      "label": "Extent of the damage",
+      "order": 13
+    },
+    {
+      "id": "Repatriation",
+      "label": "Repatriation of the vehicle",
+      "order": 14
+    },
+    {
+      "id": "Customs",
+      "label": "Customs and scrapping",
+      "order": 15
+    },
+    {
+      "id": "TotalLimit",
+      "label": "Limit for all benefits",
+      "order": 16
+    }
+  ],
+  "parameters": [
+    {
+      "id": "countedYearDeductible",
+      "label": "Minimum length of an insurance year that counts for the reduction of the deductible, in months",
+      "amount": 11,
+      "sources": [
+        "6.1"
+      ],
+      "mentions": [
+        "CountedYear"
+      ]
+    },
+    {
+      "id": "countedYearBonus",
+      "label": "Minimum length of an insurance year that counts for the no-claims bonus, in months",
+      "amount": 11,
+      "sources": [
+        "5"
+      ],
+      "mentions": [
+        "CountedYear"
+      ]
+    },
+    {
+      "id": "parkingLimit",
+      "label": "Limit per parking damage, in CHF",
+      "amount": 1000,
+      "sources": [
+        "202.4c"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "helpPointPenalty",
+      "label": "Additional deductible when the rules of Help Point PLUS are not followed, in CHF",
+      "amount": 500,
+      "sources": [
+        "10.3"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "deductibleSteps",
+      "label": "Number of reductions of the deductible",
+      "amount": 2,
+      "sources": [
+        "6.1"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "claimFreeYearsPerStep",
+      "label": "Full insurance years without claims for one reduction of the deductible",
+      "amount": 3,
+      "sources": [
+        "6.1"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "deductibleStep",
+      "label": "Reduction of the deductible after each period of years without claims, in CHF",
+      "amount": 500,
+      "sources": [
+        "6.1"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "theftRecoveryDays",
+      "label": "Days to find a stolen vehicle before it is a total loss",
+      "amount": 30,
+      "sources": [
+        "203.2",
+        "203.4"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "tableMonths",
+      "label": "Months of service covered by the compensation table; later, the replacement value",
+      "amount": 84,
+      "sources": [
+        "203.2"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "earlyMonths",
+      "label": "The first two years of service, in months",
+      "amount": 24,
+      "sources": [
+        "203.2"
+      ],
+      "mentions": []
+    },
+    {
+      "id": "totalLossShare",
+      "label": "Repair costs that make a total loss in the first two years, as a share of the table value",
+      "amount": 0.65,
+      "sources": [
+        "203.2"
+      ],
+      "mentions": []
+    }
+  ],
+  "benefits": [
+    {
+      "id": "EUCustoms",
+      "label": "Customs duty and scrapping after a total loss abroad",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Customs"
+      ],
+      "sources": [
+        "406.14"
+      ]
+    },
+    {
+      "id": "EURepatriation",
+      "label": "Repatriation of the vehicle, up to its current value",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Repatriation"
+      ],
+      "sources": [
+        "406.13"
+      ]
+    },
+    {
+      "id": "EUExtent",
+      "label": "Investigation of the damage for the repatriation",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "ExtentOfDamage"
+      ],
+      "limit": 500,
+      "sources": [
+        "406.12"
+      ]
+    },
+    {
+      "id": "EUSpareParts",
+      "label": "Shipping of spare parts abroad",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "SpareParts"
+      ],
+      "sources": [
+        "406.11"
+      ]
+    },
+    {
+      "id": "EUFerries",
+      "label": "New tickets for a missed car ferry or car train, unused services",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Ferries"
+      ],
+      "limit": 1000,
+      "sources": [
+        "406.10"
+      ]
+    },
+    {
+      "id": "EUPets",
+      "label": "Transport of dogs and cats",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Pets"
+      ],
+      "limit": 1000,
+      "sources": [
+        "406.9"
+      ]
+    },
+    {
+      "id": "EUFuel",
+      "label": "Lack of fuel or empty battery: roadworthiness or towing to a charging station",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "LackOfFuel"
+      ],
+      "sources": [
+        "406.8"
+      ]
+    },
+    {
+      "id": "EUKeysJourneyLimited",
+      "label": "Onward journey and accommodation after the loss of keys (5th item)",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "KeysJourney"
+      ],
+      "limit": 2000,
+      "sources": [
+        "406.7"
+      ]
+    },
+    {
+      "id": "EUKeysJourney",
+      "label": "Onward journey and accommodation after the loss of keys (4th item)",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "KeysJourney"
+      ],
+      "sources": [
+        "406.7"
+      ]
+    },
+    {
+      "id": "EUKeys",
+      "label": "Help, towing and the spare key",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "LossOfKeys"
+      ],
+      "sources": [
+        "406.7"
+      ]
+    },
+    {
+      "id": "EUDriver",
+      "label": "A chauffeur to return the vehicle and the passengers",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "ReplacementDriver"
+      ],
+      "sources": [
+        "406.6"
+      ]
+    },
+    {
+      "id": "EUAdditional",
+      "label": "A replacement vehicle, onward and return journey, accommodation, unused services, transport of the vehicle",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "AdditionalCosts"
+      ],
+      "limit": 5000,
+      "sources": [
+        "406.5"
+      ]
+    },
+    {
+      "id": "EUStorage",
+      "label": "Storage charges",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Storage"
+      ],
+      "limit": 500,
+      "sources": [
+        "406.4"
+      ]
+    },
+    {
+      "id": "EUTowing",
+      "label": "Towing to the nearest suitable garage",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Towing"
+      ],
+      "sources": [
+        "406.3"
+      ]
+    },
+    {
+      "id": "EURecovery",
+      "label": "Recovery of the vehicle and the trailer",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "Recovery"
+      ],
+      "limit": 2000,
+      "sources": [
+        "406.2"
+      ]
+    },
+    {
+      "id": "EUOnTheSpot",
+      "label": "Restoring roadworthiness at the roadside, small parts",
+      "covers": [
+        "RoadsideEurope"
+      ],
+      "mentions": [
+        "OnTheSpot"
+      ],
+      "sources": [
+        "406.1"
+      ]
+    },
+    {
+      "id": "CHTotal",
+      "label": "All benefits together, for all persons",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "TotalLimit"
+      ],
+      "limit": 1000,
+      "per": "event",
+      "sources": [
+        "405.9"
+      ]
+    },
+    {
+      "id": "CHFuel",
+      "label": "Lack of fuel or empty battery: roadworthiness or towing to a charging station",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "LackOfFuel"
+      ],
+      "sources": [
+        "405.8"
+      ]
+    },
+    {
+      "id": "CHKeysJourney",
+      "label": "Onward journey and accommodation after the loss of keys",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "KeysJourney"
+      ],
+      "sources": [
+        "405.7"
+      ]
+    },
+    {
+      "id": "CHKeys",
+      "label": "Help, towing and the spare key",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "LossOfKeys"
+      ],
+      "sources": [
+        "405.7"
+      ]
+    },
+    {
+      "id": "CHDriver",
+      "label": "A chauffeur to return the vehicle and the passengers",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "ReplacementDriver"
+      ],
+      "sources": [
+        "405.6"
+      ]
+    },
+    {
+      "id": "CHAdditional",
+      "label": "Onward and return journey, accommodation, unused services, transport of the vehicle",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "AdditionalCosts"
+      ],
+      "sources": [
+        "405.5"
+      ]
+    },
+    {
+      "id": "CHStorage",
+      "label": "Storage charges",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "Storage"
+      ],
+      "sources": [
+        "405.4"
+      ]
+    },
+    {
+      "id": "CHTowing",
+      "label": "Towing to the nearest suitable garage",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "Towing"
+      ],
+      "sources": [
+        "405.3"
+      ]
+    },
+    {
+      "id": "CHRecovery",
+      "label": "Recovery of the vehicle and the trailer",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "Recovery"
+      ],
+      "sources": [
+        "405.2"
+      ]
+    },
+    {
+      "id": "CHOnTheSpot",
+      "label": "Restoring roadworthiness at the roadside, small parts",
+      "covers": [
+        "RoadsideCHFL"
+      ],
+      "mentions": [
+        "OnTheSpot"
+      ],
+      "sources": [
+        "405.1"
+      ]
+    },
+    {
+      "id": "ParkingTwoEvents",
+      "label": "Two events per calendar year",
+      "covers": [
+        "ParkingDamagePlus",
+        "ParkingDamage"
+      ],
+      "mentions": [
+        "ParkingEvents"
+      ],
+      "sources": [
+        "202.4c"
+      ]
+    },
+    {
+      "id": "ParkingPlusPerEvent",
+      "label": "No limit per event",
+      "covers": [
+        "ParkingDamagePlus"
+      ],
+      "mentions": [
+        "ParkingAmount"
+      ],
+      "note": "The document says that with PLUS 'this limit' does not apply. We read it as the limit per event: the limit of two events per year stays.",
+      "sources": [
+        "202.4c"
+      ]
+    },
+    {
+      "id": "ParkingPerEvent",
+      "label": "Up to 1000 CHF per event",
+      "covers": [
+        "ParkingDamage"
+      ],
+      "mentions": [
+        "ParkingAmount"
+      ],
+      "limit": 1000,
+      "per": "event",
+      "sources": [
+        "202.4c"
+      ]
+    },
+    {
+      "id": "GlassValueLimit",
+      "label": "Nothing if the repair costs reach the replacement value",
+      "covers": [
+        "GlassPlus",
+        "Glass"
+      ],
+      "mentions": [
+        "GlassValueConcept"
+      ],
+      "sources": [
+        "202.3d"
+      ]
+    },
+    {
+      "id": "GlassBulbs",
+      "label": "Light bulbs destroyed with the glass",
+      "covers": [
+        "GlassPlus"
+      ],
+      "mentions": [
+        "BulbsConcept"
+      ],
+      "sources": [
+        "202.4a"
+      ]
+    },
+    {
+      "id": "GlassAllParts",
+      "label": "All other vehicle parts of glass, for example headlights",
+      "covers": [
+        "GlassPlus"
+      ],
+      "mentions": [
+        "OtherGlassConcept"
+      ],
+      "sources": [
+        "202.4a"
+      ]
+    },
+    {
+      "id": "GlassWindows",
+      "label": "Windscreen, side, roof and rear windows",
+      "covers": [
+        "GlassPlus",
+        "Glass"
+      ],
+      "mentions": [
+        "WindowsConcept"
+      ],
+      "sources": [
+        "202.3d"
+      ]
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "CompareGlass",
+      "label": "Glass and Glass PLUS",
+      "left": "Glass",
+      "right": "GlassPlus"
+    },
+    {
+      "id": "CompareParking",
+      "label": "Parking damage and Parking damage PLUS",
+      "left": "ParkingDamage",
+      "right": "ParkingDamagePlus"
+    },
+    {
+      "id": "CompareRoadside",
+      "label": "Roadside assistance CH/FL and Europe",
+      "left": "RoadsideCHFL",
+      "right": "RoadsideEurope"
+    }
+  ],
+  "compensation": [
+    {
+      "year": 1,
+      "fromShare": 1,
+      "toShare": 1,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 2,
+      "fromShare": 0.95,
+      "toShare": 0.85,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 3,
+      "fromShare": 0.85,
+      "toShare": 0.75,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 4,
+      "fromShare": 0.75,
+      "toShare": 0.65,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 5,
+      "fromShare": 0.65,
+      "toShare": 0.55,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 6,
+      "fromShare": 0.55,
+      "toShare": 0.45,
+      "sources": [
+        "203.2"
+      ]
+    },
+    {
+      "year": 7,
+      "fromShare": 0.45,
+      "toShare": 0.4,
+      "sources": [
+        "203.2"
+      ]
+    }
+  ],
+  "obligations": [
+    {
+      "id": "NotifyInsurer",
+      "label": "Tell Zurich at once",
+      "action": "Phone 0800 80 80 80 (from abroad +41 44 628 98 98), or write. For legal protection, tell Orion.",
+      "consequence": "If you break an obligation by your fault, Zurich can refuse the benefits (Art. 12).",
+      "when": [],
+      "sources": [
+        "10.1",
+        "12"
+      ]
+    },
+    {
+      "id": "CallPolice",
+      "label": "Tell the police",
+      "action": "The police must know about bodily injury, theft, and damage caused by animals. For animals, the gamekeeper is also possible.",
+      "when": [
+        {
+          "anyOf": [
+            {
+              "fact": "injury",
+              "in": [
+                "Yes"
+              ]
+            },
+            {
+              "fact": "stolen",
+              "in": [
+                "Yes"
+              ]
+            },
+            {
+              "fact": "animal",
+              "in": [
+                "Yes"
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": [
+        "10.1"
+      ]
+    },
+    {
+      "id": "RoadsidePhone",
+      "label": "Phone Zurich before you get help on the road",
+      "action": "Let Zurich organise the roadside help, the towing and the onward journey.",
+      "consequence": "Zurich does not pay for help that it did not organise or agree to.",
+      "when": [
+        {
+          "fact": "unusable",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "10.4"
+      ]
+    },
+    {
+      "id": "HelpPoint",
+      "label": "Use Help Point PLUS",
+      "action": "Report the damage by phone or at a help point, and have the repair done at the garage that Zurich specifies.",
+      "consequence": "If you do not, you pay 500 CHF more deductible.",
+      "when": [
+        {
+          "fact": "helpPointAgreed",
+          "in": [
+            "Yes"
+          ]
+        },
+        {
+          "fact": "damaged",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "10.3"
+      ]
+    },
+    {
+      "id": "Inspection",
+      "label": "Let Zurich inspect the vehicle before the repair",
+      "action": "Do not repair the vehicle before Zurich has had the opportunity to inspect it.",
+      "consequence": "Otherwise Zurich can reduce the benefit or pay nothing.",
+      "when": [
+        {
+          "fact": "damaged",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "10.3"
+      ]
+    },
+    {
+      "id": "DoNotAccept",
+      "label": "Do not accept or pay the claims of the other party",
+      "action": "Zurich negotiates with the injured party, and its settlement binds you. Give the claim to Zurich.",
+      "when": [
+        {
+          "fact": "otherParty",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "10.2"
+      ]
+    },
+    {
+      "id": "TheftWait",
+      "label": "Know the 30 days after a theft",
+      "action": "If the vehicle is found within 30 days after Zurich receives the notice, Zurich pays the repair. If not, it is a total loss.",
+      "when": [
+        {
+          "fact": "stolen",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "203.2",
+        "203.4"
+      ]
+    },
+    {
+      "id": "CriminalCharges",
+      "label": "File criminal charges if Zurich asks",
+      "action": "Zurich can ask you to file criminal charges.",
+      "when": [
+        {
+          "fact": "stolen",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "10.1"
+      ]
+    },
+    {
+      "id": "ReportToOrion",
+      "label": "Report the legal case to Orion before you engage a lawyer",
+      "action": "Orion decides the procedure and agrees to the lawyer. Report it at the latest 6 months after the end of the contract.",
+      "consequence": "Costs of a lawyer that you engaged before you reported the case: at most 500 CHF.",
+      "when": [
+        {
+          "fact": "legalDispute",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "503",
+        "507"
+      ]
+    },
+    {
+      "id": "MedicalCertificate",
+      "label": "Get a medical certificate",
+      "action": "The daily allowance needs a medical certificate. Medical expenses are paid for 5 years after the accident.",
+      "when": [
+        {
+          "fact": "injury",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "303.3",
+        "303.5"
+      ]
+    },
+    {
+      "id": "Investigation",
+      "label": "Help with the investigation",
+      "action": "Give Zurich the documents, the information and the powers of attorney that it needs.",
+      "when": [],
+      "sources": [
+        "10.1"
+      ]
+    },
+    {
+      "id": "AbroadNumber",
+      "label": "Check the territory",
+      "action": "The insurance covers Europe and the countries around the Mediterranean, not Belarus, Moldova, Ukraine, Russia, Georgia, Armenia, Azerbaijan, Kazakhstan, Egypt, Algeria, Lebanon, Libya or Syria.",
+      "when": [
+        {
+          "fact": "abroad",
+          "in": [
+            "Yes"
+          ]
+        }
+      ],
+      "sources": [
+        "3"
+      ]
+    }
+  ],
+  "deadlines": [
+    {
+      "id": "NoticeByPolicyholder",
+      "label": "Last day to give notice of termination",
+      "anchor": "renewalDate",
+      "offset": "-P3M1D",
+      "who": "you",
+      "meaning": "Your notice must reach Zurich by this day. Otherwise the contract renews for one year.",
+      "sources": [
+        "2"
+      ]
+    },
+    {
+      "id": "PremiumChangeInfo",
+      "label": "Last day for Zurich to tell you about a new premium",
+      "anchor": "renewalDate",
+      "offset": "-P25D",
+      "who": "Zurich",
+      "meaning": "A change of premium or conditions for the next insurance year must reach you by this day.",
+      "sources": [
+        "4.5"
+      ]
+    },
+    {
+      "id": "CancelAfterChange",
+      "label": "Last day to cancel after a change of premium",
+      "anchor": "renewalDate",
+      "offset": "-P1D",
+      "who": "you",
+      "meaning": "If Zurich raised the premium or changed the conditions, your cancellation must reach Zurich by the last day of the insurance year.",
+      "sources": [
+        "4.5"
+      ]
+    },
+    {
+      "id": "LegalCaseReport",
+      "label": "Last day to report a legal case",
+      "anchor": "contractEnd",
+      "offset": "P6M",
+      "who": "you",
+      "meaning": "Legal cases reported later are not covered.",
+      "sources": [
+        "503"
+      ]
+    },
+    {
+      "id": "FirstDeductibleReduction",
+      "label": "First reduction of the deductible, and the no-claims bonus",
+      "anchor": "claimFreeSince",
+      "offset": "P3Y",
+      "who": "Zurich",
+      "meaning": "After 3 full years without liability or collision benefits: the deductible goes down by 500 CHF, and the bonus is paid if agreed.",
+      "sources": [
+        "5",
+        "6.1"
+      ]
+    },
+    {
+      "id": "SecondDeductibleReduction",
+      "label": "Second reduction of the deductible",
+      "anchor": "claimFreeSince",
+      "offset": "P6Y",
+      "who": "Zurich",
+      "meaning": "After 3 more years without claims: 500 CHF less again, but not below 0.",
+      "sources": [
+        "6.1"
+      ]
+    },
+    {
+      "id": "FiveYearsAfterAccident",
+      "label": "End of the accident benefits",
+      "anchor": "accidentDate",
+      "offset": "P5Y",
+      "who": "Zurich",
+      "meaning": "Medical expenses, the daily allowances (at most 730 days) and the degree of disability: within 5 years of the accident.",
+      "sources": [
+        "303.2",
+        "303.3",
+        "303.4",
+        "303.5"
+      ]
+    },
+    {
+      "id": "TerminateAfterClaim",
+      "label": "Last day to terminate after a claim",
+      "anchor": "claimPaid",
+      "offset": "P14D",
+      "who": "you and Zurich",
+      "meaning": "Both sides can terminate the contract until this day. The cover then ends 14 days after the notice.",
+      "sources": [
+        "11"
+      ]
+    },
+    {
+      "id": "TheftTotalLoss",
+      "label": "A stolen vehicle becomes a total loss",
+      "anchor": "theftReported",
+      "offset": "P30D",
+      "who": "Zurich",
+      "meaning": "If the vehicle is not found by this day, Zurich pays a total loss. If it is found before, Zurich pays the repair.",
+      "sources": [
+        "203.2",
+        "203.4"
+      ]
+    },
+    {
+      "id": "DeductiblePayment",
+      "label": "Last day to pay back the deductible",
+      "anchor": "deductibleNotice",
+      "offset": "P4W",
+      "who": "you",
+      "meaning": "If you do not pay, Zurich sends a reminder with 14 more days. After that the contract ends.",
+      "sources": [
+        "6.2"
+      ]
+    },
+    {
+      "id": "PlatesRedemption",
+      "label": "Last day to take back the licence plates",
+      "anchor": "platesDeposited",
+      "offset": "P12M",
+      "who": "you",
+      "meaning": "The insurance is suspended until then. If the plates stay deposited longer, the contract ends.",
+      "sources": [
+        "9"
+      ]
+    },
+    {
+      "id": "ProvisionalCover",
+      "label": "End of the provisional accidental damage cover",
+      "anchor": "registrationDate",
+      "offset": "P4W",
+      "who": "Zurich",
+      "meaning": "A proof of insurance gives provisional cover for accidental damage, accident and roadside assistance for at most four weeks, until the policy arrives.",
+      "sources": [
+        "2"
+      ]
+    }
+  ],
+  "articles": [
+    {
+      "id": "1",
+      "number": "1",
+      "title": "Contractual basis",
+      "summary": "The policy, these conditions and the Swiss law on insurance contracts (LIC) apply. Commercial passenger transport, rental to self-drive customers and driving school use are insured only if the policy says so.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 5
+    },
+    {
+      "id": "2",
+      "number": "2",
+      "title": "Period of coverage",
+      "summary": "Cover starts on the date in the policy. A proof of insurance gives provisional cover for up to four weeks. Without notice three months before the end, the contract renews for one year.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 5
+    },
+    {
+      "id": "3",
+      "number": "3",
+      "title": "Territorial scope",
+      "summary": "Switzerland, Liechtenstein, Europe and the countries around the Mediterranean, except 13 listed countries. Roadside assistance only in Switzerland and Liechtenstein. Cover ends if the owner moves abroad.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 5
+    },
+    {
+      "id": "4",
+      "number": "4",
+      "title": "Payment of premiums and adjustment of contract",
+      "summary": "How the premium is set, paid, changed and refunded.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 5
+    },
+    {
+      "id": "4.1",
+      "number": "4.1",
+      "title": "Premium basics",
+      "summary": "The premium depends on the scope and on the facts about the insured persons and the vehicle. Tell Zurich at once when these facts change.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.2",
+      "number": "4.2",
+      "title": "Premium adjustments",
+      "summary": "A loss does not change the premium. The premium for declared young drivers goes down at each due date until age 25.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.3",
+      "number": "4.3",
+      "title": "Installment payment",
+      "summary": "Payment in installments costs a surcharge.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.4",
+      "number": "4.4",
+      "title": "Balances",
+      "summary": "Nobody claims a balance below 5 CHF.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.5",
+      "number": "4.5",
+      "title": "Contract amendments by Zurich",
+      "summary": "Zurich can change premiums and conditions from the next insurance year. It tells you at least 25 days before the end of the year; you can cancel by the last day of the year.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.6",
+      "number": "4.6",
+      "title": "Consequences of default",
+      "summary": "If you do not pay, you pay the reminder costs, the interest and the costs of a licence plate revocation.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "4.7",
+      "number": "4.7",
+      "title": "Premium reimbursement",
+      "summary": "Zurich refunds the premium of the unused period, except after a paid total loss or when you terminate in the first year after a partial loss.",
+      "within": "4",
+      "refersTo": []
+    },
+    {
+      "id": "5",
+      "number": "5",
+      "title": "No-claims bonus",
+      "summary": "If agreed, a bonus after 3 full insurance years without liability or collision benefits. An insurance year counts if it lasts at least 11 months.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 6
+    },
+    {
+      "id": "6",
+      "number": "6",
+      "title": "Deductibles",
+      "summary": "You pay the agreed deductible for each loss that Zurich pays.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 6
+    },
+    {
+      "id": "6.1",
+      "number": "6.1",
+      "title": "Reduction of the deductible",
+      "summary": "The liability and collision deductibles go down by 500 CHF after 3 claim-free insurance years, and by 500 CHF again after 3 more. Not below 0. An insurance year counts if it lasts at least eleven months.",
+      "within": "6",
+      "refersTo": []
+    },
+    {
+      "id": "6.2",
+      "number": "6.2",
+      "title": "Recovery of the deductible",
+      "summary": "If Zurich paid the injured party directly, you pay back the deductible within four weeks; after a reminder, 14 more days, or the contract ends.",
+      "within": "6",
+      "refersTo": []
+    },
+    {
+      "id": "6.3",
+      "number": "6.3",
+      "title": "Removal of the deductible",
+      "summary": "No liability deductible for strict liability without fault, joy rides you could not prevent, events without consequences, or losses you pay back within 30 days.",
+      "within": "6",
+      "refersTo": []
+    },
+    {
+      "id": "6.4",
+      "number": "6.4",
+      "title": "Towing vehicle and trailer",
+      "summary": "One deductible, the higher one, when the towing vehicle and the trailer are damaged in the same event.",
+      "within": "6",
+      "refersTo": []
+    },
+    {
+      "id": "6.5",
+      "number": "6.5",
+      "title": "Items transported and protective clothing",
+      "summary": "No deductible for items carried and for protective clothing.",
+      "within": "6",
+      "refersTo": []
+    },
+    {
+      "id": "7",
+      "number": "7",
+      "title": "Interchangeable license plates",
+      "summary": "Cover for the vehicle that has the plates, and for the other one only off public roads.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "8",
+      "number": "8",
+      "title": "Replacement vehicles",
+      "summary": "A replacement vehicle approved by the authority with your plates is covered. Accidental damage covers it if it is equivalent, except collision.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "9",
+      "number": "9",
+      "title": "Deposit of license plates",
+      "summary": "Deposited plates suspend the insurance. For up to 12 months, liability and collision apply off public roads only. After 12 months the contract ends.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "10",
+      "number": "10",
+      "title": "Obligations in the event of a claim",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "10.1",
+      "number": "10.1",
+      "title": "Obligation to notify",
+      "summary": "Tell Zurich or Orion at once and help with the investigation. Tell the police about bodily injury, theft and damage by animals.",
+      "within": "10",
+      "refersTo": []
+    },
+    {
+      "id": "10.2",
+      "number": "10.2",
+      "title": "Liability insurance",
+      "summary": "Zurich negotiates with the injured party. You must not accept or pay their claims.",
+      "within": "10",
+      "refersTo": []
+    },
+    {
+      "id": "10.3",
+      "number": "10.3",
+      "title": "Accidental damage insurance",
+      "summary": "Let Zurich inspect the vehicle before and after repairs. With Help Point PLUS, report by phone or at a help point and repair at the garage that Zurich specifies, or pay 500 CHF more deductible.",
+      "within": "10",
+      "refersTo": []
+    },
+    {
+      "id": "10.4",
+      "number": "10.4",
+      "title": "Roadside assistance",
+      "summary": "Phone Zurich at once. Zurich does not pay for help that it did not organise.",
+      "within": "10",
+      "refersTo": []
+    },
+    {
+      "id": "11",
+      "number": "11",
+      "title": "Termination in the event of a loss",
+      "summary": "After a paid loss, both sides can terminate within 14 days. Cover ends 14 days after the notice.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "12",
+      "number": "12",
+      "title": "Consequences of breach of contract",
+      "summary": "If an insured person does not obey the obligations, no benefits are paid, unless nobody is at fault.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "13",
+      "number": "13",
+      "title": "Assignment of claims",
+      "summary": "Do not assign or pledge benefits before they are set, without Zurich's agreement.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "14",
+      "number": "14",
+      "title": "Broker compensation",
+      "summary": "Zurich can pay a broker who represents the policyholder.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "15",
+      "number": "15",
+      "title": "Place of jurisdiction",
+      "summary": "Zurich or Basel, or your Swiss or Liechtenstein place of residence.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "16",
+      "number": "16",
+      "title": "Sanctions",
+      "summary": "No benefits if they violate trade or economic sanctions.",
+      "part": "Common",
+      "refersTo": [],
+      "page": 7
+    },
+    {
+      "id": "101",
+      "number": "101",
+      "title": "Scope of insurance",
+      "summary": "Claims for bodily injury and property damage from the operation of the vehicle, traffic accidents and help after accidents.",
+      "part": "Liability",
+      "refersTo": [],
+      "page": 8
+    },
+    {
+      "id": "101.2",
+      "number": "101.2",
+      "title": "Loss prevention costs",
+      "summary": "The costs to prevent an imminent insured loss.",
+      "within": "101",
+      "refersTo": []
+    },
+    {
+      "id": "101.3",
+      "number": "101.3",
+      "title": "Gross negligence coverage",
+      "summary": "If agreed, Zurich does not recover money for gross negligence, except for drunk or unfit driving and flagrant speeding.",
+      "within": "101",
+      "refersTo": []
+    },
+    {
+      "id": "102",
+      "number": "102",
+      "title": "Insured persons",
+      "summary": "The policyholder, the owner, and the persons the owner is responsible for.",
+      "part": "Liability",
+      "refersTo": [],
+      "page": 8
+    },
+    {
+      "id": "103",
+      "number": "103",
+      "title": "Insurance benefits",
+      "summary": "Up to 100 million CHF per event; 5 million CHF for damage by fire, explosion or nuclear energy.",
+      "part": "Liability",
+      "refersTo": [],
+      "page": 8
+    },
+    {
+      "id": "104",
+      "number": "104",
+      "title": "Exclusions",
+      "part": "Liability",
+      "refersTo": [],
+      "page": 8
+    },
+    {
+      "id": "104.1",
+      "number": "104.1",
+      "title": "Property damage",
+      "summary": "Damage to the owner's property, to the vehicle and to the items it carries.",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.2",
+      "number": "104.2",
+      "title": "Races and similar rides",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.3",
+      "number": "104.3",
+      "title": "Unlawful trips",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.4",
+      "number": "104.4",
+      "title": "Unauthorized trips",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.5",
+      "number": "104.5",
+      "title": "Joy rides",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.6",
+      "number": "104.6",
+      "title": "Criminal offences",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "104.7",
+      "number": "104.7",
+      "title": "Nuclear energy",
+      "within": "104",
+      "refersTo": []
+    },
+    {
+      "id": "105",
+      "number": "105",
+      "title": "Rights of recovery",
+      "summary": "The exclusions of Art. 104.3 to 104.6 do not apply to the injured party: Zurich pays, then recovers the money from the insured.",
+      "part": "Liability",
+      "refersTo": [
+        "104.3",
+        "104.4",
+        "104.5",
+        "104.6"
+      ],
+      "page": 8
+    },
+    {
+      "id": "201",
+      "number": "201",
+      "title": "Scope of insurance",
+      "part": "AccidentalDamage",
+      "refersTo": [],
+      "page": 9
+    },
+    {
+      "id": "201.1",
+      "number": "201.1",
+      "title": "Vehicle",
+      "summary": "The declared vehicle, with spare parts, equipment and accessories.",
+      "within": "201",
+      "refersTo": []
+    },
+    {
+      "id": "201.2",
+      "number": "201.2",
+      "title": "Equipment and accessories",
+      "summary": "Extras bought at extra charge are insured up to 10% of the catalogue price.",
+      "within": "201",
+      "refersTo": []
+    },
+    {
+      "id": "202",
+      "number": "202",
+      "title": "Insured events",
+      "part": "AccidentalDamage",
+      "refersTo": [],
+      "page": 9
+    },
+    {
+      "id": "202.1",
+      "number": "202.1",
+      "title": "Collision",
+      "summary": "Damage from a sudden, violent, external cause: impact, collision, rollover, falling, sinking; also when it is a consequence of breakage or wear.",
+      "within": "202",
+      "refersTo": []
+    },
+    {
+      "id": "202.2",
+      "number": "202.2",
+      "title": "Coverage for gross negligence",
+      "summary": "If agreed, Zurich does not reduce collision benefits for gross negligence. Under the influence of alcohol, it reduces them by the degree of fault.",
+      "within": "202",
+      "refersTo": []
+    },
+    {
+      "id": "202.3",
+      "number": "202.3",
+      "title": "Partial casco",
+      "within": "202",
+      "refersTo": []
+    },
+    {
+      "id": "202.3a",
+      "number": "202.3 a",
+      "title": "Theft",
+      "summary": "Theft, use without permission and robbery, and their attempts. Use by a person of the household is not theft. Closed list.",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.3b",
+      "number": "202.3 b",
+      "title": "Fire",
+      "summary": "Fire, explosion, lightning, short circuit and extinguishing. Not singeing, not an internal defect of electronics.",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.3c",
+      "number": "202.3 c",
+      "title": "Natural hazards",
+      "summary": "Storm of at least 75 km/h, hail, flood, rockslide, landslide, avalanche, snow pressure, falling ice, falling aircraft. All other natural hazards are excluded.",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.3d",
+      "number": "202.3 d",
+      "title": "Glass",
+      "summary": "Windscreen, side, roof and rear windows. For motorcycles, the scope of Glass PLUS. Nothing if the repair reaches the replacement value. Closed list.",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.3e",
+      "number": "202.3 e",
+      "title": "Animals",
+      "summary": "Collision with an animal. Damage from swerving to avoid an animal is collision damage (Art. 202.1).",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.3f",
+      "number": "202.3 f",
+      "title": "Vandalism",
+      "summary": "Breaking off parts, painting or spraying (not scratching), puncturing tyres, slashing the roof, substances in the fuel tank. Closed list.",
+      "within": "202.3",
+      "refersTo": []
+    },
+    {
+      "id": "202.4",
+      "number": "202.4",
+      "title": "Supplementary partial casco insurance",
+      "within": "202",
+      "refersTo": []
+    },
+    {
+      "id": "202.4a",
+      "number": "202.4 a",
+      "title": "Glass PLUS",
+      "summary": "All vehicle parts of glass, and the light bulbs destroyed with them.",
+      "within": "202.4",
+      "refersTo": [
+        "202.3d"
+      ]
+    },
+    {
+      "id": "202.4b",
+      "number": "202.4 b",
+      "title": "Martens",
+      "summary": "Damage and consequential damage from martens or rodents.",
+      "within": "202.4",
+      "refersTo": []
+    },
+    {
+      "id": "202.4c",
+      "number": "202.4 c",
+      "title": "Parking damage",
+      "summary": "Damage by unknown vehicles or persons while parked. Two events per calendar year, 1000 CHF per event. With Parking damage PLUS, this limit does not apply.",
+      "within": "202.4",
+      "refersTo": []
+    },
+    {
+      "id": "202.4d",
+      "number": "202.4 d",
+      "title": "Items transported in the vehicle",
+      "summary": "Items damaged with the vehicle, or stolen by breaking into the locked vehicle. Electronics only in cars, vans and motorcycles. Not cash, cards, jewellery, data, animals.",
+      "within": "202.4",
+      "refersTo": []
+    },
+    {
+      "id": "202.4e",
+      "number": "202.4 e",
+      "title": "Protective clothing (for motorcycles)",
+      "summary": "Helmets, suits, protectors, boots and gloves: damage in an accident (not only optical) and theft from a locked container or with a helmet lock.",
+      "within": "202.4",
+      "refersTo": []
+    },
+    {
+      "id": "203",
+      "number": "203",
+      "title": "Insurance benefits",
+      "part": "AccidentalDamage",
+      "refersTo": [],
+      "page": 10
+    },
+    {
+      "id": "203.1",
+      "number": "203.1",
+      "title": "Partial loss",
+      "summary": "Zurich pays the reasonable costs of repair, with the condition and the age of the vehicle in mind. Without repair, the costs without VAT.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.2",
+      "number": "203.2",
+      "title": "Total loss",
+      "summary": "Total loss: repair costs of at least 65% of the table value in the first two years, or of the replacement value later, or a stolen vehicle not found within 30 days. The table gives the share of the catalogue price by year of service.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.3",
+      "number": "203.3",
+      "title": "Costs",
+      "summary": "Recovery and towing to the nearest garage, return transport to Switzerland, customs duty.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.4",
+      "number": "203.4",
+      "title": "Indemnity in the event of the theft of the vehicle",
+      "summary": "A stolen vehicle found within 30 days: Zurich pays the repair.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.5",
+      "number": "203.5",
+      "title": "Items being transported and protective clothing",
+      "summary": "The value of an equivalent item; for clothing older than two years, 75% of the price. Up to the sum insured.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.6",
+      "number": "203.6",
+      "title": "Motorized mobile homes and campers/trailers",
+      "summary": "Full repair costs only with an invoice; without repair, the loss in value.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "203.7",
+      "number": "203.7",
+      "title": "Reduction of benefits",
+      "summary": "Zurich can reduce or refuse benefits as the law on insurance contracts allows, for example for gross negligence or intent.",
+      "within": "203",
+      "refersTo": []
+    },
+    {
+      "id": "204",
+      "number": "204",
+      "title": "Exclusions",
+      "part": "AccidentalDamage",
+      "refersTo": [],
+      "page": 11
+    },
+    {
+      "id": "204.1",
+      "number": "204.1",
+      "title": "Damage due to vehicle operation",
+      "summary": "Operation, breakage, wear, wrong handling or fuel, lack of oil or coolant, damage only to tyres or batteries, damage by the load.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.2",
+      "number": "204.2",
+      "title": "Depreciation in value and loss of use",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.3",
+      "number": "204.3",
+      "title": "Races and similar rides",
+      "summary": "Races, rallies, competitions, racetracks, and requisition by the authorities.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.4",
+      "number": "204.4",
+      "title": "Illegal driving",
+      "summary": "A driver without the required licence or accompanying person, or with unlawful passengers, if the insured should have known.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.5",
+      "number": "204.5",
+      "title": "Unauthorized driving",
+      "summary": "Journeys that the law or the authorities do not permit.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.6",
+      "number": "204.6",
+      "title": "Alcohol/infringement of traffic regulations",
+      "summary": "Blood alcohol of 1.6 per mille or more (breath 0.80 mg/l), unfit by drugs or medication, flagrant speeding, illegal races.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.7",
+      "number": "204.7",
+      "title": "Special events of theft",
+      "summary": "Theft of fuel. Theft of a motorcycle kept outside, in a shared garage or unlocked room, or without an activated steering lock.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.8",
+      "number": "204.8",
+      "title": "Criminal offences",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "204.9",
+      "number": "204.9",
+      "title": "State of emergency",
+      "summary": "War, revolution, earthquakes, volcanic eruptions, nuclear damage. Civil unrest unless reasonable precautions were taken.",
+      "within": "204",
+      "refersTo": []
+    },
+    {
+      "id": "301",
+      "number": "301",
+      "title": "Insured persons",
+      "part": "Accident",
+      "refersTo": [],
+      "page": 12
+    },
+    {
+      "id": "301.3",
+      "number": "301.3",
+      "title": "Persons travelling in other people's vehicles",
+      "summary": "Death 30,000 CHF, disability 60,000 CHF. Worldwide, for up to six weeks after leaving the territory.",
+      "within": "301",
+      "refersTo": []
+    },
+    {
+      "id": "302",
+      "number": "302",
+      "title": "Insured accidents",
+      "part": "Accident",
+      "refersTo": [],
+      "page": 12
+    },
+    {
+      "id": "303",
+      "number": "303",
+      "title": "Insurance benefits",
+      "part": "Accident",
+      "refersTo": [],
+      "page": 12
+    },
+    {
+      "id": "303.1",
+      "number": "303.1",
+      "title": "In the event of death",
+      "summary": "The sum insured goes to the beneficiaries in a fixed order; plus 50% if a minor child is left.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "303.2",
+      "number": "303.2",
+      "title": "In the event of disability",
+      "summary": "A share of the sum insured by degree of disability, up to 225%. Set at the latest 5 years after the accident.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "303.3",
+      "number": "303.3",
+      "title": "Daily allowance",
+      "summary": "With a medical certificate, for up to 730 days within 5 years of the accident.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "303.4",
+      "number": "303.4",
+      "title": "Daily allowance in case of hospitalization",
+      "summary": "For up to 730 days within 5 years of the accident.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "303.5",
+      "number": "303.5",
+      "title": "Medical expenses",
+      "summary": "Necessary treatment for 5 years after the accident, after social security.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "303.6",
+      "number": "303.6",
+      "title": "Insured pets",
+      "summary": "Veterinary treatment of pets in the car, up to 5000 CHF per event.",
+      "within": "303",
+      "refersTo": []
+    },
+    {
+      "id": "304",
+      "number": "304",
+      "title": "Exclusions",
+      "summary": "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7.",
+      "part": "Accident",
+      "refersTo": [
+        "204.3",
+        "204.4",
+        "204.5",
+        "204.6",
+        "204.8",
+        "204.9"
+      ],
+      "page": 13
+    },
+    {
+      "id": "305",
+      "number": "305",
+      "title": "Vehicles carrying too many passengers",
+      "part": "Accident",
+      "refersTo": [],
+      "page": 13
+    },
+    {
+      "id": "306",
+      "number": "306",
+      "title": "Offsetting liability claims",
+      "part": "Accident",
+      "refersTo": [],
+      "page": 13
+    },
+    {
+      "id": "401",
+      "number": "401",
+      "title": "Insured vehicles",
+      "summary": "Vehicles up to 3500 kg and their trailers.",
+      "part": "Roadside",
+      "refersTo": [],
+      "page": 14
+    },
+    {
+      "id": "403",
+      "number": "403",
+      "title": "Insured events",
+      "summary": "A breakdown or accidental damage that stops the vehicle.",
+      "part": "Roadside",
+      "refersTo": [],
+      "page": 14
+    },
+    {
+      "id": "404",
+      "number": "404",
+      "title": "Insurance benefits",
+      "summary": "Roadside assistance CH/FL or Europe, as agreed.",
+      "part": "Roadside",
+      "refersTo": [],
+      "page": 14
+    },
+    {
+      "id": "405",
+      "number": "405",
+      "title": "Roadside assistance CH/FL",
+      "part": "Roadside",
+      "refersTo": [],
+      "page": 14
+    },
+    {
+      "id": "405.1",
+      "number": "405.1",
+      "title": "On-the-spot assistance",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.2",
+      "number": "405.2",
+      "title": "Recovery costs",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.3",
+      "number": "405.3",
+      "title": "Towing costs",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.4",
+      "number": "405.4",
+      "title": "Storage charges",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.5",
+      "number": "405.5",
+      "title": "Additional costs",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.6",
+      "number": "405.6",
+      "title": "Replacement driver",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.7",
+      "number": "405.7",
+      "title": "Loss of keys",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.8",
+      "number": "405.8",
+      "title": "Lack of fuel, empty battery",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "405.9",
+      "number": "405.9",
+      "title": "Limitation of benefits for roadside assistance CH/FL",
+      "summary": "1000 CHF in total for all persons per event.",
+      "within": "405",
+      "refersTo": []
+    },
+    {
+      "id": "406",
+      "number": "406",
+      "title": "Roadside assistance Europe",
+      "summary": "Roadside assistance within Europe, as set out in Art. 3.",
+      "part": "Roadside",
+      "refersTo": [
+        "3"
+      ],
+      "page": 14
+    },
+    {
+      "id": "406.1",
+      "number": "406.1",
+      "title": "On-the-spot assistance",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.2",
+      "number": "406.2",
+      "title": "Recovery costs",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.3",
+      "number": "406.3",
+      "title": "Towing costs",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.4",
+      "number": "406.4",
+      "title": "Storage charges",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.5",
+      "number": "406.5",
+      "title": "Additional costs",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.6",
+      "number": "406.6",
+      "title": "Replacement driver",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.7",
+      "number": "406.7",
+      "title": "Loss of keys",
+      "summary": "Lists the onward journey by public transport and accommodation twice: once without a limit, once up to 2000 CHF.",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.8",
+      "number": "406.8",
+      "title": "Lack of fuel, empty battery",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.9",
+      "number": "406.9",
+      "title": "Additional costs for transporting pets",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.10",
+      "number": "406.10",
+      "title": "Car ferries, car trains",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.11",
+      "number": "406.11",
+      "title": "Shipping costs for spare parts",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.12",
+      "number": "406.12",
+      "title": "Establishing the extent of damage",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.13",
+      "number": "406.13",
+      "title": "Repatriation of the vehicle from abroad",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "406.14",
+      "number": "406.14",
+      "title": "Customs duty / scrapping fees for a vehicle abroad",
+      "within": "406",
+      "refersTo": []
+    },
+    {
+      "id": "407",
+      "number": "407",
+      "title": "Exclusions",
+      "summary": "Third-party recovery claims, and the exclusions of Art. 204.3 to 204.9 except 204.7.",
+      "part": "Roadside",
+      "refersTo": [
+        "204.3",
+        "204.4",
+        "204.5",
+        "204.6",
+        "204.8",
+        "204.9"
+      ],
+      "page": 15
+    },
+    {
+      "id": "408",
+      "number": "408",
+      "title": "Claims against third parties",
+      "part": "Roadside",
+      "refersTo": [],
+      "page": 15
+    },
+    {
+      "id": "501",
+      "number": "501",
+      "title": "Insured persons",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 16
+    },
+    {
+      "id": "502",
+      "number": "502",
+      "title": "Scope of insurance",
+      "summary": "Damages, criminal charges, defence, licence confiscation, social and other insurance law, medical law, vehicle contracts, garage rental.",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 16
+    },
+    {
+      "id": "503",
+      "number": "503",
+      "title": "Period of coverage and insured event",
+      "summary": "Cases that arise during the contract. No cover for cases reported more than 6 months after the end of the contract.",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 16
+    },
+    {
+      "id": "504",
+      "number": "504",
+      "title": "Insurance benefits",
+      "summary": "Up to 500,000 CHF per legal case. Not fines, nor damages.",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 16
+    },
+    {
+      "id": "505",
+      "number": "505",
+      "title": "Uninsured legal disputes",
+      "summary": "Exclusions that take precedence over Art. 502.",
+      "part": "Legal",
+      "refersTo": [
+        "502"
+      ],
+      "page": 17
+    },
+    {
+      "id": "506",
+      "number": "506",
+      "title": "Reductions to benefits",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 17
+    },
+    {
+      "id": "507",
+      "number": "507",
+      "title": "Processing of cases",
+      "summary": "Orion decides the procedure. A lawyer engaged before you report the case: at most 500 CHF.",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 17
+    },
+    {
+      "id": "508",
+      "number": "508",
+      "title": "Differences of opinion",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 17
+    },
+    {
+      "id": "509",
+      "number": "509",
+      "title": "Communication language",
+      "part": "Legal",
+      "refersTo": [],
+      "page": 18
+    }
+  ]
+}

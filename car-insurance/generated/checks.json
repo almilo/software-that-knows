@@ -1,0 +1,386 @@
+{
+  "$comment": "Generated from ontology/ by generator/generate.ts. Do not edit.",
+  "checks": [
+    {
+      "id": "sources",
+      "title": "Every statement has its source",
+      "what": "Each cover, rule, benefit, number, obligation and deadline cites the articles it comes from, and each cited or referred article is in the model.",
+      "why": "A decision is only as good as its source. With the article on every statement, a person can check each step of a decision against the document.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "Art. 304 uses Art. 204.3, Art. 204.4, Art. 204.5, Art. 204.6, Art. 204.8, Art. 204.9: 7 rules of the model are the same rules, with Art. 304 among their sources.",
+          "sources": [
+            "304",
+            "204.3",
+            "204.4",
+            "204.5",
+            "204.6",
+            "204.8",
+            "204.9"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Art. 407 uses Art. 204.3, Art. 204.4, Art. 204.5, Art. 204.6, Art. 204.8, Art. 204.9: 7 rules of the model are the same rules, with Art. 407 among their sources.",
+          "sources": [
+            "407",
+            "204.3",
+            "204.4",
+            "204.5",
+            "204.6",
+            "204.8",
+            "204.9"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "154 statements cite 78 of the 135 articles of the model.",
+          "sources": []
+        }
+      ]
+    },
+    {
+      "id": "overview",
+      "title": "The product overview is complete",
+      "what": "For every cover and every vehicle class, the model says whether the cover is basic, an option, or not insurable.",
+      "why": "A gap in the overview is a claim that nobody can decide: is the cover in the policy or not?",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "25 covers × 3 vehicle classes: each has exactly one status (basic, option or not insurable).",
+          "sources": []
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "title": "No dead questions, no dead rules",
+      "what": "Every question of the claim check is needed by a rule or a calculation, and every rule can apply in at least one situation.",
+      "why": "A question that no rule needs wastes the user's time. A rule that can never apply is a mistake in the model, or in the document.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "All 38 questions of the claim check are used, and all 47 rules can apply in at least one situation.",
+          "sources": []
+        }
+      ]
+    },
+    {
+      "id": "contradictions",
+      "title": "No contradictions between statements",
+      "what": "For each thing that the statements name (tyres, Europe, gross negligence…), the check compares the statements that cover it with the statements that exclude it. If their covers overlap and their conditions can hold together, the document must say which one wins.",
+      "why": "A person reads one article at a time. The model sees all statements about the same thing at once, so it finds where two articles say opposite things about the same claim.",
+      "findings": [
+        {
+          "status": "resolved",
+          "text": "Roadside assistance in Europe: “Roadside assistance Europe within Europe” (Art. 406) and “Roadside assistance only in Switzerland and Liechtenstein” (Art. 3) can apply in the same situation, with opposite effects.",
+          "sources": [
+            "3",
+            "406"
+          ],
+          "basis": "interpretation",
+          "resolution": "Art. 3 says that roadside assistance is valid only in Switzerland and Liechtenstein; Art. 406 extends roadside assistance Europe to Europe as set out in Art. 3. We read the sentence of Art. 3 as about roadside assistance CH/FL."
+        },
+        {
+          "status": "resolved",
+          "text": "Outside the territorial scope: “Accidents in other people's vehicles: worldwide, for six weeks” (Art. 301.3) and “Outside the territorial scope” (Art. 3) can apply in the same situation, with opposite effects.",
+          "sources": [
+            "3",
+            "301.3"
+          ],
+          "basis": "text",
+          "resolution": "Art. 301.3 says that this insurance applies worldwide, for up to six weeks after leaving the territory."
+        },
+        {
+          "status": "resolved",
+          "text": "Gross negligence: “Coverage for gross negligence: no reduction of collision benefits” (Art. 202.2) and “Gross negligence: reduced by the degree of fault” (Art. 203.7) can apply in the same situation, with opposite effects.",
+          "sources": [
+            "202.2",
+            "203.7"
+          ],
+          "basis": "text",
+          "resolution": "Art. 202.2: if the option is agreed, Zurich does not reduce collision benefits for gross negligence."
+        },
+        {
+          "status": "ok",
+          "text": "Breakage and wear: “Collision as the consequence of breakage or wear” (Art. 202.1) and “Operation, breakage, wear, wrong handling, lack of oil or coolant, the load” (Art. 204.1) never apply in the same situation. Their conditions keep them apart.",
+          "sources": [
+            "202.1",
+            "204.1"
+          ]
+        },
+        {
+          "status": "resolved",
+          "text": "Tyres: “Puncturing the tyres” (Art. 202.3 f) and “Damage only to the tyres or the batteries” (Art. 204.1) can apply in the same situation, with opposite effects.",
+          "sources": [
+            "202.3f",
+            "204.1"
+          ],
+          "basis": "interpretation",
+          "resolution": "Art. 202.3 f covers punctured tyres; Art. 204.1 excludes damage only to the tyres. The document does not say which one wins. We read the closed list of vandalism as the specific rule, so it wins."
+        }
+      ]
+    },
+    {
+      "id": "repeated",
+      "title": "Repeated statements agree",
+      "what": "When the document states the same number or benefit in two places, the values must be the same.",
+      "why": "Documents grow by copy and edit. Two places that state the same limit can drift apart, and then the claim depends on which article the reader found first.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "An insurance year that counts is stated 2 times, and the statements agree (Art. 6.1: 11; Art. 5: 11).",
+          "sources": [
+            "6.1",
+            "5"
+          ]
+        },
+        {
+          "status": "resolved",
+          "text": "Onward journey after the loss of keys (Roadside assistance Europe) is stated 2 times, with different values (Art. 406.7: 2000; Art. 406.7: no limit).",
+          "sources": [
+            "406.7"
+          ],
+          "basis": "interpretation",
+          "resolution": "Art. 406.7 lists the onward journey and accommodation twice: once without a limit, once up to 2000 CHF. We apply the limit of 2000 CHF: an item without a limit would make the limited item useless."
+        }
+      ]
+    },
+    {
+      "id": "table",
+      "title": "The compensation table is consistent",
+      "what": "The table has one row for each year of service, and the share of the catalogue price never goes up.",
+      "why": "The engine calculates every total loss from this table. One wrong row changes the payment of every claim in that year.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "7 years, from 100% to 40%: the share never goes up, so a total loss never pays more for an older vehicle.",
+          "sources": [
+            "203.2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "claims",
+      "title": "The test claims give the expected decisions",
+      "what": "Each test claim is walked as the app does: one question at a time, only the questions that can still change the decision. The status, the cover, the rules and the payment must be the expected ones.",
+      "why": "The test claims are the specification. When a change to the model changes a decision, a test claim shows it before a user does.",
+      "findings": [
+        {
+          "status": "ok",
+          "text": "28 test claims, 318 questions in all: 11.4 per claim, of the 38 questions that the model has.",
+          "sources": []
+        },
+        {
+          "status": "ok",
+          "text": "Collision, partial loss, deductible reduced after 4 claim-free years: covered (Collision), CHF 5500, after 18 questions.",
+          "sources": [
+            "202.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Collision in the first year: total loss at 65% of the table value: covered (Collision), CHF 49000, after 17 questions.",
+          "sources": [
+            "202.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Collision in the middle of year 2: 90% of the catalogue price, pro rata: covered (Collision), CHF 44000, after 17 questions.",
+          "sources": [
+            "202.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Collision with 1.6 per mille or more: excluded (Collision), after 7 questions.",
+          "sources": [
+            "202.1",
+            "204.6",
+            "304",
+            "407"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Collision under the influence, below 1.6 per mille: covered, with a reduction (Collision), CHF 3500, after 17 questions.",
+          "sources": [
+            "202.1",
+            "202.2"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Gross negligence, with coverage for gross negligence: covered (Collision), CHF 3500, after 18 questions.",
+          "sources": [
+            "202.1",
+            "203.7"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Gross negligence, without coverage for gross negligence: covered, with a reduction (Collision), CHF 3500, after 18 questions.",
+          "sources": [
+            "202.1",
+            "203.7"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Theft of fuel: excluded, after 3 questions.",
+          "sources": [
+            "204.7"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Motorcycle stolen outside without the steering lock: excluded (Theft), after 4 questions.",
+          "sources": [
+            "202.3a",
+            "204.7"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Car stolen and not found within 30 days: total loss in year 4: covered (Theft), CHF 42800, after 18 questions.",
+          "sources": [
+            "202.3a"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Paintwork scratched: not in the closed list of vandalism: excluded, after 3 questions.",
+          "sources": [
+            "202.3f"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Tyres punctured by a vandal: the list wins over the tyre exclusion (our interpretation): covered (Vandalism), CHF 600, after 17 questions.",
+          "sources": [
+            "202.3f",
+            "204.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A broken headlight, without Glass PLUS: option not in the policy (Glass PLUS), after 4 questions.",
+          "sources": [
+            "202.4a"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A broken headlight on a motorcycle: Glass PLUS is basic: covered (Glass PLUS), CHF 400, after 19 questions.",
+          "sources": [
+            "202.4a"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Protective clothing for a car: not insurable (Protective clothing), after 2 questions.",
+          "sources": [
+            "202.4e"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "The third parking damage of the year: excluded (Parking damage), after 4 questions.",
+          "sources": [
+            "202.4c"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Parking damage above the limit, without PLUS: covered (Parking damage), CHF 1000, after 20 questions.",
+          "sources": [
+            "202.4c"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Parking damage, without the option: option not in the policy (Parking damage), after 3 questions.",
+          "sources": [
+            "202.4c"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Wind below 75 km/h: excluded, after 3 questions.",
+          "sources": [
+            "202.3c"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Swerved to avoid a deer: collision damage, deductible not below 0: covered (Collision), CHF 3000, after 18 questions.",
+          "sources": [
+            "202.1",
+            "202.3e"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A laptop in a truck: excluded (Items transported), after 4 questions.",
+          "sources": [
+            "202.4d"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Luggage stolen from the locked car: no deductible: covered (Items transported), CHF 1200, after 15 questions.",
+          "sources": [
+            "202.4d"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Collision in an excluded country: excluded (Collision), after 3 questions.",
+          "sources": [
+            "202.1",
+            "3"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A tyre burst and the car hit a wall: collision as a consequence of wear: covered (Collision), CHF 4000, after 17 questions.",
+          "sources": [
+            "202.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Help Point PLUS not followed: 500 CHF more deductible: covered (Collision), CHF 4000, after 17 questions.",
+          "sources": [
+            "202.1"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A person of the household used the car without permission: excluded, after 3 questions.",
+          "sources": [
+            "202.3a"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Fire during civil unrest, with precautions; after 7 years: the replacement value: covered (Fire), CHF 4700, after 18 questions.",
+          "sources": [
+            "202.3b"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "Damage with intent: excluded (Collision), after 11 questions.",
+          "sources": [
+            "202.1",
+            "203.7"
+          ]
+        }
+      ]
+    }
+  ]
+}

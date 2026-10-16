@@ -9,7 +9,7 @@
     "de": {
       "language.label": "Deutsch",
       "processes.label": "Anträge",
-      "processesIntro.label": "Jeder Antrag stellt nur die Fragen, auf die es ankommt, sagt, ob das Gesetz ihn erlaubt und warum, und nennt die Artikel. Alles läuft in Ihrem Browser.",
+      "processesIntro.label": "Jeder Antrag stellt nur die Fragen, auf die es ankommt, sagt, ob das Gesetz ihn erlaubt und warum, und nennt die Artikel.",
       "open.label": "Öffnen",
       "parental-allowance.label": "Mutterschaftsentschädigung und Entschädigung des andern Elternteils",
       "parental-allowance.summary": "Die Mutterschaftsentschädigung und die Entschädigung des andern Elternteils nach einer Geburt: wer Anspruch hat, wie viel pro Tag und bis wann.",
@@ -21,7 +21,7 @@
     "en": {
       "language.label": "English",
       "processes.label": "Applications",
-      "processesIntro.label": "Each application asks only the questions that matter, says whether the law allows it and why, and names the articles. Everything runs in your browser.",
+      "processesIntro.label": "Each application asks only the questions that matter, says whether the law allows it and why, and names the articles.",
       "open.label": "Open",
       "parental-allowance.label": "Maternity and other parent's allowance",
       "parental-allowance.summary": "The maternity allowance and the other parent's allowance after a birth: who is entitled, how much a day and until when.",
@@ -33,7 +33,7 @@
     "fr": {
       "language.label": "Français",
       "processes.label": "Demandes",
-      "processesIntro.label": "Chaque demande ne pose que les questions qui comptent, indique si la loi la permet et pourquoi, et cite les articles. Tout fonctionne dans votre navigateur.",
+      "processesIntro.label": "Chaque demande ne pose que les questions qui comptent, indique si la loi la permet et pourquoi, et cite les articles.",
       "open.label": "Ouvrir",
       "parental-allowance.label": "Allocation de maternité et allocation de l'autre parent",
       "parental-allowance.summary": "L'allocation de maternité et l'allocation de l'autre parent après une naissance : qui y a droit, combien par jour et jusqu'à quand.",
@@ -45,7 +45,7 @@
     "it": {
       "language.label": "Italiano",
       "processes.label": "Domande",
-      "processesIntro.label": "Ogni domanda pone solo le domande che contano, dice se la legge la permette e perché, e cita gli articoli. Tutto funziona nel suo browser.",
+      "processesIntro.label": "Ogni domanda pone solo le domande che contano, dice se la legge la permette e perché, e cita gli articoli.",
       "open.label": "Aprire",
       "parental-allowance.label": "Indennità di maternità e indennità per l'altro genitore",
       "parental-allowance.summary": "L'indennità di maternità e l'indennità per l'altro genitore dopo una nascita: chi vi ha diritto, quanto al giorno e fino a quando.",

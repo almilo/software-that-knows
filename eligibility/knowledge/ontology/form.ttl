@@ -143,10 +143,10 @@ form:enumError a form:Text ;
 form:processes a form:Text ;
   rdfs:label "Applications"@en , "Anträge"@de , "Demandes"@fr , "Domande"@it .
 form:processesIntro a form:Text ;
-  rdfs:label "Each application asks only the questions that matter, says whether the law allows it and why, and names the articles. Everything runs in your browser."@en ,
-    "Jeder Antrag stellt nur die Fragen, auf die es ankommt, sagt, ob das Gesetz ihn erlaubt und warum, und nennt die Artikel. Alles läuft in Ihrem Browser."@de ,
-    "Chaque demande ne pose que les questions qui comptent, indique si la loi la permet et pourquoi, et cite les articles. Tout fonctionne dans votre navigateur."@fr ,
-    "Ogni domanda pone solo le domande che contano, dice se la legge la permette e perché, e cita gli articoli. Tutto funziona nel suo browser."@it .
+  rdfs:label "Each application asks only the questions that matter, says whether the law allows it and why, and names the articles."@en ,
+    "Jeder Antrag stellt nur die Fragen, auf die es ankommt, sagt, ob das Gesetz ihn erlaubt und warum, und nennt die Artikel."@de ,
+    "Chaque demande ne pose que les questions qui comptent, indique si la loi la permet et pourquoi, et cite les articles."@fr ,
+    "Ogni domanda pone solo le domande che contano, dice se la legge la permette e perché, e cita gli articoli."@it .
 form:open a form:Text ;
   rdfs:label "Open"@en , "Öffnen"@de , "Ouvrir"@fr , "Aprire"@it .
 form:allProcesses a form:Text ;

@@ -1,12 +1,20 @@
-// Reads a knowledge model: the form vocabulary (ontology/form.ttl), which every domain uses, and
-// the Turtle files of one domain (domains/<name>/ontology/). The generator reads the fields from
-// it; the engine also reads the rules.
+// Reads a knowledge model: the form vocabulary (ontology/form.ttl), which every domain uses, the
+// Turtle files of one domain (domains/<name>/ontology/), and the shared modules that they import
+// (modules/). The generator reads the fields from it; the engine also reads the rules.
 import vocabulary from "../ontology/form.ttl" with { type: "text" };
 import { PROV, Store, byNumber, list, local, objects, select, type Term } from "./rdf";
 
-export function loadModel(domain: string[]) {
+// files: the Turtle files of the domain and of every module that it imports, directly or through
+// another module. The imports must be closed: every ontology that a file imports (owl:imports) is
+// loaded, and every loaded ontology but one, the domain's, is imported by another. So a domain
+// cannot miss a module, nor load one that it does not use.
+export function loadModel(files: string[]) {
   const store = new Store();
-  [vocabulary, ...domain].forEach((file) => store.load(file, { format: "text/turtle" }));
+  [vocabulary, ...files].forEach((file) => store.load(file, { format: "text/turtle" }));
+  const missing = select(store, `SELECT ?by ?ontology WHERE { ?by a owl:Ontology ; owl:imports ?ontology FILTER NOT EXISTS { ?ontology a owl:Ontology } }`);
+  if (missing.length > 0) throw new Error(`Not loaded: ${missing.map((r) => `${r.ontology!.value}, imported by ${r.by!.value}`).join("; ")}`);
+  const roots = select(store, `SELECT ?ontology WHERE { ?ontology a owl:Ontology FILTER NOT EXISTS { ?any owl:imports ?ontology } }`);
+  if (roots.length !== 1) throw new Error(`One ontology must import all the others, directly or not. Not imported: ${roots.map((r) => r.ontology!.value).join(", ")}`);
   return store;
 }
 
@@ -32,10 +40,15 @@ export type Shape = {
   rules: string[]; // the CONSTRUCT queries of the sh:SPARQLRules, in sh:order, with their PREFIX lines
 };
 
+// The form of a domain: its shape, the one sh:NodeShape with a form:region, and every shape whose
+// sh:targetClass is the class of that shape or one of its superclasses. As in SHACL, a shape for a
+// class applies to the members of its subclasses: a module's shape for person:Applicant applies to
+// wef:Application, a subclass. Its fields and rules become part of the domain's form.
 export function readShape(store: Store) {
   const shapes = select(store, `SELECT ?shape ?class ?region WHERE { ?shape a sh:NodeShape ; sh:targetClass ?class ; form:region ?region }`);
   if (shapes.length !== 1) throw new Error(`The model must have one sh:NodeShape with a sh:targetClass and a form:region, not ${shapes.length}`);
   const { shape, class: targetClass, region } = shapes[0]!;
+  const applies = `<${targetClass!.value}> rdfs:subClassOf* ?class . ?shape sh:targetClass ?class .`;
   const declared = declaredPrefixes(store);
   function withPrefixes(executable: Term, query: Term) {
     return (declared.get(executable.value) ?? "") + query.value;
@@ -43,8 +56,9 @@ export function readShape(store: Store) {
 
   const fields = select(
     store,
-    `SELECT ?field ?path ?group ?datatype ?in ?min ?max ?minCount ?asked ?ask WHERE {
-       <${shape!.value}> sh:property ?field .
+    `SELECT DISTINCT ?field ?path ?group ?datatype ?in ?min ?max ?minCount ?asked ?ask ?groupOrder ?order WHERE {
+       ${applies}
+       ?shape sh:property ?field .
        ?field sh:path ?path ; sh:group ?group .
        ?group sh:order ?groupOrder .
        OPTIONAL { ?field sh:order ?order }
@@ -69,22 +83,24 @@ export function readShape(store: Store) {
 
   const rules = select(
     store,
-    `SELECT ?rule ?construct WHERE {
-       <${shape!.value}> sh:rule ?rule .
+    `SELECT DISTINCT ?rule ?construct ?order WHERE {
+       ${applies}
+       ?shape sh:rule ?rule .
        ?rule a sh:SPARQLRule ; sh:construct ?construct .
        OPTIONAL { ?rule sh:order ?order }
        FILTER NOT EXISTS { ?rule sh:deactivated true }
      } ORDER BY ?order`,
   ).map((r) => withPrefixes(r.rule!, r.construct!));
 
-  const groups = select(store, `SELECT ?group WHERE { ?group a sh:PropertyGroup ; sh:order ?order } ORDER BY ?order`);
+  // The groups of the fields, in their order: a module can define groups that a domain does not use.
+  const groups = [...new Set(fields.map((f) => f.group))];
 
   return {
     iri: shape!.value,
     name: local(shape!),
     region: region!.value,
     targetClass: targetClass!.value,
-    groups: groups.map((g) => local(g.group!)),
+    groups,
     fields,
     rules,
   } satisfies Shape;

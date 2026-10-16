@@ -8,7 +8,7 @@
 //    not asked does not count: it is removed, and the rules run again.
 // 4. What the rules derived is read back: values, findings, next steps.
 import { loadModel, readShape, sources, type Field } from "./model";
-import { FORM, RDF, XSD, literal, local, namedNode, quad, select, toJson, type Quad } from "./rdf";
+import { FORM, RDF, XSD, byNumber, literal, local, namedNode, quad, select, toJson, type Quad } from "./rdf";
 
 export type Answers = Record<string, unknown>;
 
@@ -102,17 +102,23 @@ export function createEngine(domain: string[]) {
     }));
   }
 
+  // The most serious first, then by name: a finding of a shared module has another namespace, which
+  // must not change the order.
   function readFindings() {
     return read(
-      `SELECT ?finding ?severity ?blocks WHERE {
+      `SELECT ?finding ?severity ?blocks ?order WHERE {
          $this form:finding ?finding . ?finding form:severity ?severity . ?severity form:blocks ?blocks ; sh:order ?order
-       } ORDER BY ?order ?finding`,
-    ).map(({ finding, severity, blocks }) => ({
-      id: local(finding!),
-      severity: local(severity!),
-      blocks: toJson(blocks!) === true,
-      sources: sources(store, finding!),
-    }));
+       }`,
+    )
+      .map(({ finding, severity, blocks, order }) => ({
+        id: local(finding!),
+        severity: local(severity!),
+        blocks: toJson(blocks!) === true,
+        sources: sources(store, finding!),
+        order: Number(order!.value),
+      }))
+      .sort((a, b) => a.order - b.order || byNumber(a.id, b.id))
+      .map(({ order, ...finding }) => finding);
   }
 
   function readNextSteps() {

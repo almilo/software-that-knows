@@ -1,0 +1,23 @@
+{
+  "name": "car-insurance",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "bun generator/generate.ts",
+    "dev": "bun run generate && bun dev.ts",
+    "build": "bun run generate && bun build ./index.html --outdir dist --production",
+    "test": "bun test",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "oxigraph": "^0.5.11",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,334 @@
+@prefix :        <https://example.org/zurich-motor-2015#> .
+@prefix art:     <https://example.org/zurich-motor-2015/article/> .
+@prefix ins:     <https://example.org/insurance#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The product: Zurich motor vehicle insurance, General Conditions of Insurance (GCI), edition
+# 01/2015, English version. The parts, the vehicle classes, the covers of the product overview
+# (page 3), and the articles with a summary in our words.
+
+<https://example.org/zurich-motor-2015>
+    a owl:Ontology ;
+    rdfs:label "Motor vehicle insurance, General Conditions of Insurance, edition 01/2015"@en ;
+    dcterms:source "Zurich Insurance Company Ltd, Motor vehicle insurance: Customer information, General Conditions of Insurance (GCI), Edition 01/2015 (English version; the German version prevails)" .
+
+:Policy a ins:Policy ;
+    rdfs:label "Motor vehicle insurance"@en ;
+    dcterms:title "Motor vehicle insurance, General Conditions of Insurance (GCI), edition 01/2015" ;
+    dcterms:publisher "Zurich Insurance Company Ltd; for legal protection, Orion Legal Expenses Insurance Ltd" .
+
+# ---------------------------------------------------------------------------
+# 1. Parts and vehicle classes
+# ---------------------------------------------------------------------------
+
+:Common a ins:Part ; rdfs:label "Common provisions"@en ; ins:order 0 ; ins:modelled false .
+:Liability a ins:Part ; rdfs:label "Third party liability insurance"@en ; ins:order 1 ; ins:modelled false .
+:AccidentalDamage a ins:Part ; rdfs:label "Accidental damage insurance"@en ; ins:order 2 ; ins:modelled true .
+:Accident a ins:Part ; rdfs:label "Accident insurance"@en ; ins:order 3 ; ins:modelled false .
+:Roadside a ins:Part ; rdfs:label "Roadside assistance"@en ; ins:order 4 ; ins:modelled false .
+:Legal a ins:Part ; rdfs:label "Legal protection insurance"@en ; ins:order 5 ; ins:modelled false .
+
+:PassengerCar a ins:VehicleClass ; rdfs:label "Passenger car or van"@en ; ins:order 1 .
+:Motorcycle a ins:VehicleClass ; rdfs:label "Motorcycle"@en ; ins:order 2 .
+:OtherVehicle a ins:VehicleClass ; rdfs:label "Other motor vehicle"@en ; ins:order 3 ;
+    ins:help "Trucks, buses, agricultural motor vehicles, industrial machines and other special vehicles."@en .
+
+# ---------------------------------------------------------------------------
+# 2. The covers: the lines of the product overview (page 3)
+# ---------------------------------------------------------------------------
+
+:ThirdPartyLiability a ins:Cover ; rdfs:label "Third party liability"@en ; ins:part :Liability ; ins:order 1 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:101 .
+:LiabilityGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (liability)"@en ; ins:part :Liability ; ins:order 2 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:101.3 .
+:WorkAccidentRisk a ins:Cover ; rdfs:label "Work accident risk"@en ; ins:part :Liability ; ins:order 3 ;
+    ins:optionFor :PassengerCar, :OtherVehicle ; ins:notInsurableFor :Motorcycle ; ins:source art:101 .
+:HazardousLoads a ins:Cover ; rdfs:label "Transportation of hazardous loads"@en ; ins:part :Liability ; ins:order 4 ;
+    ins:optionFor :PassengerCar, :OtherVehicle ; ins:notInsurableFor :Motorcycle ; ins:source art:101 .
+
+:Collision a ins:Cover ; rdfs:label "Collision"@en ; ins:part :AccidentalDamage ; ins:order 10 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:reducibleDeductible true ; ins:source art:202.1 .
+:CollisionGrossNegligence a ins:Cover ; rdfs:label "Coverage for gross negligence (collision)"@en ; ins:part :AccidentalDamage ; ins:order 11 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.2 .
+:Theft a ins:Cover ; rdfs:label "Theft"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 12 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3a .
+:Fire a ins:Cover ; rdfs:label "Fire"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 13 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3b .
+:Vandalism a ins:Cover ; rdfs:label "Vandalism"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 14 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3f .
+:Animals a ins:Cover ; rdfs:label "Animals"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 15 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3e .
+:NaturalHazards a ins:Cover ; rdfs:label "Natural hazards"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 16 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3c ;
+    ins:note "For passenger cars, natural hazards and glass also exist as a minimal partial casco."@en .
+:Glass a ins:Cover ; rdfs:label "Glass"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 17 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.3d ;
+    ins:note "For passenger cars, natural hazards and glass also exist as a minimal partial casco."@en .
+:GlassPlus a ins:Cover ; rdfs:label "Glass PLUS"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 18 ;
+    ins:optionFor :PassengerCar, :OtherVehicle ; ins:basicFor :Motorcycle ; ins:source art:202.4a, art:202.3d ;
+    ins:note "For motorcycles, glass has the scope of Glass PLUS (Art. 202.3 d)."@en .
+:Martens a ins:Cover ; rdfs:label "Martens"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 19 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4b .
+:ParkingDamage a ins:Cover ; rdfs:label "Parking damage"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 20 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4c .
+:ParkingDamagePlus a ins:Cover ; rdfs:label "Parking damage PLUS"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 21 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:202.4c .
+:ItemsTransported a ins:Cover ; rdfs:label "Items transported"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 22 ;
+    ins:optionFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:noDeductible true ; ins:source art:202.4d, art:6.5 ;
+    ins:note "Electronic devices only for passenger cars, vans and motorcycles."@en .
+:ProtectiveClothing a ins:Cover ; rdfs:label "Protective clothing"@en ; ins:part :AccidentalDamage ; ins:group "Partial casco" ; ins:order 23 ;
+    ins:optionFor :Motorcycle ; ins:notInsurableFor :PassengerCar, :OtherVehicle ; ins:noDeductible true ; ins:source art:202.4e, art:6.5 .
+
+:MedicalExpenses a ins:Cover ; rdfs:label "Medical expenses"@en ; ins:part :Accident ; ins:order 30 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:303.5 .
+:DeathDisability a ins:Cover ; rdfs:label "Death, disability, daily allowance, hospital allowance"@en ; ins:part :Accident ; ins:order 31 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:303.1, art:303.2, art:303.3, art:303.4 .
+:OtherPeoplesVehicles a ins:Cover ; rdfs:label "In other people's vehicles"@en ; ins:part :Accident ; ins:order 32 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:301.3 .
+:TransportedPets a ins:Cover ; rdfs:label "Transported pets"@en ; ins:part :Accident ; ins:order 33 ;
+    ins:basicFor :PassengerCar ; ins:notInsurableFor :Motorcycle, :OtherVehicle ; ins:source art:303.6 .
+
+:RoadsideCHFL a ins:Cover ; rdfs:label "Roadside assistance CH/FL"@en ; ins:part :Roadside ; ins:order 40 ;
+    ins:basicFor :PassengerCar, :Motorcycle ; ins:notInsurableFor :OtherVehicle ; ins:source art:405 .
+:RoadsideEurope a ins:Cover ; rdfs:label "Roadside assistance Europe"@en ; ins:part :Roadside ; ins:order 41 ;
+    ins:basicFor :PassengerCar, :Motorcycle ; ins:notInsurableFor :OtherVehicle ; ins:source art:406 .
+
+:VehicleLegalProtection a ins:Cover ; rdfs:label "Vehicle legal protection"@en ; ins:part :Legal ; ins:order 50 ;
+    ins:basicFor :PassengerCar, :Motorcycle, :OtherVehicle ; ins:source art:502 .
+
+# ---------------------------------------------------------------------------
+# 3. The articles. The summaries are ours, not the text of the document.
+# ---------------------------------------------------------------------------
+
+art:1 a ins:Article ; ins:number "1" ; rdfs:label "Contractual basis"@en ; ins:part :Common ; ins:page 5 ;
+    ins:summary "The policy, these conditions and the Swiss law on insurance contracts (LIC) apply. Commercial passenger transport, rental to self-drive customers and driving school use are insured only if the policy says so."@en .
+art:2 a ins:Article ; ins:number "2" ; rdfs:label "Period of coverage"@en ; ins:part :Common ; ins:page 5 ;
+    ins:summary "Cover starts on the date in the policy. A proof of insurance gives provisional cover for up to four weeks. Without notice three months before the end, the contract renews for one year."@en .
+art:3 a ins:Article ; ins:number "3" ; rdfs:label "Territorial scope"@en ; ins:part :Common ; ins:page 5 ;
+    ins:summary "Switzerland, Liechtenstein, Europe and the countries around the Mediterranean, except 13 listed countries. Roadside assistance only in Switzerland and Liechtenstein. Cover ends if the owner moves abroad."@en .
+art:4 a ins:Article ; ins:number "4" ; rdfs:label "Payment of premiums and adjustment of contract"@en ; ins:part :Common ; ins:page 5 ;
+    ins:summary "How the premium is set, paid, changed and refunded."@en .
+art:4.1 a ins:Article ; ins:number "4.1" ; rdfs:label "Premium basics"@en ; ins:within art:4 ;
+    ins:summary "The premium depends on the scope and on the facts about the insured persons and the vehicle. Tell Zurich at once when these facts change."@en .
+art:4.2 a ins:Article ; ins:number "4.2" ; rdfs:label "Premium adjustments"@en ; ins:within art:4 ;
+    ins:summary "A loss does not change the premium. The premium for declared young drivers goes down at each due date until age 25."@en .
+art:4.3 a ins:Article ; ins:number "4.3" ; rdfs:label "Installment payment"@en ; ins:within art:4 ;
+    ins:summary "Payment in installments costs a surcharge."@en .
+art:4.4 a ins:Article ; ins:number "4.4" ; rdfs:label "Balances"@en ; ins:within art:4 ;
+    ins:summary "Nobody claims a balance below 5 CHF."@en .
+art:4.5 a ins:Article ; ins:number "4.5" ; rdfs:label "Contract amendments by Zurich"@en ; ins:within art:4 ;
+    ins:summary "Zurich can change premiums and conditions from the next insurance year. It tells you at least 25 days before the end of the year; you can cancel by the last day of the year."@en .
+art:4.6 a ins:Article ; ins:number "4.6" ; rdfs:label "Consequences of default"@en ; ins:within art:4 ;
+    ins:summary "If you do not pay, you pay the reminder costs, the interest and the costs of a licence plate revocation."@en .
+art:4.7 a ins:Article ; ins:number "4.7" ; rdfs:label "Premium reimbursement"@en ; ins:within art:4 ;
+    ins:summary "Zurich refunds the premium of the unused period, except after a paid total loss or when you terminate in the first year after a partial loss."@en .
+art:5 a ins:Article ; ins:number "5" ; rdfs:label "No-claims bonus"@en ; ins:part :Common ; ins:page 6 ;
+    ins:summary "If agreed, a bonus after 3 full insurance years without liability or collision benefits. An insurance year counts if it lasts at least 11 months."@en .
+art:6 a ins:Article ; ins:number "6" ; rdfs:label "Deductibles"@en ; ins:part :Common ; ins:page 6 ;
+    ins:summary "You pay the agreed deductible for each loss that Zurich pays."@en .
+art:6.1 a ins:Article ; ins:number "6.1" ; rdfs:label "Reduction of the deductible"@en ; ins:within art:6 ;
+    ins:summary "The liability and collision deductibles go down by 500 CHF after 3 claim-free insurance years, and by 500 CHF again after 3 more. Not below 0. An insurance year counts if it lasts at least eleven months."@en .
+art:6.2 a ins:Article ; ins:number "6.2" ; rdfs:label "Recovery of the deductible"@en ; ins:within art:6 ;
+    ins:summary "If Zurich paid the injured party directly, you pay back the deductible within four weeks; after a reminder, 14 more days, or the contract ends."@en .
+art:6.3 a ins:Article ; ins:number "6.3" ; rdfs:label "Removal of the deductible"@en ; ins:within art:6 ;
+    ins:summary "No liability deductible for strict liability without fault, joy rides you could not prevent, events without consequences, or losses you pay back within 30 days."@en .
+art:6.4 a ins:Article ; ins:number "6.4" ; rdfs:label "Towing vehicle and trailer"@en ; ins:within art:6 ;
+    ins:summary "One deductible, the higher one, when the towing vehicle and the trailer are damaged in the same event."@en .
+art:6.5 a ins:Article ; ins:number "6.5" ; rdfs:label "Items transported and protective clothing"@en ; ins:within art:6 ;
+    ins:summary "No deductible for items carried and for protective clothing."@en .
+art:7 a ins:Article ; ins:number "7" ; rdfs:label "Interchangeable license plates"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "Cover for the vehicle that has the plates, and for the other one only off public roads."@en .
+art:8 a ins:Article ; ins:number "8" ; rdfs:label "Replacement vehicles"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "A replacement vehicle approved by the authority with your plates is covered. Accidental damage covers it if it is equivalent, except collision."@en .
+art:9 a ins:Article ; ins:number "9" ; rdfs:label "Deposit of license plates"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "Deposited plates suspend the insurance. For up to 12 months, liability and collision apply off public roads only. After 12 months the contract ends."@en .
+art:10 a ins:Article ; ins:number "10" ; rdfs:label "Obligations in the event of a claim"@en ; ins:part :Common ; ins:page 7 .
+art:10.1 a ins:Article ; ins:number "10.1" ; rdfs:label "Obligation to notify"@en ; ins:within art:10 ;
+    ins:summary "Tell Zurich or Orion at once and help with the investigation. Tell the police about bodily injury, theft and damage by animals."@en .
+art:10.2 a ins:Article ; ins:number "10.2" ; rdfs:label "Liability insurance"@en ; ins:within art:10 ;
+    ins:summary "Zurich negotiates with the injured party. You must not accept or pay their claims."@en .
+art:10.3 a ins:Article ; ins:number "10.3" ; rdfs:label "Accidental damage insurance"@en ; ins:within art:10 ;
+    ins:summary "Let Zurich inspect the vehicle before and after repairs. With Help Point PLUS, report by phone or at a help point and repair at the garage that Zurich specifies, or pay 500 CHF more deductible."@en .
+art:10.4 a ins:Article ; ins:number "10.4" ; rdfs:label "Roadside assistance"@en ; ins:within art:10 ;
+    ins:summary "Phone Zurich at once. Zurich does not pay for help that it did not organise."@en .
+art:11 a ins:Article ; ins:number "11" ; rdfs:label "Termination in the event of a loss"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "After a paid loss, both sides can terminate within 14 days. Cover ends 14 days after the notice."@en .
+art:12 a ins:Article ; ins:number "12" ; rdfs:label "Consequences of breach of contract"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "If an insured person does not obey the obligations, no benefits are paid, unless nobody is at fault."@en .
+art:13 a ins:Article ; ins:number "13" ; rdfs:label "Assignment of claims"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "Do not assign or pledge benefits before they are set, without Zurich's agreement."@en .
+art:14 a ins:Article ; ins:number "14" ; rdfs:label "Broker compensation"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "Zurich can pay a broker who represents the policyholder."@en .
+art:15 a ins:Article ; ins:number "15" ; rdfs:label "Place of jurisdiction"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "Zurich or Basel, or your Swiss or Liechtenstein place of residence."@en .
+art:16 a ins:Article ; ins:number "16" ; rdfs:label "Sanctions"@en ; ins:part :Common ; ins:page 7 ;
+    ins:summary "No benefits if they violate trade or economic sanctions."@en .
+
+art:101 a ins:Article ; ins:number "101" ; rdfs:label "Scope of insurance"@en ; ins:part :Liability ; ins:page 8 ;
+    ins:summary "Claims for bodily injury and property damage from the operation of the vehicle, traffic accidents and help after accidents."@en .
+art:101.2 a ins:Article ; ins:number "101.2" ; rdfs:label "Loss prevention costs"@en ; ins:within art:101 ;
+    ins:summary "The costs to prevent an imminent insured loss."@en .
+art:101.3 a ins:Article ; ins:number "101.3" ; rdfs:label "Gross negligence coverage"@en ; ins:within art:101 ;
+    ins:summary "If agreed, Zurich does not recover money for gross negligence, except for drunk or unfit driving and flagrant speeding."@en .
+art:102 a ins:Article ; ins:number "102" ; rdfs:label "Insured persons"@en ; ins:part :Liability ; ins:page 8 ;
+    ins:summary "The policyholder, the owner, and the persons the owner is responsible for."@en .
+art:103 a ins:Article ; ins:number "103" ; rdfs:label "Insurance benefits"@en ; ins:part :Liability ; ins:page 8 ;
+    ins:summary "Up to 100 million CHF per event; 5 million CHF for damage by fire, explosion or nuclear energy."@en .
+art:104 a ins:Article ; ins:number "104" ; rdfs:label "Exclusions"@en ; ins:part :Liability ; ins:page 8 .
+art:104.1 a ins:Article ; ins:number "104.1" ; rdfs:label "Property damage"@en ; ins:within art:104 ;
+    ins:summary "Damage to the owner's property, to the vehicle and to the items it carries."@en .
+art:104.2 a ins:Article ; ins:number "104.2" ; rdfs:label "Races and similar rides"@en ; ins:within art:104 .
+art:104.3 a ins:Article ; ins:number "104.3" ; rdfs:label "Unlawful trips"@en ; ins:within art:104 .
+art:104.4 a ins:Article ; ins:number "104.4" ; rdfs:label "Unauthorized trips"@en ; ins:within art:104 .
+art:104.5 a ins:Article ; ins:number "104.5" ; rdfs:label "Joy rides"@en ; ins:within art:104 .
+art:104.6 a ins:Article ; ins:number "104.6" ; rdfs:label "Criminal offences"@en ; ins:within art:104 .
+art:104.7 a ins:Article ; ins:number "104.7" ; rdfs:label "Nuclear energy"@en ; ins:within art:104 .
+art:105 a ins:Article ; ins:number "105" ; rdfs:label "Rights of recovery"@en ; ins:part :Liability ; ins:page 8 ;
+    ins:refersTo art:104.3, art:104.4, art:104.5, art:104.6 ;
+    ins:summary "The exclusions of Art. 104.3 to 104.6 do not apply to the injured party: Zurich pays, then recovers the money from the insured."@en .
+
+art:201 a ins:Article ; ins:number "201" ; rdfs:label "Scope of insurance"@en ; ins:part :AccidentalDamage ; ins:page 9 .
+art:201.1 a ins:Article ; ins:number "201.1" ; rdfs:label "Vehicle"@en ; ins:within art:201 ;
+    ins:summary "The declared vehicle, with spare parts, equipment and accessories."@en .
+art:201.2 a ins:Article ; ins:number "201.2" ; rdfs:label "Equipment and accessories"@en ; ins:within art:201 ;
+    ins:summary "Extras bought at extra charge are insured up to 10% of the catalogue price."@en .
+art:202 a ins:Article ; ins:number "202" ; rdfs:label "Insured events"@en ; ins:part :AccidentalDamage ; ins:page 9 .
+art:202.1 a ins:Article ; ins:number "202.1" ; rdfs:label "Collision"@en ; ins:within art:202 ;
+    ins:summary "Damage from a sudden, violent, external cause: impact, collision, rollover, falling, sinking; also when it is a consequence of breakage or wear."@en .
+art:202.2 a ins:Article ; ins:number "202.2" ; rdfs:label "Coverage for gross negligence"@en ; ins:within art:202 ;
+    ins:summary "If agreed, Zurich does not reduce collision benefits for gross negligence. Under the influence of alcohol, it reduces them by the degree of fault."@en .
+art:202.3 a ins:Article ; ins:number "202.3" ; rdfs:label "Partial casco"@en ; ins:within art:202 .
+art:202.3a a ins:Article ; ins:number "202.3 a" ; rdfs:label "Theft"@en ; ins:within art:202.3 ;
+    ins:summary "Theft, use without permission and robbery, and their attempts. Use by a person of the household is not theft. Closed list."@en .
+art:202.3b a ins:Article ; ins:number "202.3 b" ; rdfs:label "Fire"@en ; ins:within art:202.3 ;
+    ins:summary "Fire, explosion, lightning, short circuit and extinguishing. Not singeing, not an internal defect of electronics."@en .
+art:202.3c a ins:Article ; ins:number "202.3 c" ; rdfs:label "Natural hazards"@en ; ins:within art:202.3 ;
+    ins:summary "Storm of at least 75 km/h, hail, flood, rockslide, landslide, avalanche, snow pressure, falling ice, falling aircraft. All other natural hazards are excluded."@en .
+art:202.3d a ins:Article ; ins:number "202.3 d" ; rdfs:label "Glass"@en ; ins:within art:202.3 ;
+    ins:summary "Windscreen, side, roof and rear windows. For motorcycles, the scope of Glass PLUS. Nothing if the repair reaches the replacement value. Closed list."@en .
+art:202.3e a ins:Article ; ins:number "202.3 e" ; rdfs:label "Animals"@en ; ins:within art:202.3 ;
+    ins:summary "Collision with an animal. Damage from swerving to avoid an animal is collision damage (Art. 202.1)."@en .
+art:202.3f a ins:Article ; ins:number "202.3 f" ; rdfs:label "Vandalism"@en ; ins:within art:202.3 ;
+    ins:summary "Breaking off parts, painting or spraying (not scratching), puncturing tyres, slashing the roof, substances in the fuel tank. Closed list."@en .
+art:202.4 a ins:Article ; ins:number "202.4" ; rdfs:label "Supplementary partial casco insurance"@en ; ins:within art:202 .
+art:202.4a a ins:Article ; ins:number "202.4 a" ; rdfs:label "Glass PLUS"@en ; ins:within art:202.4 ; ins:refersTo art:202.3d ;
+    ins:summary "All vehicle parts of glass, and the light bulbs destroyed with them."@en .
+art:202.4b a ins:Article ; ins:number "202.4 b" ; rdfs:label "Martens"@en ; ins:within art:202.4 ;
+    ins:summary "Damage and consequential damage from martens or rodents."@en .
+art:202.4c a ins:Article ; ins:number "202.4 c" ; rdfs:label "Parking damage"@en ; ins:within art:202.4 ;
+    ins:summary "Damage by unknown vehicles or persons while parked. Two events per calendar year, 1000 CHF per event. With Parking damage PLUS, this limit does not apply."@en .
+art:202.4d a ins:Article ; ins:number "202.4 d" ; rdfs:label "Items transported in the vehicle"@en ; ins:within art:202.4 ;
+    ins:summary "Items damaged with the vehicle, or stolen by breaking into the locked vehicle. Electronics only in cars, vans and motorcycles. Not cash, cards, jewellery, data, animals."@en .
+art:202.4e a ins:Article ; ins:number "202.4 e" ; rdfs:label "Protective clothing (for motorcycles)"@en ; ins:within art:202.4 ;
+    ins:summary "Helmets, suits, protectors, boots and gloves: damage in an accident (not only optical) and theft from a locked container or with a helmet lock."@en .
+art:203 a ins:Article ; ins:number "203" ; rdfs:label "Insurance benefits"@en ; ins:part :AccidentalDamage ; ins:page 10 .
+art:203.1 a ins:Article ; ins:number "203.1" ; rdfs:label "Partial loss"@en ; ins:within art:203 ;
+    ins:summary "Zurich pays the reasonable costs of repair, with the condition and the age of the vehicle in mind. Without repair, the costs without VAT."@en .
+art:203.2 a ins:Article ; ins:number "203.2" ; rdfs:label "Total loss"@en ; ins:within art:203 ;
+    ins:summary "Total loss: repair costs of at least 65% of the table value in the first two years, or of the replacement value later, or a stolen vehicle not found within 30 days. The table gives the share of the catalogue price by year of service."@en .
+art:203.3 a ins:Article ; ins:number "203.3" ; rdfs:label "Costs"@en ; ins:within art:203 ;
+    ins:summary "Recovery and towing to the nearest garage, return transport to Switzerland, customs duty."@en .
+art:203.4 a ins:Article ; ins:number "203.4" ; rdfs:label "Indemnity in the event of the theft of the vehicle"@en ; ins:within art:203 ;
+    ins:summary "A stolen vehicle found within 30 days: Zurich pays the repair."@en .
+art:203.5 a ins:Article ; ins:number "203.5" ; rdfs:label "Items being transported and protective clothing"@en ; ins:within art:203 ;
+    ins:summary "The value of an equivalent item; for clothing older than two years, 75% of the price. Up to the sum insured."@en .
+art:203.6 a ins:Article ; ins:number "203.6" ; rdfs:label "Motorized mobile homes and campers/trailers"@en ; ins:within art:203 ;
+    ins:summary "Full repair costs only with an invoice; without repair, the loss in value."@en .
+art:203.7 a ins:Article ; ins:number "203.7" ; rdfs:label "Reduction of benefits"@en ; ins:within art:203 ;
+    ins:summary "Zurich can reduce or refuse benefits as the law on insurance contracts allows, for example for gross negligence or intent."@en .
+art:204 a ins:Article ; ins:number "204" ; rdfs:label "Exclusions"@en ; ins:part :AccidentalDamage ; ins:page 11 .
+art:204.1 a ins:Article ; ins:number "204.1" ; rdfs:label "Damage due to vehicle operation"@en ; ins:within art:204 ;
+    ins:summary "Operation, breakage, wear, wrong handling or fuel, lack of oil or coolant, damage only to tyres or batteries, damage by the load."@en .
+art:204.2 a ins:Article ; ins:number "204.2" ; rdfs:label "Depreciation in value and loss of use"@en ; ins:within art:204 .
+art:204.3 a ins:Article ; ins:number "204.3" ; rdfs:label "Races and similar rides"@en ; ins:within art:204 ;
+    ins:summary "Races, rallies, competitions, racetracks, and requisition by the authorities."@en .
+art:204.4 a ins:Article ; ins:number "204.4" ; rdfs:label "Illegal driving"@en ; ins:within art:204 ;
+    ins:summary "A driver without the required licence or accompanying person, or with unlawful passengers, if the insured should have known."@en .
+art:204.5 a ins:Article ; ins:number "204.5" ; rdfs:label "Unauthorized driving"@en ; ins:within art:204 ;
+    ins:summary "Journeys that the law or the authorities do not permit."@en .
+art:204.6 a ins:Article ; ins:number "204.6" ; rdfs:label "Alcohol/infringement of traffic regulations"@en ; ins:within art:204 ;
+    ins:summary "Blood alcohol of 1.6 per mille or more (breath 0.80 mg/l), unfit by drugs or medication, flagrant speeding, illegal races."@en .
+art:204.7 a ins:Article ; ins:number "204.7" ; rdfs:label "Special events of theft"@en ; ins:within art:204 ;
+    ins:summary "Theft of fuel. Theft of a motorcycle kept outside, in a shared garage or unlocked room, or without an activated steering lock."@en .
+art:204.8 a ins:Article ; ins:number "204.8" ; rdfs:label "Criminal offences"@en ; ins:within art:204 .
+art:204.9 a ins:Article ; ins:number "204.9" ; rdfs:label "State of emergency"@en ; ins:within art:204 ;
+    ins:summary "War, revolution, earthquakes, volcanic eruptions, nuclear damage. Civil unrest unless reasonable precautions were taken."@en .
+
+art:301 a ins:Article ; ins:number "301" ; rdfs:label "Insured persons"@en ; ins:part :Accident ; ins:page 12 .
+art:301.3 a ins:Article ; ins:number "301.3" ; rdfs:label "Persons travelling in other people's vehicles"@en ; ins:within art:301 ;
+    ins:summary "Death 30,000 CHF, disability 60,000 CHF. Worldwide, for up to six weeks after leaving the territory."@en .
+art:302 a ins:Article ; ins:number "302" ; rdfs:label "Insured accidents"@en ; ins:part :Accident ; ins:page 12 .
+art:303 a ins:Article ; ins:number "303" ; rdfs:label "Insurance benefits"@en ; ins:part :Accident ; ins:page 12 .
+art:303.1 a ins:Article ; ins:number "303.1" ; rdfs:label "In the event of death"@en ; ins:within art:303 ;
+    ins:summary "The sum insured goes to the beneficiaries in a fixed order; plus 50% if a minor child is left."@en .
+art:303.2 a ins:Article ; ins:number "303.2" ; rdfs:label "In the event of disability"@en ; ins:within art:303 ;
+    ins:summary "A share of the sum insured by degree of disability, up to 225%. Set at the latest 5 years after the accident."@en .
+art:303.3 a ins:Article ; ins:number "303.3" ; rdfs:label "Daily allowance"@en ; ins:within art:303 ;
+    ins:summary "With a medical certificate, for up to 730 days within 5 years of the accident."@en .
+art:303.4 a ins:Article ; ins:number "303.4" ; rdfs:label "Daily allowance in case of hospitalization"@en ; ins:within art:303 ;
+    ins:summary "For up to 730 days within 5 years of the accident."@en .
+art:303.5 a ins:Article ; ins:number "303.5" ; rdfs:label "Medical expenses"@en ; ins:within art:303 ;
+    ins:summary "Necessary treatment for 5 years after the accident, after social security."@en .
+art:303.6 a ins:Article ; ins:number "303.6" ; rdfs:label "Insured pets"@en ; ins:within art:303 ;
+    ins:summary "Veterinary treatment of pets in the car, up to 5000 CHF per event."@en .
+art:304 a ins:Article ; ins:number "304" ; rdfs:label "Exclusions"@en ; ins:part :Accident ; ins:page 13 ;
+    ins:refersTo art:204.3, art:204.4, art:204.5, art:204.6, art:204.8, art:204.9 ;
+    ins:summary "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7."@en .
+art:305 a ins:Article ; ins:number "305" ; rdfs:label "Vehicles carrying too many passengers"@en ; ins:part :Accident ; ins:page 13 .
+art:306 a ins:Article ; ins:number "306" ; rdfs:label "Offsetting liability claims"@en ; ins:part :Accident ; ins:page 13 .
+
+art:401 a ins:Article ; ins:number "401" ; rdfs:label "Insured vehicles"@en ; ins:part :Roadside ; ins:page 14 ;
+    ins:summary "Vehicles up to 3500 kg and their trailers."@en .
+art:403 a ins:Article ; ins:number "403" ; rdfs:label "Insured events"@en ; ins:part :Roadside ; ins:page 14 ;
+    ins:summary "A breakdown or accidental damage that stops the vehicle."@en .
+art:404 a ins:Article ; ins:number "404" ; rdfs:label "Insurance benefits"@en ; ins:part :Roadside ; ins:page 14 ;
+    ins:summary "Roadside assistance CH/FL or Europe, as agreed."@en .
+art:405 a ins:Article ; ins:number "405" ; rdfs:label "Roadside assistance CH/FL"@en ; ins:part :Roadside ; ins:page 14 .
+art:405.1 a ins:Article ; ins:number "405.1" ; rdfs:label "On-the-spot assistance"@en ; ins:within art:405 .
+art:405.2 a ins:Article ; ins:number "405.2" ; rdfs:label "Recovery costs"@en ; ins:within art:405 .
+art:405.3 a ins:Article ; ins:number "405.3" ; rdfs:label "Towing costs"@en ; ins:within art:405 .
+art:405.4 a ins:Article ; ins:number "405.4" ; rdfs:label "Storage charges"@en ; ins:within art:405 .
+art:405.5 a ins:Article ; ins:number "405.5" ; rdfs:label "Additional costs"@en ; ins:within art:405 .
+art:405.6 a ins:Article ; ins:number "405.6" ; rdfs:label "Replacement driver"@en ; ins:within art:405 .
+art:405.7 a ins:Article ; ins:number "405.7" ; rdfs:label "Loss of keys"@en ; ins:within art:405 .
+art:405.8 a ins:Article ; ins:number "405.8" ; rdfs:label "Lack of fuel, empty battery"@en ; ins:within art:405 .
+art:405.9 a ins:Article ; ins:number "405.9" ; rdfs:label "Limitation of benefits for roadside assistance CH/FL"@en ; ins:within art:405 ;
+    ins:summary "1000 CHF in total for all persons per event."@en .
+art:406 a ins:Article ; ins:number "406" ; rdfs:label "Roadside assistance Europe"@en ; ins:part :Roadside ; ins:page 14 ; ins:refersTo art:3 ;
+    ins:summary "Roadside assistance within Europe, as set out in Art. 3."@en .
+art:406.1 a ins:Article ; ins:number "406.1" ; rdfs:label "On-the-spot assistance"@en ; ins:within art:406 .
+art:406.2 a ins:Article ; ins:number "406.2" ; rdfs:label "Recovery costs"@en ; ins:within art:406 .
+art:406.3 a ins:Article ; ins:number "406.3" ; rdfs:label "Towing costs"@en ; ins:within art:406 .
+art:406.4 a ins:Article ; ins:number "406.4" ; rdfs:label "Storage charges"@en ; ins:within art:406 .
+art:406.5 a ins:Article ; ins:number "406.5" ; rdfs:label "Additional costs"@en ; ins:within art:406 .
+art:406.6 a ins:Article ; ins:number "406.6" ; rdfs:label "Replacement driver"@en ; ins:within art:406 .
+art:406.7 a ins:Article ; ins:number "406.7" ; rdfs:label "Loss of keys"@en ; ins:within art:406 ;
+    ins:summary "Lists the onward journey by public transport and accommodation twice: once without a limit, once up to 2000 CHF."@en .
+art:406.8 a ins:Article ; ins:number "406.8" ; rdfs:label "Lack of fuel, empty battery"@en ; ins:within art:406 .
+art:406.9 a ins:Article ; ins:number "406.9" ; rdfs:label "Additional costs for transporting pets"@en ; ins:within art:406 .
+art:406.10 a ins:Article ; ins:number "406.10" ; rdfs:label "Car ferries, car trains"@en ; ins:within art:406 .
+art:406.11 a ins:Article ; ins:number "406.11" ; rdfs:label "Shipping costs for spare parts"@en ; ins:within art:406 .
+art:406.12 a ins:Article ; ins:number "406.12" ; rdfs:label "Establishing the extent of damage"@en ; ins:within art:406 .
+art:406.13 a ins:Article ; ins:number "406.13" ; rdfs:label "Repatriation of the vehicle from abroad"@en ; ins:within art:406 .
+art:406.14 a ins:Article ; ins:number "406.14" ; rdfs:label "Customs duty / scrapping fees for a vehicle abroad"@en ; ins:within art:406 .
+art:407 a ins:Article ; ins:number "407" ; rdfs:label "Exclusions"@en ; ins:part :Roadside ; ins:page 15 ;
+    ins:refersTo art:204.3, art:204.4, art:204.5, art:204.6, art:204.8, art:204.9 ;
+    ins:summary "Third-party recovery claims, and the exclusions of Art. 204.3 to 204.9 except 204.7."@en .
+art:408 a ins:Article ; ins:number "408" ; rdfs:label "Claims against third parties"@en ; ins:part :Roadside ; ins:page 15 .
+
+art:501 a ins:Article ; ins:number "501" ; rdfs:label "Insured persons"@en ; ins:part :Legal ; ins:page 16 .
+art:502 a ins:Article ; ins:number "502" ; rdfs:label "Scope of insurance"@en ; ins:part :Legal ; ins:page 16 ;
+    ins:summary "Damages, criminal charges, defence, licence confiscation, social and other insurance law, medical law, vehicle contracts, garage rental."@en .
+art:503 a ins:Article ; ins:number "503" ; rdfs:label "Period of coverage and insured event"@en ; ins:part :Legal ; ins:page 16 ;
+    ins:summary "Cases that arise during the contract. No cover for cases reported more than 6 months after the end of the contract."@en .
+art:504 a ins:Article ; ins:number "504" ; rdfs:label "Insurance benefits"@en ; ins:part :Legal ; ins:page 16 ;
+    ins:summary "Up to 500,000 CHF per legal case. Not fines, nor damages."@en .
+art:505 a ins:Article ; ins:number "505" ; rdfs:label "Uninsured legal disputes"@en ; ins:part :Legal ; ins:page 17 ; ins:refersTo art:502 ;
+    ins:summary "Exclusions that take precedence over Art. 502."@en .
+art:506 a ins:Article ; ins:number "506" ; rdfs:label "Reductions to benefits"@en ; ins:part :Legal ; ins:page 17 .
+art:507 a ins:Article ; ins:number "507" ; rdfs:label "Processing of cases"@en ; ins:part :Legal ; ins:page 17 ;
+    ins:summary "Orion decides the procedure. A lawyer engaged before you report the case: at most 500 CHF."@en .
+art:508 a ins:Article ; ins:number "508" ; rdfs:label "Differences of opinion"@en ; ins:part :Legal ; ins:page 17 .
+art:509 a ins:Article ; ins:number "509" ; rdfs:label "Communication language"@en ; ins:part :Legal ; ins:page 18 .

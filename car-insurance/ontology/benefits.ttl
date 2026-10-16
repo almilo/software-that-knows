@@ -1,0 +1,133 @@
+@prefix :        <https://example.org/zurich-motor-2015#> .
+@prefix art:     <https://example.org/zurich-motor-2015/article/> .
+@prefix ins:     <https://example.org/insurance#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# The numbers of the document: the compensation table, the parameters of the calculation of a
+# claim, and the benefits of the covers that the comparison shows side by side.
+
+# ---------------------------------------------------------------------------
+# 1. Compensation table (Art. 203.2): share of the catalogue price for a total loss
+# ---------------------------------------------------------------------------
+
+:Year1 a ins:CompensationRow ; ins:year 1 ; ins:fromShare 1.00 ; ins:toShare 1.00 ; ins:source art:203.2 .
+:Year2 a ins:CompensationRow ; ins:year 2 ; ins:fromShare 0.95 ; ins:toShare 0.85 ; ins:source art:203.2 .
+:Year3 a ins:CompensationRow ; ins:year 3 ; ins:fromShare 0.85 ; ins:toShare 0.75 ; ins:source art:203.2 .
+:Year4 a ins:CompensationRow ; ins:year 4 ; ins:fromShare 0.75 ; ins:toShare 0.65 ; ins:source art:203.2 .
+:Year5 a ins:CompensationRow ; ins:year 5 ; ins:fromShare 0.65 ; ins:toShare 0.55 ; ins:source art:203.2 .
+:Year6 a ins:CompensationRow ; ins:year 6 ; ins:fromShare 0.55 ; ins:toShare 0.45 ; ins:source art:203.2 .
+:Year7 a ins:CompensationRow ; ins:year 7 ; ins:fromShare 0.45 ; ins:toShare 0.40 ; ins:source art:203.2 .
+
+# ---------------------------------------------------------------------------
+# 2. Parameters of the calculation (engine/benefit.ts reads them by name)
+# ---------------------------------------------------------------------------
+
+:totalLossShare a ins:Parameter ; rdfs:label "Repair costs that make a total loss in the first two years, as a share of the table value"@en ;
+    ins:amount 0.65 ; ins:source art:203.2 .
+:earlyMonths a ins:Parameter ; rdfs:label "The first two years of service, in months"@en ;
+    ins:amount 24 ; ins:source art:203.2 .
+:tableMonths a ins:Parameter ; rdfs:label "Months of service covered by the compensation table; later, the replacement value"@en ;
+    ins:amount 84 ; ins:source art:203.2 .
+:theftRecoveryDays a ins:Parameter ; rdfs:label "Days to find a stolen vehicle before it is a total loss"@en ;
+    ins:amount 30 ; ins:source art:203.2, art:203.4 .
+:deductibleStep a ins:Parameter ; rdfs:label "Reduction of the deductible after each period of years without claims, in CHF"@en ;
+    ins:amount 500 ; ins:source art:6.1 .
+:claimFreeYearsPerStep a ins:Parameter ; rdfs:label "Full insurance years without claims for one reduction of the deductible"@en ;
+    ins:amount 3 ; ins:source art:6.1 .
+:deductibleSteps a ins:Parameter ; rdfs:label "Number of reductions of the deductible"@en ;
+    ins:amount 2 ; ins:source art:6.1 .
+:helpPointPenalty a ins:Parameter ; rdfs:label "Additional deductible when the rules of Help Point PLUS are not followed, in CHF"@en ;
+    ins:amount 500 ; ins:source art:10.3 .
+:parkingLimit a ins:Parameter ; rdfs:label "Limit per parking damage, in CHF"@en ;
+    ins:amount 1000 ; ins:source art:202.4c .
+
+# The same number, stated twice. The checks compare the statements that name the same thing.
+:countedYearBonus a ins:Parameter ; rdfs:label "Minimum length of an insurance year that counts for the no-claims bonus, in months"@en ;
+    ins:amount 11 ; ins:source art:5 ; ins:mentions :CountedYear .
+:countedYearDeductible a ins:Parameter ; rdfs:label "Minimum length of an insurance year that counts for the reduction of the deductible, in months"@en ;
+    ins:amount 11 ; ins:source art:6.1 ; ins:mentions :CountedYear .
+:CountedYear a ins:Concept ; rdfs:label "An insurance year that counts"@en .
+
+# ---------------------------------------------------------------------------
+# 3. Benefits of the covers, for the comparison. ins:mentions names the row of the comparison.
+# ---------------------------------------------------------------------------
+
+:GlassWindows a ins:Benefit ; rdfs:label "Windscreen, side, roof and rear windows"@en ;
+    ins:benefitOf :Glass, :GlassPlus ; ins:mentions :WindowsConcept ; ins:source art:202.3d .
+:GlassAllParts a ins:Benefit ; rdfs:label "All other vehicle parts of glass, for example headlights"@en ;
+    ins:benefitOf :GlassPlus ; ins:mentions :OtherGlassConcept ; ins:source art:202.4a .
+:GlassBulbs a ins:Benefit ; rdfs:label "Light bulbs destroyed with the glass"@en ;
+    ins:benefitOf :GlassPlus ; ins:mentions :BulbsConcept ; ins:source art:202.4a .
+:GlassValueLimit a ins:Benefit ; rdfs:label "Nothing if the repair costs reach the replacement value"@en ;
+    ins:benefitOf :Glass, :GlassPlus ; ins:mentions :GlassValueConcept ; ins:source art:202.3d .
+
+:ParkingPerEvent a ins:Benefit ; rdfs:label "Up to 1000 CHF per event"@en ; ins:limit 1000 ; ins:per "event" ;
+    ins:benefitOf :ParkingDamage ; ins:mentions :ParkingAmount ; ins:source art:202.4c .
+:ParkingPlusPerEvent a ins:Benefit ; rdfs:label "No limit per event"@en ;
+    ins:benefitOf :ParkingDamagePlus ; ins:mentions :ParkingAmount ; ins:source art:202.4c ;
+    ins:note "The document says that with PLUS 'this limit' does not apply. We read it as the limit per event: the limit of two events per year stays."@en .
+:ParkingTwoEvents a ins:Benefit ; rdfs:label "Two events per calendar year"@en ;
+    ins:benefitOf :ParkingDamage, :ParkingDamagePlus ; ins:mentions :ParkingEvents ; ins:source art:202.4c .
+
+:CHOnTheSpot a ins:Benefit ; rdfs:label "Restoring roadworthiness at the roadside, small parts"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :OnTheSpot ; ins:source art:405.1 .
+:CHRecovery a ins:Benefit ; rdfs:label "Recovery of the vehicle and the trailer"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :Recovery ; ins:source art:405.2 .
+:CHTowing a ins:Benefit ; rdfs:label "Towing to the nearest suitable garage"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :Towing ; ins:source art:405.3 .
+:CHStorage a ins:Benefit ; rdfs:label "Storage charges"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :Storage ; ins:source art:405.4 .
+:CHAdditional a ins:Benefit ; rdfs:label "Onward and return journey, accommodation, unused services, transport of the vehicle"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :AdditionalCosts ; ins:source art:405.5 .
+:CHDriver a ins:Benefit ; rdfs:label "A chauffeur to return the vehicle and the passengers"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :ReplacementDriver ; ins:source art:405.6 .
+:CHKeys a ins:Benefit ; rdfs:label "Help, towing and the spare key"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :LossOfKeys ; ins:source art:405.7 .
+:CHKeysJourney a ins:Benefit ; rdfs:label "Onward journey and accommodation after the loss of keys"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :KeysJourney ; ins:source art:405.7 .
+:CHFuel a ins:Benefit ; rdfs:label "Lack of fuel or empty battery: roadworthiness or towing to a charging station"@en ; ins:benefitOf :RoadsideCHFL ; ins:mentions :LackOfFuel ; ins:source art:405.8 .
+:CHTotal a ins:Benefit ; rdfs:label "All benefits together, for all persons"@en ; ins:limit 1000 ; ins:per "event" ; ins:benefitOf :RoadsideCHFL ; ins:mentions :TotalLimit ; ins:source art:405.9 .
+
+:EUOnTheSpot a ins:Benefit ; rdfs:label "Restoring roadworthiness at the roadside, small parts"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :OnTheSpot ; ins:source art:406.1 .
+:EURecovery a ins:Benefit ; rdfs:label "Recovery of the vehicle and the trailer"@en ; ins:limit 2000 ; ins:benefitOf :RoadsideEurope ; ins:mentions :Recovery ; ins:source art:406.2 .
+:EUTowing a ins:Benefit ; rdfs:label "Towing to the nearest suitable garage"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :Towing ; ins:source art:406.3 .
+:EUStorage a ins:Benefit ; rdfs:label "Storage charges"@en ; ins:limit 500 ; ins:benefitOf :RoadsideEurope ; ins:mentions :Storage ; ins:source art:406.4 .
+:EUAdditional a ins:Benefit ; rdfs:label "A replacement vehicle, onward and return journey, accommodation, unused services, transport of the vehicle"@en ; ins:limit 5000 ; ins:benefitOf :RoadsideEurope ; ins:mentions :AdditionalCosts ; ins:source art:406.5 .
+:EUDriver a ins:Benefit ; rdfs:label "A chauffeur to return the vehicle and the passengers"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :ReplacementDriver ; ins:source art:406.6 .
+:EUKeys a ins:Benefit ; rdfs:label "Help, towing and the spare key"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :LossOfKeys ; ins:source art:406.7 .
+:EUKeysJourney a ins:Benefit ; rdfs:label "Onward journey and accommodation after the loss of keys (4th item)"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :KeysJourney ; ins:source art:406.7 .
+:EUKeysJourneyLimited a ins:Benefit ; rdfs:label "Onward journey and accommodation after the loss of keys (5th item)"@en ; ins:limit 2000 ; ins:benefitOf :RoadsideEurope ; ins:mentions :KeysJourney ; ins:source art:406.7 .
+:EUFuel a ins:Benefit ; rdfs:label "Lack of fuel or empty battery: roadworthiness or towing to a charging station"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :LackOfFuel ; ins:source art:406.8 .
+:EUPets a ins:Benefit ; rdfs:label "Transport of dogs and cats"@en ; ins:limit 1000 ; ins:benefitOf :RoadsideEurope ; ins:mentions :Pets ; ins:source art:406.9 .
+:EUFerries a ins:Benefit ; rdfs:label "New tickets for a missed car ferry or car train, unused services"@en ; ins:limit 1000 ; ins:benefitOf :RoadsideEurope ; ins:mentions :Ferries ; ins:source art:406.10 .
+:EUSpareParts a ins:Benefit ; rdfs:label "Shipping of spare parts abroad"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :SpareParts ; ins:source art:406.11 .
+:EUExtent a ins:Benefit ; rdfs:label "Investigation of the damage for the repatriation"@en ; ins:limit 500 ; ins:benefitOf :RoadsideEurope ; ins:mentions :ExtentOfDamage ; ins:source art:406.12 .
+:EURepatriation a ins:Benefit ; rdfs:label "Repatriation of the vehicle, up to its current value"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :Repatriation ; ins:source art:406.13 .
+:EUCustoms a ins:Benefit ; rdfs:label "Customs duty and scrapping after a total loss abroad"@en ; ins:benefitOf :RoadsideEurope ; ins:mentions :Customs ; ins:source art:406.14 .
+
+:KeysJourneyPrecedence a ins:Precedence ;
+    ins:winner :EUKeysJourneyLimited ; ins:loser :EUKeysJourney ; ins:basis ins:Interpretation ;
+    rdfs:comment "Art. 406.7 lists the onward journey and accommodation twice: once without a limit, once up to 2000 CHF. We apply the limit of 2000 CHF: an item without a limit would make the limited item useless."@en .
+
+:WindowsConcept a ins:Concept ; rdfs:label "Windows"@en ; ins:order 1 .
+:OtherGlassConcept a ins:Concept ; rdfs:label "Other glass parts"@en ; ins:order 2 .
+:BulbsConcept a ins:Concept ; rdfs:label "Light bulbs"@en ; ins:order 3 .
+:GlassValueConcept a ins:Concept ; rdfs:label "Repair at the replacement value"@en ; ins:order 4 .
+:ParkingAmount a ins:Concept ; rdfs:label "Amount per event"@en ; ins:order 1 .
+:ParkingEvents a ins:Concept ; rdfs:label "Events per year"@en ; ins:order 2 .
+:OnTheSpot a ins:Concept ; rdfs:label "On-the-spot assistance"@en ; ins:order 1 .
+:Recovery a ins:Concept ; rdfs:label "Recovery"@en ; ins:order 2 .
+:Towing a ins:Concept ; rdfs:label "Towing"@en ; ins:order 3 .
+:Storage a ins:Concept ; rdfs:label "Storage"@en ; ins:order 4 .
+:AdditionalCosts a ins:Concept ; rdfs:label "Additional costs"@en ; ins:order 5 .
+:ReplacementDriver a ins:Concept ; rdfs:label "Replacement driver"@en ; ins:order 6 .
+:LossOfKeys a ins:Concept ; rdfs:label "Loss of keys"@en ; ins:order 7 .
+:KeysJourney a ins:Concept ; rdfs:label "Onward journey after the loss of keys"@en ; ins:order 8 .
+:LackOfFuel a ins:Concept ; rdfs:label "Lack of fuel, empty battery"@en ; ins:order 9 .
+:Pets a ins:Concept ; rdfs:label "Pets"@en ; ins:order 10 .
+:Ferries a ins:Concept ; rdfs:label "Car ferries and car trains"@en ; ins:order 11 .
+:SpareParts a ins:Concept ; rdfs:label "Spare parts"@en ; ins:order 12 .
+:ExtentOfDamage a ins:Concept ; rdfs:label "Extent of the damage"@en ; ins:order 13 .
+:Repatriation a ins:Concept ; rdfs:label "Repatriation of the vehicle"@en ; ins:order 14 .
+:Customs a ins:Concept ; rdfs:label "Customs and scrapping"@en ; ins:order 15 .
+:TotalLimit a ins:Concept ; rdfs:label "Limit for all benefits"@en ; ins:order 16 .
+
+# ---------------------------------------------------------------------------
+# 4. Comparisons
+# ---------------------------------------------------------------------------
+
+:CompareGlass a ins:Comparison ; ins:order 1 ; rdfs:label "Glass and Glass PLUS"@en ; ins:left :Glass ; ins:right :GlassPlus .
+:CompareParking a ins:Comparison ; ins:order 2 ; rdfs:label "Parking damage and Parking damage PLUS"@en ; ins:left :ParkingDamage ; ins:right :ParkingDamagePlus .
+:CompareRoadside a ins:Comparison ; ins:order 3 ; rdfs:label "Roadside assistance CH/FL and Europe"@en ; ins:left :RoadsideCHFL ; ins:right :RoadsideEurope .

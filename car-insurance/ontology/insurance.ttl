@@ -1,0 +1,157 @@
+@prefix ins:     <https://example.org/insurance#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# The words of an insurance policy. They know no insurer and no product: the policy of
+# policy.ttl and the other files use them. The engine (engine/) and the app (app/) know only these
+# words, through the generated file generated/policy.json.
+
+<https://example.org/insurance>
+    a owl:Ontology ;
+    rdfs:label "The words of an insurance policy"@en .
+
+# ---------------------------------------------------------------------------
+# 1. The document
+# ---------------------------------------------------------------------------
+
+ins:Policy a owl:Class ; rdfs:label "Policy"@en ;
+    rdfs:comment "The conditions of an insurance product, as one document."@en .
+ins:Article a owl:Class ; rdfs:label "Article"@en ;
+    rdfs:comment "A numbered part of the document. Every statement of the model cites the articles it comes from."@en .
+ins:number a owl:DatatypeProperty ; rdfs:label "number"@en ; rdfs:comment "The number of the article, as printed, for example 202.3 a."@en .
+ins:summary a owl:DatatypeProperty ; rdfs:label "summary"@en ; rdfs:comment "What the article says, in our words. It is not the text of the document."@en .
+ins:within a owl:ObjectProperty ; rdfs:label "within"@en ; rdfs:comment "The article that contains this article."@en .
+ins:refersTo a owl:ObjectProperty ; rdfs:label "refers to"@en ; rdfs:comment "An article that this article uses, for example the exclusions of Art. 204 in Art. 304."@en .
+ins:source a owl:ObjectProperty ; rdfs:label "source"@en ; rdfs:comment "The article that a statement comes from."@en .
+ins:page a owl:DatatypeProperty ; rdfs:label "page"@en .
+
+# ---------------------------------------------------------------------------
+# 2. The product
+# ---------------------------------------------------------------------------
+
+ins:Part a owl:Class ; rdfs:label "Part"@en ;
+    rdfs:comment "A part of the product with its own articles, for example accidental damage insurance."@en .
+ins:part a owl:ObjectProperty ; rdfs:label "part"@en .
+ins:modelled a owl:DatatypeProperty ; rdfs:label "modelled"@en ;
+    rdfs:comment "True when the rules of the part are in the model, so that the engine can decide claims of the part."@en .
+
+ins:VehicleClass a owl:Class ; rdfs:label "Vehicle class"@en .
+
+ins:Cover a owl:Class ; rdfs:label "Cover"@en ;
+    rdfs:comment "A benefit of the product that a policy includes or not, for example glass. A line of the product overview."@en .
+ins:group a owl:DatatypeProperty ; rdfs:label "group"@en ; rdfs:comment "The heading of the cover in the product overview, for example partial casco."@en .
+ins:basicFor a owl:ObjectProperty ; rdfs:label "basic for"@en ; rdfs:comment "The cover is in every policy for this vehicle class."@en .
+ins:optionFor a owl:ObjectProperty ; rdfs:label "option for"@en ; rdfs:comment "The cover is in the policy for this vehicle class only if it is agreed."@en .
+ins:notInsurableFor a owl:ObjectProperty ; rdfs:label "not insurable for"@en .
+ins:note a owl:DatatypeProperty ; rdfs:label "note"@en .
+ins:noDeductible a owl:DatatypeProperty ; rdfs:label "no deductible"@en ; rdfs:comment "No deductible applies to claims of this cover."@en .
+ins:reducibleDeductible a owl:DatatypeProperty ; rdfs:label "reducible deductible"@en ; rdfs:comment "Years without claims reduce the deductible of this cover."@en .
+
+# ---------------------------------------------------------------------------
+# 3. The questions: the facts of a situation
+# ---------------------------------------------------------------------------
+
+ins:Fact a owl:Class ; rdfs:label "Fact"@en ;
+    rdfs:comment "A fact of the situation that the user gives. The rules are conditions on facts."@en .
+ins:ClaimFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of a claim"@en .
+ins:GuideFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of the guide after an event"@en .
+ins:DateFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Date of the contract or of a claim"@en .
+ins:key a owl:DatatypeProperty ; rdfs:label "key"@en .
+ins:help a owl:DatatypeProperty ; rdfs:label "help"@en .
+ins:kind a owl:DatatypeProperty ; rdfs:label "kind"@en ; rdfs:comment "choice, number or date."@en .
+ins:unit a owl:DatatypeProperty ; rdfs:label "unit"@en .
+ins:value a owl:ObjectProperty ; rdfs:label "value"@en ; rdfs:comment "The possible answers of a choice, as an RDF list, in order."@en .
+ins:askWhen a owl:ObjectProperty ; rdfs:label "ask when"@en ; rdfs:comment "A condition: the fact is asked only when it holds. For the facts that no rule uses, such as amounts."@en .
+ins:required a owl:DatatypeProperty ; rdfs:label "required"@en ; rdfs:comment "The fact is always asked."@en .
+ins:optionOf a owl:ObjectProperty ; rdfs:label "option of"@en ; rdfs:comment "The fact says whether the optional cover is in the policy (yes or no)."@en .
+ins:closedList a owl:ObjectProperty ; rdfs:label "closed list"@en ; rdfs:comment "The answers of this fact come from a list that the document calls exhaustive."@en .
+
+# ---------------------------------------------------------------------------
+# 4. Rules
+# ---------------------------------------------------------------------------
+
+ins:Rule a owl:Class ; rdfs:label "Rule"@en ;
+    rdfs:comment "A statement of the document as a condition on facts and an effect. It applies when all its conditions hold."@en .
+ins:CoverRule a owl:Class ; rdfs:subClassOf ins:Rule ; rdfs:label "Cover rule"@en ;
+    rdfs:comment "The event is a case of the cover."@en .
+ins:Exclusion a owl:Class ; rdfs:subClassOf ins:Rule ; rdfs:label "Exclusion"@en ;
+    rdfs:comment "The insurer pays nothing."@en .
+ins:Reduction a owl:Class ; rdfs:subClassOf ins:Rule ; rdfs:label "Reduction"@en ;
+    rdfs:comment "The insurer can pay less. The amount depends on the degree of fault: a person decides it, not the model."@en .
+ins:Waiver a owl:Class ; rdfs:subClassOf ins:Rule ; rdfs:label "Waiver"@en ;
+    rdfs:comment "The insurer gives up a reduction."@en .
+ins:TerritoryRule a owl:Class ; rdfs:subClassOf ins:Rule ; rdfs:label "Territory rule"@en ;
+    rdfs:comment "Where the cover applies (ins:covers) or does not apply (ins:appliesTo, as an exclusion)."@en .
+
+ins:covers a owl:ObjectProperty ; rdfs:label "covers"@en ; rdfs:comment "The cover that a cover rule or a territory rule gives."@en .
+ins:appliesTo a owl:ObjectProperty ; rdfs:label "applies to"@en ; rdfs:comment "The covers or parts that an exclusion, a reduction or a waiver is about."@en .
+ins:when a owl:ObjectProperty ; rdfs:label "when"@en ;
+    rdfs:comment "A condition: one fact with its matching answers (ins:fact with ins:in or ins:notIn), a number range (ins:atLeast, ins:below), or several conditions of which one is enough (ins:anyOf)."@en .
+ins:fact a owl:ObjectProperty ; rdfs:label "fact"@en .
+ins:in a owl:ObjectProperty ; rdfs:label "in"@en ; rdfs:comment "The answers that meet the condition, as an RDF list."@en .
+ins:notIn a owl:ObjectProperty ; rdfs:label "not in"@en .
+ins:atLeast a owl:DatatypeProperty ; rdfs:label "at least"@en .
+ins:below a owl:DatatypeProperty ; rdfs:label "below"@en .
+ins:anyOf a owl:ObjectProperty ; rdfs:label "any of"@en .
+ins:mentions a owl:ObjectProperty ; rdfs:label "mentions"@en ;
+    rdfs:comment "A thing that the statement names. The checks compare the statements that name the same thing."@en .
+ins:order a owl:DatatypeProperty ; rdfs:label "order"@en .
+
+# Precedence: when two statements say different things about the same situation, which one wins.
+ins:Precedence a owl:Class ; rdfs:label "Precedence"@en ;
+    rdfs:comment "One statement wins over another one in the situations where both apply."@en .
+ins:winner a owl:ObjectProperty ; rdfs:label "winner"@en .
+ins:loser a owl:ObjectProperty ; rdfs:label "loser"@en .
+ins:basis a owl:ObjectProperty ; rdfs:label "basis"@en ; rdfs:comment "Where the precedence comes from: the text of the document, or our interpretation."@en .
+ins:Text a ins:Basis ; rdfs:label "the text"@en ; rdfs:comment "The document says which statement wins."@en .
+ins:Interpretation a ins:Basis ; rdfs:label "our interpretation"@en ; rdfs:comment "The document does not say which statement wins. We chose, and say why. The insurer must confirm it."@en .
+ins:Basis a owl:Class .
+
+ins:ClosedList a owl:Class ; rdfs:label "Closed list"@en ;
+    rdfs:comment "A list that the document calls exhaustive and conclusive: what is not in it is not covered."@en .
+ins:item a owl:DatatypeProperty ; rdfs:label "item"@en .
+
+ins:Concept a owl:Class ; rdfs:subClassOf skos:Concept ; rdfs:label "Concept"@en ;
+    rdfs:comment "A thing that statements name, such as tyres or Europe."@en .
+
+# ---------------------------------------------------------------------------
+# 5. Amounts, benefits, tables
+# ---------------------------------------------------------------------------
+
+ins:Parameter a owl:Class ; rdfs:label "Parameter"@en ;
+    rdfs:comment "A number of the document that the engine uses in a calculation, for example the limit per event."@en .
+ins:amount a owl:DatatypeProperty ; rdfs:label "amount"@en .
+ins:per a owl:DatatypeProperty ; rdfs:label "per"@en .
+
+ins:Benefit a owl:Class ; rdfs:label "Benefit"@en ;
+    rdfs:comment "One thing that a cover pays for, with its limit, if it has one."@en .
+ins:benefitOf a owl:ObjectProperty ; rdfs:label "benefit of"@en .
+ins:limit a owl:DatatypeProperty ; rdfs:label "limit"@en ; rdfs:comment "The maximum amount in CHF."@en .
+
+ins:Comparison a owl:Class ; rdfs:label "Comparison"@en ; rdfs:comment "Two covers to compare, benefit by benefit."@en .
+ins:left a owl:ObjectProperty ; rdfs:label "left"@en .
+ins:right a owl:ObjectProperty ; rdfs:label "right"@en .
+
+ins:CompensationRow a owl:Class ; rdfs:label "Row of the compensation table"@en ;
+    rdfs:comment "In a year of service, the share of the catalogue price that the insurer pays for a total loss. It goes down from ins:fromShare to ins:toShare during the year, pro rata."@en .
+ins:year a owl:DatatypeProperty ; rdfs:label "year of service"@en .
+ins:fromShare a owl:DatatypeProperty ; rdfs:label "share at the start of the year"@en .
+ins:toShare a owl:DatatypeProperty ; rdfs:label "share at the end of the year"@en .
+
+# ---------------------------------------------------------------------------
+# 6. Obligations and deadlines
+# ---------------------------------------------------------------------------
+
+ins:Obligation a owl:Class ; rdfs:label "Obligation"@en ;
+    rdfs:comment "What the insured person must do after an event, and what happens if they do not."@en .
+ins:action a owl:DatatypeProperty ; rdfs:label "action"@en .
+ins:consequence a owl:DatatypeProperty ; rdfs:label "consequence"@en .
+
+ins:Deadline a owl:Class ; rdfs:label "Deadline"@en ;
+    rdfs:comment "A date that the document sets relative to another date (ins:anchor), with an ISO 8601 duration (ins:offset; a minus sign means before)."@en .
+ins:anchor a owl:ObjectProperty ; rdfs:label "anchor"@en .
+ins:offset a owl:DatatypeProperty ; rdfs:label "offset"@en .
+ins:who a owl:DatatypeProperty ; rdfs:label "who"@en ; rdfs:comment "Who must act by the date, or who it is about."@en .
+ins:meaning a owl:DatatypeProperty ; rdfs:label "meaning"@en .

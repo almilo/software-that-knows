@@ -1,0 +1,128 @@
+@prefix :        <https://example.org/zurich-motor-2015#> .
+@prefix art:     <https://example.org/zurich-motor-2015/article/> .
+@prefix ins:     <https://example.org/insurance#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# What the insured person must do after an event (the guide), and the deadlines of the contract
+# and of a claim (the dates). The obligations are conditions on the guide facts of questions.ttl;
+# an obligation without a condition always applies.
+
+# ---------------------------------------------------------------------------
+# 1. Obligations after an event
+# ---------------------------------------------------------------------------
+
+:NotifyInsurer a ins:Obligation ; ins:order 1 ; rdfs:label "Tell Zurich at once"@en ;
+    ins:action "Phone 0800 80 80 80 (from abroad +41 44 628 98 98), or write. For legal protection, tell Orion."@en ;
+    ins:consequence "If you break an obligation by your fault, Zurich can refuse the benefits (Art. 12)."@en ;
+    ins:source art:10.1, art:12 .
+
+:CallPolice a ins:Obligation ; ins:order 2 ; rdfs:label "Tell the police"@en ;
+    ins:action "The police must know about bodily injury, theft, and damage caused by animals. For animals, the gamekeeper is also possible."@en ;
+    ins:source art:10.1 ;
+    ins:when [ ins:anyOf ( [ ins:fact :injury ; ins:in ( :Yes ) ] [ ins:fact :stolen ; ins:in ( :Yes ) ] [ ins:fact :animal ; ins:in ( :Yes ) ] ) ] .
+
+:RoadsidePhone a ins:Obligation ; ins:order 3 ; rdfs:label "Phone Zurich before you get help on the road"@en ;
+    ins:action "Let Zurich organise the roadside help, the towing and the onward journey."@en ;
+    ins:consequence "Zurich does not pay for help that it did not organise or agree to."@en ;
+    ins:source art:10.4 ;
+    ins:when [ ins:fact :unusable ; ins:in ( :Yes ) ] .
+
+:HelpPoint a ins:Obligation ; ins:order 4 ; rdfs:label "Use Help Point PLUS"@en ;
+    ins:action "Report the damage by phone or at a help point, and have the repair done at the garage that Zurich specifies."@en ;
+    ins:consequence "If you do not, you pay 500 CHF more deductible."@en ;
+    ins:source art:10.3 ;
+    ins:when [ ins:fact :damaged ; ins:in ( :Yes ) ] , [ ins:fact :helpPointAgreed ; ins:in ( :Yes ) ] .
+
+:Inspection a ins:Obligation ; ins:order 5 ; rdfs:label "Let Zurich inspect the vehicle before the repair"@en ;
+    ins:action "Do not repair the vehicle before Zurich has had the opportunity to inspect it."@en ;
+    ins:consequence "Otherwise Zurich can reduce the benefit or pay nothing."@en ;
+    ins:source art:10.3 ;
+    ins:when [ ins:fact :damaged ; ins:in ( :Yes ) ] .
+
+:DoNotAccept a ins:Obligation ; ins:order 6 ; rdfs:label "Do not accept or pay the claims of the other party"@en ;
+    ins:action "Zurich negotiates with the injured party, and its settlement binds you. Give the claim to Zurich."@en ;
+    ins:source art:10.2 ;
+    ins:when [ ins:fact :otherParty ; ins:in ( :Yes ) ] .
+
+:TheftWait a ins:Obligation ; ins:order 7 ; rdfs:label "Know the 30 days after a theft"@en ;
+    ins:action "If the vehicle is found within 30 days after Zurich receives the notice, Zurich pays the repair. If not, it is a total loss."@en ;
+    ins:source art:203.2, art:203.4 ;
+    ins:when [ ins:fact :stolen ; ins:in ( :Yes ) ] .
+
+:CriminalCharges a ins:Obligation ; ins:order 8 ; rdfs:label "File criminal charges if Zurich asks"@en ;
+    ins:action "Zurich can ask you to file criminal charges."@en ;
+    ins:source art:10.1 ;
+    ins:when [ ins:fact :stolen ; ins:in ( :Yes ) ] .
+
+:ReportToOrion a ins:Obligation ; ins:order 9 ; rdfs:label "Report the legal case to Orion before you engage a lawyer"@en ;
+    ins:action "Orion decides the procedure and agrees to the lawyer. Report it at the latest 6 months after the end of the contract."@en ;
+    ins:consequence "Costs of a lawyer that you engaged before you reported the case: at most 500 CHF."@en ;
+    ins:source art:507, art:503 ;
+    ins:when [ ins:fact :legalDispute ; ins:in ( :Yes ) ] .
+
+:MedicalCertificate a ins:Obligation ; ins:order 10 ; rdfs:label "Get a medical certificate"@en ;
+    ins:action "The daily allowance needs a medical certificate. Medical expenses are paid for 5 years after the accident."@en ;
+    ins:source art:303.3, art:303.5 ;
+    ins:when [ ins:fact :injury ; ins:in ( :Yes ) ] .
+
+:Investigation a ins:Obligation ; ins:order 11 ; rdfs:label "Help with the investigation"@en ;
+    ins:action "Give Zurich the documents, the information and the powers of attorney that it needs."@en ;
+    ins:source art:10.1 .
+
+:AbroadNumber a ins:Obligation ; ins:order 12 ; rdfs:label "Check the territory"@en ;
+    ins:action "The insurance covers Europe and the countries around the Mediterranean, not Belarus, Moldova, Ukraine, Russia, Georgia, Armenia, Azerbaijan, Kazakhstan, Egypt, Algeria, Lebanon, Libya or Syria."@en ;
+    ins:source art:3 ;
+    ins:when [ ins:fact :abroad ; ins:in ( :Yes ) ] .
+
+# ---------------------------------------------------------------------------
+# 2. Deadlines
+# ---------------------------------------------------------------------------
+
+:NoticeByPolicyholder a ins:Deadline ; ins:order 1 ; rdfs:label "Last day to give notice of termination"@en ;
+    ins:anchor :renewalDate ; ins:offset "-P3M1D" ; ins:who "you" ;
+    ins:meaning "Your notice must reach Zurich by this day. Otherwise the contract renews for one year."@en ;
+    ins:source art:2 .
+:PremiumChangeInfo a ins:Deadline ; ins:order 2 ; rdfs:label "Last day for Zurich to tell you about a new premium"@en ;
+    ins:anchor :renewalDate ; ins:offset "-P25D" ; ins:who "Zurich" ;
+    ins:meaning "A change of premium or conditions for the next insurance year must reach you by this day."@en ;
+    ins:source art:4.5 .
+:CancelAfterChange a ins:Deadline ; ins:order 3 ; rdfs:label "Last day to cancel after a change of premium"@en ;
+    ins:anchor :renewalDate ; ins:offset "-P1D" ; ins:who "you" ;
+    ins:meaning "If Zurich raised the premium or changed the conditions, your cancellation must reach Zurich by the last day of the insurance year."@en ;
+    ins:source art:4.5 .
+:LegalCaseReport a ins:Deadline ; ins:order 4 ; rdfs:label "Last day to report a legal case"@en ;
+    ins:anchor :contractEnd ; ins:offset "P6M" ; ins:who "you" ;
+    ins:meaning "Legal cases reported later are not covered."@en ;
+    ins:source art:503 .
+:FirstDeductibleReduction a ins:Deadline ; ins:order 5 ; rdfs:label "First reduction of the deductible, and the no-claims bonus"@en ;
+    ins:anchor :claimFreeSince ; ins:offset "P3Y" ; ins:who "Zurich" ;
+    ins:meaning "After 3 full years without liability or collision benefits: the deductible goes down by 500 CHF, and the bonus is paid if agreed."@en ;
+    ins:source art:5, art:6.1 .
+:SecondDeductibleReduction a ins:Deadline ; ins:order 6 ; rdfs:label "Second reduction of the deductible"@en ;
+    ins:anchor :claimFreeSince ; ins:offset "P6Y" ; ins:who "Zurich" ;
+    ins:meaning "After 3 more years without claims: 500 CHF less again, but not below 0."@en ;
+    ins:source art:6.1 .
+:FiveYearsAfterAccident a ins:Deadline ; ins:order 7 ; rdfs:label "End of the accident benefits"@en ;
+    ins:anchor :accidentDate ; ins:offset "P5Y" ; ins:who "Zurich" ;
+    ins:meaning "Medical expenses, the daily allowances (at most 730 days) and the degree of disability: within 5 years of the accident."@en ;
+    ins:source art:303.2, art:303.3, art:303.4, art:303.5 .
+:TerminateAfterClaim a ins:Deadline ; ins:order 8 ; rdfs:label "Last day to terminate after a claim"@en ;
+    ins:anchor :claimPaid ; ins:offset "P14D" ; ins:who "you and Zurich" ;
+    ins:meaning "Both sides can terminate the contract until this day. The cover then ends 14 days after the notice."@en ;
+    ins:source art:11 .
+:TheftTotalLoss a ins:Deadline ; ins:order 9 ; rdfs:label "A stolen vehicle becomes a total loss"@en ;
+    ins:anchor :theftReported ; ins:offset "P30D" ; ins:who "Zurich" ;
+    ins:meaning "If the vehicle is not found by this day, Zurich pays a total loss. If it is found before, Zurich pays the repair."@en ;
+    ins:source art:203.2, art:203.4 .
+:DeductiblePayment a ins:Deadline ; ins:order 10 ; rdfs:label "Last day to pay back the deductible"@en ;
+    ins:anchor :deductibleNotice ; ins:offset "P4W" ; ins:who "you" ;
+    ins:meaning "If you do not pay, Zurich sends a reminder with 14 more days. After that the contract ends."@en ;
+    ins:source art:6.2 .
+:PlatesRedemption a ins:Deadline ; ins:order 11 ; rdfs:label "Last day to take back the licence plates"@en ;
+    ins:anchor :platesDeposited ; ins:offset "P12M" ; ins:who "you" ;
+    ins:meaning "The insurance is suspended until then. If the plates stay deposited longer, the contract ends."@en ;
+    ins:source art:9 .
+:ProvisionalCover a ins:Deadline ; ins:order 12 ; rdfs:label "End of the provisional accidental damage cover"@en ;
+    ins:anchor :registrationDate ; ins:offset "P4W" ; ins:who "Zurich" ;
+    ins:meaning "A proof of insurance gives provisional cover for accidental damage, accident and roadside assistance for at most four weeks, until the policy arrives."@en ;
+    ins:source art:2 .

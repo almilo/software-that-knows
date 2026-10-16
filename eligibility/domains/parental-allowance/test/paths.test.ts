@@ -1,4 +1,4 @@
-// The maternity and paternity allowance, path by path. The test names cite the articles of the EOG
+// The maternity allowance and the other parent's allowance, path by path. The test names cite the articles of the EOG
 // that each path comes from. The date of the application is 2 October 2026.
 import { describe, expect, test } from "bun:test";
 import { createEngine, type Answers } from "../../../core/engine";
@@ -16,7 +16,7 @@ const mother = {
   status: "employed",
   monthlyIncome: 6000,
 };
-const father = { ...mother, parent: "father", legalFather: "yes", leaveStart: "2026-09-14" };
+const otherParent = { ...mother, parent: "otherParent", legalParent: "yes", leaveStart: "2026-09-14" };
 
 describe("evaluate(): the paths of the law", () => {
   test("an employed mother: 80 % of her daily income for 98 days, until the 98th day (EOG Art. 16b, 16c, 16d, 16e)", () => {
@@ -37,19 +37,25 @@ describe("evaluate(): the paths of the law", () => {
     expect(values(e).dailyAllowance).toBe(160);
   });
 
-  test("a father: 14 daily allowances, within the 6 months after the birth (EOG Art. 16i, 16j, 16k, 16l)", () => {
-    const e = evaluate(father);
+  test("the other parent: 14 daily allowances, within the 6 months after the birth, the day of the birth being the first (EOG Art. 16i, 16j, 16k, 16l)", () => {
+    const e = evaluate(otherParent);
     expect(e).toMatchObject({ findings: [], allowed: true });
-    expect(values(e)).toEqual({ dailyAllowance: 160, days: 14, totalAllowance: 2240, lastLeaveDay: "2027-03-01" });
+    expect(values(e)).toEqual({ dailyAllowance: 160, days: 14, totalAllowance: 2240, lastLeaveDay: "2027-02-28" });
     expect(e.nextSteps.map((s) => s.id)).toEqual(["Claim", "TakeWithinSixMonths"]);
-    expect(findings({ ...father, leaveStart: "2027-03-01" })).toEqual([]);
-    expect(findings({ ...father, leaveStart: "2027-03-02" })).toEqual(["LeaveOutsidePeriod"]);
-    expect(findings({ ...father, leaveStart: "2026-08-31" })).toEqual(["LeaveOutsidePeriod"]);
+    expect(findings({ ...otherParent, leaveStart: "2027-02-28" })).toEqual([]);
+    expect(findings({ ...otherParent, leaveStart: "2027-03-01" })).toEqual(["LeaveOutsidePeriod"]);
+    expect(findings({ ...otherParent, leaveStart: "2026-08-31" })).toEqual(["LeaveOutsidePeriod"]);
   });
 
-  test("only the legal father, at the birth or within 6 months (EOG Art. 16i)", () => {
-    expect(findings({ ...father, legalFather: "no" })).toEqual(["NotLegalFather"]);
-    expect(evaluate(mother).shown).not.toContain("legalFather");
+  test("only the legal other parent, at the birth or within 6 months (EOG Art. 16i)", () => {
+    expect(findings({ ...otherParent, legalParent: "no" })).toEqual(["NotLegalParent"]);
+    expect(evaluate(mother).shown).not.toContain("legalParent");
+  });
+
+  test("working in the spouse's business for a cash wage counts, with the monthly wage (EOG Art. 16b para. 1 c, 16i para. 1 d)", () => {
+    const e = evaluate({ ...mother, status: "spouseBusiness" });
+    expect(e).toMatchObject({ findings: [], allowed: true });
+    expect(values(e).dailyAllowance).toBe(160);
   });
 
   test("9 months of AHV insurance and 5 months of work (EOG Art. 16b para. 1, 16i)", () => {

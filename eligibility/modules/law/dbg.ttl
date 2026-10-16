@@ -1,7 +1,7 @@
 # A shared module: the articles of the DBG (SR 642.11) that the domains cite (prov:wasDerivedFrom),
 # with their labels in the abbreviations of each language.
-# NOT CHECKED against the consolidated text: written from memory, because fedlex.admin.ch was not
-# reachable when this module was written. Check every article before relying on it.
+# Checked against the consolidated text on fedlex.admin.ch on 16 October 2026 (in force since
+# 2 September 2026).
 # The comments are short summaries in English, not official texts.
 
 @prefix law:  <https://example.org/ch-law#> .
@@ -17,10 +17,10 @@ law:DBG a prov:Entity ;
   rdfs:comment "Federal Act on Direct Federal Taxation." .
 law:DBG-38 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
   rdfs:label "DBG Art. 38"@en , "DBG Art. 38"@de , "LIFD art. 38"@fr , "LIFD art. 38"@it ;
-  rdfs:comment "Capital benefits from pension provision are taxed separately from other income, at a reduced rate." .
+  rdfs:comment "Capital benefits from pension provision are taxed separately from other income, for the year in which they are paid, at one fifth of the rates." .
 law:DBG-95 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
   rdfs:label "DBG Art. 95"@en , "DBG Art. 95"@de , "LIFD art. 95"@fr , "LIFD art. 95"@it ;
-  rdfs:comment "Persons resident abroad who receive pension benefits from an earlier public-law employment are taxed at source." .
+  rdfs:comment "Persons resident abroad who receive pension benefits from an earlier public-law employment, from an employer or a pension institution in Switzerland, are taxed on them (tax at source)." .
 law:DBG-96 a prov:Entity ; prov:wasDerivedFrom law:DBG ;
   rdfs:label "DBG Art. 96"@en , "DBG Art. 96"@de , "LIFD art. 96"@fr , "LIFD art. 96"@it ;
-  rdfs:comment "Persons resident abroad who receive benefits from a private-law occupational pension institution are taxed at source." .
+  rdfs:comment "Persons resident abroad who receive benefits from a Swiss private-law occupational pension institution are taxed on them (tax at source)." .

@@ -71,13 +71,19 @@ describe("evaluate(): the paths of the law", () => {
     expect(findings({ ...small, annualContribution: 3000 })).toEqual(["NotSmall"]);
   });
 
-  test("to the EU or EFTA, with mandatory insurance there, the BVG part stays in Switzerland (FZG Art. 25f)", () => {
-    const eu = { ...ok, destination: "euEfta" };
-    expect(evaluate(eu).missing).toEqual(["insuredAbroad"]);
-    const e = evaluate({ ...eu, insuredAbroad: "yes" });
-    expect(e.findings.map((f) => [f.id, f.severity])).toEqual([["MandatoryPartStays", "Notice"]]);
-    expect(e.allowed).toBe(true);
-    expect(findings({ ...eu, insuredAbroad: "no" })).toEqual([]);
+  test("to the EU, Iceland or Norway with mandatory insurance there, or to Liechtenstein, the BVG part stays (FZG Art. 25f para. 1)", () => {
+    for (const destination of ["eu", "icelandNorway"]) {
+      const there = { ...ok, destination };
+      expect(evaluate(there).missing).toEqual(["insuredAbroad"]);
+      const e = evaluate({ ...there, insuredAbroad: "yes" });
+      expect(e.findings.map((f) => [f.id, f.severity])).toEqual([["MandatoryPartStays", "Notice"]]);
+      expect(e.allowed).toBe(true);
+      expect(findings({ ...there, insuredAbroad: "no" })).toEqual([]);
+    }
+    const liechtenstein = evaluate({ ...ok, destination: "liechtenstein" });
+    expect(liechtenstein.shown).not.toContain("insuredAbroad");
+    expect(liechtenstein.findings.map((f) => f.id)).toEqual(["MandatoryPartStays"]);
+    expect(liechtenstein.findings[0]!.sources).toEqual(["FZG-4-1", "FZG-25f-1"]);
   });
 
   test("married: the consent of the module, with this law as its basis (FZG Art. 5 para. 2 and 3)", () => {

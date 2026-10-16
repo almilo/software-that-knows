@@ -5,8 +5,8 @@
 #   DBG   Federal Act on Direct Federal Taxation (SR 642.11), Art. 38, 95 and 96, for the tax
 #
 # Demonstration only: not legal or financial advice, not checked by a lawyer or a pension fund.
-# NOT CHECKED against the consolidated texts: the articles were written from memory, because
-# fedlex.admin.ch was not reachable when this model was written. Check them before relying on it.
+# The articles were checked against the consolidated texts on fedlex.admin.ch on 16 October 2026
+# (FZG in force since 1 January 2024, DBG in force since 2 September 2026).
 #
 # Reuse: this domain is the second process on the same shared modules as wef. It imports
 #   modules/person.ttl    date of birth, marriage, the spouse's consent, its finding and next step
@@ -23,8 +23,8 @@
 #   - "Before an insured event": the model checks only the reference age of the fund's regulations.
 #     Leaving after the earliest age for early retirement (FZG Art. 2 para. 1bis), disability and
 #     death are left out.
-#   - FZG Art. 25f: "a state of the EU or EFTA" stands for the states that the agreements on the free
-#     movement of persons cover; the special rules for Liechtenstein are left out.
+#   - FZG Art. 25f: the restriction applies to a person who stays insured under the mandatory scheme
+#     of an EU member state, or of Iceland or Norway, and to every person who lives in Liechtenstein.
 #   - The annual contribution of FZG Art. 5 para. 1 c is the person's own contribution, as the
 #     pension certificate gives it.
 
@@ -68,9 +68,13 @@ fzg:smallAmount
 fzg:otherReason
   rdfs:label "Another reason"@en , "Ein anderer Grund"@de , "Une autre raison"@fr , "Un altro motivo"@it .
 
-fzg:euEfta
-  rdfs:label "In a state of the EU or EFTA"@en , "In einem Staat der EU oder der EFTA"@de ,
-             "Dans un État de l'UE ou de l'AELE"@fr , "In uno Stato dell'UE o dell'AELS"@it .
+fzg:eu
+  rdfs:label "In a member state of the EU"@en , "In einem Mitgliedstaat der EU"@de ,
+             "Dans un État membre de l'UE"@fr , "In uno Stato membro dell'UE"@it .
+fzg:icelandNorway
+  rdfs:label "In Iceland or Norway"@en , "In Island oder Norwegen"@de , "En Islande ou en Norvège"@fr , "In Islanda o in Norvegia"@it .
+fzg:liechtenstein
+  rdfs:label "In Liechtenstein"@en , "In Liechtenstein"@de , "Au Liechtenstein"@fr , "Nel Liechtenstein"@it .
 fzg:otherCountry
   rdfs:label "In another country"@en , "In einem anderen Land"@de , "Dans un autre pays"@fr , "In un altro Paese"@it .
 
@@ -93,10 +97,10 @@ fzg:ApplicationShape a sh:NodeShape ;
   rdfs:label "Your vested benefit in cash"@en , "Barauszahlung der Freizügigkeitsleistung"@de ,
              "Paiement en espèces de la prestation de libre passage"@fr , "Pagamento in contanti della prestazione di libero passaggio"@it ;
   rdfs:comment
-    "Demonstration only. Not legal or financial advice. Simplified from FZG Art. 2–5 and 25f, not checked by a lawyer or a pension fund, and not yet checked against the consolidated texts. Your pension fund's regulations decide."@en ,
-    "Nur zur Demonstration. Keine Rechts- oder Finanzberatung. Vereinfacht nach FZG Art. 2–5 und 25f, nicht von einer Anwältin oder einer Pensionskasse geprüft und noch nicht mit den konsolidierten Texten verglichen. Massgebend ist das Reglement Ihrer Pensionskasse."@de ,
-    "Démonstration uniquement. Pas un conseil juridique ou financier. Simplifié d'après les art. 2 à 5 et 25f LFLP, non vérifié par un avocat ni par une caisse de pension, ni encore comparé aux textes consolidés. Le règlement de votre caisse de pension fait foi."@fr ,
-    "Solo a scopo dimostrativo. Non è una consulenza legale o finanziaria. Semplificato dagli art. 2–5 e 25f LFLP, non verificato da un avvocato né da una cassa pensioni, né ancora confrontato con i testi consolidati. Fa stato il regolamento della sua cassa pensioni."@it ;
+    "Demonstration only. Not legal or financial advice. Simplified from FZG Art. 2–5 and 25f, and not checked by a lawyer or a pension fund. Your pension fund's regulations decide."@en ,
+    "Nur zur Demonstration. Keine Rechts- oder Finanzberatung. Vereinfacht nach FZG Art. 2–5 und 25f, nicht von einer Anwältin oder einer Pensionskasse geprüft. Massgebend ist das Reglement Ihrer Pensionskasse."@de ,
+    "Démonstration uniquement. Pas un conseil juridique ou financier. Simplifié d'après les art. 2 à 5 et 25f LFLP, non vérifié par un avocat ni par une caisse de pension. Le règlement de votre caisse de pension fait foi."@fr ,
+    "Solo a scopo dimostrativo. Non è una consulenza legale o finanziaria. Semplificato dagli art. 2–5 e 25f LFLP, non verificato da un avvocato né da una cassa pensioni. Fa stato il regolamento della sua cassa pensioni."@it ;
   sh:property
     [ sh:path fzg:heldBy ; sh:in ( fzg:inPensionFund fzg:inVestedBenefitsInstitution ) ; sh:minCount 1 ;
       sh:group fzg:cashPayment ; sh:order 1 ;
@@ -116,21 +120,21 @@ fzg:ApplicationShape a sh:NodeShape ;
       sh:name "Why do you want the money in cash?"@en , "Weshalb möchten Sie das Geld bar?"@de ,
               "Pourquoi souhaitez-vous l'argent en espèces ?"@fr , "Perché desidera il denaro in contanti?"@it ;
       prov:wasDerivedFrom law:FZG-5-1 ] ,
-    [ sh:path fzg:destination ; sh:in ( fzg:euEfta fzg:otherCountry ) ; sh:minCount 1 ;
+    [ sh:path fzg:destination ; sh:in ( fzg:eu fzg:icelandNorway fzg:liechtenstein fzg:otherCountry ) ; sh:minCount 1 ;
       sh:group fzg:cashPayment ; sh:order 4 ;
       form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:reason fzg:leavingSwitzerland }" ] ;
       sh:name "Where will you live?"@en , "Wo werden Sie wohnen?"@de , "Où allez-vous habiter ?"@fr , "Dove abiterà?"@it ;
-      prov:wasDerivedFrom law:FZG-25f ] ,
+      prov:wasDerivedFrom law:FZG-25f-1 ] ,
     [ sh:path fzg:insuredAbroad ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
       sh:group fzg:cashPayment ; sh:order 5 ;
-      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:destination fzg:euEfta }" ] ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:destination ?d FILTER (?d IN (fzg:eu, fzg:icelandNorway)) }" ] ;
       sh:name "Will you be insured there under the mandatory scheme for old age, survivors and disability?"@en ,
               "Werden Sie dort für Alter, Tod und Invalidität obligatorisch versichert sein?"@de ,
               "Y serez-vous assuré obligatoirement pour la vieillesse, le décès et l'invalidité ?"@fr ,
               "Vi sarà assicurato obbligatoriamente per la vecchiaia, il decesso e l'invalidità?"@it ;
       sh:description "For example because you work there."@en , "Zum Beispiel, weil Sie dort arbeiten."@de ,
                      "Par exemple parce que vous y travaillez."@fr , "Ad esempio perché vi lavora."@it ;
-      prov:wasDerivedFrom law:FZG-25f ] ,
+      prov:wasDerivedFrom law:FZG-25f-1 ] ,
     [ sh:path fzg:stillMandatory ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
       sh:group fzg:cashPayment ; sh:order 6 ;
       form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:reason fzg:selfEmployment }" ] ;
@@ -193,7 +197,12 @@ fzg:ApplicationShape sh:rule
   [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
     sh:construct """
       CONSTRUCT { $this form:finding fzg:MandatoryPartStays }
-      WHERE { $this fzg:reason fzg:leavingSwitzerland ; fzg:destination fzg:euEfta ; fzg:insuredAbroad form:yes }""" ] ,
+      WHERE {
+        $this fzg:reason fzg:leavingSwitzerland .
+        { $this fzg:destination ?d ; fzg:insuredAbroad form:yes FILTER (?d IN (fzg:eu, fzg:icelandNorway)) }
+        UNION
+        { $this fzg:destination fzg:liechtenstein }
+      }""" ] ,
 
   [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
     sh:construct """
@@ -263,11 +272,11 @@ fzg:NotSmall a form:Finding ; form:severity form:Refusal ;
 fzg:MandatoryPartStays a form:Finding ; form:severity form:Notice ;
   rdfs:label "Only part of the money can be paid in cash"@en , "Nur ein Teil des Geldes kann bar ausbezahlt werden"@de ,
              "Seule une partie de l'argent peut être versée en espèces"@fr , "Solo una parte del denaro può essere versata in contanti"@it ;
-  rdfs:comment "The minimum retirement assets of the BVG stay in Switzerland, on a vested benefits account or policy, until an insured event. Only the part above them can be paid in cash."@en ,
-               "Das BVG-Altersguthaben bleibt bis zum Vorsorgefall in der Schweiz auf einem Freizügigkeitskonto oder einer Freizügigkeitspolice. Nur der Teil darüber kann bar ausbezahlt werden."@de ,
-               "L'avoir de vieillesse LPP reste en Suisse sur un compte ou une police de libre passage jusqu'au cas de prévoyance. Seule la part qui le dépasse peut être versée en espèces."@fr ,
-               "L'avere di vecchiaia LPP resta in Svizzera su un conto o una polizza di libero passaggio fino al caso di previdenza. Solo la parte che lo supera può essere versata in contanti."@it ;
-  prov:wasDerivedFrom law:FZG-25f .
+  rdfs:comment "The retirement assets under the BVG that you earned until you leave the fund cannot be paid in cash; they stay on a vested benefits account or policy. Only the part above them can be paid in cash."@en ,
+               "Das BVG-Altersguthaben, das Sie bis zum Austritt erworben haben, kann nicht bar ausbezahlt werden; es bleibt auf einem Freizügigkeitskonto oder einer Freizügigkeitspolice. Nur der Teil darüber kann bar ausbezahlt werden."@de ,
+               "L'avoir de vieillesse LPP acquis jusqu'à votre sortie ne peut pas être versé en espèces ; il reste sur un compte ou une police de libre passage. Seule la part qui le dépasse peut être versée en espèces."@fr ,
+               "L'avere di vecchiaia LPP acquisito fino all'uscita non può essere versato in contanti; resta su un conto o una polizza di libero passaggio. Solo la parte che lo supera può essere versata in contanti."@it ;
+  prov:wasDerivedFrom law:FZG-25f-1 , law:FZG-4-1 .
 
 fzg:ProofOfDeparture a form:NextStep ; sh:order 1 ;
   rdfs:label "Attach the confirmation of your municipality that you deregistered."@en , "Legen Sie die Abmeldebestätigung Ihrer Gemeinde bei."@de ,

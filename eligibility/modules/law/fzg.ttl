@@ -1,7 +1,7 @@
 # A shared module: the articles of the FZG (SR 831.42) that the domains cite (prov:wasDerivedFrom),
 # with their labels in the abbreviations of each language.
-# NOT CHECKED against the consolidated text: written from memory, because fedlex.admin.ch was not
-# reachable when this module was written. Check every article before relying on it.
+# Checked against the consolidated text on fedlex.admin.ch on 16 October 2026 (in force since
+# 1 January 2024).
 # The comments are short summaries in English, not official texts.
 
 @prefix law:  <https://example.org/ch-law#> .
@@ -29,7 +29,7 @@ law:FZG-3-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
   rdfs:comment "When the person joins a new pension fund, the former fund transfers the vested benefit to it." .
 law:FZG-4-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
   rdfs:label "FZG Art. 4 para. 1"@en , "FZG Art. 4 Abs. 1"@de , "LFLP art. 4 al. 1"@fr , "LFLP art. 4 cpv. 1"@it ;
-  rdfs:comment "A person who does not join a new pension fund keeps the pension protection with a vested benefits policy or a vested benefits account." .
+  rdfs:comment "A person who does not join a new pension fund tells the fund in which permitted form to keep the pension protection: a vested benefits policy or account (FZV Art. 10)." .
 law:FZG-5-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
   rdfs:label "FZG Art. 5 para. 1"@en , "FZG Art. 5 Abs. 1"@de , "LFLP art. 5 al. 1"@fr , "LFLP art. 5 cpv. 1"@it ;
   rdfs:comment "Cash payment if the person a. leaves Switzerland for good (Art. 25f reserved), b. starts a self-employed activity and is no longer subject to mandatory occupational pension insurance, or c. the vested benefit is less than the person's annual contribution." .
@@ -38,7 +38,7 @@ law:FZG-5-2 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
   rdfs:comment "A married person or a person in a registered partnership gets a cash payment only with the written consent of the spouse or partner." .
 law:FZG-5-3 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
   rdfs:label "FZG Art. 5 para. 3"@en , "FZG Art. 5 Abs. 3"@de , "LFLP art. 5 al. 3"@fr , "LFLP art. 5 cpv. 3"@it ;
-  rdfs:comment "If the consent cannot be obtained, or is refused without a valid reason, the person can ask the court." .
-law:FZG-25f a prov:Entity ; prov:wasDerivedFrom law:FZG ;
-  rdfs:label "FZG Art. 25f"@en , "FZG Art. 25f"@de , "LFLP art. 25f"@fr , "LFLP art. 25f"@it ;
-  rdfs:comment "A person who leaves Switzerland for good and stays insured under a mandatory scheme for old age, survivors and disability in a state of the EU or EFTA gets no cash payment of the minimum retirement assets under the BVG." .
+  rdfs:comment "If the consent cannot be obtained, or is refused without a valid reason, the person can ask the civil court." .
+law:FZG-25f-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 25f para. 1"@en , "FZG Art. 25f Abs. 1"@de , "LFLP art. 25f al. 1"@fr , "LFLP art. 25f cpv. 1"@it ;
+  rdfs:comment "A person who leaves Switzerland for good cannot ask for the retirement assets under BVG Art. 15, earned until leaving the fund, in cash if the person a. stays insured under the mandatory scheme for old age, death and disability of a member state of the EU, b. of Iceland or Norway, or c. lives in Liechtenstein." .

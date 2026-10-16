@@ -17,7 +17,7 @@
         },
         {
           "type": "Control",
-          "scope": "#/properties/legalFather"
+          "scope": "#/properties/legalParent"
         },
         {
           "type": "Control",

@@ -7,14 +7,14 @@
       "type": "string",
       "enum": [
         "mother",
-        "father"
+        "otherParent"
       ]
     },
     "childBirthDate": {
       "type": "string",
       "format": "date"
     },
-    "legalFather": {
+    "legalParent": {
       "type": "string",
       "enum": [
         "yes",
@@ -44,6 +44,7 @@
       "enum": [
         "employed",
         "selfEmployed",
+        "spouseBusiness",
         "otherStatus"
       ]
     },

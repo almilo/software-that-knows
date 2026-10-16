@@ -1,4 +1,4 @@
-// The parental-allowance domain: the maternity and paternity allowance (EOG Art. 16b–16l).
+// The parental-allowance domain: the maternity allowance and the other parent's allowance (EOG Art. 16b–16l).
 // Its model, the law module that it imports, and the files generated from them, as the app and the
 // tests use them. It imports no shared module of knowledge: see its model.
 import type { DomainFiles } from "../../app/domain";

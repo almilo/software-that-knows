@@ -57,7 +57,9 @@
     "destination": {
       "type": "string",
       "enum": [
-        "euEfta",
+        "eu",
+        "icelandNorway",
+        "liechtenstein",
         "otherCountry"
       ]
     },

@@ -7,7 +7,7 @@ Each folder is one self-contained demo.
 | Demo | What it shows |
 | --- | --- |
 | [`imci-fever/`](imci-fever/) | A knowledge model of the fever part of WHO's IMCI guidance, and an app generated from it |
-| [`eligibility/`](eligibility/) | A generic wizard for applications under a law or an ordinance: knowledge models with their rules as SPARQL and their texts in several languages, run in the browser. Three domains: the early withdrawal of pension money for a home (BVG Art. 30a–30g, WEFV), the vested benefit in cash (FZG) and the maternity and paternity allowance (EOG); the first two share modules of knowledge |
+| [`eligibility/`](eligibility/) | A generic wizard for applications under a law or an ordinance: knowledge models with their rules as SPARQL and their texts in several languages, run in the browser. Three domains: the early withdrawal of pension money for a home (BVG Art. 30a–30g, WEFV), the vested benefit in cash (FZG) and the maternity and other parent's allowance (EOG); the first two share modules of knowledge |
 
 > **Demonstrations only.** `imci-fever` is not a medical device: do not use it to assess or treat anyone.
 > `eligibility` is not legal or financial advice.

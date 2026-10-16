@@ -11,11 +11,9 @@ application for real use.
 | --- | --- | --- | --- |
 | [`wef`](domains/wef/) | Pension money for a home (BVG Art. 30a–30g, WEFV) | `person`, `pension` | `/eligibility/wef/` |
 | [`vested-benefits`](domains/vested-benefits/) | The vested benefit in cash (FZG Art. 2–5, 25f) | `person`, `pension` | `/eligibility/vested-benefits/` |
-| [`parental-allowance`](domains/parental-allowance/) | Maternity and paternity allowance (EOG Art. 16b–16l) | none | `/eligibility/parental-allowance/` |
+| [`parental-allowance`](domains/parental-allowance/) | Maternity and other parent's allowance (EOG Art. 16b–16l) | none | `/eligibility/parental-allowance/` |
 
-> **Demonstration only. Not legal or financial advice.** See each domain for what was checked. The
-> articles of `vested-benefits` and `parental-allowance` are not yet checked against the
-> consolidated texts.
+> **Demonstration only. Not legal or financial advice.** See each domain for what was checked.
 
 ## How it works
 
@@ -138,8 +136,8 @@ vocabulary and the app, which every domain shares):
 ┌────────────────────┬─────────┬─────────┬──────────────────────────────┬───────────┬─────────────────────────┐
 │                    │ fields  │ rules   │ findings, next steps, values │ texts     │ articles in shared acts │
 ├────────────────────┼─────────┼─────────┼──────────────────────────────┼───────────┼─────────────────────────┤
-│ parental-allowance │ 0 of 9  │ 0 of 15 │ 0 of 14                      │ 0 of 172  │ 0 of 9                  │
-│    vested-benefits │ 6 of 13 │ 2 of 12 │ 2 of 13                      │ 56 of 204 │ 1 of 13                 │
+│ parental-allowance │ 0 of 9  │ 0 of 15 │ 0 of 14                      │ 0 of 176  │ 0 of 10                 │
+│    vested-benefits │ 6 of 13 │ 2 of 12 │ 2 of 13                      │ 56 of 212 │ 1 of 13                 │
 │                wef │ 6 of 17 │ 2 of 18 │ 2 of 22                      │ 56 of 288 │ 9 of 23                 │
 └────────────────────┴─────────┴─────────┴──────────────────────────────┴───────────┴─────────────────────────┘
 ```

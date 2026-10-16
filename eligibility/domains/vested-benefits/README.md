@@ -10,9 +10,10 @@ finding and next step names its article with `prov:wasDerivedFrom`, and the app 
 texts are in English, German, French and Italian.
 
 > **Demonstration only. Not legal or financial advice.** Not checked by a lawyer or a pension fund.
-> **Not checked against the consolidated texts:** the articles were written from memory, because
-> fedlex.admin.ch was not reachable when the model was written. Check each article on
-> [fedlex.admin.ch](https://www.fedlex.admin.ch) before relying on it.
+> The articles were checked against the consolidated texts on
+> [fedlex.admin.ch](https://www.fedlex.admin.ch) on 16 October 2026: the FZG in force since
+> 1 January 2024 and the DBG in force since 2 September 2026. The translations use the official terms
+> but are not official texts. Each pension fund's regulations decide the reference age.
 
 ## Reuse
 
@@ -26,7 +27,7 @@ fzg:Application rdfs:subClassOf pension:PensionApplication .
 person:ConsentMissing prov:wasDerivedFrom law:FZG-5-2 , law:FZG-5-3 .
 ```
 
-`bun run reuse` (in `eligibility/`) counts it: 6 of its 13 fields and 56 of its 204 texts come from
+`bun run reuse` (in `eligibility/`) counts it: 6 of its 13 fields and 56 of its 212 texts come from
 the modules.
 
 | File | What it holds |
@@ -44,14 +45,22 @@ the modules.
 | FZG Art. 2 para. 3 and 4 | Due when the person leaves the fund; interest, and interest on arrears after 30 days |
 | FZG Art. 3, 4 | Without a reason for a cash payment: a new fund, or a vested benefits account or policy |
 | FZG Art. 5 para. 1 | The reasons: leaving Switzerland for good, self-employment without mandatory insurance, an amount below the annual contribution |
-| FZG Art. 5 para. 2 and 3 | The written consent of the spouse or registered partner (shared with wef); the court |
-| FZG Art. 25f | To the EU or EFTA, with mandatory insurance there: the BVG part stays in Switzerland |
+| FZG Art. 5 para. 2 and 3 | The written consent of the spouse or registered partner (shared with wef); the civil court |
+| FZG Art. 25f para. 1 | To an EU member state, Iceland or Norway with mandatory insurance there, or to Liechtenstein: the BVG retirement assets cannot be paid in cash |
 | DBG Art. 38, 95, 96 | Taxed as a capital benefit; at source when the person lives abroad |
 | BVG Art. 13 | The reference age (shared with wef) |
 
 Left out: leaving after the earliest age for early retirement (FZG Art. 2 para. 1bis), disability
-and death, divorce (FZG Art. 22), the special rules for Liechtenstein, and the amounts of the vested
+and death, divorce (FZG Art. 22), and the amounts of the vested
 benefit (FZG Art. 15 to 19): the person gives the amount from the fund's statement.
+
+## Review against Fedlex
+
+The first version was written from memory. The review against the consolidated texts found one
+error, now corrected: FZG Art. 25f para. 1 also restricts the cash payment for a person who lives
+in Liechtenstein, whether insured there or not, and it names Iceland and Norway apart from the EU.
+The model had "a state of the EU or EFTA" with mandatory insurance. The other articles were right;
+some summaries were made more exact (the civil court of Art. 5 para. 3, the forms of Art. 4).
 
 ## Licence
 

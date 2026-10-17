@@ -18,7 +18,8 @@ the same. It is a demonstration of the approach, not an application for real use
 | Folder | What it holds |
 | --- | --- |
 | [`knowledge/`](knowledge/) | The only source of truth, for every stack: the form vocabulary (`ontology/form.ttl`), the shared modules (`modules/`) and the domains (`domains/<name>/ontology/`) |
-| [`conformance/`](conformance/) | The shared test cases: for each domain, applications and what every stack must decide for them |
+| [`conformance/`](conformance/) | The shared test cases: for each domain, applications and what every stack must decide for them; in `display/`, how every stack writes values |
+| [`fixtures/`](fixtures/) | A test domain (a fictional library card) that the tests of every stack add to a copy of the knowledge model |
 | [`react-bun/`](react-bun/) | The browser stack: React, JSON Forms and Oxigraph (WebAssembly). A generator writes its files from the model; the rules run in the browser. [Its README](react-bun/README.md) describes the model, the modules, the engine and the wizard in detail |
 | [`java/`](java/) | The Java stacks, one Gradle build: `eligibility-core` (Apache Jena), `vaadin-app` (Vaadin + Spring Boot) and `flowable-app` (Spring Boot + Flowable) |
 
@@ -56,6 +57,19 @@ inexact decimal division left more digits than it keeps; the model now computes 
 The Java core also checks that it reads the same texts as the TypeScript generator writes, and that
 it adds durations to dates as Oxigraph does.
 
+`conformance/display/format.json` holds how every stack writes values for a person: numbers, dates
+and choices, in the four languages. The platforms do not agree on the separators of numbers (for
+en-CH, Chrome writes 150'000, Bun and the JDK 150’000), so the form vocabulary says how numbers are
+written in a region (`form:NumberFormat`), and both cores use it.
+
+## A new domain needs only its model
+
+`fixtures/domains/library-card/` is a test domain: every kind of question, a question asked only
+after a rule derives a fact, a refusal, a value and next steps. The tests of every stack copy the
+knowledge model, add it, and run it with no change to their code: the React generator writes its
+files and the engine decides; the Java core reads it; the Vaadin wizard asks, decides and derives;
+the Flowable pages show its form and its applications run through the same process.
+
 ## Adding a domain
 
 1. Write the model in `knowledge/domains/<name>/ontology/` (see
@@ -63,7 +77,8 @@ it adds durations to dates as Oxigraph does.
    `form:summary` and a `form:region`, its fields, rules, values, findings, next steps and sources;
    import the shared modules that it needs.
 2. In `react-bun/`: `bun run generate`, then `bun run conformance`.
-3. Nothing changes in the Java stacks: they find the domain in `knowledge/`.
+3. Nothing changes in the Java stacks: they find the domain in `knowledge/`. The test domain shows
+   it for every stack.
 
 ## Commands
 
@@ -72,7 +87,8 @@ cd react-bun && bun install && bun run dev      # http://127.0.0.1:3518/
 cd react-bun && bun run test                    # tests, the shared cases included
 cd react-bun && bun run conformance             # record the shared cases again
 
-cd java && ./gradlew build                      # Java tests, the shared cases included
+cd java && ./gradlew build                      # Java tests and format check, the shared cases included
+cd java && ./gradlew spotlessApply              # format the Java code
 cd java && ./gradlew :vaadin-app:bootRun        # http://localhost:3520/
 cd java && ./gradlew :flowable-app:bootRun      # http://localhost:3521/
 ```

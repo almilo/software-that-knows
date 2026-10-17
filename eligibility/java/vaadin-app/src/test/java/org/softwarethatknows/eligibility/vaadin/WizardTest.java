@@ -28,7 +28,11 @@ class WizardTest extends SpringBrowserlessTest {
     @Test
     void theListShowsEveryProcessOfTheModel() {
         navigate(ProcessListView.class);
-        assertEquals(java.util.List.of("Maternity and other parent's allowance", "Your vested benefit in cash", "Pension money for a home"),
+        assertEquals(
+                java.util.List.of(
+                        "Maternity and other parent's allowance",
+                        "Your vested benefit in cash",
+                        "Pension money for a home"),
                 find(H2.class).all().stream().map(H2::getText).toList());
     }
 
@@ -36,11 +40,16 @@ class WizardTest extends SpringBrowserlessTest {
     void wefAsksForTheHomeOnlyForAPurchaseAndAllowsACompleteApplication() {
         navigate("process/wef", ProcessView.class);
         find(DatePicker.class).withCaption("Date of birth").single().setValue(LocalDate.of(1986, 3, 15));
-        find(IntegerField.class).withCaption("Reference age in your pension fund's regulations (years)").single().setValue(65);
+        find(IntegerField.class)
+                .withCaption("Reference age in your pension fund's regulations (years)")
+                .single()
+                .setValue(65);
         test(radio("Are you married or in a registered partnership?")).selectItem("No");
         click("Next");
 
-        assertFalse(find(RadioButtonGroup.class).withCaption("What kind of home is it?").exists());
+        assertFalse(find(RadioButtonGroup.class)
+                .withCaption("What kind of home is it?")
+                .exists());
         test(radio("What is the money for?")).selectItem("Buy or build a home");
         assertTrue(radio("What kind of home is it?").isVisible());
         test(radio("What kind of home is it?")).selectItem("An apartment");
@@ -48,31 +57,52 @@ class WizardTest extends SpringBrowserlessTest {
         test(radio("Will you live there yourself?")).selectItem("Yes");
         click("Next");
 
-        find(BigDecimalField.class).withCaption("Your vested benefit today (CHF)").single().setValue(new BigDecimal("150000"));
-        find(BigDecimalField.class).withCaption("The amount you want to withdraw (CHF)").single().setValue(new BigDecimal("100000"));
+        find(BigDecimalField.class)
+                .withCaption("Your vested benefit today (CHF)")
+                .single()
+                .setValue(new BigDecimal("150000"));
+        find(BigDecimalField.class)
+                .withCaption("The amount you want to withdraw (CHF)")
+                .single()
+                .setValue(new BigDecimal("100000"));
         test(radio("Did you withdraw pension money for a home before?")).selectItem("No");
         click("Next");
 
-        assertTrue(find(com.vaadin.flow.component.html.H4.class).withText("No rule stops this application. You can submit it.").exists());
-        assertTrue(find(com.vaadin.flow.component.html.Span.class).withText("150’000").exists());
+        assertTrue(find(com.vaadin.flow.component.html.H4.class)
+                .withText("No rule stops this application. You can submit it.")
+                .exists());
+        assertTrue(find(com.vaadin.flow.component.html.Span.class)
+                .withText("150’000")
+                .exists());
     }
 
     @Test
     void nextWithAnOpenQuestionStaysAndSaysSo() {
         navigate("process/wef", ProcessView.class);
         click("Next");
-        assertTrue(find(Paragraph.class).withText("Answer the questions marked above to continue.").single().isVisible());
+        assertTrue(find(Paragraph.class)
+                .withText("Answer the questions marked above to continue.")
+                .single()
+                .isVisible());
         assertTrue(find(DatePicker.class).withCaption("Date of birth").single().isInvalid());
     }
 
     @Test
     void anotherLanguageTranslatesThePageAndKeepsTheAnswers() {
         navigate("process/wef", ProcessView.class);
-        find(IntegerField.class).withCaption("Reference age in your pension fund's regulations (years)").single().setValue(64);
+        find(IntegerField.class)
+                .withCaption("Reference age in your pension fund's regulations (years)")
+                .single()
+                .setValue(64);
         test(find(Select.class).single()).selectItem("Deutsch");
         assertEquals("Vorsorgegeld für Wohneigentum", find(H1.class).single().getText());
         assertEquals(Locale.GERMAN, com.vaadin.flow.component.UI.getCurrent().getLocale());
-        assertEquals(64, find(IntegerField.class).withCaption("Referenzalter gemäss Reglement Ihrer Pensionskasse (Jahre)").single().getValue());
+        assertEquals(
+                64,
+                find(IntegerField.class)
+                        .withCaption("Referenzalter gemäss Reglement Ihrer Pensionskasse (Jahre)")
+                        .single()
+                        .getValue());
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
@@ -86,6 +116,10 @@ class WizardTest extends SpringBrowserlessTest {
     }
 
     private void click(String text) {
-        test(find(Button.class).withText(text).all().stream().filter(Button::isVisible).findFirst().orElseThrow()).click();
+        test(find(Button.class).withText(text).all().stream()
+                        .filter(Button::isVisible)
+                        .findFirst()
+                        .orElseThrow())
+                .click();
     }
 }

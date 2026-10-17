@@ -19,10 +19,10 @@ in memory, so a restart forgets everything.
 | Element | What it does |
 | --- | --- |
 | Start event | The applicant submits (`flowable:initiator` records who) |
-| Service task *Decide with the knowledge model* | `CheckApplication` evaluates the answers with the core: `missing`, `allowed`, `nextSteps`, and `ruling` (the findings, next steps and values with their sources, the date of the decision, and the version of the model) |
+| Service task *Decide with the knowledge model* | `CheckApplication` evaluates the answers with the core and keeps the decision as one variable, `ruling` (`Ruling`): the core's evaluation, the date of the decision and the version of the model |
 | Gateway *What does the model decide?* | Incomplete: back to the applicant. Refused: ends. Allowed: to the office |
 | User task *Complete the application* | Assigned to the applicant, who changes the answers; the model decides again |
-| User task *Check a next step* | Parallel multi-instance over `nextSteps`: one task for each next step that the model derived, offered to the group `office`, due in 3 days. The reviewer marks it fulfilled or not, with a note |
+| User task *Check a next step* | Parallel multi-instance over `${ruling.nextStepIds()}`: one task for each next step that the model derived, offered to the group `office`, due in 3 days. The reviewer marks it fulfilled or not, with a note |
 | User task *Decide on the application* | Offered to `office`, due in 5 days: approve, reject (with a reason) or return to the applicant (with a note) |
 
 Nothing in the process knows a domain. A new domain in the knowledge model gets its form, its
@@ -40,6 +40,15 @@ decision and its office tasks without a change here.
 | History: activities, tasks, task variables | the application page: the history, the checks of the last decision, the diagram's marks |
 
 The pages read everything from Flowable's services; the app keeps no state of its own.
+
+## Classes
+
+| Class | What it is |
+| --- | --- |
+| `CheckApplication`, `Ruling` | The service task, and the decision that it keeps in the process |
+| `Applications`, `Bpmn`, `People` | The applications through Flowable's runtime, task, history and identity services; the ids of the process |
+| `Views`, `Form`, `Outcome` | What the pages show, with the texts of the model in the person's language |
+| `Pages`, `Actions`, `Diagram`, `Web` | The controllers (reading, acting), the translated process for bpmn-js, the language and the person you act as |
 
 ## Pages
 
@@ -72,4 +81,5 @@ the knowledge model; the texts of this stack (the process, the tasks) are in
 `./gradlew :flowable-app:test`: `ApplicationProcessTest` runs the process (approval after the
 checks, refusal, an incomplete application, a return and its correction, a rejection that needs a
 reason, and every domain with cases from `conformance/`); `PagesTest` checks the pages through
-MockMvc (the form that follows the model, a submission, the office's tasks, German).
+MockMvc (the form that follows the model, a submission, the office's tasks, German);
+`TestDomainTest` runs the test domain of `fixtures/` through the pages and the process.

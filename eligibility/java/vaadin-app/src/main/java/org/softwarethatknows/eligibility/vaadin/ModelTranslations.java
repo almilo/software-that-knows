@@ -22,15 +22,21 @@ public class ModelTranslations implements I18NProvider {
     @Override
     public List<Locale> getProvidedLocales() {
         final var languages = processes.commonLanguages();
-        return languages.stream().sorted((a, b) -> a.equals("en") ? -1 : b.equals("en") ? 1 : a.compareTo(b)).map(Locale::of).toList();
+        return languages.stream()
+                .sorted((a, b) -> a.equals("en") ? -1 : b.equals("en") ? 1 : a.compareTo(b))
+                .map(Locale::of)
+                .toList();
     }
 
     @Override
     public String getTranslation(String key, Locale locale, Object... params) {
         final var separator = key.indexOf(':');
-        final var process = separator < 0 ? processes.all().getFirst() : processes.get(key.substring(0, separator)).orElseThrow();
+        final var process = separator < 0
+                ? processes.all().getFirst()
+                : processes.get(key.substring(0, separator)).orElseThrow();
         final var text = process.text(locale.getLanguage(), key.substring(separator + 1));
         if (params.length == 0 || !(params[0] instanceof Map<?, ?> values)) return text;
-        return values.entrySet().stream().reduce(text, (t, e) -> t.replace("{" + e.getKey() + "}", String.valueOf(e.getValue())), (a, b) -> a);
+        return values.entrySet().stream()
+                .reduce(text, (t, e) -> t.replace("{" + e.getKey() + "}", String.valueOf(e.getValue())), (a, b) -> a);
     }
 }

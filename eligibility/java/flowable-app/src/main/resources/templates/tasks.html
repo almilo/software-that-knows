@@ -13,11 +13,11 @@
           <tr th:each="t : ${tasks}">
             <td>
               <a th:href="@{/applications/{id}(id=${t.application})}" th:text="#{'activity.' + ${t.activity}}">Task</a>
-              <div th:if="${t.step}" class="meta" th:text="${@model.text(t.domain, t.step + '.label')}">Step</div>
+              <div th:if="${t.step}" class="meta" th:text="${t.step}">Step</div>
             </td>
-            <td th:text="${@model.title(t.domain)}">Process</td>
-            <td th:text="${t.assignee == null} ? #{task.offered} : ${@model.person(t.assignee)}">Assigned to</td>
-            <td><span th:text="${@model.time(t.due)}">Due</span> <span class="badge overdue" th:if="${t.overdue}" th:text="#{task.overdue}">overdue</span></td>
+            <td th:text="${t.title}">Process</td>
+            <td th:text="${t.assignee.isEmpty()} ? #{task.offered} : ${t.assignee}">Assigned to</td>
+            <td><span th:text="${t.due}">Due</span> <span class="badge overdue" th:if="${t.overdue}" th:text="#{task.overdue}">overdue</span></td>
           </tr>
         </tbody>
       </table>

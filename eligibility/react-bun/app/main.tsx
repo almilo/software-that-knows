@@ -6,9 +6,9 @@ import { I18n, preferred, translator } from "./i18n";
 import { Wizard } from "./Wizard";
 
 function App({ domain }: { domain: Domain }) {
-  const { languages, messages, region, schema } = domain;
+  const { languages, messages, region, numbers, schema } = domain;
   const [language, setLanguage] = useState(() => preferred(languages));
-  const i18n = useMemo(() => translator(language, messages, region), [language]);
+  const i18n = useMemo(() => translator(language, messages, region, numbers), [language]);
   const { t } = i18n;
   useEffect(() => {
     document.documentElement.lang = language;

@@ -20,14 +20,25 @@ final class Outcome {
 
     static Component of(Evaluation e, Function<String, String> t, Function<Object, String> format) {
         final var outcome = new Div();
-        e.findings().forEach(f -> outcome.add(card(f.severity(), t.apply(f.severity() + ".label") + ": " + t.apply(f.id() + ".label"),
-                new Paragraph(t.apply(f.id() + ".comment")), sources(f.sources(), t))));
+        e.findings()
+                .forEach(f -> outcome.add(card(
+                        f.severity(),
+                        t.apply(f.severity() + ".label") + ": " + t.apply(f.id() + ".label"),
+                        new Paragraph(t.apply(f.id() + ".comment")),
+                        sources(f.sources(), t))));
         if (e.allowed()) {
-            final var steps = new UnorderedList(e.nextSteps().stream().map(s -> new ListItem(new Text(t.apply(s.id() + ".label") + " "), sources(s.sources(), t))).toArray(ListItem[]::new));
-            outcome.add(card("allowed", t.apply("allowed.label"), new Paragraph(t.apply("nextSteps.label") + ":"), steps));
+            final var steps = new UnorderedList(e.nextSteps().stream()
+                    .map(s -> new ListItem(new Text(t.apply(s.id() + ".label") + " "), sources(s.sources(), t)))
+                    .toArray(ListItem[]::new));
+            outcome.add(
+                    card("allowed", t.apply("allowed.label"), new Paragraph(t.apply("nextSteps.label") + ":"), steps));
         }
         if (!e.values().isEmpty()) {
-            final var values = new Div(e.values().stream().map(v -> new Div(new Span(t.apply(v.id() + ".label")), new Div(new Span(format.apply(v.value())), sources(v.sources(), t)))).toArray(Div[]::new));
+            final var values = new Div(e.values().stream()
+                    .map(v -> new Div(
+                            new Span(t.apply(v.id() + ".label")),
+                            new Div(new Span(format.apply(v.value())), sources(v.sources(), t))))
+                    .toArray(Div[]::new));
             values.addClassName("values");
             outcome.add(values);
         }
@@ -42,7 +53,8 @@ final class Outcome {
     }
 
     private static Component sources(List<String> ids, Function<String, String> t) {
-        final var sources = new Span(String.join(", ", ids.stream().map(id -> t.apply(id + ".label")).toList()));
+        final var sources = new Span(
+                String.join(", ", ids.stream().map(id -> t.apply(id + ".label")).toList()));
         sources.addClassName("sources");
         return sources;
     }

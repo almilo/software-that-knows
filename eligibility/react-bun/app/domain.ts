@@ -7,13 +7,15 @@ import { createSubmit } from "../core/submit";
 import { createEngine, today, type Answers } from "../core/engine";
 import { createSteps, type UiSchema } from "./steps";
 import { createValidator } from "../core/validate";
+import type { NumberFormat } from "../core/model";
 
 export type DomainFiles = {
   model: string[]; // the Turtle files of the domain
   schema: { i18n: string } & Record<string, unknown>; // generated/schema.json
   uischema: UiSchema; // generated/uischema.json
   messages: Record<string, unknown>; // generated/messages.json: texts by language
-  region: string; // from generated/domain.json: how dates and numbers are written
+  region: string; // from generated/domain.json: how dates are written
+  numbers: Record<string, NumberFormat>; // from generated/domain.json: how numbers are written, by language
 };
 
 // The engine needs the WebAssembly of Oxigraph to be ready (core/rdf.ts).
@@ -29,6 +31,7 @@ export function createDomain(files: DomainFiles) {
     messages,
     languages: Object.keys(messages),
     region: files.region,
+    numbers: files.numbers,
     steps: createSteps(files.uischema),
     validator,
     evaluate,

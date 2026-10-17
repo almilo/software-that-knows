@@ -1,4 +1,22 @@
 {
   "$comment": "Generated from knowledge/domains/parental-allowance/ontology/ by generator/generate.ts. Do not edit.",
-  "region": "CH"
+  "region": "CH",
+  "numbers": {
+    "de": {
+      "group": "’",
+      "decimal": "."
+    },
+    "en": {
+      "group": "’",
+      "decimal": "."
+    },
+    "fr": {
+      "group": " ",
+      "decimal": ","
+    },
+    "it": {
+      "group": "’",
+      "decimal": "."
+    }
+  }
 }

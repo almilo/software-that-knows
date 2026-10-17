@@ -52,7 +52,10 @@ class Step extends Composite<Div> implements LocaleChangeObserver {
 
     // The questions of this step that are asked and need an answer, but have none.
     List<String> missing(Evaluation e) {
-        return questions.stream().map(Question::name).filter(e.missing()::contains).toList();
+        return questions.stream()
+                .map(Question::name)
+                .filter(e.missing()::contains)
+                .toList();
     }
 
     @Override

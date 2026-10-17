@@ -19,4 +19,5 @@ export const vestedBenefits: DomainFiles = {
   uischema,
   messages,
   region: domain.region,
+  numbers: domain.numbers,
 };

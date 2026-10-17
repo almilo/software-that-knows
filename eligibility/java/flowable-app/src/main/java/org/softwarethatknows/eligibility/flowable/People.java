@@ -17,20 +17,29 @@ public class People {
         }
     }
 
-    public static final List<Person> ALL = List.of(new Person("alex", "Alex Meier", "applicants"), new Person("maria", "Maria Rossi", "office"), new Person("luca", "Luca Brunner", "office"));
+    public static final List<Person> ALL = List.of(
+            new Person("alex", "Alex Meier", "applicants"),
+            new Person("maria", "Maria Rossi", "office"),
+            new Person("luca", "Luca Brunner", "office"));
 
     public People(IdentityService identity) {
-        ALL.stream().map(Person::group).distinct().filter(g -> identity.createGroupQuery().groupId(g).count() == 0).forEach(g -> {
-            final var group = identity.newGroup(g);
-            group.setName(g);
-            identity.saveGroup(group);
-        });
-        ALL.stream().filter(p -> identity.createUserQuery().userId(p.id()).count() == 0).forEach(p -> {
-            final var user = identity.newUser(p.id());
-            user.setDisplayName(p.name());
-            identity.saveUser(user);
-            identity.createMembership(p.id(), p.group());
-        });
+        ALL.stream()
+                .map(Person::group)
+                .distinct()
+                .filter(g -> identity.createGroupQuery().groupId(g).count() == 0)
+                .forEach(g -> {
+                    final var group = identity.newGroup(g);
+                    group.setName(g);
+                    identity.saveGroup(group);
+                });
+        ALL.stream()
+                .filter(p -> identity.createUserQuery().userId(p.id()).count() == 0)
+                .forEach(p -> {
+                    final var user = identity.newUser(p.id());
+                    user.setDisplayName(p.name());
+                    identity.saveUser(user);
+                    identity.createMembership(p.id(), p.group());
+                });
     }
 
     public static Optional<Person> get(String id) {

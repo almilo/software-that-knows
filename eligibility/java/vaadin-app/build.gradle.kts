@@ -4,6 +4,7 @@ plugins {
     java
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.vaadin)
+    alias(libs.plugins.spotless)
 }
 
 java {
@@ -11,6 +12,15 @@ java {
 }
 
 repositories { mavenCentral() }
+
+// One format for the Java code, checked by the build (spotlessCheck) and applied by spotlessApply.
+spotless {
+    java {
+        target("src/*/java/**/*.java")
+        palantirJavaFormat(libs.versions.palantir.java.format.get())
+    }
+}
+
 
 dependencies {
     implementation(project(":eligibility-core"))
@@ -20,6 +30,7 @@ dependencies {
     developmentOnly(platform(libs.vaadin.bom))
     developmentOnly(libs.vaadin.dev)
     testImplementation(libs.spring.boot.starter.test)
+    testImplementation(testFixtures(project(":eligibility-core")))
     testImplementation(libs.vaadin.browserless.spring)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
@@ -32,4 +43,5 @@ tasks.named<org.springframework.boot.gradle.tasks.run.BootRun>("bootRun") {
 tasks.test {
     useJUnitPlatform()
     systemProperty("eligibility.knowledge", rootDir.resolve("../knowledge").canonicalPath)
+    systemProperty("eligibility.fixtures", rootDir.resolve("../fixtures").canonicalPath)
 }

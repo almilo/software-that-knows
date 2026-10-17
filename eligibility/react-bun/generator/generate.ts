@@ -5,7 +5,7 @@
 //   schema.json    JSON Forms schema
 //   uischema.json  JSON Forms UI schema
 //   messages.json  the texts, by language
-//   domain.json    what else the app needs: the region of its dates and numbers
+//   domain.json    what else the app needs: the region of its dates, and how it writes numbers
 // and, for all domains, generated/index.json: the list of processes (index.html) with its texts.
 // The rules need no generation: the engine runs the SPARQL of the model as it is (core/engine.ts).
 // Git tracks these files, so a review shows how a change to the model changes the app.
@@ -25,10 +25,11 @@ if (import.meta.main) {
   console.log(`Wrote ${Object.keys(files).join(", ")}`);
 }
 
-// The content of each generated file, by its path relative to the project root.
-export async function generateFiles() {
+// The content of each generated file, by its path relative to the project root. from: the knowledge
+// model to read; the tests give another one, with a test domain added.
+export async function generateFiles(from = knowledge) {
   await ready;
-  const generated = await Promise.all([...(await domains())].map(([name, paths]) => generateDomain(name, paths)));
+  const generated = await Promise.all([...(await domains(from))].map(([name, paths]) => generateDomain(name, paths, from)));
   return Object.fromEntries([...generated.flatMap((d) => d.files), generateIndex(generated)]);
 }
 
@@ -58,28 +59,30 @@ function summary(domain: string, text: string | undefined) {
 
 // The Turtle files of each domain, by domain name: its own (domains/<name>/ontology/) and the
 // modules that they import (modules/), directly or through another module.
-export async function domains() {
-  const paths = (await Array.fromAsync(new Bun.Glob("domains/*/ontology/*.ttl").scan({ cwd: knowledge }))).sort();
-  const index = await moduleIndex();
+export async function domains(from = knowledge) {
+  const paths = (await Array.fromAsync(new Bun.Glob("domains/*/ontology/*.ttl").scan({ cwd: from }))).sort();
+  const index = await moduleIndex(from);
   const own = Map.groupBy(paths, (path) => path.split("/")[1]!);
-  const entries = await Promise.all([...own].map(async ([name, files]): Promise<[string, string[]]> => [name, [...files, ...(await imported(files, index))]]));
+  const entries = await Promise.all(
+    [...own].map(async ([name, files]): Promise<[string, string[]]> => [name, [...files, ...(await imported(files, index, from))]]),
+  );
   return new Map(entries);
 }
 
 // Each module by the IRI of its ontology.
-async function moduleIndex() {
-  const paths = (await Array.fromAsync(new Bun.Glob("modules/**/*.ttl").scan({ cwd: knowledge }))).sort();
-  const entries = await Promise.all(paths.map(async (path) => ontologies(await text(path)).map((iri) => [iri, path] as const)));
+async function moduleIndex(from: string) {
+  const paths = (await Array.fromAsync(new Bun.Glob("modules/**/*.ttl").scan({ cwd: from }))).sort();
+  const entries = await Promise.all(paths.map(async (path) => ontologies(await text(path, from)).map((iri) => [iri, path] as const)));
   return new Map(entries.flat());
 }
 
 // The modules that the files import, and the modules that those import, without repeats.
-async function imported(files: string[], index: Map<string, string>, seen = new Set<string>()): Promise<string[]> {
-  const next = (await Promise.all(files.map(async (f) => imports(await text(f)))))
+async function imported(files: string[], index: Map<string, string>, from: string, seen = new Set<string>()): Promise<string[]> {
+  const next = (await Promise.all(files.map(async (f) => imports(await text(f, from)))))
     .flat()
     .flatMap((iri) => (index.has(iri) ? [index.get(iri)!] : []))
     .filter((path) => !seen.has(path) && seen.add(path));
-  return next.length === 0 ? [] : [...next, ...(await imported(next, index, seen))];
+  return next.length === 0 ? [] : [...next, ...(await imported(next, index, from, seen))];
 }
 
 function ontologies(turtle: string) {
@@ -93,16 +96,16 @@ function parse(turtle: string) {
   store.load(turtle, { format: "text/turtle" });
   return store;
 }
-function text(path: string) {
-  return Bun.file(`${knowledge}${path}`).text();
+function text(path: string, from: string) {
+  return Bun.file(`${from}${path}`).text();
 }
 
-async function generateDomain(name: string, paths: string[]) {
-  const store = loadModel(await Promise.all(paths.map(text)));
+async function generateDomain(name: string, paths: string[], from: string) {
+  const store = loadModel(await Promise.all(paths.map((path) => text(path, from))));
   const shape = readShape(store);
   const comment = `Generated from knowledge/domains/${name}/ontology/ by generator/generate.ts. Do not edit.`;
   const messages = generateMessages(store, shape);
-  const outputs = { ...generateForm(shape), messages, domain: { region: shape.region } };
+  const outputs = { ...generateForm(shape), messages, domain: { region: shape.region, numbers: shape.numbers } };
   const files = Object.entries(outputs).map(
     ([file, value]) => [`domains/${name}/generated/${file}.json`, JSON.stringify({ $comment: comment, ...value }, null, 2) + "\n"] as const,
   );
@@ -134,6 +137,7 @@ function entry(name: string, paths: string[], messages: Record<string, Record<st
     `  uischema,`,
     `  messages,`,
     `  region: domain.region,`,
+    `  numbers: domain.numbers,`,
     `};`,
     ``,
   ].join("\n");

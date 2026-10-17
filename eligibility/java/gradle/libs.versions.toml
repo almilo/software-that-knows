@@ -7,6 +7,8 @@ junit = "6.1.3"
 jackson = "2.22.3"
 htmx = "2.0.11"
 bpmn-js = "18.18.0"
+spotless = "8.9.0"
+palantir-java-format = "2.99.0"
 
 [libraries]
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
@@ -33,3 +35,4 @@ junit-params = { module = "org.junit.jupiter:junit-jupiter-params" }
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 vaadin = { id = "com.vaadin", version.ref = "vaadin" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }

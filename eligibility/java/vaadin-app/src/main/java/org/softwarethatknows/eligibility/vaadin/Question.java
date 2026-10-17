@@ -13,15 +13,13 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.softwarethatknows.eligibility.Catalog.Process;
 import org.softwarethatknows.eligibility.Field;
-import org.softwarethatknows.eligibility.Rdf;
 
-// A question of the model, as the input that its type needs: a choice (radio buttons for up to three
-// choices, otherwise a list), a date, a whole number or an amount. Its label, help text and choices
+// A question of the model, as the input that the core chooses for it: radio buttons or a list for a
+// choice, a date, a whole number or an amount. Its label, help text and choices
 // come from the model in the current language. Which questions are asked and which are missing is
 // for the engine to decide, not for the field: the wizard tells it.
 public class Question extends Composite<AbstractField<?, ?>> implements LocaleChangeObserver {
@@ -61,30 +59,32 @@ public class Question extends Composite<AbstractField<?, ?>> implements LocaleCh
         refreshChoiceLabels();
     }
 
+    // The input that the core chooses for the field (Field.input()).
     private AbstractField<?, ?> input(Field f, Consumer<Object> onAnswer) {
-        if (f.choices().isPresent()) {
-            final List<String> choices = f.choices().get().stream().map(Rdf::local).toList();
-            if (choices.size() <= 3) {
+        return switch (f.input()) {
+            case RADIO -> {
                 final var radio = new RadioButtonGroup<String>();
-                radio.setItems(choices);
-                return listen(radio, value -> value, onAnswer);
+                radio.setItems(f.choiceNames());
+                yield listen(radio, value -> value, onAnswer);
             }
-            final var select = new Select<String>();
-            select.setItems(choices);
-            return listen(select, value -> value, onAnswer);
-        }
-        final var type = f.datatype().orElse("");
-        if (type.endsWith("#date")) return listen(new DatePicker(), LocalDate::toString, onAnswer);
-        if (type.endsWith("#integer")) {
-            final var number = new IntegerField();
-            f.minimum().ifPresent(m -> number.setMin(m.intValue()));
-            f.maximum().ifPresent(m -> number.setMax(m.intValue()));
-            return listen(number, value -> value, onAnswer);
-        }
-        return listen(new BigDecimalField(), value -> value, onAnswer);
+            case SELECT -> {
+                final var select = new Select<String>();
+                select.setItems(f.choiceNames());
+                yield listen(select, value -> value, onAnswer);
+            }
+            case DATE -> listen(new DatePicker(), LocalDate::toString, onAnswer);
+            case INTEGER -> {
+                final var number = new IntegerField();
+                f.minimum().ifPresent(m -> number.setMin(m.intValue()));
+                f.maximum().ifPresent(m -> number.setMax(m.intValue()));
+                yield listen(number, value -> value, onAnswer);
+            }
+            case DECIMAL -> listen(new BigDecimalField(), value -> value, onAnswer);
+        };
     }
 
-    private static <V> AbstractField<?, V> listen(AbstractField<?, V> input, Function<V, Object> toAnswer, Consumer<Object> onAnswer) {
+    private static <V> AbstractField<?, V> listen(
+            AbstractField<?, V> input, Function<V, Object> toAnswer, Consumer<Object> onAnswer) {
         input.addValueChangeListener(e -> onAnswer.accept(e.getValue() == null ? null : toAnswer.apply(e.getValue())));
         return input;
     }

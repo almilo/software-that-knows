@@ -25,7 +25,10 @@ public final class Rdf {
     public static final String FORM = "https://example.org/form#";
 
     // For the queries of the core. The queries of a model declare their own.
-    public static final String PREFIXES = Map.of("rdf", RDF, "rdfs", RDFS, "xsd", XSD, "owl", OWL, "sh", SH, "prov", PROV, "form", FORM).entrySet().stream()
+    public static final String PREFIXES = Map.of(
+                    "rdf", RDF, "rdfs", RDFS, "xsd", XSD, "owl", OWL, "sh", SH, "prov", PROV, "form", FORM)
+            .entrySet()
+            .stream()
             .map(e -> "PREFIX %s: <%s>%n".formatted(e.getKey(), e.getValue()))
             .collect(Collectors.joining());
 
@@ -34,7 +37,9 @@ public final class Rdf {
     // The rows of a SELECT query.
     public static List<QuerySolution> select(Model model, String query) {
         try (final var execution = QueryExecutionFactory.create(PREFIXES + query, model)) {
-            return java.util.stream.StreamSupport.stream(java.util.Spliterators.spliteratorUnknownSize(execution.execSelect(), 0), false).toList();
+            return java.util.stream.StreamSupport.stream(
+                            java.util.Spliterators.spliteratorUnknownSize(execution.execSelect(), 0), false)
+                    .toList();
         }
     }
 
@@ -52,7 +57,8 @@ public final class Rdf {
         if (!node.isLiteral()) return local(node);
         final Literal literal = node.asLiteral();
         final var type = local(literal.getDatatypeURI() == null ? "" : literal.getDatatypeURI());
-        if (List.of("integer", "decimal", "double", "float").contains(type)) return new BigDecimal(literal.getLexicalForm()).stripTrailingZeros();
+        if (List.of("integer", "decimal", "double", "float").contains(type))
+            return new BigDecimal(literal.getLexicalForm()).stripTrailingZeros();
         return type.equals("boolean") ? Boolean.parseBoolean(literal.getLexicalForm()) : literal.getLexicalForm();
     }
 

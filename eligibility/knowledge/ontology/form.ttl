@@ -38,6 +38,23 @@ form:region a rdf:Property ;
   rdfs:domain sh:NodeShape ;
   rdfs:comment "The region whose way of writing dates and numbers the app uses: a two-letter code (ISO 3166-1), for example CH." .
 
+# How numbers are written in a region, in each language. The platforms do not agree on it: for
+# en-CH, Chrome writes 150'000, Bun and the JDK 150’000; for it-CH, Bun writes 1234.57, the JDK
+# 1’234.57. So the model says it, and every stack writes numbers alike. Dates are written by the
+# platform, in long form (15 March 1986): there they agree.
+form:NumberFormat a rdfs:Class ;
+  rdfs:comment "A way of writing numbers: in a region (form:region), in some languages (form:language), with a separator of thousands, from 1000, and a decimal separator." .
+form:language a rdf:Property ; rdfs:domain form:NumberFormat ; rdfs:comment "A language code (ISO 639-1)." .
+form:groupSeparator a rdf:Property ; rdfs:domain form:NumberFormat .
+form:decimalSeparator a rdf:Property ; rdfs:domain form:NumberFormat .
+
+form:SwissNumbers a form:NumberFormat ;
+  rdfs:comment "As the Federal Chancellery writes numbers in German and Italian: 1’234.57." ;
+  form:region "CH" ; form:language "de" , "en" , "it" ; form:groupSeparator "’" ; form:decimalSeparator "." .
+form:SwissFrenchNumbers a form:NumberFormat ;
+  rdfs:comment "As the Federal Chancellery writes numbers in French: 1 234,57, with a narrow no-break space." ;
+  form:region "CH" ; form:language "fr" ; form:groupSeparator "\u202F" ; form:decimalSeparator "," .
+
 form:summary a rdf:Property ;
   rdfs:domain sh:NodeShape ;
   rdfs:comment "One sentence about the process, with a language tag: the list of processes shows it under the title." .

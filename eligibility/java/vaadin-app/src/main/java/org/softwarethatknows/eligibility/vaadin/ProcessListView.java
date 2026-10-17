@@ -29,8 +29,12 @@ public class ProcessListView extends Main implements LocaleChangeObserver, HasDy
         intro.addClassName("intro");
         final var header = new Div(heading, new LanguageSelect(), intro);
         header.addClassName("header");
-        cards = processes.all().stream().map(p -> new Card(p, new H2(), new Paragraph(), new Span())).toList();
-        final var list = new Div(cards.stream().map(c -> new Anchor("process/" + c.process().name(), c.title(), c.summary(), c.open())).toArray(Anchor[]::new));
+        cards = processes.all().stream()
+                .map(p -> new Card(p, new H2(), new Paragraph(), new Span()))
+                .toList();
+        final var list = new Div(cards.stream()
+                .map(c -> new Anchor("process/" + c.process().name(), c.title(), c.summary(), c.open()))
+                .toArray(Anchor[]::new));
         list.addClassName("processes");
         add(header, list);
     }
@@ -40,8 +44,12 @@ public class ProcessListView extends Main implements LocaleChangeObserver, HasDy
         heading.setText(getTranslation("processes.label"));
         intro.setText(getTranslation("processesIntro.label"));
         cards.forEach(c -> {
-            c.title().setText(getTranslation(c.process().name() + ":" + c.process().shape().name() + ".label"));
-            c.summary().setText(getTranslation(c.process().name() + ":" + c.process().shape().name() + ".summary"));
+            c.title()
+                    .setText(getTranslation(
+                            c.process().name() + ":" + c.process().shape().name() + ".label"));
+            c.summary()
+                    .setText(getTranslation(
+                            c.process().name() + ":" + c.process().shape().name() + ".summary"));
             c.open().setText(getTranslation("open.label"));
         });
         getUI().ifPresent(ui -> ui.getPage().setTitle(getPageTitle()));

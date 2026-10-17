@@ -39,8 +39,14 @@ class DateArithmeticTest {
     void addsDurationsAsOxigraphDoes(Case c) {
         final var xsd = "http://www.w3.org/2001/XMLSchema#";
         final Model model = ModelFactory.createDefaultModel();
-        model.read(new StringReader("<urn:a> <urn:d> \"%s\"^^<%sdate> ; <urn:p> \"%s\"^^<%s%s> .".formatted(c.date(), xsd, c.duration(), xsd, c.type())), null, "TTL");
-        final var query = "SELECT ?v ?w WHERE { <urn:a> <urn:d> ?d ; <urn:p> ?p BIND (?d + ?p AS ?v) BIND ((?d + ?p) - \"P1D\"^^<%sdayTimeDuration> AS ?w) }".formatted(xsd);
+        model.read(
+                new StringReader("<urn:a> <urn:d> \"%s\"^^<%sdate> ; <urn:p> \"%s\"^^<%s%s> ."
+                        .formatted(c.date(), xsd, c.duration(), xsd, c.type())),
+                null,
+                "TTL");
+        final var query =
+                "SELECT ?v ?w WHERE { <urn:a> <urn:d> ?d ; <urn:p> ?p BIND (?d + ?p AS ?v) BIND ((?d + ?p) - \"P1D\"^^<%sdayTimeDuration> AS ?w) }"
+                        .formatted(xsd);
         try (final var execution = QueryExecutionFactory.create(query, model)) {
             final var row = execution.execSelect().next();
             assertEquals(c.plus(), lexical(row.get("v")), "date + duration");

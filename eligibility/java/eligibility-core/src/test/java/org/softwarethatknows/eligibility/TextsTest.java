@@ -15,19 +15,25 @@ import org.junit.jupiter.api.TestFactory;
 class TextsTest {
 
     private static final Knowledge KNOWLEDGE = Knowledge.at(Path.of(System.getProperty("eligibility.knowledge")));
-    private static final Path REACT = Path.of(System.getProperty("eligibility.knowledge")).resolve("../react-bun");
+    private static final Path REACT =
+            Path.of(System.getProperty("eligibility.knowledge")).resolve("../react-bun");
 
     @TestFactory
     Stream<DynamicTest> theTextsAreThoseOfMessagesJson() {
-        return KNOWLEDGE.domains().stream().map(name -> DynamicTest.dynamicTest(name, () -> {
-            final var engine = KNOWLEDGE.engine(name);
-            assertEquals(messages(name), Texts.read(engine.model(), engine.shape()));
-        }));
+        return KNOWLEDGE.domains().stream()
+                .map(name -> DynamicTest.dynamicTest(name, () -> {
+                    final var engine = KNOWLEDGE.engine(name);
+                    assertEquals(messages(name), Texts.read(engine.model(), engine.shape()));
+                }));
     }
 
     @SuppressWarnings("unchecked")
     private static Map<String, Object> messages(String name) throws IOException {
-        final Map<String, Object> all = new ObjectMapper().readValue(REACT.resolve("domains/" + name + "/generated/messages.json").toFile(), Map.class);
+        final Map<String, Object> all = new ObjectMapper()
+                .readValue(
+                        REACT.resolve("domains/" + name + "/generated/messages.json")
+                                .toFile(),
+                        Map.class);
         all.remove("$comment");
         return all;
     }

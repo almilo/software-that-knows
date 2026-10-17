@@ -39,7 +39,9 @@ class Review extends Composite<Div> {
             change.addThemeVariants(ButtonVariant.LUMO_SMALL, ButtonVariant.LUMO_TERTIARY);
             final var answers = new Div(process.shape().fields().stream()
                     .filter(f -> f.group().equals(groups.get(i)) && e.answers().containsKey(f.name()))
-                    .map(f -> new Div(new Span(t(f.name() + ".label")), new Span(format(f.name(), e.answers().get(f.name())))))
+                    .map(f -> new Div(
+                            new Span(t(f.name() + ".label")),
+                            new Span(format(f.name(), e.answers().get(f.name())))))
                     .toArray(Div[]::new));
             answers.addClassName("summary");
             content.add(new H3(new Text(t(groups.get(i) + ".label") + " "), change), answers);
@@ -58,8 +60,21 @@ class Review extends Composite<Div> {
         submission.addClassName("apply");
         final var submit = new Button(getTranslation("submit.label"));
         submit.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        submit.addClickListener(click -> submission.replace(submit, Outcome.card("receipt", getTranslation("received.label"),
-                new Paragraph(getTranslation("receipt.label", Map.of("reference", UUID.randomUUID().toString().substring(0, 8).toUpperCase(), "date", format(null, LocalDate.now().toString())))))));
+        submit.addClickListener(click -> submission.replace(
+                submit,
+                Outcome.card(
+                        "receipt",
+                        getTranslation("received.label"),
+                        new Paragraph(getTranslation(
+                                "receipt.label",
+                                Map.of(
+                                        "reference",
+                                        UUID.randomUUID()
+                                                .toString()
+                                                .substring(0, 8)
+                                                .toUpperCase(),
+                                        "date",
+                                        format(null, LocalDate.now().toString())))))));
         final var hint = new Paragraph(getTranslation("demo.label"));
         hint.addClassName("hint");
         submission.add(submit, hint);

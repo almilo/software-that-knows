@@ -31,11 +31,21 @@ class Wizard extends Composite<Div> implements LocaleChangeObserver {
         this.process = process;
         this.evaluation = process.evaluate(answers);
         final var groups = process.shape().groups();
-        steps = IntStream.range(0, groups.size()).mapToObj(i -> new Step(process, groups.get(i),
-                process.shape().fields().stream().filter(f -> f.group().equals(groups.get(i))).map(f -> new Question(process, f, value -> answer(f.name(), value))).toList(),
-                () -> go(i - 1), () -> next(i))).toList();
+        steps = IntStream.range(0, groups.size())
+                .mapToObj(i -> new Step(
+                        process,
+                        groups.get(i),
+                        process.shape().fields().stream()
+                                .filter(f -> f.group().equals(groups.get(i)))
+                                .map(f -> new Question(process, f, value -> answer(f.name(), value)))
+                                .toList(),
+                        () -> go(i - 1),
+                        () -> next(i)))
+                .toList();
         review = new Review(process, this::go);
-        tabs = IntStream.rangeClosed(0, groups.size()).mapToObj(i -> new Button("", click -> go(i))).toList();
+        tabs = IntStream.rangeClosed(0, groups.size())
+                .mapToObj(i -> new Button("", click -> go(i)))
+                .toList();
         final var nav = new Div(tabs.toArray(Button[]::new));
         nav.addClassName("steps");
         getContent().add(nav);
@@ -73,7 +83,11 @@ class Wizard extends Composite<Div> implements LocaleChangeObserver {
         review.setVisible(at == steps.size());
         if (at == steps.size()) review.show(evaluation);
         IntStream.range(0, tabs.size()).forEach(i -> {
-            tabs.get(i).setEnabled(i == at || IntStream.range(0, i).allMatch(s -> s < steps.size() && steps.get(s).missing(evaluation).isEmpty()));
+            tabs.get(i)
+                    .setEnabled(i == at
+                            || IntStream.range(0, i)
+                                    .allMatch(s -> s < steps.size()
+                                            && steps.get(s).missing(evaluation).isEmpty()));
             if (i == at) tabs.get(i).addThemeVariants(ButtonVariant.LUMO_PRIMARY);
             else tabs.get(i).removeThemeVariants(ButtonVariant.LUMO_PRIMARY);
         });
@@ -82,7 +96,12 @@ class Wizard extends Composite<Div> implements LocaleChangeObserver {
     @Override
     public void localeChange(LocaleChangeEvent event) {
         final var groups = process.shape().groups();
-        IntStream.range(0, tabs.size()).forEach(i -> tabs.get(i).setText((i + 1) + ". " + (i < groups.size() ? getTranslation(process.name() + ":" + groups.get(i) + ".label") : getTranslation("review.label"))));
+        IntStream.range(0, tabs.size())
+                .forEach(i -> tabs.get(i)
+                        .setText((i + 1) + ". "
+                                + (i < groups.size()
+                                        ? getTranslation(process.name() + ":" + groups.get(i) + ".label")
+                                        : getTranslation("review.label"))));
         if (at == steps.size()) review.show(evaluation);
     }
 }

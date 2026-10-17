@@ -18,4 +18,5 @@ export const wef: DomainFiles = {
   uischema,
   messages,
   region: domain.region,
+  numbers: domain.numbers,
 };

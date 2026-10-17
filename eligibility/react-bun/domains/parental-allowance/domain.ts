@@ -15,4 +15,5 @@ export const parentalAllowance: DomainFiles = {
   uischema,
   messages,
   region: domain.region,
+  numbers: domain.numbers,
 };

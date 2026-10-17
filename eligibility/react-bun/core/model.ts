@@ -31,10 +31,13 @@ export type Field = {
   askedWhen?: string; // form:askedWhen: an ASK query, with its PREFIX lines
 };
 
+export type NumberFormat = { group: string; decimal: string };
+
 export type Shape = {
   iri: string; // the sh:NodeShape
   name: string; // its local name
   region: string; // form:region: how the app writes dates and numbers
+  numbers: Record<string, NumberFormat>; // the form:NumberFormat of the region, by language
   targetClass: string; // sh:targetClass: the class of $this
   groups: string[]; // the local names of the sh:PropertyGroups, in sh:order
   fields: Field[]; // in the order of their groups, then in sh:order
@@ -93,6 +96,14 @@ export function readShape(store: Store) {
      } ORDER BY ?order`,
   ).map((r) => withPrefixes(r.rule!, r.construct!));
 
+  const numbers = Object.fromEntries(
+    select(
+      store,
+      `SELECT ?language ?group ?decimal WHERE {
+         ?format a form:NumberFormat ; form:region "${region!.value}" ; form:language ?language ; form:groupSeparator ?group ; form:decimalSeparator ?decimal } ORDER BY ?language`,
+    ).map((n) => [n.language!.value, { group: n.group!.value, decimal: n.decimal!.value }]),
+  );
+
   // The groups of the fields, in their order: a module can define groups that a domain does not use.
   const groups = [...new Set(fields.map((f) => f.group))];
 
@@ -100,6 +111,7 @@ export function readShape(store: Store) {
     iri: shape!.value,
     name: local(shape!),
     region: region!.value,
+    numbers,
     targetClass: targetClass!.value,
     groups,
     fields,

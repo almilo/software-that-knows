@@ -27,7 +27,8 @@ public final class Knowledge {
     }
 
     public static Knowledge at(Path root) {
-        if (!Files.isRegularFile(root.resolve("ontology/form.ttl"))) throw new IllegalArgumentException("No knowledge model at " + root.toAbsolutePath());
+        if (!Files.isRegularFile(root.resolve("ontology/form.ttl")))
+            throw new IllegalArgumentException("No knowledge model at " + root.toAbsolutePath());
         return new Knowledge(root);
     }
 
@@ -45,12 +46,17 @@ public final class Knowledge {
     public Map<String, List<String>> files() {
         final var index = moduleIndex();
         final var own = new TreeMap<String, List<String>>();
-        glob("domains").filter(p -> p.getParent().getFileName().toString().equals("ontology"))
-                .forEach(p -> own.computeIfAbsent(p.getName(1).toString(), k -> new ArrayList<>()).add(p.toString()));
+        glob("domains")
+                .filter(p -> p.getParent().getFileName().toString().equals("ontology"))
+                .forEach(p -> own.computeIfAbsent(p.getName(1).toString(), k -> new ArrayList<>())
+                        .add(p.toString()));
         final var all = new LinkedHashMap<String, List<String>>();
         own.forEach((name, files) -> {
             final var sorted = files.stream().sorted().toList();
-            all.put(name, Stream.concat(sorted.stream(), imported(sorted, index, new LinkedHashSet<>()).stream()).toList());
+            all.put(
+                    name,
+                    Stream.concat(sorted.stream(), imported(sorted, index, new LinkedHashSet<>()).stream())
+                            .toList());
         });
         return all;
     }
@@ -59,7 +65,9 @@ public final class Knowledge {
     public List<String> texts(String domain) {
         final var files = files().get(domain);
         if (files == null) throw new IllegalArgumentException("No domain " + domain + " in " + root);
-        return Stream.concat(Stream.of("ontology/form.ttl"), files.stream()).map(this::text).toList();
+        return Stream.concat(Stream.of("ontology/form.ttl"), files.stream())
+                .map(this::text)
+                .toList();
     }
 
     public Engine engine(String domain) {
@@ -69,7 +77,10 @@ public final class Knowledge {
     // Each module by the IRI of its ontology.
     private Map<String, String> moduleIndex() {
         final var index = new LinkedHashMap<String, String>();
-        glob("modules").sorted().forEach(p -> select(text(p.toString()), "SELECT ?o WHERE { ?o a owl:Ontology }", "o").forEach(iri -> index.put(iri, p.toString())));
+        glob("modules")
+                .sorted()
+                .forEach(p -> select(text(p.toString()), "SELECT ?o WHERE { ?o a owl:Ontology }", "o")
+                        .forEach(iri -> index.put(iri, p.toString())));
         return index;
     }
 
@@ -81,13 +92,18 @@ public final class Knowledge {
                 .map(index::get)
                 .filter(seen::add)
                 .toList();
-        return next.isEmpty() ? List.of() : Stream.concat(next.stream(), imported(next, index, seen).stream()).toList();
+        return next.isEmpty()
+                ? List.of()
+                : Stream.concat(next.stream(), imported(next, index, seen).stream())
+                        .toList();
     }
 
     private static List<String> select(String turtle, String query, String variable) {
         final var model = ModelFactory.createDefaultModel();
         model.read(new StringReader(turtle), null, "TTL");
-        return Rdf.select(model, query).stream().map(r -> r.get(variable).asResource().getURI()).toList();
+        return Rdf.select(model, query).stream()
+                .map(r -> r.get(variable).asResource().getURI())
+                .toList();
     }
 
     private Stream<Path> glob(String folder) {

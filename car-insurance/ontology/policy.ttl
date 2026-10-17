@@ -289,7 +289,7 @@ art:303.6 a ins:Article ; ins:number "303.6" ; rdfs:label "Insured pets"@en ; in
     ins:summary "Veterinary treatment of pets in the car, up to 5000 CHF per event."@en .
 art:304 a ins:Article ; ins:number "304" ; rdfs:label "Exclusions"@en ; ins:part :Accident ; ins:page 13 ;
     ins:refersTo art:204.3, art:204.4, art:204.5, art:204.6, art:204.8, art:204.9 ;
-    ins:summary "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7."@en .
+    ins:summary "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7. Alcohol (Art. 204.6) only insofar as the claims of the driver are affected."@en .
 art:305 a ins:Article ; ins:number "305" ; rdfs:label "Vehicles carrying too many passengers"@en ; ins:part :Accident ; ins:page 13 .
 art:306 a ins:Article ; ins:number "306" ; rdfs:label "Offsetting liability claims"@en ; ins:part :Accident ; ins:page 13 .
 

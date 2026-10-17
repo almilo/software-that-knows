@@ -3133,16 +3133,48 @@
       "order": 0
     },
     {
+      "id": "HighAlcoholDriver",
+      "kind": "exclusion",
+      "label": "The injured driver: 1.6 per mille or more, drugs, flagrant speeding, illegal races",
+      "appliesTo": [
+        "MedicalExpenses",
+        "DeathDisability",
+        "OtherPeoplesVehicles",
+        "TransportedPets"
+      ],
+      "appliesToNamed": [
+        "Accident"
+      ],
+      "when": [
+        {
+          "fact": "injuredPerson",
+          "in": [
+            "Driver"
+          ]
+        },
+        {
+          "fact": "alcohol",
+          "in": [
+            "HighAlcohol"
+          ]
+        }
+      ],
+      "sources": [
+        "204.6",
+        "304"
+      ],
+      "mentions": [
+        "Alcohol"
+      ],
+      "order": 0
+    },
+    {
       "id": "HighAlcohol",
       "kind": "exclusion",
       "label": "1.6 per mille or more, drugs, flagrant speeding, illegal races",
       "appliesTo": [
         "RoadsideCHFL",
         "RoadsideEurope",
-        "MedicalExpenses",
-        "DeathDisability",
-        "OtherPeoplesVehicles",
-        "TransportedPets",
         "Collision",
         "CollisionGrossNegligence",
         "Theft",
@@ -3160,7 +3192,6 @@
       ],
       "appliesToNamed": [
         "Roadside",
-        "Accident",
         "AccidentalDamage"
       ],
       "when": [
@@ -3173,7 +3204,6 @@
       ],
       "sources": [
         "204.6",
-        "304",
         "407"
       ],
       "mentions": [
@@ -6225,7 +6255,7 @@
       "id": "304",
       "number": "304",
       "title": "Exclusions",
-      "summary": "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7.",
+      "summary": "Joyriding, and the exclusions of Art. 204.3 to 204.9 except 204.7. Alcohol (Art. 204.6) only insofar as the claims of the driver are affected.",
       "part": "Accident",
       "refersTo": [
         "204.3",

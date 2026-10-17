@@ -316,4 +316,18 @@ export const testClaims: TestClaim[] = [
     cover: "Glass",
     payment: 900,
   },
+  {
+    name: "A passenger injured when the driver had 1.6 per mille or more: covered (Art. 304)",
+    certificate: "ExampleCertificate",
+    answers: { event: "InjuryEvent", injuredPerson: "Passenger", ...normal, alcohol: "HighAlcohol" },
+    status: "covered",
+    cover: "MedicalExpenses",
+  },
+  {
+    name: "The injured driver had 1.6 per mille or more: excluded (Art. 204.6, 304)",
+    certificate: "ExampleCertificate",
+    answers: { event: "InjuryEvent", injuredPerson: "Driver", ...normal, alcohol: "HighAlcohol" },
+    status: "excluded",
+    rules: ["HighAlcoholDriver"],
+  },
 ];

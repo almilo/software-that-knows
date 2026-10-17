@@ -57,7 +57,7 @@ flowchart LR
   E["engine/<br/>claim · benefit · guide · dates · checks/ · record · text"]
   A["app/<br/>six views, React"]
   K --> G --> J --> E --> A
-  T["claims/test-claims.ts<br/>37 test claims"] --> G
+  T["claims/test-claims.ts<br/>39 test claims"] --> G
 ```
 
 - **The engine knows the words, not the product.** It knows module, cover, exclusion, reduction,

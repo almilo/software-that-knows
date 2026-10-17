@@ -35,7 +35,7 @@
         },
         {
           "status": "ok",
-          "text": "171 statements cite 90 of the 141 articles of the model.",
+          "text": "172 statements cite 90 of the 141 articles of the model.",
           "sources": []
         }
       ]
@@ -79,7 +79,7 @@
       "findings": [
         {
           "status": "ok",
-          "text": "All 32 questions of the claim check are used, and all 57 rules can apply in at least one situation.",
+          "text": "All 32 questions of the claim check are used, and all 58 rules can apply in at least one situation.",
           "sources": []
         }
       ]
@@ -192,8 +192,8 @@
     },
     {
       "stats": {
-        "claims": 37,
-        "questionsPerClaim": 8.6,
+        "claims": 39,
+        "questionsPerClaim": 8.5,
         "modelQuestions": 32
       },
       "id": "claims",
@@ -203,7 +203,7 @@
       "findings": [
         {
           "status": "ok",
-          "text": "37 test claims, 317 questions in all: 8.6 per claim, of the 32 questions that the model has. The certificate gives the other facts.",
+          "text": "39 test claims, 331 questions in all: 8.5 per claim, of the 32 questions that the model has. The certificate gives the other facts.",
           "sources": []
         },
         {
@@ -233,7 +233,6 @@
           "sources": [
             "202.1",
             "204.6",
-            "304",
             "407"
           ]
         },
@@ -450,7 +449,7 @@
         },
         {
           "status": "ok",
-          "text": "Evaluation 23: injured as a passenger in my own car: covered (Medical expenses), after 9 questions.",
+          "text": "Evaluation 23: injured as a passenger in my own car: covered (Medical expenses), after 8 questions.",
           "sources": [
             "301.1",
             "301.2",
@@ -489,6 +488,28 @@
           "text": "Evaluation 25b: the smashed window of the same claim: covered (Glass), CHF 900, after 17 questions.",
           "sources": [
             "202.3d"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "A passenger injured when the driver had 1.6 per mille or more: covered (Art. 304): covered (Medical expenses), after 8 questions.",
+          "sources": [
+            "301.1",
+            "301.2",
+            "302",
+            "303.5"
+          ]
+        },
+        {
+          "status": "ok",
+          "text": "The injured driver had 1.6 per mille or more: excluded (Art. 204.6, 304): excluded (Medical expenses), after 7 questions.",
+          "sources": [
+            "301.1",
+            "301.2",
+            "302",
+            "303.5",
+            "204.6",
+            "304"
           ]
         }
       ]

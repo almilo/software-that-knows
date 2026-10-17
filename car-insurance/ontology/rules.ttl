@@ -194,8 +194,14 @@
     ins:when [ ins:fact :journey ; ins:in ( :NotPermitted ) ] .
 
 :HighAlcohol a ins:Exclusion ; rdfs:label "1.6 per mille or more, drugs, flagrant speeding, illegal races"@en ;
-    ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.6, art:304, art:407 ; ins:mentions :Alcohol ;
+    ins:appliesTo :AccidentalDamage, :Roadside ; ins:source art:204.6, art:407 ; ins:mentions :Alcohol ;
     ins:when [ ins:fact :alcohol ; ins:in ( :HighAlcohol ) ] .
+
+# Art. 304 uses Art. 204.6 only "insofar as the driver's claims are affected": a passenger injured
+# when the driver had too much alcohol keeps the accident benefits.
+:HighAlcoholDriver a ins:Exclusion ; rdfs:label "The injured driver: 1.6 per mille or more, drugs, flagrant speeding, illegal races"@en ;
+    ins:appliesTo :Accident ; ins:source art:204.6, art:304 ; ins:mentions :Alcohol ;
+    ins:when [ ins:fact :alcohol ; ins:in ( :HighAlcohol ) ] , [ ins:fact :injuredPerson ; ins:in ( :Driver ) ] .
 
 :CriminalOffence a ins:Exclusion ; rdfs:label "Criminal offences"@en ;
     ins:appliesTo :AccidentalDamage, :Accident, :Roadside ; ins:source art:204.8, art:304, art:407 ;

@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { calculationInputs } from "../engine/benefit";
 import { createClaim } from "../engine/claim";
 import { addOffset, deadlines } from "../engine/dates";
 import { obligations } from "../engine/guide";
@@ -105,5 +106,11 @@ describe("the guide", () => {
   });
   test("legal protection only when the policy has it", () => {
     expect(ids({ legalDispute: "Yes", hasLegal: "No" })).toEqual(["NotifyInsurer", "NoLegal", "Investigation"]);
+  });
+});
+
+describe("the calculation and the model agree", () => {
+  test("every fact that the calculation reads is in the model, and is needed for the vehicle calculation", () => {
+    for (const key of calculationInputs) expect(policy.facts.find((f) => f.id === key)?.neededFor ?? [], key).toContain("vehicle");
   });
 });

@@ -33,6 +33,7 @@ export function loadModel(turtles: string[]) {
       if (value === undefined) throw new Error(`${s.value} has no ${p}`);
       return value;
     },
+    node: (iri: string) => namedNode(iri) as Term,
     ofType: (type: string) => store.match(null, namedNode(`${RDF}type`), namedNode(type), null).map((q) => q.subject),
     // An RDF list ( a b c ) is a chain of rdf:first and rdf:rest nodes that ends with rdf:nil.
     list(head: Term | undefined): Term[] {

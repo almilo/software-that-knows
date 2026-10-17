@@ -5,7 +5,19 @@
 // A condition on one fact, or several conditions of which one is enough.
 export type Condition = { fact: string; in?: string[]; notIn?: string[]; atLeast?: number; below?: number } | { anyOf: Condition[] };
 
-export type Value = { id: string; label: string; help?: string };
+// The answers of a yesno fact, words of the vocabulary (ins:Yes, ins:No).
+export const YES = "Yes";
+export const NO = "No";
+
+export type Value = {
+  id: string;
+  label: string;
+  help?: string;
+  // The answer makes the claim a total loss, for this reason.
+  totalLossBecause?: string;
+  // The answer adds this parameter to the deductible.
+  addsDeductible?: string;
+};
 
 export type Fact = {
   id: string;
@@ -13,7 +25,7 @@ export type Fact = {
   group: "claim" | "guide" | "date" | "certificate";
   label: string;
   help?: string;
-  kind: "choice" | "number" | "date";
+  kind: "yesno" | "choice" | "number" | "date";
   unit?: string;
   values: Value[];
   order: number;
@@ -26,6 +38,8 @@ export type Fact = {
   moduleOf?: string;
   // The cover that this number is a sum insured of.
   sumOf?: string;
+  // The module that this certificate fact is a detail of: it matters only when the policy has it.
+  detailOf?: string;
   // The calculations of an amount that need this answer.
   neededFor: string[];
   closedList?: string;
@@ -73,7 +87,9 @@ export type Precedence = { id: string; winner: string; loser: string; basis: "te
 
 export type ClosedList = { id: string; label: string; items: string[]; sources: string[]; note?: string };
 export type Concept = { id: string; label: string; order: number };
-export type Parameter = { id: string; label: string; amount: number; sources: string[]; mentions: string[] };
+// limitOf: the parameter is the maximum payment of a claim of this cover, unless the yesno fact
+// liftedBy is yes.
+export type Parameter = { id: string; label: string; amount: number; sources: string[]; mentions: string[]; limitOf?: string; liftedBy?: string };
 export type Benefit = { id: string; label: string; covers: string[]; mentions: string[]; limit?: number; per?: string; note?: string; sources: string[] };
 export type Comparison = { id: string; label: string; left: string; right: string };
 export type CompensationRow = { year: number; fromShare: number; toShare: number; sources: string[] };

@@ -653,7 +653,7 @@
       "id": "hasCollision",
       "group": "certificate",
       "label": "Collision (full casco)",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -674,7 +674,7 @@
       "id": "hasPartialCasco",
       "group": "certificate",
       "label": "Partial casco",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -695,7 +695,7 @@
       "id": "hasAccident",
       "group": "certificate",
       "label": "Accident insurance",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -716,7 +716,7 @@
       "id": "hasRoadside",
       "group": "certificate",
       "label": "Roadside assistance",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -737,7 +737,7 @@
       "id": "hasLegal",
       "group": "certificate",
       "label": "Legal protection",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -758,7 +758,7 @@
       "id": "hasHelpPoint",
       "group": "certificate",
       "label": "Help Point PLUS",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -792,6 +792,7 @@
       "order": 26,
       "required": false,
       "askWhen": [],
+      "detailOf": "AccidentModule",
       "neededFor": []
     },
     {
@@ -805,6 +806,7 @@
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
+      "detailOf": "AccidentModule",
       "neededFor": []
     },
     {
@@ -818,6 +820,7 @@
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
+      "detailOf": "AccidentModule",
       "neededFor": []
     },
     {
@@ -831,6 +834,7 @@
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
+      "detailOf": "AccidentModule",
       "neededFor": []
     },
     {
@@ -844,13 +848,14 @@
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
+      "detailOf": "AccidentModule",
       "neededFor": []
     },
     {
       "id": "hasGlassPlus",
       "group": "certificate",
       "label": "Glass PLUS",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -871,7 +876,7 @@
       "id": "hasMartens",
       "group": "certificate",
       "label": "Martens",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -892,7 +897,7 @@
       "id": "hasParkingDamage",
       "group": "certificate",
       "label": "Parking damage",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -913,7 +918,7 @@
       "id": "hasItemsTransported",
       "group": "certificate",
       "label": "Items transported",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -934,7 +939,7 @@
       "id": "hasProtectiveClothing",
       "group": "certificate",
       "label": "Protective clothing",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -955,7 +960,7 @@
       "id": "hasParkingDamagePlus",
       "group": "certificate",
       "label": "Parking damage PLUS",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -985,7 +990,7 @@
       "id": "hasCollisionGrossNegligence",
       "group": "certificate",
       "label": "Coverage for gross negligence (collision)",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -1742,7 +1747,8 @@
         },
         {
           "id": "NotRecovered",
-          "label": "No"
+          "label": "No",
+          "totalLossBecause": "the vehicle was not found within 30 days"
         }
       ],
       "order": 60,
@@ -1889,7 +1895,8 @@
         },
         {
           "id": "HelpPointNotFollowed",
-          "label": "No"
+          "label": "No",
+          "addsDeductible": "helpPointPenalty"
         }
       ],
       "order": 67,
@@ -2010,7 +2017,7 @@
       "id": "injury",
       "group": "guide",
       "label": "Somebody is injured",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2030,7 +2037,7 @@
       "id": "stolen",
       "group": "guide",
       "label": "Something was stolen",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2050,7 +2057,7 @@
       "id": "animal",
       "group": "guide",
       "label": "An animal was involved",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2070,7 +2077,7 @@
       "id": "damaged",
       "group": "guide",
       "label": "My vehicle is damaged",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2090,7 +2097,7 @@
       "id": "unusable",
       "group": "guide",
       "label": "I cannot drive on",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2110,7 +2117,7 @@
       "id": "otherParty",
       "group": "guide",
       "label": "Another person says I must pay for their damage",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2130,7 +2137,7 @@
       "id": "legalDispute",
       "group": "guide",
       "label": "I need a lawyer, or the police opened proceedings",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -2150,7 +2157,7 @@
       "id": "abroad",
       "group": "guide",
       "label": "I am outside Switzerland",
-      "kind": "choice",
+      "kind": "yesno",
       "values": [
         {
           "id": "Yes",
@@ -4361,16 +4368,18 @@
     },
     {
       "id": "parkingLimit",
-      "label": "Limit per parking damage, in CHF",
+      "label": "Limit per parking damage",
       "amount": 1000,
       "sources": [
         "202.4c"
       ],
-      "mentions": []
+      "mentions": [],
+      "limitOf": "ParkingDamage",
+      "liftedBy": "hasParkingDamagePlus"
     },
     {
       "id": "helpPointPenalty",
-      "label": "Additional deductible when the rules of Help Point PLUS are not followed, in CHF",
+      "label": "Additional deductible: the rules of Help Point PLUS were not followed",
       "amount": 500,
       "sources": [
         "10.3"

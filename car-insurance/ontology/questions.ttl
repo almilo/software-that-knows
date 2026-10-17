@@ -6,8 +6,6 @@
 # dates of the contract. The rules (rules.ttl) are conditions on these facts. The claim check asks a
 # question only when a rule that can still apply needs its answer (ins:order sets the order).
 
-:Yes rdfs:label "Yes"@en .
-:No rdfs:label "No"@en .
 
 # ---------------------------------------------------------------------------
 # 1. The claim: what happened
@@ -161,47 +159,47 @@
 #    certificate (certificate.ttl); the claim check asks one only if the certificate misses it.
 # ---------------------------------------------------------------------------
 
-:hasCollision a ins:CertificateFact ; ins:key "hasCollision" ; ins:order 20 ; ins:kind "choice" ; ins:moduleOf :CollisionModule ;
-    rdfs:label "Collision (full casco)"@en ; ins:value ( :Yes :No ) .
-:hasPartialCasco a ins:CertificateFact ; ins:key "hasPartialCasco" ; ins:order 21 ; ins:kind "choice" ; ins:moduleOf :PartialCascoModule ;
-    rdfs:label "Partial casco"@en ; ins:value ( :Yes :No ) .
-:hasAccident a ins:CertificateFact ; ins:key "hasAccident" ; ins:order 22 ; ins:kind "choice" ; ins:moduleOf :AccidentModule ;
-    rdfs:label "Accident insurance"@en ; ins:value ( :Yes :No ) .
-:hasRoadside a ins:CertificateFact ; ins:key "hasRoadside" ; ins:order 23 ; ins:kind "choice" ; ins:moduleOf :RoadsideModule ;
-    rdfs:label "Roadside assistance"@en ; ins:value ( :Yes :No ) .
-:hasLegal a ins:CertificateFact ; ins:key "hasLegal" ; ins:order 24 ; ins:kind "choice" ; ins:moduleOf :LegalModule ;
-    rdfs:label "Legal protection"@en ; ins:value ( :Yes :No ) .
-:hasHelpPoint a ins:CertificateFact ; ins:key "hasHelpPoint" ; ins:order 25 ; ins:kind "choice" ;
-    rdfs:label "Help Point PLUS"@en ; ins:value ( :Yes :No ) .
-:accidentPersons a ins:CertificateFact ; ins:key "accidentPersons" ; ins:order 26 ; ins:kind "choice" ;
+:hasCollision a ins:CertificateFact ; ins:key "hasCollision" ; ins:order 20 ; ins:kind "yesno" ; ins:moduleOf :CollisionModule ;
+    rdfs:label "Collision (full casco)"@en .
+:hasPartialCasco a ins:CertificateFact ; ins:key "hasPartialCasco" ; ins:order 21 ; ins:kind "yesno" ; ins:moduleOf :PartialCascoModule ;
+    rdfs:label "Partial casco"@en .
+:hasAccident a ins:CertificateFact ; ins:key "hasAccident" ; ins:order 22 ; ins:kind "yesno" ; ins:moduleOf :AccidentModule ;
+    rdfs:label "Accident insurance"@en .
+:hasRoadside a ins:CertificateFact ; ins:key "hasRoadside" ; ins:order 23 ; ins:kind "yesno" ; ins:moduleOf :RoadsideModule ;
+    rdfs:label "Roadside assistance"@en .
+:hasLegal a ins:CertificateFact ; ins:key "hasLegal" ; ins:order 24 ; ins:kind "yesno" ; ins:moduleOf :LegalModule ;
+    rdfs:label "Legal protection"@en .
+:hasHelpPoint a ins:CertificateFact ; ins:key "hasHelpPoint" ; ins:order 25 ; ins:kind "yesno" ;
+    rdfs:label "Help Point PLUS"@en .
+:accidentPersons a ins:CertificateFact ; ins:key "accidentPersons" ; ins:detailOf :AccidentModule ; ins:order 26 ; ins:kind "choice" ;
     rdfs:label "Insured persons of the accident insurance"@en ;
     ins:value ( :DriverAndPassengers :DriverOnly ) .
 :DriverAndPassengers rdfs:label "Driver and passengers"@en .
 :DriverOnly rdfs:label "Driver only"@en .
-:deathSum a ins:CertificateFact ; ins:key "deathSum" ; ins:order 27 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+:deathSum a ins:CertificateFact ; ins:key "deathSum" ; ins:detailOf :AccidentModule ; ins:order 27 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
     rdfs:label "Sum insured in the event of death"@en .
-:disabilitySum a ins:CertificateFact ; ins:key "disabilitySum" ; ins:order 28 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+:disabilitySum a ins:CertificateFact ; ins:key "disabilitySum" ; ins:detailOf :AccidentModule ; ins:order 28 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
     rdfs:label "Sum insured in the event of disability"@en .
-:dailyAllowance a ins:CertificateFact ; ins:key "dailyAllowance" ; ins:order 29 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+:dailyAllowance a ins:CertificateFact ; ins:key "dailyAllowance" ; ins:detailOf :AccidentModule ; ins:order 29 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
     rdfs:label "Daily allowance"@en .
-:hospitalAllowance a ins:CertificateFact ; ins:key "hospitalAllowance" ; ins:order 29.5 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
+:hospitalAllowance a ins:CertificateFact ; ins:key "hospitalAllowance" ; ins:detailOf :AccidentModule ; ins:order 29.5 ; ins:kind "number" ; ins:unit "CHF" ; ins:sumOf :DeathDisability ;
     rdfs:label "Daily allowance in hospital"@en .
 
-:hasGlassPlus a ins:CertificateFact ; ins:key "hasGlassPlus" ; ins:order 30 ; ins:kind "choice" ; ins:optionOf :GlassPlus ;
-    rdfs:label "Glass PLUS"@en ; ins:value ( :Yes :No ) .
-:hasMartens a ins:CertificateFact ; ins:key "hasMartens" ; ins:order 31 ; ins:kind "choice" ; ins:optionOf :Martens ;
-    rdfs:label "Martens"@en ; ins:value ( :Yes :No ) .
-:hasParkingDamage a ins:CertificateFact ; ins:key "hasParkingDamage" ; ins:order 32 ; ins:kind "choice" ; ins:optionOf :ParkingDamage ;
-    rdfs:label "Parking damage"@en ; ins:value ( :Yes :No ) .
-:hasItemsTransported a ins:CertificateFact ; ins:key "hasItemsTransported" ; ins:order 33 ; ins:kind "choice" ; ins:optionOf :ItemsTransported ;
-    rdfs:label "Items transported"@en ; ins:value ( :Yes :No ) .
-:hasProtectiveClothing a ins:CertificateFact ; ins:key "hasProtectiveClothing" ; ins:order 34 ; ins:kind "choice" ; ins:optionOf :ProtectiveClothing ;
-    rdfs:label "Protective clothing"@en ; ins:value ( :Yes :No ) .
-:hasParkingDamagePlus a ins:CertificateFact ; ins:key "hasParkingDamagePlus" ; ins:order 35 ; ins:kind "choice" ; ins:optionOf :ParkingDamagePlus ;
-    rdfs:label "Parking damage PLUS"@en ; ins:value ( :Yes :No ) ; ins:neededFor "vehicle" ;
+:hasGlassPlus a ins:CertificateFact ; ins:key "hasGlassPlus" ; ins:order 30 ; ins:kind "yesno" ; ins:optionOf :GlassPlus ;
+    rdfs:label "Glass PLUS"@en .
+:hasMartens a ins:CertificateFact ; ins:key "hasMartens" ; ins:order 31 ; ins:kind "yesno" ; ins:optionOf :Martens ;
+    rdfs:label "Martens"@en .
+:hasParkingDamage a ins:CertificateFact ; ins:key "hasParkingDamage" ; ins:order 32 ; ins:kind "yesno" ; ins:optionOf :ParkingDamage ;
+    rdfs:label "Parking damage"@en .
+:hasItemsTransported a ins:CertificateFact ; ins:key "hasItemsTransported" ; ins:order 33 ; ins:kind "yesno" ; ins:optionOf :ItemsTransported ;
+    rdfs:label "Items transported"@en .
+:hasProtectiveClothing a ins:CertificateFact ; ins:key "hasProtectiveClothing" ; ins:order 34 ; ins:kind "yesno" ; ins:optionOf :ProtectiveClothing ;
+    rdfs:label "Protective clothing"@en .
+:hasParkingDamagePlus a ins:CertificateFact ; ins:key "hasParkingDamagePlus" ; ins:order 35 ; ins:kind "yesno" ; ins:optionOf :ParkingDamagePlus ;
+    rdfs:label "Parking damage PLUS"@en ; ins:neededFor "vehicle" ;
     ins:askWhen [ ins:fact :event ; ins:in ( :ParkingEvent ) ] .
-:hasCollisionGrossNegligence a ins:CertificateFact ; ins:key "hasCollisionGrossNegligence" ; ins:order 36 ; ins:kind "choice" ; ins:optionOf :CollisionGrossNegligence ;
-    rdfs:label "Coverage for gross negligence (collision)"@en ; ins:value ( :Yes :No ) .
+:hasCollisionGrossNegligence a ins:CertificateFact ; ins:key "hasCollisionGrossNegligence" ; ins:order 36 ; ins:kind "yesno" ; ins:optionOf :CollisionGrossNegligence ;
+    rdfs:label "Coverage for gross negligence (collision)"@en .
 
 # ---------------------------------------------------------------------------
 # 3. The claim: the facts of the exclusions and reductions
@@ -275,7 +273,7 @@
     ins:askWhen [ ins:fact :theftKind ; ins:in ( :VehicleStolen ) ] ;
     ins:value ( :Recovered :NotRecovered ) .
 :Recovered rdfs:label "Yes"@en .
-:NotRecovered rdfs:label "No"@en .
+:NotRecovered rdfs:label "No"@en ; ins:totalLossBecause "the vehicle was not found within 30 days"@en .
 
 :monthsOfService a ins:ClaimFact ; ins:key "monthsOfService" ; ins:order 61 ; ins:kind "number" ; ins:unit "months" ; ins:neededFor "vehicle" ;
     rdfs:label "How many months ago was the vehicle first put on the road?"@en ; .
@@ -298,23 +296,23 @@
 :helpPoint a ins:ClaimFact ; ins:key "helpPoint" ; ins:order 67 ; ins:kind "choice" ; ins:neededFor "vehicle" ;
     rdfs:label "Did you follow the rules of Help Point PLUS?"@en ;
     ins:help "Report the damage by phone or at a help point, and repair at the garage that Zurich specifies."@en ;
-    ins:askWhen [ ins:fact :hasHelpPoint ; ins:in ( :Yes ) ] ;
+    ins:askWhen [ ins:fact :hasHelpPoint ; ins:in ( ins:Yes ) ] ;
     ins:value ( :HelpPointFollowed :HelpPointNotFollowed ) .
 :HelpPointFollowed rdfs:label "Yes"@en .
-:HelpPointNotFollowed rdfs:label "No"@en .
+:HelpPointNotFollowed rdfs:label "No"@en ; ins:addsDeductible :helpPointPenalty .
 
 # ---------------------------------------------------------------------------
 # 5. The guide after an event
 # ---------------------------------------------------------------------------
 
-:injury a ins:GuideFact ; ins:key "injury" ; ins:order 1 ; ins:kind "choice" ; rdfs:label "Somebody is injured"@en ; ins:value ( :Yes :No ) .
-:stolen a ins:GuideFact ; ins:key "stolen" ; ins:order 2 ; ins:kind "choice" ; rdfs:label "Something was stolen"@en ; ins:value ( :Yes :No ) .
-:animal a ins:GuideFact ; ins:key "animal" ; ins:order 3 ; ins:kind "choice" ; rdfs:label "An animal was involved"@en ; ins:value ( :Yes :No ) .
-:damaged a ins:GuideFact ; ins:key "damaged" ; ins:order 4 ; ins:kind "choice" ; rdfs:label "My vehicle is damaged"@en ; ins:value ( :Yes :No ) .
-:unusable a ins:GuideFact ; ins:key "unusable" ; ins:order 6 ; ins:kind "choice" ; rdfs:label "I cannot drive on"@en ; ins:value ( :Yes :No ) .
-:otherParty a ins:GuideFact ; ins:key "otherParty" ; ins:order 7 ; ins:kind "choice" ; rdfs:label "Another person says I must pay for their damage"@en ; ins:value ( :Yes :No ) .
-:legalDispute a ins:GuideFact ; ins:key "legalDispute" ; ins:order 8 ; ins:kind "choice" ; rdfs:label "I need a lawyer, or the police opened proceedings"@en ; ins:value ( :Yes :No ) .
-:abroad a ins:GuideFact ; ins:key "abroad" ; ins:order 9 ; ins:kind "choice" ; rdfs:label "I am outside Switzerland"@en ; ins:value ( :Yes :No ) .
+:injury a ins:GuideFact ; ins:key "injury" ; ins:order 1 ; ins:kind "yesno" ; rdfs:label "Somebody is injured"@en .
+:stolen a ins:GuideFact ; ins:key "stolen" ; ins:order 2 ; ins:kind "yesno" ; rdfs:label "Something was stolen"@en .
+:animal a ins:GuideFact ; ins:key "animal" ; ins:order 3 ; ins:kind "yesno" ; rdfs:label "An animal was involved"@en .
+:damaged a ins:GuideFact ; ins:key "damaged" ; ins:order 4 ; ins:kind "yesno" ; rdfs:label "My vehicle is damaged"@en .
+:unusable a ins:GuideFact ; ins:key "unusable" ; ins:order 6 ; ins:kind "yesno" ; rdfs:label "I cannot drive on"@en .
+:otherParty a ins:GuideFact ; ins:key "otherParty" ; ins:order 7 ; ins:kind "yesno" ; rdfs:label "Another person says I must pay for their damage"@en .
+:legalDispute a ins:GuideFact ; ins:key "legalDispute" ; ins:order 8 ; ins:kind "yesno" ; rdfs:label "I need a lawyer, or the police opened proceedings"@en .
+:abroad a ins:GuideFact ; ins:key "abroad" ; ins:order 9 ; ins:kind "yesno" ; rdfs:label "I am outside Switzerland"@en .
 
 # ---------------------------------------------------------------------------
 # 6. Dates of the contract and of a claim

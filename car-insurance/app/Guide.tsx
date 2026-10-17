@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { obligations } from "../engine/guide";
-import type { Answers } from "../engine/model";
+import { type Answers, NO, YES } from "../engine/model";
 import { CertificatePanel, useCertificate } from "./certificate";
 import { policy } from "./data";
 import { Page, Sources } from "./ui";
@@ -13,7 +13,7 @@ export function Guide() {
   const certificate = useCertificate().answers;
   const [answers, setAnswers] = useState<Answers>({});
   const list = obligations(policy, { ...certificate, ...answers });
-  const toggle = (id: string, on: boolean) => setAnswers((a) => ({ ...a, [id]: on ? "Yes" : "No" }));
+  const toggle = (id: string, on: boolean) => setAnswers((a) => ({ ...a, [id]: on ? YES : NO }));
 
   return (
     <Page
@@ -29,7 +29,7 @@ export function Guide() {
           <h2>Your situation</h2>
           {facts.map((f) => (
             <label key={f.id} className="toggle">
-              <input type="checkbox" checked={answers[f.id] === "Yes"} onChange={(e) => toggle(f.id, e.target.checked)} />
+              <input type="checkbox" checked={answers[f.id] === YES} onChange={(e) => toggle(f.id, e.target.checked)} />
               <span>{f.label}</span>
             </label>
           ))}

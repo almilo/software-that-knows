@@ -1,9 +1,12 @@
 // The amount of a claim, as steps from the loss to the payment, each with its articles. The numbers
-// come from the model (the parameters and the compensation table), not from this code. The order of
-// the steps is code: it names the facts of the amounts and a few answers of the model (a theft not
-// found, Help Point PLUS not followed, Parking damage PLUS), so a test of every claim keeps the two
-// in step (test/cases.ts).
-import type { Answers, Cover, Policy } from "./model";
+// come from the model: the parameters, the compensation table, the limits of a cover
+// (ins:limitOf), and the answers that make a total loss or add to the deductible. The order of the
+// steps is code; it reads the facts of the amounts by their keys (calculationInputs), and a test
+// makes sure that the model has them.
+import { type Answers, type Cover, type Policy, YES } from "./model";
+
+// The facts that the calculation reads, by key.
+export const calculationInputs = ["monthsOfService", "catalogPrice", "marketValue", "repairCost", "deductible", "claimFreeYears"];
 
 export type Step = { label: string; amount: number; sources: string[] };
 export type Amount = { loss: "partial" | "total" | "item"; steps: Step[]; payment: number; notes: { text: string; sources: string[] }[] };
@@ -18,6 +21,8 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
   const n = (key: string) => (answers[key] === undefined ? undefined : Number(answers[key]));
   const steps: Step[] = [];
   const notes: Amount["notes"] = [];
+  // The answers given, as values of the model.
+  const answered = policy.facts.flatMap((f) => f.values.filter((v) => answers[f.id] === v.id));
 
   // Items and protective clothing: the cost of an equivalent item, no deductible.
   if (cover.calculation === "item") {
@@ -35,14 +40,14 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
   const share = row ? row.fromShare + (row.toShare - row.fromShare) * ((months % 12) / 12) : undefined;
   const tableValue = share !== undefined ? Math.round(catalog * share) : (market ?? 0);
 
-  const notFound = answers.theftRecovered === "NotRecovered";
+  const totalLossBecause = answered.find((v) => v.totalLossBecause)?.totalLossBecause;
   const early = months < value("earlyMonths");
-  const total = notFound || (repair !== undefined && (early ? repair >= value("totalLossShare") * tableValue : repair >= (market ?? Infinity)));
+  const total = totalLossBecause !== undefined || (repair !== undefined && (early ? repair >= value("totalLossShare") * tableValue : repair >= (market ?? Infinity)));
   let loss: Amount["loss"] = "partial";
   if (total) {
     loss = "total";
-    const why = notFound
-      ? `the vehicle was not found within ${value("theftRecoveryDays")} days`
+    const why = totalLossBecause
+      ? totalLossBecause
       : early
         ? `the repair costs reach ${percent(value("totalLossShare"))} of the table value in the first two years`
         : "the repair costs reach the replacement value";
@@ -56,10 +61,10 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
     steps.push({ label: "Reasonable costs of the repair", amount: repair ?? 0, sources: ["203.1"] });
   }
 
-  if (cover.id === "ParkingDamage" && answers.hasParkingDamagePlus !== "Yes") {
-    const limit = value("parkingLimit");
+  for (const limit of policy.parameters.filter((p) => p.limitOf === cover.id && !(p.liftedBy && answers[p.liftedBy] === YES))) {
     const current = sum(steps);
-    if (current > limit) steps.push({ label: `Limit per parking damage, without Parking damage PLUS`, amount: limit - current, sources: parameter("parkingLimit").sources });
+    const without = limit.liftedBy && policy.facts.find((f) => f.id === limit.liftedBy)?.label;
+    if (current > limit.amount) steps.push({ label: `${limit.label}${without ? `, without ${without}` : ""}`, amount: limit.amount - current, sources: limit.sources });
   }
 
   if (!cover.noDeductible) {
@@ -71,8 +76,9 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
       const back = Math.min(agreed, reductions * value("deductibleStep"));
       if (back > 0) steps.push({ label: `Reduction of the deductible after ${years} full years without claims`, amount: back, sources: parameter("deductibleStep").sources });
     }
-    if (answers.helpPoint === "HelpPointNotFollowed") {
-      steps.push({ label: "Additional deductible: the rules of Help Point PLUS were not followed", amount: -value("helpPointPenalty"), sources: parameter("helpPointPenalty").sources });
+    for (const v of answered.filter((v) => v.addsDeductible)) {
+      const extra = parameter(v.addsDeductible!);
+      steps.push({ label: extra.label, amount: -extra.amount, sources: extra.sources });
     }
   }
   notes.push({ text: "If you can deduct input tax, Zurich deducts the VAT. Without a repair, it pays the costs without VAT.", sources: ["203.1", "203.2"] });

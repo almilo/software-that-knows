@@ -5,8 +5,8 @@
 // The decision, in order:
 //   1. the cover: the first cover rule that holds says which cover the event is a case of;
 //   2. the policy: the cover must be insurable for the vehicle class, its module must be in the
-//      policy, and an optional cover must be in the policy too. The certificate gives these answers
-//      (the first answer of a module or option fact means "included");
+//      policy, and an optional cover must be in the policy too. The certificate gives these answers,
+//      as yes or no;
 //   3. the exclusions and territory rules of the cover: one that holds excludes the claim, unless a
 //      precedence lets another statement that holds win over it;
 //   4. the reductions: one that holds reduces the benefit, unless a waiver wins over it;
@@ -15,7 +15,7 @@
 // A question is asked only when a rule that can still apply needs its answer: next() gives it.
 import { type Amount, calculate } from "./benefit";
 import { all, openFacts } from "./conditions";
-import type { Answers, Cover, Fact, Policy, Precedence, Rule } from "./model";
+import { type Answers, type Cover, type Fact, type Policy, type Precedence, type Rule, YES } from "./model";
 
 export type Status = "open" | "covered" | "reduced" | "excluded" | "noCover" | "notInsurable" | "moduleNotActive" | "notAgreed";
 
@@ -80,13 +80,13 @@ export function createClaim(policy: Policy) {
       const fact = facts.find((f) => f.moduleOf === c.module);
       const included = fact && answers[fact.id];
       if (fact && included === undefined) return { ...open(applied, [fact.id]), cover: c };
-      if (!fact || included !== fact.values[0]!.id) return { status: "moduleNotActive", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
+      if (!fact || included !== YES) return { status: "moduleNotActive", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
     }
     if (availability === "option") {
       const option = facts.find((f) => f.optionOf === c.id);
       const included = option && answers[option.id];
       if (option && included === undefined) return { ...open(applied, [option.id]), cover: c };
-      if (!option || included !== option.values[0]!.id) return { status: "notAgreed", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
+      if (!option || included !== YES) return { status: "notAgreed", cover: c, applied, pending: [], amountPending: [], benefits: benefits(c, answers) };
     }
 
     // 3 and 4. Exclusions and reductions, with precedence

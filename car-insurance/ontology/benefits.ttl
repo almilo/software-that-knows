@@ -36,10 +36,10 @@
     ins:amount 3 ; ins:source art:6.1 .
 :deductibleSteps a ins:Parameter ; rdfs:label "Number of reductions of the deductible"@en ;
     ins:amount 2 ; ins:source art:6.1 .
-:helpPointPenalty a ins:Parameter ; rdfs:label "Additional deductible when the rules of Help Point PLUS are not followed, in CHF"@en ;
+:helpPointPenalty a ins:Parameter ; rdfs:label "Additional deductible: the rules of Help Point PLUS were not followed"@en ;
     ins:amount 500 ; ins:source art:10.3 .
-:parkingLimit a ins:Parameter ; rdfs:label "Limit per parking damage, in CHF"@en ;
-    ins:amount 1000 ; ins:source art:202.4c .
+:parkingLimit a ins:Parameter ; rdfs:label "Limit per parking damage"@en ;
+    ins:amount 1000 ; ins:source art:202.4c ; ins:limitOf :ParkingDamage ; ins:liftedBy :hasParkingDamagePlus .
 
 # The same number, stated twice. The checks compare the statements that name the same thing.
 :countedYearBonus a ins:Parameter ; rdfs:label "Minimum length of an insurance year that counts for the no-claims bonus, in months"@en ;

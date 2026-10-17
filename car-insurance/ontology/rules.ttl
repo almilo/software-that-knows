@@ -240,7 +240,7 @@
 
 :GrossNegligenceWaiver a ins:Waiver ; rdfs:label "Coverage for gross negligence: no reduction of collision benefits"@en ;
     ins:appliesTo :Collision ; ins:source art:202.2 ; ins:mentions :GrossNegligenceConcept ;
-    ins:when [ ins:fact :hasCollisionGrossNegligence ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :hasCollisionGrossNegligence ; ins:in ( ins:Yes ) ] .
 
 # ---------------------------------------------------------------------------
 # 5. Territory (Art. 3)

@@ -9,7 +9,7 @@
 import type { Case } from "../test/cases";
 import { factsOf, satisfiable } from "./conditions";
 import { type ClaimResult, createClaim } from "./claim";
-import type { Answers, Condition, Policy, Precedence, Rule } from "./model";
+import { type Answers, type Condition, type Policy, type Precedence, type Rule, YES } from "./model";
 
 export type Finding = { status: "ok" | "resolved" | "open"; text: string; sources: string[]; basis?: Precedence["basis"]; resolution?: string };
 export type Check = { id: string; title: string; what: string; why: string; findings: Finding[] };
@@ -94,15 +94,15 @@ function certificates(p: Policy): Check {
     const missing = facts.filter((f) => c.answers[f.id] === undefined);
     if (missing.length) findings.push({ status: "open", text: `${c.label}: no answer for ${missing.map((f) => f.label.toLowerCase()).join(", ")}.`, sources: [] });
     const vehicle = String(c.answers.vehicleClass);
-    for (const f of facts.filter((f) => f.optionOf && c.answers[f.id] === f.values[0]!.id)) {
+    for (const f of facts.filter((f) => f.optionOf && c.answers[f.id] === YES)) {
       const cover = p.covers.find((x) => x.id === f.optionOf)!;
       const status = cover.availability[vehicle];
       if (status !== "option") findings.push({ status: "open", text: `${c.label}: includes ${cover.label}, which is ${status === "basic" ? "basic, not an option," : "not insurable"} for this vehicle class.`, sources: cover.sources });
       const module = facts.find((m) => m.moduleOf === cover.module);
-      if (module && c.answers[module.id] !== module.values[0]!.id) findings.push({ status: "open", text: `${c.label}: includes ${cover.label}, but not its module.`, sources: cover.sources });
+      if (module && c.answers[module.id] !== YES) findings.push({ status: "open", text: `${c.label}: includes ${cover.label}, but not its module.`, sources: cover.sources });
     }
     if (!findings.some((x) => x.text.startsWith(`${c.label}:`))) {
-      const modules = p.modules.filter((m) => m.mandatory || facts.some((f) => f.moduleOf === m.id && c.answers[f.id] === f.values[0]!.id));
+      const modules = p.modules.filter((m) => m.mandatory || facts.some((f) => f.moduleOf === m.id && c.answers[f.id] === YES));
       findings.push({ status: "ok", text: `${c.label}: complete. Modules: ${modules.map((m) => m.label.toLowerCase()).join(", ")}.`, sources: [] });
     }
   }

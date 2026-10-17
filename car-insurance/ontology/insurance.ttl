@@ -69,12 +69,19 @@ ins:CertificateFact a owl:Class ; rdfs:subClassOf ins:Fact ; rdfs:label "Fact of
     rdfs:comment "A fact of one policy, from its certificate: the vehicle, the modules and options it includes, its sums. The applications read it from the certificate and do not ask it."@en .
 ins:key a owl:DatatypeProperty ; rdfs:label "key"@en .
 ins:help a owl:DatatypeProperty ; rdfs:label "help"@en .
-ins:kind a owl:DatatypeProperty ; rdfs:label "kind"@en ; rdfs:comment "choice, number or date."@en .
+ins:kind a owl:DatatypeProperty ; rdfs:label "kind"@en ; rdfs:comment "yesno, choice, number or date. A yesno fact has the answers ins:Yes and ins:No."@en .
+ins:Yes rdfs:label "Yes"@en .
+ins:No rdfs:label "No"@en .
+ins:detailOf a owl:ObjectProperty ; rdfs:label "detail of"@en ; rdfs:comment "A fact of the certificate that matters only when the policy has this module, for example the sums of the accident insurance."@en .
 ins:unit a owl:DatatypeProperty ; rdfs:label "unit"@en .
 ins:value a owl:ObjectProperty ; rdfs:label "value"@en ; rdfs:comment "The possible answers of a choice, as an RDF list, in order."@en .
 ins:askWhen a owl:ObjectProperty ; rdfs:label "ask when"@en ; rdfs:comment "A condition: the fact is asked only when it holds. For the facts that no rule uses, such as amounts."@en .
 ins:required a owl:DatatypeProperty ; rdfs:label "required"@en ; rdfs:comment "The fact is always asked."@en .
 ins:optionOf a owl:ObjectProperty ; rdfs:label "option of"@en ; rdfs:comment "The fact says whether the optional cover is in the policy (yes or no)."@en .
+ins:totalLossBecause a owl:DatatypeProperty ; rdfs:label "total loss because"@en ;
+    rdfs:comment "On an answer: the answer makes the claim a total loss, for this reason."@en .
+ins:addsDeductible a owl:ObjectProperty ; rdfs:label "adds deductible"@en ;
+    rdfs:comment "On an answer: the answer adds the amount of this parameter to the deductible."@en .
 ins:closedList a owl:ObjectProperty ; rdfs:label "closed list"@en ; rdfs:comment "The answers of this fact come from a list that the document calls exhaustive."@en .
 
 ins:Certificate a owl:Class ; rdfs:label "Certificate"@en ;
@@ -137,6 +144,8 @@ ins:Concept a owl:Class ; rdfs:subClassOf skos:Concept ; rdfs:label "Concept"@en
 ins:Parameter a owl:Class ; rdfs:label "Parameter"@en ;
     rdfs:comment "A number of the document that the engine uses in a calculation, for example the limit per event."@en .
 ins:amount a owl:DatatypeProperty ; rdfs:label "amount"@en .
+ins:limitOf a owl:ObjectProperty ; rdfs:label "limit of"@en ; rdfs:comment "The parameter is the maximum payment of a claim of this cover."@en .
+ins:liftedBy a owl:ObjectProperty ; rdfs:label "lifted by"@en ; rdfs:comment "The limit does not apply when the answer to this yesno fact is yes."@en .
 ins:per a owl:DatatypeProperty ; rdfs:label "per"@en .
 
 ins:Benefit a owl:Class ; rdfs:label "Benefit"@en ;

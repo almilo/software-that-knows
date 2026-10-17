@@ -112,13 +112,20 @@ export function generatePolicy(m: Model): Policy {
       ...optional("help", m.text(t, ins("help"))),
       kind: m.required(t, ins("kind")) as Fact["kind"],
       ...optional("unit", m.text(t, ins("unit"))),
-      values: m.list(m.one(t, ins("value"))).map((v) => ({ id: local(v), label: label(v), ...optional("help", m.text(v, ins("help"))) })),
+      values: (m.text(t, ins("kind")) === "yesno" ? [m.node(ins("Yes")), m.node(ins("No"))] : m.list(m.one(t, ins("value")))).map((v) => ({
+        id: local(v),
+        label: label(v),
+        ...optional("help", m.text(v, ins("help"))),
+        ...optional("totalLossBecause", m.text(v, ins("totalLossBecause"))),
+        ...optional("addsDeductible", m.one(v, ins("addsDeductible")) && local(m.one(v, ins("addsDeductible"))!)),
+      })),
       order: order(t),
       required: m.text(t, ins("required")) === "true",
       askWhen: conditions(t, "askWhen"),
       ...optional("optionOf", m.one(t, ins("optionOf")) && local(m.one(t, ins("optionOf"))!)),
       ...optional("moduleOf", m.one(t, ins("moduleOf")) && local(m.one(t, ins("moduleOf"))!)),
       ...optional("sumOf", m.one(t, ins("sumOf")) && local(m.one(t, ins("sumOf"))!)),
+      ...optional("detailOf", m.one(t, ins("detailOf")) && local(m.one(t, ins("detailOf"))!)),
       neededFor: m.all(t, ins("neededFor")).map((x) => x.value).sort(),
       ...optional("closedList", m.one(t, ins("closedList")) && local(m.one(t, ins("closedList"))!)),
     }))
@@ -197,6 +204,8 @@ export function generatePolicy(m: Model): Policy {
     amount: Number(m.required(t, ins("amount"))),
     sources: sources(t),
     mentions: locals(t, ins("mentions")),
+    ...optional("limitOf", m.one(t, ins("limitOf")) && local(m.one(t, ins("limitOf"))!)),
+    ...optional("liftedBy", m.one(t, ins("liftedBy")) && local(m.one(t, ins("liftedBy"))!)),
   }));
   const benefits: Benefit[] = m.ofType(ins("Benefit")).map((t) => ({
     id: local(t),
@@ -339,6 +348,12 @@ function checkNames(p: Policy) {
   for (const b of p.benefits) {
     b.covers.forEach((c) => expect(covers, c, b.id));
     b.mentions.forEach((c) => expect(concepts, c, b.id));
+  }
+  const parameters = ids(p.parameters);
+  for (const f of p.facts) for (const v of f.values) expect(parameters, v.addsDeductible, `${f.id}, ${v.id}`);
+  for (const x of p.parameters) {
+    expect(covers, x.limitOf, x.id);
+    expect(facts, x.liftedBy, x.id);
   }
   for (const c of p.comparisons) [c.left, c.right].forEach((id) => expect(covers, id, c.id));
   for (const o of p.obligations) o.when.forEach((c) => condition(c, o.id));

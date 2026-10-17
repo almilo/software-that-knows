@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from "react";
-import type { Answers, Fact } from "../engine/model";
+import { type Answers, type Fact, NO, YES } from "../engine/model";
 import { cover, policy } from "./data";
 
 // The certificate of the policy that the views use: one of the certificates of the model, or one
@@ -23,8 +23,6 @@ export const changeCertificate = (changes: Answers) => set({ id: "custom", answe
 
 const facts = policy.facts.filter((f) => f.group === "certificate");
 export const isCertificateFact = (id: string) => facts.some((f) => f.id === id);
-const yes = (f: Fact) => f.values[0]!.id;
-const no = (f: Fact) => f.values[1]!.id;
 
 // The panel "Your policy": the certificate to use, and its modules and options, which the user can
 // change to see how the decision changes.
@@ -33,10 +31,12 @@ export function CertificatePanel() {
   const vehicle = String(answers.vehicleClass);
   const modules = facts.filter((f) => f.moduleOf);
   const options = facts.filter((f) => f.optionOf && cover(f.optionOf).availability[vehicle] === "option");
-  const others = facts.filter((f) => !f.moduleOf && !f.optionOf && f.id !== "vehicleClass" && (!f.sumOf || answers.hasAccident === "Yes") && (f.id !== "accidentPersons" || answers.hasAccident === "Yes"));
+  // A detail of a module (the sums of the accident insurance) matters only when the policy has it.
+  const hasModule = (id: string) => facts.some((f) => f.moduleOf === id && answers[f.id] === YES);
+  const others = facts.filter((f) => !f.moduleOf && !f.optionOf && !f.required && (!f.detailOf || hasModule(f.detailOf)));
   const toggle = (f: Fact) => (
     <label key={f.id} className="check">
-      <input type="checkbox" checked={answers[f.id] === yes(f)} onChange={(e) => changeCertificate({ [f.id]: e.target.checked ? yes(f) : no(f) })} />
+      <input type="checkbox" checked={answers[f.id] === YES} onChange={(e) => changeCertificate({ [f.id]: e.target.checked ? YES : NO })} />
       {f.label}
     </label>
   );
@@ -83,10 +83,10 @@ export function CertificatePanel() {
       <fieldset>
         <legend>Options</legend>
         {options.map(toggle)}
-        {others.filter((f) => f.kind === "choice" && f.values.length === 2 && f.values[0]!.label === "Yes").map(toggle)}
+        {others.filter((f) => f.kind === "yesno").map(toggle)}
       </fieldset>
       {others
-        .filter((f) => !(f.kind === "choice" && f.values[0]!.label === "Yes"))
+        .filter((f) => f.kind !== "yesno")
         .map((f) => (
           <label key={f.id} className="row">
             <span>{f.label}</span>

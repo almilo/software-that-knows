@@ -19,61 +19,61 @@
 :CallPolice a ins:Obligation ; ins:order 2 ; rdfs:label "Tell the police"@en ;
     ins:action "The police must know about bodily injury, theft, and damage caused by animals. For animals, the gamekeeper is also possible."@en ;
     ins:source art:10.1 ;
-    ins:when [ ins:anyOf ( [ ins:fact :injury ; ins:in ( :Yes ) ] [ ins:fact :stolen ; ins:in ( :Yes ) ] [ ins:fact :animal ; ins:in ( :Yes ) ] ) ] .
+    ins:when [ ins:anyOf ( [ ins:fact :injury ; ins:in ( ins:Yes ) ] [ ins:fact :stolen ; ins:in ( ins:Yes ) ] [ ins:fact :animal ; ins:in ( ins:Yes ) ] ) ] .
 
 :RoadsidePhone a ins:Obligation ; ins:order 3 ; rdfs:label "Phone Zurich before you get help on the road"@en ;
     ins:action "Let Zurich organise the roadside help, the towing and the onward journey."@en ;
     ins:consequence "Zurich does not pay for help that it did not organise or agree to."@en ;
     ins:source art:10.4 ;
-    ins:when [ ins:fact :unusable ; ins:in ( :Yes ) ] , [ ins:fact :hasRoadside ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :unusable ; ins:in ( ins:Yes ) ] , [ ins:fact :hasRoadside ; ins:in ( ins:Yes ) ] .
 
 :NoRoadside a ins:Obligation ; ins:order 3.5 ; rdfs:label "Roadside assistance is not in your policy"@en ;
     ins:action "Call a breakdown service; you pay its costs. If an accident or another insured event damaged the vehicle, the accidental damage insurance pays the recovery and the towing to the nearest suitable garage."@en ;
     ins:source art:404, art:203.3 ;
-    ins:when [ ins:fact :unusable ; ins:in ( :Yes ) ] , [ ins:fact :hasRoadside ; ins:in ( :No ) ] .
+    ins:when [ ins:fact :unusable ; ins:in ( ins:Yes ) ] , [ ins:fact :hasRoadside ; ins:in ( ins:No ) ] .
 
 :HelpPoint a ins:Obligation ; ins:order 4 ; rdfs:label "Use Help Point PLUS"@en ;
     ins:action "Report the damage by phone or at a help point, and have the repair done at the garage that Zurich specifies."@en ;
     ins:consequence "If you do not, you pay 500 CHF more deductible."@en ;
     ins:source art:10.3 ;
-    ins:when [ ins:fact :damaged ; ins:in ( :Yes ) ] , [ ins:fact :hasHelpPoint ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :damaged ; ins:in ( ins:Yes ) ] , [ ins:fact :hasHelpPoint ; ins:in ( ins:Yes ) ] .
 
 :Inspection a ins:Obligation ; ins:order 5 ; rdfs:label "Let Zurich inspect the vehicle before the repair"@en ;
     ins:action "Do not repair the vehicle before Zurich has had the opportunity to inspect it."@en ;
     ins:consequence "Otherwise Zurich can reduce the benefit or pay nothing."@en ;
     ins:source art:10.3 ;
-    ins:when [ ins:fact :damaged ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :damaged ; ins:in ( ins:Yes ) ] .
 
 :DoNotAccept a ins:Obligation ; ins:order 6 ; rdfs:label "Do not accept or pay the claims of the other party"@en ;
     ins:action "Zurich negotiates with the injured party, and its settlement binds you. Give the claim to Zurich."@en ;
     ins:source art:10.2 ;
-    ins:when [ ins:fact :otherParty ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :otherParty ; ins:in ( ins:Yes ) ] .
 
 :TheftWait a ins:Obligation ; ins:order 7 ; rdfs:label "Know the 30 days after a theft"@en ;
     ins:action "If the vehicle is found within 30 days after Zurich receives the notice, Zurich pays the repair. If not, it is a total loss."@en ;
     ins:source art:203.2, art:203.4 ;
-    ins:when [ ins:fact :stolen ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :stolen ; ins:in ( ins:Yes ) ] .
 
 :CriminalCharges a ins:Obligation ; ins:order 8 ; rdfs:label "File criminal charges if Zurich asks"@en ;
     ins:action "Zurich can ask you to file criminal charges."@en ;
     ins:source art:10.1 ;
-    ins:when [ ins:fact :stolen ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :stolen ; ins:in ( ins:Yes ) ] .
 
 :ReportToOrion a ins:Obligation ; ins:order 9 ; rdfs:label "Report the legal case to Orion before you engage a lawyer"@en ;
     ins:action "Orion decides the procedure and agrees to the lawyer. Report it at the latest 6 months after the end of the contract."@en ;
     ins:consequence "Costs of a lawyer that you engaged before you reported the case: at most 500 CHF."@en ;
     ins:source art:507, art:503 ;
-    ins:when [ ins:fact :legalDispute ; ins:in ( :Yes ) ] , [ ins:fact :hasLegal ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :legalDispute ; ins:in ( ins:Yes ) ] , [ ins:fact :hasLegal ; ins:in ( ins:Yes ) ] .
 
 :NoLegal a ins:Obligation ; ins:order 9.5 ; rdfs:label "Legal protection is not in your policy"@en ;
     ins:action "You pay a lawyer to claim damages from another person. If another person claims damages from you, give the claim to Zurich: the liability insurance defends you against unjustified claims."@en ;
     ins:source art:502, art:103, art:10.2 ;
-    ins:when [ ins:fact :legalDispute ; ins:in ( :Yes ) ] , [ ins:fact :hasLegal ; ins:in ( :No ) ] .
+    ins:when [ ins:fact :legalDispute ; ins:in ( ins:Yes ) ] , [ ins:fact :hasLegal ; ins:in ( ins:No ) ] .
 
 :MedicalCertificate a ins:Obligation ; ins:order 10 ; rdfs:label "Get a medical certificate"@en ;
     ins:action "The daily allowance needs a medical certificate. Medical expenses are paid for 5 years after the accident."@en ;
     ins:source art:303.3, art:303.5 ;
-    ins:when [ ins:fact :injury ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :injury ; ins:in ( ins:Yes ) ] .
 
 :Investigation a ins:Obligation ; ins:order 11 ; rdfs:label "Help with the investigation"@en ;
     ins:action "Give Zurich the documents, the information and the powers of attorney that it needs."@en ;
@@ -82,7 +82,7 @@
 :AbroadNumber a ins:Obligation ; ins:order 12 ; rdfs:label "Check the territory"@en ;
     ins:action "The insurance covers Europe and the countries around the Mediterranean, not Belarus, Moldova, Ukraine, Russia, Georgia, Armenia, Azerbaijan, Kazakhstan, Egypt, Algeria, Lebanon, Libya or Syria."@en ;
     ins:source art:3 ;
-    ins:when [ ins:fact :abroad ; ins:in ( :Yes ) ] .
+    ins:when [ ins:fact :abroad ; ins:in ( ins:Yes ) ] .
 
 # ---------------------------------------------------------------------------
 # 2. Deadlines

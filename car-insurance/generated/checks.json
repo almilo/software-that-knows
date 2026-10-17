@@ -191,6 +191,11 @@
       ]
     },
     {
+      "stats": {
+        "claims": 37,
+        "questionsPerClaim": 8.6,
+        "modelQuestions": 32
+      },
       "id": "claims",
       "title": "The test claims give the expected decisions",
       "what": "Each test claim is walked as the app does: one question at a time, only the questions that can still change the decision. The status, the cover, the rules and the payment must be the expected ones.",

@@ -1,28 +1,8 @@
-import { useSyncExternalStore } from "react";
-import { type Answers, type Fact, NO, YES } from "../engine/model";
+import { type Fact, NO, YES } from "../engine/model";
+import { changeCertificate, chooseCertificate, useCertificate } from "./certificate-store";
 import { cover, policy } from "./data";
 
-// The certificate of the policy that the views use: one of the certificates of the model, or one
-// that the user changed. The claim check and the guide read it; they do not ask about it.
-type State = { id: string; answers: Answers };
-let state: State = { id: policy.certificates[0]!.id, answers: policy.certificates[0]!.answers };
-const listeners = new Set<() => void>();
-const set = (next: State) => {
-  state = next;
-  listeners.forEach((l) => l());
-};
-
-export function useCertificate() {
-  return useSyncExternalStore(
-    (l) => (listeners.add(l), () => listeners.delete(l)),
-    () => state,
-  );
-}
-export const chooseCertificate = (id: string) => set({ id, answers: policy.certificates.find((c) => c.id === id)!.answers });
-export const changeCertificate = (changes: Answers) => set({ id: "custom", answers: { ...state.answers, ...changes } });
-
 const facts = policy.facts.filter((f) => f.group === "certificate");
-export const isCertificateFact = (id: string) => facts.some((f) => f.id === id);
 
 // The panel "Your policy": the certificate to use, and its modules and options, which the user can
 // change to see how the decision changes.

@@ -106,60 +106,6 @@
       ]
     }
   ],
-  "certificates": [
-    {
-      "id": "ExampleCertificate",
-      "label": "Example: a passenger car with partial casco, collision, accident and Help Point PLUS",
-      "comment": "No roadside assistance, no legal protection, no items transported. The certificate of the evaluation cases.",
-      "answers": {
-        "accidentPersons": "DriverAndPassengers",
-        "dailyAllowance": 25,
-        "deathSum": 30000,
-        "disabilitySum": 60000,
-        "hasAccident": "Yes",
-        "hasCollision": "Yes",
-        "hasCollisionGrossNegligence": "No",
-        "hasGlassPlus": "No",
-        "hasHelpPoint": "Yes",
-        "hasItemsTransported": "No",
-        "hasLegal": "No",
-        "hasMartens": "No",
-        "hasParkingDamage": "No",
-        "hasParkingDamagePlus": "No",
-        "hasPartialCasco": "Yes",
-        "hasProtectiveClothing": "No",
-        "hasRoadside": "No",
-        "hospitalAllowance": 25,
-        "vehicleClass": "PassengerCar"
-      }
-    },
-    {
-      "id": "FullCertificate",
-      "label": "Every module and option, for a passenger car",
-      "comment": "To explore the rules of all covers.",
-      "answers": {
-        "accidentPersons": "DriverAndPassengers",
-        "dailyAllowance": 50,
-        "deathSum": 100000,
-        "disabilitySum": 200000,
-        "hasAccident": "Yes",
-        "hasCollision": "Yes",
-        "hasCollisionGrossNegligence": "Yes",
-        "hasGlassPlus": "Yes",
-        "hasHelpPoint": "No",
-        "hasItemsTransported": "Yes",
-        "hasLegal": "Yes",
-        "hasMartens": "Yes",
-        "hasParkingDamage": "Yes",
-        "hasParkingDamagePlus": "Yes",
-        "hasPartialCasco": "Yes",
-        "hasProtectiveClothing": "No",
-        "hasRoadside": "Yes",
-        "hospitalAllowance": 50,
-        "vehicleClass": "PassengerCar"
-      }
-    }
-  ],
   "covers": [
     {
       "id": "ThirdPartyLiability",
@@ -644,7 +590,7 @@
           "help": "Trucks, buses, agricultural motor vehicles, industrial machines and other special vehicles."
         }
       ],
-      "order": 1,
+      "order": 0,
       "required": true,
       "askWhen": [],
       "neededFor": []
@@ -664,7 +610,7 @@
           "label": "No"
         }
       ],
-      "order": 20,
+      "order": 17,
       "required": false,
       "askWhen": [],
       "moduleOf": "CollisionModule",
@@ -685,7 +631,7 @@
           "label": "No"
         }
       ],
-      "order": 21,
+      "order": 18,
       "required": false,
       "askWhen": [],
       "moduleOf": "PartialCascoModule",
@@ -706,7 +652,7 @@
           "label": "No"
         }
       ],
-      "order": 22,
+      "order": 19,
       "required": false,
       "askWhen": [],
       "moduleOf": "AccidentModule",
@@ -727,7 +673,7 @@
           "label": "No"
         }
       ],
-      "order": 23,
+      "order": 20,
       "required": false,
       "askWhen": [],
       "moduleOf": "RoadsideModule",
@@ -748,7 +694,7 @@
           "label": "No"
         }
       ],
-      "order": 24,
+      "order": 21,
       "required": false,
       "askWhen": [],
       "moduleOf": "LegalModule",
@@ -769,7 +715,7 @@
           "label": "No"
         }
       ],
-      "order": 25,
+      "order": 22,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -789,7 +735,7 @@
           "label": "Driver only"
         }
       ],
-      "order": 26,
+      "order": 23,
       "required": false,
       "askWhen": [],
       "detailOf": "AccidentModule",
@@ -802,7 +748,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 27,
+      "order": 24,
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
@@ -816,7 +762,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 28,
+      "order": 25,
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
@@ -830,7 +776,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 29,
+      "order": 26,
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
@@ -844,7 +790,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 29.5,
+      "order": 27,
       "required": false,
       "askWhen": [],
       "sumOf": "DeathDisability",
@@ -866,7 +812,7 @@
           "label": "No"
         }
       ],
-      "order": 30,
+      "order": 28,
       "required": false,
       "askWhen": [],
       "optionOf": "GlassPlus",
@@ -887,7 +833,7 @@
           "label": "No"
         }
       ],
-      "order": 31,
+      "order": 29,
       "required": false,
       "askWhen": [],
       "optionOf": "Martens",
@@ -908,7 +854,7 @@
           "label": "No"
         }
       ],
-      "order": 32,
+      "order": 30,
       "required": false,
       "askWhen": [],
       "optionOf": "ParkingDamage",
@@ -929,7 +875,7 @@
           "label": "No"
         }
       ],
-      "order": 33,
+      "order": 31,
       "required": false,
       "askWhen": [],
       "optionOf": "ItemsTransported",
@@ -950,7 +896,7 @@
           "label": "No"
         }
       ],
-      "order": 34,
+      "order": 32,
       "required": false,
       "askWhen": [],
       "optionOf": "ProtectiveClothing",
@@ -971,7 +917,7 @@
           "label": "No"
         }
       ],
-      "order": 35,
+      "order": 33,
       "required": false,
       "askWhen": [
         {
@@ -1001,7 +947,7 @@
           "label": "No"
         }
       ],
-      "order": 36,
+      "order": 34,
       "required": false,
       "askWhen": [],
       "optionOf": "CollisionGrossNegligence",
@@ -1087,7 +1033,7 @@
           "help": "I want to claim damages from another person, or I must defend myself in proceedings."
         }
       ],
-      "order": 2,
+      "order": 1,
       "required": true,
       "askWhen": [],
       "neededFor": []
@@ -1122,7 +1068,7 @@
           "label": "A person of my household used it without permission"
         }
       ],
-      "order": 3,
+      "order": 2,
       "required": false,
       "askWhen": [],
       "neededFor": [],
@@ -1143,7 +1089,7 @@
           "label": "Outside, in a shared garage or an unlocked room, without the steering lock"
         }
       ],
-      "order": 4,
+      "order": 3,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1184,7 +1130,7 @@
           "label": "Damage to electronics from an internal defect"
         }
       ],
-      "order": 5,
+      "order": 4,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1232,7 +1178,7 @@
           "help": "For example wind below 75 km/h, or frost."
         }
       ],
-      "order": 6,
+      "order": 5,
       "required": false,
       "askWhen": [],
       "neededFor": [],
@@ -1254,7 +1200,7 @@
           "help": "For example a headlight or the glass of a mirror."
         }
       ],
-      "order": 7,
+      "order": 6,
       "required": false,
       "askWhen": [],
       "neededFor": [],
@@ -1275,7 +1221,7 @@
           "label": "Yes, or the parts cannot be replaced or repaired"
         }
       ],
-      "order": 8,
+      "order": 7,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1295,7 +1241,7 @@
           "label": "The driver swerved to avoid it and the vehicle hit something else"
         }
       ],
-      "order": 9,
+      "order": 8,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1335,7 +1281,7 @@
           "label": "Something else"
         }
       ],
-      "order": 10,
+      "order": 9,
       "required": false,
       "askWhen": [],
       "neededFor": [],
@@ -1357,7 +1303,7 @@
           "label": "The third or a later one"
         }
       ],
-      "order": 11,
+      "order": 10,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1382,7 +1328,7 @@
           "label": "Cash, cards, jewellery, data, vehicles, animals and similar items"
         }
       ],
-      "order": 12,
+      "order": 11,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1407,7 +1353,7 @@
           "help": "For example from an unlocked vehicle."
         }
       ],
-      "order": 13,
+      "order": 12,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1437,7 +1383,7 @@
           "help": "A car or van of up to 3500 kg and 9 seats."
         }
       ],
-      "order": 13.5,
+      "order": 13,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1465,7 +1411,7 @@
           "label": "A dispute about buying, renting, leasing or repairing the vehicle"
         }
       ],
-      "order": 13.6,
+      "order": 14,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1494,7 +1440,7 @@
           "label": "Stolen in another way"
         }
       ],
-      "order": 14,
+      "order": 15,
       "required": false,
       "askWhen": [],
       "neededFor": [],
@@ -1524,7 +1470,7 @@
           "label": "Somewhere else"
         }
       ],
-      "order": 15,
+      "order": 16,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1550,7 +1496,7 @@
           "help": "Passenger transport for money, rental to self-drive customers, driving school."
         }
       ],
-      "order": 40,
+      "order": 35,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1575,7 +1521,7 @@
           "label": "No, and the insured person could not know"
         }
       ],
-      "order": 41,
+      "order": 36,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1595,7 +1541,7 @@
           "label": "No"
         }
       ],
-      "order": 42,
+      "order": 37,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1619,7 +1565,7 @@
           "label": "1.6 per mille or more, drugs, flagrant speeding, illegal races"
         }
       ],
-      "order": 43,
+      "order": 38,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1639,7 +1585,7 @@
           "label": "Yes, an intentional or attempted criminal offence or misdemeanour"
         }
       ],
-      "order": 44,
+      "order": 39,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1667,7 +1613,7 @@
           "label": "Civil unrest, but reasonable precautions were taken"
         }
       ],
-      "order": 45,
+      "order": 40,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1705,7 +1651,7 @@
           "label": "Damage caused by the load"
         }
       ],
-      "order": 46,
+      "order": 41,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1730,7 +1676,7 @@
           "label": "Damage caused with intent"
         }
       ],
-      "order": 47,
+      "order": 42,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1751,7 +1697,7 @@
           "totalLossBecause": "the vehicle was not found within 30 days"
         }
       ],
-      "order": 60,
+      "order": 43,
       "required": false,
       "askWhen": [
         {
@@ -1772,7 +1718,7 @@
       "kind": "number",
       "unit": "months",
       "values": [],
-      "order": 61,
+      "order": 44,
       "required": false,
       "askWhen": [],
       "neededFor": [
@@ -1787,7 +1733,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 62,
+      "order": 45,
       "required": false,
       "askWhen": [],
       "neededFor": [
@@ -1802,7 +1748,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 63,
+      "order": 46,
       "required": false,
       "askWhen": [
         {
@@ -1821,7 +1767,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 64,
+      "order": 47,
       "required": false,
       "askWhen": [
         {
@@ -1843,7 +1789,7 @@
       "kind": "number",
       "unit": "CHF",
       "values": [],
-      "order": 65,
+      "order": 48,
       "required": false,
       "askWhen": [],
       "neededFor": [
@@ -1858,7 +1804,7 @@
       "kind": "number",
       "unit": "years",
       "values": [],
-      "order": 66,
+      "order": 49,
       "required": false,
       "askWhen": [
         {
@@ -1899,7 +1845,7 @@
           "addsDeductible": "helpPointPenalty"
         }
       ],
-      "order": 67,
+      "order": 50,
       "required": false,
       "askWhen": [
         {
@@ -1920,7 +1866,7 @@
       "help": "The first day of the next insurance year.",
       "kind": "date",
       "values": [],
-      "order": 1,
+      "order": 0,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1931,7 +1877,7 @@
       "label": "End of the contract",
       "kind": "date",
       "values": [],
-      "order": 2,
+      "order": 1,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1942,7 +1888,7 @@
       "label": "Start of the first insurance year without a claim",
       "kind": "date",
       "values": [],
-      "order": 3,
+      "order": 2,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1953,7 +1899,7 @@
       "label": "Date of an accident with injury",
       "kind": "date",
       "values": [],
-      "order": 4,
+      "order": 3,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1964,7 +1910,7 @@
       "label": "Date when Zurich paid a claim",
       "kind": "date",
       "values": [],
-      "order": 5,
+      "order": 4,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1975,7 +1921,7 @@
       "label": "Date when Zurich received the notice of a theft",
       "kind": "date",
       "values": [],
-      "order": 6,
+      "order": 5,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1986,7 +1932,7 @@
       "label": "Date of Zurich's notice to pay back a deductible",
       "kind": "date",
       "values": [],
-      "order": 7,
+      "order": 6,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -1997,7 +1943,7 @@
       "label": "Date when the licence plates were deposited",
       "kind": "date",
       "values": [],
-      "order": 8,
+      "order": 7,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2008,7 +1954,7 @@
       "label": "Date of registration with a proof of insurance",
       "kind": "date",
       "values": [],
-      "order": 9,
+      "order": 8,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2028,7 +1974,7 @@
           "label": "No"
         }
       ],
-      "order": 1,
+      "order": 0,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2048,7 +1994,7 @@
           "label": "No"
         }
       ],
-      "order": 2,
+      "order": 1,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2068,7 +2014,7 @@
           "label": "No"
         }
       ],
-      "order": 3,
+      "order": 2,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2088,7 +2034,7 @@
           "label": "No"
         }
       ],
-      "order": 4,
+      "order": 3,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2108,7 +2054,7 @@
           "label": "No"
         }
       ],
-      "order": 6,
+      "order": 4,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2128,7 +2074,7 @@
           "label": "No"
         }
       ],
-      "order": 7,
+      "order": 5,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2148,7 +2094,7 @@
           "label": "No"
         }
       ],
-      "order": 8,
+      "order": 6,
       "required": false,
       "askWhen": [],
       "neededFor": []
@@ -2168,10 +2114,64 @@
           "label": "No"
         }
       ],
-      "order": 9,
+      "order": 7,
       "required": false,
       "askWhen": [],
       "neededFor": []
+    }
+  ],
+  "certificates": [
+    {
+      "id": "ExampleCertificate",
+      "label": "Example: a passenger car with partial casco, collision, accident and Help Point PLUS",
+      "comment": "No roadside assistance, no legal protection, no items transported. The certificate of the evaluation cases.",
+      "answers": {
+        "accidentPersons": "DriverAndPassengers",
+        "dailyAllowance": 25,
+        "deathSum": 30000,
+        "disabilitySum": 60000,
+        "hasAccident": "Yes",
+        "hasCollision": "Yes",
+        "hasCollisionGrossNegligence": "No",
+        "hasGlassPlus": "No",
+        "hasHelpPoint": "Yes",
+        "hasItemsTransported": "No",
+        "hasLegal": "No",
+        "hasMartens": "No",
+        "hasParkingDamage": "No",
+        "hasParkingDamagePlus": "No",
+        "hasPartialCasco": "Yes",
+        "hasProtectiveClothing": "No",
+        "hasRoadside": "No",
+        "hospitalAllowance": 25,
+        "vehicleClass": "PassengerCar"
+      }
+    },
+    {
+      "id": "FullCertificate",
+      "label": "Every module and option, for a passenger car",
+      "comment": "To explore the rules of all covers.",
+      "answers": {
+        "accidentPersons": "DriverAndPassengers",
+        "dailyAllowance": 50,
+        "deathSum": 100000,
+        "disabilitySum": 200000,
+        "hasAccident": "Yes",
+        "hasCollision": "Yes",
+        "hasCollisionGrossNegligence": "Yes",
+        "hasGlassPlus": "Yes",
+        "hasHelpPoint": "No",
+        "hasItemsTransported": "Yes",
+        "hasLegal": "Yes",
+        "hasMartens": "Yes",
+        "hasParkingDamage": "Yes",
+        "hasParkingDamagePlus": "Yes",
+        "hasPartialCasco": "Yes",
+        "hasProtectiveClothing": "No",
+        "hasRoadside": "Yes",
+        "hospitalAllowance": 50,
+        "vehicleClass": "PassengerCar"
+      }
     }
   ],
   "rules": [

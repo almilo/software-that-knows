@@ -75,6 +75,9 @@ ins:No rdfs:label "No"@en .
 ins:detailOf a owl:ObjectProperty ; rdfs:label "detail of"@en ; rdfs:comment "A fact of the certificate that matters only when the policy has this module, for example the sums of the accident insurance."@en .
 ins:unit a owl:DatatypeProperty ; rdfs:label "unit"@en .
 ins:value a owl:ObjectProperty ; rdfs:label "value"@en ; rdfs:comment "The possible answers of a choice, as an RDF list, in order."@en .
+ins:QuestionOrder a owl:Class ; rdfs:label "Order of questions"@en ;
+    rdfs:comment "The facts of a group of questions, in the order to ask them (ins:facts, an RDF list). Every fact is in one list."@en .
+ins:facts a owl:ObjectProperty ; rdfs:label "facts"@en .
 ins:askWhen a owl:ObjectProperty ; rdfs:label "ask when"@en ; rdfs:comment "A condition: the fact is asked only when it holds. For the facts that no rule uses, such as amounts."@en .
 ins:required a owl:DatatypeProperty ; rdfs:label "required"@en ; rdfs:comment "The fact is always asked."@en .
 ins:optionOf a owl:ObjectProperty ; rdfs:label "option of"@en ; rdfs:comment "The fact says whether the optional cover is in the policy (yes or no)."@en .

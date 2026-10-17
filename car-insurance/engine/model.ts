@@ -33,7 +33,7 @@ export type Fact = {
   required: boolean;
   // Asked only when these conditions hold; for the facts that no rule uses, such as amounts.
   askWhen: Condition[];
-  // The optional cover, or the module, that the answer says is in the policy (first answer) or not.
+  // The optional cover, or the module, that this yesno fact says is in the policy or not.
   optionOf?: string;
   moduleOf?: string;
   // The cover that this number is a sum insured of.

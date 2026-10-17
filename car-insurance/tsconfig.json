@@ -11,5 +11,5 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "types": ["bun"]
   },
-  "include": ["app", "engine", "generator", "test", "dev.ts"]
+  "include": ["app", "claims", "engine", "generator", "test", "dev.ts"]
 }

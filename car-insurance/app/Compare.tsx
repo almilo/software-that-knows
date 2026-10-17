@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { chf } from "../engine/benefit";
+import { chf } from "../engine/text";
 import type { Availability, Benefit } from "../engine/model";
 import { concept, cover, policy } from "./data";
 import { Badge, basisWords, Page, Sources } from "./ui";

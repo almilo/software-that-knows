@@ -1,25 +1,11 @@
 // The test claims: the specification of the claim check. Each claim gives the answers of a user and
-// the expected decision: the status, the cover, the rules that decide, the rules that a precedence
-// sets aside, and the payment in CHF. The checks walk each claim as the app does (one question
+// the expected decision (TestClaim in engine/claim.ts). The generator runs them, as a check of the
+// model, and writes the results to the report. The claims with an example label are also the
+// examples of the claim check in the app. The checks walk each claim as the app does (one question
 // at a time, only the questions that the decision needs), so a claim also fails when it must answer
 // a question that the app would not ask, or does not answer one that it would ask.
-import type { Status } from "../engine/claim";
+import type { TestClaim } from "../engine/claim";
 import type { Answers } from "../engine/model";
-
-export type Case = {
-  name: string;
-  // The certificate of the policy (an id of certificate.ttl). The answers of the claim come after
-  // it and can replace its answers.
-  certificate?: string;
-  // For the evaluation cases: the question in the words of a user.
-  question?: string;
-  answers: Answers;
-  status: Status;
-  cover?: string;
-  rules?: string[];
-  overridden?: string[];
-  payment?: number;
-};
 
 // No exclusion and no reduction applies.
 const normal: Answers = {
@@ -40,7 +26,7 @@ const car = { vehicleClass: "PassengerCar", ...modules };
 const motorcycle = { vehicleClass: "Motorcycle", ...modules };
 const collision = { ...car, event: "CollisionEvent" };
 
-export const cases: Case[] = [
+export const testClaims: TestClaim[] = [
   {
     name: "Collision, partial loss, deductible reduced after 4 claim-free years",
     answers: { ...collision, ...normal, monthsOfService: 30, catalogPrice: 40000, marketValue: 25000, repairCost: 6000, deductible: 1000, claimFreeYears: 4 },
@@ -58,6 +44,7 @@ export const cases: Case[] = [
   },
   {
     name: "Collision in the middle of year 2: 90% of the catalogue price, pro rata",
+    example: "A collision in year 2: total loss",
     answers: { ...collision, ...normal, monthsOfService: 18, catalogPrice: 50000, repairCost: 30000, deductible: 1000, claimFreeYears: 0 },
     status: "covered",
     payment: 44000,
@@ -106,6 +93,7 @@ export const cases: Case[] = [
   },
   {
     name: "Motorcycle stolen outside without the steering lock",
+    example: "A motorcycle stolen outside",
     answers: { ...motorcycle, event: "TheftEvent", theftKind: "VehicleStolen", motorcycleSecured: "NotSecured" },
     status: "excluded",
     cover: "Theft",
@@ -120,12 +108,14 @@ export const cases: Case[] = [
   },
   {
     name: "Paintwork scratched: not in the closed list of vandalism",
+    example: "Paintwork scratched",
     answers: { ...car, event: "VandalismEvent", vandalismKind: "Scratched" },
     status: "excluded",
     rules: ["NotInVandalismList"],
   },
   {
     name: "Tyres punctured by a vandal: the list wins over the tyre exclusion (our interpretation)",
+    example: "Tyres punctured by a vandal",
     answers: { ...car, event: "VandalismEvent", vandalismKind: "PuncturedTyres", ...normal, operation: "TyresOrBatteryOnly", monthsOfService: 10, catalogPrice: 30000, repairCost: 800, deductible: 200 },
     status: "covered",
     cover: "Vandalism",
@@ -249,6 +239,7 @@ export const cases: Case[] = [
   // answers are the ones that the question gives.
   {
     name: "Evaluation 21: driving on a flooded road",
+    example: "Driving into a flooded road",
     question: "Is damage from driving on a flooded road covered?",
     certificate: "ExampleCertificate",
     answers: { event: "HazardEvent", hazardKind: "DroveIntoWater" },
@@ -267,6 +258,7 @@ export const cases: Case[] = [
   },
   {
     name: "Evaluation 22: suing a person who damaged my car",
+    example: "Sue a person who damaged my car",
     question: "Can I use my motor insurance to sue someone who damaged my car and refuses to pay?",
     certificate: "ExampleCertificate",
     answers: { event: "LegalEvent", legalKind: "ClaimDamages" },
@@ -282,6 +274,7 @@ export const cases: Case[] = [
   },
   {
     name: "Evaluation 23: injured as a passenger in my own car",
+    example: "Injured as a passenger in my own car",
     question: "If I'm injured as a passenger in my own car when my partner is driving, are my medical expenses covered by the auto insurance?",
     certificate: "ExampleCertificate",
     answers: { event: "InjuryEvent", injuredPerson: "Passenger", ...normal },
@@ -298,6 +291,7 @@ export const cases: Case[] = [
   },
   {
     name: "Evaluation 24: a breakdown on the autobahn",
+    example: "A breakdown on the autobahn",
     question: "My car broke down on the autobahn and won't start — will Zurich send someone to tow me to a garage?",
     certificate: "ExampleCertificate",
     answers: { event: "BreakdownEvent", place: "Europe" },
@@ -306,6 +300,7 @@ export const cases: Case[] = [
   },
   {
     name: "Evaluation 25: a laptop stolen from the car",
+    example: "A laptop stolen from the car",
     question: "Someone smashed my car window and stole my laptop from the back seat — am I covered for the laptop?",
     certificate: "ExampleCertificate",
     answers: { event: "TheftEvent", theftKind: "ItemsStolen" },

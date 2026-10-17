@@ -4,12 +4,10 @@ import { checks, policy, repository } from "./data";
 // The landing page: what the demonstrator is, and for each application what it shows, its
 // interface, and what the model gives it. The numbers come from the generated files.
 export function Home() {
-  const claimCheck = checks.find((c) => c.id === "claims")!;
-  const perClaim = /([\d.]+) per claim/.exec(claimCheck.findings[0]!.text)?.[1];
+  const { questionsPerClaim, modelQuestions } = checks.find((c) => c.id === "claims")!.stats!;
   const resolved = checks.flatMap((c) => c.findings).filter((f) => f.status === "resolved");
   const interpreted = resolved.filter((f) => f.basis === "interpretation").length;
   const open = checks.flatMap((c) => c.findings).filter((f) => f.status === "open");
-  const claimFacts = policy.facts.filter((f) => f.group === "claim").length;
   const count = (kind: string) => policy.rules.filter((r) => r.kind === kind).length;
 
   const cases = [
@@ -20,7 +18,7 @@ export function Home() {
       shows:
         "A decision for a claim, with the articles that make it: which cover the event belongs to, whether the certificate of your policy includes its module and option, and which exclusions and reductions apply. For accidental damage, the payment step by step: total loss or repair, compensation table, limits, deductible. For the other modules, what the cover pays, with the sums of your policy.",
       interface: "Your policy (the certificate) at the top. One question at a time on the left. On the right, the decision as it builds up: the cover, the exclusions and reductions that hold, the statements that a precedence sets aside, the amount. A record of the decision to download.",
-      model: `${count("cover")} cover rules, ${count("exclusion")} exclusions, ${count("reduction")} reductions, ${policy.modules.length} modules, the product overview, the compensation table, ${policy.parameters.length} numbers and ${policy.certificates.length} example certificates. A test claim needs ${perClaim} of the ${claimFacts} questions on average.`,
+      model: `${count("cover")} cover rules, ${count("exclusion")} exclusions, ${count("reduction")} reductions, ${policy.modules.length} modules, the product overview, the compensation table, ${policy.parameters.length} numbers and ${policy.certificates.length} example certificates. A test claim needs ${questionsPerClaim} of the ${modelQuestions} questions on average.`,
     },
     {
       path: "guide",

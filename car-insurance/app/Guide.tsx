@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { obligations } from "../engine/guide";
 import { type Answers, NO, YES } from "../engine/model";
-import { CertificatePanel, useCertificate } from "./certificate";
+import { useCertificate } from "./certificate-store";
+import { CertificatePanel } from "./CertificatePanel";
 import { policy } from "./data";
 import { Page, Sources } from "./ui";
 

@@ -4,6 +4,7 @@
 // steps is code; it reads the facts of the amounts by their keys (calculationInputs), and a test
 // makes sure that the model has them.
 import { type Answers, type Cover, type Policy, YES } from "./model";
+import { chf } from "./text";
 
 // The facts that the calculation reads, by key.
 export const calculationInputs = ["monthsOfService", "catalogPrice", "marketValue", "repairCost", "deductible", "claimFreeYears"];
@@ -90,5 +91,4 @@ export function calculate(policy: Policy, cover: Cover, answers: Answers): Amoun
 }
 
 const sum = (steps: Step[]) => steps.reduce((s, x) => s + x.amount, 0);
-export const chf = (x: number) => Math.round(x).toLocaleString("en-CH").replace(/,/g, "'");
 const percent = (x: number) => `${Math.round(x * 1000) / 10}%`;

@@ -3,10 +3,11 @@
 //   generated/policy.json  the policy: covers, questions, rules, tables, obligations, deadlines,
 //                          articles (generate-policy.ts)
 //   generated/checks.json  the report of the checks of the model, and the results of the test
-//                          claims (engine/checks.ts), so the app can show it without running them
+//                          claims of claims/ (engine/checks/), so the app can show it without
+//                          running them
 // Git tracks both, so a review shows how a change to the model changes the app and the report.
 import { runChecks } from "../engine/checks";
-import { cases } from "../test/cases";
+import { testClaims } from "../claims/test-claims";
 import { generatePolicy } from "./generate-policy";
 import { loadModel } from "./rdf";
 
@@ -23,7 +24,7 @@ export async function generateFiles() {
   const policy = generatePolicy(await readModel());
   return {
     "generated/policy.json": json(policy),
-    "generated/checks.json": json({ checks: runChecks(policy, cases) }),
+    "generated/checks.json": json({ checks: runChecks(policy, testClaims) }),
   };
 }
 

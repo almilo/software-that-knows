@@ -54,16 +54,17 @@ flowchart LR
   end
   G["generator/<br/>Turtle → JSON, then the checks"]
   J["generated/policy.json<br/>generated/checks.json"]
-  E["engine/<br/>claim · benefit · guide · dates · checks · record"]
+  E["engine/<br/>claim · benefit · guide · dates · checks/ · record · text"]
   A["app/<br/>six views, React"]
   K --> G --> J --> E --> A
-  T["test/cases.ts<br/>37 test claims"] --> G
+  T["claims/test-claims.ts<br/>37 test claims"] --> G
 ```
 
 - **The engine knows the words, not the product.** It knows module, cover, exclusion, reduction,
-  waiver, precedence, certificate, obligation and deadline (`ontology/insurance.ttl`). The product is the generated
-  policy. The calculation of an amount (`engine/benefit.ts`) is code: its numbers come from the
-  model, and the test claims keep the two in step.
+  waiver, precedence, certificate, obligation and deadline (`ontology/insurance.ttl`). The product
+  is the generated policy: no code names an answer or a cover of it. The calculation of an amount
+  (`engine/benefit.ts`) is code, but its numbers, its limits and the answers that change it
+  (a total loss, an extra deductible) come from the model.
 - **Only the questions that matter.** The claim check asks a question only when a rule that can
   still apply needs its answer. A test claim needs 9 of the 32 questions on average; the
   certificate gives the rest.
@@ -108,7 +109,7 @@ that is the job of the person who writes the model, and of the test claims.
 
 Five questions of users, on a certificate with partial casco, collision, accident insurance and
 Help Point PLUS, but without roadside assistance, legal protection or items transported
-(`ExampleCertificate`). They are test claims now (`test/cases.ts`, "Evaluation").
+(`ExampleCertificate`). They are test claims now (`claims/test-claims.ts`, "Evaluation").
 
 | # | Question | Expected | First version | Now |
 | --- | --- | --- | --- | --- |

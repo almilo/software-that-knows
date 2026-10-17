@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { chf } from "../engine/benefit";
-import { conditionText } from "../engine/checks";
+import { chf, conditionText } from "../engine/text";
 import type { Article } from "../engine/model";
 import { anyRule, article, checks, cover, part, policy } from "./data";
 import { Badge, basisWords, Page, Sources } from "./ui";

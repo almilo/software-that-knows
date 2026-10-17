@@ -10,6 +10,9 @@ Conditions of Insurance (GCI)*, edition 01/2015, English version (the German ver
 > **Demonstration only. Not insurance advice.** Not made or checked by Zurich. The model is our
 > reading of the document; the policy and the German text of the conditions decide.
 
+The lessons of the modelling, without the technical detail, are in
+[`docs/lessons-learned.md`](docs/lessons-learned.md).
+
 ## The applications
 
 | View | Question | What the model gives it |

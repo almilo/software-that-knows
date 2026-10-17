@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 306" role="img" aria-label="Every error goes back into the model, with a new test claim" font-size="13" font-family="system-ui, sans-serif">
+      <style>
+    .box { fill: none; stroke: #8a8d91; stroke-width: 1.25; }
+    .box.main { fill: rgba(47, 111, 214, 0.12); stroke: #2f6fd6; stroke-width: 2; }
+    .edge { fill: none; stroke: #8a8d91; stroke-width: 1.25; }
+    .ink { fill: #1f1f1f; }
+    .quiet { fill: #5f6368; }
+    .arrow { fill: #8a8d91; }
+  </style>
+  <rect width="760" height="306" fill="#ffffff"/>
+      <defs><marker id="loop-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path class="arrow" d="M0 0L10 5L0 10z"/></marker></defs>
+      <text class="ink" x="24" y="34" font-size="15" font-weight="600">Every error goes back into the model, with a new test claim</text>
+      <g class="edge">
+        <path d="M220 100H250" marker-end="url(#loop-arrow)"/>
+        <path d="M450 100H480" marker-end="url(#loop-arrow)"/>
+        <path d="M580 128V186" marker-end="url(#loop-arrow)"/>
+        <path d="M480 214H450" marker-end="url(#loop-arrow)"/>
+        <path d="M250 214H220" marker-end="url(#loop-arrow)"/>
+        <path d="M120 242V272H708V100H680" marker-end="url(#loop-arrow)"/>
+      </g>
+      <rect class="box" x="20" y="72" width="200" height="56" rx="8"/>
+      <text class="ink" x="120" y="96" text-anchor="middle" font-weight="600">Read the document</text>
+      <text class="quiet" x="120" y="114" text-anchor="middle" font-size="11.5">articles, lists, references</text>
+      <rect class="box" x="250" y="72" width="200" height="56" rx="8"/>
+      <text class="ink" x="350" y="96" text-anchor="middle" font-weight="600">Name the concepts</text>
+      <text class="quiet" x="350" y="114" text-anchor="middle" font-size="11.5">module, cover, exclusion</text>
+      <rect class="box" x="480" y="72" width="200" height="56" rx="8"/>
+      <text class="ink" x="580" y="96" text-anchor="middle" font-weight="600">Model each statement</text>
+      <text class="quiet" x="580" y="114" text-anchor="middle" font-size="11.5">with its article as source</text>
+      <rect class="box" x="480" y="186" width="200" height="56" rx="8"/>
+      <text class="ink" x="580" y="210" text-anchor="middle" font-weight="600">Write test claims</text>
+      <text class="quiet" x="580" y="228" text-anchor="middle" font-size="11.5">stories, expected results</text>
+      <rect class="box" x="250" y="186" width="200" height="56" rx="8"/>
+      <text class="ink" x="350" y="210" text-anchor="middle" font-weight="600">Check the model</text>
+      <text class="quiet" x="350" y="228" text-anchor="middle" font-size="11.5">does it agree with itself?</text>
+      <rect class="box main" x="20" y="186" width="200" height="56" rx="8"/>
+      <text class="ink" x="120" y="210" text-anchor="middle" font-weight="600">Try real cases</text>
+      <text class="ink" x="120" y="228" text-anchor="middle" font-size="11.5">does it match the world?</text>
+      <text class="quiet" x="414" y="290" text-anchor="middle" font-size="11.5">an error found: fix the concept or the rule, add a test claim</text>
+    </svg>

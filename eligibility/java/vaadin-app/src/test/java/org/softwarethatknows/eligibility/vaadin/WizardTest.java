@@ -88,8 +88,11 @@ class WizardTest extends SpringBrowserlessTest {
     }
 
     @Test
-    void anotherLanguageTranslatesThePageAndKeepsTheAnswers() {
+    void anotherLanguageTranslatesThePageKeepsTheAnswersAndWritesDatesAsInTheRegion() {
         navigate("process/wef", ProcessView.class);
+        assertEquals(
+                Locale.of("en", "CH"),
+                find(DatePicker.class).withCaption("Date of birth").single().getLocale());
         find(IntegerField.class)
                 .withCaption("Reference age in your pension fund's regulations (years)")
                 .single()
@@ -97,6 +100,9 @@ class WizardTest extends SpringBrowserlessTest {
         test(find(Select.class).single()).selectItem("Deutsch");
         assertEquals("Vorsorgegeld für Wohneigentum", find(H1.class).single().getText());
         assertEquals(Locale.GERMAN, com.vaadin.flow.component.UI.getCurrent().getLocale());
+        assertEquals(
+                Locale.of("de", "CH"),
+                find(DatePicker.class).withCaption("Geburtsdatum").single().getLocale());
         assertEquals(
                 64,
                 find(IntegerField.class)

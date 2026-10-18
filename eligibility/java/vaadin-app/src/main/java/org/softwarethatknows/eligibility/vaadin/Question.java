@@ -13,6 +13,7 @@ import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.i18n.LocaleChangeEvent;
 import com.vaadin.flow.i18n.LocaleChangeObserver;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import org.softwarethatknows.eligibility.Catalog.Process;
@@ -55,7 +56,11 @@ public class Question extends Composite<AbstractField<?, ?>> implements LocaleCh
         ((HasHelper) input).setHelperText(help.equals(field.name() + ".description") ? null : help);
         ((HasValidation) input).setErrorMessage(getTranslation("answerError.label"));
         if (input instanceof Select<?> select) select.setPlaceholder(getTranslation("choose.label"));
-        if (input instanceof DatePicker picker) picker.setLocale(event.getLocale());
+        // Dates are typed as written in the process's region: 15.03.1986 in Swiss German, not 3/15/1986.
+        if (input instanceof DatePicker picker) {
+            picker.setLocale(
+                    Locale.of(event.getLocale().getLanguage(), process.shape().region()));
+        }
         refreshChoiceLabels();
     }
 

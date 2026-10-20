@@ -1,0 +1,34 @@
+{
+  "name": "software-that-knows",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Family allowances for one child under the Swiss FamZG: a knowledge model in SHACL, a generator and a browser app.",
+  "scripts": {
+    "generate": "bun generator/generate.ts model/famzg.ttl model/vocabulary.ttl app/generated",
+    "dev": "bun run generate && bun app/index.html",
+    "build": "bun run generate && bun build app/index.html --outdir dist --minify",
+    "typecheck": "tsc --noEmit -p .",
+    "test": "bun run generate && bun test",
+    "test:browser": "bun run generate && bun test tests/browser"
+  },
+  "dependencies": {
+    "@jsonforms/core": "^3.8.0",
+    "@jsonforms/react": "^3.8.0",
+    "@jsonforms/vanilla-renderers": "^3.8.0",
+    "jsonld": "^9.0.0",
+    "n3": "^2.13.12",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "shacl-engine": "^1.1.3"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.3",
+    "@types/jsonld": "^1.5.15",
+    "@types/n3": "^1.26.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "playwright": "1.64.1",
+    "typescript": "5"
+  }
+}

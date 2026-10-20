@@ -1,0 +1,1165 @@
+{
+	"process": {
+		"id": "https://almilo.github.io/software-that-knows/famzg#Prozess",
+		"title": "Familienzulagen für ein Kind",
+		"description": "Prüft den Anspruch auf Kinderzulage und Ausbildungszulage für ein Kind nach dem Bundesgesetz über die Familienzulagen (FamZG), Stand 1. Januar 2026. Das Ergebnis gilt für den Monat des Antrags.",
+		"language": "de",
+		"sources": [
+			"https://almilo.github.io/software-that-knows/famzg#FamZG"
+		],
+		"outOfScope": [
+			"Kantonale Ansätze (höhere Mindestansätze, Geburts- und Adoptionszulagen nach Art. 3 Abs. 2 FamZG).",
+			"Kinder mit Wohnsitz im Ausland (Art. 4 Abs. 3 FamZG).",
+			"Mehrere anspruchsberechtigte Personen für das gleiche Kind (Art. 6 und 7 FamZG)."
+		]
+	},
+	"root": {
+		"class": "https://almilo.github.io/software-that-knows/famzg#Antrag"
+	},
+	"schema": {
+		"type": "object",
+		"properties": {
+			"antragsdatum": {
+				"title": "Datum des Antrags",
+				"description": "Das Ergebnis gilt für den Monat dieses Datums.",
+				"type": "string",
+				"format": "date"
+			},
+			"antragsteller": {
+				"type": "object",
+				"title": "Antragstellende Person",
+				"properties": {
+					"erwerbsstatus": {
+						"title": "Erwerbssituation",
+						"description": "Wählen Sie die Situation, nach der Sie in der AHV versichert sind.",
+						"type": "string",
+						"oneOf": [
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Arbeitnehmend",
+								"title": "Arbeitnehmerin oder Arbeitnehmer (nicht in der Landwirtschaft)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Selbststaendigerwerbend",
+								"title": "Selbstständigerwerbend (nicht in der Landwirtschaft)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Nichterwerbstaetig",
+								"title": "Nichterwerbstätig (bei der AHV als nichterwerbstätig erfasst)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Landwirtschaft",
+								"title": "Erwerbstätig in der Landwirtschaft"
+							}
+						]
+					},
+					"erwerbseinkommen": {
+						"title": "Jährliches Erwerbseinkommen, auf dem Sie AHV-Beiträge bezahlen (CHF)",
+						"type": "number",
+						"minimum": 0
+					},
+					"steuerbaresEinkommen": {
+						"title": "Steuerbares Einkommen pro Jahr (CHF)",
+						"type": "number",
+						"minimum": 0
+					},
+					"bezugErgaenzungsleistungen": {
+						"title": "Beziehen Sie Ergänzungsleistungen zur AHV/IV?",
+						"type": "boolean",
+						"oneOf": [
+							{
+								"const": true,
+								"title": "Ja"
+							},
+							{
+								"const": false,
+								"title": "Nein"
+							}
+						]
+					}
+				}
+			},
+			"kind": {
+				"type": "object",
+				"title": "Kind",
+				"properties": {
+					"kindesverhaeltnis": {
+						"title": "Wie stehen Sie zum Kind?",
+						"type": "string",
+						"oneOf": [
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#EigenesKind",
+								"title": "Eigenes Kind (Kindesverhältnis nach Zivilgesetzbuch, auch adoptiert)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Stiefkind",
+								"title": "Stiefkind"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Pflegekind",
+								"title": "Pflegekind"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#GeschwisterOderEnkelkind",
+								"title": "Geschwister oder Enkelkind"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#AnderesVerhaeltnis",
+								"title": "Anderes Verhältnis"
+							}
+						]
+					},
+					"ueberwiegenderUnterhalt": {
+						"title": "Kommen Sie in überwiegendem Mass für den Unterhalt des Kindes auf?",
+						"type": "boolean",
+						"oneOf": [
+							{
+								"const": true,
+								"title": "Ja"
+							},
+							{
+								"const": false,
+								"title": "Nein"
+							}
+						]
+					},
+					"geburtsdatum": {
+						"title": "Geburtsdatum des Kindes",
+						"type": "string",
+						"format": "date"
+					},
+					"ausbildung": {
+						"title": "Welche Ausbildung macht das Kind im Monat des Antrags?",
+						"type": "string",
+						"oneOf": [
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#ObligatorischeSchule",
+								"title": "Obligatorische Schule"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#Lehre",
+								"title": "Lehre (berufliche Grundbildung)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#AndereNachobligatorischeAusbildung",
+								"title": "Andere Ausbildung nach der obligatorischen Schule (z. B. Mittelschule, Hochschule)"
+							},
+							{
+								"const": "https://almilo.github.io/software-that-knows/famzg#KeineAusbildung",
+								"title": "Keine Ausbildung"
+							}
+						]
+					},
+					"ausbildungsbeginn": {
+						"title": "Seit wann ist das Kind in dieser Ausbildung?",
+						"type": "string",
+						"format": "date"
+					},
+					"erwerbsunfaehig": {
+						"title": "Ist das Kind erwerbsunfähig (Art. 7 ATSG)?",
+						"type": "boolean",
+						"oneOf": [
+							{
+								"const": true,
+								"title": "Ja"
+							},
+							{
+								"const": false,
+								"title": "Nein"
+							}
+						]
+					}
+				}
+			}
+		}
+	},
+	"uischema": {
+		"type": "VerticalLayout",
+		"elements": [
+			{
+				"type": "Group",
+				"label": "Antrag",
+				"elements": [
+					{
+						"type": "Control",
+						"scope": "#/properties/antragsdatum"
+					}
+				]
+			},
+			{
+				"type": "Group",
+				"label": "Antragstellende Person",
+				"elements": [
+					{
+						"type": "Control",
+						"scope": "#/properties/antragsteller/properties/erwerbsstatus",
+						"options": {
+							"format": "radio",
+							"orientation": "vertical"
+						}
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/antragsteller/properties/erwerbseinkommen"
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/antragsteller/properties/steuerbaresEinkommen"
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/antragsteller/properties/bezugErgaenzungsleistungen"
+					}
+				]
+			},
+			{
+				"type": "Group",
+				"label": "Kind",
+				"elements": [
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/kindesverhaeltnis",
+						"options": {
+							"format": "radio",
+							"orientation": "vertical"
+						}
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/ueberwiegenderUnterhalt"
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/geburtsdatum"
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/ausbildung",
+						"options": {
+							"format": "radio",
+							"orientation": "vertical"
+						}
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/ausbildungsbeginn"
+					},
+					{
+						"type": "Control",
+						"scope": "#/properties/kind/properties/erwerbsunfaehig"
+					}
+				]
+			}
+		]
+	},
+	"context": {
+		"antragsdatum": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#antragsdatum",
+			"@type": "http://www.w3.org/2001/XMLSchema#date"
+		},
+		"antragsteller": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#antragsteller"
+		},
+		"erwerbsstatus": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#erwerbsstatus",
+			"@type": "@id"
+		},
+		"erwerbseinkommen": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#erwerbseinkommen",
+			"@type": "http://www.w3.org/2001/XMLSchema#decimal"
+		},
+		"steuerbaresEinkommen": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#steuerbaresEinkommen",
+			"@type": "http://www.w3.org/2001/XMLSchema#decimal"
+		},
+		"bezugErgaenzungsleistungen": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#bezugErgaenzungsleistungen",
+			"@type": "http://www.w3.org/2001/XMLSchema#boolean"
+		},
+		"kind": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#kind"
+		},
+		"kindesverhaeltnis": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#kindesverhaeltnis",
+			"@type": "@id"
+		},
+		"ueberwiegenderUnterhalt": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#ueberwiegenderUnterhalt",
+			"@type": "http://www.w3.org/2001/XMLSchema#boolean"
+		},
+		"geburtsdatum": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#geburtsdatum",
+			"@type": "http://www.w3.org/2001/XMLSchema#date"
+		},
+		"ausbildung": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#ausbildung",
+			"@type": "@id"
+		},
+		"ausbildungsbeginn": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#ausbildungsbeginn",
+			"@type": "http://www.w3.org/2001/XMLSchema#date"
+		},
+		"erwerbsunfaehig": {
+			"@id": "https://almilo.github.io/software-that-knows/famzg#erwerbsunfaehig",
+			"@type": "http://www.w3.org/2001/XMLSchema#boolean"
+		}
+	},
+	"questions": [
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Antragsdatum",
+			"path": [
+				"antragsdatum"
+			],
+			"scope": "#/properties/antragsdatum",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeAntrag",
+			"order": 1,
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Erwerbsstatus",
+			"path": [
+				"antragsteller",
+				"erwerbsstatus"
+			],
+			"scope": "#/properties/antragsteller/properties/erwerbsstatus",
+			"radio": true,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppePerson",
+			"order": 1,
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_AHVVersichert",
+				"https://almilo.github.io/software-that-knows/famzg#A_Arbeitnehmend"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Erwerbseinkommen",
+			"path": [
+				"antragsteller",
+				"erwerbseinkommen"
+			],
+			"scope": "#/properties/antragsteller/properties/erwerbseinkommen",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppePerson",
+			"order": 2,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_Erwerbstaetig",
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_SteuerbaresEinkommen",
+			"path": [
+				"antragsteller",
+				"steuerbaresEinkommen"
+			],
+			"scope": "#/properties/antragsteller/properties/steuerbaresEinkommen",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppePerson",
+			"order": 3,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_GiltAlsNichterwerbstaetig",
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Ergaenzungsleistungen",
+			"path": [
+				"antragsteller",
+				"bezugErgaenzungsleistungen"
+			],
+			"scope": "#/properties/antragsteller/properties/bezugErgaenzungsleistungen",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppePerson",
+			"order": 4,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_GiltAlsNichterwerbstaetig",
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Kindesverhaeltnis",
+			"path": [
+				"kind",
+				"kindesverhaeltnis"
+			],
+			"scope": "#/properties/kind/properties/kindesverhaeltnis",
+			"radio": true,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 1,
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_EigenesKind"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Unterhalt",
+			"path": [
+				"kind",
+				"ueberwiegenderUnterhalt"
+			],
+			"scope": "#/properties/kind/properties/ueberwiegenderUnterhalt",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 2,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_GeschwisterOderEnkelkind",
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Geburtsdatum",
+			"path": [
+				"kind",
+				"geburtsdatum"
+			],
+			"scope": "#/properties/kind/properties/geburtsdatum",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 3,
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Ausbildung",
+			"path": [
+				"kind",
+				"ausbildung"
+			],
+			"scope": "#/properties/kind/properties/ausbildung",
+			"radio": true,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 4,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_AusbildungMoeglich",
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_LaufendeAusbildung",
+				"https://almilo.github.io/software-that-knows/famzg#A_Lehre"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Ausbildungsbeginn",
+			"path": [
+				"kind",
+				"ausbildungsbeginn"
+			],
+			"scope": "#/properties/kind/properties/ausbildungsbeginn",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 5,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_Nachobligatorisch",
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#Q_Erwerbsunfaehig",
+			"path": [
+				"kind",
+				"erwerbsunfaehig"
+			],
+			"scope": "#/properties/kind/properties/erwerbsunfaehig",
+			"radio": false,
+			"group": "https://almilo.github.io/software-that-knows/famzg#GruppeKind",
+			"order": 6,
+			"condition": "https://almilo.github.io/software-that-knows/famzg#C_Erwerbsunfaehigkeit",
+			"interpretations": []
+		}
+	],
+	"results": {
+		"https://almilo.github.io/software-that-knows/famzg#R_Landwirtschaft": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_Landwirtschaft",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"order": 1,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art18",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art21c_c"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Landwirtschaft"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_Gueltigkeit": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_Gueltigkeit",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"order": 7,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#V2027",
+				"https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Rentenwerte2026"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_AntragArbeitnehmend": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_AntragArbeitnehmend",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"order": 20,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs2",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art15"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Arbeitnehmend",
+				"https://almilo.github.io/software-that-knows/famzg#A_AntragArbeitgeber"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_AntragSelbststaendig": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_AntragSelbststaendig",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"order": 21,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs2",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art12_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2bis",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art15"
+			],
+			"interpretations": []
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_AntragNichterwerbstaetig": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_AntragNichterwerbstaetig",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"order": 22,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs2",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1bis"
+			],
+			"interpretations": []
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_UnterMindesteinkommen": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_UnterMindesteinkommen",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Value",
+			"order": 2,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1bis"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_JaehrlicherBetrag"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_Ausbildungszulage": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_Ausbildungszulage",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Value",
+			"order": 10,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs2"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr",
+				"https://almilo.github.io/software-that-knows/famzg#A_LaufendeAusbildung"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_Kinderzulage": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_Kinderzulage",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Value",
+			"order": 11,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs1"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_KinderzulageErwerbsunfaehig": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_KinderzulageErwerbsunfaehig",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Value",
+			"order": 12,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs1"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_EinkommenZuHoch": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_EinkommenZuHoch",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 3,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_JaehrlicherBetrag"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_Ergaenzungsleistungen": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_Ergaenzungsleistungen",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 4,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2"
+			],
+			"interpretations": []
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_KeinKindesverhaeltnis": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_KeinKindesverhaeltnis",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 5,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1"
+			],
+			"interpretations": []
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_KeinUeberwiegenderUnterhalt": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_KeinUeberwiegenderUnterhalt",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 6,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1_d"
+			],
+			"interpretations": []
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_UeberAltersgrenze": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_UeberAltersgrenze",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 13,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_KeineAusbildung": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_KeineAusbildung",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 14,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+				"https://almilo.github.io/software-that-knows/famzg#A_Altersjahr"
+			]
+		},
+		"https://almilo.github.io/software-that-knows/famzg#R_EinkommenDesKindes": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#R_EinkommenDesKindes",
+			"resultType": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"order": 9007199254740991,
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5",
+				"https://almilo.github.io/software-that-knows/famzg#AHVV_Art49bis_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZV_Art1"
+			],
+			"interpretations": []
+		}
+	},
+	"resultTypes": [
+		{
+			"id": "https://almilo.github.io/software-that-knows/vocabulary#Refusal",
+			"label": "Ablehnung",
+			"order": 1
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/vocabulary#Value",
+			"label": "Wert",
+			"order": 2
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/vocabulary#NextStep",
+			"label": "Nächster Schritt",
+			"order": 3
+		}
+	],
+	"sources": {
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art18": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art18",
+			"label": "FamZG Art. 18",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_18",
+			"quote": "Die landwirtschaftlichen Arbeitnehmerinnen und Arbeitnehmer sowie die selbständigerwerbenden Landwirtinnen und Landwirte haben Anspruch auf Familienzulagen nach dem Bundesgesetz vom 20. Juni 1952 über die Familienzulagen in der Landwirtschaft."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art21c_c": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art21c_c",
+			"label": "FamZG Art. 21c Bst. c",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_21_c",
+			"quote": "die AHV-Ausgleichskassen für die Erfüllung ihrer Aufgaben nach Artikel 13 des Bundesgesetzes vom 20. Juni 1952 über die Familienzulagen in der Landwirtschaft [...]"
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs3": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs3",
+			"label": "FamZG Art. 5 Abs. 3",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5",
+			"quote": "Der Bundesrat passt die Mindestansätze auf den gleichen Zeitpunkt wie die Renten der Alters- und Hinterlassenenversicherung (AHV) der Teuerung an, sofern der Landesindex der Konsumentenpreise seit der letzten Festsetzung der Ansätze um mindestens 5 Punkte gestiegen ist."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1",
+			"label": "Verordnung vom 28. August 2024 (SR 831.108) Art. 3 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2024/463/de#art_3",
+			"quote": "Der Mindestbetrag der vollen Altersrente nach Artikel 34 Absatz 5 AHVG wird auf 1260 Franken festgesetzt."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#V2027": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#V2027",
+			"label": "Verordnung vom 2. Oktober 2026 (SR 831.108), noch nicht in Kraft",
+			"url": "https://fedlex.data.admin.ch/eli/cc/2026/542"
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs2": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs2",
+			"label": "FamZG Art. 3 Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3",
+			"quote": "Die Kantone können in ihren Familienzulagenordnungen höhere Mindestansätze für Kinder- und Ausbildungszulagen als nach Artikel 5 sowie auch Geburts- und Adoptionszulagen vorsehen."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1",
+			"label": "FamZG Art. 13 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13",
+			"quote": "Die als Arbeitnehmerinnen oder Arbeitnehmer in der AHV obligatorisch versicherten Personen, die von einem diesem Gesetz unterstellten Arbeitgeber beschäftigt werden, haben Anspruch auf Familienzulagen. [...] Der Anspruch entsteht und erlischt mit dem Lohnanspruch."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2",
+			"label": "FamZG Art. 13 Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13",
+			"quote": "Arbeitnehmerinnen und Arbeitnehmer nicht beitragspflichtiger Arbeitgeber haben Anspruch auf Familienzulagen."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3",
+			"label": "FamZG Art. 13 Abs. 3",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13",
+			"quote": "Es werden nur ganze Zulagen ausgerichtet. Anspruch auf Zulagen hat, wer auf einem jährlichen Erwerbseinkommen, das mindestens dem halben jährlichen Betrag der minimalen vollen Altersrente der AHV entspricht, AHV-Beiträge entrichtet."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art15": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art15",
+			"label": "FamZG Art. 15 Abs. 1 Bst. a und Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_15",
+			"quote": "Den Familienausgleichskassen obliegen insbesondere: a. die Festsetzung und Ausrichtung der Familienzulagen; [...] Die Familienzulagen werden den anspruchsberechtigten Arbeitnehmerinnen und Arbeitnehmern in der Regel durch den Arbeitgeber ausbezahlt."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art12_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art12_Abs1",
+			"label": "FamZG Art. 12 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_12",
+			"quote": "Die diesem Gesetz unterstellten Personen sind verpflichtet, sich einer Familienausgleichskasse in dem Kanton anzuschliessen, dessen Familienzulagenordnung auf sie anwendbar ist."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2bis": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2bis",
+			"label": "FamZG Art. 13 Abs. 2bis",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13",
+			"quote": "Die als Selbstständigerwerbende in der AHV obligatorisch versicherten Personen haben Anspruch auf Familienzulagen. [...] Der Bundesrat regelt die Einzelheiten betreffend Entstehen und Erlöschen des Anspruchs."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1",
+			"label": "FamZG Art. 19 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19",
+			"quote": "In der AHV obligatorisch versicherte Personen, die bei der AHV als nichterwerbstätige Personen erfasst sind, gelten als Nichterwerbstätige. Sie haben Anspruch auf Familienzulagen nach den Artikeln 3 und 5. [...] Zuständig ist der Wohnsitzkanton."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1bis": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1bis",
+			"label": "FamZG Art. 19 Abs. 1bis",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19",
+			"quote": "Die Personen, die als Arbeitnehmerinnen oder Arbeitnehmer oder als Selbstständigerwerbende in der AHV obligatorisch versichert sind und das Mindesteinkommen nach Artikel 13 Absatz 3 nicht erreichen, gelten ebenfalls als Nichterwerbstätige."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b",
+			"label": "FamZG Art. 3 Abs. 1 Bst. b",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3",
+			"quote": "die Ausbildungszulage: sie wird ab dem Beginn des Monats ausgerichtet, in dem das Kind eine nachobligatorische Ausbildung beginnt, jedoch frühestens ab dem Beginn des Monats, in dem es das 15. Altersjahr vollendet; besucht das Kind nach Vollendung des 16. Altersjahrs noch die obligatorische Schule, so wird die Ausbildungszulage ab dem Beginn des darauffolgenden Monats ausgerichtet; die Ausbildungszulage wird bis zum Abschluss der Ausbildung des Kindes gewährt, längstens jedoch bis zum Ende des Monats, in dem es das 25. Altersjahr vollendet."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs2": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs2",
+			"label": "FamZG Art. 5 Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5",
+			"quote": "Die Ausbildungszulage beträgt mindestens 268 Franken pro Monat."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+			"label": "FamZG Art. 3 Abs. 1 Bst. a",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3",
+			"quote": "die Kinderzulage: sie wird vom Beginn des Geburtsmonats des Kindes bis zum Ende des Monats ausgerichtet, in dem das Kind das 16. Altersjahr vollendet; besteht für das Kind schon vor Vollendung des 16. Altersjahrs ein Anspruch auf eine Ausbildungszulage, so wird diese anstelle der Kinderzulage ausgerichtet; ist das Kind erwerbsunfähig (Art. 7 ATSG), so wird die Kinderzulage bis zum Ende des Monats ausgerichtet, in dem es das 20. Altersjahr vollendet;"
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs1",
+			"label": "FamZG Art. 5 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5",
+			"quote": "Die Kinderzulage beträgt mindestens 215 Franken pro Monat."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2",
+			"label": "FamZG Art. 19 Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19",
+			"quote": "Der Anspruch auf Familienzulagen ist an die Voraussetzung geknüpft, dass das steuerbare Einkommen den anderthalbfachen Betrag einer maximalen vollen Altersrente der AHV nicht übersteigt und keine Ergänzungsleistungen zur AHV/IV bezogen werden."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs3": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs3",
+			"label": "AHVG Art. 34 Abs. 3",
+			"url": "https://www.fedlex.admin.ch/eli/cc/63/837_843_843/de#art_34",
+			"quote": "Der Höchstbetrag der Altersrente entspricht dem doppelten Mindestbetrag."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5",
+			"label": "AHVG Art. 34 Abs. 5",
+			"url": "https://www.fedlex.admin.ch/eli/cc/63/837_843_843/de#art_34",
+			"quote": "Der Mindestbetrag der vollen Altersrente von 1260 Franken entspricht dem Rentenindex von 229,1 Punkten."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1",
+			"label": "FamZG Art. 4 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4",
+			"quote": "Zum Anspruch auf Familienzulagen berechtigen: a. Kinder, zu denen ein Kindesverhältnis im Sinne des Zivilgesetzbuches besteht; b. Stiefkinder; c. Pflegekinder; d. Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1_d": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1_d",
+			"label": "FamZG Art. 4 Abs. 1 Bst. d",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4",
+			"quote": "Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZV_Art1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZV_Art1",
+			"label": "FamZV Art. 1 Abs. 1 und 2 (SR 836.21)",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_1",
+			"quote": "Ein Anspruch auf eine Ausbildungszulage besteht für Kinder, die eine Ausbildung im Sinne der Artikel 49bis und 49ter der Verordnung vom 31. Oktober 1947 über die Alters- und Hinterlassenenversicherung absolvieren. Als nachobligatorische Ausbildung gilt die Ausbildung, welche auf die obligatorische Schule folgt."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#AHVV_Art49bis_Abs3": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#AHVV_Art49bis_Abs3",
+			"label": "AHVV Art. 49bis Abs. 3 (SR 831.101)",
+			"url": "https://www.fedlex.admin.ch/eli/cc/63/1185_1183_1185/de#art_49_bis",
+			"quote": "Nicht als in Ausbildung gilt ein Kind, wenn es ein durchschnittliches monatliches Erwerbseinkommen erzielt, das höher ist als die maximale volle Altersrente der AHV."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#BSV_FAQ_Arbeitnehmende": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#BSV_FAQ_Arbeitnehmende",
+			"label": "BSV, FAQ Familienzulagen: Habe ich als Arbeitnehmerin/Arbeitnehmer Anspruch auf Familienzulagen?",
+			"url": "https://faq.bsv.admin.ch/de/familienzulagen/habe-ich-als-arbeitnehmerinarbeitnehmer-anspruch-auf-familienzulagen",
+			"quote": "Das Bundesamt für Sozialversicherungen nennt als Mindesteinkommen 630 Franken im Monat bzw. 7560 Franken im Jahr (Seite ohne Datum, abgerufen am 20. Oktober 2026)."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art1_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art1_Abs1",
+			"label": "FamZG Art. 1 Abs. 1",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_1",
+			"quote": "Die Bestimmungen des Bundesgesetzes vom 6. Oktober 2000 über den Allgemeinen Teil des Sozialversicherungsrechts (ATSG) sind auf die Familienzulagen anwendbar, soweit das vorliegende Gesetz nicht ausdrücklich eine Abweichung vom ATSG vorsieht."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#ATSG_Art24_Abs1": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#ATSG_Art24_Abs1",
+			"label": "ATSG Art. 24 Abs. 1 (SR 830.1)",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2002/510/de#art_24",
+			"quote": "Der Anspruch auf ausstehende Leistungen oder Beiträge erlischt fünf Jahre nach dem Ende des Monats, für welchen die Leistung [...] geschuldet war."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs2": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs2",
+			"label": "FamZG Art. 4 Abs. 2",
+			"url": "https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4",
+			"quote": "Der Bundesrat regelt die Einzelheiten."
+		},
+		"https://almilo.github.io/software-that-knows/famzg#FamZG": {
+			"id": "https://almilo.github.io/software-that-knows/famzg#FamZG",
+			"label": "FamZG",
+			"url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html"
+		}
+	},
+	"interpretations": [
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_AHVVersichert",
+			"label": "Die Person ist in der AHV obligatorisch versichert.",
+			"comment": "Art. 13 und 19 FamZG setzen voraus, dass die Person in der AHV obligatorisch versichert ist. Das Modell fragt nicht danach und nimmt es an.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs1"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Altersjahr",
+			"label": "«Das N. Altersjahr vollenden» heisst: den N. Geburtstag haben.",
+			"comment": "Das Kind vollendet das N. Altersjahr an seinem N. Geburtstag. Der Monat, in dem es das N. Altersjahr vollendet, ist darum sein Geburtsmonat im Jahr Geburtsjahr + N.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_AntragArbeitgeber",
+			"label": "Arbeitnehmende reichen den Antrag beim Arbeitgeber ein.",
+			"comment": "Das FamZG regelt das Antragsverfahren nicht im Einzelnen. Weil der Arbeitgeber die Zulagen in der Regel auszahlt und einer Familienausgleichskasse angeschlossen ist, nennt das Modell den Arbeitgeber als erste Stelle.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art12_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art15"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Arbeitnehmend",
+			"label": "«Arbeitnehmerin oder Arbeitnehmer» umfasst Art. 13 Abs. 1 und 2.",
+			"comment": "Arbeitnehmende eines beitragspflichtigen Arbeitgebers (Abs. 1) und Arbeitnehmende eines nicht beitragspflichtigen Arbeitgebers (Abs. 2) haben gleich Anspruch. Das Modell unterscheidet sie nicht.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Bezugsmonat",
+			"label": "Das Ergebnis gilt für den Monat des Antrags.",
+			"comment": "Das FamZG legt fest, ab wann und bis wann die Zulagen ausgerichtet werden. Das Modell prüft, welche Zulage im Monat des Antragsdatums zusteht, und nennt Beginn und spätestes Ende dieser Zulage. Nachzahlungen für frühere Monate prüft es nicht.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_EigenesKind",
+			"label": "Ein adoptiertes Kind ist ein eigenes Kind.",
+			"comment": "Die Adoption begründet ein Kindesverhältnis im Sinne des Zivilgesetzbuches. Darum nennt die Antwort «Eigenes Kind» auch adoptierte Kinder.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs1"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_JaehrlicherBetrag",
+			"label": "Der jährliche Betrag einer Altersrente ist 12 Monatsbeträge.",
+			"comment": "Art. 13 Abs. 3 FamZG nennt den «jährlichen Betrag» der minimalen vollen Altersrente. Das Modell rechnet 12 Monatsbeträge, ohne eine 13. Altersrente. Das BSV nennt mit dieser Rechnung ein Mindesteinkommen von CHF 7560 pro Jahr. Für die Grenze nach Art. 19 Abs. 2 FamZG (anderthalbfacher Betrag einer maximalen vollen Altersrente) rechnet das Modell ebenfalls mit dem Jahresbetrag.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#BSV_FAQ_Arbeitnehmende",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Landwirtschaft",
+			"label": "Für die Landwirtschaft ist die AHV-Ausgleichskasse die Stelle.",
+			"comment": "Das FamZG verweist für die Landwirtschaft auf das FLG. Nach Art. 21c Bst. c FamZG erfüllen die AHV-Ausgleichskassen die Aufgaben nach dem FLG. Das Modell prüft das FLG nicht.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art18",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art21c_c"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_LaufendeAusbildung",
+			"label": "Die Ausbildung dauert im Monat des Antrags an.",
+			"comment": "Die Ausbildungszulage wird bis zum Abschluss der Ausbildung gewährt. Das Modell fragt nach der Ausbildung im Monat des Antrags. Es nimmt an, dass eine angegebene Ausbildung ohne Unterbruch seit ihrem Beginn dauert. Das Ende der Ausbildung ist nicht bekannt, darum nennt das Ergebnis das späteste Ende.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Lehre",
+			"label": "Eine Lehre ist eine nachobligatorische Ausbildung.",
+			"comment": "Das FamZG nennt die Lehre nicht. Eine Lehre (berufliche Grundbildung) folgt auf die obligatorische Schule und bereitet auf einen Berufsabschluss vor. Darum behandelt das Modell sie als nachobligatorische Ausbildung nach Art. 3 Abs. 1 Bst. b FamZG.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b",
+				"https://almilo.github.io/software-that-knows/famzg#FamZV_Art1"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#A_Rentenwerte2026",
+			"label": "Die Rentenwerte gelten vom 1. Januar 2026 bis zum 31. Dezember 2026.",
+			"comment": "Der Mindestbetrag der vollen Altersrente von CHF 1260 gilt seit dem 1. Januar 2025 (Verordnung vom 28. August 2024) und steht in AHVG Art. 34 Abs. 5, Stand 1. Januar 2026. Eine Verordnung vom 2. Oktober 2026 passt die Werte ab 2027 an; sie ist noch nicht in Kraft und nicht im Modell. Darum gelten die Werte des Modells nur für Anträge im Jahr 2026.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5",
+				"https://almilo.github.io/software-that-knows/famzg#V2027",
+				"https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1"
+			]
+		}
+	],
+	"openPoints": [
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_AusbildungsbeginnNachAntrag",
+			"label": "Ausbildung, die nach dem Datum des Antrags beginnt",
+			"comment": "Das Modell prüft nicht, ob der Beginn der Ausbildung nach dem Datum des Antrags liegt. Ist das Kind älter als 16 Jahre und beginnt die Ausbildung später, so gibt das Modell kein Ergebnis für den Monat des Antrags.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			],
+			"deactivatedRules": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_EinkommenDesKindes",
+			"label": "Einkommen des Kindes in Ausbildung",
+			"comment": "Nach FamZV Art. 1 und AHVV Art. 49bis Abs. 3 gilt ein Kind nicht als in Ausbildung, wenn sein durchschnittliches monatliches Erwerbseinkommen höher ist als die maximale volle Altersrente der AHV. Diese Bedingung steht nicht im FamZG. Das Modell fragt nicht nach dem Einkommen des Kindes; die Regel fz:R_EinkommenDesKindes ist deaktiviert.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVV_Art49bis_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#FamZV_Art1"
+			],
+			"deactivatedRules": [
+				"https://almilo.github.io/software-that-knows/famzg#EinkommenDesKindes"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_Lohnanspruch",
+			"label": "Beginn und Ende des Anspruchs mit dem Lohn",
+			"comment": "Der Anspruch von Arbeitnehmenden entsteht und erlischt mit dem Lohnanspruch; der Bundesrat regelt den Anspruch nach dem Erlöschen des Lohnanspruchs und die Einzelheiten für Selbstständigerwerbende. Das Modell nimmt an, dass im Monat des Antrags ein Lohnanspruch oder eine selbstständige Erwerbstätigkeit besteht.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs2bis"
+			],
+			"deactivatedRules": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_Nachzahlung",
+			"label": "Nachzahlung für frühere Monate",
+			"comment": "Über das ATSG (Art. 1 FamZG) erlischt der Anspruch auf ausstehende Leistungen fünf Jahre nach dem Ende des Monats, für den sie geschuldet waren. Das Modell prüft nur den Monat des Antrags und berechnet keine Nachzahlung.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#ATSG_Art24_Abs1",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art1_Abs1"
+			],
+			"deactivatedRules": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_Pflegekinder",
+			"label": "Einzelheiten zu Stiefkindern und Pflegekindern",
+			"comment": "Der Bundesrat regelt die Einzelheiten zu den Kindern nach Art. 4 Abs. 1 FamZG in der Verordnung. Das Modell prüft diese Bedingungen nicht.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art4_Abs2"
+			],
+			"deactivatedRules": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#O_Werte2027",
+			"label": "Werte ab 2027",
+			"comment": "Die Verordnung vom 2. Oktober 2026 passt die Renten ab 2027 an. Damit ändern das Mindesteinkommen und die Einkommensgrenze für Nichterwerbstätige, und eventuell die Mindestansätze nach Art. 5 Abs. 3 FamZG. Das Modell enthält diese Werte nicht; für ein Antragsdatum ab 2027 gibt die Regel fz:R_Gueltigkeit einen Hinweis.",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#V2027"
+			],
+			"deactivatedRules": []
+		}
+	],
+	"parameters": [
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#AlterBeginnAusbildungszulage",
+			"label": "Altersjahr, ab dessen Vollendungsmonat die Ausbildungszulage frühestens beginnt",
+			"value": "15",
+			"unit": "Altersjahre",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#AlterEndeAusbildungszulage",
+			"label": "Altersjahr, mit dessen Vollendungsmonat die Ausbildungszulage spätestens endet",
+			"value": "25",
+			"unit": "Altersjahre",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_b"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulage",
+			"label": "Altersjahr, mit dessen Vollendungsmonat die Kinderzulage endet",
+			"value": "16",
+			"unit": "Altersjahre",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulageErwerbsunfaehig",
+			"label": "Altersjahr, mit dessen Vollendungsmonat die Kinderzulage für ein erwerbsunfähiges Kind endet",
+			"value": "20",
+			"unit": "Altersjahre",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art3_Abs1_a"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#AnteilMindesteinkommen",
+			"label": "Mindesteinkommen als Anteil des jährlichen Betrags der minimalen vollen Altersrente",
+			"value": "0.5",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#FaktorEinkommensgrenzeNichterwerbstaetige",
+			"label": "Grenze des steuerbaren Einkommens als Vielfaches der maximalen vollen Altersrente",
+			"value": "1.5",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art19_Abs2"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_JaehrlicherBetrag"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#FaktorHoechstbetragAltersrente",
+			"label": "Höchstbetrag der Altersrente als Vielfaches des Mindestbetrags",
+			"value": "2",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs3"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#GueltigAb",
+			"label": "Erster Tag, für den die Werte des Modells gelten",
+			"value": "2026-01-01",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG",
+				"https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#GueltigBis",
+			"label": "Letzter Tag, für den die Werte des Modells gelten",
+			"value": "2026-12-31",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs3",
+				"https://almilo.github.io/software-that-knows/famzg#V2027"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Rentenwerte2026"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#MindestansatzAusbildungszulage",
+			"label": "Mindestansatz der Ausbildungszulage",
+			"value": "268",
+			"unit": "CHF pro Monat",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs2"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#MindestansatzKinderzulage",
+			"label": "Mindestansatz der Kinderzulage",
+			"value": "215",
+			"unit": "CHF pro Monat",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art5_Abs1"
+			],
+			"interpretations": []
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#MindestbetragAltersrente",
+			"label": "Mindestbetrag der vollen Altersrente der AHV",
+			"value": "1260",
+			"unit": "CHF pro Monat",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#AHVG_Art34_Abs5",
+				"https://almilo.github.io/software-that-knows/famzg#V2025_Art3_Abs1"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_Rentenwerte2026"
+			]
+		},
+		{
+			"id": "https://almilo.github.io/software-that-knows/famzg#RentenbetraegeProJahr",
+			"label": "Anzahl Monatsbeträge im jährlichen Betrag einer Altersrente",
+			"value": "12",
+			"sources": [
+				"https://almilo.github.io/software-that-knows/famzg#BSV_FAQ_Arbeitnehmende",
+				"https://almilo.github.io/software-that-knows/famzg#FamZG_Art13_Abs3"
+			],
+			"interpretations": [
+				"https://almilo.github.io/software-that-knows/famzg#A_JaehrlicherBetrag"
+			]
+		}
+	],
+	"labels": {
+		"questions": "Fragen",
+		"results": "Ergebnisse",
+		"noResults": "Noch kein Ergebnis. Beantworten Sie die Fragen.",
+		"sources": "Quellen",
+		"interpretation": "Auslegung",
+		"openPoint": "Offener Punkt",
+		"outOfScope": "Nicht im Modell",
+		"parameters": "Werte"
+	},
+	"shapes": "@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .\n@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .\n@prefix sh:      <http://www.w3.org/ns/shacl#> .\n@prefix dcterms: <http://purl.org/dc/terms/> .\n@prefix eli:     <http://data.europa.eu/eli/ontology#> .\n@prefix stk:     <https://almilo.github.io/software-that-knows/vocabulary#> .\n@prefix fz:      <https://almilo.github.io/software-that-knows/famzg#> .\n\n# Knowledge model: family allowances for one child under the Swiss Federal Act\n# on Family Allowances (FamZG), version of 1 January 2026.\n#\n# Parts of this file:\n#   1. Process\n#   2. Sources (ELI)\n#   3. Parameters (values that the rules need)\n#   4. Questions (SHACL node and property shapes)\n#   5. Relevance conditions (when a question is asked)\n#   6. Rules (SHACL-SPARQL constraints; each one gives a result)\n#   7. Interpretations\n#   8. Open points\n#\n# Calendar arithmetic in the rules: a month has the index YEAR * 12 + MONTH.\n# The child completes the N. Altersjahr in the month with the index\n# (month of birth) + 12 * N.\n\n# =============================================================================\n# 1. Process\n# =============================================================================\n\nfz:Prozess a stk:Process ;\n    dcterms:title \"Familienzulagen für ein Kind\"@de ;\n    dcterms:description \"Prüft den Anspruch auf Kinderzulage und Ausbildungszulage für ein Kind nach dem Bundesgesetz über die Familienzulagen (FamZG), Stand 1. Januar 2026. Das Ergebnis gilt für den Monat des Antrags.\"@de ;\n    dcterms:language \"de\" ;\n    dcterms:source fz:FamZG ;\n    stk:rootShape fz:AntragShape ;\n    stk:outOfScope\n        \"Kantonale Ansätze (höhere Mindestansätze, Geburts- und Adoptionszulagen nach Art. 3 Abs. 2 FamZG).\"@de ,\n        \"Kinder mit Wohnsitz im Ausland (Art. 4 Abs. 3 FamZG).\"@de ,\n        \"Mehrere anspruchsberechtigte Personen für das gleiche Kind (Art. 6 und 7 FamZG).\"@de .\n\n# =============================================================================\n# 2. Sources\n# =============================================================================\n\nfz:FamZG a eli:LegalResource ;\n    eli:title \"Bundesgesetz über die Familienzulagen und Finanzhilfen an Familienorganisationen (Familienzulagengesetz, FamZG)\"@de ;\n    eli:id_local \"SR 836.2\" ;\n    eli:version_date \"2026-01-01\"^^xsd:date ;\n    rdfs:label \"FamZG\"@de ;\n    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html> .\n\nfz:FamZG_Art1_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 1 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_1> ;\n    dcterms:description \"Die Bestimmungen des Bundesgesetzes vom 6. Oktober 2000 über den Allgemeinen Teil des Sozialversicherungsrechts (ATSG) sind auf die Familienzulagen anwendbar, soweit das vorliegende Gesetz nicht ausdrücklich eine Abweichung vom ATSG vorsieht.\"@de .\n\nfz:FamZG_Art3_Abs1_a a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 3 Abs. 1 Bst. a\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;\n    dcterms:description \"die Kinderzulage: sie wird vom Beginn des Geburtsmonats des Kindes bis zum Ende des Monats ausgerichtet, in dem das Kind das 16. Altersjahr vollendet; besteht für das Kind schon vor Vollendung des 16. Altersjahrs ein Anspruch auf eine Ausbildungszulage, so wird diese anstelle der Kinderzulage ausgerichtet; ist das Kind erwerbsunfähig (Art. 7 ATSG), so wird die Kinderzulage bis zum Ende des Monats ausgerichtet, in dem es das 20. Altersjahr vollendet;\"@de .\n\nfz:FamZG_Art3_Abs1_b a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 3 Abs. 1 Bst. b\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;\n    dcterms:description \"die Ausbildungszulage: sie wird ab dem Beginn des Monats ausgerichtet, in dem das Kind eine nachobligatorische Ausbildung beginnt, jedoch frühestens ab dem Beginn des Monats, in dem es das 15. Altersjahr vollendet; besucht das Kind nach Vollendung des 16. Altersjahrs noch die obligatorische Schule, so wird die Ausbildungszulage ab dem Beginn des darauffolgenden Monats ausgerichtet; die Ausbildungszulage wird bis zum Abschluss der Ausbildung des Kindes gewährt, längstens jedoch bis zum Ende des Monats, in dem es das 25. Altersjahr vollendet.\"@de .\n\nfz:FamZG_Art3_Abs2 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 3 Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;\n    dcterms:description \"Die Kantone können in ihren Familienzulagenordnungen höhere Mindestansätze für Kinder- und Ausbildungszulagen als nach Artikel 5 sowie auch Geburts- und Adoptionszulagen vorsehen.\"@de .\n\nfz:FamZG_Art4_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 4 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4> ;\n    dcterms:description \"Zum Anspruch auf Familienzulagen berechtigen: a. Kinder, zu denen ein Kindesverhältnis im Sinne des Zivilgesetzbuches besteht; b. Stiefkinder; c. Pflegekinder; d. Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt.\"@de .\n\nfz:FamZG_Art4_Abs1_d a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 4 Abs. 1 Bst. d\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4> ;\n    dcterms:description \"Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt.\"@de .\n\nfz:FamZG_Art4_Abs2 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 4 Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4> ;\n    dcterms:description \"Der Bundesrat regelt die Einzelheiten.\"@de .\n\nfz:FamZG_Art5_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 5 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> ;\n    dcterms:description \"Die Kinderzulage beträgt mindestens 215 Franken pro Monat.\"@de .\n\nfz:FamZG_Art5_Abs2 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 5 Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> ;\n    dcterms:description \"Die Ausbildungszulage beträgt mindestens 268 Franken pro Monat.\"@de .\n\nfz:FamZG_Art5_Abs3 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 5 Abs. 3\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> ;\n    dcterms:description \"Der Bundesrat passt die Mindestansätze auf den gleichen Zeitpunkt wie die Renten der Alters- und Hinterlassenenversicherung (AHV) der Teuerung an, sofern der Landesindex der Konsumentenpreise seit der letzten Festsetzung der Ansätze um mindestens 5 Punkte gestiegen ist.\"@de .\n\nfz:FamZG_Art12_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 12 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_12> ;\n    dcterms:description \"Die diesem Gesetz unterstellten Personen sind verpflichtet, sich einer Familienausgleichskasse in dem Kanton anzuschliessen, dessen Familienzulagenordnung auf sie anwendbar ist.\"@de .\n\nfz:FamZG_Art13_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 13 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;\n    dcterms:description \"Die als Arbeitnehmerinnen oder Arbeitnehmer in der AHV obligatorisch versicherten Personen, die von einem diesem Gesetz unterstellten Arbeitgeber beschäftigt werden, haben Anspruch auf Familienzulagen. [...] Der Anspruch entsteht und erlischt mit dem Lohnanspruch.\"@de .\n\nfz:FamZG_Art13_Abs2 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 13 Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;\n    dcterms:description \"Arbeitnehmerinnen und Arbeitnehmer nicht beitragspflichtiger Arbeitgeber haben Anspruch auf Familienzulagen.\"@de .\n\nfz:FamZG_Art13_Abs2bis a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 13 Abs. 2bis\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;\n    dcterms:description \"Die als Selbstständigerwerbende in der AHV obligatorisch versicherten Personen haben Anspruch auf Familienzulagen. [...] Der Bundesrat regelt die Einzelheiten betreffend Entstehen und Erlöschen des Anspruchs.\"@de .\n\nfz:FamZG_Art13_Abs3 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 13 Abs. 3\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;\n    dcterms:description \"Es werden nur ganze Zulagen ausgerichtet. Anspruch auf Zulagen hat, wer auf einem jährlichen Erwerbseinkommen, das mindestens dem halben jährlichen Betrag der minimalen vollen Altersrente der AHV entspricht, AHV-Beiträge entrichtet.\"@de .\n\nfz:FamZG_Art15 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 15 Abs. 1 Bst. a und Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_15> ;\n    dcterms:description \"Den Familienausgleichskassen obliegen insbesondere: a. die Festsetzung und Ausrichtung der Familienzulagen; [...] Die Familienzulagen werden den anspruchsberechtigten Arbeitnehmerinnen und Arbeitnehmern in der Regel durch den Arbeitgeber ausbezahlt.\"@de .\n\nfz:FamZG_Art18 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 18\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_18> ;\n    dcterms:description \"Die landwirtschaftlichen Arbeitnehmerinnen und Arbeitnehmer sowie die selbständigerwerbenden Landwirtinnen und Landwirte haben Anspruch auf Familienzulagen nach dem Bundesgesetz vom 20. Juni 1952 über die Familienzulagen in der Landwirtschaft.\"@de .\n\nfz:FamZG_Art19_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 19 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;\n    dcterms:description \"In der AHV obligatorisch versicherte Personen, die bei der AHV als nichterwerbstätige Personen erfasst sind, gelten als Nichterwerbstätige. Sie haben Anspruch auf Familienzulagen nach den Artikeln 3 und 5. [...] Zuständig ist der Wohnsitzkanton.\"@de .\n\nfz:FamZG_Art19_Abs1bis a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 19 Abs. 1bis\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;\n    dcterms:description \"Die Personen, die als Arbeitnehmerinnen oder Arbeitnehmer oder als Selbstständigerwerbende in der AHV obligatorisch versichert sind und das Mindesteinkommen nach Artikel 13 Absatz 3 nicht erreichen, gelten ebenfalls als Nichterwerbstätige.\"@de .\n\nfz:FamZG_Art19_Abs2 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 19 Abs. 2\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;\n    dcterms:description \"Der Anspruch auf Familienzulagen ist an die Voraussetzung geknüpft, dass das steuerbare Einkommen den anderthalbfachen Betrag einer maximalen vollen Altersrente der AHV nicht übersteigt und keine Ergänzungsleistungen zur AHV/IV bezogen werden.\"@de .\n\nfz:FamZG_Art21c_c a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:FamZG ;\n    rdfs:label \"FamZG Art. 21c Bst. c\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_21_c> ;\n    dcterms:description \"die AHV-Ausgleichskassen für die Erfüllung ihrer Aufgaben nach Artikel 13 des Bundesgesetzes vom 20. Juni 1952 über die Familienzulagen in der Landwirtschaft [...]\"@de .\n\nfz:AHVG a eli:LegalResource ;\n    eli:title \"Bundesgesetz über die Alters- und Hinterlassenenversicherung (AHVG)\"@de ;\n    eli:id_local \"SR 831.10\" ;\n    eli:version_date \"2026-01-01\"^^xsd:date ;\n    rdfs:label \"AHVG\"@de ;\n    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/63/837_843_843/20260101/de/html/fedlex-data-admin-ch-eli-cc-63-837_843_843-20260101-de-html-1.html> .\n\nfz:AHVG_Art34_Abs3 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:AHVG ;\n    rdfs:label \"AHVG Art. 34 Abs. 3\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/63/837_843_843/de#art_34> ;\n    dcterms:description \"Der Höchstbetrag der Altersrente entspricht dem doppelten Mindestbetrag.\"@de .\n\nfz:AHVG_Art34_Abs5 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:AHVG ;\n    rdfs:label \"AHVG Art. 34 Abs. 5\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/63/837_843_843/de#art_34> ;\n    dcterms:description \"Der Mindestbetrag der vollen Altersrente von 1260 Franken entspricht dem Rentenindex von 229,1 Punkten.\"@de .\n\nfz:V2025 a eli:LegalResource ;\n    eli:title \"Verordnung vom 28. August 2024 über Anpassungen an die Lohn- und Preisentwicklung bei der AHV/IV/EO ab dem Jahr 2025\"@de ;\n    eli:id_local \"SR 831.108\" ;\n    eli:version_date \"2025-01-01\"^^xsd:date ;\n    rdfs:label \"Verordnung 2025 über Anpassungen an die Lohn- und Preisentwicklung bei der AHV/IV/EO\"@de ;\n    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2024/463/20250101/de/html/fedlex-data-admin-ch-eli-cc-2024-463-20250101-de-html-2.html> .\n\nfz:V2025_Art3_Abs1 a eli:LegalResourceSubdivision ;\n    eli:is_part_of fz:V2025 ;\n    rdfs:label \"Verordnung vom 28. August 2024 (SR 831.108) Art. 3 Abs. 1\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2024/463/de#art_3> ;\n    dcterms:description \"Der Mindestbetrag der vollen Altersrente nach Artikel 34 Absatz 5 AHVG wird auf 1260 Franken festgesetzt.\"@de .\n\nfz:V2027 a eli:LegalResource ;\n    eli:title \"Verordnung vom 2. Oktober 2026 über Anpassungen an die Lohn- und Preisentwicklung bei der AHV/IV/EO ab dem Jahr 2027\"@de ;\n    eli:id_local \"SR 831.108\" ;\n    rdfs:label \"Verordnung vom 2. Oktober 2026 (SR 831.108), noch nicht in Kraft\"@de ;\n    rdfs:seeAlso <https://fedlex.data.admin.ch/eli/cc/2026/542> .\n\nfz:BSV_FAQ_Arbeitnehmende a eli:LegalResource ;\n    rdfs:label \"BSV, FAQ Familienzulagen: Habe ich als Arbeitnehmerin/Arbeitnehmer Anspruch auf Familienzulagen?\"@de ;\n    rdfs:seeAlso <https://faq.bsv.admin.ch/de/familienzulagen/habe-ich-als-arbeitnehmerinarbeitnehmer-anspruch-auf-familienzulagen> ;\n    dcterms:description \"Das Bundesamt für Sozialversicherungen nennt als Mindesteinkommen 630 Franken im Monat bzw. 7560 Franken im Jahr (Seite ohne Datum, abgerufen am 20. Oktober 2026).\"@de .\n\nfz:FamZV_Art1 a eli:LegalResourceSubdivision ;\n    rdfs:label \"FamZV Art. 1 Abs. 1 und 2 (SR 836.21)\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_1> ;\n    dcterms:description \"Ein Anspruch auf eine Ausbildungszulage besteht für Kinder, die eine Ausbildung im Sinne der Artikel 49bis und 49ter der Verordnung vom 31. Oktober 1947 über die Alters- und Hinterlassenenversicherung absolvieren. Als nachobligatorische Ausbildung gilt die Ausbildung, welche auf die obligatorische Schule folgt.\"@de .\n\nfz:AHVV_Art49bis_Abs3 a eli:LegalResourceSubdivision ;\n    rdfs:label \"AHVV Art. 49bis Abs. 3 (SR 831.101)\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/63/1185_1183_1185/de#art_49_bis> ;\n    dcterms:description \"Nicht als in Ausbildung gilt ein Kind, wenn es ein durchschnittliches monatliches Erwerbseinkommen erzielt, das höher ist als die maximale volle Altersrente der AHV.\"@de .\n\nfz:ATSG_Art24_Abs1 a eli:LegalResourceSubdivision ;\n    rdfs:label \"ATSG Art. 24 Abs. 1 (SR 830.1)\"@de ;\n    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2002/510/de#art_24> ;\n    dcterms:description \"Der Anspruch auf ausstehende Leistungen oder Beiträge erlischt fünf Jahre nach dem Ende des Monats, für welchen die Leistung [...] geschuldet war.\"@de .\n\n# =============================================================================\n# 3. Parameters\n# =============================================================================\n\nfz:MindestansatzKinderzulage a stk:Parameter ;\n    rdfs:label \"Mindestansatz der Kinderzulage\"@de ;\n    rdf:value 215 ;\n    stk:unit \"CHF pro Monat\" ;\n    dcterms:source fz:FamZG_Art5_Abs1 .\n\nfz:MindestansatzAusbildungszulage a stk:Parameter ;\n    rdfs:label \"Mindestansatz der Ausbildungszulage\"@de ;\n    rdf:value 268 ;\n    stk:unit \"CHF pro Monat\" ;\n    dcterms:source fz:FamZG_Art5_Abs2 .\n\nfz:AlterBeginnAusbildungszulage a stk:Parameter ;\n    rdfs:label \"Altersjahr, ab dessen Vollendungsmonat die Ausbildungszulage frühestens beginnt\"@de ;\n    rdf:value 15 ;\n    stk:unit \"Altersjahre\" ;\n    dcterms:source fz:FamZG_Art3_Abs1_b .\n\nfz:AlterEndeKinderzulage a stk:Parameter ;\n    rdfs:label \"Altersjahr, mit dessen Vollendungsmonat die Kinderzulage endet\"@de ;\n    rdf:value 16 ;\n    stk:unit \"Altersjahre\" ;\n    dcterms:source fz:FamZG_Art3_Abs1_a .\n\nfz:AlterEndeKinderzulageErwerbsunfaehig a stk:Parameter ;\n    rdfs:label \"Altersjahr, mit dessen Vollendungsmonat die Kinderzulage für ein erwerbsunfähiges Kind endet\"@de ;\n    rdf:value 20 ;\n    stk:unit \"Altersjahre\" ;\n    dcterms:source fz:FamZG_Art3_Abs1_a .\n\nfz:AlterEndeAusbildungszulage a stk:Parameter ;\n    rdfs:label \"Altersjahr, mit dessen Vollendungsmonat die Ausbildungszulage spätestens endet\"@de ;\n    rdf:value 25 ;\n    stk:unit \"Altersjahre\" ;\n    dcterms:source fz:FamZG_Art3_Abs1_b .\n\nfz:MindestbetragAltersrente a stk:Parameter ;\n    rdfs:label \"Mindestbetrag der vollen Altersrente der AHV\"@de ;\n    rdf:value 1260 ;\n    stk:unit \"CHF pro Monat\" ;\n    dcterms:source fz:AHVG_Art34_Abs5 , fz:V2025_Art3_Abs1 ;\n    stk:interpretation fz:A_Rentenwerte2026 .\n\nfz:FaktorHoechstbetragAltersrente a stk:Parameter ;\n    rdfs:label \"Höchstbetrag der Altersrente als Vielfaches des Mindestbetrags\"@de ;\n    rdf:value 2 ;\n    dcterms:source fz:AHVG_Art34_Abs3 .\n\nfz:RentenbetraegeProJahr a stk:Parameter ;\n    rdfs:label \"Anzahl Monatsbeträge im jährlichen Betrag einer Altersrente\"@de ;\n    rdf:value 12 ;\n    dcterms:source fz:FamZG_Art13_Abs3 , fz:BSV_FAQ_Arbeitnehmende ;\n    stk:interpretation fz:A_JaehrlicherBetrag .\n\nfz:AnteilMindesteinkommen a stk:Parameter ;\n    rdfs:label \"Mindesteinkommen als Anteil des jährlichen Betrags der minimalen vollen Altersrente\"@de ;\n    rdf:value 0.5 ;\n    dcterms:source fz:FamZG_Art13_Abs3 .\n\nfz:FaktorEinkommensgrenzeNichterwerbstaetige a stk:Parameter ;\n    rdfs:label \"Grenze des steuerbaren Einkommens als Vielfaches der maximalen vollen Altersrente\"@de ;\n    rdf:value 1.5 ;\n    dcterms:source fz:FamZG_Art19_Abs2 ;\n    stk:interpretation fz:A_JaehrlicherBetrag .\n\nfz:GueltigAb a stk:Parameter ;\n    rdfs:label \"Erster Tag, für den die Werte des Modells gelten\"@de ;\n    rdf:value \"2026-01-01\"^^xsd:date ;\n    dcterms:source fz:FamZG , fz:V2025_Art3_Abs1 .\n\nfz:GueltigBis a stk:Parameter ;\n    rdfs:label \"Letzter Tag, für den die Werte des Modells gelten\"@de ;\n    rdf:value \"2026-12-31\"^^xsd:date ;\n    dcterms:source fz:V2027 , fz:FamZG_Art5_Abs3 ;\n    stk:interpretation fz:A_Rentenwerte2026 .\n\n# =============================================================================\n# 4. Questions\n# =============================================================================\n\nfz:GruppeAntrag a sh:PropertyGroup ;\n    rdfs:label \"Antrag\"@de ;\n    sh:order 1 .\n\nfz:GruppePerson a sh:PropertyGroup ;\n    rdfs:label \"Antragstellende Person\"@de ;\n    sh:order 2 .\n\nfz:GruppeKind a sh:PropertyGroup ;\n    rdfs:label \"Kind\"@de ;\n    sh:order 3 .\n\nfz:AntragShape a sh:NodeShape ;\n    sh:targetClass fz:Antrag ;\n    rdfs:label \"Antrag auf Familienzulagen\"@de ;\n    sh:property fz:Q_Antragsdatum , fz:P_Antragsteller , fz:P_Kind .\n\nfz:Q_Antragsdatum a sh:PropertyShape ;\n    sh:path fz:antragsdatum ;\n    sh:group fz:GruppeAntrag ;\n    sh:order 1 ;\n    sh:name \"Datum des Antrags\"@de ;\n    sh:description \"Das Ergebnis gilt für den Monat dieses Datums.\"@de ;\n    sh:datatype xsd:date ;\n    sh:maxCount 1 ;\n    stk:interpretation fz:A_Bezugsmonat .\n\nfz:P_Antragsteller a sh:PropertyShape ;\n    sh:path fz:antragsteller ;\n    sh:order 2 ;\n    sh:name \"Antragstellende Person\"@de ;\n    sh:maxCount 1 ;\n    sh:node fz:PersonShape .\n\nfz:P_Kind a sh:PropertyShape ;\n    sh:path fz:kind ;\n    sh:order 3 ;\n    sh:name \"Kind\"@de ;\n    sh:maxCount 1 ;\n    sh:node fz:KindShape .\n\nfz:PersonShape a sh:NodeShape ;\n    rdfs:label \"Antragstellende Person\"@de ;\n    sh:property fz:Q_Erwerbsstatus , fz:Q_Erwerbseinkommen , fz:Q_SteuerbaresEinkommen , fz:Q_Ergaenzungsleistungen .\n\nfz:Q_Erwerbsstatus a sh:PropertyShape ;\n    sh:path fz:erwerbsstatus ;\n    sh:group fz:GruppePerson ;\n    sh:order 1 ;\n    sh:name \"Erwerbssituation\"@de ;\n    sh:description \"Wählen Sie die Situation, nach der Sie in der AHV versichert sind.\"@de ;\n    sh:maxCount 1 ;\n    sh:in ( fz:Arbeitnehmend fz:Selbststaendigerwerbend fz:Nichterwerbstaetig fz:Landwirtschaft ) ;\n    stk:interpretation fz:A_AHVVersichert .\n\nfz:Arbeitnehmend rdfs:label \"Arbeitnehmerin oder Arbeitnehmer (nicht in der Landwirtschaft)\"@de ;\n    stk:interpretation fz:A_Arbeitnehmend .\nfz:Selbststaendigerwerbend rdfs:label \"Selbstständigerwerbend (nicht in der Landwirtschaft)\"@de .\nfz:Nichterwerbstaetig rdfs:label \"Nichterwerbstätig (bei der AHV als nichterwerbstätig erfasst)\"@de .\nfz:Landwirtschaft rdfs:label \"Erwerbstätig in der Landwirtschaft\"@de .\n\nfz:Q_Erwerbseinkommen a sh:PropertyShape ;\n    sh:path fz:erwerbseinkommen ;\n    sh:group fz:GruppePerson ;\n    sh:order 2 ;\n    sh:name \"Jährliches Erwerbseinkommen, auf dem Sie AHV-Beiträge bezahlen (CHF)\"@de ;\n    sh:datatype xsd:decimal ;\n    sh:minInclusive 0 ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_Erwerbstaetig .\n\nfz:Q_SteuerbaresEinkommen a sh:PropertyShape ;\n    sh:path fz:steuerbaresEinkommen ;\n    sh:group fz:GruppePerson ;\n    sh:order 3 ;\n    sh:name \"Steuerbares Einkommen pro Jahr (CHF)\"@de ;\n    sh:datatype xsd:decimal ;\n    sh:minInclusive 0 ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_GiltAlsNichterwerbstaetig .\n\nfz:Q_Ergaenzungsleistungen a sh:PropertyShape ;\n    sh:path fz:bezugErgaenzungsleistungen ;\n    sh:group fz:GruppePerson ;\n    sh:order 4 ;\n    sh:name \"Beziehen Sie Ergänzungsleistungen zur AHV/IV?\"@de ;\n    sh:datatype xsd:boolean ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_GiltAlsNichterwerbstaetig .\n\nfz:KindShape a sh:NodeShape ;\n    rdfs:label \"Kind\"@de ;\n    sh:property fz:Q_Kindesverhaeltnis , fz:Q_Unterhalt , fz:Q_Geburtsdatum , fz:Q_Ausbildung , fz:Q_Ausbildungsbeginn , fz:Q_Erwerbsunfaehig .\n\nfz:Q_Kindesverhaeltnis a sh:PropertyShape ;\n    sh:path fz:kindesverhaeltnis ;\n    sh:group fz:GruppeKind ;\n    sh:order 1 ;\n    sh:name \"Wie stehen Sie zum Kind?\"@de ;\n    sh:maxCount 1 ;\n    sh:in ( fz:EigenesKind fz:Stiefkind fz:Pflegekind fz:GeschwisterOderEnkelkind fz:AnderesVerhaeltnis ) .\n\nfz:EigenesKind rdfs:label \"Eigenes Kind (Kindesverhältnis nach Zivilgesetzbuch, auch adoptiert)\"@de ;\n    stk:interpretation fz:A_EigenesKind .\nfz:Stiefkind rdfs:label \"Stiefkind\"@de .\nfz:Pflegekind rdfs:label \"Pflegekind\"@de .\nfz:GeschwisterOderEnkelkind rdfs:label \"Geschwister oder Enkelkind\"@de .\nfz:AnderesVerhaeltnis rdfs:label \"Anderes Verhältnis\"@de .\n\nfz:Q_Unterhalt a sh:PropertyShape ;\n    sh:path fz:ueberwiegenderUnterhalt ;\n    sh:group fz:GruppeKind ;\n    sh:order 2 ;\n    sh:name \"Kommen Sie in überwiegendem Mass für den Unterhalt des Kindes auf?\"@de ;\n    sh:datatype xsd:boolean ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_GeschwisterOderEnkelkind .\n\nfz:Q_Geburtsdatum a sh:PropertyShape ;\n    sh:path fz:geburtsdatum ;\n    sh:group fz:GruppeKind ;\n    sh:order 3 ;\n    sh:name \"Geburtsdatum des Kindes\"@de ;\n    sh:datatype xsd:date ;\n    sh:maxCount 1 ;\n    stk:interpretation fz:A_Altersjahr .\n\nfz:Q_Ausbildung a sh:PropertyShape ;\n    sh:path fz:ausbildung ;\n    sh:group fz:GruppeKind ;\n    sh:order 4 ;\n    sh:name \"Welche Ausbildung macht das Kind im Monat des Antrags?\"@de ;\n    sh:maxCount 1 ;\n    sh:in ( fz:ObligatorischeSchule fz:Lehre fz:AndereNachobligatorischeAusbildung fz:KeineAusbildung ) ;\n    stk:relevantIf fz:C_AusbildungMoeglich ;\n    stk:interpretation fz:A_LaufendeAusbildung .\n\nfz:ObligatorischeSchule rdfs:label \"Obligatorische Schule\"@de .\nfz:Lehre rdfs:label \"Lehre (berufliche Grundbildung)\"@de ;\n    stk:interpretation fz:A_Lehre .\nfz:AndereNachobligatorischeAusbildung rdfs:label \"Andere Ausbildung nach der obligatorischen Schule (z. B. Mittelschule, Hochschule)\"@de .\nfz:KeineAusbildung rdfs:label \"Keine Ausbildung\"@de .\n\nfz:Q_Ausbildungsbeginn a sh:PropertyShape ;\n    sh:path fz:ausbildungsbeginn ;\n    sh:group fz:GruppeKind ;\n    sh:order 5 ;\n    sh:name \"Seit wann ist das Kind in dieser Ausbildung?\"@de ;\n    sh:datatype xsd:date ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_Nachobligatorisch .\n\nfz:Q_Erwerbsunfaehig a sh:PropertyShape ;\n    sh:path fz:erwerbsunfaehig ;\n    sh:group fz:GruppeKind ;\n    sh:order 6 ;\n    sh:name \"Ist das Kind erwerbsunfähig (Art. 7 ATSG)?\"@de ;\n    sh:datatype xsd:boolean ;\n    sh:maxCount 1 ;\n    stk:relevantIf fz:C_Erwerbsunfaehigkeit .\n\n# =============================================================================\n# 5. Relevance conditions\n#    The root node of the answers must conform to the shape. In a SPARQL-based\n#    condition, the query returns a row when the condition is NOT met.\n# =============================================================================\n\nfz:Praefixe\n    sh:declare [ sh:prefix \"fz\" ; sh:namespace \"https://almilo.github.io/software-that-knows/famzg#\"^^xsd:anyURI ] ,\n               [ sh:prefix \"rdf\" ; sh:namespace \"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"^^xsd:anyURI ] ,\n               [ sh:prefix \"xsd\" ; sh:namespace \"http://www.w3.org/2001/XMLSchema#\"^^xsd:anyURI ] .\n\nfz:C_Erwerbstaetig a sh:NodeShape ;\n    rdfs:comment \"Die Person ist ausserhalb der Landwirtschaft erwerbstätig.\"@de ;\n    sh:property [\n        sh:path ( fz:antragsteller fz:erwerbsstatus ) ;\n        sh:minCount 1 ;\n        sh:in ( fz:Arbeitnehmend fz:Selbststaendigerwerbend )\n    ] .\n\nfz:C_GiltAlsNichterwerbstaetig a sh:NodeShape ;\n    rdfs:comment \"Die Person ist nichterwerbstätig oder erreicht das Mindesteinkommen nicht (Art. 19 Abs. 1 und 1bis).\"@de ;\n    sh:sparql [\n        sh:prefixes fz:Praefixe ;\n        sh:select \"\"\"\n            SELECT $this WHERE {\n              FILTER NOT EXISTS {\n                $this fz:antragsteller ?p .\n                ?p fz:erwerbsstatus ?status .\n                OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n                fz:MindestbetragAltersrente rdf:value ?rente .\n                fz:RentenbetraegeProJahr rdf:value ?proJahr .\n                fz:AnteilMindesteinkommen rdf:value ?anteil .\n                FILTER(?status = fz:Nichterwerbstaetig\n                       || (?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend)\n                           && ?einkommen < ?anteil * ?proJahr * ?rente))\n              }\n            }\"\"\"\n    ] .\n\nfz:C_GeschwisterOderEnkelkind a sh:NodeShape ;\n    sh:property [\n        sh:path ( fz:kind fz:kindesverhaeltnis ) ;\n        sh:hasValue fz:GeschwisterOderEnkelkind\n    ] .\n\nfz:C_AusbildungMoeglich a sh:NodeShape ;\n    rdfs:comment \"Im Monat des Antrags hat das Kind das 15. Altersjahr vollendet und das 25. Altersjahr noch nicht überschritten.\"@de ;\n    sh:sparql [\n        sh:prefixes fz:Praefixe ;\n        sh:select \"\"\"\n            SELECT $this WHERE {\n              FILTER NOT EXISTS {\n                $this fz:antragsdatum ?datum ; fz:kind ?k .\n                ?k fz:geburtsdatum ?geb .\n                fz:AlterBeginnAusbildungszulage rdf:value ?a15 .\n                fz:AlterEndeAusbildungszulage rdf:value ?a25 .\n                BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n                BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n                FILTER(?mGeb + 12 * ?a15 <= ?ref && ?ref <= ?mGeb + 12 * ?a25)\n              }\n            }\"\"\"\n    ] .\n\nfz:C_Nachobligatorisch a sh:NodeShape ;\n    sh:property [\n        sh:path ( fz:kind fz:ausbildung ) ;\n        sh:minCount 1 ;\n        sh:in ( fz:Lehre fz:AndereNachobligatorischeAusbildung )\n    ] .\n\nfz:C_Erwerbsunfaehigkeit a sh:NodeShape ;\n    rdfs:comment \"Das Kind ist in keiner Ausbildung und im Monat des Antrags älter als 16, aber nicht älter als 20 Jahre.\"@de ;\n    sh:sparql [\n        sh:prefixes fz:Praefixe ;\n        sh:select \"\"\"\n            SELECT $this WHERE {\n              FILTER NOT EXISTS {\n                $this fz:antragsdatum ?datum ; fz:kind ?k .\n                ?k fz:geburtsdatum ?geb ; fz:ausbildung fz:KeineAusbildung .\n                fz:AlterEndeKinderzulage rdf:value ?a16 .\n                fz:AlterEndeKinderzulageErwerbsunfaehig rdf:value ?a20 .\n                BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n                BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n                FILTER(?mGeb + 12 * ?a16 < ?ref && ?ref <= ?mGeb + 12 * ?a20)\n              }\n            }\"\"\"\n    ] .\n\n# =============================================================================\n# 6. Rules\n# =============================================================================\n\n# --- 6.1 Rules for every application -----------------------------------------\n\n# Each rule is in its own property shape: the property shape names the part of\n# the answers that the rule is about, and has exactly one sh:sparql constraint.\n\nfz:AllgemeineRegeln a sh:NodeShape ;\n    sh:targetClass fz:Antrag ;\n    rdfs:label \"Regeln zur Person, zum Kindesverhältnis und zum Datum\"@de ;\n    sh:property\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_Landwirtschaft ] ,\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_UnterMindesteinkommen ] ,\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_EinkommenZuHoch ] ,\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_Ergaenzungsleistungen ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_KeinKindesverhaeltnis ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_KeinUeberwiegenderUnterhalt ] ,\n        [ sh:path fz:antragsdatum ; sh:severity sh:Info ; sh:sparql fz:R_Gueltigkeit ] .\n\nfz:R_Landwirtschaft a sh:SPARQLConstraint ;\n    stk:resultType stk:NextStep ;\n    sh:order 1 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Für Erwerbstätige in der Landwirtschaft gilt nicht das FamZG, sondern das Bundesgesetz über die Familienzulagen in der Landwirtschaft (FLG). Wenden Sie sich an Ihre AHV-Ausgleichskasse.\"@de ;\n    dcterms:source fz:FamZG_Art18 , fz:FamZG_Art21c_c ;\n    stk:interpretation fz:A_Landwirtschaft ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:antragsteller/fz:erwerbsstatus fz:Landwirtschaft .\n        }\"\"\" .\n\nfz:R_UnterMindesteinkommen a sh:SPARQLConstraint ;\n    stk:resultType stk:Value ;\n    sh:order 2 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Ihr Erwerbseinkommen von CHF {?einkommen} pro Jahr liegt unter dem Mindesteinkommen von CHF {?value} pro Jahr. Sie gelten deshalb als nichterwerbstätig.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs3 , fz:FamZG_Art19_Abs1bis ;\n    stk:interpretation fz:A_JaehrlicherBetrag ;\n    sh:select \"\"\"\n        SELECT $this ?einkommen ?value WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus ?status ; fz:erwerbseinkommen ?einkommen .\n          FILTER(?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend))\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          BIND(xsd:integer(?anteil * ?proJahr * ?rente) AS ?value)\n          FILTER(?einkommen < ?value)\n        }\"\"\" .\n\nfz:R_EinkommenZuHoch a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 3 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch: Ihr steuerbares Einkommen von CHF {?steuerbar} ist höher als CHF {?value}, das Anderthalbfache der maximalen vollen Altersrente der AHV pro Jahr.\"@de ;\n    dcterms:source fz:FamZG_Art19_Abs2 , fz:AHVG_Art34_Abs3 , fz:AHVG_Art34_Abs5 ;\n    stk:interpretation fz:A_JaehrlicherBetrag ;\n    sh:select \"\"\"\n        SELECT $this ?steuerbar ?value WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus ?status ; fz:steuerbaresEinkommen ?steuerbar .\n          OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          fz:FaktorHoechstbetragAltersrente rdf:value ?fHoechst .\n          fz:FaktorEinkommensgrenzeNichterwerbstaetige rdf:value ?fGrenze .\n          FILTER(?status = fz:Nichterwerbstaetig\n                 || (?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend)\n                     && ?einkommen < ?anteil * ?proJahr * ?rente))\n          BIND(xsd:integer(?fGrenze * ?proJahr * ?fHoechst * ?rente) AS ?value)\n          FILTER(?steuerbar > ?value)\n        }\"\"\" .\n\nfz:R_Ergaenzungsleistungen a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 4 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch: Nichterwerbstätige, die Ergänzungsleistungen zur AHV/IV beziehen, haben keinen Anspruch auf Familienzulagen.\"@de ;\n    dcterms:source fz:FamZG_Art19_Abs2 ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus ?status ; fz:bezugErgaenzungsleistungen true .\n          OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          FILTER(?status = fz:Nichterwerbstaetig\n                 || (?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend)\n                     && ?einkommen < ?anteil * ?proJahr * ?rente))\n        }\"\"\" .\n\nfz:R_KeinKindesverhaeltnis a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 5 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch: Nur eigene Kinder, Stiefkinder, Pflegekinder sowie Geschwister und Enkelkinder berechtigen zum Anspruch auf Familienzulagen.\"@de ;\n    dcterms:source fz:FamZG_Art4_Abs1 ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:kind/fz:kindesverhaeltnis fz:AnderesVerhaeltnis .\n        }\"\"\" .\n\nfz:R_KeinUeberwiegenderUnterhalt a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 6 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch: Für Geschwister und Enkelkinder besteht ein Anspruch nur, wenn Sie in überwiegendem Mass für deren Unterhalt aufkommen.\"@de ;\n    dcterms:source fz:FamZG_Art4_Abs1_d ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:kind ?k .\n          ?k fz:kindesverhaeltnis fz:GeschwisterOderEnkelkind ; fz:ueberwiegenderUnterhalt false .\n        }\"\"\" .\n\nfz:R_Gueltigkeit a sh:SPARQLConstraint ;\n    stk:resultType stk:NextStep ;\n    sh:order 7 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Das Datum des Antrags ({?datum}) liegt ausserhalb der Zeit, für die dieses Modell Werte enthält ({?von} bis {?bis}). Prüfen Sie die Ansätze und Grenzbeträge, die an diesem Datum gelten, bei Ihrer Familienausgleichskasse.\"@de ;\n    dcterms:source fz:FamZG_Art5_Abs3 , fz:V2025_Art3_Abs1 , fz:V2027 ;\n    stk:interpretation fz:A_Rentenwerte2026 ;\n    sh:select \"\"\"\n        SELECT $this ?datum ?von ?bis WHERE {\n          $this fz:antragsdatum ?datum .\n          fz:GueltigAb rdf:value ?von .\n          fz:GueltigBis rdf:value ?bis .\n          FILTER(?datum < ?von || ?datum > ?bis)\n        }\"\"\" .\n\n# --- 6.2 Rules for an entitled person and a child that gives a right ---------\n#     The SPARQL target selects the applications in which the person is\n#     entitled (Art. 13 Abs. 1, 2, 2bis and 3, Art. 19) and the child gives a\n#     right to family allowances (Art. 4 Abs. 1).\n\nfz:Zulagen a sh:NodeShape ;\n    rdfs:label \"Kinderzulage und Ausbildungszulage\"@de ;\n    sh:target [\n        a sh:SPARQLTarget ;\n        sh:prefixes fz:Praefixe ;\n        sh:select \"\"\"\n            PREFIX fz: <https://almilo.github.io/software-that-knows/famzg#>\n            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n            SELECT ?this WHERE {\n              ?this a fz:Antrag ; fz:antragsteller ?p ; fz:kind ?k .\n              ?p fz:erwerbsstatus ?status .\n              OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n              OPTIONAL { ?p fz:steuerbaresEinkommen ?steuerbar }\n              OPTIONAL { ?p fz:bezugErgaenzungsleistungen ?el }\n              fz:MindestbetragAltersrente rdf:value ?rente .\n              fz:RentenbetraegeProJahr rdf:value ?proJahr .\n              fz:AnteilMindesteinkommen rdf:value ?anteil .\n              fz:FaktorHoechstbetragAltersrente rdf:value ?fHoechst .\n              fz:FaktorEinkommensgrenzeNichterwerbstaetige rdf:value ?fGrenze .\n              BIND(?anteil * ?proJahr * ?rente AS ?mindesteinkommen)\n              BIND(?fGrenze * ?proJahr * ?fHoechst * ?rente AS ?grenze)\n              BIND(?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend) AS ?erwerbstaetig)\n              BIND(COALESCE(?erwerbstaetig && ?einkommen >= ?mindesteinkommen, false) AS ?anspruchErwerb)\n              BIND(COALESCE(?status = fz:Nichterwerbstaetig || (?erwerbstaetig && ?einkommen < ?mindesteinkommen), false) AS ?giltAlsNichterwerbstaetig)\n              BIND(COALESCE(?giltAlsNichterwerbstaetig && ?steuerbar <= ?grenze && ?el = false, false) AS ?anspruchNichterwerb)\n              FILTER(?anspruchErwerb || ?anspruchNichterwerb)\n              ?k fz:kindesverhaeltnis ?verhaeltnis .\n              OPTIONAL { ?k fz:ueberwiegenderUnterhalt ?unterhalt }\n              FILTER(?verhaeltnis IN (fz:EigenesKind, fz:Stiefkind, fz:Pflegekind)\n                     || (?verhaeltnis = fz:GeschwisterOderEnkelkind && COALESCE(?unterhalt, false)))\n            }\"\"\"\n    ] ;\n    sh:property\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_Ausbildungszulage ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_Kinderzulage ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_KinderzulageErwerbsunfaehig ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_UeberAltersgrenze ] ,\n        [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_KeineAusbildung ] .\n\nfz:R_Ausbildungszulage a sh:SPARQLConstraint ;\n    stk:resultType stk:Value ;\n    sh:order 10 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Ausbildungszulage: mindestens CHF {?value} pro Monat, ab {?beginn} bis zum Abschluss der Ausbildung, längstens bis {?ende}.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_b , fz:FamZG_Art5_Abs2 ;\n    stk:interpretation fz:A_Bezugsmonat , fz:A_Altersjahr , fz:A_LaufendeAusbildung ;\n    sh:select \"\"\"\n        SELECT $this ?value ?beginn ?ende WHERE {\n          $this fz:antragsdatum ?datum ; fz:kind ?k .\n          ?k fz:geburtsdatum ?geb ; fz:ausbildung ?ausbildung .\n          FILTER(?ausbildung IN (fz:ObligatorischeSchule, fz:Lehre, fz:AndereNachobligatorischeAusbildung))\n          OPTIONAL { ?k fz:ausbildungsbeginn ?ab }\n          fz:AlterBeginnAusbildungszulage rdf:value ?a15 .\n          fz:AlterEndeKinderzulage rdf:value ?a16 .\n          fz:AlterEndeAusbildungszulage rdf:value ?a25 .\n          fz:MindestansatzAusbildungszulage rdf:value ?value .\n          BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n          BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n          BIND(YEAR(?ab) * 12 + MONTH(?ab) AS ?mAb)\n          # Compulsory school after the 16th year: from the next month.\n          # Post-compulsory education: from its start, at the earliest from the month of the 15th year.\n          BIND(IF(?ausbildung = fz:ObligatorischeSchule,\n                  ?mGeb + 12 * ?a16 + 1,\n                  IF(?mAb > ?mGeb + 12 * ?a15, ?mAb, ?mGeb + 12 * ?a15)) AS ?mBeginn)\n          BIND(?mGeb + 12 * ?a25 AS ?mEnde)\n          FILTER(?mBeginn <= ?ref && ?ref <= ?mEnde)\n          BIND(xsd:integer(FLOOR((?mBeginn - 1) / 12)) AS ?jBeginn)\n          BIND(xsd:integer(?mBeginn - 12 * ?jBeginn) AS ?moBeginn)\n          BIND(STRDT(CONCAT(STR(?jBeginn), \"-\", IF(?moBeginn < 10, \"0\", \"\"), STR(?moBeginn), \"-01\"), xsd:date) AS ?beginn)\n          BIND(xsd:integer(FLOOR((?mEnde - 1) / 12)) AS ?jEnde)\n          BIND(xsd:integer(?mEnde - 12 * ?jEnde) AS ?moEnde)\n          BIND(IF(?moEnde = 2,\n                  IF(?jEnde - FLOOR(?jEnde / 4) * 4 = 0 && (?jEnde - FLOOR(?jEnde / 100) * 100 != 0 || ?jEnde - FLOOR(?jEnde / 400) * 400 = 0), 29, 28),\n                  IF(?moEnde IN (4, 6, 9, 11), 30, 31)) AS ?tagEnde)\n          BIND(STRDT(CONCAT(STR(?jEnde), \"-\", IF(?moEnde < 10, \"0\", \"\"), STR(?moEnde), \"-\", STR(?tagEnde)), xsd:date) AS ?ende)\n        }\"\"\" .\n\nfz:R_Kinderzulage a sh:SPARQLConstraint ;\n    stk:resultType stk:Value ;\n    sh:order 11 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kinderzulage: mindestens CHF {?value} pro Monat, ab {?beginn} bis {?ende}. Beginnt das Kind vorher eine Ausbildung nach der obligatorischen Schule, so gibt es ab dann die Ausbildungszulage.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art5_Abs1 ;\n    stk:interpretation fz:A_Bezugsmonat , fz:A_Altersjahr ;\n    sh:select \"\"\"\n        SELECT $this ?value ?beginn ?ende WHERE {\n          $this fz:antragsdatum ?datum ; fz:kind ?k .\n          ?k fz:geburtsdatum ?geb .\n          OPTIONAL { ?k fz:ausbildung ?ausbildung }\n          OPTIONAL { ?k fz:ausbildungsbeginn ?ab }\n          fz:AlterBeginnAusbildungszulage rdf:value ?a15 .\n          fz:AlterEndeKinderzulage rdf:value ?a16 .\n          fz:MindestansatzKinderzulage rdf:value ?value .\n          BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n          BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n          BIND(?mGeb + 12 * ?a15 AS ?m15)\n          BIND(?mGeb + 12 * ?a16 AS ?mEnde)\n          FILTER(?mGeb <= ?ref && ?ref <= ?mEnde)\n          # From the month of the 15th year, the answer about the education is necessary.\n          FILTER(?ref < ?m15 || BOUND(?ausbildung))\n          # The education allowance replaces the child allowance.\n          BIND(COALESCE(?ausbildung IN (fz:Lehre, fz:AndereNachobligatorischeAusbildung)\n                        && ?ref >= ?m15 && ?ref >= YEAR(?ab) * 12 + MONTH(?ab), false) AS ?ausbildungszulage)\n          FILTER(!?ausbildungszulage)\n          BIND(xsd:integer(FLOOR((?mGeb - 1) / 12)) AS ?jBeginn)\n          BIND(xsd:integer(?mGeb - 12 * ?jBeginn) AS ?moBeginn)\n          BIND(STRDT(CONCAT(STR(?jBeginn), \"-\", IF(?moBeginn < 10, \"0\", \"\"), STR(?moBeginn), \"-01\"), xsd:date) AS ?beginn)\n          BIND(xsd:integer(FLOOR((?mEnde - 1) / 12)) AS ?jEnde)\n          BIND(xsd:integer(?mEnde - 12 * ?jEnde) AS ?moEnde)\n          BIND(IF(?moEnde = 2,\n                  IF(?jEnde - FLOOR(?jEnde / 4) * 4 = 0 && (?jEnde - FLOOR(?jEnde / 100) * 100 != 0 || ?jEnde - FLOOR(?jEnde / 400) * 400 = 0), 29, 28),\n                  IF(?moEnde IN (4, 6, 9, 11), 30, 31)) AS ?tagEnde)\n          BIND(STRDT(CONCAT(STR(?jEnde), \"-\", IF(?moEnde < 10, \"0\", \"\"), STR(?moEnde), \"-\", STR(?tagEnde)), xsd:date) AS ?ende)\n        }\"\"\" .\n\nfz:R_KinderzulageErwerbsunfaehig a sh:SPARQLConstraint ;\n    stk:resultType stk:Value ;\n    sh:order 12 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kinderzulage für ein erwerbsunfähiges Kind: mindestens CHF {?value} pro Monat, längstens bis {?ende}.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art5_Abs1 ;\n    stk:interpretation fz:A_Bezugsmonat , fz:A_Altersjahr ;\n    sh:select \"\"\"\n        SELECT $this ?value ?ende WHERE {\n          $this fz:antragsdatum ?datum ; fz:kind ?k .\n          ?k fz:geburtsdatum ?geb ; fz:ausbildung fz:KeineAusbildung ; fz:erwerbsunfaehig true .\n          fz:AlterEndeKinderzulage rdf:value ?a16 .\n          fz:AlterEndeKinderzulageErwerbsunfaehig rdf:value ?a20 .\n          fz:MindestansatzKinderzulage rdf:value ?value .\n          BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n          BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n          BIND(?mGeb + 12 * ?a20 AS ?mEnde)\n          FILTER(?mGeb + 12 * ?a16 < ?ref && ?ref <= ?mEnde)\n          BIND(xsd:integer(FLOOR((?mEnde - 1) / 12)) AS ?jEnde)\n          BIND(xsd:integer(?mEnde - 12 * ?jEnde) AS ?moEnde)\n          BIND(IF(?moEnde = 2,\n                  IF(?jEnde - FLOOR(?jEnde / 4) * 4 = 0 && (?jEnde - FLOOR(?jEnde / 100) * 100 != 0 || ?jEnde - FLOOR(?jEnde / 400) * 400 = 0), 29, 28),\n                  IF(?moEnde IN (4, 6, 9, 11), 30, 31)) AS ?tagEnde)\n          BIND(STRDT(CONCAT(STR(?jEnde), \"-\", IF(?moEnde < 10, \"0\", \"\"), STR(?moEnde), \"-\", STR(?tagEnde)), xsd:date) AS ?ende)\n        }\"\"\" .\n\nfz:R_UeberAltersgrenze a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 13 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch: Das Kind hat vor dem Monat des Antrags das {?a25}. Altersjahr vollendet. Kinder- und Ausbildungszulagen werden längstens bis zum Ende dieses Monats ausgerichtet.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art3_Abs1_b ;\n    stk:interpretation fz:A_Bezugsmonat , fz:A_Altersjahr ;\n    sh:select \"\"\"\n        SELECT $this ?a25 WHERE {\n          $this fz:antragsdatum ?datum ; fz:kind ?k .\n          ?k fz:geburtsdatum ?geb .\n          fz:AlterEndeAusbildungszulage rdf:value ?a25 .\n          BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n          BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n          FILTER(?ref > ?mGeb + 12 * ?a25)\n        }\"\"\" .\n\nfz:R_KeineAusbildung a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:order 14 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch für den Monat des Antrags: Das Kind hat das {?a16}. Altersjahr vollendet und ist in keiner Ausbildung. Danach wird die Kinderzulage nur für ein erwerbsunfähiges Kind ausgerichtet, längstens bis zum Ende des Monats, in dem es das {?a20}. Altersjahr vollendet.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art3_Abs1_b ;\n    stk:interpretation fz:A_Bezugsmonat , fz:A_Altersjahr ;\n    sh:select \"\"\"\n        SELECT $this ?a16 ?a20 WHERE {\n          $this fz:antragsdatum ?datum ; fz:kind ?k .\n          ?k fz:geburtsdatum ?geb ; fz:ausbildung fz:KeineAusbildung .\n          OPTIONAL { ?k fz:erwerbsunfaehig ?erwerbsunfaehig }\n          fz:AlterEndeKinderzulage rdf:value ?a16 .\n          fz:AlterEndeKinderzulageErwerbsunfaehig rdf:value ?a20 .\n          fz:AlterEndeAusbildungszulage rdf:value ?a25 .\n          BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n          BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n          FILTER(?mGeb + 12 * ?a16 < ?ref && ?ref <= ?mGeb + 12 * ?a25)\n          FILTER(?ref > ?mGeb + 12 * ?a20 || ?erwerbsunfaehig = false)\n        }\"\"\" .\n\n# --- 6.3 Next steps when an allowance is due ---------------------------------\n#     The SPARQL target selects the applications of 6.2 for which a child\n#     allowance or an education allowance is due in the month of the application.\n\nfz:Antragstellung a sh:NodeShape ;\n    rdfs:label \"Antrag einreichen\"@de ;\n    sh:target [\n        a sh:SPARQLTarget ;\n        sh:prefixes fz:Praefixe ;\n        sh:select \"\"\"\n            PREFIX fz: <https://almilo.github.io/software-that-knows/famzg#>\n            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n            SELECT ?this WHERE {\n              ?this a fz:Antrag ; fz:antragsteller ?p ; fz:kind ?k ; fz:antragsdatum ?datum .\n              ?p fz:erwerbsstatus ?status .\n              OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n              OPTIONAL { ?p fz:steuerbaresEinkommen ?steuerbar }\n              OPTIONAL { ?p fz:bezugErgaenzungsleistungen ?el }\n              fz:MindestbetragAltersrente rdf:value ?rente .\n              fz:RentenbetraegeProJahr rdf:value ?proJahr .\n              fz:AnteilMindesteinkommen rdf:value ?anteil .\n              fz:FaktorHoechstbetragAltersrente rdf:value ?fHoechst .\n              fz:FaktorEinkommensgrenzeNichterwerbstaetige rdf:value ?fGrenze .\n              BIND(?anteil * ?proJahr * ?rente AS ?mindesteinkommen)\n              BIND(?fGrenze * ?proJahr * ?fHoechst * ?rente AS ?grenze)\n              BIND(?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend) AS ?erwerbstaetig)\n              BIND(COALESCE(?erwerbstaetig && ?einkommen >= ?mindesteinkommen, false) AS ?anspruchErwerb)\n              BIND(COALESCE(?status = fz:Nichterwerbstaetig || (?erwerbstaetig && ?einkommen < ?mindesteinkommen), false) AS ?giltAlsNichterwerbstaetig)\n              BIND(COALESCE(?giltAlsNichterwerbstaetig && ?steuerbar <= ?grenze && ?el = false, false) AS ?anspruchNichterwerb)\n              FILTER(?anspruchErwerb || ?anspruchNichterwerb)\n              ?k fz:kindesverhaeltnis ?verhaeltnis ; fz:geburtsdatum ?geb .\n              OPTIONAL { ?k fz:ueberwiegenderUnterhalt ?unterhalt }\n              FILTER(?verhaeltnis IN (fz:EigenesKind, fz:Stiefkind, fz:Pflegekind)\n                     || (?verhaeltnis = fz:GeschwisterOderEnkelkind && COALESCE(?unterhalt, false)))\n              OPTIONAL { ?k fz:ausbildung ?ausbildung }\n              OPTIONAL { ?k fz:erwerbsunfaehig ?erwerbsunfaehig }\n              fz:AlterBeginnAusbildungszulage rdf:value ?a15 .\n              fz:AlterEndeKinderzulage rdf:value ?a16 .\n              fz:AlterEndeKinderzulageErwerbsunfaehig rdf:value ?a20 .\n              fz:AlterEndeAusbildungszulage rdf:value ?a25 .\n              BIND(YEAR(?datum) * 12 + MONTH(?datum) AS ?ref)\n              BIND(YEAR(?geb) * 12 + MONTH(?geb) AS ?mGeb)\n              FILTER(?mGeb <= ?ref && ?ref <= ?mGeb + 12 * ?a25)\n              FILTER(?ref < ?mGeb + 12 * ?a15\n                     || (?ref <= ?mGeb + 12 * ?a16 && BOUND(?ausbildung))\n                     || ?ausbildung IN (fz:Lehre, fz:AndereNachobligatorischeAusbildung, fz:ObligatorischeSchule)\n                     || (?ref <= ?mGeb + 12 * ?a20 && ?erwerbsunfaehig = true))\n            }\"\"\"\n    ] ;\n    sh:property\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_AntragArbeitnehmend ] ,\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_AntragSelbststaendig ] ,\n        [ sh:path fz:antragsteller ; sh:severity sh:Info ; sh:sparql fz:R_AntragNichterwerbstaetig ] .\n\nfz:R_AntragArbeitnehmend a sh:SPARQLConstraint ;\n    stk:resultType stk:NextStep ;\n    sh:order 20 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Reichen Sie den Antrag bei Ihrem Arbeitgeber ein. Die Familienausgleichskasse, der Ihr Arbeitgeber angeschlossen ist, setzt die Zulage fest; der Arbeitgeber zahlt sie in der Regel mit dem Lohn aus. Die Beträge oben sind Mindestansätze: Ihr Kanton kann höhere Ansätze vorsehen.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs1 , fz:FamZG_Art13_Abs2 , fz:FamZG_Art13_Abs3 , fz:FamZG_Art15 , fz:FamZG_Art3_Abs2 ;\n    stk:interpretation fz:A_Arbeitnehmend , fz:A_AntragArbeitgeber ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus fz:Arbeitnehmend ; fz:erwerbseinkommen ?einkommen .\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          FILTER(?einkommen >= ?anteil * ?proJahr * ?rente)\n        }\"\"\" .\n\nfz:R_AntragSelbststaendig a sh:SPARQLConstraint ;\n    stk:resultType stk:NextStep ;\n    sh:order 21 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Reichen Sie den Antrag bei der Familienausgleichskasse ein, der Sie als Selbstständigerwerbende Person angeschlossen sind. Die Beträge oben sind Mindestansätze: Ihr Kanton kann höhere Ansätze vorsehen.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs2bis , fz:FamZG_Art13_Abs3 , fz:FamZG_Art12_Abs1 , fz:FamZG_Art15 , fz:FamZG_Art3_Abs2 ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus fz:Selbststaendigerwerbend ; fz:erwerbseinkommen ?einkommen .\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          FILTER(?einkommen >= ?anteil * ?proJahr * ?rente)\n        }\"\"\" .\n\nfz:R_AntragNichterwerbstaetig a sh:SPARQLConstraint ;\n    stk:resultType stk:NextStep ;\n    sh:order 22 ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Reichen Sie den Antrag bei der Stelle Ihres Wohnsitzkantons ein, die für die Familienzulagen der Nichterwerbstätigen zuständig ist. Die Beträge oben sind Mindestansätze: Ihr Kanton kann höhere Ansätze vorsehen.\"@de ;\n    dcterms:source fz:FamZG_Art19_Abs1 , fz:FamZG_Art19_Abs1bis , fz:FamZG_Art3_Abs2 ;\n    sh:select \"\"\"\n        SELECT $this WHERE {\n          $this fz:antragsteller ?p .\n          ?p fz:erwerbsstatus ?status .\n          OPTIONAL { ?p fz:erwerbseinkommen ?einkommen }\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:RentenbetraegeProJahr rdf:value ?proJahr .\n          fz:AnteilMindesteinkommen rdf:value ?anteil .\n          FILTER(?status = fz:Nichterwerbstaetig\n                 || (?status IN (fz:Arbeitnehmend, fz:Selbststaendigerwerbend)\n                     && ?einkommen < ?anteil * ?proJahr * ?rente))\n        }\"\"\" .\n\n# =============================================================================\n# 7. Interpretations\n# =============================================================================\n\nfz:A_Bezugsmonat a stk:Interpretation ;\n    rdfs:label \"Das Ergebnis gilt für den Monat des Antrags.\"@de ;\n    rdfs:comment \"Das FamZG legt fest, ab wann und bis wann die Zulagen ausgerichtet werden. Das Modell prüft, welche Zulage im Monat des Antragsdatums zusteht, und nennt Beginn und spätestes Ende dieser Zulage. Nachzahlungen für frühere Monate prüft es nicht.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art3_Abs1_b .\n\nfz:A_Altersjahr a stk:Interpretation ;\n    rdfs:label \"«Das N. Altersjahr vollenden» heisst: den N. Geburtstag haben.\"@de ;\n    rdfs:comment \"Das Kind vollendet das N. Altersjahr an seinem N. Geburtstag. Der Monat, in dem es das N. Altersjahr vollendet, ist darum sein Geburtsmonat im Jahr Geburtsjahr + N.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_a , fz:FamZG_Art3_Abs1_b .\n\nfz:A_Lehre a stk:Interpretation ;\n    rdfs:label \"Eine Lehre ist eine nachobligatorische Ausbildung.\"@de ;\n    rdfs:comment \"Das FamZG nennt die Lehre nicht. Eine Lehre (berufliche Grundbildung) folgt auf die obligatorische Schule und bereitet auf einen Berufsabschluss vor. Darum behandelt das Modell sie als nachobligatorische Ausbildung nach Art. 3 Abs. 1 Bst. b FamZG.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_b , fz:FamZV_Art1 .\n\nfz:A_LaufendeAusbildung a stk:Interpretation ;\n    rdfs:label \"Die Ausbildung dauert im Monat des Antrags an.\"@de ;\n    rdfs:comment \"Die Ausbildungszulage wird bis zum Abschluss der Ausbildung gewährt. Das Modell fragt nach der Ausbildung im Monat des Antrags. Es nimmt an, dass eine angegebene Ausbildung ohne Unterbruch seit ihrem Beginn dauert. Das Ende der Ausbildung ist nicht bekannt, darum nennt das Ergebnis das späteste Ende.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_b .\n\nfz:A_JaehrlicherBetrag a stk:Interpretation ;\n    rdfs:label \"Der jährliche Betrag einer Altersrente ist 12 Monatsbeträge.\"@de ;\n    rdfs:comment \"Art. 13 Abs. 3 FamZG nennt den «jährlichen Betrag» der minimalen vollen Altersrente. Das Modell rechnet 12 Monatsbeträge, ohne eine 13. Altersrente. Das BSV nennt mit dieser Rechnung ein Mindesteinkommen von CHF 7560 pro Jahr. Für die Grenze nach Art. 19 Abs. 2 FamZG (anderthalbfacher Betrag einer maximalen vollen Altersrente) rechnet das Modell ebenfalls mit dem Jahresbetrag.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs3 , fz:FamZG_Art19_Abs2 , fz:BSV_FAQ_Arbeitnehmende .\n\nfz:A_Rentenwerte2026 a stk:Interpretation ;\n    rdfs:label \"Die Rentenwerte gelten vom 1. Januar 2026 bis zum 31. Dezember 2026.\"@de ;\n    rdfs:comment \"Der Mindestbetrag der vollen Altersrente von CHF 1260 gilt seit dem 1. Januar 2025 (Verordnung vom 28. August 2024) und steht in AHVG Art. 34 Abs. 5, Stand 1. Januar 2026. Eine Verordnung vom 2. Oktober 2026 passt die Werte ab 2027 an; sie ist noch nicht in Kraft und nicht im Modell. Darum gelten die Werte des Modells nur für Anträge im Jahr 2026.\"@de ;\n    dcterms:source fz:AHVG_Art34_Abs5 , fz:V2025_Art3_Abs1 , fz:V2027 .\n\nfz:A_AHVVersichert a stk:Interpretation ;\n    rdfs:label \"Die Person ist in der AHV obligatorisch versichert.\"@de ;\n    rdfs:comment \"Art. 13 und 19 FamZG setzen voraus, dass die Person in der AHV obligatorisch versichert ist. Das Modell fragt nicht danach und nimmt es an.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs1 , fz:FamZG_Art19_Abs1 .\n\nfz:A_Arbeitnehmend a stk:Interpretation ;\n    rdfs:label \"«Arbeitnehmerin oder Arbeitnehmer» umfasst Art. 13 Abs. 1 und 2.\"@de ;\n    rdfs:comment \"Arbeitnehmende eines beitragspflichtigen Arbeitgebers (Abs. 1) und Arbeitnehmende eines nicht beitragspflichtigen Arbeitgebers (Abs. 2) haben gleich Anspruch. Das Modell unterscheidet sie nicht.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs1 , fz:FamZG_Art13_Abs2 .\n\nfz:A_AntragArbeitgeber a stk:Interpretation ;\n    rdfs:label \"Arbeitnehmende reichen den Antrag beim Arbeitgeber ein.\"@de ;\n    rdfs:comment \"Das FamZG regelt das Antragsverfahren nicht im Einzelnen. Weil der Arbeitgeber die Zulagen in der Regel auszahlt und einer Familienausgleichskasse angeschlossen ist, nennt das Modell den Arbeitgeber als erste Stelle.\"@de ;\n    dcterms:source fz:FamZG_Art15 , fz:FamZG_Art12_Abs1 .\n\nfz:A_Landwirtschaft a stk:Interpretation ;\n    rdfs:label \"Für die Landwirtschaft ist die AHV-Ausgleichskasse die Stelle.\"@de ;\n    rdfs:comment \"Das FamZG verweist für die Landwirtschaft auf das FLG. Nach Art. 21c Bst. c FamZG erfüllen die AHV-Ausgleichskassen die Aufgaben nach dem FLG. Das Modell prüft das FLG nicht.\"@de ;\n    dcterms:source fz:FamZG_Art18 , fz:FamZG_Art21c_c .\n\nfz:A_EigenesKind a stk:Interpretation ;\n    rdfs:label \"Ein adoptiertes Kind ist ein eigenes Kind.\"@de ;\n    rdfs:comment \"Die Adoption begründet ein Kindesverhältnis im Sinne des Zivilgesetzbuches. Darum nennt die Antwort «Eigenes Kind» auch adoptierte Kinder.\"@de ;\n    dcterms:source fz:FamZG_Art4_Abs1 .\n\n# =============================================================================\n# 8. Open points\n# =============================================================================\n\nfz:O_EinkommenDesKindes a stk:OpenPoint ;\n    rdfs:label \"Einkommen des Kindes in Ausbildung\"@de ;\n    rdfs:comment \"Nach FamZV Art. 1 und AHVV Art. 49bis Abs. 3 gilt ein Kind nicht als in Ausbildung, wenn sein durchschnittliches monatliches Erwerbseinkommen höher ist als die maximale volle Altersrente der AHV. Diese Bedingung steht nicht im FamZG. Das Modell fragt nicht nach dem Einkommen des Kindes; die Regel fz:R_EinkommenDesKindes ist deaktiviert.\"@de ;\n    dcterms:source fz:FamZV_Art1 , fz:AHVV_Art49bis_Abs3 .\n\nfz:EinkommenDesKindes a sh:NodeShape ;\n    sh:deactivated true ;\n    sh:targetClass fz:Antrag ;\n    stk:openPoint fz:O_EinkommenDesKindes ;\n    sh:property [ sh:path fz:kind ; sh:severity sh:Info ; sh:sparql fz:R_EinkommenDesKindes ] .\n\nfz:R_EinkommenDesKindes a sh:SPARQLConstraint ;\n    stk:resultType stk:Refusal ;\n    sh:prefixes fz:Praefixe ;\n    sh:message \"Kein Anspruch auf die Ausbildungszulage: Das Erwerbseinkommen des Kindes von CHF {?einkommenKind} pro Monat ist höher als die maximale volle Altersrente der AHV von CHF {?value}.\"@de ;\n    dcterms:source fz:FamZV_Art1 , fz:AHVV_Art49bis_Abs3 , fz:AHVG_Art34_Abs3 , fz:AHVG_Art34_Abs5 ;\n    sh:select \"\"\"\n        SELECT $this ?einkommenKind ?value WHERE {\n          $this fz:kind/fz:monatlichesErwerbseinkommen ?einkommenKind .\n          fz:MindestbetragAltersrente rdf:value ?rente .\n          fz:FaktorHoechstbetragAltersrente rdf:value ?fHoechst .\n          BIND(xsd:integer(?fHoechst * ?rente) AS ?value)\n          FILTER(?einkommenKind > ?value)\n        }\"\"\" .\n\nfz:O_Nachzahlung a stk:OpenPoint ;\n    rdfs:label \"Nachzahlung für frühere Monate\"@de ;\n    rdfs:comment \"Über das ATSG (Art. 1 FamZG) erlischt der Anspruch auf ausstehende Leistungen fünf Jahre nach dem Ende des Monats, für den sie geschuldet waren. Das Modell prüft nur den Monat des Antrags und berechnet keine Nachzahlung.\"@de ;\n    dcterms:source fz:FamZG_Art1_Abs1 , fz:ATSG_Art24_Abs1 .\n\nfz:O_Lohnanspruch a stk:OpenPoint ;\n    rdfs:label \"Beginn und Ende des Anspruchs mit dem Lohn\"@de ;\n    rdfs:comment \"Der Anspruch von Arbeitnehmenden entsteht und erlischt mit dem Lohnanspruch; der Bundesrat regelt den Anspruch nach dem Erlöschen des Lohnanspruchs und die Einzelheiten für Selbstständigerwerbende. Das Modell nimmt an, dass im Monat des Antrags ein Lohnanspruch oder eine selbstständige Erwerbstätigkeit besteht.\"@de ;\n    dcterms:source fz:FamZG_Art13_Abs1 , fz:FamZG_Art13_Abs2bis .\n\nfz:O_Pflegekinder a stk:OpenPoint ;\n    rdfs:label \"Einzelheiten zu Stiefkindern und Pflegekindern\"@de ;\n    rdfs:comment \"Der Bundesrat regelt die Einzelheiten zu den Kindern nach Art. 4 Abs. 1 FamZG in der Verordnung. Das Modell prüft diese Bedingungen nicht.\"@de ;\n    dcterms:source fz:FamZG_Art4_Abs2 .\n\nfz:O_Werte2027 a stk:OpenPoint ;\n    rdfs:label \"Werte ab 2027\"@de ;\n    rdfs:comment \"Die Verordnung vom 2. Oktober 2026 passt die Renten ab 2027 an. Damit ändern das Mindesteinkommen und die Einkommensgrenze für Nichterwerbstätige, und eventuell die Mindestansätze nach Art. 5 Abs. 3 FamZG. Das Modell enthält diese Werte nicht; für ein Antragsdatum ab 2027 gibt die Regel fz:R_Gueltigkeit einen Hinweis.\"@de ;\n    dcterms:source fz:V2027 , fz:FamZG_Art5_Abs3 .\n\nfz:O_AusbildungsbeginnNachAntrag a stk:OpenPoint ;\n    rdfs:label \"Ausbildung, die nach dem Datum des Antrags beginnt\"@de ;\n    rdfs:comment \"Das Modell prüft nicht, ob der Beginn der Ausbildung nach dem Datum des Antrags liegt. Ist das Kind älter als 16 Jahre und beginnt die Ausbildung später, so gibt das Modell kein Ergebnis für den Monat des Antrags.\"@de ;\n    dcterms:source fz:FamZG_Art3_Abs1_b .\n",
+	"facts": "<https://almilo.github.io/software-that-knows/famzg#AlterBeginnAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#AlterBeginnAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"15\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"25\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"16\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulageErwerbsunfaehig> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#AlterEndeKinderzulageErwerbsunfaehig> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"20\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#AnteilMindesteinkommen> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#AnteilMindesteinkommen> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"0.5\"^^<http://www.w3.org/2001/XMLSchema#decimal> .\n<https://almilo.github.io/software-that-knows/famzg#FaktorEinkommensgrenzeNichterwerbstaetige> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#FaktorEinkommensgrenzeNichterwerbstaetige> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"1.5\"^^<http://www.w3.org/2001/XMLSchema#decimal> .\n<https://almilo.github.io/software-that-knows/famzg#FaktorHoechstbetragAltersrente> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#FaktorHoechstbetragAltersrente> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"2\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#GueltigAb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#GueltigAb> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"2026-01-01\"^^<http://www.w3.org/2001/XMLSchema#date> .\n<https://almilo.github.io/software-that-knows/famzg#GueltigBis> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#GueltigBis> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"2026-12-31\"^^<http://www.w3.org/2001/XMLSchema#date> .\n<https://almilo.github.io/software-that-knows/famzg#MindestansatzAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#MindestansatzAusbildungszulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"268\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#MindestansatzKinderzulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#MindestansatzKinderzulage> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"215\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#MindestbetragAltersrente> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#MindestbetragAltersrente> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"1260\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n<https://almilo.github.io/software-that-knows/famzg#RentenbetraegeProJahr> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://almilo.github.io/software-that-knows/vocabulary#Parameter> .\n<https://almilo.github.io/software-that-knows/famzg#RentenbetraegeProJahr> <http://www.w3.org/1999/02/22-rdf-syntax-ns#value> \"12\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n"
+}

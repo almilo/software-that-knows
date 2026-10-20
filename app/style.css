@@ -1,0 +1,43 @@
+:root {
+	--text: #1d1d1f;
+	--muted: #5f6368;
+	--line: #d9d9de;
+	--surface: #ffffff;
+	--page: #f5f5f7;
+	--accent: #0b57d0;
+	--refusal: #b3261e;
+	--value: #146c2e;
+	--next: #7c4a03;
+	font-family: system-ui, sans-serif;
+	color: var(--text);
+	background: var(--page);
+}
+body { margin: 0; background: var(--page); }
+main { max-width: 72rem; margin: 0 auto; padding: 1rem; }
+h1 { font-size: 1.5rem; margin-bottom: 0.25rem; }
+.page p { color: var(--muted); margin-top: 0; }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+@media (max-width: 48rem) { .columns { grid-template-columns: minmax(0, 1fr); } }
+.questions, .results { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; padding: 1rem; }
+.questions fieldset, .questions .group-layout { border: 0; padding: 0; margin: 0 0 1rem; }
+.questions legend, .questions .group-layout-item > label { font-weight: 600; }
+.questions .control { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0.75rem; }
+.questions input[type='text'], .questions input[type='number'], .questions input[type='date'], .questions select { box-sizing: border-box; width: 100%; padding: 0.4rem; border: 1px solid var(--line); border-radius: 0.25rem; font: inherit; }
+.questions .radio { gap: 0.25rem; }
+.questions .radio-option { display: flex; gap: 0.5rem; align-items: baseline; }
+.questions .validation { color: var(--refusal); font-size: 0.875rem; }
+.questions .input-description { color: var(--muted); font-size: 0.875rem; }
+.result { border-left: 0.25rem solid var(--accent); padding: 0.5rem 0.75rem; margin-bottom: 0.75rem; background: var(--page); border-radius: 0.25rem; }
+.result header { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+.result[data-result-type$='#Refusal'] { border-left-color: var(--refusal); }
+.result[data-result-type$='#Value'] { border-left-color: var(--value); }
+.result[data-result-type$='#NextStep'] { border-left-color: var(--next); }
+.result .message { margin: 0.25rem 0 0.5rem; }
+.sources { margin: 0.25rem 0; padding-left: 1.25rem; }
+.sources blockquote { margin: 0.25rem 0 0.5rem; color: var(--muted); font-size: 0.875rem; }
+.empty, .issue { color: var(--muted); }
+footer { margin-top: 1rem; }
+.notes { background: var(--surface); border: 1px solid var(--line); border-radius: 0.5rem; padding: 0.5rem 1rem; margin-bottom: 0.5rem; }
+.notes summary { font-weight: 600; cursor: pointer; }
+.notes h4 { margin-bottom: 0.25rem; }
+a { color: var(--accent); }

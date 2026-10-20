@@ -1,0 +1,111 @@
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix stk:     <https://almilo.github.io/software-that-knows/vocabulary#> .
+
+# The small vocabulary for what SHACL, RDF, DCMI Terms and ELI cannot express.
+# It contains no knowledge of a law. The generator and the app know only these
+# terms and the W3C standards.
+
+stk: a owl:Ontology ;
+    rdfs:label "Software that knows: vocabulary"@en ;
+    rdfs:comment "Terms to describe a process as questions (SHACL shapes), rules (SHACL-SPARQL constraints) and results."@en .
+
+# --- Process -----------------------------------------------------------------
+
+stk:Process a rdfs:Class ;
+    rdfs:label "Process"@en ;
+    rdfs:comment "A process that a knowledge model describes. Use dcterms:title, dcterms:description and dcterms:language on it."@en .
+
+stk:rootShape a rdf:Property ;
+    rdfs:domain stk:Process ;
+    rdfs:range sh:NodeShape ;
+    rdfs:label "root shape"@en ;
+    rdfs:comment "The node shape of the answers. Its sh:targetClass is the type of the root node of the answers."@en .
+
+stk:outOfScope a rdf:Property ;
+    rdfs:domain stk:Process ;
+    rdfs:range xsd:string ;
+    rdfs:label "Out of scope"@en , "Nicht im Modell"@de ;
+    rdfs:comment "A topic that the model does not cover."@en .
+
+# --- Questions ---------------------------------------------------------------
+
+stk:relevantIf a rdf:Property ;
+    rdfs:domain sh:PropertyShape ;
+    rdfs:range sh:NodeShape ;
+    rdfs:label "relevant if"@en ;
+    rdfs:comment "The question (a property shape) is asked only if the root node of the answers conforms to this node shape. A question without this property is always asked."@en .
+
+# --- Results -----------------------------------------------------------------
+
+stk:resultType a rdf:Property ;
+    rdfs:domain sh:SPARQLConstraint ;
+    rdfs:range stk:ResultType ;
+    rdfs:label "result type"@en ;
+    rdfs:comment "Each row that the SELECT query of the constraint returns is one result of this type. The sh:message is the text of the result, the ?value variable is its main value and dcterms:source gives its sources."@en .
+
+stk:ResultType a rdfs:Class ;
+    rdfs:label "result type"@en .
+
+stk:Refusal a stk:ResultType ;
+    sh:order 1 ;
+    rdfs:label "Refusal"@en , "Ablehnung"@de .
+
+stk:Value a stk:ResultType ;
+    sh:order 2 ;
+    rdfs:label "Value"@en , "Wert"@de .
+
+stk:NextStep a stk:ResultType ;
+    sh:order 3 ;
+    rdfs:label "Next step"@en , "Nächster Schritt"@de .
+
+# --- Parameters --------------------------------------------------------------
+
+stk:Parameter a rdfs:Class ;
+    rdfs:label "Values"@en , "Werte"@de ;
+    rdfs:comment "A value that rules need. Its rdf:value is copied into the data graph, so that SPARQL constraints can read it. Use dcterms:source to cite where the value comes from."@en .
+
+stk:unit a rdf:Property ;
+    rdfs:domain stk:Parameter ;
+    rdfs:range xsd:string ;
+    rdfs:label "unit"@en .
+
+# --- Interpretations and open points ----------------------------------------
+
+stk:Interpretation a rdfs:Class ;
+    rdfs:label "Interpretation"@en , "Auslegung"@de ;
+    rdfs:comment "A decision of the model author that the source does not state directly. Use rdfs:label, rdfs:comment and dcterms:source (the basis)."@en .
+
+stk:interpretation a rdf:Property ;
+    rdfs:range stk:Interpretation ;
+    rdfs:label "interpretation"@en ;
+    rdfs:comment "Links a question, rule, parameter or answer option to an interpretation that it uses."@en .
+
+stk:OpenPoint a rdfs:Class ;
+    rdfs:label "Open point"@en , "Offener Punkt"@de ;
+    rdfs:comment "A point that the model does not decide. Use rdfs:label, rdfs:comment and dcterms:source. A rule that cannot be executed is a shape with sh:deactivated true and stk:openPoint."@en .
+
+stk:openPoint a rdf:Property ;
+    rdfs:range stk:OpenPoint ;
+    rdfs:label "open point"@en .
+
+# --- Labels for the user interface ------------------------------------------
+
+stk:Question a rdfs:Class ;
+    rdfs:label "Questions"@en , "Fragen"@de .
+
+stk:Result a rdfs:Class ;
+    rdfs:label "Results"@en , "Ergebnisse"@de ;
+    rdfs:comment "No result yet. Answer the questions."@en , "Noch kein Ergebnis. Beantworten Sie die Fragen."@de .
+
+dcterms:source rdfs:label "Sources"@en , "Quellen"@de .
+
+stk:trueLabel a rdf:Property ;
+    rdfs:label "Yes"@en , "Ja"@de .
+
+stk:falseLabel a rdf:Property ;
+    rdfs:label "No"@en , "Nein"@de .

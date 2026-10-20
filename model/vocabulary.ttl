@@ -1,0 +1,80 @@
+# Small vocabulary for what the W3C standards cannot express.
+# It is generic: it contains no knowledge of a law.
+@prefix stk:     <https://software-that-knows.example/vocab#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+stk: a owl:Ontology ;
+    rdfs:label "Software that knows: process vocabulary"@en ;
+    rdfs:comment "Terms for questionnaires, rule outcomes, legal parameters, interpretations and open points. Questions are SHACL property shapes. Rules are SHACL-SPARQL constraints."@en .
+
+# --- Questionnaire --------------------------------------------------------
+
+stk:Questionnaire a rdfs:Class ;
+    rdfs:subClassOf sh:NodeShape ;
+    rdfs:label "Questionnaire"@en ;
+    rdfs:comment "A node shape whose property shapes are the questions of a process. Its sh:targetClass is the class of the answers node."@en .
+
+stk:askWhen a rdf:Property ;
+    rdfs:label "ask when"@en ;
+    rdfs:domain sh:PropertyShape ;
+    rdfs:range sh:NodeShape ;
+    rdfs:comment "The question is relevant only when the answers node conforms to this shape. Without this property, the question is always relevant."@en .
+
+# --- Rules and outcomes ---------------------------------------------------
+
+stk:Rule a rdfs:Class ;
+    rdfs:subClassOf sh:NodeShape ;
+    rdfs:label "Rule"@en ;
+    rdfs:comment "A node shape with one SHACL-SPARQL constraint. Each solution of the query is one result of the process. A solution can bind ?path and ?value to give one value of the result."@en .
+
+stk:outcome a rdf:Property ;
+    rdfs:label "outcome"@en ;
+    rdfs:domain stk:Rule ;
+    rdfs:range stk:OutcomeKind .
+
+stk:OutcomeKind a rdfs:Class ; rdfs:label "Outcome kind"@en .
+
+stk:Refusal a stk:OutcomeKind ;
+    rdfs:label "Refusal"@en ;
+    rdfs:comment "The claim does not exist. A refusal ends the process."@en ;
+    sh:order 1 .
+
+stk:Value a stk:OutcomeKind ;
+    rdfs:label "Value"@en ;
+    rdfs:comment "The claim exists. The result gives its values."@en ;
+    sh:order 2 .
+
+stk:NextStep a stk:OutcomeKind ;
+    rdfs:label "Next step"@en ;
+    rdfs:comment "An action for the applicant."@en ;
+    sh:order 3 .
+
+stk:ResultProperty a rdfs:Class ;
+    rdfs:subClassOf rdf:Property ;
+    rdfs:label "Result property"@en ;
+    rdfs:comment "A property that a rule binds to ?path, to give one value of a result."@en .
+
+# --- Parameters -----------------------------------------------------------
+
+stk:Parameter a rdfs:Class ;
+    rdfs:label "Parameter"@en ;
+    rdfs:comment "A value that a rule needs, given in rdf:value, with its source in dcterms:source. Parameters are added to the data graph, so that SPARQL constraints can read them."@en .
+
+# --- Interpretations and open points --------------------------------------
+
+stk:Interpretation a rdfs:Class ;
+    rdfs:label "Interpretation"@en ;
+    rdfs:comment "A decision of the model author where the text of the source is not explicit. rdfs:comment gives the decision."@en .
+
+stk:interpretation a rdf:Property ;
+    rdfs:label "interpretation"@en ;
+    rdfs:range stk:Interpretation ;
+    rdfs:comment "Links a question, rule, parameter or source to an interpretation that it uses."@en .
+
+stk:OpenPoint a rdfs:Class ;
+    rdfs:label "Open point"@en ;
+    rdfs:comment "A rule that the model does not apply, because a value or a decision is missing. An open rule has sh:deactivated true. rdfs:comment tells what is missing."@en .

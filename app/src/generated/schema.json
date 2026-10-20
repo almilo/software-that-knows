@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Family allowances for one child",
+  "type": "object",
+  "properties": {
+    "activity": {
+      "title": "What is your gainful activity?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "https://software-that-knows.example/famzg#Employed",
+          "title": "Employed (not in agriculture)"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#SelfEmployed",
+          "title": "Self-employed (not in agriculture)"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#NonEmployed",
+          "title": "Not gainfully employed"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#Agriculture",
+          "title": "Employed or self-employed in agriculture"
+        }
+      ]
+    },
+    "annualIncome": {
+      "title": "Annual earned income with AHV contributions (CHF)",
+      "type": "number",
+      "minimum": 0
+    },
+    "taxableIncome": {
+      "title": "Taxable annual income (CHF)",
+      "type": "number",
+      "minimum": 0
+    },
+    "supplementaryBenefits": {
+      "title": "Do you get supplementary benefits (EL) to the AHV/IV?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "true",
+          "title": "Yes"
+        },
+        {
+          "const": "false",
+          "title": "No"
+        }
+      ]
+    },
+    "relationship": {
+      "title": "What is the child to you?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "https://software-that-knows.example/famzg#OwnChild",
+          "title": "Own child (by birth or by adoption)"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#StepChild",
+          "title": "Stepchild"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#FosterChild",
+          "title": "Foster child"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#SiblingOrGrandchild",
+          "title": "Sibling or grandchild"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#OtherChild",
+          "title": "Other relation"
+        }
+      ]
+    },
+    "predominantSupport": {
+      "title": "Do you pay the larger part of the maintenance of the child?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "true",
+          "title": "Yes"
+        },
+        {
+          "const": "false",
+          "title": "No"
+        }
+      ]
+    },
+    "birthDate": {
+      "title": "Date of birth of the child",
+      "type": "string",
+      "format": "date"
+    },
+    "schooling": {
+      "title": "What does the child do at the date of the application?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "https://software-that-knows.example/famzg#CompulsorySchool",
+          "title": "Compulsory school"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#PostCompulsoryEducation",
+          "title": "Post-compulsory education (for example apprenticeship, upper secondary school, university)"
+        },
+        {
+          "const": "https://software-that-knows.example/famzg#NoEducation",
+          "title": "No school and no education"
+        }
+      ]
+    },
+    "educationStart": {
+      "title": "Start date of the post-compulsory education",
+      "type": "string",
+      "format": "date"
+    },
+    "incapableOfWork": {
+      "title": "Is the child incapable of gainful work (Art. 7 ATSG)?",
+      "type": "string",
+      "oneOf": [
+        {
+          "const": "true",
+          "title": "Yes"
+        },
+        {
+          "const": "false",
+          "title": "No"
+        }
+      ]
+    },
+    "applicationDate": {
+      "title": "Date of the application",
+      "description": "The results describe the situation at this date.",
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

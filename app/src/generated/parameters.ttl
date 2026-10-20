@@ -1,0 +1,66 @@
+@prefix stk: <https://software-that-knows.example/vocab#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix sh: <http://www.w3.org/ns/shacl#>.
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix fz: <https://software-that-knows.example/famzg#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix eli: <http://data.europa.eu/eli/ontology#>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#>.
+
+fz:childAllowanceEndAge dcterms:source fz:Art3-1-a;
+    a stk:Parameter;
+    rdf:value 16;
+    rdfs:label "Age at which the child allowance ends"@en;
+    stk:interpretation fz:I-age.
+fz:childAllowanceEndAgeIncapable dcterms:source fz:Art3-1-a;
+    a stk:Parameter;
+    rdf:value 20;
+    rdfs:label "Age at which the child allowance ends if the child is incapable of gainful work"@en;
+    stk:interpretation fz:I-age.
+fz:childAllowanceMinimum dcterms:source fz:Art5-1;
+    a stk:Parameter;
+    rdf:value 215;
+    rdfs:label "Minimum child allowance per month (CHF)"@en;
+    stk:interpretation fz:I-parameters-2026.
+fz:compulsorySchoolAge dcterms:source fz:Art3-1-b;
+    a stk:Parameter;
+    rdf:value 16;
+    rdfs:label "Age after which compulsory school gives the education allowance"@en;
+    stk:interpretation fz:I-age, fz:I-compulsory-school.
+fz:educationAllowanceEndAge dcterms:source fz:Art3-1-b;
+    a stk:Parameter;
+    rdf:value 25;
+    rdfs:label "Age at which the education allowance ends at the latest"@en;
+    stk:interpretation fz:I-age.
+fz:educationAllowanceMinimum dcterms:source fz:Art5-2;
+    a stk:Parameter;
+    rdf:value 268;
+    rdfs:label "Minimum education allowance per month (CHF)"@en;
+    stk:interpretation fz:I-parameters-2026.
+fz:educationAllowanceStartAge dcterms:source fz:Art3-1-b;
+    a stk:Parameter;
+    rdf:value 15;
+    rdfs:label "Earliest age for the education allowance"@en;
+    stk:interpretation fz:I-age.
+fz:maximumFullOldAgePension dcterms:source fz:InfoAhvIv2026;
+    a stk:Parameter;
+    rdf:value 2520;
+    rdfs:label "Maximum full AHV old-age pension per month (CHF)"@en;
+    stk:interpretation fz:I-parameters-2026.
+fz:minimumFullOldAgePension dcterms:source fz:InfoAhvIv2026;
+    a stk:Parameter;
+    rdf:value 1260;
+    rdfs:label "Minimum full AHV old-age pension per month (CHF)"@en;
+    stk:interpretation fz:I-parameters-2026.
+fz:minimumIncomeShare dcterms:source fz:Art13-3;
+    a stk:Parameter;
+    rdf:value 0.5;
+    rdfs:label "Share of the annual minimum full old-age pension that gives the minimum income"@en;
+    stk:interpretation fz:I-minimum-income.
+fz:nonEmployedIncomeFactor dcterms:source fz:Art19-2;
+    a stk:Parameter;
+    rdf:value 1.5;
+    rdfs:label "Factor on the annual maximum full old-age pension that gives the income limit for non-employed persons"@en;
+    stk:interpretation fz:I-maximum-taxable.

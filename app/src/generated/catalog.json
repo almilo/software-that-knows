@@ -1,0 +1,775 @@
+{
+  "title": "Family allowances for one child",
+  "focusClass": "https://software-that-knows.example/famzg#Application",
+  "questionnaire": "https://software-that-knows.example/famzg#FamilyAllowanceQuestionnaire",
+  "questions": [
+    {
+      "key": "activity",
+      "path": "https://software-that-knows.example/famzg#activity",
+      "label": "What is your gainful activity?",
+      "order": 2,
+      "group": "https://software-that-knows.example/famzg#GroupApplicant",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-1",
+        "https://software-that-knows.example/famzg#Art13-2bis",
+        "https://software-that-knows.example/famzg#Art18",
+        "https://software-that-knows.example/famzg#Art19-1"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-scope-insured"
+      ]
+    },
+    {
+      "key": "annualIncome",
+      "path": "https://software-that-knows.example/famzg#annualIncome",
+      "label": "Annual earned income with AHV contributions (CHF)",
+      "order": 3,
+      "group": "https://software-that-knows.example/famzg#GroupApplicant",
+      "askWhen": "https://software-that-knows.example/famzg#WhenGainfullyActive",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-3"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-income-question"
+      ]
+    },
+    {
+      "key": "taxableIncome",
+      "path": "https://software-that-knows.example/famzg#taxableIncome",
+      "label": "Taxable annual income (CHF)",
+      "order": 4,
+      "group": "https://software-that-knows.example/famzg#GroupApplicant",
+      "askWhen": "https://software-that-knows.example/famzg#WhenNonEmployed",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-maximum-taxable"
+      ]
+    },
+    {
+      "key": "supplementaryBenefits",
+      "path": "https://software-that-knows.example/famzg#supplementaryBenefits",
+      "label": "Do you get supplementary benefits (EL) to the AHV/IV?",
+      "order": 5,
+      "group": "https://software-that-knows.example/famzg#GroupApplicant",
+      "askWhen": "https://software-that-knows.example/famzg#WhenNonEmployed",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": []
+    },
+    {
+      "key": "relationship",
+      "path": "https://software-that-knows.example/famzg#relationship",
+      "label": "What is the child to you?",
+      "order": 6,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenInScope",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art4-1"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-own-child"
+      ]
+    },
+    {
+      "key": "predominantSupport",
+      "path": "https://software-that-knows.example/famzg#predominantSupport",
+      "label": "Do you pay the larger part of the maintenance of the child?",
+      "order": 7,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenSiblingOrGrandchild",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art4-1-d"
+      ],
+      "interpretations": []
+    },
+    {
+      "key": "birthDate",
+      "path": "https://software-that-knows.example/famzg#birthDate",
+      "label": "Date of birth of the child",
+      "order": 8,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenInScope",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a",
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": []
+    },
+    {
+      "key": "schooling",
+      "path": "https://software-that-knows.example/famzg#schooling",
+      "label": "What does the child do at the date of the application?",
+      "order": 9,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenInScope",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-compulsory-school",
+        "https://software-that-knows.example/famzg#I-post-compulsory"
+      ]
+    },
+    {
+      "key": "educationStart",
+      "path": "https://software-that-knows.example/famzg#educationStart",
+      "label": "Start date of the post-compulsory education",
+      "order": 10,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenPostCompulsoryEducation",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": []
+    },
+    {
+      "key": "incapableOfWork",
+      "path": "https://software-that-knows.example/famzg#incapableOfWork",
+      "label": "Is the child incapable of gainful work (Art. 7 ATSG)?",
+      "order": 11,
+      "group": "https://software-that-knows.example/famzg#GroupChild",
+      "askWhen": "https://software-that-knows.example/famzg#WhenPastChildAllowanceAge",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a"
+      ],
+      "interpretations": []
+    },
+    {
+      "key": "applicationDate",
+      "path": "https://software-that-knows.example/famzg#applicationDate",
+      "label": "Date of the application",
+      "order": 12,
+      "group": "https://software-that-knows.example/famzg#GroupApplication",
+      "askWhen": "https://software-that-knows.example/famzg#WhenInScope",
+      "sources": [],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-reference-date"
+      ]
+    }
+  ],
+  "rules": {
+    "https://software-that-knows.example/famzg#RuleAgriculture": {
+      "label": "Agriculture: claim under the FLG",
+      "outcome": "https://software-that-knows.example/vocab#NextStep",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art18"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-agriculture"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleApplyEmployed": {
+      "label": "Where to apply: employed persons",
+      "outcome": "https://software-that-knows.example/vocab#NextStep",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art12-2",
+        "https://software-that-knows.example/famzg#Art13-1",
+        "https://software-that-knows.example/famzg#Art15"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-minimum-income"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleApplyNonEmployed": {
+      "label": "Where to apply: persons who are not gainfully employed",
+      "outcome": "https://software-that-knows.example/vocab#NextStep",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-1",
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-maximum-taxable"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleApplySelfEmployed": {
+      "label": "Where to apply: self-employed persons",
+      "outcome": "https://software-that-knows.example/vocab#NextStep",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art12-1",
+        "https://software-that-knows.example/famzg#Art12-2",
+        "https://software-that-knows.example/famzg#Art13-2bis"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-minimum-income"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleBelowMinimumIncome": {
+      "label": "Income below the minimum: counts as not gainfully employed",
+      "outcome": "https://software-that-knows.example/vocab#NextStep",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-3",
+        "https://software-that-knows.example/famzg#Art19-1bis"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-income-question",
+        "https://software-that-knows.example/famzg#I-minimum-income"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleChildAllowance": {
+      "label": "Child allowance",
+      "outcome": "https://software-that-knows.example/vocab#Value",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a",
+        "https://software-that-knows.example/famzg#Art5-1"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age",
+        "https://software-that-knows.example/famzg#I-maximum-taxable",
+        "https://software-that-knows.example/famzg#I-minimum-income",
+        "https://software-that-knows.example/famzg#I-reference-date"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleEducationAllowance": {
+      "label": "Education allowance",
+      "outcome": "https://software-that-knows.example/vocab#Value",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b",
+        "https://software-that-knows.example/famzg#Art5-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age",
+        "https://software-that-knows.example/famzg#I-compulsory-school",
+        "https://software-that-knows.example/famzg#I-latest-end",
+        "https://software-that-knows.example/famzg#I-maximum-taxable",
+        "https://software-that-knows.example/famzg#I-minimum-income",
+        "https://software-that-knows.example/famzg#I-post-compulsory",
+        "https://software-that-knows.example/famzg#I-reference-date"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleNoAllowanceAtDate": {
+      "label": "No allowance for the child at the date of the application",
+      "outcome": "https://software-that-knows.example/vocab#Refusal",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a",
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age",
+        "https://software-that-knows.example/famzg#I-compulsory-school",
+        "https://software-that-knows.example/famzg#I-reference-date"
+      ]
+    },
+    "https://software-that-knows.example/famzg#RuleNoPredominantSupport": {
+      "label": "Sibling or grandchild without predominant maintenance",
+      "outcome": "https://software-that-knows.example/vocab#Refusal",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art4-1-d"
+      ],
+      "interpretations": []
+    },
+    "https://software-that-knows.example/famzg#RuleOtherRelation": {
+      "label": "Child without a qualifying relation",
+      "outcome": "https://software-that-knows.example/vocab#Refusal",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art4-1"
+      ],
+      "interpretations": []
+    },
+    "https://software-that-knows.example/famzg#RuleSupplementaryBenefits": {
+      "label": "Not gainfully employed: supplementary benefits",
+      "outcome": "https://software-that-knows.example/vocab#Refusal",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": []
+    },
+    "https://software-that-knows.example/famzg#RuleTaxableIncomeTooHigh": {
+      "label": "Not gainfully employed: taxable income above the limit",
+      "outcome": "https://software-that-knows.example/vocab#Refusal",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-maximum-taxable"
+      ]
+    }
+  },
+  "outcomes": {
+    "https://software-that-knows.example/vocab#Refusal": {
+      "label": "Refusal",
+      "order": 1
+    },
+    "https://software-that-knows.example/vocab#Value": {
+      "label": "Value",
+      "order": 2
+    },
+    "https://software-that-knows.example/vocab#NextStep": {
+      "label": "Next step",
+      "order": 3
+    }
+  },
+  "labels": {
+    "https://software-that-knows.example/famzg#": "Family allowances for one child (FamZG)",
+    "https://software-that-knows.example/famzg#Agriculture": "Employed or self-employed in agriculture",
+    "https://software-that-knows.example/famzg#allowanceType": "Allowance",
+    "https://software-that-knows.example/famzg#Application": "Application for family allowances for one child",
+    "https://software-that-knows.example/famzg#Art1": "FamZG Art. 1 para. 1 (ATSG applies)",
+    "https://software-that-knows.example/famzg#Art11-1": "FamZG Art. 11 para. 1",
+    "https://software-that-knows.example/famzg#Art12-1": "FamZG Art. 12 para. 1",
+    "https://software-that-knows.example/famzg#Art12-2": "FamZG Art. 12 para. 2",
+    "https://software-that-knows.example/famzg#Art13-1": "FamZG Art. 13 para. 1",
+    "https://software-that-knows.example/famzg#Art13-2bis": "FamZG Art. 13 para. 2bis",
+    "https://software-that-knows.example/famzg#Art13-3": "FamZG Art. 13 para. 3",
+    "https://software-that-knows.example/famzg#Art13-4": "FamZG Art. 13 para. 4",
+    "https://software-that-knows.example/famzg#Art15": "FamZG Art. 15 para. 1 let. a and para. 2",
+    "https://software-that-knows.example/famzg#Art18": "FamZG Art. 18",
+    "https://software-that-knows.example/famzg#Art19-1": "FamZG Art. 19 para. 1",
+    "https://software-that-knows.example/famzg#Art19-1bis": "FamZG Art. 19 para. 1bis",
+    "https://software-that-knows.example/famzg#Art19-1ter": "FamZG Art. 19 para. 1ter",
+    "https://software-that-knows.example/famzg#Art19-2": "FamZG Art. 19 para. 2",
+    "https://software-that-knows.example/famzg#Art3-1-a": "FamZG Art. 3 para. 1 let. a",
+    "https://software-that-knows.example/famzg#Art3-1-b": "FamZG Art. 3 para. 1 let. b",
+    "https://software-that-knows.example/famzg#Art4-1": "FamZG Art. 4 para. 1",
+    "https://software-that-knows.example/famzg#Art4-1-d": "FamZG Art. 4 para. 1 let. d",
+    "https://software-that-knows.example/famzg#Art4-2": "FamZG Art. 4 para. 2",
+    "https://software-that-knows.example/famzg#Art5-1": "FamZG Art. 5 para. 1",
+    "https://software-that-knows.example/famzg#Art5-2": "FamZG Art. 5 para. 2",
+    "https://software-that-knows.example/famzg#Art5-3": "FamZG Art. 5 para. 3",
+    "https://software-that-knows.example/famzg#BsvFamilyAllowances": "Federal Social Insurance Office (BSV): Zulagen für Familien (minimum earned income CHF 7,560 a year, CHF 630 a month)",
+    "https://software-that-knows.example/famzg#ChildAllowance": "Child allowance",
+    "https://software-that-knows.example/famzg#childAllowanceEndAge": "Age at which the child allowance ends",
+    "https://software-that-knows.example/famzg#childAllowanceEndAgeIncapable": "Age at which the child allowance ends if the child is incapable of gainful work",
+    "https://software-that-knows.example/famzg#childAllowanceMinimum": "Minimum child allowance per month (CHF)",
+    "https://software-that-knows.example/famzg#claimFrom": "Claim from",
+    "https://software-that-knows.example/famzg#claimUntilLatest": "Claim at the latest until",
+    "https://software-that-knows.example/famzg#CompulsorySchool": "Compulsory school",
+    "https://software-that-knows.example/famzg#compulsorySchoolAge": "Age after which compulsory school gives the education allowance",
+    "https://software-that-knows.example/famzg#EducationAllowance": "Education allowance",
+    "https://software-that-knows.example/famzg#educationAllowanceEndAge": "Age at which the education allowance ends at the latest",
+    "https://software-that-knows.example/famzg#educationAllowanceMinimum": "Minimum education allowance per month (CHF)",
+    "https://software-that-knows.example/famzg#educationAllowanceStartAge": "Earliest age for the education allowance",
+    "https://software-that-knows.example/famzg#Employed": "Employed (not in agriculture)",
+    "https://software-that-knows.example/famzg#FamilyAllowanceQuestionnaire": "Family allowances for one child",
+    "https://software-that-knows.example/famzg#FamZG": "Federal Act on Family Allowances (FamZG, SR 836.2), version of 1 January 2026",
+    "https://software-that-knows.example/famzg#FosterChild": "Foster child",
+    "https://software-that-knows.example/famzg#GroupApplicant": "Applicant",
+    "https://software-that-knows.example/famzg#GroupApplication": "Application",
+    "https://software-that-knows.example/famzg#GroupChild": "Child",
+    "https://software-that-knows.example/famzg#I-age": "I1 Completed year of age",
+    "https://software-that-knows.example/famzg#I-agriculture": "I12 Agriculture",
+    "https://software-that-knows.example/famzg#I-compulsory-school": "I9 Compulsory school after the 16th birthday",
+    "https://software-that-knows.example/famzg#I-income-question": "I5 Annual income",
+    "https://software-that-knows.example/famzg#I-latest-end": "I3 Latest end of the education allowance",
+    "https://software-that-knows.example/famzg#I-maximum-taxable": "I6 Income limit for non-employed persons",
+    "https://software-that-knows.example/famzg#I-minimum-income": "I4 Minimum income",
+    "https://software-that-knows.example/famzg#I-own-child": "I7 Own child",
+    "https://software-that-knows.example/famzg#I-parameters-2026": "I11 Values of 2026",
+    "https://software-that-knows.example/famzg#I-post-compulsory": "I8 Post-compulsory education",
+    "https://software-that-knows.example/famzg#I-reference-date": "I2 Reference date",
+    "https://software-that-knows.example/famzg#I-scope-insured": "I10 AHV insurance and subjection",
+    "https://software-that-knows.example/famzg#InfoAhvIv2026": "Informationsstelle AHV/IV: Update «Sozialversicherungen in der Schweiz», Stand 1. Januar 2026 (changes 2025: minimum old-age pension CHF 1,260, maximum CHF 2,520 a month; changes 2026: no new pension amounts)",
+    "https://software-that-knows.example/famzg#maximumFullOldAgePension": "Maximum full AHV old-age pension per month (CHF)",
+    "https://software-that-knows.example/famzg#minimumAnnualIncome": "Minimum annual earned income (CHF)",
+    "https://software-that-knows.example/famzg#minimumFullOldAgePension": "Minimum full AHV old-age pension per month (CHF)",
+    "https://software-that-knows.example/famzg#minimumIncomeShare": "Share of the annual minimum full old-age pension that gives the minimum income",
+    "https://software-that-knows.example/famzg#minimumMonthlyAmount": "Minimum amount per month (CHF)",
+    "https://software-that-knows.example/famzg#NoEducation": "No school and no education",
+    "https://software-that-knows.example/famzg#NonEmployed": "Not gainfully employed",
+    "https://software-that-knows.example/famzg#nonEmployedIncomeFactor": "Factor on the annual maximum full old-age pension that gives the income limit for non-employed persons",
+    "https://software-that-knows.example/famzg#OpenAdjustment": "Adjustment of the amounts",
+    "https://software-that-knows.example/famzg#OpenBackPayment": "Payment for past months",
+    "https://software-that-knows.example/famzg#OpenEducationDefinition": "Definition of education and income of the child",
+    "https://software-that-knows.example/famzg#OpenEndOfSalary": "Claim after the end of the salary and during incapacity for work",
+    "https://software-that-knows.example/famzg#OpenSeveralEmployers": "Several employers, or employed and self-employed at the same time",
+    "https://software-that-knows.example/famzg#OpenStepAndFosterChildren": "Details for stepchildren and foster children",
+    "https://software-that-knows.example/famzg#OpenUnemployedMothers": "Unemployed mothers with maternity allowance",
+    "https://software-that-knows.example/famzg#OtherChild": "Other relation",
+    "https://software-that-knows.example/famzg#OwnChild": "Own child (by birth or by adoption)",
+    "https://software-that-knows.example/famzg#PostCompulsoryEducation": "Post-compulsory education (for example apprenticeship, upper secondary school, university)",
+    "https://software-that-knows.example/famzg#RuleAgriculture": "Agriculture: claim under the FLG",
+    "https://software-that-knows.example/famzg#RuleApplyEmployed": "Where to apply: employed persons",
+    "https://software-that-knows.example/famzg#RuleApplyNonEmployed": "Where to apply: persons who are not gainfully employed",
+    "https://software-that-knows.example/famzg#RuleApplySelfEmployed": "Where to apply: self-employed persons",
+    "https://software-that-knows.example/famzg#RuleBelowMinimumIncome": "Income below the minimum: counts as not gainfully employed",
+    "https://software-that-knows.example/famzg#RuleChildAllowance": "Child allowance",
+    "https://software-that-knows.example/famzg#RuleEducationAllowance": "Education allowance",
+    "https://software-that-knows.example/famzg#RuleNoAllowanceAtDate": "No allowance for the child at the date of the application",
+    "https://software-that-knows.example/famzg#RuleNoPredominantSupport": "Sibling or grandchild without predominant maintenance",
+    "https://software-that-knows.example/famzg#RuleOtherRelation": "Child without a qualifying relation",
+    "https://software-that-knows.example/famzg#RuleSupplementaryBenefits": "Not gainfully employed: supplementary benefits",
+    "https://software-that-knows.example/famzg#RuleTaxableIncomeTooHigh": "Not gainfully employed: taxable income above the limit",
+    "https://software-that-knows.example/famzg#SelfEmployed": "Self-employed (not in agriculture)",
+    "https://software-that-knows.example/famzg#SiblingOrGrandchild": "Sibling or grandchild",
+    "https://software-that-knows.example/famzg#StepChild": "Stepchild",
+    "https://software-that-knows.example/famzg#taxableIncomeLimit": "Limit of the taxable annual income (CHF)",
+    "https://software-that-knows.example/vocab#": "Software that knows: process vocabulary",
+    "https://software-that-knows.example/vocab#askWhen": "ask when",
+    "https://software-that-knows.example/vocab#interpretation": "interpretation",
+    "https://software-that-knows.example/vocab#Interpretation": "Interpretation",
+    "https://software-that-knows.example/vocab#NextStep": "Next step",
+    "https://software-that-knows.example/vocab#OpenPoint": "Open point",
+    "https://software-that-knows.example/vocab#outcome": "outcome",
+    "https://software-that-knows.example/vocab#OutcomeKind": "Outcome kind",
+    "https://software-that-knows.example/vocab#Parameter": "Parameter",
+    "https://software-that-knows.example/vocab#Questionnaire": "Questionnaire",
+    "https://software-that-knows.example/vocab#Refusal": "Refusal",
+    "https://software-that-knows.example/vocab#ResultProperty": "Result property",
+    "https://software-that-knows.example/vocab#Rule": "Rule",
+    "https://software-that-knows.example/vocab#Value": "Value"
+  },
+  "sources": {
+    "https://software-that-knows.example/famzg#Art1": {
+      "label": "FamZG Art. 1 para. 1 (ATSG applies)",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_1",
+      "description": "Die Bestimmungen des ATSG sind auf die Familienzulagen anwendbar, soweit dieses Gesetz nicht ausdrücklich abweicht."
+    },
+    "https://software-that-knows.example/famzg#Art12-1": {
+      "label": "FamZG Art. 12 para. 1",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_12",
+      "description": "Anschluss an eine Familienausgleichskasse in dem Kanton, dessen Familienzulagenordnung anwendbar ist."
+    },
+    "https://software-that-knows.example/famzg#Art12-2": {
+      "label": "FamZG Art. 12 para. 2",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_12",
+      "description": "Arbeitgeber und Selbstständigerwerbende unterstehen der Familienzulagenordnung des Kantons ihres rechtlichen Sitzes oder Wohnsitzes."
+    },
+    "https://software-that-knows.example/famzg#Art13-1": {
+      "label": "FamZG Art. 13 para. 1",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_13",
+      "description": "Arbeitnehmende, die von einem unterstellten Arbeitgeber beschäftigt werden, haben Anspruch auf Familienzulagen. Der Anspruch entsteht und erlischt mit dem Lohnanspruch."
+    },
+    "https://software-that-knows.example/famzg#Art13-2bis": {
+      "label": "FamZG Art. 13 para. 2bis",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_13",
+      "description": "Die als Selbstständigerwerbende in der AHV obligatorisch versicherten Personen haben Anspruch auf Familienzulagen."
+    },
+    "https://software-that-knows.example/famzg#Art13-3": {
+      "label": "FamZG Art. 13 para. 3",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_13",
+      "description": "Anspruch hat, wer auf einem jährlichen Erwerbseinkommen, das mindestens dem halben jährlichen Betrag der minimalen vollen Altersrente der AHV entspricht, AHV-Beiträge entrichtet."
+    },
+    "https://software-that-knows.example/famzg#Art13-4": {
+      "label": "FamZG Art. 13 para. 4",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_13",
+      "description": "Der Bundesrat regelt den Anspruch bei Arbeitsunfähigkeit und Arbeitsverhinderung sowie bei mehreren Arbeitgebern."
+    },
+    "https://software-that-knows.example/famzg#Art15": {
+      "label": "FamZG Art. 15 para. 1 let. a and para. 2",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_15",
+      "description": "Die Familienausgleichskassen setzen die Familienzulagen fest und richten sie aus; den Arbeitnehmenden werden sie in der Regel durch den Arbeitgeber ausbezahlt."
+    },
+    "https://software-that-knows.example/famzg#Art18": {
+      "label": "FamZG Art. 18",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_18",
+      "description": "Erwerbstätige in der Landwirtschaft haben Anspruch auf Familienzulagen nach dem Bundesgesetz über die Familienzulagen in der Landwirtschaft (FLG)."
+    },
+    "https://software-that-knows.example/famzg#Art19-1": {
+      "label": "FamZG Art. 19 para. 1",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_19",
+      "description": "Nichterwerbstätige haben Anspruch auf Familienzulagen nach den Artikeln 3 und 5. Zuständig ist der Wohnsitzkanton."
+    },
+    "https://software-that-knows.example/famzg#Art19-1bis": {
+      "label": "FamZG Art. 19 para. 1bis",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_19",
+      "description": "Wer das Mindesteinkommen nach Artikel 13 Absatz 3 nicht erreicht, gilt ebenfalls als nichterwerbstätig."
+    },
+    "https://software-that-knows.example/famzg#Art19-1ter": {
+      "label": "FamZG Art. 19 para. 1ter",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_19",
+      "description": "Arbeitslose Mütter mit Anspruch auf Mutterschaftsentschädigung gelten während dieses Anspruchs als nichterwerbstätig."
+    },
+    "https://software-that-knows.example/famzg#Art19-2": {
+      "label": "FamZG Art. 19 para. 2",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_19",
+      "description": "Der Anspruch setzt voraus, dass das steuerbare Einkommen den anderthalbfachen Betrag einer maximalen vollen Altersrente der AHV nicht übersteigt und keine Ergänzungsleistungen zur AHV/IV bezogen werden."
+    },
+    "https://software-that-knows.example/famzg#Art3-1-a": {
+      "label": "FamZG Art. 3 para. 1 let. a",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_3",
+      "description": "Kinderzulage: vom Beginn des Geburtsmonats bis zum Ende des Monats, in dem das Kind das 16. Altersjahr vollendet; bei Erwerbsunfähigkeit bis zum Ende des Monats, in dem es das 20. Altersjahr vollendet."
+    },
+    "https://software-that-knows.example/famzg#Art3-1-b": {
+      "label": "FamZG Art. 3 para. 1 let. b",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_3",
+      "description": "Ausbildungszulage: ab Beginn des Monats, in dem das Kind eine nachobligatorische Ausbildung beginnt, frühestens ab Beginn des Monats, in dem es das 15. Altersjahr vollendet; bis zum Abschluss der Ausbildung, längstens bis zum Ende des Monats, in dem es das 25. Altersjahr vollendet."
+    },
+    "https://software-that-knows.example/famzg#Art4-1": {
+      "label": "FamZG Art. 4 para. 1",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_4",
+      "description": "Zum Anspruch berechtigen Kinder mit Kindesverhältnis nach ZGB, Stiefkinder, Pflegekinder sowie Geschwister und Enkelkinder, wenn die bezugsberechtigte Person für deren Unterhalt in überwiegendem Mass aufkommt."
+    },
+    "https://software-that-knows.example/famzg#Art4-1-d": {
+      "label": "FamZG Art. 4 para. 1 let. d",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_4",
+      "description": "Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt."
+    },
+    "https://software-that-knows.example/famzg#Art4-2": {
+      "label": "FamZG Art. 4 para. 2",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_4",
+      "description": "Der Bundesrat regelt die Einzelheiten."
+    },
+    "https://software-that-knows.example/famzg#Art5-1": {
+      "label": "FamZG Art. 5 para. 1",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_5",
+      "description": "Die Kinderzulage beträgt mindestens 215 Franken pro Monat."
+    },
+    "https://software-that-knows.example/famzg#Art5-2": {
+      "label": "FamZG Art. 5 para. 2",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_5",
+      "description": "Die Ausbildungszulage beträgt mindestens 268 Franken pro Monat."
+    },
+    "https://software-that-knows.example/famzg#Art5-3": {
+      "label": "FamZG Art. 5 para. 3",
+      "url": "https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html#art_5",
+      "description": "Der Bundesrat passt die Mindestansätze der Teuerung an."
+    },
+    "https://software-that-knows.example/famzg#BsvFamilyAllowances": {
+      "label": "Federal Social Insurance Office (BSV): Zulagen für Familien (minimum earned income CHF 7,560 a year, CHF 630 a month)",
+      "url": "https://www.bsv.admin.ch/de/zulagen-fuer-familien"
+    },
+    "https://software-that-knows.example/famzg#InfoAhvIv2026": {
+      "label": "Informationsstelle AHV/IV: Update «Sozialversicherungen in der Schweiz», Stand 1. Januar 2026 (changes 2025: minimum old-age pension CHF 1,260, maximum CHF 2,520 a month; changes 2026: no new pension amounts)",
+      "url": "https://www.shop.ahv-iv.ch/data/docs/de/82816/Update-%C2%ABSozialversicherungen-in-der-Schweiz%C2%BB-Stand-1.-Januar-2026.pdf"
+    }
+  },
+  "interpretations": {
+    "https://software-that-knows.example/famzg#I-age": {
+      "label": "I1 Completed year of age",
+      "comment": "«Das n. Altersjahr vollenden» means the n-th birthday. «Der Monat, in dem das Kind das n. Altersjahr vollendet» is the month of the n-th birthday.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-agriculture": {
+      "label": "I12 Agriculture",
+      "comment": "Art. 18 sends persons in agriculture to the FLG. The model gives this as a next step and asks no further questions.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-compulsory-school": {
+      "label": "I9 Compulsory school after the 16th birthday",
+      "comment": "If the child still attends compulsory school after the 16th birthday, the education allowance starts at the start of the month after the month of the 16th birthday.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-income-question": {
+      "label": "I5 Annual income",
+      "comment": "The model asks for the annual earned income on which the applicant pays AHV contributions, and compares it with the minimum income of Art. 13 para. 3.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-latest-end": {
+      "label": "I3 Latest end of the education allowance",
+      "comment": "The end of the education is not known at the date of the application. The model gives the latest end: the end of the month of the 25th birthday.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-maximum-taxable": {
+      "label": "I6 Income limit for non-employed persons",
+      "comment": "«Anderthalbfacher Betrag einer maximalen vollen Altersrente» = 1.5 x 12 x the monthly maximum full old-age pension, compared with the taxable income of one year.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-minimum-income": {
+      "label": "I4 Minimum income",
+      "comment": "«Halber jährlicher Betrag der minimalen vollen Altersrente» = 0.5 x 12 x the monthly minimum full old-age pension. The BSV gives the same result (CHF 7,560).",
+      "sources": [
+        "https://software-that-knows.example/famzg#BsvFamilyAllowances"
+      ]
+    },
+    "https://software-that-knows.example/famzg#I-own-child": {
+      "label": "I7 Own child",
+      "comment": "«Kindesverhältnis im Sinne des Zivilgesetzbuches» is asked as «own child (by birth or by adoption)».",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-parameters-2026": {
+      "label": "I11 Values of 2026",
+      "comment": "The amounts in CHF are the values in force in 2026. The model uses them for all dates of application.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-post-compulsory": {
+      "label": "I8 Post-compulsory education",
+      "comment": "An apprenticeship, an upper secondary school and a university are post-compulsory education («nachobligatorische Ausbildung»). The model does not check the definition of education in detail.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-reference-date": {
+      "label": "I2 Reference date",
+      "comment": "The model gives the allowance that applies in the month of the date of the application. The answers describe the situation at that date.",
+      "sources": []
+    },
+    "https://software-that-knows.example/famzg#I-scope-insured": {
+      "label": "I10 AHV insurance and subjection",
+      "comment": "The model does not ask if the applicant is compulsorily insured in the AHV and if the employer is subject to the act (Art. 11, Art. 13 para. 1, 2 and 2bis). It assumes yes. «Employed» includes employees of employers that do not pay contributions (Art. 13 para. 2).",
+      "sources": []
+    }
+  },
+  "openPoints": [
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenAdjustment",
+      "label": "Adjustment of the amounts",
+      "comment": "Art. 5 para. 3: the Federal Council adjusts the minimum amounts to prices; the AHV pensions also change. The model has the values of 2026 only (I11).",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art5-3"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenBackPayment",
+      "label": "Payment for past months",
+      "comment": "The ATSG applies (Art. 1). The model gives the start of the claim, not the limit for payments for past months (Art. 24 ATSG). The act does not give this limit.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art1"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenEducationDefinition",
+      "label": "Definition of education and income of the child",
+      "comment": "The act does not define «Ausbildung» and gives no income limit for a child in education. The Federal Council ordinance (FamZV) has these rules. They are not in the model.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenEndOfSalary",
+      "label": "Claim after the end of the salary and during incapacity for work",
+      "comment": "Art. 13 para. 1 and para. 4 let. a give these rules to the Federal Council. The model assumes a current claim to a salary.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-1",
+        "https://software-that-knows.example/famzg#Art13-4"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenSeveralEmployers",
+      "label": "Several employers, or employed and self-employed at the same time",
+      "comment": "Art. 13 para. 4 let. b gives the procedure to the Federal Council. The model asks for one activity only.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-4"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenStepAndFosterChildren",
+      "label": "Details for stepchildren and foster children",
+      "comment": "Art. 4 para. 2 gives the details to the Federal Council (ordinance FamZV). The act does not give them. The model accepts stepchildren and foster children without more conditions.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art4-2"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#OpenUnemployedMothers",
+      "label": "Unemployed mothers with maternity allowance",
+      "comment": "Art. 19 para. 1ter: they count as not gainfully employed without the income limit of para. 2. The model does not ask this.",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-1ter"
+      ]
+    }
+  ],
+  "parameters": [
+    {
+      "iri": "https://software-that-knows.example/famzg#childAllowanceEndAge",
+      "label": "Age at which the child allowance ends",
+      "value": "16",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#childAllowanceEndAgeIncapable",
+      "label": "Age at which the child allowance ends if the child is incapable of gainful work",
+      "value": "20",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-a"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#childAllowanceMinimum",
+      "label": "Minimum child allowance per month (CHF)",
+      "value": "215",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art5-1"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-parameters-2026"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#compulsorySchoolAge",
+      "label": "Age after which compulsory school gives the education allowance",
+      "value": "16",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age",
+        "https://software-that-knows.example/famzg#I-compulsory-school"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#educationAllowanceEndAge",
+      "label": "Age at which the education allowance ends at the latest",
+      "value": "25",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#educationAllowanceMinimum",
+      "label": "Minimum education allowance per month (CHF)",
+      "value": "268",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art5-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-parameters-2026"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#educationAllowanceStartAge",
+      "label": "Earliest age for the education allowance",
+      "value": "15",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art3-1-b"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-age"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#maximumFullOldAgePension",
+      "label": "Maximum full AHV old-age pension per month (CHF)",
+      "value": "2520",
+      "sources": [
+        "https://software-that-knows.example/famzg#InfoAhvIv2026"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-parameters-2026"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#minimumFullOldAgePension",
+      "label": "Minimum full AHV old-age pension per month (CHF)",
+      "value": "1260",
+      "sources": [
+        "https://software-that-knows.example/famzg#InfoAhvIv2026"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-parameters-2026"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#minimumIncomeShare",
+      "label": "Share of the annual minimum full old-age pension that gives the minimum income",
+      "value": "0.5",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art13-3"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-minimum-income"
+      ]
+    },
+    {
+      "iri": "https://software-that-knows.example/famzg#nonEmployedIncomeFactor",
+      "label": "Factor on the annual maximum full old-age pension that gives the income limit for non-employed persons",
+      "value": "1.5",
+      "sources": [
+        "https://software-that-knows.example/famzg#Art19-2"
+      ],
+      "interpretations": [
+        "https://software-that-knows.example/famzg#I-maximum-taxable"
+      ]
+    }
+  ]
+}

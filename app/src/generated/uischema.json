@@ -1,0 +1,85 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "Group",
+      "label": "Applicant",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/activity",
+          "options": {
+            "format": "radio"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/annualIncome"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/taxableIncome"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/supplementaryBenefits",
+          "options": {
+            "format": "radio"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Group",
+      "label": "Child",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/relationship",
+          "options": {
+            "format": "radio"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/predominantSupport",
+          "options": {
+            "format": "radio"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/birthDate"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/schooling",
+          "options": {
+            "format": "radio"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/educationStart"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/incapableOfWork",
+          "options": {
+            "format": "radio"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Group",
+      "label": "Application",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/applicationDate"
+        }
+      ]
+    }
+  ]
+}

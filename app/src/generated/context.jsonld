@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "activity": {
+      "@id": "https://software-that-knows.example/famzg#activity",
+      "@type": "@id"
+    },
+    "annualIncome": {
+      "@id": "https://software-that-knows.example/famzg#annualIncome",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "taxableIncome": {
+      "@id": "https://software-that-knows.example/famzg#taxableIncome",
+      "@type": "http://www.w3.org/2001/XMLSchema#decimal"
+    },
+    "supplementaryBenefits": {
+      "@id": "https://software-that-knows.example/famzg#supplementaryBenefits",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "relationship": {
+      "@id": "https://software-that-knows.example/famzg#relationship",
+      "@type": "@id"
+    },
+    "predominantSupport": {
+      "@id": "https://software-that-knows.example/famzg#predominantSupport",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "birthDate": {
+      "@id": "https://software-that-knows.example/famzg#birthDate",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "schooling": {
+      "@id": "https://software-that-knows.example/famzg#schooling",
+      "@type": "@id"
+    },
+    "educationStart": {
+      "@id": "https://software-that-knows.example/famzg#educationStart",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    },
+    "incapableOfWork": {
+      "@id": "https://software-that-knows.example/famzg#incapableOfWork",
+      "@type": "http://www.w3.org/2001/XMLSchema#boolean"
+    },
+    "applicationDate": {
+      "@id": "https://software-that-knows.example/famzg#applicationDate",
+      "@type": "http://www.w3.org/2001/XMLSchema#date"
+    }
+  }
+}

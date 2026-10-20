@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Software that knows</title>
+    <style>
+      :root {
+        --bg: #f7f7f5;
+        --card: #ffffff;
+        --text: #1d1d1b;
+        --muted: #5c5c58;
+        --line: #d9d9d4;
+        --refusal: #b3261e;
+        --value: #1b6e3a;
+        --next: #1f4f99;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.4; }
+      .top { padding: 1rem 1.5rem; border-bottom: 1px solid var(--line); background: var(--card); }
+      .top h1 { margin: 0; font-size: 1.3rem; }
+      main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem; padding: 1.5rem; max-width: 80rem; margin: 0 auto; }
+      @media (max-width: 50rem) { main { grid-template-columns: 1fr; padding: 1rem; } }
+      .form fieldset, .form .group-layout { border: 1px solid var(--line); border-radius: 0.5rem; background: var(--card); padding: 0.75rem 1rem; margin: 0 0 1rem; }
+      .form legend, .form .group-layout > legend { font-weight: 600; }
+      .form .control { margin: 0.6rem 0; display: flex; flex-direction: column; gap: 0.3rem; }
+      .form .control > label { font-weight: 500; }
+      .form input[type="text"], .form input[type="number"], .form input[type="date"], .form select { padding: 0.4rem; border: 1px solid var(--line); border-radius: 0.3rem; font: inherit; max-width: 100%; }
+      .form .radio { flex-direction: column !important; gap: 0.2rem; }
+      .form .validation { color: var(--refusal); font-size: 0.9rem; }
+      .form .input-description { color: var(--muted); font-size: 0.9rem; }
+      .results h2 { margin-top: 0; font-size: 1.1rem; }
+      .busy { color: var(--muted); font-weight: normal; font-size: 0.9rem; }
+      .outcome { background: var(--card); border: 1px solid var(--line); border-left: 0.35rem solid var(--muted); border-radius: 0.5rem; padding: 0.75rem 1rem; margin-bottom: 1rem; }
+      .outcome.refusal { border-left-color: var(--refusal); }
+      .outcome.value { border-left-color: var(--value); }
+      .outcome.next { border-left-color: var(--next); }
+      .outcome header { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+      .outcome h3 { margin: 0; font-size: 1.05rem; }
+      .badge { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+      .refusal .badge { color: var(--refusal); }
+      .value .badge { color: var(--value); }
+      .next .badge { color: var(--next); }
+      .values { display: grid; gap: 0.2rem; margin: 0.5rem 0; }
+      .values div { display: flex; justify-content: space-between; gap: 1rem; border-bottom: 1px dotted var(--line); }
+      .values dt { color: var(--muted); }
+      .values dd { margin: 0; font-weight: 600; text-align: right; }
+      .sources h4 { margin: 0.5rem 0 0.2rem; font-size: 0.9rem; }
+      .sources ul, footer ul { margin: 0; padding-left: 1.2rem; }
+      .sources q { display: block; color: var(--muted); font-size: 0.85rem; }
+      .interpretations { margin-top: 0.4rem; font-size: 0.9rem; }
+      .input-error { color: var(--refusal); }
+      footer { max-width: 80rem; margin: 0 auto; padding: 0 1.5rem 2rem; font-size: 0.9rem; }
+      footer details { margin-bottom: 0.6rem; }
+      a { color: var(--next); }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./src/main.tsx"></script>
+  </body>
+</html>

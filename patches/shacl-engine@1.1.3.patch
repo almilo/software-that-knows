@@ -1,0 +1,19 @@
+diff --git a/lib/sparql.js b/lib/sparql.js
+index f8fff9b370779e760e3aded51fc3c66496539b94..dd0eec46e3606572d68a0a7ad8dac0f3e0ac35e2 100644
+--- a/lib/sparql.js
++++ b/lib/sparql.js
+@@ -12,9 +12,13 @@ function bindingsToObject (row) {
+   return args
+ }
+ 
++// Patch (software-that-knows): one query engine for all queries. To create a
++// Comunica engine for each query makes the validation slow.
++let engine = null
++
+ async function select ({ bindings, dataset, factory, query }) {
+   const store = new DatasetSource(dataset)
+-  const engine = new QueryEngine()
++  engine = engine || new QueryEngine()
+ 
+   const bindingsFactory = new BindingsFactory(factory)
+   const initialBindings = bindingsFactory.bindings(bindings)

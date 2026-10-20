@@ -1,0 +1,1568 @@
+# Knowledge model: family allowances for one child under the Swiss Federal Act
+# on Family Allowances (Familienzulagengesetz, FamZG), version of 1 January 2026.
+#
+# Scope: child allowance and education allowance for one child, for one person.
+# Not in scope: cantonal amounts, children abroad, several persons entitled for
+# the same child (see fz:Scope).
+#
+# Standards: RDF, RDFS, SHACL Core, SHACL-SPARQL, SKOS, PROV-O, XSD.
+# Own vocabulary: sk: (vocabulary/sk.ttl).
+#
+# Conventions:
+# - Each question is a property shape of fz:ApplicationShape.
+# - Each relevance rule (sk:RelevanceRule) gives a result when its question is
+#   relevant. Answers to questions that are not relevant are not in the data.
+# - Each rule (sk:Rule) gives one result per SELECT row: a refusal, a value or a
+#   next step. Its sources are given with prov:wasDerivedFrom.
+# - All rules read their numbers from parameters (sk:Parameter). The app adds
+#   the parameter nodes to the data graph.
+# - Each interpretation is an sk:Interpretation. Each open point is an
+#   sk:OpenPoint. Rules that are not complete have sk:status sk:Open.
+# - The results are for the calendar month of the date of the application
+#   (fz:I_ApplicationMonth).
+
+@prefix fz:   <https://github.com/almilo/software-that-knows/model/famzg#> .
+@prefix sk:   <https://github.com/almilo/software-that-knows/vocabulary#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+fz: a owl:Ontology ;
+    rdfs:label "Family allowances for one child (FamZG)"@en ;
+    rdfs:comment "Child allowance and education allowance for one child under the FamZG, version of 1 January 2026."@en ;
+    owl:imports sk: ;
+    prov:wasDerivedFrom fz:FamZG .
+
+fz:Scope a sk:OpenPoint ;
+    rdfs:label "Scope"@en ;
+    rdfs:comment "Not in the model: cantonal amounts (FamZG Art. 3 para. 2), birth and adoption allowances, children who live abroad (FamZG Art. 4 para. 3), several persons entitled for the same child (FamZG Art. 6 and 7)."@en .
+
+# =============================================================================
+# Sources
+# =============================================================================
+
+fz:FamZG a prov:Entity ;
+    rdfs:label "FamZG (SR 836.2), version of 1 January 2026"@en ;
+    skos:altLabel "Bundesgesetz über die Familienzulagen und Finanzhilfen an Familienorganisationen"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/51/20260101/de/html/fedlex-data-admin-ch-eli-cc-2008-51-20260101-de-html-1.html> .
+
+fz:FamZV a prov:Entity ;
+    rdfs:label "FamZV (SR 836.21), version of 1 January 2025"@en ;
+    skos:altLabel "Verordnung über die Familienzulagen"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2008/52/20250101/de/html/fedlex-data-admin-ch-eli-cc-2008-52-20250101-de-html-6.html> .
+
+fz:AHVG a prov:Entity ;
+    rdfs:label "AHVG (SR 831.10), version of 1 January 2026"@en ;
+    skos:altLabel "Bundesgesetz über die Alters- und Hinterlassenenversicherung"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/63/837_843_843/20260101/de/html/fedlex-data-admin-ch-eli-cc-63-837_843_843-20260101-de-html-1.html> .
+
+fz:AHVV a prov:Entity ;
+    rdfs:label "AHVV (SR 831.101), version of 1 January 2026"@en ;
+    skos:altLabel "Verordnung über die Alters- und Hinterlassenenversicherung"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/63/1185_1183_1185/20260101/de/html/fedlex-data-admin-ch-eli-cc-63-1185_1183_1185-20260101-de-html.html> .
+
+fz:RV25 a prov:Entity ;
+    rdfs:label "Ordinance of 28 August 2024 on adjustments to wage and price development in AHV/IV/EO from 2025 (SR 831.108)"@en ;
+    skos:altLabel "Verordnung über Anpassungen an die Lohn- und Preisentwicklung bei der AHV/IV/EO ab dem Jahr 2025"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2024/463/20250101/de/html/fedlex-data-admin-ch-eli-cc-2024-463-20250101-de-html-2.html> .
+
+fz:RV27 a prov:Entity ;
+    rdfs:label "Ordinance of 2 October 2026 on adjustments to wage and price development in AHV/IV/EO from 2027 (SR 831.108)"@en ;
+    skos:altLabel "Verordnung über Anpassungen an die Lohn- und Preisentwicklung bei der AHV/IV/EO ab dem Jahr 2027"@de ;
+    rdfs:seeAlso <https://fedlex.data.admin.ch/filestore/fedlex.data.admin.ch/eli/cc/2026/542/20270101/de/html/fedlex-data-admin-ch-eli-cc-2026-542-20270101-de-html.html> .
+
+fz:FamZG_3_1_a a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 3 para. 1 a"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;
+    prov:value "a. die Kinderzulage: sie wird vom Beginn des Geburtsmonats des Kindes bis zum Ende des Monats ausgerichtet, in dem das Kind das 16. Altersjahr vollendet; besteht für das Kind schon vor Vollendung des 16. Altersjahrs ein Anspruch auf eine Ausbildungszulage, so wird diese anstelle der Kinderzulage ausgerichtet; ist das Kind erwerbsunfähig (Art. 7 ATSG), so wird die Kinderzulage bis zum Ende des Monats ausgerichtet, in dem es das 20. Altersjahr vollendet;"@de .
+
+fz:FamZG_3_1_b a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 3 para. 1 b"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;
+    prov:value "b. die Ausbildungszulage: sie wird ab dem Beginn des Monats ausgerichtet, in dem das Kind eine nachobligatorische Ausbildung beginnt, jedoch frühestens ab dem Beginn des Monats, in dem es das 15. Altersjahr vollendet; besucht das Kind nach Vollendung des 16. Altersjahrs noch die obligatorische Schule, so wird die Ausbildungszulage ab dem Beginn des darauffolgenden Monats ausgerichtet; die Ausbildungszulage wird bis zum Abschluss der Ausbildung des Kindes gewährt, längstens jedoch bis zum Ende des Monats, in dem es das 25. Altersjahr vollendet."@de .
+
+fz:FamZG_3_2 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 3 para. 2"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_3> ;
+    prov:value "Die Kantone können in ihren Familienzulagenordnungen höhere Mindestansätze für Kinder- und Ausbildungszulagen als nach Artikel 5 sowie auch Geburts- und Adoptionszulagen vorsehen."@de .
+
+fz:FamZG_4_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 4 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_4> ;
+    prov:value "Zum Anspruch auf Familienzulagen berechtigen: a. Kinder, zu denen ein Kindesverhältnis im Sinne des Zivilgesetzbuches besteht; b. Stiefkinder; c. Pflegekinder; d. Geschwister und Enkelkinder der bezugsberechtigten Person, wenn diese für deren Unterhalt in überwiegendem Mass aufkommt."@de .
+
+fz:FamZG_5_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 5 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> ;
+    prov:value "Die Kinderzulage beträgt mindestens 215 Franken pro Monat."@de .
+
+fz:FamZG_5_2 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 5 para. 2"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> ;
+    prov:value "Die Ausbildungszulage beträgt mindestens 268 Franken pro Monat."@de .
+
+fz:FamZG_11_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 11 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_11> ;
+    prov:value "Diesem Gesetz unterstehen: a. die Arbeitgeber, die nach Artikel 12 AHVG beitragspflichtig sind; b. die Arbeitnehmerinnen und Arbeitnehmer nicht beitragspflichtiger Arbeitgeber nach Artikel 6 AHVG; und c. die Personen, die als Selbstständigerwerbende obligatorisch in der AHV versichert sind."@de .
+
+fz:FamZG_12_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 12 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_12> ;
+    prov:value "Die diesem Gesetz unterstellten Personen sind verpflichtet, sich einer Familienausgleichskasse in dem Kanton anzuschliessen, dessen Familienzulagenordnung auf sie anwendbar ist."@de .
+
+fz:FamZG_13_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 13 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;
+    prov:value "Die als Arbeitnehmerinnen oder Arbeitnehmer in der AHV obligatorisch versicherten Personen, die von einem diesem Gesetz unterstellten Arbeitgeber beschäftigt werden, haben Anspruch auf Familienzulagen. [...] Der Anspruch entsteht und erlischt mit dem Lohnanspruch."@de .
+
+fz:FamZG_13_2bis a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 13 para. 2bis"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;
+    prov:value "Die als Selbstständigerwerbende in der AHV obligatorisch versicherten Personen haben Anspruch auf Familienzulagen."@de .
+
+fz:FamZG_13_3 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 13 para. 3"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_13> ;
+    prov:value "Es werden nur ganze Zulagen ausgerichtet. Anspruch auf Zulagen hat, wer auf einem jährlichen Erwerbseinkommen, das mindestens dem halben jährlichen Betrag der minimalen vollen Altersrente der AHV entspricht, AHV-Beiträge entrichtet."@de .
+
+fz:FamZG_14 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 14"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_14> ;
+    prov:value "Durchführungsorgane sind: a. die von den Kantonen anerkannten beruflichen und zwischenberuflichen Familienausgleichskassen; b. die kantonalen Familienausgleichskassen; c. die von den AHV-Ausgleichskassen geführten Familienausgleichskassen."@de .
+
+fz:FamZG_15_2 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 15 para. 2"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_15> ;
+    prov:value "Die Familienzulagen werden den anspruchsberechtigten Arbeitnehmerinnen und Arbeitnehmern in der Regel durch den Arbeitgeber ausbezahlt."@de .
+
+fz:FamZG_18 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 18"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_18> ;
+    prov:value "Die landwirtschaftlichen Arbeitnehmerinnen und Arbeitnehmer sowie die selbständigerwerbenden Landwirtinnen und Landwirte haben Anspruch auf Familienzulagen nach dem Bundesgesetz vom 20. Juni 1952 über die Familienzulagen in der Landwirtschaft."@de .
+
+fz:FamZG_19_1 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 19 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;
+    prov:value "In der AHV obligatorisch versicherte Personen, die bei der AHV als nichterwerbstätige Personen erfasst sind, gelten als Nichterwerbstätige. Sie haben Anspruch auf Familienzulagen nach den Artikeln 3 und 5. Artikel 7 Absatz 2 ist nicht anwendbar. Zuständig ist der Wohnsitzkanton."@de .
+
+fz:FamZG_19_1bis a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 19 para. 1bis"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;
+    prov:value "Die Personen, die als Arbeitnehmerinnen oder Arbeitnehmer oder als Selbstständigerwerbende in der AHV obligatorisch versichert sind und das Mindesteinkommen nach Artikel 13 Absatz 3 nicht erreichen, gelten ebenfalls als Nichterwerbstätige."@de .
+
+fz:FamZG_19_2 a sk:LegalProvision ;
+    rdfs:label "FamZG Art. 19 para. 2"@en ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_19> ;
+    prov:value "Der Anspruch auf Familienzulagen ist an die Voraussetzung geknüpft, dass das steuerbare Einkommen den anderthalbfachen Betrag einer maximalen vollen Altersrente der AHV nicht übersteigt und keine Ergänzungsleistungen zur AHV/IV bezogen werden."@de .
+
+fz:FamZV_1 a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 1"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_1> ;
+    prov:value "1 Ein Anspruch auf eine Ausbildungszulage besteht für Kinder, die eine Ausbildung im Sinne der Artikel 49bis und 49ter der Verordnung vom 31. Oktober 1947 über die Alters- und Hinterlassenenversicherung absolvieren. 2 Als nachobligatorische Ausbildung gilt die Ausbildung, welche auf die obligatorische Schule folgt. Dauer und Ende der obligatorischen Schule richten sich nach den jeweiligen kantonalen Bestimmungen."@de .
+
+fz:FamZV_4_1 a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 4 para. 1"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_4> ;
+    prov:value "Für Stiefkinder besteht ein Anspruch auf Familienzulagen, wenn das Stiefkind überwiegend im Haushalt des Stiefelternteils lebt oder bis zu seiner Mündigkeit gelebt hat."@de .
+
+fz:FamZV_5 a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 5"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_5> ;
+    prov:value "Für Pflegekinder besteht ein Anspruch auf Familienzulagen, wenn sie im Sinne von Artikel 49 Absatz 1 der Verordnung vom 31. Oktober 1947 über die Alters- und Hinterlassenenversicherung unentgeltlich zu dauernder Pflege und Erziehung aufgenommen worden sind."@de .
+
+fz:FamZV_6 a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 6"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_6> ;
+    prov:value "Die bezugsberechtigte Person kommt in überwiegendem Mass für den Unterhalt auf, wenn: a. das Kind in ihrem Haushalt lebt und der von dritter Seite für den Unterhalt des Kindes bezahlte Betrag die maximale volle Waisenrente der AHV nicht übersteigt; oder b. sie an den Unterhalt des Kindes, das nicht in ihrem Haushalt lebt, einen Betrag von mindestens der maximalen vollen Waisenrente der AHV zahlt."@de .
+
+fz:FamZV_10b a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 10b"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_10_b> ;
+    prov:value "Ist eine Person bei mehreren Arbeitgebern beschäftigt oder ist sie gleichzeitig selbstständig und unselbstständig erwerbstätig, so werden zur Bestimmung des Einkommens die Einkommen zusammengezählt."@de .
+
+fz:FamZV_17 a sk:LegalProvision ;
+    rdfs:label "FamZV Art. 17"@en ;
+    prov:wasQuotedFrom fz:FamZV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/52/de#art_17> ;
+    prov:value "Für die Bemessung des Einkommens der Nichterwerbstätigen ist das steuerbare Einkommen nach dem Bundesgesetz vom 14. Dezember 1990 über die direkte Bundessteuer massgebend."@de .
+
+fz:AHVG_34_3 a sk:LegalProvision ;
+    rdfs:label "AHVG Art. 34 para. 3"@en ;
+    prov:wasQuotedFrom fz:AHVG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/63/837_843_843/de#art_34> ;
+    prov:value "Der Höchstbetrag der Altersrente entspricht dem doppelten Mindestbetrag."@de .
+
+fz:AHVV_49bis_3 a sk:LegalProvision ;
+    rdfs:label "AHVV Art. 49bis para. 3"@en ;
+    prov:wasQuotedFrom fz:AHVV ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/63/1185_1183_1185/de#art_49_bis> ;
+    prov:value "Nicht als in Ausbildung gilt ein Kind, wenn es ein durchschnittliches monatliches Erwerbseinkommen erzielt, das höher ist als die maximale volle Altersrente der AHV."@de .
+
+fz:RV25_3_1 a sk:LegalProvision ;
+    rdfs:label "Ordinance of 28 August 2024 (SR 831.108) Art. 3 para. 1"@en ;
+    prov:wasQuotedFrom fz:RV25 ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2024/463/de#art_3> ;
+    prov:value "Der Mindestbetrag der vollen Altersrente nach Artikel 34 Absatz 5 AHVG wird auf 1260 Franken festgesetzt."@de .
+
+fz:RV27_3_1 a sk:LegalProvision ;
+    rdfs:label "Ordinance of 2 October 2026 (SR 831.108) Art. 3 para. 1"@en ;
+    prov:wasQuotedFrom fz:RV27 ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2026/542/de#art_3> ;
+    prov:value "Der Mindestbetrag der vollen Altersrente nach Artikel 34 Absatz 5 AHVG wird auf 1280 Franken festgesetzt."@de .
+
+fz:AmountsOrdinance2024 a sk:LegalProvision ;
+    rdfs:label "Ordinance of 28 August 2024 on the adjustment of family allowances to price development (AS 2024 493), Art. 1"@en ;
+    prov:value "FamZG footnotes 16 and 17: Betrag gemäss Art. 1 Abs. 1 und 2 der V vom 28. Aug. 2024 über die Anpassung der Familienzulagen an die Preisentwicklung, in Kraft seit 1. Jan. 2025 (AS 2024 493)."@de ;
+    prov:wasQuotedFrom fz:FamZG ;
+    rdfs:seeAlso <https://www.fedlex.admin.ch/eli/cc/2008/51/de#art_5> .
+
+# =============================================================================
+# Parameters
+# =============================================================================
+
+fz:ChildAllowanceMinimum a rdfs:Class ;
+    rdfs:subClassOf sk:Parameter ;
+    rdfs:label "Minimum child allowance (CHF a month)"@en .
+
+fz:EducationAllowanceMinimum a rdfs:Class ;
+    rdfs:subClassOf sk:Parameter ;
+    rdfs:label "Minimum education allowance (CHF a month)"@en .
+
+fz:MinimumFullOldAgePension a rdfs:Class ;
+    rdfs:subClassOf sk:Parameter ;
+    rdfs:label "Minimum full old-age pension of the AHV (CHF a month)"@en .
+
+fz:childAllowanceMinimum2025 a sk:Parameter, fz:ChildAllowanceMinimum ;
+    rdfs:label "Minimum child allowance from 1 January 2025"@en ;
+    rdf:value 215 ;
+    sk:validFrom "2025-01-01"^^xsd:date ;
+    prov:wasDerivedFrom fz:FamZG_5_1, fz:AmountsOrdinance2024 ;
+    sk:openPoint fz:OP_AmountsEnd .
+
+fz:educationAllowanceMinimum2025 a sk:Parameter, fz:EducationAllowanceMinimum ;
+    rdfs:label "Minimum education allowance from 1 January 2025"@en ;
+    rdf:value 268 ;
+    sk:validFrom "2025-01-01"^^xsd:date ;
+    prov:wasDerivedFrom fz:FamZG_5_2, fz:AmountsOrdinance2024 ;
+    sk:openPoint fz:OP_AmountsEnd .
+
+fz:minimumFullOldAgePension2025 a sk:Parameter, fz:MinimumFullOldAgePension ;
+    rdfs:label "Minimum full old-age pension in 2025 and 2026"@en ;
+    rdf:value 1260 ;
+    sk:validFrom "2025-01-01"^^xsd:date ;
+    sk:validUntil "2026-12-31"^^xsd:date ;
+    prov:wasDerivedFrom fz:RV25_3_1 ;
+    sk:interpretation fz:I_PensionAtApplicationDate .
+
+fz:minimumFullOldAgePension2027 a sk:Parameter, fz:MinimumFullOldAgePension ;
+    rdfs:label "Minimum full old-age pension from 2027"@en ;
+    rdf:value 1280 ;
+    sk:validFrom "2027-01-01"^^xsd:date ;
+    prov:wasDerivedFrom fz:RV27_3_1 ;
+    sk:interpretation fz:I_PensionAtApplicationDate .
+
+fz:maximumPensionFactor a sk:Parameter ;
+    rdfs:label "Maximum full old-age pension as a multiple of the minimum full old-age pension"@en ;
+    rdf:value 2 ;
+    prov:wasDerivedFrom fz:AHVG_34_3 .
+
+fz:minimumIncomeShare a sk:Parameter ;
+    rdfs:label "Minimum annual income as a share of the annual minimum full old-age pension"@en ;
+    rdf:value 0.5 ;
+    prov:wasDerivedFrom fz:FamZG_13_3 ;
+    sk:interpretation fz:I_AnnualPension .
+
+fz:nonEmployedIncomeFactor a sk:Parameter ;
+    rdfs:label "Limit of the taxable income of non-employed persons as a multiple of the annual maximum full old-age pension"@en ;
+    rdf:value 1.5 ;
+    prov:wasDerivedFrom fz:FamZG_19_2 ;
+    sk:interpretation fz:I_TaxableIncomeLimitAnnual .
+
+fz:monthsPerYear a sk:Parameter ;
+    rdfs:label "Months in a year"@en ;
+    rdf:value 12 ;
+    sk:interpretation fz:I_AnnualPension .
+
+fz:childAllowanceEndAge a sk:Parameter ;
+    rdfs:label "Age at the end of the child allowance"@en ;
+    rdf:value 16 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a ;
+    sk:interpretation fz:I_CompletedYear .
+
+fz:childAllowanceIncapableEndAge a sk:Parameter ;
+    rdfs:label "Age at the end of the child allowance for a child that is incapable of work"@en ;
+    rdf:value 20 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a ;
+    sk:interpretation fz:I_CompletedYear .
+
+fz:educationAllowanceStartAge a sk:Parameter ;
+    rdfs:label "Age at the earliest start of the education allowance"@en ;
+    rdf:value 15 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b ;
+    sk:interpretation fz:I_CompletedYear .
+
+fz:educationAllowanceEndAge a sk:Parameter ;
+    rdfs:label "Age at the latest end of the education allowance"@en ;
+    rdf:value 25 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b ;
+    sk:interpretation fz:I_CompletedYear .
+
+# =============================================================================
+# Interpretations
+# =============================================================================
+
+fz:I_ApplicationMonth a sk:Interpretation ;
+    rdfs:label "Results for the month of the application"@en ;
+    rdfs:comment "The model decides the allowance for the calendar month that contains the date of the application. For an allowance that applies, it also gives the first and the last possible month. The law gives the periods; the reference date is a decision of the model."@en ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b .
+
+fz:I_CompletedYear a sk:Interpretation ;
+    rdfs:label "Completed year of age"@en ;
+    rdfs:comment "\"Das N. Altersjahr vollenden\" means: the child has its Nth birthday. The month in which the child completes the Nth year of age is the month of the Nth birthday."@en ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b .
+
+fz:I_AnnualPension a sk:Interpretation ;
+    rdfs:label "Annual amount of the pension"@en ;
+    rdfs:comment "The annual amount of the minimum full old-age pension is 12 times the monthly amount. The minimum annual income is half of this annual amount."@en ;
+    prov:wasDerivedFrom fz:FamZG_13_3 .
+
+fz:I_PensionAtApplicationDate a sk:Interpretation ;
+    rdfs:label "Pension amount at the date of the application"@en ;
+    rdfs:comment "For the limits that depend on the AHV pension, the model uses the minimum full old-age pension that is in force at the date of the application."@en ;
+    prov:wasDerivedFrom fz:FamZG_13_3, fz:FamZG_19_2 .
+
+fz:I_IncomeOfApplicant a sk:Interpretation ;
+    rdfs:label "Annual income from work"@en ;
+    rdfs:comment "The annual income is the AHV-liable income from work in the year of the application, as the person states it. The person adds the incomes from all employers and from self-employment."@en ;
+    prov:wasDerivedFrom fz:FamZG_13_3, fz:FamZV_10b .
+
+fz:I_TaxableIncomeLimitAnnual a sk:Interpretation ;
+    rdfs:label "Limit of the taxable income"@en ;
+    rdfs:comment "The taxable income is an annual amount. Thus the model compares it with 1.5 times the annual maximum full old-age pension (12 monthly amounts). The maximum full old-age pension is 2 times the minimum full old-age pension."@en ;
+    prov:wasDerivedFrom fz:FamZG_19_2, fz:AHVG_34_3, fz:FamZV_17 .
+
+fz:I_EmploymentStatus a sk:Interpretation ;
+    rdfs:label "One main status"@en ;
+    rdfs:comment "The person selects one status: employee, self-employed, non-employed or person who works in agriculture. A person who is both employed and self-employed selects the status with the larger income and gives the total income."@en ;
+    prov:wasDerivedFrom fz:FamZG_11_1, fz:FamZG_13_1, fz:FamZG_13_2bis, fz:FamZG_18, fz:FamZG_19_1, fz:FamZV_10b .
+
+fz:I_PersonJudges a sk:Interpretation ;
+    rdfs:label "The person judges the legal term"@en ;
+    rdfs:comment "For some legal terms the model asks the person for a judgement and does not examine the term itself: post-compulsory education (AHVV Art. 49bis), compulsory school (cantonal law), incapable of work (ATSG Art. 7), lives mostly in the household, foster child without payment, pays mostly for the support."@en ;
+    prov:wasDerivedFrom fz:FamZV_1, fz:FamZV_4_1, fz:FamZV_5, fz:FamZV_6, fz:FamZG_3_1_a .
+
+fz:I_CompulsorySchoolAfter16 a sk:Interpretation ;
+    rdfs:label "Compulsory school after the 16th birthday"@en ;
+    rdfs:comment "A child that still attends the compulsory school after the month of its 16th birthday gets the education allowance from the start of the month after the month of the 16th birthday."@en ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b .
+
+fz:I_ChildIncomePresumption a sk:Interpretation ;
+    rdfs:label "Income of the child not yet known"@en ;
+    rdfs:comment "Until the person tells the income of the child, the model presumes that the average monthly income of the child from work is not more than the maximum full old-age pension. The result is provisional, and a next step asks the person to confirm the income."@en ;
+    prov:wasDerivedFrom fz:AHVV_49bis_3 .
+
+fz:I_MinimumAmount a sk:Interpretation ;
+    rdfs:label "Federal minimum amount"@en ;
+    rdfs:comment "The model gives the federal minimum amount (\"at least\"). The canton can pay more."@en ;
+    prov:wasDerivedFrom fz:FamZG_3_2, fz:FamZG_5_1, fz:FamZG_5_2 .
+
+fz:I_ApplyThroughEmployer a sk:Interpretation ;
+    rdfs:label "Application through the employer"@en ;
+    rdfs:comment "The law says that the employer usually pays the allowance to the employee. The model thus tells the employee to give the application to the employer."@en ;
+    prov:wasDerivedFrom fz:FamZG_15_2, fz:FamZG_12_1 .
+
+fz:I_ApplySelfEmployed a sk:Interpretation ;
+    rdfs:label "Application of a self-employed person"@en ;
+    rdfs:comment "A self-employed person applies to the family compensation fund that the person is affiliated with. Usually this fund is managed by the AHV compensation fund of the person."@en ;
+    prov:wasDerivedFrom fz:FamZG_12_1, fz:FamZG_14 .
+
+fz:I_ApplyNonEmployed a sk:Interpretation ;
+    rdfs:label "Application of a non-employed person"@en ;
+    rdfs:comment "\"Zuständig ist der Wohnsitzkanton\": a non-employed person applies to the family compensation fund of the canton where the person lives."@en ;
+    prov:wasDerivedFrom fz:FamZG_19_1 .
+
+# =============================================================================
+# Open points
+# =============================================================================
+
+fz:OP_WageClaim a sk:OpenPoint ;
+    rdfs:label "Start and end of the wage claim"@en ;
+    rdfs:comment "For employees the right starts and ends with the wage claim (FamZG Art. 13 para. 1, FamZV Art. 10). For self-employed persons it starts and ends with the self-employment (FamZV Art. 10a). The model presumes that the work continues during the full period of the allowance."@en .
+
+fz:OP_BackPayment a sk:OpenPoint ;
+    rdfs:label "Payment for past months"@en ;
+    rdfs:comment "The model gives the start of the allowance, also when it is in the past. It does not examine how many past months the fund pays (ATSG, applicable by FamZG Art. 1)."@en .
+
+fz:OP_OrphanPension a sk:OpenPoint ;
+    rdfs:label "Support of siblings and grandchildren"@en ;
+    rdfs:comment "FamZV Art. 6 compares the support with the maximum full orphan's pension of the AHV. The model does not contain this amount and does not calculate it. The person judges if the person pays mostly for the support."@en .
+
+fz:OP_AmountsEnd a sk:OpenPoint ;
+    rdfs:label "End of validity of the minimum amounts"@en ;
+    rdfs:comment "The Federal Council adjusts the minimum amounts to the price development (FamZG Art. 5 para. 3). The model uses the amounts of the version of 1 January 2026 for all later dates."@en .
+
+fz:OP_EducationInterruption a sk:OpenPoint ;
+    rdfs:label "End and interruption of the education"@en ;
+    rdfs:comment "The model does not examine the end or the interruption of the education (AHVV Art. 49ter). It gives the latest possible end."@en .
+
+fz:OP_NonEmployedExceptions a sk:OpenPoint ;
+    rdfs:label "Exceptions for non-employed persons"@en ;
+    rdfs:comment "The model does not examine the persons that do not count as non-employed (FamZV Art. 16) and the unemployed mothers (FamZG Art. 19 para. 1ter)."@en .
+
+fz:OP_ParametersForDate a sk:OpenPoint ;
+    rdfs:label "Amounts before 2025"@en ;
+    rdfs:comment "The model contains the amounts from 1 January 2025. For an earlier date of the application it cannot give a result."@en .
+
+# =============================================================================
+# Answers: classes and values
+# =============================================================================
+
+fz:Application a rdfs:Class ;
+    rdfs:label "Application for family allowances"@en .
+
+fz:Employee a skos:Concept ;
+    rdfs:label "Employee"@en ;
+    skos:definition "Employed and insured in the AHV as an employee, not in agriculture."@en ;
+    sh:order 1 .
+
+fz:SelfEmployed a skos:Concept ;
+    rdfs:label "Self-employed"@en ;
+    skos:definition "Insured in the AHV as a self-employed person, not in agriculture."@en ;
+    sh:order 2 .
+
+fz:NonEmployed a skos:Concept ;
+    rdfs:label "Not employed"@en ;
+    skos:definition "Registered in the AHV as a non-employed person."@en ;
+    sh:order 3 .
+
+fz:FarmWorker a skos:Concept ;
+    rdfs:label "Work in agriculture"@en ;
+    skos:definition "Employee in agriculture or self-employed farmer."@en ;
+    sh:order 4 .
+
+fz:OwnChild a skos:Concept ;
+    rdfs:label "My own child (also adopted)"@en ;
+    sh:order 1 .
+
+fz:StepChild a skos:Concept ;
+    rdfs:label "My stepchild"@en ;
+    sh:order 2 .
+
+fz:FosterChild a skos:Concept ;
+    rdfs:label "My foster child"@en ;
+    sh:order 3 .
+
+fz:SiblingOrGrandchild a skos:Concept ;
+    rdfs:label "My sibling or my grandchild"@en ;
+    sh:order 4 .
+
+# =============================================================================
+# Questions
+# =============================================================================
+
+fz:GroupApplication a sh:PropertyGroup ;
+    rdfs:label "Application"@en ;
+    sh:order 1 .
+
+fz:GroupPerson a sh:PropertyGroup ;
+    rdfs:label "You"@en ;
+    sh:order 2 .
+
+fz:GroupChild a sh:PropertyGroup ;
+    rdfs:label "The child"@en ;
+    sh:order 3 .
+
+fz:ApplicationShape a sh:NodeShape, sk:Questionnaire ;
+    rdfs:label "Family allowances for one child"@en ;
+    sh:targetClass fz:Application ;
+    sh:property
+        fz:q_applicationDate,
+        fz:q_employmentStatus,
+        fz:q_annualIncome,
+        fz:q_taxableIncome,
+        fz:q_receivesSupplementaryBenefits,
+        fz:q_childRelation,
+        fz:q_stepChildInHousehold,
+        fz:q_fosterChildWithoutPayment,
+        fz:q_predominantMaintenance,
+        fz:q_childBirthDate,
+        fz:q_inPostCompulsoryEducation,
+        fz:q_educationStartDate,
+        fz:q_childIncomeAboveLimit,
+        fz:q_inCompulsorySchool,
+        fz:q_childIncapableOfWork .
+
+fz:q_applicationDate a sh:PropertyShape ;
+    sh:path fz:applicationDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name "Date of the application"@en ;
+    sh:description "The results are for the month of this date."@en ;
+    sh:group fz:GroupApplication ;
+    sh:order 1 ;
+    sk:interpretation fz:I_ApplicationMonth .
+
+fz:q_employmentStatus a sh:PropertyShape ;
+    sh:path fz:employmentStatus ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( fz:Employee fz:SelfEmployed fz:NonEmployed fz:FarmWorker ) ;
+    sh:maxCount 1 ;
+    sh:name "What is your work status?"@en ;
+    sh:description "Select the status with your largest income."@en ;
+    sh:group fz:GroupPerson ;
+    sh:order 2 ;
+    prov:wasDerivedFrom fz:FamZG_11_1, fz:FamZG_18, fz:FamZG_19_1 ;
+    sk:interpretation fz:I_EmploymentStatus .
+
+fz:q_annualIncome a sh:PropertyShape ;
+    sh:path fz:annualIncome ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0 ;
+    sh:maxCount 1 ;
+    sh:name "What is your annual income from work in CHF?"@en ;
+    sh:description "The income on which you pay AHV contributions. Add the incomes from all your work."@en ;
+    sh:group fz:GroupPerson ;
+    sh:order 3 ;
+    prov:wasDerivedFrom fz:FamZG_13_3, fz:FamZV_10b ;
+    sk:interpretation fz:I_IncomeOfApplicant .
+
+fz:q_taxableIncome a sh:PropertyShape ;
+    sh:path fz:taxableIncome ;
+    sh:datatype xsd:decimal ;
+    sh:minInclusive 0 ;
+    sh:maxCount 1 ;
+    sh:name "What is your taxable income in CHF?"@en ;
+    sh:description "The taxable income for the direct federal tax, for one year."@en ;
+    sh:group fz:GroupPerson ;
+    sh:order 4 ;
+    prov:wasDerivedFrom fz:FamZG_19_2, fz:FamZV_17 ;
+    sk:interpretation fz:I_TaxableIncomeLimitAnnual .
+
+fz:q_receivesSupplementaryBenefits a sh:PropertyShape ;
+    sh:path fz:receivesSupplementaryBenefits ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Do you get supplementary benefits to the AHV or IV (Ergänzungsleistungen)?"@en ;
+    sh:group fz:GroupPerson ;
+    sh:order 5 ;
+    prov:wasDerivedFrom fz:FamZG_19_2 .
+
+fz:q_childRelation a sh:PropertyShape ;
+    sh:path fz:childRelation ;
+    sh:nodeKind sh:IRI ;
+    sh:in ( fz:OwnChild fz:StepChild fz:FosterChild fz:SiblingOrGrandchild ) ;
+    sh:maxCount 1 ;
+    sh:name "Who is the child to you?"@en ;
+    sh:group fz:GroupChild ;
+    sh:order 6 ;
+    prov:wasDerivedFrom fz:FamZG_4_1 .
+
+fz:q_stepChildInHousehold a sh:PropertyShape ;
+    sh:path fz:stepChildInHousehold ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Does the stepchild live mostly in your household (or did it live there until it became an adult)?"@en ;
+    sh:group fz:GroupChild ;
+    sh:order 7 ;
+    prov:wasDerivedFrom fz:FamZV_4_1 ;
+    sk:interpretation fz:I_PersonJudges .
+
+fz:q_fosterChildWithoutPayment a sh:PropertyShape ;
+    sh:path fz:fosterChildWithoutPayment ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Did you take the foster child permanently into your care and education, without payment for it?"@en ;
+    sh:group fz:GroupChild ;
+    sh:order 8 ;
+    prov:wasDerivedFrom fz:FamZV_5 ;
+    sk:interpretation fz:I_PersonJudges .
+
+fz:q_predominantMaintenance a sh:PropertyShape ;
+    sh:path fz:predominantMaintenance ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Do you pay the larger part of the support of the child?"@en ;
+    sh:description "If the child lives with you: other persons pay not more than the maximum full orphan's pension of the AHV. If the child does not live with you: you pay at least this pension."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 9 ;
+    prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_6 ;
+    sk:interpretation fz:I_PersonJudges ;
+    sk:openPoint fz:OP_OrphanPension .
+
+fz:q_childBirthDate a sh:PropertyShape ;
+    sh:path fz:childBirthDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:lessThanOrEquals fz:applicationDate ;
+    sh:name "Date of birth of the child"@en ;
+    sh:description "The date of birth must not be after the date of the application."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 10 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b .
+
+fz:q_inPostCompulsoryEducation a sh:PropertyShape ;
+    sh:path fz:inPostCompulsoryEducation ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Is the child in an education after the compulsory school?"@en ;
+    sh:description "For example an apprenticeship, a school after the compulsory school or a university. The education prepares systematically for a profession or gives a general education, and takes most of the time of the child."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 11 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b, fz:FamZV_1 ;
+    sk:interpretation fz:I_PersonJudges .
+
+fz:q_educationStartDate a sh:PropertyShape ;
+    sh:path fz:educationStartDate ;
+    sh:datatype xsd:date ;
+    sh:maxCount 1 ;
+    sh:name "When did this education begin?"@en ;
+    sh:group fz:GroupChild ;
+    sh:order 12 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b .
+
+fz:q_childIncomeAboveLimit a sh:PropertyShape ;
+    sh:path fz:childIncomeAboveLimit ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Does the child earn on average more than the maximum full AHV old-age pension a month from work?"@en ;
+    sh:description "A wage of an apprentice is also an income from work. The results show the limit in CHF."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 13 ;
+    prov:wasDerivedFrom fz:AHVV_49bis_3, fz:AHVG_34_3 ;
+    sk:interpretation fz:I_ChildIncomePresumption .
+
+fz:q_inCompulsorySchool a sh:PropertyShape ;
+    sh:path fz:inCompulsorySchool ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Does the child still attend the compulsory school?"@en ;
+    sh:description "The canton sets the duration of the compulsory school."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 14 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b, fz:FamZV_1 ;
+    sk:interpretation fz:I_PersonJudges, fz:I_CompulsorySchoolAfter16 .
+
+fz:q_childIncapableOfWork a sh:PropertyShape ;
+    sh:path fz:childIncapableOfWork ;
+    sh:datatype xsd:boolean ;
+    sh:maxCount 1 ;
+    sh:name "Is the child incapable of work because of its health?"@en ;
+    sh:description "Incapable of work (erwerbsunfähig) as in ATSG Art. 7."@en ;
+    sh:group fz:GroupChild ;
+    sh:order 15 ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a ;
+    sk:interpretation fz:I_PersonJudges .
+
+# =============================================================================
+# SPARQL prefixes
+# =============================================================================
+
+fz:prefixes
+    sh:declare
+        [ sh:prefix "fz" ; sh:namespace "https://github.com/almilo/software-that-knows/model/famzg#"^^xsd:anyURI ] ,
+        [ sh:prefix "sk" ; sh:namespace "https://github.com/almilo/software-that-knows/vocabulary#"^^xsd:anyURI ] ,
+        [ sh:prefix "rdf" ; sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ] ,
+        [ sh:prefix "xsd" ; sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ] .
+
+# =============================================================================
+# Relevance rules
+# =============================================================================
+
+fz:ask_annualIncome a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_annualIncome ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Employees and self-employed persons need a minimum income."@en ;
+        prov:wasDerivedFrom fz:FamZG_13_3 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:employmentStatus ?status .
+  FILTER(?status IN (fz:Employee, fz:SelfEmployed))
+}"""
+    ] .
+
+fz:ask_taxableIncome a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_taxableIncome ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Non-employed persons have a limit for the taxable income."@en ;
+        prov:wasDerivedFrom fz:FamZG_19_1, fz:FamZG_19_1bis, fz:FamZG_19_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  FILTER(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome))
+}"""
+    ] .
+
+fz:ask_receivesSupplementaryBenefits a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_receivesSupplementaryBenefits ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Non-employed persons must not get supplementary benefits."@en ;
+        prov:wasDerivedFrom fz:FamZG_19_1, fz:FamZG_19_1bis, fz:FamZG_19_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  FILTER(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome))
+}"""
+    ] .
+
+fz:ask_childRelation a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_childRelation ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "The person can have a right to family allowances."@en ;
+        prov:wasDerivedFrom fz:FamZG_13_1, fz:FamZG_13_2bis, fz:FamZG_13_3, fz:FamZG_19_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  OPTIONAL { $this fz:taxableIncome ?taxable }
+  OPTIONAL { $this fz:receivesSupplementaryBenefits ?benefits }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  BIND(?minPension * ?maxFactor * ?months * ?neFactor AS ?taxableLimit)
+  BIND(?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income >= ?minIncome AS ?workRight)
+  BIND(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome) AS ?nonEmployed)
+  BIND(?nonEmployed && BOUND(?taxable) && ?taxable <= ?taxableLimit && BOUND(?benefits) && !?benefits AS ?nonEmployedRight)
+  FILTER(?workRight || ?nonEmployedRight)
+}"""
+    ] .
+
+fz:ask_stepChildInHousehold a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_stepChildInHousehold ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "A stepchild must live mostly in the household of the stepparent."@en ;
+        prov:wasDerivedFrom fz:FamZV_4_1 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:StepChild . }"""
+    ] .
+
+fz:ask_fosterChildWithoutPayment a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_fosterChildWithoutPayment ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "A foster child must be in permanent care without payment."@en ;
+        prov:wasDerivedFrom fz:FamZV_5 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:FosterChild . }"""
+    ] .
+
+fz:ask_predominantMaintenance a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_predominantMaintenance ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "For siblings and grandchildren the person must pay the larger part of the support."@en ;
+        prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_6 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:SiblingOrGrandchild . }"""
+    ] .
+
+fz:ask_childBirthDate a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_childBirthDate ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "The child gives a right to family allowances. The age of the child decides the allowance."@en ;
+        prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZG_3_1_a, fz:FamZG_3_1_b ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:childRelation ?relation .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+}"""
+    ] .
+
+fz:ask_inPostCompulsoryEducation a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_inPostCompulsoryEducation ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "The child is old enough for the education allowance."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_b ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:childBirthDate ?bd .
+  fz:monthsPerYear rdf:value ?months .
+  fz:educationAllowanceStartAge rdf:value ?eduStartAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  FILTER(?a >= ?b + ?eduStartAge * ?months && ?a <= ?b + ?eduEndAge * ?months)
+}"""
+    ] .
+
+fz:ask_educationStartDate a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_educationStartDate ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "The education allowance starts in the month in which the education begins."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_b ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:inPostCompulsoryEducation true . }"""
+    ] .
+
+fz:ask_childIncomeAboveLimit a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_childIncomeAboveLimit ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "A child with a high income from work does not count as in education."@en ;
+        prov:wasDerivedFrom fz:AHVV_49bis_3 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:inPostCompulsoryEducation true . }"""
+    ] .
+
+fz:ask_inCompulsorySchool a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_inCompulsorySchool ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "After the 16th birthday the child allowance ends. A child in the compulsory school can get the education allowance."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:childBirthDate ?bd .
+  fz:monthsPerYear rdf:value ?months .
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  FILTER((BOUND(?inEducation) && !?inEducation) || (BOUND(?incomeAbove) && ?incomeAbove))
+  FILTER(?a > ?b + ?caEndAge * ?months && ?a <= ?b + ?eduEndAge * ?months)
+}"""
+    ] .
+
+fz:ask_childIncapableOfWork a sh:NodeShape, sk:RelevanceRule ;
+    sk:asks fz:q_childIncapableOfWork ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "For a child that is incapable of work the child allowance continues until the 20th birthday."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_a ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:childBirthDate ?bd ; fz:inCompulsorySchool false .
+  fz:monthsPerYear rdf:value ?months .
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  FILTER(?a > ?b + ?caEndAge * ?months && ?a <= ?b + ?caIncapableAge * ?months)
+}"""
+    ] .
+
+# =============================================================================
+# Rules: the person
+# =============================================================================
+
+fz:rule_Agriculture a sh:NodeShape, sk:Rule ;
+    rdfs:label "Work in agriculture"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_18 ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances under the FamZG: for work in agriculture the Federal Act on Family Allowances in Agriculture (FLG, SR 836.1) applies. This app does not examine this act. Ask the AHV compensation fund of your canton."@en ;
+        prov:wasDerivedFrom fz:FamZG_18 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:employmentStatus fz:FarmWorker . }"""
+    ] .
+
+fz:rule_CountsAsNonEmployed a sh:NodeShape, sk:Rule ;
+    rdfs:label "Income below the minimum income"@en ;
+    sk:resultKind sk:Value ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_13_3, fz:FamZG_19_1bis, fz:RV25_3_1, fz:RV27_3_1 ;
+    sk:interpretation fz:I_AnnualPension, fz:I_PensionAtApplicationDate, fz:I_IncomeOfApplicant ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "You count as a non-employed person: your annual income of CHF {?income} is less than the minimum income of CHF {?minIncome}."@en ;
+        prov:wasDerivedFrom fz:FamZG_13_3, fz:FamZG_19_1bis ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?income ?minIncome WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status ; fz:annualIncome ?income .
+  FILTER(?status IN (fz:Employee, fz:SelfEmployed))
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  FILTER(?income < ?minIncome)
+}"""
+    ] .
+
+fz:rule_NonEmployedIncome a sh:NodeShape, sk:Rule ;
+    rdfs:label "Taxable income above the limit"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_19_2, fz:FamZV_17, fz:AHVG_34_3, fz:RV25_3_1, fz:RV27_3_1 ;
+    sk:interpretation fz:I_TaxableIncomeLimitAnnual, fz:I_PensionAtApplicationDate ;
+    sk:openPoint fz:OP_NonEmployedExceptions ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances: as a non-employed person you have a right only if your taxable income is not more than CHF {?taxableLimit}. Your taxable income is CHF {?taxable}."@en ;
+        prov:wasDerivedFrom fz:FamZG_19_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?taxable ?taxableLimit WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status ; fz:taxableIncome ?taxable .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  BIND(?minPension * ?maxFactor * ?months * ?neFactor AS ?taxableLimit)
+  FILTER(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome))
+  FILTER(?taxable > ?taxableLimit)
+}"""
+    ] .
+
+fz:rule_SupplementaryBenefits a sh:NodeShape, sk:Rule ;
+    rdfs:label "Supplementary benefits"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_19_2 ;
+    sk:openPoint fz:OP_NonEmployedExceptions ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances: a non-employed person who gets supplementary benefits to the AHV or IV has no right."@en ;
+        prov:wasDerivedFrom fz:FamZG_19_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status ; fz:receivesSupplementaryBenefits true .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  FILTER(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome))
+}"""
+    ] .
+
+fz:rule_NoParametersForDate a sh:NodeShape, sk:Rule ;
+    rdfs:label "No amounts for the date of the application"@en ;
+    sk:resultKind sk:NextStep ;
+    sk:status sk:Open ;
+    sk:openPoint fz:OP_ParametersForDate ;
+    prov:wasDerivedFrom fz:FamZG_5_1, fz:FamZG_5_2, fz:FamZG_13_3 ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "The model has no amounts for the date of the application {?ad}. Ask a family compensation fund."@en ;
+        prov:wasDerivedFrom fz:FamZG_5_1, fz:FamZG_5_2, fz:FamZG_13_3 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?ad WHERE {
+  $this fz:applicationDate ?ad .
+  FILTER NOT EXISTS {
+    ?pension a fz:MinimumFullOldAgePension ; sk:validFrom ?pensionFrom .
+    OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+    FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+    ?childAmount a fz:ChildAllowanceMinimum ; sk:validFrom ?childFrom .
+    FILTER(?childFrom <= ?ad)
+    ?educationAmount a fz:EducationAllowanceMinimum ; sk:validFrom ?educationFrom .
+    FILTER(?educationFrom <= ?ad)
+  }
+}"""
+    ] .
+
+# =============================================================================
+# Rules: the child
+# =============================================================================
+
+fz:rule_StepChild a sh:NodeShape, sk:Rule ;
+    rdfs:label "Stepchild not in the household"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_4_1 ;
+    sk:interpretation fz:I_PersonJudges ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances for this child: a stepchild gives a right only if it lives mostly in the household of the stepparent, or lived there until it became an adult."@en ;
+        prov:wasDerivedFrom fz:FamZV_4_1 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:StepChild ; fz:stepChildInHousehold false . }"""
+    ] .
+
+fz:rule_FosterChild a sh:NodeShape, sk:Rule ;
+    rdfs:label "Foster child not in permanent care without payment"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_5 ;
+    sk:interpretation fz:I_PersonJudges ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances for this child: a foster child gives a right only if you took it permanently into your care and education without payment."@en ;
+        prov:wasDerivedFrom fz:FamZV_5 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:FosterChild ; fz:fosterChildWithoutPayment false . }"""
+    ] .
+
+fz:rule_SiblingOrGrandchild a sh:NodeShape, sk:Rule ;
+    rdfs:label "Sibling or grandchild without predominant support"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Open ;
+    sk:openPoint fz:OP_OrphanPension ;
+    prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_6 ;
+    sk:interpretation fz:I_PersonJudges ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No family allowances for this child: a sibling or a grandchild gives a right only if you pay the larger part of its support."@en ;
+        prov:wasDerivedFrom fz:FamZG_4_1, fz:FamZV_6 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE { $this fz:childRelation fz:SiblingOrGrandchild ; fz:predominantMaintenance false . }"""
+    ] .
+
+fz:rule_ChildIncomeAboveLimit a sh:NodeShape, sk:Rule ;
+    rdfs:label "Income of the child above the limit"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:AHVV_49bis_3, fz:FamZV_1, fz:AHVG_34_3, fz:RV25_3_1, fz:RV27_3_1 ;
+    sk:interpretation fz:I_PensionAtApplicationDate ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No education allowance: a child that earns on average more than CHF {?limit} a month from work does not count as in education."@en ;
+        prov:wasDerivedFrom fz:AHVV_49bis_3 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?limit WHERE {
+  $this fz:applicationDate ?ad ; fz:inPostCompulsoryEducation true ; fz:childIncomeAboveLimit true .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  BIND(?minPension * ?maxFactor AS ?limit)
+}"""
+    ] .
+
+fz:rule_ConfirmChildIncome a sh:NodeShape, sk:Rule ;
+    rdfs:label "Confirm the income of the child"@en ;
+    sk:resultKind sk:NextStep ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:AHVV_49bis_3, fz:AHVG_34_3, fz:RV25_3_1, fz:RV27_3_1 ;
+    sk:interpretation fz:I_ChildIncomePresumption, fz:I_PensionAtApplicationDate ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Confirm that the child earns on average not more than CHF {?limit} a month from work. If the child earns more, it does not count as in education."@en ;
+        prov:wasDerivedFrom fz:AHVV_49bis_3 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?limit WHERE {
+  $this fz:applicationDate ?ad ; fz:inPostCompulsoryEducation true .
+  FILTER NOT EXISTS { $this fz:childIncomeAboveLimit ?anyAnswer }
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  BIND(?minPension * ?maxFactor AS ?limit)
+}"""
+    ] .
+
+# =============================================================================
+# Rules: the allowances
+#
+# All rules in this section use the same blocks:
+# - the right of the person (work or non-employed),
+# - the right for the child (relation),
+# - month numbers: ?a for the month of the application, ?b for the month of
+#   birth (year * 12 + month),
+# - the education allowance (?educationDue, ?eduStart, ?eduEnd) and the child
+#   allowance (?childDue, ?caEnd).
+# =============================================================================
+
+fz:rule_ChildAllowance a sh:NodeShape, sk:Rule ;
+    rdfs:label "Child allowance"@en ;
+    sk:resultKind sk:Value ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_5_1 ;
+    sk:interpretation fz:I_ApplicationMonth, fz:I_CompletedYear, fz:I_MinimumAmount ;
+    sk:openPoint fz:OP_WageClaim, fz:OP_BackPayment ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Child allowance: at least CHF {?amount} a month, from {?start} until {?end} at the latest."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_5_1 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?amount ?start ?end WHERE {
+  # The person
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  OPTIONAL { $this fz:taxableIncome ?taxable }
+  OPTIONAL { $this fz:receivesSupplementaryBenefits ?benefits }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  BIND(?minPension * ?maxFactor * ?months * ?neFactor AS ?taxableLimit)
+  BIND(?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income >= ?minIncome AS ?workRight)
+  BIND(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome) AS ?nonEmployed)
+  BIND(?nonEmployed && BOUND(?taxable) && ?taxable <= ?taxableLimit && BOUND(?benefits) && !?benefits AS ?nonEmployedRight)
+  FILTER(?workRight || ?nonEmployedRight)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # Months
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+
+  # Education allowance
+  fz:educationAllowanceStartAge rdf:value ?eduStartAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:educationStartDate ?es }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  BIND(BOUND(?inEducation) && ?inEducation && BOUND(?es) && !(BOUND(?incomeAbove) && ?incomeAbove) AS ?postCompulsory)
+  BIND(BOUND(?inSchool) && ?inSchool AS ?schoolAfter)
+  BIND(IF(?postCompulsory,
+          IF(YEAR(?es) * ?months + MONTH(?es) > ?b + ?eduStartAge * ?months, YEAR(?es) * ?months + MONTH(?es), ?b + ?eduStartAge * ?months),
+          ?b + ?caEndAge * ?months + 1) AS ?eduStart)
+  BIND(?b + ?eduEndAge * ?months AS ?eduEnd)
+  BIND((?postCompulsory || ?schoolAfter) && ?a <= ?eduEnd AS ?educationDue)
+
+  # Child allowance
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  OPTIONAL { $this fz:childIncapableOfWork ?incapable }
+  BIND(IF(BOUND(?incapable) && ?incapable, ?b + ?caIncapableAge * ?months, ?b + ?caEndAge * ?months) AS ?caEnd)
+  BIND(?a >= ?b && ?a <= ?caEnd && !(?educationDue && ?a >= ?eduStart) AS ?childDue)
+  FILTER(?childDue)
+
+  # Amount at the date of the application
+  ?amountParameter a fz:ChildAllowanceMinimum ; rdf:value ?amount ; sk:validFrom ?amountFrom .
+  OPTIONAL { ?amountParameter sk:validUntil ?amountUntil }
+  FILTER(?amountFrom <= ?ad && (!BOUND(?amountUntil) || ?ad <= ?amountUntil))
+
+  # Dates: first day of the month of birth, last day of the month of ?caEnd
+  BIND(STRDT(CONCAT(STR(YEAR(?bd)), "-", IF(MONTH(?bd) < 10, "0", ""), STR(MONTH(?bd)), "-01"), xsd:date) AS ?start)
+  BIND(xsd:integer(FLOOR((?caEnd - 1) / ?months)) AS ?ey)
+  BIND(?caEnd - ?ey * ?months AS ?em)
+  BIND(?ey - xsd:integer(FLOOR(?ey / 4)) * 4 = 0 && (?ey - xsd:integer(FLOOR(?ey / 100)) * 100 != 0 || ?ey - xsd:integer(FLOOR(?ey / 400)) * 400 = 0) AS ?leap)
+  BIND(IF(?em = 2, IF(?leap, 29, 28), IF(?em IN (4, 6, 9, 11), 30, 31)) AS ?lastDay)
+  BIND(STRDT(CONCAT(STR(?ey), "-", IF(?em < 10, "0", ""), STR(?em), "-", STR(?lastDay)), xsd:date) AS ?end)
+}"""
+    ] .
+
+fz:rule_EducationAllowance a sh:NodeShape, sk:Rule ;
+    rdfs:label "Education allowance"@en ;
+    sk:resultKind sk:Value ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_3_1_b, fz:FamZG_5_2 ;
+    sk:interpretation fz:I_ApplicationMonth, fz:I_CompletedYear, fz:I_MinimumAmount, fz:I_CompulsorySchoolAfter16, fz:I_ChildIncomePresumption ;
+    sk:openPoint fz:OP_WageClaim, fz:OP_BackPayment, fz:OP_EducationInterruption ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Education allowance: at least CHF {?amount} a month, from {?start} until the end of the education, but until {?end} at the latest."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_b, fz:FamZG_5_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this ?amount ?start ?end WHERE {
+  # The person
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  OPTIONAL { $this fz:taxableIncome ?taxable }
+  OPTIONAL { $this fz:receivesSupplementaryBenefits ?benefits }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  BIND(?minPension * ?maxFactor * ?months * ?neFactor AS ?taxableLimit)
+  BIND(?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income >= ?minIncome AS ?workRight)
+  BIND(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome) AS ?nonEmployed)
+  BIND(?nonEmployed && BOUND(?taxable) && ?taxable <= ?taxableLimit && BOUND(?benefits) && !?benefits AS ?nonEmployedRight)
+  FILTER(?workRight || ?nonEmployedRight)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # Months
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+
+  # Education allowance
+  fz:educationAllowanceStartAge rdf:value ?eduStartAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:educationStartDate ?es }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  BIND(BOUND(?inEducation) && ?inEducation && BOUND(?es) && !(BOUND(?incomeAbove) && ?incomeAbove) AS ?postCompulsory)
+  BIND(BOUND(?inSchool) && ?inSchool AS ?schoolAfter)
+  BIND(IF(?postCompulsory,
+          IF(YEAR(?es) * ?months + MONTH(?es) > ?b + ?eduStartAge * ?months, YEAR(?es) * ?months + MONTH(?es), ?b + ?eduStartAge * ?months),
+          ?b + ?caEndAge * ?months + 1) AS ?eduStart)
+  BIND(?b + ?eduEndAge * ?months AS ?eduEnd)
+  BIND((?postCompulsory || ?schoolAfter) && ?a <= ?eduEnd AS ?educationDue)
+  FILTER(?educationDue)
+
+  # Amount at the date of the application
+  ?amountParameter a fz:EducationAllowanceMinimum ; rdf:value ?amount ; sk:validFrom ?amountFrom .
+  OPTIONAL { ?amountParameter sk:validUntil ?amountUntil }
+  FILTER(?amountFrom <= ?ad && (!BOUND(?amountUntil) || ?ad <= ?amountUntil))
+
+  # Dates: first day of the month of ?eduStart, last day of the month of ?eduEnd
+  BIND(xsd:integer(FLOOR((?eduStart - 1) / ?months)) AS ?sy)
+  BIND(?eduStart - ?sy * ?months AS ?sm)
+  BIND(STRDT(CONCAT(STR(?sy), "-", IF(?sm < 10, "0", ""), STR(?sm), "-01"), xsd:date) AS ?start)
+  BIND(xsd:integer(FLOOR((?eduEnd - 1) / ?months)) AS ?ey)
+  BIND(?eduEnd - ?ey * ?months AS ?em)
+  BIND(?ey - xsd:integer(FLOOR(?ey / 4)) * 4 = 0 && (?ey - xsd:integer(FLOOR(?ey / 100)) * 100 != 0 || ?ey - xsd:integer(FLOOR(?ey / 400)) * 400 = 0) AS ?leap)
+  BIND(IF(?em = 2, IF(?leap, 29, 28), IF(?em IN (4, 6, 9, 11), 30, 31)) AS ?lastDay)
+  BIND(STRDT(CONCAT(STR(?ey), "-", IF(?em < 10, "0", ""), STR(?em), "-", STR(?lastDay)), xsd:date) AS ?end)
+}"""
+    ] .
+
+fz:rule_NoAllowanceForAge a sh:NodeShape, sk:Rule ;
+    rdfs:label "No allowance for the age of the child"@en ;
+    sk:resultKind sk:Refusal ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b ;
+    sk:interpretation fz:I_ApplicationMonth, fz:I_CompletedYear ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "No child allowance and no education allowance for the month of the application: the child allowance ends in the month of the 16th birthday (20th birthday if the child is incapable of work). After this month only a child in education or still in the compulsory school gives a right, until the month of the 25th birthday at the latest."@en ;
+        prov:wasDerivedFrom fz:FamZG_3_1_a, fz:FamZG_3_1_b ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  # The person
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  OPTIONAL { $this fz:taxableIncome ?taxable }
+  OPTIONAL { $this fz:receivesSupplementaryBenefits ?benefits }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  BIND(?minPension * ?maxFactor * ?months * ?neFactor AS ?taxableLimit)
+  BIND(?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income >= ?minIncome AS ?workRight)
+  BIND(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome) AS ?nonEmployed)
+  BIND(?nonEmployed && BOUND(?taxable) && ?taxable <= ?taxableLimit && BOUND(?benefits) && !?benefits AS ?nonEmployedRight)
+  FILTER(?workRight || ?nonEmployedRight)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # Months
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  OPTIONAL { $this fz:childIncapableOfWork ?incapable }
+
+  # After the 16th birthday month, and all answers say: no right
+  FILTER(?a > ?b + ?caEndAge * ?months)
+  FILTER(?a > ?b + ?eduEndAge * ?months
+    || (((BOUND(?inEducation) && !?inEducation) || (BOUND(?incomeAbove) && ?incomeAbove))
+        && BOUND(?inSchool) && !?inSchool
+        && (?a > ?b + ?caIncapableAge * ?months || (BOUND(?incapable) && !?incapable))))
+}"""
+    ] .
+
+# =============================================================================
+# Rules: next steps
+# =============================================================================
+
+fz:rule_ApplyEmployee a sh:NodeShape, sk:Rule ;
+    rdfs:label "Application of an employee"@en ;
+    sk:resultKind sk:NextStep ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_15_2, fz:FamZG_12_1, fz:FamZG_3_2 ;
+    sk:interpretation fz:I_ApplyThroughEmployer, fz:I_MinimumAmount ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Give the application to your employer. The employer sends it to its family compensation fund and usually pays the allowance with your salary. Ask the fund for the amount in your canton: the canton can pay more than the federal minimum."@en ;
+        prov:wasDerivedFrom fz:FamZG_15_2, fz:FamZG_3_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  # The person: employee with the minimum income
+  $this fz:applicationDate ?ad ; fz:employmentStatus fz:Employee ; fz:annualIncome ?income .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  FILTER(?income >= ?minPension * ?months * ?share)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # An allowance is due (see fz:rule_ChildAllowance and fz:rule_EducationAllowance)
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:educationStartDate ?es }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  OPTIONAL { $this fz:childIncapableOfWork ?incapable }
+  BIND(BOUND(?inEducation) && ?inEducation && BOUND(?es) && !(BOUND(?incomeAbove) && ?incomeAbove) AS ?postCompulsory)
+  BIND(BOUND(?inSchool) && ?inSchool AS ?schoolAfter)
+  BIND((?postCompulsory || ?schoolAfter) && ?a <= ?b + ?eduEndAge * ?months AS ?educationDue)
+  BIND(IF(BOUND(?incapable) && ?incapable, ?b + ?caIncapableAge * ?months, ?b + ?caEndAge * ?months) AS ?caEnd)
+  FILTER(?educationDue || (?a >= ?b && ?a <= ?caEnd))
+}"""
+    ] .
+
+fz:rule_ApplySelfEmployed a sh:NodeShape, sk:Rule ;
+    rdfs:label "Application of a self-employed person"@en ;
+    sk:resultKind sk:NextStep ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_12_1, fz:FamZG_14, fz:FamZG_3_2 ;
+    sk:interpretation fz:I_ApplySelfEmployed, fz:I_MinimumAmount ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Send the application to the family compensation fund that you are affiliated with. Usually the AHV compensation fund that collects your contributions manages it. Ask the fund for the amount in your canton: the canton can pay more than the federal minimum."@en ;
+        prov:wasDerivedFrom fz:FamZG_12_1, fz:FamZG_14, fz:FamZG_3_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  # The person: self-employed with the minimum income
+  $this fz:applicationDate ?ad ; fz:employmentStatus fz:SelfEmployed ; fz:annualIncome ?income .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  FILTER(?income >= ?minPension * ?months * ?share)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # An allowance is due (see fz:rule_ChildAllowance and fz:rule_EducationAllowance)
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:educationStartDate ?es }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  OPTIONAL { $this fz:childIncapableOfWork ?incapable }
+  BIND(BOUND(?inEducation) && ?inEducation && BOUND(?es) && !(BOUND(?incomeAbove) && ?incomeAbove) AS ?postCompulsory)
+  BIND(BOUND(?inSchool) && ?inSchool AS ?schoolAfter)
+  BIND((?postCompulsory || ?schoolAfter) && ?a <= ?b + ?eduEndAge * ?months AS ?educationDue)
+  BIND(IF(BOUND(?incapable) && ?incapable, ?b + ?caIncapableAge * ?months, ?b + ?caEndAge * ?months) AS ?caEnd)
+  FILTER(?educationDue || (?a >= ?b && ?a <= ?caEnd))
+}"""
+    ] .
+
+fz:rule_ApplyNonEmployed a sh:NodeShape, sk:Rule ;
+    rdfs:label "Application of a non-employed person"@en ;
+    sk:resultKind sk:NextStep ;
+    sk:status sk:Settled ;
+    prov:wasDerivedFrom fz:FamZG_19_1, fz:FamZG_3_2 ;
+    sk:interpretation fz:I_ApplyNonEmployed, fz:I_MinimumAmount ;
+    sk:openPoint fz:OP_NonEmployedExceptions ;
+    sh:targetClass fz:Application ;
+    sh:severity sh:Info ;
+    sh:sparql [
+        sh:message "Send the application to the family compensation fund of the canton where you live. Ask the fund for the amount in your canton: the canton can pay more than the federal minimum."@en ;
+        prov:wasDerivedFrom fz:FamZG_19_1, fz:FamZG_3_2 ;
+        sh:prefixes fz:prefixes ;
+        sh:select """
+SELECT $this WHERE {
+  # The person: non-employed with a right
+  $this fz:applicationDate ?ad ; fz:employmentStatus ?status ;
+        fz:taxableIncome ?taxable ; fz:receivesSupplementaryBenefits false .
+  fz:monthsPerYear rdf:value ?months .
+  fz:minimumIncomeShare rdf:value ?share .
+  fz:maximumPensionFactor rdf:value ?maxFactor .
+  fz:nonEmployedIncomeFactor rdf:value ?neFactor .
+  ?pension a fz:MinimumFullOldAgePension ; rdf:value ?minPension ; sk:validFrom ?pensionFrom .
+  OPTIONAL { ?pension sk:validUntil ?pensionUntil }
+  FILTER(?pensionFrom <= ?ad && (!BOUND(?pensionUntil) || ?ad <= ?pensionUntil))
+  OPTIONAL { $this fz:annualIncome ?income }
+  BIND(?minPension * ?months * ?share AS ?minIncome)
+  FILTER(?status = fz:NonEmployed || (?status IN (fz:Employee, fz:SelfEmployed) && BOUND(?income) && ?income < ?minIncome))
+  FILTER(?taxable <= ?minPension * ?maxFactor * ?months * ?neFactor)
+
+  # The child
+  $this fz:childRelation ?relation ; fz:childBirthDate ?bd .
+  OPTIONAL { $this fz:stepChildInHousehold ?household }
+  OPTIONAL { $this fz:fosterChildWithoutPayment ?foster }
+  OPTIONAL { $this fz:predominantMaintenance ?maintenance }
+  FILTER(?relation = fz:OwnChild
+    || (?relation = fz:StepChild && BOUND(?household) && ?household)
+    || (?relation = fz:FosterChild && BOUND(?foster) && ?foster)
+    || (?relation = fz:SiblingOrGrandchild && BOUND(?maintenance) && ?maintenance))
+
+  # An allowance is due (see fz:rule_ChildAllowance and fz:rule_EducationAllowance)
+  BIND(YEAR(?ad) * ?months + MONTH(?ad) AS ?a)
+  BIND(YEAR(?bd) * ?months + MONTH(?bd) AS ?b)
+  fz:childAllowanceEndAge rdf:value ?caEndAge .
+  fz:childAllowanceIncapableEndAge rdf:value ?caIncapableAge .
+  fz:educationAllowanceEndAge rdf:value ?eduEndAge .
+  OPTIONAL { $this fz:inPostCompulsoryEducation ?inEducation }
+  OPTIONAL { $this fz:educationStartDate ?es }
+  OPTIONAL { $this fz:childIncomeAboveLimit ?incomeAbove }
+  OPTIONAL { $this fz:inCompulsorySchool ?inSchool }
+  OPTIONAL { $this fz:childIncapableOfWork ?incapable }
+  BIND(BOUND(?inEducation) && ?inEducation && BOUND(?es) && !(BOUND(?incomeAbove) && ?incomeAbove) AS ?postCompulsory)
+  BIND(BOUND(?inSchool) && ?inSchool AS ?schoolAfter)
+  BIND((?postCompulsory || ?schoolAfter) && ?a <= ?b + ?eduEndAge * ?months AS ?educationDue)
+  BIND(IF(BOUND(?incapable) && ?incapable, ?b + ?caIncapableAge * ?months, ?b + ?caEndAge * ?months) AS ?caEnd)
+  FILTER(?educationDue || (?a >= ?b && ?a <= ?caEnd))
+}"""
+    ] .

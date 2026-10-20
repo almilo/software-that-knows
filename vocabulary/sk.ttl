@@ -1,0 +1,122 @@
+# The "software that knows" vocabulary.
+#
+# A small vocabulary for the things that the W3C standards (RDF, RDFS, SHACL,
+# SKOS, PROV-O, XSD) cannot express on their own. It contains no knowledge of
+# any law. The generator and the app know these terms; they do not know the
+# terms of a knowledge model.
+
+@prefix sk:   <https://github.com/almilo/software-that-knows/vocabulary#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+sk: a owl:Ontology ;
+    rdfs:label "Software that knows vocabulary"@en ;
+    rdfs:comment "Terms to connect SHACL shapes to questions, relevance, results, sources, interpretations and open points."@en .
+
+# --- Questions ---------------------------------------------------------------
+
+sk:Questionnaire a rdfs:Class ;
+    rdfs:subClassOf sh:NodeShape ;
+    rdfs:label "Questionnaire"@en ;
+    rdfs:comment "A node shape. Each of its property shapes (sh:property) is one question. sh:name is the question text, sh:description the help text, sh:order the position and sh:group the section. The target class of the shape is the class of the node that holds the answers."@en .
+
+sk:RelevanceRule a rdfs:Class ;
+    rdfs:subClassOf sh:NodeShape ;
+    rdfs:label "Relevance rule"@en ;
+    rdfs:comment "A node shape with a SHACL-SPARQL constraint. Each validation result of the constraint means: the question in sk:asks is relevant for the focus node. A question without a relevance rule is always relevant."@en .
+
+sk:asks a rdf:Property ;
+    rdfs:label "asks"@en ;
+    rdfs:domain sk:RelevanceRule ;
+    rdfs:range sh:PropertyShape ;
+    rdfs:comment "The question that the relevance rule makes relevant."@en .
+
+# --- Results -----------------------------------------------------------------
+
+sk:Rule a rdfs:Class ;
+    rdfs:subClassOf sh:NodeShape ;
+    rdfs:label "Rule"@en ;
+    rdfs:comment "A node shape with a SHACL-SPARQL constraint. Each validation result of the constraint is one result for the person who answers. The sh:message of the constraint is the text of the result. Variables in the message ({?name}) take the values of the SELECT row. prov:wasDerivedFrom gives the sources."@en .
+
+sk:resultKind a rdf:Property ;
+    rdfs:label "result kind"@en ;
+    rdfs:domain sk:Rule ;
+    rdfs:range sk:ResultKind .
+
+sk:ResultKind a rdfs:Class ;
+    rdfs:label "Result kind"@en .
+
+sk:Refusal a sk:ResultKind ;
+    rdfs:label "Refusal"@en ;
+    skos:definition "The answers do not give a right to the benefit."@en ;
+    sh:order 1 .
+
+sk:Value a sk:ResultKind ;
+    rdfs:label "Value"@en ;
+    skos:definition "A value that follows from the answers."@en ;
+    sh:order 2 .
+
+sk:NextStep a sk:ResultKind ;
+    rdfs:label "Next step"@en ;
+    skos:definition "An action for the person who answers."@en ;
+    sh:order 3 .
+
+# --- Sources, parameters, interpretations, open points -----------------------
+
+sk:LegalProvision a rdfs:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Legal provision"@en ;
+    rdfs:comment "A part of a legal text. rdfs:label is the citation, rdfs:seeAlso the official web page and prov:value the original text."@en .
+
+sk:Parameter a rdfs:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Parameter"@en ;
+    rdfs:comment "A value that rules read from the data graph. rdf:value is the value. prov:wasDerivedFrom gives its source."@en .
+
+sk:validFrom a rdf:Property ;
+    rdfs:label "valid from"@en ;
+    rdfs:domain sk:Parameter ;
+    rdfs:range xsd:date .
+
+sk:validUntil a rdf:Property ;
+    rdfs:label "valid until"@en ;
+    rdfs:domain sk:Parameter ;
+    rdfs:range xsd:date .
+
+sk:Interpretation a rdfs:Class ;
+    rdfs:label "Interpretation"@en ;
+    rdfs:comment "A decision of the modeller that the source text does not make directly. rdfs:comment gives the decision, prov:wasDerivedFrom the text that it interprets."@en .
+
+sk:interpretation a rdf:Property ;
+    rdfs:label "interpretation"@en ;
+    rdfs:range sk:Interpretation ;
+    rdfs:comment "Connects a question, rule or parameter to an interpretation that it depends on."@en .
+
+sk:OpenPoint a rdfs:Class ;
+    rdfs:label "Open point"@en ;
+    rdfs:comment "A point that the model does not settle. rdfs:comment tells what is open."@en .
+
+sk:openPoint a rdf:Property ;
+    rdfs:label "open point"@en ;
+    rdfs:range sk:OpenPoint .
+
+sk:status a rdf:Property ;
+    rdfs:label "status"@en ;
+    rdfs:domain sk:Rule ;
+    rdfs:range sk:Status .
+
+sk:Status a rdfs:Class ;
+    rdfs:label "Status"@en .
+
+sk:Open a sk:Status ;
+    rdfs:label "Open"@en ;
+    skos:definition "The rule is not complete: the law or the official sources do not give all that the rule needs. The result is provisional."@en .
+
+sk:Settled a sk:Status ;
+    rdfs:label "Settled"@en ;
+    skos:definition "The rule is complete for the scope of the model."@en .

@@ -31,7 +31,9 @@ function useHash() {
 
 function App() {
   const [view = "", param] = useHash();
-  useEffect(() => scrollTo(0, 0), [view]);
+  useEffect(() => {
+    scrollTo(0, 0);
+  }, [view]);
   const content =
     view === "claim" ? <Claim />
     : view === "guide" ? <Guide />

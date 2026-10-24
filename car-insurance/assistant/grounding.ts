@@ -1,7 +1,8 @@
 // Grounding: the facts that the language model writes into a component are checked against the
 // model before the engine sees them. A fact must exist, belong to a group that the component asks
 // about, and have a value that the fact allows. Anything else is rejected, with the reason, and the
-// component shows it: the model cannot invent a question, an answer or a part of the policy.
+// component shows it: the model cannot invent a question, an answer or a part of the policy. Facts
+// of the certificate are allowed only where the caller allows them: in the changes of a what-if.
 import type { Answers, Fact, Policy } from "../engine/model";
 
 export type Rejected = { fact: string; value: unknown; reason: string };
@@ -13,7 +14,7 @@ export function ground(policy: Policy, facts: Record<string, unknown> | undefine
     const fact = policy.facts.find((f) => f.id === id);
     const reason = !fact
       ? "no question of the model has this id"
-      : fact.group === "certificate"
+      : fact.group === "certificate" && !groups.includes("certificate")
         ? "this comes from the certificate of the policy, not from the question"
         : !groups.includes(fact.group)
           ? `this component does not use ${fact.group} facts`

@@ -1,9 +1,10 @@
 import { Renderer } from "@openuidev/react-lang";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { policy } from "../../app/data";
 import { fixtures } from "../fixtures";
 import { CertificateContext, library } from "../library";
+import { createTools } from "../tools";
 
 // The assistant: the policy (its certificate), a question in the person's own words, and the screen
 // that the language model builds for it while the answer streams in.
@@ -16,6 +17,9 @@ function App() {
   const [error, setError] = useState<string>();
   // A new answer remounts the renderer, so the answers given to the previous one are gone.
   const [round, setRound] = useState(0);
+  const answers = policy.certificates.find((c) => c.id === certificate)!.answers;
+  // The tools of Query(), on the person's policy. The engine runs in the browser.
+  const tools = useMemo(() => createTools(policy, answers), [answers]);
 
   const ask = async (text: string) => {
     setQuestion(text);
@@ -77,8 +81,8 @@ function App() {
       </div>
       {error && <p className="rejected">{error}</p>}
       {source === "replay" && <p className="hint">No API key is set: this is the hand-written answer to an example question, not the answer of a language model.</p>}
-      <CertificateContext.Provider value={policy.certificates.find((c) => c.id === certificate)!.answers}>
-        <Renderer key={round} response={response} library={library} isStreaming={streaming} onError={(errors) => errors.length && console.warn(errors)} />
+      <CertificateContext.Provider value={answers}>
+        <Renderer key={round} response={response} library={library} toolProvider={tools} isStreaming={streaming} onError={(errors) => errors.length && console.warn(errors)} />
       </CertificateContext.Provider>
       <footer>
         Demonstration only. Not insurance advice, and not made or checked by Zurich. The decisions are our reading of the

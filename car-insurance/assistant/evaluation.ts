@@ -25,11 +25,33 @@ function components(node: unknown, found: Node[] = []): Node[] {
   return found;
 }
 
+type Ast = { k: string; v?: unknown; n?: string; entries?: [string, Ast][]; items?: Ast[] };
+
+// The value of a literal of OpenUI Lang, with the $variables of the answer. Anything else (an
+// expression, a reference to a statement) is undefined.
+function value(ast: Ast | null | undefined, state: Record<string, unknown>): unknown {
+  if (!ast) return undefined;
+  if (ast.k === "Str" || ast.k === "Num" || ast.k === "Bool") return ast.v;
+  if (ast.k === "Null") return null;
+  if (ast.k === "StateRef") return state[ast.n!];
+  if (ast.k === "Obj") return Object.fromEntries(ast.entries!.map(([k, v]) => [k, value(v, state)]));
+  if (ast.k === "Arr") return ast.items?.map((v) => value(v, state));
+  return undefined;
+}
+
 export function readAnswer(response: string) {
   const parsed = parser.parse(response);
   const used = components(parsed.root);
+  const state = parsed.stateDeclarations ?? {};
+  const bound = (v: unknown) => (v && typeof v === "object" && (v as Ast).k === "StateRef" ? state[(v as Ast).n!] : v);
   const check = used.find((n) => n.typeName === "ClaimCheck");
-  return { errors: parsed.meta.errors, used: used.map((n) => n.typeName!), facts: check?.props?.facts as Record<string, unknown> | undefined };
+  // The queries, with their arguments as written; `withFacts` puts other facts in place of $facts.
+  const queries = parsed.queryStatements.map((q) => ({
+    tool: value(q.toolAST as Ast, state) as string,
+    args: (facts: Record<string, unknown>) => value(q.argsAST as Ast, { ...state, $facts: facts }) as Record<string, unknown>,
+    usesFacts: q.deps?.includes("$facts") ?? false,
+  }));
+  return { errors: parsed.meta.errors, used: used.map((n) => n.typeName!), facts: bound(check?.props?.facts) as Record<string, unknown> | undefined, queries };
 }
 
 // The evaluation claims: the test claims with a question in the words of a user. A question can

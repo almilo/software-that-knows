@@ -1,0 +1,12 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}">
+  <head th:replace="~{layout :: head(${form.title})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <main class="narrow">
+      <p class="kicker" th:text="#{apply.heading}">New application</p>
+      <h1 th:text="${form.title}">Process</h1>
+      <form th:replace="~{form :: form}"></form>
+    </main>
+  </body>
+</html>

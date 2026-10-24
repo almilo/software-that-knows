@@ -1,0 +1,79 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <!-- The parts of every page. The controllers give them their texts ready (Views, Form, Outcome);
+       the texts of this stack come from messages*.properties (#{...}). -->
+  <head th:fragment="head(title)">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title th:text="${title} + ' · ' + #{app.title}">Applications in a process</title>
+    <link rel="stylesheet" href="/webjars/bpmn-js/dist/assets/diagram-js.css" />
+    <link rel="stylesheet" href="/webjars/bpmn-js/dist/assets/bpmn-js.css" />
+    <link rel="stylesheet" href="/app.css" />
+    <script src="/webjars/htmx.org/dist/htmx.min.js" defer></script>
+    <script src="/webjars/bpmn-js/dist/bpmn-navigated-viewer.production.min.js" defer></script>
+    <script src="/diagram.js" defer></script>
+  </head>
+  <body>
+    <!-- The navigation, the person you act as and the language. -->
+    <header th:fragment="header" class="top">
+      <nav>
+        <a href="/" class="brand" th:text="#{app.title}">Applications in a process</a>
+        <a href="/applications" th:text="#{nav.applications}" th:classappend="${path.startsWith('/applications')} ? 'current'">Applications</a>
+        <a href="/tasks" th:text="#{nav.tasks}" th:classappend="${path == '/tasks'} ? 'current'">Tasks</a>
+      </nav>
+      <div class="switches">
+        <form method="post" action="/me">
+          <label><span th:text="#{me.label}">Acting as</span>
+            <select name="user" onchange="this.form.requestSubmit()">
+              <option th:each="p : ${people}" th:value="${p.id}" th:selected="${p.id == me.id}" th:text="${p.name} + ' (' + #{'group.' + ${p.group}} + ')'">Alex</option>
+            </select>
+          </label>
+          <input type="hidden" name="back" th:value="${path}" />
+        </form>
+        <form method="get" th:action="${path}">
+          <select name="language" th:attr="aria-label=#{nav.language}" onchange="this.form.requestSubmit()">
+            <option th:each="l : ${languages}" th:value="${l.key}" th:selected="${l.key == language}" th:text="${l.value}">English</option>
+          </select>
+        </form>
+      </div>
+    </header>
+
+    <!-- What the model found (Outcome): the findings in the colour of their severity, the next steps
+         when nothing blocks the application, and the values; each names its sources. -->
+    <section th:fragment="outcome(o)" class="outcome">
+      <div th:each="f : ${o.findings}" class="card" th:classappend="${f.severity}">
+        <h4 th:text="${f.title}">Finding</h4>
+        <p th:text="${f.comment}">Why</p>
+        <span class="sources" th:text="${f.sources}">Art. 1</span>
+      </div>
+      <div th:if="${o.allowed}" class="card allowed">
+        <h4 th:text="${o.allowedText}">No rule stops this application.</h4>
+        <ul>
+          <li th:each="s : ${o.nextSteps}"><span th:text="${s.label}">Step</span> <span class="sources" th:text="${s.sources}">Art. 1</span></li>
+        </ul>
+      </div>
+      <dl th:unless="${o.values.isEmpty()}" class="values">
+        <div th:each="v : ${o.values}">
+          <dt th:text="${v.label}">Value</dt>
+          <dd><span th:text="${v.value}">1</span> <span class="sources" th:text="${v.sources}">Art. 1</span></dd>
+        </div>
+      </dl>
+    </section>
+
+    <!-- The BPMN process, drawn by bpmn-js (diagram.js), with the activities done and active marked. -->
+    <div th:fragment="diagram(done, active)" class="diagram" role="img" th:attr="aria-label=#{diagram.label},data-done=${done},data-active=${active}"></div>
+
+    <!-- A task of the office (Views.Task): who has it, its due date, and claiming or releasing it. -->
+    <div th:fragment="task(t, applicationId)" class="task">
+      <span class="meta" th:text="${t.assignee.isEmpty()} ? #{task.offered} : ${t.assignee}">Offered</span>
+      <span class="meta" th:unless="${t.due.isEmpty()}" th:text="#{column.due} + ' ' + ${t.due}">Due</span>
+      <span class="badge overdue" th:if="${t.overdue}" th:text="#{task.overdue}">overdue</span>
+      <form th:if="${t.claimable}" method="post" th:action="@{/tasks/{id}/claim(id=${t.id})}" class="inline">
+        <input type="hidden" name="application" th:value="${applicationId}" /><button th:text="#{task.claim}">Claim</button>
+      </form>
+      <form th:if="${t.mine}" method="post" th:action="@{/tasks/{id}/unclaim(id=${t.id})}" class="inline">
+        <input type="hidden" name="application" th:value="${applicationId}" /><button class="link" th:text="#{task.unclaim}">Release</button>
+      </form>
+    </div>
+  </body>
+</html>

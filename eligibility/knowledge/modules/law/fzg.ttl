@@ -1,0 +1,44 @@
+# A shared module: the articles of the FZG (SR 831.42) that the domains cite (prov:wasDerivedFrom),
+# with their labels in the abbreviations of each language.
+# Checked against the consolidated text on fedlex.admin.ch on 16 October 2026 (in force since
+# 1 January 2024).
+# The comments are short summaries in English, not official texts.
+
+@prefix law:  <https://example.org/ch-law#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/ch-law/fzg> a owl:Ontology ;
+  rdfs:label "FZG (SR 831.42)" .
+
+law:FZG a prov:Entity ;
+  rdfs:label "FZG (SR 831.42)"@en , "FZG (SR 831.42)"@de , "LFLP (RS 831.42)"@fr , "LFLP (RS 831.42)"@it ;
+  rdfs:comment "Federal Act on Vested Benefits in Occupational Retirement, Survivors' and Disability Pension Plans." .
+law:FZG-2-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 2 para. 1"@en , "FZG Art. 2 Abs. 1"@de , "LFLP art. 2 al. 1"@fr , "LFLP art. 2 cpv. 1"@it ;
+  rdfs:comment "Insured persons who leave the pension fund before an insured event (Vorsorgefall) are entitled to a vested benefit." .
+law:FZG-2-3 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 2 para. 3"@en , "FZG Art. 2 Abs. 3"@de , "LFLP art. 2 al. 3"@fr , "LFLP art. 2 cpv. 3"@it ;
+  rdfs:comment "The vested benefit falls due when the person leaves the fund. From then on it earns interest." .
+law:FZG-2-4 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 2 para. 4"@en , "FZG Art. 2 Abs. 4"@de , "LFLP art. 2 al. 4"@fr , "LFLP art. 2 cpv. 4"@it ;
+  rdfs:comment "If the fund does not transfer the vested benefit within 30 days after it has the information it needs, it owes interest on arrears from the end of that period." .
+law:FZG-3-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 3 para. 1"@en , "FZG Art. 3 Abs. 1"@de , "LFLP art. 3 al. 1"@fr , "LFLP art. 3 cpv. 1"@it ;
+  rdfs:comment "When the person joins a new pension fund, the former fund transfers the vested benefit to it." .
+law:FZG-4-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 4 para. 1"@en , "FZG Art. 4 Abs. 1"@de , "LFLP art. 4 al. 1"@fr , "LFLP art. 4 cpv. 1"@it ;
+  rdfs:comment "A person who does not join a new pension fund tells the fund in which permitted form to keep the pension protection: a vested benefits policy or account (FZV Art. 10)." .
+law:FZG-5-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 5 para. 1"@en , "FZG Art. 5 Abs. 1"@de , "LFLP art. 5 al. 1"@fr , "LFLP art. 5 cpv. 1"@it ;
+  rdfs:comment "Cash payment if the person a. leaves Switzerland for good (Art. 25f reserved), b. starts a self-employed activity and is no longer subject to mandatory occupational pension insurance, or c. the vested benefit is less than the person's annual contribution." .
+law:FZG-5-2 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 5 para. 2"@en , "FZG Art. 5 Abs. 2"@de , "LFLP art. 5 al. 2"@fr , "LFLP art. 5 cpv. 2"@it ;
+  rdfs:comment "A married person or a person in a registered partnership gets a cash payment only with the written consent of the spouse or partner." .
+law:FZG-5-3 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 5 para. 3"@en , "FZG Art. 5 Abs. 3"@de , "LFLP art. 5 al. 3"@fr , "LFLP art. 5 cpv. 3"@it ;
+  rdfs:comment "If the consent cannot be obtained, or is refused without a valid reason, the person can ask the civil court." .
+law:FZG-25f-1 a prov:Entity ; prov:wasDerivedFrom law:FZG ;
+  rdfs:label "FZG Art. 25f para. 1"@en , "FZG Art. 25f Abs. 1"@de , "LFLP art. 25f al. 1"@fr , "LFLP art. 25f cpv. 1"@it ;
+  rdfs:comment "A person who leaves Switzerland for good cannot ask for the retirement assets under BVG Art. 15, earned until leaving the fund, in cash if the person a. stays insured under the mandatory scheme for old age, death and disability of a member state of the EU, b. of Iceland or Norway, or c. lives in Liechtenstein." .

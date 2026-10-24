@@ -1,0 +1,11 @@
+# Written by Vaadin's frontend build, from the dependencies: not sources.
+node_modules/
+src/main/frontend/generated/
+src/main/bundles/
+package.json
+package-lock.json
+tsconfig.json
+types.d.ts
+vite.config.ts
+vite.generated.ts
+target/

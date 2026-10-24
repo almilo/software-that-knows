@@ -1,0 +1,23 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}">
+  <head th:replace="~{layout :: head(#{nav.processes})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <main>
+      <h1 th:text="#{app.title}">Applications in a process</h1>
+      <p class="intro" th:text="#{app.intro}">Intro</p>
+      <p class="hint" th:text="#{app.demo}">Demo</p>
+      <h2 th:text="#{nav.processes}">Processes</h2>
+      <div class="processes">
+        <article th:each="p : ${processes}" class="card">
+          <h3 th:text="${p.title}">Process</h3>
+          <p th:text="${p.summary}">Summary</p>
+          <div class="actions"><a class="button primary" th:href="@{/apply/{d}(d=${p.name})}" th:text="#{apply}">Apply</a></div>
+        </article>
+      </div>
+      <h2 th:text="#{process.heading}">The process</h2>
+      <p th:text="#{process.intro}">Intro</p>
+      <div th:replace="~{layout :: diagram('', '')}"></div>
+    </main>
+  </body>
+</html>

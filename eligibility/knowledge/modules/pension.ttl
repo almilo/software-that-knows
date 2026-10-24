@@ -1,0 +1,58 @@
+# A shared module: an application to an occupational pension fund, by an insured person. A
+# domain gets its fields by making its class a subclass of pension:PensionApplication, and by
+# importing this module, which imports person.ttl.
+#
+# The vested benefit (Freizügigkeitsleistung) is defined by the Vested Benefits Act (FZG, SR 831.42,
+# Art. 15 to 19). Here it is a number that the person reads on a statement of the fund; the domains
+# state which articles use it. The texts were in the wef model first.
+
+@prefix form:   <https://example.org/form#> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix pension: <https://example.org/pension#> .
+@prefix person: <https://example.org/person#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+pension: a owl:Ontology ;
+  rdfs:label "An application to an occupational pension fund" ;
+  owl:imports person: ;
+  sh:declare [ sh:prefix "pension" ; sh:namespace "https://example.org/pension#"^^xsd:anyURI ] .
+
+pension:PensionApplication a rdfs:Class ;
+  rdfs:subClassOf person:PersonalApplication ;
+  rdfs:comment "An application by an insured person to an occupational pension fund or a vested benefits institution." .
+
+pension:pensionFund a sh:PropertyGroup ; sh:order 3 ;
+  rdfs:label "Pension fund"@en , "Pensionskasse"@de , "Caisse de pension"@fr , "Cassa pensioni"@it .
+
+pension:PensionApplicationShape a sh:NodeShape ;
+  sh:targetClass pension:PensionApplication ;
+  sh:property pension:RetirementAge , pension:RetirementAgeMonths , pension:VestedBenefit .
+
+pension:RetirementAge a sh:PropertyShape ;
+  sh:path pension:retirementAge ; sh:datatype xsd:integer ; sh:minInclusive 58 ; sh:maxInclusive 70 ; sh:minCount 1 ;
+  sh:group person:you ; sh:order 2 ;
+  sh:name "Reference age in your pension fund's regulations (years)"@en ,
+          "Referenzalter gemäss Reglement Ihrer Pensionskasse (Jahre)"@de ,
+          "Âge de référence selon le règlement de votre caisse de pension (ans)"@fr ,
+          "Età di riferimento secondo il regolamento della sua cassa pensioni (anni)"@it ;
+  sh:description "Usually 65."@en , "Meistens 65."@de , "En général 65 ans."@fr , "Di solito 65 anni."@it .
+
+pension:RetirementAgeMonths a sh:PropertyShape ;
+  sh:path pension:retirementAgeMonths ; sh:datatype xsd:integer ; sh:minInclusive 0 ; sh:maxInclusive 11 ;
+  sh:group person:you ; sh:order 3 ;
+  sh:name "And months, if any"@en , "Und Monate, falls vorhanden"@de ,
+          "Et mois, le cas échéant"@fr , "E mesi, se del caso"@it ;
+  sh:description "For example 3 for 64 years and 3 months, the reference age of women born in 1961."@en ,
+                 "Zum Beispiel 3 für 64 Jahre und 3 Monate, das Referenzalter der Frauen mit Jahrgang 1961."@de ,
+                 "Par exemple 3 pour 64 ans et 3 mois, l'âge de référence des femmes nées en 1961."@fr ,
+                 "Ad esempio 3 per 64 anni e 3 mesi, l'età di riferimento delle donne nate nel 1961."@it .
+
+pension:VestedBenefit a sh:PropertyShape ;
+  sh:path pension:vestedBenefit ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+  sh:group pension:pensionFund ; sh:order 1 ;
+  sh:name "Your vested benefit today (CHF)"@en , "Ihre heutige Freizügigkeitsleistung (CHF)"@de ,
+          "Votre prestation de libre passage actuelle (CHF)"@fr , "La sua prestazione di libero passaggio attuale (CHF)"@it ;
+  sh:description "On your pension certificate."@en , "Auf Ihrem Vorsorgeausweis."@de ,
+                 "Sur votre certificat de prévoyance."@fr , "Sul suo certificato di previdenza."@it .

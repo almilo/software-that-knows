@@ -1,0 +1,120 @@
+# A test domain, not a real process: a library card of a fictional town library. The tests of every
+# stack add it to a copy of the knowledge model and check that the stack runs it without a change to
+# its code: the claim that a new domain needs only its model.
+#
+# It uses each kind of question (a choice of two, a choice of four, a date, a whole number, an
+# amount), a question asked only after a rule derives a fact, a refusal, a value and next steps, and
+# names its sources, which are defined here, since no law applies.
+
+@prefix lib:  <https://example.org/library-card#> .
+@prefix form: <https://example.org/form#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+lib: a owl:Ontology ;
+  rdfs:label "Library card (test domain)" ;
+  owl:imports form: ;
+  sh:declare [ sh:prefix "lib" ; sh:namespace "https://example.org/library-card#"^^xsd:anyURI ] .
+
+lib:Rules-2 rdfs:label "Library rules § 2"@en , "Bibliotheksordnung § 2"@de , "Règlement de la bibliothèque § 2"@fr , "Regolamento della biblioteca § 2"@it .
+lib:Rules-3 rdfs:label "Library rules § 3"@en , "Bibliotheksordnung § 3"@de , "Règlement de la bibliothèque § 3"@fr , "Regolamento della biblioteca § 3"@it .
+
+lib:adult rdfs:label "Adult"@en , "Erwachsene"@de , "Adulte"@fr , "Adulto"@it .
+lib:student rdfs:label "Student"@en , "Studierende"@de , "Étudiant"@fr , "Studente"@it .
+lib:family rdfs:label "Family"@en , "Familie"@de , "Famille"@fr , "Famiglia"@it .
+lib:visitor rdfs:label "Visitor"@en , "Gast"@de , "Visiteur"@fr , "Ospite"@it .
+
+lib:you a sh:PropertyGroup ; sh:order 1 ; rdfs:label "You"@en , "Sie"@de , "Vous"@fr , "Lei"@it .
+lib:card a sh:PropertyGroup ; sh:order 2 ; rdfs:label "Card"@en , "Karte"@de , "Carte"@fr , "Tessera"@it .
+
+lib:Application a rdfs:Class ; rdfs:comment "An application for a library card." .
+
+lib:ApplicationShape a sh:NodeShape ;
+  sh:targetClass lib:Application ;
+  form:region "CH" ;
+  rdfs:label "Library card"@en , "Bibliotheksausweis"@de , "Carte de bibliothèque"@fr , "Tessera della biblioteca"@it ;
+  form:summary "A test domain: a card of a fictional town library."@en , "Eine Testdomäne: ein Ausweis einer erfundenen Stadtbibliothek."@de ,
+               "Un domaine de test : une carte d'une bibliothèque municipale fictive."@fr , "Un dominio di prova: una tessera di una biblioteca comunale fittizia."@it ;
+  rdfs:comment "Test domain, not a real process."@en , "Testdomäne, kein echter Prozess."@de , "Domaine de test, pas un vrai processus."@fr , "Dominio di prova, non un vero processo."@it ;
+  sh:property
+    [ sh:path lib:birthDate ; sh:datatype xsd:date ; sh:minCount 1 ; sh:group lib:you ; sh:order 1 ;
+      sh:name "Date of birth"@en , "Geburtsdatum"@de , "Date de naissance"@fr , "Data di nascita"@it ;
+      prov:wasDerivedFrom lib:Rules-2 ] ,
+    [ sh:path lib:resident ; sh:in ( form:yes form:no ) ; sh:minCount 1 ; sh:group lib:you ; sh:order 2 ;
+      sh:name "Do you live in the town?"@en , "Wohnen Sie in der Stadt?"@de , "Habitez-vous en ville ?"@fr , "Abita in città?"@it ;
+      prov:wasDerivedFrom lib:Rules-2 ] ,
+    [ sh:path lib:parentConsent ; sh:in ( form:yes form:no ) ; sh:minCount 1 ; sh:group lib:you ; sh:order 3 ;
+      form:askedWhen [ sh:prefixes lib: ; sh:ask "ASK { $this lib:under16 true }" ] ;
+      sh:name "Does a parent agree?"@en , "Ist ein Elternteil einverstanden?"@de , "Un parent est-il d'accord ?"@fr , "Un genitore è d'accordo?"@it ;
+      prov:wasDerivedFrom lib:Rules-2 ] ,
+    [ sh:path lib:cardType ; sh:in ( lib:adult lib:student lib:family lib:visitor ) ; sh:minCount 1 ; sh:group lib:card ; sh:order 1 ;
+      sh:name "Which card?"@en , "Welche Karte?"@de , "Quelle carte ?"@fr , "Quale tessera?"@it ;
+      prov:wasDerivedFrom lib:Rules-3 ] ,
+    [ sh:path lib:books ; sh:datatype xsd:integer ; sh:minInclusive 1 ; sh:maxInclusive 20 ; sh:group lib:card ; sh:order 2 ;
+      sh:name "Books at a time"@en , "Bücher gleichzeitig"@de , "Livres à la fois"@fr , "Libri alla volta"@it ;
+      sh:description "At most 20."@en , "Höchstens 20."@de , "Au plus 20."@fr , "Al massimo 20."@it ;
+      prov:wasDerivedFrom lib:Rules-3 ] ,
+    [ sh:path lib:deposit ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ; sh:group lib:card ; sh:order 3 ;
+      form:askedWhen [ sh:prefixes lib: ; sh:ask "ASK { $this lib:cardType lib:visitor }" ] ;
+      sh:name "Deposit (CHF)"@en , "Depot (CHF)"@de , "Caution (CHF)"@fr , "Deposito (CHF)"@it ;
+      prov:wasDerivedFrom lib:Rules-3 ] .
+
+lib:ApplicationShape sh:rule
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this lib:under16 true }
+      WHERE { $this lib:birthDate ?birth ; form:today ?today FILTER (?today < ?birth + "P16Y"^^xsd:duration) }""" ] ,
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this lib:fee ?fee }
+      WHERE {
+        $this lib:cardType ?type .
+        VALUES (?type ?fee) { (lib:adult 30) (lib:student 15) (lib:family 45) (lib:visitor 0) }
+      }""" ] ,
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding lib:NotResident }
+      WHERE { $this lib:resident form:no ; lib:cardType ?type FILTER (?type != lib:visitor) }""" ] ,
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding lib:NoConsent }
+      WHERE { $this lib:under16 true ; lib:parentConsent form:no }""" ] ,
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep lib:BringId }
+      WHERE { }""" ] ,
+  [ a sh:SPARQLRule ; sh:order 2 ; sh:prefixes lib: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep lib:ParentSignature }
+      WHERE { $this lib:under16 true }""" ] .
+
+lib:under16 a rdf:Property ; rdfs:comment "True before the 16th birthday." ; prov:wasDerivedFrom lib:Rules-2 .
+
+lib:fee a form:Value ; sh:order 1 ;
+  rdfs:label "Yearly fee (CHF)"@en , "Jahresgebühr (CHF)"@de , "Cotisation annuelle (CHF)"@fr , "Tassa annuale (CHF)"@it ;
+  prov:wasDerivedFrom lib:Rules-3 .
+
+lib:NotResident a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Not living in the town"@en , "Nicht in der Stadt wohnhaft"@de , "N'habite pas en ville"@fr , "Non abita in città"@it ;
+  rdfs:comment "Only residents get this card; others can take a visitor card."@en , "Nur Einwohner erhalten diese Karte; andere können eine Gastkarte nehmen."@de ,
+               "Seuls les habitants obtiennent cette carte ; les autres peuvent prendre une carte de visiteur."@fr , "Solo gli abitanti ricevono questa tessera; gli altri possono prendere una tessera ospite."@it ;
+  prov:wasDerivedFrom lib:Rules-2 .
+
+lib:NoConsent a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "No consent of a parent"@en , "Keine Zustimmung eines Elternteils"@de , "Pas d'accord d'un parent"@fr , "Nessun consenso di un genitore"@it ;
+  rdfs:comment "Under 16, a parent must agree."@en , "Unter 16 muss ein Elternteil zustimmen."@de , "Avant 16 ans, un parent doit être d'accord."@fr , "Sotto i 16 anni, un genitore deve essere d'accordo."@it ;
+  prov:wasDerivedFrom lib:Rules-2 .
+
+lib:BringId a form:NextStep ; sh:order 1 ;
+  rdfs:label "Bring an identity card to the desk."@en , "Bringen Sie einen Ausweis an den Schalter."@de ,
+             "Apportez une pièce d'identité au guichet."@fr , "Porti un documento d'identità allo sportello."@it ;
+  prov:wasDerivedFrom lib:Rules-2 .
+
+lib:ParentSignature a form:NextStep ; sh:order 2 ;
+  rdfs:label "A parent signs the application."@en , "Ein Elternteil unterschreibt den Antrag."@de ,
+             "Un parent signe la demande."@fr , "Un genitore firma la domanda."@it ;
+  prov:wasDerivedFrom lib:Rules-2 .

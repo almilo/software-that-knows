@@ -1,0 +1,8 @@
+{
+  "$comment": "Example applications of wef, written by hand: the recorder adds them before the drawn ones. Answers only; the expected decision is recorded.",
+  "examples": [
+    { "date": "2026-10-02", "answers": { "birthDate": "1986-03-15", "retirementAge": 65, "married": "no", "purpose": "buyOrBuild", "propertyType": "apartment", "ownership": "soleOwnership", "ownUse": "yes", "vestedBenefit": 150000, "requestedAmount": 100000, "withdrawnBefore": "no" } },
+    { "date": "2026-10-02", "answers": { "birthDate": "1970-05-20", "retirementAge": 65, "married": "yes", "spouseConsent": "yes", "purpose": "repayMortgage", "propertyType": "house", "ownership": "jointOwnership", "ownUse": "yes", "vestedBenefit": 400000, "vestedBenefitAt50": 200000, "requestedAmount": 150000, "withdrawnBefore": "yes", "lastWithdrawal": "2019-01-01", "alreadyInvested": 40000, "otherHome": "no", "fundUnderfunded": "no" } },
+    { "date": "2027-03-01", "answers": { "birthDate": "1990-01-31", "retirementAge": 65, "married": "no", "purpose": "cooperativeShares", "ownUse": "yes", "vestedBenefit": 50000, "requestedAmount": 20000, "withdrawnBefore": "no" } }
+  ]
+}

@@ -1,0 +1,7313 @@
+{
+  "$comment": "Shared test cases of parental-allowance: what every stack must decide. Recorded by react-bun/generator/conformance.ts. Do not edit.",
+  "domain": "parental-allowance",
+  "cases": [
+    {
+      "id": "parental-allowance-001",
+      "date": "2026-10-02",
+      "answers": {
+        "childBirthDate": "2026-10-02",
+        "legalParent": "no",
+        "leaveStart": "2026-08-31",
+        "insured": "no",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2026-10-02",
+          "insured": "no",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-002",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-01-31",
+        "legalParent": "no",
+        "leaveStart": "2019-01-01",
+        "insured": "yes",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 0,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-01-31",
+          "legalParent": "no",
+          "leaveStart": "2019-01-01",
+          "insured": "yes",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2026-07-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-003",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1986-03-15",
+        "legalParent": "yes",
+        "leaveStart": "2026-10-02",
+        "insured": "no",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 150000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1986-03-15",
+          "insured": "no",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 21560,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1986-06-20",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-004",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1960-06-15",
+        "legalParent": "no",
+        "leaveStart": "1976-10-02",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1960-06-15",
+          "legalParent": "no",
+          "leaveStart": "1976-10-02",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1960-12-14",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-005",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1960-06-15",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-01",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 1000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1960-06-15",
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1960-09-20",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-006",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "legalParent": "yes",
+        "leaveStart": "2010-05-01",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 20000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "legalParent": "yes",
+          "leaveStart": "2010-05-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-007",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2010-05-01",
+        "legalParent": "yes",
+        "leaveStart": "2021-10-02",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "employed",
+        "monthlyIncome": 1000,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2010-05-01",
+          "legalParent": "yes",
+          "leaveStart": "2021-10-02",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "employed",
+          "monthlyIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 26.66666666666667,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 373.33333333333337,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2010-10-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-008",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2026-08-31",
+        "legalParent": "no",
+        "leaveStart": "1964-10-01",
+        "insured": "yes",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2026-08-31",
+          "insured": "yes",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 21560,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2026-12-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-009",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1976-10-03",
+        "legalParent": "yes",
+        "leaveStart": "2026-08-31",
+        "insured": "no",
+        "worked": "no",
+        "status": "employed",
+        "monthlyIncome": 150000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1976-10-03",
+          "legalParent": "yes",
+          "leaveStart": "2026-08-31",
+          "insured": "no",
+          "worked": "no",
+          "status": "employed",
+          "monthlyIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1977-04-02",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-010",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1986-03-15",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "spouseBusiness",
+        "monthlyIncome": 1000,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1964-10-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "spouseBusiness",
+          "monthlyIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 26.66666666666667,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 2613.333333333334,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1965-01-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "parental-allowance-011",
+      "date": "2026-10-02",
+      "answers": {
+        "legalParent": "yes",
+        "leaveStart": "1976-10-02",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "employed",
+        "monthlyIncome": 400000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "insured": "yes",
+          "worked": "yes",
+          "status": "employed",
+          "monthlyIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "parent",
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-012",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-02",
+        "legalParent": "no",
+        "leaveStart": "1976-10-03",
+        "insured": "no",
+        "worked": "no",
+        "status": "employed",
+        "monthlyIncome": 20000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-02",
+          "legalParent": "no",
+          "leaveStart": "1976-10-03",
+          "insured": "no",
+          "worked": "no",
+          "status": "employed",
+          "monthlyIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-013",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1972-02-29",
+        "legalParent": "yes",
+        "leaveStart": "2026-10-02",
+        "insured": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1972-02-29",
+          "legalParent": "yes",
+          "leaveStart": "2026-10-02",
+          "insured": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1972-08-28",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-014",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "legalParent": "yes",
+        "leaveStart": "1990-01-31",
+        "insured": "yes",
+        "monthlyIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "legalParent": "yes",
+          "leaveStart": "1990-01-31",
+          "insured": "yes"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "worked",
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-015",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "no",
+        "leaveStart": "1972-02-29",
+        "insured": "no",
+        "status": "employed",
+        "monthlyIncome": 50000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "no",
+          "leaveStart": "1972-02-29",
+          "insured": "no",
+          "status": "employed",
+          "monthlyIncome": 50000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "childBirthDate",
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-016",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "legalParent": "no",
+        "leaveStart": "2026-01-31",
+        "insured": "yes",
+        "worked": "no",
+        "monthlyIncome": 50000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "insured": "yes",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "childBirthDate",
+          "status"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-017",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2026-08-31",
+        "legalParent": "no",
+        "leaveStart": "1964-10-01",
+        "insured": "yes",
+        "status": "employed",
+        "monthlyIncome": 0,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2026-08-31",
+          "insured": "yes",
+          "status": "employed",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2026-12-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-018",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1962-03-15",
+        "legalParent": "no",
+        "leaveStart": "1960-06-15",
+        "insured": "no",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 400000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1962-03-15",
+          "insured": "no",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 21560,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1962-06-20",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-019",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2021-10-02",
+        "legalParent": "no",
+        "leaveStart": "2026-10-02",
+        "insured": "no",
+        "worked": "yes",
+        "status": "spouseBusiness",
+        "monthlyIncome": 1000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2021-10-02",
+          "legalParent": "no",
+          "leaveStart": "2026-10-02",
+          "insured": "no",
+          "worked": "yes",
+          "status": "spouseBusiness",
+          "monthlyIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 26.66666666666667,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 373.33333333333337,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2022-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-020",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "leaveStart": "1972-02-29",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44444444444445,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-021",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1962-03-15",
+        "legalParent": "no",
+        "leaveStart": "1962-03-15",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1962-03-15",
+          "legalParent": "no",
+          "leaveStart": "1962-03-15",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "annualIncome"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1962-09-14",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-022",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1986-03-15",
+        "legalParent": "yes",
+        "insured": "no",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 20000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1986-03-15",
+          "legalParent": "yes",
+          "insured": "no",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "leaveStart"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1986-09-14",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-023",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2021-10-02",
+        "legalParent": "yes",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2021-10-02",
+          "legalParent": "yes",
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "leaveStart"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2022-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-024",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-01-31",
+        "legalParent": "no",
+        "leaveStart": "2024-08-29",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 1000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-01-31",
+          "legalParent": "no",
+          "leaveStart": "2024-08-29",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44444444444445,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 622.2222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2026-07-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-025",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "legalParent": "no",
+        "leaveStart": "2026-01-31",
+        "insured": "yes",
+        "worked": "yes",
+        "monthlyIncome": 1000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "insured": "yes",
+          "worked": "yes"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "childBirthDate",
+          "status"
+        ],
+        "values": [],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-026",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1972-02-29",
+        "insured": "no",
+        "worked": "yes",
+        "status": "spouseBusiness",
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "yes",
+          "leaveStart": "1972-02-29",
+          "insured": "no",
+          "worked": "yes",
+          "status": "spouseBusiness"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "monthlyIncome"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-027",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2021-10-02",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-01",
+        "insured": "no",
+        "worked": "yes",
+        "status": "employed",
+        "monthlyIncome": 0,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2021-10-02",
+          "insured": "no",
+          "worked": "yes",
+          "status": "employed",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2022-01-07",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-028",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-01",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1964-10-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 21560,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1965-01-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "parental-allowance-029",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-08-31",
+        "leaveStart": "2010-05-01",
+        "insured": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 150000,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-08-31",
+          "leaveStart": "2010-05-01",
+          "insured": "no",
+          "status": "selfEmployed",
+          "annualIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "legalParent",
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 2.2222222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 31.111111111111114,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-02-27",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-030",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2024-08-29",
+        "legalParent": "no",
+        "insured": "no",
+        "worked": "yes",
+        "monthlyIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2024-08-29",
+          "insured": "no",
+          "worked": "yes"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2024-12-04",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-031",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1990-01-31",
+        "legalParent": "no",
+        "leaveStart": "2026-08-31",
+        "insured": "no",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 1000,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1990-01-31",
+          "insured": "no",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 2.2222222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 217.7777777777778,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1990-05-08",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-032",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "no",
+        "leaveStart": "1990-01-31",
+        "insured": "no",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "no",
+          "leaveStart": "1990-01-31",
+          "insured": "no",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 2.2222222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-033",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "2027-01-01",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "selfEmployed"
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "1964-10-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "selfEmployed"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "annualIncome"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "1965-01-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-034",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2026-08-31",
+        "legalParent": "yes",
+        "leaveStart": "1960-06-15",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 19999,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2026-08-31",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2026-12-06",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "parental-allowance-035",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1972-02-29",
+        "legalParent": "yes",
+        "leaveStart": "1972-02-29",
+        "insured": "no",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 0,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1972-02-29",
+          "legalParent": "yes",
+          "leaveStart": "1972-02-29",
+          "insured": "no",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1972-08-28",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-036",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "yes",
+        "leaveStart": "1990-01-31",
+        "insured": "yes",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 19999,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "yes",
+          "leaveStart": "1990-01-31",
+          "insured": "yes",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 19999
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-037",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "legalParent": "yes",
+        "leaveStart": "1972-02-29",
+        "insured": "no",
+        "worked": "no",
+        "status": "otherStatus",
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "insured": "no",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-038",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2019-01-01",
+        "leaveStart": "1964-10-02",
+        "insured": "no",
+        "worked": "yes",
+        "status": "otherStatus",
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2019-01-01",
+          "insured": "no",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2019-04-08",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-039",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "no",
+        "leaveStart": "1972-02-29",
+        "worked": "no",
+        "monthlyIncome": 150000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "no",
+          "leaveStart": "1972-02-29",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "insured",
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-040",
+      "date": "2026-10-02",
+      "answers": {
+        "childBirthDate": "2026-01-31",
+        "legalParent": "yes",
+        "leaveStart": "2027-01-01",
+        "insured": "no",
+        "worked": "yes",
+        "status": "spouseBusiness",
+        "monthlyIncome": 50000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2026-01-31",
+          "insured": "no",
+          "worked": "yes",
+          "status": "spouseBusiness",
+          "monthlyIncome": 50000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-041",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "mother",
+        "legalParent": "yes",
+        "leaveStart": "2026-10-02",
+        "insured": "no",
+        "worked": "no",
+        "monthlyIncome": 20000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "insured": "no",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "childBirthDate",
+          "status"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-042",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "mother",
+        "childBirthDate": "2026-10-02",
+        "legalParent": "yes",
+        "leaveStart": "1962-03-15",
+        "insured": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 50000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "mother",
+          "childBirthDate": "2026-10-02",
+          "insured": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 98,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastAllowanceDay",
+            "value": "2027-01-07",
+            "datatype": "date",
+            "sources": [
+              "EOG-16c-2",
+              "EOG-16d"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "EndsEarly",
+            "sources": [
+              "EOG-16d"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-043",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-01-31",
+        "legalParent": "yes",
+        "leaveStart": "2026-08-31",
+        "insured": "no",
+        "worked": "no",
+        "monthlyIncome": 0,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-01-31",
+          "legalParent": "yes",
+          "leaveStart": "2026-08-31",
+          "insured": "no",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2026-07-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-044",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-10-02",
+        "legalParent": "no",
+        "leaveStart": "2024-08-29",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-10-02",
+          "legalParent": "no",
+          "leaveStart": "2024-08-29",
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-045",
+      "date": "2027-03-01",
+      "answers": {
+        "childBirthDate": "2024-08-29",
+        "legalParent": "yes",
+        "leaveStart": "1976-10-03",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 19999,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2024-08-29",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-046",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "yes",
+        "leaveStart": "1976-10-02",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 1000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "yes",
+          "leaveStart": "1976-10-02",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44444444444445,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-047",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1976-10-02",
+        "legalParent": "yes",
+        "leaveStart": "2026-08-31",
+        "insured": "no",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 400000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1976-10-02",
+          "legalParent": "yes",
+          "leaveStart": "2026-08-31",
+          "insured": "no",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 19999
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 622.1911111111112,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1977-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-048",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-10-02",
+        "legalParent": "yes",
+        "leaveStart": "1990-01-31",
+        "insured": "yes",
+        "worked": "no",
+        "status": "employed",
+        "monthlyIncome": 150000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-10-02",
+          "legalParent": "yes",
+          "leaveStart": "1990-01-31",
+          "insured": "yes",
+          "worked": "no",
+          "status": "employed",
+          "monthlyIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-049",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1976-10-02",
+        "legalParent": "no",
+        "leaveStart": "1976-10-02",
+        "insured": "no",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 20000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1976-10-02",
+          "legalParent": "no",
+          "leaveStart": "1976-10-02",
+          "insured": "no",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1977-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-050",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2026-10-02",
+        "legalParent": "no",
+        "leaveStart": "1990-01-31",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 1000,
+        "annualIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2026-10-02",
+          "legalParent": "no",
+          "leaveStart": "1990-01-31",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "insured"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-051",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "no",
+        "leaveStart": "1990-01-31",
+        "insured": "no",
+        "worked": "yes",
+        "monthlyIncome": 20000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "no",
+          "leaveStart": "1990-01-31",
+          "insured": "no",
+          "worked": "yes"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-052",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2024-08-29",
+        "legalParent": "no",
+        "leaveStart": "1964-10-01",
+        "insured": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2024-08-29",
+          "legalParent": "no",
+          "leaveStart": "1964-10-01",
+          "insured": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2025-02-27",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-053",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-01",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "employed",
+        "monthlyIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "yes",
+          "leaveStart": "1964-10-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "employed",
+          "monthlyIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": true
+      }
+    },
+    {
+      "id": "parental-allowance-054",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1976-10-03",
+        "legalParent": "no",
+        "leaveStart": "1986-03-15",
+        "insured": "no",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1976-10-03",
+          "legalParent": "no",
+          "leaveStart": "1986-03-15",
+          "insured": "no",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 50000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 111.11111111111111,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 1555.5555555555557,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1977-04-02",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-055",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1972-02-29",
+        "legalParent": "yes",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1972-02-29",
+          "legalParent": "yes",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 19999
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "leaveStart"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 622.1911111111112,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1972-08-28",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-056",
+      "date": "2027-03-01",
+      "answers": {
+        "childBirthDate": "2021-10-02",
+        "legalParent": "no",
+        "leaveStart": "1960-06-15",
+        "insured": "no",
+        "worked": "no",
+        "monthlyIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2021-10-02",
+          "insured": "no",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "parent",
+          "status"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-057",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1990-01-31",
+        "legalParent": "no",
+        "leaveStart": "1976-10-03",
+        "insured": "no",
+        "worked": "no",
+        "monthlyIncome": 0,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1990-01-31",
+          "legalParent": "no",
+          "leaveStart": "1976-10-03",
+          "insured": "no",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1990-07-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-058",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1962-03-15",
+        "legalParent": "yes",
+        "leaveStart": "1976-10-03",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1962-03-15",
+          "legalParent": "yes",
+          "leaveStart": "1976-10-03",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1962-09-14",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-059",
+      "date": "2027-03-01",
+      "answers": {
+        "childBirthDate": "2026-01-31",
+        "legalParent": "no",
+        "leaveStart": "2026-01-31",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2026-01-31",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "parent",
+          "insured"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-060",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2019-01-01",
+        "legalParent": "yes",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 50000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2019-01-01",
+          "legalParent": "yes",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "leaveStart"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2019-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-061",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "no",
+        "leaveStart": "2027-01-01",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "otherStatus",
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "no",
+          "leaveStart": "2027-01-01",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-062",
+      "date": "2027-03-01",
+      "answers": {
+        "childBirthDate": "2024-08-29",
+        "legalParent": "yes",
+        "leaveStart": "2010-05-01",
+        "insured": "no",
+        "worked": "no",
+        "status": "otherStatus",
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2024-08-29",
+          "insured": "no",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-063",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "legalParent": "yes",
+        "leaveStart": "1972-02-29",
+        "insured": "no",
+        "worked": "yes",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "legalParent": "yes",
+          "leaveStart": "1972-02-29",
+          "insured": "no",
+          "worked": "yes",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotBornYet",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "EOG-16c-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-064",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2019-01-01",
+        "legalParent": "yes",
+        "leaveStart": "2026-01-31",
+        "insured": "yes",
+        "worked": "no",
+        "annualIncome": 50000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2019-01-01",
+          "legalParent": "yes",
+          "leaveStart": "2026-01-31",
+          "insured": "yes",
+          "worked": "no"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2019-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-065",
+      "date": "2026-10-02",
+      "answers": {
+        "childBirthDate": "2027-01-01",
+        "legalParent": "yes",
+        "leaveStart": "2026-10-02",
+        "insured": "yes",
+        "status": "spouseBusiness",
+        "monthlyIncome": 0,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2027-01-01",
+          "insured": "yes",
+          "status": "spouseBusiness",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "parent",
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotBornYet",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "EOG-16c-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-066",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "legalParent": "no",
+        "insured": "no",
+        "status": "employed",
+        "monthlyIncome": 0,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "legalParent": "no",
+          "insured": "no",
+          "status": "employed",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "leaveStart",
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotBornYet",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "EOG-16c-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-067",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-02",
+        "legalParent": "yes",
+        "leaveStart": "1962-03-15",
+        "insured": "no",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-02",
+          "legalParent": "yes",
+          "leaveStart": "1962-03-15",
+          "insured": "no",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-068",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "leaveStart": "1990-01-31",
+        "insured": "no",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 0,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "leaveStart": "1990-01-31",
+          "insured": "no",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "legalParent"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotBornYet",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "EOG-16c-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-069",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-02",
+        "legalParent": "yes",
+        "leaveStart": "1972-02-29",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 150000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-02",
+          "legalParent": "yes",
+          "leaveStart": "1972-02-29",
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-04-01",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-070",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2010-05-01",
+        "legalParent": "no",
+        "leaveStart": "1976-10-03",
+        "insured": "yes",
+        "worked": "yes",
+        "status": "employed",
+        "monthlyIncome": 150000,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2010-05-01",
+          "legalParent": "no",
+          "leaveStart": "1976-10-03",
+          "insured": "yes",
+          "worked": "yes",
+          "status": "employed",
+          "monthlyIncome": 150000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2010-10-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-071",
+      "date": "2026-10-02",
+      "answers": {
+        "legalParent": "yes",
+        "leaveStart": "2019-01-01",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 150000,
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "parent",
+          "childBirthDate"
+        ],
+        "values": [],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-072",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1976-10-03",
+        "legalParent": "yes",
+        "leaveStart": "2024-08-29",
+        "insured": "yes",
+        "worked": "no",
+        "status": "selfEmployed",
+        "monthlyIncome": 50000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1976-10-03",
+          "legalParent": "yes",
+          "leaveStart": "2024-08-29",
+          "insured": "yes",
+          "worked": "no",
+          "status": "selfEmployed",
+          "annualIncome": 400000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 3080,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1977-04-02",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-073",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-02",
+        "insured": "no",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 0,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "yes",
+          "leaveStart": "1964-10-02",
+          "insured": "no",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-074",
+      "date": "2027-03-01",
+      "answers": {
+        "childBirthDate": "1964-10-01",
+        "legalParent": "yes",
+        "leaveStart": "1964-10-02",
+        "insured": "no",
+        "worked": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 20000,
+        "annualIncome": 400000
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "1964-10-01",
+          "insured": "no",
+          "worked": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 220,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-075",
+      "date": "2027-03-01",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1986-03-15",
+        "legalParent": "no",
+        "insured": "yes",
+        "worked": "no",
+        "status": "otherStatus",
+        "monthlyIncome": 400000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1986-03-15",
+          "legalParent": "no",
+          "insured": "yes",
+          "worked": "no",
+          "status": "otherStatus"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "leaveStart"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1986-09-14",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotEnoughWork",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          },
+          {
+            "id": "AskOffice",
+            "severity": "Notice",
+            "blocks": false,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-076",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "leaveStart": "1964-10-01",
+        "insured": "no",
+        "status": "spouseBusiness",
+        "monthlyIncome": 0,
+        "annualIncome": 19999
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "leaveStart": "1964-10-01",
+          "insured": "no",
+          "status": "spouseBusiness",
+          "monthlyIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "monthlyIncome"
+        ],
+        "missing": [
+          "childBirthDate",
+          "legalParent",
+          "worked"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-077",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "1964-10-01",
+        "legalParent": "no",
+        "leaveStart": "1962-03-15",
+        "insured": "yes",
+        "worked": "yes",
+        "monthlyIncome": 150000,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "1964-10-01",
+          "legalParent": "no",
+          "leaveStart": "1962-03-15",
+          "insured": "yes",
+          "worked": "yes"
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status"
+        ],
+        "missing": [
+          "status"
+        ],
+        "values": [
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "1965-03-31",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotLegalParent",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-078",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "legalParent": "yes",
+        "leaveStart": "1986-03-15",
+        "insured": "no",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 0,
+        "annualIncome": 1000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "legalParent": "yes",
+          "leaveStart": "1986-03-15",
+          "insured": "no",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 1000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "childBirthDate"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 2.2222222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-079",
+      "date": "2026-10-02",
+      "answers": {
+        "parent": "otherParent",
+        "childBirthDate": "2027-01-01",
+        "leaveStart": "2026-08-31",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "annualIncome": 20000
+      },
+      "expected": {
+        "answers": {
+          "parent": "otherParent",
+          "childBirthDate": "2027-01-01",
+          "leaveStart": "2026-08-31",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 20000
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "legalParent",
+          "leaveStart",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "legalParent",
+          "insured"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 44.44444444444445,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          },
+          {
+            "id": "days",
+            "value": 14,
+            "datatype": "integer",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "totalAllowance",
+            "value": 622.2222222222223,
+            "datatype": "double",
+            "sources": [
+              "EOG-16d",
+              "EOG-16k"
+            ]
+          },
+          {
+            "id": "lastLeaveDay",
+            "value": "2027-06-30",
+            "datatype": "date",
+            "sources": [
+              "EOG-16j"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "LeaveOutsidePeriod",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16j"
+            ]
+          },
+          {
+            "id": "NotBornYet",
+            "severity": "NotYet",
+            "blocks": true,
+            "sources": [
+              "EOG-16c-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          },
+          {
+            "id": "TakeWithinSixMonths",
+            "sources": [
+              "EOG-16j",
+              "EOG-16k"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    },
+    {
+      "id": "parental-allowance-080",
+      "date": "2026-10-02",
+      "answers": {
+        "childBirthDate": "2024-08-29",
+        "legalParent": "no",
+        "leaveStart": "1962-03-15",
+        "insured": "no",
+        "worked": "yes",
+        "status": "selfEmployed",
+        "monthlyIncome": 400000,
+        "annualIncome": 0
+      },
+      "expected": {
+        "answers": {
+          "childBirthDate": "2024-08-29",
+          "insured": "no",
+          "worked": "yes",
+          "status": "selfEmployed",
+          "annualIncome": 0
+        },
+        "shown": [
+          "parent",
+          "childBirthDate",
+          "insured",
+          "worked",
+          "status",
+          "annualIncome"
+        ],
+        "missing": [
+          "parent"
+        ],
+        "values": [
+          {
+            "id": "dailyAllowance",
+            "value": 0,
+            "datatype": "double",
+            "sources": [
+              "EOG-16e",
+              "EOG-16f",
+              "EOG-16l"
+            ]
+          }
+        ],
+        "findings": [
+          {
+            "id": "NotInsured",
+            "severity": "Refusal",
+            "blocks": true,
+            "sources": [
+              "EOG-16b-1",
+              "EOG-16i"
+            ]
+          }
+        ],
+        "nextSteps": [
+          {
+            "id": "Claim",
+            "sources": [
+              "EOG"
+            ]
+          }
+        ],
+        "allowed": false
+      }
+    }
+  ]
+}

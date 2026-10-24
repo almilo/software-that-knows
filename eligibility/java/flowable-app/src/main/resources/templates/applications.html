@@ -1,0 +1,22 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}">
+  <head th:replace="~{layout :: head(#{nav.applications})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <main>
+      <h1 th:text="#{nav.applications}">Applications</h1>
+      <p th:if="${rows.isEmpty()}" class="hint" th:text="#{applications.empty}">No application yet.</p>
+      <table th:unless="${rows.isEmpty()}">
+        <thead><tr><th th:text="#{column.process}">Process</th><th th:text="#{column.applicant}">Applicant</th><th th:text="#{column.state}">State</th><th th:text="#{column.started}">Started</th></tr></thead>
+        <tbody>
+          <tr th:each="r : ${rows}">
+            <td><a th:href="@{/applications/{id}(id=${r.id})}" th:text="${r.title}">Process</a></td>
+            <td th:text="${r.applicant}">Applicant</td>
+            <td><span class="state" th:classappend="${r.state}" th:text="#{'state.' + ${r.state}}">State</span></td>
+            <td th:text="${r.started}">Started</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

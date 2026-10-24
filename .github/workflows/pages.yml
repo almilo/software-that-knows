@@ -1,6 +1,6 @@
 # Build the demos and publish them to GitHub Pages.
-# Each demo goes to its own folder: /imci-fever/, /cloud-architecture/, /choices/<domain>/ and /car-insurance/. The
-# landing page is site/index.html.
+# Each demo goes to its own folder: /imci-fever/, /cloud-architecture/, /choices/<domain>/,
+# /eligibility/<domain>/ and /car-insurance/. The landing page is site/index.html.
 name: Pages
 
 on:
@@ -28,15 +28,16 @@ jobs:
 
       - name: Check and build each demo
         run: |
-          for demo in imci-fever cloud-architecture choices car-insurance; do
+          for demo in imci-fever cloud-architecture choices eligibility/react-bun car-insurance; do
             (cd "$demo" && bun install --frozen-lockfile && bun run typecheck && bun run test && bun run build)
           done
 
       - name: Assemble site
         run: |
-          for demo in imci-fever cloud-architecture choices car-insurance; do
+          for demo in imci-fever cloud-architecture choices eligibility car-insurance; do
+            app="$demo"; [ "$demo" = eligibility ] && app=eligibility/react-bun
             mkdir -p "_site/$demo"
-            cp -r "$demo/dist/." "_site/$demo/"
+            cp -r "$app/dist/." "_site/$demo/"
           done
           cp -r site/. _site/
 

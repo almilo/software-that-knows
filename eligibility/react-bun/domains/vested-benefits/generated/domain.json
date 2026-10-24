@@ -1,0 +1,22 @@
+{
+  "$comment": "Generated from knowledge/domains/vested-benefits/ontology/ by generator/generate.ts. Do not edit.",
+  "region": "CH",
+  "numbers": {
+    "de": {
+      "group": "’",
+      "decimal": "."
+    },
+    "en": {
+      "group": "’",
+      "decimal": "."
+    },
+    "fr": {
+      "group": " ",
+      "decimal": ","
+    },
+    "it": {
+      "group": "’",
+      "decimal": "."
+    }
+  }
+}

@@ -1,0 +1,26 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}">
+  <head th:replace="~{layout :: head(#{nav.tasks})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <main>
+      <h1 th:text="#{tasks.heading}">Your tasks</h1>
+      <p th:text="#{tasks.intro}">Intro</p>
+      <p th:if="${tasks.isEmpty()}" class="hint" th:text="#{tasks.empty}">No task.</p>
+      <table th:unless="${tasks.isEmpty()}">
+        <thead><tr><th th:text="#{column.task}">Task</th><th th:text="#{column.process}">Process</th><th th:text="#{column.assignee}">Assigned to</th><th th:text="#{column.due}">Due</th></tr></thead>
+        <tbody>
+          <tr th:each="t : ${tasks}">
+            <td>
+              <a th:href="@{/applications/{id}(id=${t.application})}" th:text="#{'activity.' + ${t.activity}}">Task</a>
+              <div th:if="${t.step}" class="meta" th:text="${t.step}">Step</div>
+            </td>
+            <td th:text="${t.title}">Process</td>
+            <td th:text="${t.assignee.isEmpty()} ? #{task.offered} : ${t.assignee}">Assigned to</td>
+            <td><span th:text="${t.due}">Due</span> <span class="badge overdue" th:if="${t.overdue}" th:text="#{task.overdue}">overdue</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </body>
+</html>

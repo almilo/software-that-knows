@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <!-- The form of a process (Form). On each change htmx posts it to /form/<domain>, and the server
+         answers with the form again: the questions that the model asks now, what is missing, and
+         the outcome so far. Submitting posts it to its action. -->
+    <form th:fragment="form" id="form" class="form" method="post" th:action="${form.action}"
+          th:attr="hx-post=@{/form/{d}(d=${form.domain})}" hx-trigger="change" hx-target="this" hx-swap="outerHTML">
+      <input type="hidden" name="_action" th:value="${form.action}" />
+      <input type="hidden" name="_reveal" th:value="${form.reveal}" />
+      <input th:each="h : ${form.hidden}" type="hidden" th:name="${h.name}" th:value="${h.value}" />
+      <section th:each="g : ${form.groups}" class="group">
+        <h2 th:text="${g.label}">Group</h2>
+        <div th:each="q : ${g.questions}" class="question" th:classappend="${q.missing} ? 'missing'">
+          <fieldset th:if="${q.input == 'radio'}">
+            <legend><span th:text="${q.label}">Question</span><span th:if="${q.required}" class="required">*</span></legend>
+            <p th:if="${q.help}" class="help" th:text="${q.help}">Help</p>
+            <label th:each="c : ${q.choices}" class="choice">
+              <input type="radio" th:name="${q.name}" th:value="${c.value}" th:checked="${c.value == q.value}" /> <span th:text="${c.label}">Choice</span>
+            </label>
+          </fieldset>
+          <th:block th:unless="${q.input == 'radio'}">
+            <label th:for="${q.name}"><span th:text="${q.label}">Question</span><span th:if="${q.required}" class="required">*</span></label>
+            <p th:if="${q.help}" class="help" th:text="${q.help}">Help</p>
+            <select th:if="${q.input == 'select'}" th:id="${q.name}" th:name="${q.name}">
+              <option value="" th:text="${form.texts.choose}">Choose…</option>
+              <option th:each="c : ${q.choices}" th:value="${c.value}" th:selected="${c.value == q.value}" th:text="${c.label}">Choice</option>
+            </select>
+            <input th:if="${q.input == 'date'}" type="date" th:id="${q.name}" th:name="${q.name}" th:value="${q.value}" />
+            <input th:if="${q.input == 'integer' or q.input == 'decimal'}" type="number" th:id="${q.name}" th:name="${q.name}" th:value="${q.value}"
+                   th:step="${q.input == 'integer'} ? '1' : 'any'" th:min="${q.min}" th:max="${q.max}" th:attr="inputmode=${q.input == 'integer'} ? 'numeric' : 'decimal'" />
+          </th:block>
+          <p th:if="${q.missing}" class="error" th:text="${q.label} + ' ' + ${form.texts.answerError}">needs an answer</p>
+        </div>
+      </section>
+      <th:block th:if="${form.complete()}">
+        <h2 th:text="${form.texts.outcome}">Outcome</h2>
+        <section th:replace="~{layout :: outcome(${form.outcome})}"></section>
+      </th:block>
+      <p th:if="${form.reveal and !form.complete()}" class="error" th:text="${form.texts.openQuestions}">Answer the questions marked above.</p>
+      <div class="actions"><button type="submit" class="primary" th:text="${form.texts.submit}">Submit</button></div>
+    </form>
+  </body>
+</html>

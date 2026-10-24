@@ -1,0 +1,328 @@
+# A knowledge model of the cash payment of the vested benefit (Barauszahlung der
+# Freizügigkeitsleistung) in Switzerland, from:
+#   FZG   Federal Act on Vested Benefits in Occupational Retirement, Survivors' and Disability
+#         Pension Plans (SR 831.42), Art. 2 to 5 and 25f
+#   DBG   Federal Act on Direct Federal Taxation (SR 642.11), Art. 38, 95 and 96, for the tax
+#
+# Demonstration only: not legal or financial advice, not checked by a lawyer or a pension fund.
+# The articles were checked against the consolidated texts on fedlex.admin.ch on 16 October 2026
+# (FZG in force since 1 January 2024, DBG in force since 2 September 2026).
+#
+# Reuse: this domain is the second process on the same shared modules as wef. It imports
+#   modules/person.ttl    date of birth, marriage, the spouse's consent, its finding and next step
+#   modules/pension.ttl   the reference age and the vested benefit
+# and adds only what is new: where the money is, the reason for a cash payment, and its rules.
+# The consent of the spouse is the same concept as in wef, with another legal basis: FZG Art. 5
+# para. 2 here, BVG Art. 30c para. 5 there (part 5 below).
+#
+# Scope and readings of the law:
+#   - Only the cash payment (FZG Art. 5). The transfer to a new fund (Art. 3) and to a vested
+#     benefits institution (Art. 4) appear as what happens without a reason for a cash payment.
+#   - The money can be in the pension fund or with a vested benefits institution; the reasons for a
+#     cash payment are the same for both.
+#   - "Before an insured event": the model checks only the reference age of the fund's regulations.
+#     Leaving after the earliest age for early retirement (FZG Art. 2 para. 1bis), disability and
+#     death are left out.
+#   - FZG Art. 25f: the restriction applies to a person who stays insured under the mandatory scheme
+#     of an EU member state, or of Iceland or Norway, and to every person who lives in Liechtenstein.
+#   - The annual contribution of FZG Art. 5 para. 1 c is the person's own contribution, as the
+#     pension certificate gives it.
+
+@prefix form:    <https://example.org/form#> .
+@prefix fzg:     <https://example.org/vested-benefits#> .
+@prefix law:     <https://example.org/ch-law#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix pension: <https://example.org/pension#> .
+@prefix person:  <https://example.org/person#> .
+@prefix prov:    <http://www.w3.org/ns/prov#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh:      <http://www.w3.org/ns/shacl#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+fzg: a owl:Ontology ;
+  rdfs:label "The vested benefit in cash" ;
+  owl:imports form: , pension: , <https://example.org/ch-law/fzg> , <https://example.org/ch-law/bvg> , <https://example.org/ch-law/dbg> ;
+  sh:declare [ sh:prefix "fzg" ; sh:namespace "https://example.org/vested-benefits#"^^xsd:anyURI ] .
+
+# ---------------------------------------------------------------------------
+# 1. Choices
+# ---------------------------------------------------------------------------
+
+fzg:inPensionFund
+  rdfs:label "In the pension fund of my employer or former employer"@en , "In der Pensionskasse meines Arbeitgebers oder früheren Arbeitgebers"@de ,
+             "Dans la caisse de pension de mon employeur ou ancien employeur"@fr , "Nella cassa pensioni del mio datore di lavoro o del mio ex datore di lavoro"@it .
+fzg:inVestedBenefitsInstitution
+  rdfs:label "On a vested benefits account or policy"@en , "Auf einem Freizügigkeitskonto oder einer Freizügigkeitspolice"@de ,
+             "Sur un compte ou une police de libre passage"@fr , "Su un conto o una polizza di libero passaggio"@it .
+
+fzg:leavingSwitzerland
+  rdfs:label "I leave Switzerland for good"@en , "Ich verlasse die Schweiz endgültig"@de ,
+             "Je quitte définitivement la Suisse"@fr , "Lascio definitivamente la Svizzera"@it .
+fzg:selfEmployment
+  rdfs:label "I become self-employed"@en , "Ich nehme eine selbständige Erwerbstätigkeit auf"@de ,
+             "Je m'établis à mon compte"@fr , "Avvio un'attività lucrativa indipendente"@it .
+fzg:smallAmount
+  rdfs:label "The amount is small: less than my annual contribution"@en , "Der Betrag ist gering: weniger als mein Jahresbeitrag"@de ,
+             "Le montant est faible : inférieur à ma cotisation annuelle"@fr , "L'importo è esiguo: inferiore al mio contributo annuo"@it .
+fzg:otherReason
+  rdfs:label "Another reason"@en , "Ein anderer Grund"@de , "Une autre raison"@fr , "Un altro motivo"@it .
+
+fzg:eu
+  rdfs:label "In a member state of the EU"@en , "In einem Mitgliedstaat der EU"@de ,
+             "Dans un État membre de l'UE"@fr , "In uno Stato membro dell'UE"@it .
+fzg:icelandNorway
+  rdfs:label "In Iceland or Norway"@en , "In Island oder Norwegen"@de , "En Islande ou en Norvège"@fr , "In Islanda o in Norvegia"@it .
+fzg:liechtenstein
+  rdfs:label "In Liechtenstein"@en , "In Liechtenstein"@de , "Au Liechtenstein"@fr , "Nel Liechtenstein"@it .
+fzg:otherCountry
+  rdfs:label "In another country"@en , "In einem anderen Land"@de , "Dans un autre pays"@fr , "In un altro Paese"@it .
+
+# ---------------------------------------------------------------------------
+# 2. Fields
+# ---------------------------------------------------------------------------
+# The steps: person:you (1) and pension:pensionFund (3) come from the modules, with their fields;
+# this domain adds its own step between them, and one field to pension:pensionFund.
+
+fzg:cashPayment a sh:PropertyGroup ; sh:order 2 ;
+  rdfs:label "Cash payment"@en , "Barauszahlung"@de , "Paiement en espèces"@fr , "Pagamento in contanti"@it .
+
+fzg:Application a rdfs:Class ;
+  rdfs:subClassOf pension:PensionApplication ;
+  rdfs:comment "An application for the cash payment of a vested benefit. As a pension application by a person, it gets the fields and rules of modules/person.ttl and modules/pension.ttl." .
+
+fzg:ApplicationShape a sh:NodeShape ;
+  sh:targetClass fzg:Application ;
+  form:region "CH" ;
+  rdfs:label "Your vested benefit in cash"@en , "Barauszahlung der Freizügigkeitsleistung"@de ,
+             "Paiement en espèces de la prestation de libre passage"@fr , "Pagamento in contanti della prestazione di libero passaggio"@it ;
+  form:summary
+    "Have your vested benefit paid in cash when you leave Switzerland for good, become self-employed, or the amount is small."@en ,
+    "Die Freizügigkeitsleistung bar auszahlen lassen, wenn Sie die Schweiz endgültig verlassen, eine selbständige Erwerbstätigkeit aufnehmen oder der Betrag gering ist."@de ,
+    "Obtenir le paiement en espèces de la prestation de libre passage si vous quittez définitivement la Suisse, vous établissez à votre compte ou si le montant est faible."@fr ,
+    "Ottenere il pagamento in contanti della prestazione di libero passaggio se lascia definitivamente la Svizzera, avvia un'attività indipendente o se l'importo è esiguo."@it ;
+  rdfs:comment
+    "Demonstration only. Not legal or financial advice. Simplified from FZG Art. 2–5 and 25f, and not checked by a lawyer or a pension fund. Your pension fund's regulations decide."@en ,
+    "Nur zur Demonstration. Keine Rechts- oder Finanzberatung. Vereinfacht nach FZG Art. 2–5 und 25f, nicht von einer Anwältin oder einer Pensionskasse geprüft. Massgebend ist das Reglement Ihrer Pensionskasse."@de ,
+    "Démonstration uniquement. Pas un conseil juridique ou financier. Simplifié d'après les art. 2 à 5 et 25f LFLP, non vérifié par un avocat ni par une caisse de pension. Le règlement de votre caisse de pension fait foi."@fr ,
+    "Solo a scopo dimostrativo. Non è una consulenza legale o finanziaria. Semplificato dagli art. 2–5 e 25f LFLP, non verificato da un avvocato né da una cassa pensioni. Fa stato il regolamento della sua cassa pensioni."@it ;
+  sh:property
+    [ sh:path fzg:heldBy ; sh:in ( fzg:inPensionFund fzg:inVestedBenefitsInstitution ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 1 ;
+      sh:name "Where is the money now?"@en , "Wo ist das Geld heute?"@de ,
+              "Où se trouve l'argent aujourd'hui ?"@fr , "Dove si trova il denaro oggi?"@it ;
+      prov:wasDerivedFrom law:FZG-2-1 , law:FZG-4-1 ] ,
+    [ sh:path fzg:leaving ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 2 ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:heldBy fzg:inPensionFund }" ] ;
+      sh:name "Are you leaving the pension fund, because your employment ends?"@en ,
+              "Treten Sie aus der Pensionskasse aus, weil Ihr Arbeitsverhältnis endet?"@de ,
+              "Quittez-vous la caisse de pension parce que vos rapports de travail prennent fin ?"@fr ,
+              "Lascia la cassa pensioni perché il suo rapporto di lavoro termina?"@it ;
+      prov:wasDerivedFrom law:FZG-2-1 , law:FZG-2-3 ] ,
+    [ sh:path fzg:reason ; sh:in ( fzg:leavingSwitzerland fzg:selfEmployment fzg:smallAmount fzg:otherReason ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 3 ;
+      sh:name "Why do you want the money in cash?"@en , "Weshalb möchten Sie das Geld bar?"@de ,
+              "Pourquoi souhaitez-vous l'argent en espèces ?"@fr , "Perché desidera il denaro in contanti?"@it ;
+      prov:wasDerivedFrom law:FZG-5-1 ] ,
+    [ sh:path fzg:destination ; sh:in ( fzg:eu fzg:icelandNorway fzg:liechtenstein fzg:otherCountry ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 4 ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:reason fzg:leavingSwitzerland }" ] ;
+      sh:name "Where will you live?"@en , "Wo werden Sie wohnen?"@de , "Où allez-vous habiter ?"@fr , "Dove abiterà?"@it ;
+      prov:wasDerivedFrom law:FZG-25f-1 ] ,
+    [ sh:path fzg:insuredAbroad ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 5 ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:destination ?d FILTER (?d IN (fzg:eu, fzg:icelandNorway)) }" ] ;
+      sh:name "Will you be insured there under the mandatory scheme for old age, survivors and disability?"@en ,
+              "Werden Sie dort für Alter, Tod und Invalidität obligatorisch versichert sein?"@de ,
+              "Y serez-vous assuré obligatoirement pour la vieillesse, le décès et l'invalidité ?"@fr ,
+              "Vi sarà assicurato obbligatoriamente per la vecchiaia, il decesso e l'invalidità?"@it ;
+      sh:description "For example because you work there."@en , "Zum Beispiel, weil Sie dort arbeiten."@de ,
+                     "Par exemple parce que vous y travaillez."@fr , "Ad esempio perché vi lavora."@it ;
+      prov:wasDerivedFrom law:FZG-25f-1 ] ,
+    [ sh:path fzg:stillMandatory ; sh:in ( form:yes form:no ) ; sh:minCount 1 ;
+      sh:group fzg:cashPayment ; sh:order 6 ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:reason fzg:selfEmployment }" ] ;
+      sh:name "Will you still be insured in a pension fund under the mandatory scheme, for example because you also stay employed?"@en ,
+              "Bleiben Sie obligatorisch in einer Pensionskasse versichert, zum Beispiel weil Sie daneben angestellt bleiben?"@de ,
+              "Resterez-vous assuré obligatoirement dans une caisse de pension, par exemple parce que vous restez aussi salarié ?"@fr ,
+              "Resterà assicurato obbligatoriamente in una cassa pensioni, ad esempio perché resta anche dipendente?"@it ;
+      prov:wasDerivedFrom law:FZG-5-1 ] ,
+
+    [ sh:path fzg:annualContribution ; sh:datatype xsd:decimal ; sh:minInclusive 0 ; sh:minCount 1 ;
+      sh:group pension:pensionFund ; sh:order 2 ;
+      form:askedWhen [ sh:prefixes fzg: ; sh:ask "ASK { $this fzg:reason fzg:smallAmount }" ] ;
+      sh:name "Your annual contribution to the pension fund (CHF)"@en , "Ihr Jahresbeitrag an die Pensionskasse (CHF)"@de ,
+              "Votre cotisation annuelle à la caisse de pension (CHF)"@fr , "Il suo contributo annuo alla cassa pensioni (CHF)"@it ;
+      sh:description "Your own share, as your pension certificate gives it."@en , "Ihr eigener Anteil, wie ihn Ihr Vorsorgeausweis angibt."@de ,
+                     "Votre propre part, telle que l'indique votre certificat de prévoyance."@fr ,
+                     "La sua quota, come la indica il suo certificato di previdenza."@it ;
+      prov:wasDerivedFrom law:FZG-5-1 ] .
+
+# ---------------------------------------------------------------------------
+# 3. Rules
+# ---------------------------------------------------------------------------
+# $this is the application. The rules of modules/person.ttl add the finding on the spouse's
+# consent and the next step to attach it.
+
+fzg:ApplicationShape sh:rule
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    rdfs:comment "At the reference age, in years and months, the person is no longer before an insured event." ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:AtReferenceAge }
+      WHERE {
+        $this person:birthDate ?birth ; pension:retirementAge ?age ; form:today ?today .
+        OPTIONAL { $this pension:retirementAgeMonths ?m }
+        FILTER (?today >= ?birth + STRDT(CONCAT("P", STR(?age), "Y", STR(COALESCE(?m, 0)), "M"), xsd:duration))
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:NotLeaving }
+      WHERE { $this fzg:heldBy fzg:inPensionFund ; fzg:leaving form:no }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:NoReason }
+      WHERE { $this fzg:reason fzg:otherReason }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:StillInsured }
+      WHERE { $this fzg:reason fzg:selfEmployment ; fzg:stillMandatory form:yes }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:NotSmall }
+      WHERE {
+        $this fzg:reason fzg:smallAmount ; pension:vestedBenefit ?benefit ; fzg:annualContribution ?contribution .
+        FILTER (?benefit >= ?contribution)
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:finding fzg:MandatoryPartStays }
+      WHERE {
+        $this fzg:reason fzg:leavingSwitzerland .
+        { $this fzg:destination ?d ; fzg:insuredAbroad form:yes FILTER (?d IN (fzg:eu, fzg:icelandNorway)) }
+        UNION
+        { $this fzg:destination fzg:liechtenstein }
+      }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep fzg:ProofOfDeparture , fzg:SourceTax }
+      WHERE { $this fzg:reason fzg:leavingSwitzerland }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep fzg:ProofOfSelfEmployment }
+      WHERE { $this fzg:reason fzg:selfEmployment }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep fzg:Interest }
+      WHERE { $this fzg:heldBy fzg:inPensionFund }""" ] ,
+
+  [ a sh:SPARQLRule ; sh:order 1 ; sh:prefixes fzg: , form: ;
+    rdfs:comment "The next steps of every cash payment." ;
+    sh:construct """
+      CONSTRUCT { $this form:nextStep fzg:CapitalTax }
+      WHERE { }""" ] .
+
+# ---------------------------------------------------------------------------
+# 4. Findings and next steps
+# ---------------------------------------------------------------------------
+
+fzg:AtReferenceAge a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "You have reached the reference age"@en , "Sie haben das Referenzalter erreicht"@de ,
+             "Vous avez atteint l'âge de référence"@fr , "Ha raggiunto l'età di riferimento"@it ;
+  rdfs:comment "A vested benefit is due when you leave before an insured event. At the reference age, retirement benefits are due instead; ask your pension fund or institution which."@en ,
+               "Eine Freizügigkeitsleistung ist geschuldet, wenn Sie vor einem Vorsorgefall austreten. Mit dem Referenzalter sind stattdessen Altersleistungen geschuldet; fragen Sie Ihre Pensionskasse oder Einrichtung, welche."@de ,
+               "Une prestation de libre passage est due si vous partez avant un cas de prévoyance. À l'âge de référence, des prestations de vieillesse sont dues à la place ; demandez à votre caisse ou institution lesquelles."@fr ,
+               "Una prestazione di libero passaggio è dovuta se lascia la cassa prima di un caso di previdenza. All'età di riferimento sono invece dovute prestazioni di vecchiaia; chieda alla sua cassa o al suo istituto quali."@it ;
+  prov:wasDerivedFrom law:FZG-2-1 , law:BVG-13 .
+fzg:NotLeaving a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "You stay in the pension fund"@en , "Sie bleiben in der Pensionskasse"@de ,
+             "Vous restez dans la caisse de pension"@fr , "Resta nella cassa pensioni"@it ;
+  rdfs:comment "The vested benefit falls due when you leave the pension fund, for example when your employment ends. While you stay insured, there is no cash payment."@en ,
+               "Die Freizügigkeitsleistung wird fällig, wenn Sie aus der Pensionskasse austreten, zum Beispiel weil Ihr Arbeitsverhältnis endet. Solange Sie versichert bleiben, gibt es keine Barauszahlung."@de ,
+               "La prestation de libre passage devient exigible lorsque vous quittez la caisse de pension, par exemple à la fin de vos rapports de travail. Tant que vous restez assuré, il n'y a pas de paiement en espèces."@fr ,
+               "La prestazione di libero passaggio diventa esigibile quando lascia la cassa pensioni, ad esempio alla fine del rapporto di lavoro. Finché resta assicurato, non c'è pagamento in contanti."@it ;
+  prov:wasDerivedFrom law:FZG-2-1 , law:FZG-2-3 .
+fzg:NoReason a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "No reason for a cash payment"@en , "Kein Grund für eine Barauszahlung"@de ,
+             "Aucun motif de paiement en espèces"@fr , "Nessun motivo per un pagamento in contanti"@it ;
+  rdfs:comment "Without one of these reasons, the vested benefit goes to your new pension fund, or to a vested benefits account or policy."@en ,
+               "Ohne einen dieser Gründe geht die Freizügigkeitsleistung an Ihre neue Pensionskasse oder auf ein Freizügigkeitskonto oder eine Freizügigkeitspolice."@de ,
+               "Sans l'un de ces motifs, la prestation de libre passage va à votre nouvelle caisse de pension, ou sur un compte ou une police de libre passage."@fr ,
+               "Senza uno di questi motivi, la prestazione di libero passaggio va alla sua nuova cassa pensioni, oppure su un conto o una polizza di libero passaggio."@it ;
+  prov:wasDerivedFrom law:FZG-3-1 , law:FZG-4-1 , law:FZG-5-1 .
+fzg:StillInsured a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Still insured under the mandatory scheme"@en , "Weiterhin obligatorisch versichert"@de ,
+             "Toujours assuré obligatoirement"@fr , "Ancora assicurato obbligatoriamente"@it ;
+  rdfs:comment "Self-employment allows a cash payment only if you are no longer subject to mandatory occupational pension insurance."@en ,
+               "Eine selbständige Erwerbstätigkeit erlaubt die Barauszahlung nur, wenn Sie der obligatorischen beruflichen Vorsorge nicht mehr unterstehen."@de ,
+               "Une activité indépendante permet le paiement en espèces seulement si vous n'êtes plus soumis à la prévoyance professionnelle obligatoire."@fr ,
+               "Un'attività indipendente permette il pagamento in contanti solo se non è più soggetto alla previdenza professionale obbligatoria."@it ;
+  prov:wasDerivedFrom law:FZG-5-1 .
+fzg:NotSmall a form:Finding ; form:severity form:Refusal ;
+  rdfs:label "Not less than your annual contribution"@en , "Nicht weniger als Ihr Jahresbeitrag"@de ,
+             "Pas inférieur à votre cotisation annuelle"@fr , "Non inferiore al suo contributo annuo"@it ;
+  rdfs:comment "A small amount can be paid in cash only if the vested benefit is less than your annual contribution."@en ,
+               "Ein geringer Betrag kann nur bar ausbezahlt werden, wenn die Freizügigkeitsleistung kleiner ist als Ihr Jahresbeitrag."@de ,
+               "Un faible montant ne peut être versé en espèces que si la prestation de libre passage est inférieure à votre cotisation annuelle."@fr ,
+               "Un importo esiguo può essere versato in contanti solo se la prestazione di libero passaggio è inferiore al suo contributo annuo."@it ;
+  prov:wasDerivedFrom law:FZG-5-1 .
+fzg:MandatoryPartStays a form:Finding ; form:severity form:Notice ;
+  rdfs:label "Only part of the money can be paid in cash"@en , "Nur ein Teil des Geldes kann bar ausbezahlt werden"@de ,
+             "Seule une partie de l'argent peut être versée en espèces"@fr , "Solo una parte del denaro può essere versata in contanti"@it ;
+  rdfs:comment "The retirement assets under the BVG that you earned until you leave the fund cannot be paid in cash; they stay on a vested benefits account or policy. Only the part above them can be paid in cash."@en ,
+               "Das BVG-Altersguthaben, das Sie bis zum Austritt erworben haben, kann nicht bar ausbezahlt werden; es bleibt auf einem Freizügigkeitskonto oder einer Freizügigkeitspolice. Nur der Teil darüber kann bar ausbezahlt werden."@de ,
+               "L'avoir de vieillesse LPP acquis jusqu'à votre sortie ne peut pas être versé en espèces ; il reste sur un compte ou une police de libre passage. Seule la part qui le dépasse peut être versée en espèces."@fr ,
+               "L'avere di vecchiaia LPP acquisito fino all'uscita non può essere versato in contanti; resta su un conto o una polizza di libero passaggio. Solo la parte che lo supera può essere versata in contanti."@it ;
+  prov:wasDerivedFrom law:FZG-25f-1 , law:FZG-4-1 .
+
+fzg:ProofOfDeparture a form:NextStep ; sh:order 1 ;
+  rdfs:label "Attach the confirmation of your municipality that you deregistered."@en , "Legen Sie die Abmeldebestätigung Ihrer Gemeinde bei."@de ,
+             "Joignez l'attestation de départ de votre commune."@fr , "Alleghi la conferma di partenza del suo Comune."@it ;
+  prov:wasDerivedFrom law:FZG-5-1 .
+fzg:ProofOfSelfEmployment a form:NextStep ; sh:order 2 ;
+  rdfs:label "Attach the confirmation of your AHV compensation office that you are self-employed."@en ,
+             "Legen Sie die Bestätigung Ihrer AHV-Ausgleichskasse über die selbständige Erwerbstätigkeit bei."@de ,
+             "Joignez l'attestation de votre caisse de compensation AVS confirmant votre activité indépendante."@fr ,
+             "Alleghi la conferma della sua cassa di compensazione AVS dell'attività indipendente."@it ;
+  prov:wasDerivedFrom law:FZG-5-1 .
+fzg:Interest a form:NextStep ; sh:order 6 ;
+  rdfs:label "The vested benefit earns interest from the day you leave the fund. If the fund pays more than 30 days after it has all the information it needs, it also owes interest on arrears."@en ,
+             "Die Freizügigkeitsleistung wird ab dem Austritt verzinst. Zahlt die Pensionskasse später als 30 Tage, nachdem sie alle nötigen Angaben hat, schuldet sie zudem Verzugszins."@de ,
+             "La prestation de libre passage porte intérêt dès la sortie de la caisse. Si la caisse paie plus de 30 jours après avoir reçu toutes les indications nécessaires, elle doit en outre un intérêt moratoire."@fr ,
+             "La prestazione di libero passaggio frutta interessi dall'uscita dalla cassa. Se la cassa paga più di 30 giorni dopo aver ricevuto tutte le indicazioni necessarie, deve inoltre un interesse di mora."@it ;
+  prov:wasDerivedFrom law:FZG-2-3 , law:FZG-2-4 .
+fzg:CapitalTax a form:NextStep ; sh:order 7 ;
+  rdfs:label "The cash payment is taxed as a capital benefit, separately from your other income."@en ,
+             "Die Barauszahlung wird als Kapitalleistung getrennt vom übrigen Einkommen besteuert."@de ,
+             "Le paiement en espèces est imposé comme prestation en capital, séparément des autres revenus."@fr ,
+             "Il pagamento in contanti è tassato come prestazione in capitale, separatamente dagli altri redditi."@it ;
+  prov:wasDerivedFrom law:DBG-38 .
+fzg:SourceTax a form:NextStep ; sh:order 8 ;
+  rdfs:label "If you live abroad when it is paid, it is taxed at source."@en ,
+             "Wohnen Sie bei der Auszahlung im Ausland, wird sie an der Quelle besteuert."@de ,
+             "Si vous habitez à l'étranger au moment du versement, il est imposé à la source."@fr ,
+             "Se al momento del pagamento abita all'estero, è tassato alla fonte."@it ;
+  prov:wasDerivedFrom law:DBG-95 , law:DBG-96 .
+
+# ---------------------------------------------------------------------------
+# 5. Provenance
+# ---------------------------------------------------------------------------
+# Why this process uses the fields, findings and next steps of the modules. The articles are in
+# modules/law/.
+
+person:BirthDate prov:wasDerivedFrom law:FZG-2-1 .
+pension:RetirementAge prov:wasDerivedFrom law:FZG-2-1 , law:BVG-13 .
+pension:RetirementAgeMonths prov:wasDerivedFrom law:BVG-13 .
+person:Married prov:wasDerivedFrom law:FZG-5-2 .
+person:SpouseConsent prov:wasDerivedFrom law:FZG-5-2 .
+pension:VestedBenefit prov:wasDerivedFrom law:FZG-5-1 .
+person:ConsentMissing prov:wasDerivedFrom law:FZG-5-2 , law:FZG-5-3 .
+person:AttachConsent prov:wasDerivedFrom law:FZG-5-2 .

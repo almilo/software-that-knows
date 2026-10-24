@@ -1,0 +1,101 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${language}">
+  <head th:replace="~{layout :: head(${page.title})}"></head>
+  <body hx-boost="true">
+    <header th:replace="~{layout :: header}"></header>
+    <!-- One application (Views.Application): its diagram, the applicant's task when it waits for
+         them, what the model decided, the checks of the office, the decision, the answers and the
+         history. -->
+    <main th:with="p=${page}">
+      <p class="kicker"><span th:text="#{column.application}">Application</span> <code th:text="${p.id}">id</code></p>
+      <h1><span th:text="${p.title}">Process</span> <span class="state" th:classappend="${p.state}" th:text="#{'state.' + ${p.state}}">State</span></h1>
+      <p class="meta" th:text="${p.applicant} + ' · ' + ${p.started}">Applicant, date</p>
+      <p th:if="${error}" class="error" th:text="${error}">Error</p>
+
+      <div th:replace="~{layout :: diagram(${p.done}, ${p.active})}"></div>
+
+      <section th:if="${p.form.isPresent()}" class="panel" th:with="form=${p.form.get()}">
+        <h2 th:text="#{complete.heading}">Complete your application</h2>
+        <p th:if="${p.returned.isPresent()}" class="card NotYet" th:text="#{decision.return(${p.returned.get()})}">Returned</p>
+        <p th:text="#{complete.intro}">Change the answers and submit again.</p>
+        <form th:replace="~{form :: form}"></form>
+      </section>
+
+      <section th:if="${p.trace.isPresent()}" th:with="t=${p.trace.get()}">
+        <h2 th:text="#{ruling.heading}">What the model decided</h2>
+        <p class="meta" th:text="#{ruling.trace(${t.decidedOn}, ${t.modelVersion})}">Decided on, version</p>
+        <section th:replace="~{layout :: outcome(${t.outcome})}"></section>
+      </section>
+
+      <section th:if="${p.inReview() or !p.checks.isEmpty()}" hx-swap="innerHTML show:none">
+        <h2 th:text="#{checks.heading}">Next steps, checked by the office</h2>
+        <p th:if="${p.checks.isEmpty()}" class="hint" th:text="#{checks.none}">No next step.</p>
+        <form th:if="${p.canClaimSteps}" method="post" th:action="@{/applications/{id}/claim-steps(id=${p.id})}" class="inline">
+          <button th:text="#{task.claimSteps}">Claim all next steps</button>
+        </form>
+        <div th:each="c : ${p.checks}" class="check" th:classappend="${c.task.isPresent()} ? 'open' : (${c.fulfilled} ? 'fulfilled' : 'unfulfilled')">
+          <strong th:text="${c.label}">Step</strong>
+          <span class="sources" th:text="${c.sources}">Art. 1</span>
+          <th:block th:if="${c.task.isEmpty()}">
+            <span th:text="${c.fulfilled} ? #{check.fulfilled} : #{check.notFulfilled}">Fulfilled</span>
+            <span class="meta" th:text="#{check.by(${c.reviewer})}">checked by</span>
+            <p th:if="${c.note}" class="note" th:text="${c.note}">Note</p>
+          </th:block>
+          <th:block th:if="${c.task.isPresent()}" th:with="t=${c.task.get()}">
+            <div th:replace="~{layout :: task(${t}, ${p.id})}"></div>
+            <form th:if="${t.mine}" method="post" th:action="@{/tasks/{id}/check(id=${t.id})}" class="inline">
+              <input type="hidden" name="application" th:value="${p.id}" />
+              <input type="text" name="note" th:placeholder="#{check.note}" th:attr="aria-label=#{check.note}" />
+              <button name="fulfilled" value="false" th:text="#{check.notFulfilled}">Not fulfilled</button>
+              <button name="fulfilled" value="true" class="primary" th:text="#{check.fulfilled}">Fulfilled</button>
+            </form>
+          </th:block>
+        </div>
+      </section>
+
+      <section th:if="${p.inReview() or p.decided()}" hx-swap="innerHTML show:none">
+        <h2 th:text="#{decide.heading}">Decision</h2>
+        <p th:if="${p.state == 'approved'}" class="card allowed" th:text="#{decision.approve}">Approved</p>
+        <p th:if="${p.state == 'rejected'}" class="card Refusal" th:text="#{decision.reject(${p.reason.orElse('')})}">Rejected</p>
+        <p th:if="${p.inReview() and p.decide.isEmpty()}" class="hint" th:text="#{decide.wait}">Waiting for the checks.</p>
+        <th:block th:if="${p.decide.isPresent()}" th:with="t=${p.decide.get()}">
+          <div th:replace="~{layout :: task(${t}, ${p.id})}"></div>
+          <th:block th:if="${t.mine}">
+            <form method="post" th:action="@{/tasks/{id}/decide(id=${t.id})}" class="inline">
+              <input type="hidden" name="application" th:value="${p.id}" />
+              <button name="decision" value="approve" class="primary" th:text="#{decide.approve}">Approve</button>
+            </form>
+            <form method="post" th:action="@{/tasks/{id}/decide(id=${t.id})}" class="stacked">
+              <input type="hidden" name="application" th:value="${p.id}" />
+              <label for="reason" th:text="#{decide.reason}">Reason</label>
+              <textarea id="reason" name="reason" required></textarea>
+              <div class="actions">
+                <button name="decision" value="return" th:text="#{decide.return}">Return</button>
+                <button name="decision" value="reject" class="danger" th:text="#{decide.reject}">Reject</button>
+              </div>
+            </form>
+          </th:block>
+        </th:block>
+      </section>
+
+      <section>
+        <h2 th:text="#{answers.heading}">Answers</h2>
+        <dl class="values">
+          <div th:each="a : ${p.answers}"><dt th:text="${a.label}">Question</dt><dd th:text="${a.value}">Answer</dd></div>
+        </dl>
+      </section>
+
+      <section>
+        <h2 th:text="#{history.heading}">History</h2>
+        <table>
+          <tr th:each="h : ${p.history}">
+            <td th:text="#{'activity.' + ${h.activity}}">Activity</td>
+            <td th:text="${h.user}">Person</td>
+            <td th:text="${h.start}">Start</td>
+            <td th:text="${h.end.isEmpty()} ? #{history.running} : ${h.end}">End</td>
+          </tr>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+/* The assistant adds a question form and a few parts to the styles of the demonstrator. */
+.assistant .ask {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.assistant .ask textarea {
+  font: inherit;
+  padding: 0.5rem;
+}
+.assistant .ask button {
+  justify-self: start;
+}
+.assistant .answer {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.assistant .note {
+  font-style: italic;
+}
+.assistant .understood h4 {
+  margin-bottom: 0.25rem;
+}
+.assistant .rejected {
+  color: #9a3412;
+}

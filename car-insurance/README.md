@@ -26,7 +26,8 @@ The lessons of the modelling, without the technical detail, are in
 
 The landing page of the app describes each view. Two more applications need a language model and a
 server, so they are not in this demonstrator: questions in your own words, and tools for agents.
-Both would call the same engine.
+Both would call the same engine. The first one is a spike in [`assistant/`](assistant/): a language
+model builds the screen with OpenUI, and the engine decides.
 
 What is modelled:
 

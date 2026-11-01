@@ -1,0 +1,154 @@
+@prefix :        <https://example.org/figures#> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+
+# The vocabulary of business figures: the words that the generator, the engine and the app know.
+# A domain (domains/<name>/ontology/) uses these words for its own lists, its master data, its
+# rules and its article templates. Nothing here knows about drinks, sales or account managers.
+#
+# The idea comes from the Kiraa engine (https://youtu.be/j5bAryILBCM): every figure is a variable
+# with a name of five parts, always in the same order, and each part comes from a fixed list. A
+# template is a text with blanks; the engine fills the blanks and writes one article for each
+# entity. Here the same idea is written down as a model, with one change: a rule, such as "above
+# plan", is part of the model, with an owner, not an instruction in a template.
+#
+# Every resource also uses the common words: rdfs:label for its name, skos:notation for its code
+# in a variable name, skos:altLabel for other words that people use for it in a question,
+# skos:definition for what it means.
+
+<https://example.org/figures>
+    a owl:Ontology ;
+    rdfs:label "Figures: variables, rules and articles"@en .
+
+# ---------------------------------------------------------------------------
+# 1. The domain: its page, its calendar and its periods
+# ---------------------------------------------------------------------------
+
+:Domain a owl:Class ; rdfs:label "Domain"@en ;
+    rdfs:comment "One business, with its lists, its master data, its rules and its templates. rdfs:label is the title of the page."@en .
+
+:intro a owl:DatatypeProperty ; rdfs:domain :Domain ;
+    rdfs:comment "The first sentence of the page, before the link to the source."@en .
+:sourceTitle a owl:DatatypeProperty ; rdfs:domain :Domain ;
+    rdfs:comment "The title of the source of the example; dcterms:source is its address."@en .
+:currencySymbol a owl:DatatypeProperty ; rdfs:domain :Domain ;
+    rdfs:comment "The symbol in front of a value in currency, such as \"$\"."@en .
+:fiscalYearStart a owl:DatatypeProperty ; rdfs:domain :Domain ; rdfs:range xsd:integer ;
+    rdfs:comment "The month (1 to 12) in which the financial year starts. \"This financial year\" and \"year to date\" depend on it."@en .
+:period a owl:ObjectProperty ; rdfs:domain :Domain ; rdfs:range :Period ;
+    rdfs:comment "A month that the page shows the figures of."@en .
+
+:Period a owl:Class ; rdfs:label "Period"@en ;
+    rdfs:comment "A reporting month. rdfs:comment says where its data come from."@en .
+:month a owl:DatatypeProperty ; rdfs:domain :Period ;
+    rdfs:comment "The month, as YYYY-MM."@en .
+
+# ---------------------------------------------------------------------------
+# 2. The name of a variable: five parts, always in this order
+# ---------------------------------------------------------------------------
+
+:variableParts a owl:AnnotationProperty ;
+    rdfs:comment "The parts of the name of a variable, as an RDF list, in their order. A name is the codes (skos:notation) of one concept of each part, joined with \"_\". A name that does not have exactly one concept of each part, in this order, is not a variable."@en .
+
+<https://example.org/figures> :variableParts ( :Measure :TimeBasis :TimeSlice :Scenario :Suffix ) .
+
+:Measure a owl:Class ; rdfs:label "measure"@en ;
+    rdfs:comment "What is measured, such as sales or margin."@en .
+:sourceMeasure a owl:DatatypeProperty ; rdfs:domain :Measure ;
+    rdfs:comment "The value of the measure column of the source rows that this measure adds up."@en .
+
+:TimeBasis a owl:Class ; rdfs:label "time basis"@en ;
+    rdfs:comment "Which financial year, such as this financial year."@en .
+:yearOffset a owl:DatatypeProperty ; rdfs:domain :TimeBasis ; rdfs:range xsd:integer ;
+    rdfs:comment "0 for the financial year of the period, -1 for the year before."@en .
+
+:TimeSlice a owl:Class ; rdfs:label "time slice"@en ;
+    rdfs:comment "Which part of the financial year."@en .
+:sliceKind a owl:ObjectProperty ; rdfs:domain :TimeSlice ; rdfs:range :SliceKind .
+:SliceKind a owl:Class ; rdfs:label "slice kind"@en ;
+    rdfs:comment "The three kinds of time slice that the engine can calculate."@en .
+:Month a :SliceKind ; rdfs:label "the month of the period"@en .
+:YearToDate a :SliceKind ; rdfs:label "from the start of the financial year to the end of the period"@en .
+:FullYear a :SliceKind ; rdfs:label "the full financial year"@en .
+
+:Scenario a owl:Class ; rdfs:label "scenario"@en ;
+    rdfs:comment "Which version of reality: what happened, what was planned, or a comparison of the two."@en .
+:sourceVersion a owl:DatatypeProperty ; rdfs:domain :Scenario ;
+    rdfs:comment "The value of the version column of the source rows of this scenario."@en .
+
+:Comparison a owl:Class ; rdfs:subClassOf :Scenario ; rdfs:label "comparison"@en ;
+    rdfs:comment "A scenario that is not in the source rows: a rule calculates it from two other scenarios, as (of - against) / against. It is a rule, so it has an owner."@en .
+:of a owl:ObjectProperty ; rdfs:domain :Comparison ; rdfs:range :Scenario .
+:against a owl:ObjectProperty ; rdfs:domain :Comparison ; rdfs:range :Scenario .
+:inputSuffix a owl:ObjectProperty ; rdfs:domain :Comparison ; rdfs:range :Suffix ;
+    rdfs:comment "The suffix of the two variables that the comparison reads."@en .
+:aboveWords a owl:DatatypeProperty ; rdfs:domain :Comparison ;
+    rdfs:comment "The words after a positive result, such as \"above plan\"."@en .
+:belowWords a owl:DatatypeProperty ; rdfs:domain :Comparison .
+:equalWords a owl:DatatypeProperty ; rdfs:domain :Comparison .
+
+:Suffix a owl:Class ; rdfs:label "suffix"@en ;
+    rdfs:comment "What kind of number the figure is."@en .
+:format a owl:DatatypeProperty ; rdfs:domain :Suffix ;
+    rdfs:comment "\"currency\" or \"percent\": how the article writes the number."@en .
+
+# ---------------------------------------------------------------------------
+# 3. Who a figure is about: the master data, as a knowledge graph
+# ---------------------------------------------------------------------------
+
+:EntityType a owl:Class ; rdfs:label "entity type"@en ;
+    rdfs:comment "A kind of thing that figures are about, such as account managers. The engine groups the source rows by it."@en .
+:sourceColumn a owl:DatatypeProperty ; rdfs:domain :EntityType ;
+    rdfs:comment "The column of the source rows with the code (skos:notation) of an entity."@en .
+:via a owl:ObjectProperty ; rdfs:domain :EntityType ;
+    rdfs:comment "A link to follow from the entity of the source column, such as from a customer to its account manager."@en .
+:whole a owl:DatatypeProperty ; rdfs:domain :EntityType ; rdfs:range xsd:boolean ;
+    rdfs:comment "true for the business as a whole: one entity, and every row counts for it."@en .
+
+:Entity a owl:Class ; rdfs:label "entity"@en ;
+    rdfs:comment "One thing of the master data. Its type is the domain's subclass of :Entity that is also an :EntityType."@en .
+
+:Role a owl:Class ; rdfs:label "role"@en ;
+    rdfs:comment "A role in the business. The articles that a person sees depend on it."@en .
+:hasRole a owl:ObjectProperty ; rdfs:domain :Entity ; rdfs:range :Role .
+
+:Owner a owl:Class ; rdfs:label "owner"@en ;
+    rdfs:comment "The people who are accountable for a rule or a decision."@en .
+:owner a owl:ObjectProperty ; rdfs:range :Owner .
+
+# ---------------------------------------------------------------------------
+# 4. Templates and articles
+# ---------------------------------------------------------------------------
+
+:Template a owl:Class ; rdfs:label "template"@en ;
+    rdfs:comment "A text with blanks. The engine writes one article for each entity of the type it is about. A blank is {entity}, {period}, {yearStart}, {VARIABLE}, {VARIABLE|direction} (the result of a comparison, with its words), {ranking:Name}, or {=calculation|currency} or {=calculation|percent}: a calculation in the template itself. The checks report each calculation as a rule that nobody owns."@en .
+:about a owl:ObjectProperty ; rdfs:domain :Template ; rdfs:range :EntityType .
+:text a owl:DatatypeProperty ; rdfs:domain :Template .
+:visibleTo a owl:ObjectProperty ; rdfs:domain :Template ;
+    rdfs:comment "Who sees the articles: a node with :role and :scope."@en .
+:role a owl:ObjectProperty ; rdfs:range :Role .
+:scope a owl:ObjectProperty ; rdfs:range :Scope .
+:Scope a owl:Class .
+:All a :Scope ; rdfs:label "every article of the template"@en .
+:Own a :Scope ; rdfs:label "only the articles about the person"@en .
+
+# ---------------------------------------------------------------------------
+# 5. Rankings: what "top" means
+# ---------------------------------------------------------------------------
+
+:Ranking a owl:Class ; rdfs:label "ranking"@en ;
+    rdfs:comment "An order of the entities of a type, such as \"the top account manager\". skos:altLabel holds the words of a question that ask for it."@en .
+:rankingOf a owl:ObjectProperty ; rdfs:domain :Ranking ; rdfs:range :EntityType .
+:candidate a owl:ObjectProperty ; rdfs:domain :Ranking ;
+    rdfs:comment "A possible definition: a node with rdfs:label and :variable. The entity with the highest value of the variable is the top."@en .
+:variable a owl:DatatypeProperty ;
+    rdfs:comment "The name of a variable."@en .
+:decision a owl:DatatypeProperty ; rdfs:domain :Ranking ;
+    rdfs:comment "The name of the variable that the owner chose. Without it, the decision is open: the checks report it, and the articles say it."@en .
+
+:rankingWords a owl:AnnotationProperty ;
+    rdfs:comment "Words of a question that ask for a ranking. If the model has no ranking for them, an LLM must decide what they mean."@en .
+
+<https://example.org/figures> :rankingWords "top", "best", "highest", "most", "lowest", "worst" .

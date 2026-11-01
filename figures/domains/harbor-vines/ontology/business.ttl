@@ -1,0 +1,49 @@
+@prefix :        <https://example.org/harbor-vines#> .
+@prefix fv:      <https://example.org/figures#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+# The master data, as a knowledge graph: who the figures are about, and how they are linked.
+# The source rows have only codes (C01, P1); these statements say what the codes are.
+
+# --- Entity types -----------------------------------------------------------
+:Business a fv:EntityType ; rdfs:subClassOf fv:Entity ; rdfs:label "business"@en ;
+    skos:altLabel "team"@en, "company"@en ;
+    fv:whole true .
+
+:AccountManager a fv:EntityType ; rdfs:subClassOf fv:Entity ; rdfs:label "account manager"@en ;
+    skos:altLabel "account managers"@en, "sales rep"@en, "rep"@en ;
+    fv:sourceColumn "customer" ; fv:via :managedBy .
+
+:Customer a fv:EntityType ; rdfs:subClassOf fv:Entity ; rdfs:label "customer"@en ;
+    skos:altLabel "customers"@en, "client"@en, "clients"@en ;
+    fv:sourceColumn "customer" .
+
+:Product a fv:EntityType ; rdfs:subClassOf fv:Entity ; rdfs:label "product"@en ;
+    skos:altLabel "products"@en, "drink"@en, "drinks"@en ;
+    fv:sourceColumn "product" .
+
+:managedBy a rdfs:Property ; rdfs:domain :Customer ; rdfs:range :AccountManager ;
+    rdfs:label "managed by"@en .
+
+# --- Roles and owners -------------------------------------------------------
+:SalesManagerRole a fv:Role ; rdfs:label "Sales manager"@en .
+:AccountManagerRole a fv:Role ; rdfs:label "Account manager"@en .
+:Finance a fv:Owner ; rdfs:label "Finance"@en .
+
+# --- Entities ---------------------------------------------------------------
+:HarborVinesCo a :Business ; rdfs:label "Harbor Vines"@en .
+
+:Anna a :AccountManager ; skos:notation "AM1" ; rdfs:label "Anna"@en ; fv:hasRole :AccountManagerRole .
+:Tom a :AccountManager ; skos:notation "AM2" ; rdfs:label "Tom"@en ; fv:hasRole :AccountManagerRole .
+# Invented for September.
+:Sam a :AccountManager ; skos:notation "AM3" ; rdfs:label "Sam"@en ; fv:hasRole :AccountManagerRole .
+
+:CafeUno a :Customer ; skos:notation "C01" ; rdfs:label "Cafe Uno"@en ; :managedBy :Anna .
+:DeliDuo a :Customer ; skos:notation "C02" ; rdfs:label "Deli Duo"@en ; :managedBy :Anna .
+:BarTrio a :Customer ; skos:notation "C03" ; rdfs:label "Bar Trio"@en ; :managedBy :Tom .
+# Invented for September.
+:PubQuattro a :Customer ; skos:notation "C04" ; rdfs:label "Pub Quattro"@en ; :managedBy :Sam .
+
+:Cola a :Product ; skos:notation "P1" ; rdfs:label "Cola"@en .
+:Lemonade a :Product ; skos:notation "P2" ; rdfs:label "Lemonade"@en .

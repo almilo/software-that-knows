@@ -1,0 +1,446 @@
+{
+  "$comment": "Generated from ontology/ and domains/harbor-vines/ by generator/generate.ts. Do not edit.",
+  "domain": {
+    "title": "Harbor Vines: figures that know what they mean",
+    "intro": "A drinks wholesaler, its sales and its budget: every figure is a variable with a name of five parts, every rule is in the model with an owner, and every article says where its numbers come from.",
+    "source": "https://youtu.be/j5bAryILBCM",
+    "sourceTitle": "Kiraa Engine Explainer (Kiraa, 2026)",
+    "currencySymbol": "$",
+    "fiscalYearStart": 7
+  },
+  "periods": [
+    {
+      "month": "2026-08",
+      "comment": "The data of the video: five sales and three budget lines. The video does not show the dates, the product of each sale, or which customers Anna has: we chose them so that the totals are the ones of the video."
+    },
+    {
+      "month": "2026-09",
+      "comment": "Invented for this demo: a new account manager with a new customer and no budget yet, and one account manager below plan."
+    }
+  ],
+  "partOrder": [
+    {
+      "key": "measure",
+      "label": "measure"
+    },
+    {
+      "key": "timeBasis",
+      "label": "time basis"
+    },
+    {
+      "key": "timeSlice",
+      "label": "time slice"
+    },
+    {
+      "key": "scenario",
+      "label": "scenario"
+    },
+    {
+      "key": "suffix",
+      "label": "suffix"
+    }
+  ],
+  "parts": {
+    "measure": [
+      {
+        "id": "Margin",
+        "code": "MARGIN",
+        "label": "margin",
+        "words": [
+          "made",
+          "margin",
+          "profit"
+        ],
+        "definition": "What the business made on its sales. The video names it; the source rows have no costs yet.",
+        "sourceMeasure": "margin"
+      },
+      {
+        "id": "Sales",
+        "code": "SALES",
+        "label": "sales",
+        "words": [
+          "revenue",
+          "sales",
+          "sell",
+          "sold",
+          "turnover"
+        ],
+        "definition": "The amounts of the sales lines, without tax.",
+        "sourceMeasure": "sales"
+      }
+    ],
+    "timeBasis": [
+      {
+        "id": "ThisFinYear",
+        "code": "TFY",
+        "label": "this financial year",
+        "words": [
+          "this fin year",
+          "this financial year",
+          "this year"
+        ],
+        "yearOffset": 0
+      }
+    ],
+    "timeSlice": [
+      {
+        "id": "CurrentPeriod",
+        "code": "CP",
+        "label": "current period",
+        "words": [
+          "current period",
+          "in the month",
+          "this month"
+        ],
+        "kind": "Month"
+      },
+      {
+        "id": "FullYear",
+        "code": "FY",
+        "label": "full year",
+        "words": [
+          "for the year",
+          "full year",
+          "whole year"
+        ],
+        "kind": "FullYear"
+      },
+      {
+        "id": "YearToDate",
+        "code": "YTD",
+        "label": "year to date",
+        "words": [
+          "since july",
+          "so far this year",
+          "year to date",
+          "ytd"
+        ],
+        "kind": "YearToDate"
+      }
+    ],
+    "scenario": [
+      {
+        "id": "Actual",
+        "code": "ACT",
+        "label": "actual",
+        "words": [
+          "actual"
+        ],
+        "definition": "What happened.",
+        "sourceVersion": "actual"
+      },
+      {
+        "id": "Budget",
+        "code": "BUD",
+        "label": "budget",
+        "words": [
+          "budget",
+          "plan",
+          "target"
+        ],
+        "definition": "What was planned for each customer in each month.",
+        "sourceVersion": "budget"
+      },
+      {
+        "id": "AgainstBudget",
+        "code": "VAR",
+        "label": "against budget",
+        "words": [
+          "above plan",
+          "against budget",
+          "against plan",
+          "below plan",
+          "variance"
+        ],
+        "definition": "How far actual is above or below budget, as a share of the budget: (actual - budget) / budget. There is no result when the budget is 0.",
+        "comparison": {
+          "of": "ACT",
+          "against": "BUD",
+          "inputSuffix": "VAL",
+          "owner": "Finance",
+          "above": "above plan",
+          "below": "below plan",
+          "equal": "on plan"
+        }
+      }
+    ],
+    "suffix": [
+      {
+        "id": "Percent",
+        "code": "PCT",
+        "label": "percent",
+        "words": [
+          "percent"
+        ],
+        "definition": "A share, written as a percentage.",
+        "format": "percent"
+      },
+      {
+        "id": "Value",
+        "code": "VAL",
+        "label": "value",
+        "words": [
+          "value"
+        ],
+        "definition": "An amount in dollars.",
+        "format": "currency"
+      }
+    ]
+  },
+  "entityTypes": [
+    {
+      "id": "AccountManager",
+      "code": "AccountManager",
+      "label": "account manager",
+      "words": [
+        "account manager",
+        "account managers",
+        "rep",
+        "sales rep"
+      ],
+      "sourceColumn": "customer",
+      "via": "managedBy",
+      "whole": false
+    },
+    {
+      "id": "Business",
+      "code": "Business",
+      "label": "business",
+      "words": [
+        "business",
+        "company",
+        "team"
+      ],
+      "whole": true
+    },
+    {
+      "id": "Customer",
+      "code": "Customer",
+      "label": "customer",
+      "words": [
+        "client",
+        "clients",
+        "customer",
+        "customers"
+      ],
+      "sourceColumn": "customer",
+      "whole": false
+    },
+    {
+      "id": "Product",
+      "code": "Product",
+      "label": "product",
+      "words": [
+        "drink",
+        "drinks",
+        "product",
+        "products"
+      ],
+      "sourceColumn": "product",
+      "whole": false
+    }
+  ],
+  "entities": [
+    {
+      "id": "Anna",
+      "type": "AccountManager",
+      "code": "AM1",
+      "label": "Anna",
+      "words": [
+        "anna"
+      ],
+      "roles": [
+        "AccountManagerRole"
+      ],
+      "links": {}
+    },
+    {
+      "id": "BarTrio",
+      "type": "Customer",
+      "code": "C03",
+      "label": "Bar Trio",
+      "words": [
+        "bar trio"
+      ],
+      "roles": [],
+      "links": {
+        "managedBy": "Tom"
+      }
+    },
+    {
+      "id": "CafeUno",
+      "type": "Customer",
+      "code": "C01",
+      "label": "Cafe Uno",
+      "words": [
+        "cafe uno"
+      ],
+      "roles": [],
+      "links": {
+        "managedBy": "Anna"
+      }
+    },
+    {
+      "id": "Cola",
+      "type": "Product",
+      "code": "P1",
+      "label": "Cola",
+      "words": [
+        "cola"
+      ],
+      "roles": [],
+      "links": {}
+    },
+    {
+      "id": "DeliDuo",
+      "type": "Customer",
+      "code": "C02",
+      "label": "Deli Duo",
+      "words": [
+        "deli duo"
+      ],
+      "roles": [],
+      "links": {
+        "managedBy": "Anna"
+      }
+    },
+    {
+      "id": "HarborVinesCo",
+      "type": "Business",
+      "label": "Harbor Vines",
+      "words": [
+        "harbor vines"
+      ],
+      "roles": [],
+      "links": {}
+    },
+    {
+      "id": "Lemonade",
+      "type": "Product",
+      "code": "P2",
+      "label": "Lemonade",
+      "words": [
+        "lemonade"
+      ],
+      "roles": [],
+      "links": {}
+    },
+    {
+      "id": "PubQuattro",
+      "type": "Customer",
+      "code": "C04",
+      "label": "Pub Quattro",
+      "words": [
+        "pub quattro"
+      ],
+      "roles": [],
+      "links": {
+        "managedBy": "Sam"
+      }
+    },
+    {
+      "id": "Sam",
+      "type": "AccountManager",
+      "code": "AM3",
+      "label": "Sam",
+      "words": [
+        "sam"
+      ],
+      "roles": [
+        "AccountManagerRole"
+      ],
+      "links": {}
+    },
+    {
+      "id": "Tom",
+      "type": "AccountManager",
+      "code": "AM2",
+      "label": "Tom",
+      "words": [
+        "tom"
+      ],
+      "roles": [
+        "AccountManagerRole"
+      ],
+      "links": {}
+    }
+  ],
+  "roles": [
+    {
+      "id": "AccountManagerRole",
+      "label": "Account manager"
+    },
+    {
+      "id": "SalesManagerRole",
+      "label": "Sales manager"
+    }
+  ],
+  "owners": [
+    {
+      "id": "Finance",
+      "label": "Finance"
+    }
+  ],
+  "templates": [
+    {
+      "id": "AccountManagerArticle",
+      "label": "Account manager",
+      "about": "AccountManager",
+      "text": "{entity} sold {SALES_TFY_CP_ACT_VAL} in {period} against the budget of {SALES_TFY_CP_BUD_VAL}. That's {SALES_TFY_CP_VAR_PCT|direction}. Since {yearStart}, {entity} sold {SALES_TFY_YTD_ACT_VAL} against a budget of {SALES_TFY_YTD_BUD_VAL}: {SALES_TFY_YTD_VAR_PCT|direction}.",
+      "visibleTo": [
+        {
+          "role": "AccountManagerRole",
+          "scope": "Own"
+        },
+        {
+          "role": "SalesManagerRole",
+          "scope": "All"
+        }
+      ]
+    },
+    {
+      "id": "SalesManagerArticle",
+      "label": "Sales manager",
+      "about": "Business",
+      "text": "In {period}, {entity} sold {SALES_TFY_CP_ACT_VAL} against a budget of {SALES_TFY_CP_BUD_VAL}: {SALES_TFY_CP_VAR_PCT|direction}. {ranking:TopAccountManager}",
+      "visibleTo": [
+        {
+          "role": "SalesManagerRole",
+          "scope": "All"
+        }
+      ]
+    }
+  ],
+  "rankings": [
+    {
+      "id": "TopAccountManager",
+      "code": "TopAccountManager",
+      "label": "top account manager",
+      "words": [
+        "best",
+        "best account manager",
+        "top",
+        "top account manager"
+      ],
+      "of": "AccountManager",
+      "candidates": [
+        {
+          "label": "by sales",
+          "variable": "SALES_TFY_CP_ACT_VAL"
+        },
+        {
+          "label": "by result against budget",
+          "variable": "SALES_TFY_CP_VAR_PCT"
+        }
+      ]
+    }
+  ],
+  "rankingWords": [
+    "best",
+    "highest",
+    "lowest",
+    "most",
+    "top",
+    "worst"
+  ]
+}

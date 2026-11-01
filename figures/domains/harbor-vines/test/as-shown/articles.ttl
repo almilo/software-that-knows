@@ -1,0 +1,15 @@
+@prefix :        <https://example.org/harbor-vines#> .
+@prefix fv:      <https://example.org/figures#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+# The template as the video shows it, in place of ../../ontology/articles.ttl: the last blank is an
+# instruction, "take actual, subtract budget and divide by budget". Both roles see the articles;
+# the video shows no article for the sales manager and no definition of "top".
+#   bun run verify harbor-vines domains/harbor-vines/test/as-shown/articles.ttl
+
+:AccountManagerArticle a fv:Template ;
+    rdfs:label "Account manager (as shown)"@en ;
+    fv:about :AccountManager ;
+    fv:text "{entity} sold {SALES_TFY_CP_ACT_VAL} in {period} against the budget of {SALES_TFY_CP_BUD_VAL}. That's {=(SALES_TFY_CP_ACT_VAL - SALES_TFY_CP_BUD_VAL) / SALES_TFY_CP_BUD_VAL|percent} above plan." ;
+    fv:visibleTo [ fv:role :SalesManagerRole ; fv:scope fv:All ] ,
+                 [ fv:role :AccountManagerRole ; fv:scope fv:Own ] .

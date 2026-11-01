@@ -1,0 +1,61 @@
+body { margin: 0; font: 15px/1.45 system-ui, sans-serif; background: #fafafa; color: #222; }
+main { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 24px; max-width: 1100px; margin: 0 auto; padding: 16px; }
+header, .controls, .ask, .checks, .inside { grid-column: 1 / -1; }
+h1 { margin: 0 0 4px; }
+h2 { font-size: 16px; margin: 0 0 8px; }
+h3 { font-size: 14px; margin: 14px 0 6px; }
+h2 small, h3 small { color: #666; font-weight: 400; font-size: 13px; }
+a { color: #0b5cd5; }
+code { font-size: 12px; }
+.intro { margin: 4px 0 0; color: #444; }
+.hint { margin: 4px 0 8px; color: #666; font-size: 13px; }
+button, select, input { font: inherit; padding: 6px 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; color: #222; }
+button { cursor: pointer; }
+@media (max-width: 760px) { main { grid-template-columns: minmax(0, 1fr); } }
+
+/* The controls */
+.controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.controls .hint { flex-basis: 100%; margin: 0; }
+.choice { display: flex; align-items: center; gap: 4px; }
+.choice span { margin-right: 4px; }
+.choice button[aria-pressed="true"] { background: #222; color: #fff; border-color: #222; }
+
+/* The articles */
+.articles article { margin: 0 0 12px; padding: 10px 14px; border-left: 6px solid #0b5cd5; border-radius: 4px; background: #fff; }
+.articles h3 { margin: 0 0 4px; }
+.articles p { margin: 0; line-height: 1.9; }
+.figure { padding: 1px 6px; border-color: #8fb3ea; background: #eef4fd; font-weight: 600; }
+.figure.calculation { border-color: #e0a800; background: #fff8e1; }
+.figure.missing { border-style: dashed; color: #8a1c1c; }
+.figure[aria-pressed="true"] { background: #0b5cd5; border-color: #0b5cd5; color: #fff; }
+
+/* One figure */
+.figure-panel { align-self: start; position: sticky; top: 12px; padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.figure-panel dl { margin: 0; }
+.figure-panel dl div { display: grid; grid-template-columns: 90px 1fr; gap: 8px; padding: 3px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+.figure-panel dt { color: #666; }
+.figure-panel dd { margin: 0; }
+.figure-panel dd small { color: #666; }
+.figure-panel p { margin: 4px 0; font-size: 13px; }
+.warning, .caution { padding: 6px 10px; border: 1px solid #e0a800; border-radius: 4px; background: #fff8e1; color: #6b3d00; font-size: 13px; }
+
+/* A question */
+.ask { padding: 10px 14px; border: 1px solid #ddd; border-radius: 4px; background: #fff; }
+.ask input { box-sizing: border-box; width: 100%; }
+.examples { display: flex; flex-wrap: wrap; gap: 4px; margin: 6px 0; }
+.examples button { padding: 2px 8px; color: #444; font-size: 12px; }
+.matches { display: flex; flex-wrap: wrap; gap: 4px; color: #666; font-size: 13px; }
+.chip { padding: 1px 8px; border-radius: 10px; background: #eef4fd; }
+.unknown { padding: 8px 12px; border: 1px dashed #bbb; border-radius: 4px; }
+.ask ul { margin: 0; padding-left: 20px; }
+
+/* Checks */
+.checks ul { margin: 0; padding-left: 20px; font-size: 13px; }
+
+/* Tables */
+.table { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: #fff; font-size: 13px; }
+th, td { padding: 4px 8px; border: 1px solid #e3e3e3; text-align: left; vertical-align: top; }
+thead th { background: #f4f4f4; }
+td.number { text-align: right; font-variant-numeric: tabular-nums; }
+.templates { padding-left: 20px; font-size: 13px; }

@@ -1,0 +1,66 @@
+@prefix :        <https://example.org/harbor-vines#> .
+@prefix fv:      <https://example.org/figures#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+# The five fixed lists of the variable names. A name is one code of each list, in this order:
+#   measure _ time basis _ time slice _ scenario _ suffix
+#   SALES_TFY_CP_ACT_VAL = sales, this financial year, current period, actual, value.
+# The lists of the video: sales and margin; this financial year; current period, year to date
+# and full year; actual and budget; value. Ours adds one scenario and one suffix: the comparison
+# of actual with budget, as a percentage. In the video it is an instruction in the template.
+
+# --- Measures ---------------------------------------------------------------
+:Sales a fv:Measure ; skos:notation "SALES" ; rdfs:label "sales"@en ;
+    skos:altLabel "sold"@en, "sell"@en, "revenue"@en, "turnover"@en ;
+    skos:definition "The amounts of the sales lines, without tax."@en ;
+    fv:sourceMeasure "sales" .
+
+:Margin a fv:Measure ; skos:notation "MARGIN" ; rdfs:label "margin"@en ;
+    skos:altLabel "profit"@en, "made"@en ;
+    skos:definition "What the business made on its sales. The video names it; the source rows have no costs yet."@en ;
+    fv:sourceMeasure "margin" .
+
+# --- Time bases -------------------------------------------------------------
+:ThisFinYear a fv:TimeBasis ; skos:notation "TFY" ; rdfs:label "this financial year"@en ;
+    skos:altLabel "this year"@en, "this fin year"@en ;
+    fv:yearOffset 0 .
+
+# --- Time slices ------------------------------------------------------------
+:CurrentPeriod a fv:TimeSlice ; skos:notation "CP" ; rdfs:label "current period"@en ;
+    skos:altLabel "this month"@en, "in the month"@en ;
+    fv:sliceKind fv:Month .
+
+:YearToDate a fv:TimeSlice ; skos:notation "YTD" ; rdfs:label "year to date"@en ;
+    skos:altLabel "since july"@en, "so far this year"@en, "ytd"@en ;
+    fv:sliceKind fv:YearToDate .
+
+:FullYear a fv:TimeSlice ; skos:notation "FY" ; rdfs:label "full year"@en ;
+    skos:altLabel "whole year"@en, "for the year"@en ;
+    fv:sliceKind fv:FullYear .
+
+# --- Scenarios --------------------------------------------------------------
+:Actual a fv:Scenario ; skos:notation "ACT" ; rdfs:label "actual"@en ;
+    skos:definition "What happened."@en ;
+    fv:sourceVersion "actual" .
+
+:Budget a fv:Scenario ; skos:notation "BUD" ; rdfs:label "budget"@en ;
+    skos:altLabel "plan"@en, "target"@en ;
+    skos:definition "What was planned for each customer in each month."@en ;
+    fv:sourceVersion "budget" .
+
+:AgainstBudget a fv:Comparison ; skos:notation "VAR" ; rdfs:label "against budget"@en ;
+    skos:altLabel "above plan"@en, "below plan"@en, "against plan"@en, "variance"@en ;
+    skos:definition "How far actual is above or below budget, as a share of the budget: (actual - budget) / budget. There is no result when the budget is 0."@en ;
+    fv:of :Actual ; fv:against :Budget ; fv:inputSuffix :Value ;
+    fv:aboveWords "above plan" ; fv:belowWords "below plan" ; fv:equalWords "on plan" ;
+    fv:owner :Finance .
+
+# --- Suffixes ---------------------------------------------------------------
+:Value a fv:Suffix ; skos:notation "VAL" ; rdfs:label "value"@en ;
+    skos:definition "An amount in dollars."@en ;
+    fv:format "currency" .
+
+:Percent a fv:Suffix ; skos:notation "PCT" ; rdfs:label "percent"@en ;
+    skos:definition "A share, written as a percentage."@en ;
+    fv:format "percent" .

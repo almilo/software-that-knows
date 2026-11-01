@@ -1,0 +1,23 @@
+@prefix :        <https://example.org/harbor-vines#> .
+@prefix fv:      <https://example.org/figures#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+# The page of the domain, its calendar and its two months.
+# Harbor Vines, its people, customers and products, and the data of August are the example of the
+# video "Kiraa Engine Explainer" (Kiraa, 2026). September is invented for this demo.
+
+:HarborVines a fv:Domain ;
+    rdfs:label "Harbor Vines: figures that know what they mean"@en ;
+    fv:intro "A drinks wholesaler, its sales and its budget: every figure is a variable with a name of five parts, every rule is in the model with an owner, and every article says where its numbers come from."@en ;
+    dcterms:source <https://youtu.be/j5bAryILBCM> ;
+    fv:sourceTitle "Kiraa Engine Explainer (Kiraa, 2026)" ;
+    fv:currencySymbol "$" ;
+    fv:fiscalYearStart 7 ;
+    fv:period :August2026, :September2026 .
+
+:August2026 a fv:Period ; fv:month "2026-08" ;
+    rdfs:comment "The data of the video: five sales and three budget lines. The video does not show the dates, the product of each sale, or which customers Anna has: we chose them so that the totals are the ones of the video."@en .
+
+:September2026 a fv:Period ; fv:month "2026-09" ;
+    rdfs:comment "Invented for this demo: a new account manager with a new customer and no budget yet, and one account manager below plan."@en .

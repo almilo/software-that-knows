@@ -10,6 +10,7 @@ Each folder is one self-contained demo.
 | [`cloud-architecture/`](cloud-architecture/) | A diagram that compares architecture styles, and its author's heuristics, as an ontology; an app that recommends a style for a team, asking only the questions that matter |
 | [`choices/`](choices/) | One generic decision app with two domains: the architecture styles of `cloud-architecture/`, and a decision tree for ChatGPT models; the checks that find gaps and conflicts in a model |
 | [`eligibility/`](eligibility/) | A generic wizard for applications under a law or an ordinance: knowledge models with their rules as SPARQL and their texts in several languages, run by three stacks (React + Bun in the browser, Vaadin + Spring Boot, Spring Boot + Flowable) that shared test cases check against each other. Three domains: the early withdrawal of pension money for a home (BVG Art. 30a–30g, WEFV), the vested benefit in cash (FZG) and the maternity and other parent's allowance (EOG); the first two share modules of knowledge |
+| [`figures/`](figures/) | Business figures from a knowledge model: the engine of Kiraa's explainer video (variables with a name of five parts, templates, articles), with its rules in the model and their owners; checks that find what the templates hide, and questions that get "I do not know" when no article can answer |
 
 > **Demonstrations only.** `imci-fever` is not a medical device: do not use it to assess or treat anyone.
 > `eligibility` is not legal or financial advice.
@@ -23,6 +24,7 @@ This repository has two licences, and some files that are not licensed. [`REUSE.
 | Code and documentation | [MIT](LICENSES/MIT.txt) |
 | The IMCI knowledge model (`imci-fever/ontology/`) and the files generated from it or extracted from the DAK (`imci-fever/generated/`, `imci-fever/source/`) | [CC BY-NC-SA 3.0 IGO](LICENSES/CC-BY-NC-SA-3.0-IGO.txt) |
 | The ontologies extracted from Alok Sharan's diagrams, and the generated files that hold their content (`cloud-architecture/`, `choices/`) | [Not licensed](LICENSES/LicenseRef-NotLicensed.txt): all rights stay with its author |
+| The Harbor Vines example of Kiraa's video, and the files that hold it (`figures/domains/harbor-vines/`: ontology, source data, generated files, the template as shown) | [Not licensed](LICENSES/LicenseRef-NotLicensed.txt): all rights stay with Kiraa |
 | The knowledge models of `eligibility` (`eligibility/knowledge/`), the files generated from them (`eligibility/react-bun/domains/*/generated/`) and the shared test cases (`eligibility/conformance/`) | [MIT](LICENSES/MIT.txt): Swiss laws and ordinances are not protected by copyright (URG Art. 5) |
 
 The IMCI knowledge model is adapted from the

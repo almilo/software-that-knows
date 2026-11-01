@@ -1,0 +1,31 @@
+@prefix :        <https://example.org/harbor-vines#> .
+@prefix fv:      <https://example.org/figures#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+
+# The templates, who sees their articles, and the one ranking that the sales manager asks for.
+# The templates only bind variables: every rule is in lists.ttl, with its owner. The template of
+# the video, with its calculation, is in test/as-shown/articles.ttl.
+
+:AccountManagerArticle a fv:Template ;
+    rdfs:label "Account manager"@en ;
+    fv:about :AccountManager ;
+    fv:text "{entity} sold {SALES_TFY_CP_ACT_VAL} in {period} against the budget of {SALES_TFY_CP_BUD_VAL}. That's {SALES_TFY_CP_VAR_PCT|direction}. Since {yearStart}, {entity} sold {SALES_TFY_YTD_ACT_VAL} against a budget of {SALES_TFY_YTD_BUD_VAL}: {SALES_TFY_YTD_VAR_PCT|direction}." ;
+    fv:visibleTo [ fv:role :SalesManagerRole ; fv:scope fv:All ] ,
+                 [ fv:role :AccountManagerRole ; fv:scope fv:Own ] .
+
+:SalesManagerArticle a fv:Template ;
+    rdfs:label "Sales manager"@en ;
+    fv:about :Business ;
+    fv:text "In {period}, {entity} sold {SALES_TFY_CP_ACT_VAL} against a budget of {SALES_TFY_CP_BUD_VAL}: {SALES_TFY_CP_VAR_PCT|direction}. {ranking:TopAccountManager}" ;
+    fv:visibleTo [ fv:role :SalesManagerRole ; fv:scope fv:All ] .
+
+# "Who was our top account manager?" The video's answer compares the results against budget, and
+# in August the sales give the same answer. The model keeps both definitions and no decision: the
+# checks report it, and the article says it when the two give different answers.
+:TopAccountManager a fv:Ranking ;
+    rdfs:label "top account manager"@en ;
+    skos:altLabel "top"@en, "best"@en, "best account manager"@en ;
+    fv:rankingOf :AccountManager ;
+    fv:candidate [ rdfs:label "by sales" ; fv:variable "SALES_TFY_CP_ACT_VAL" ] ,
+                 [ rdfs:label "by result against budget" ; fv:variable "SALES_TFY_CP_VAR_PCT" ] .

@@ -1,0 +1,158 @@
+{
+  "$comment": "Generated from ontology/ and domains/harbor-vines/ by generator/generate.ts. Do not edit.",
+  "rows": [
+    {
+      "id": "T01",
+      "date": "2026-08-04",
+      "customer": "C01",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 300
+    },
+    {
+      "id": "T02",
+      "date": "2026-08-11",
+      "customer": "C02",
+      "product": "P2",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 200
+    },
+    {
+      "id": "T03",
+      "date": "2026-08-19",
+      "customer": "C01",
+      "product": "P2",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 500
+    },
+    {
+      "id": "T04",
+      "date": "2026-08-21",
+      "customer": "C03",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 400
+    },
+    {
+      "id": "T05",
+      "date": "2026-08-27",
+      "customer": "C03",
+      "product": "P2",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 200
+    },
+    {
+      "id": "B01",
+      "date": "2026-08-01",
+      "customer": "C01",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 400
+    },
+    {
+      "id": "B02",
+      "date": "2026-08-01",
+      "customer": "C02",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 400
+    },
+    {
+      "id": "B03",
+      "date": "2026-08-01",
+      "customer": "C03",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 500
+    },
+    {
+      "id": "T06",
+      "date": "2026-09-03",
+      "customer": "C01",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 400
+    },
+    {
+      "id": "T07",
+      "date": "2026-09-09",
+      "customer": "C04",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 250
+    },
+    {
+      "id": "T08",
+      "date": "2026-09-15",
+      "customer": "C03",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 350
+    },
+    {
+      "id": "T09",
+      "date": "2026-09-18",
+      "customer": "C01",
+      "product": "P2",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 200
+    },
+    {
+      "id": "T10",
+      "date": "2026-09-24",
+      "customer": "C02",
+      "product": "P1",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 300
+    },
+    {
+      "id": "T11",
+      "date": "2026-09-29",
+      "customer": "C03",
+      "product": "P2",
+      "version": "actual",
+      "measure": "sales",
+      "amount": 250
+    },
+    {
+      "id": "B04",
+      "date": "2026-09-01",
+      "customer": "C01",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 500
+    },
+    {
+      "id": "B05",
+      "date": "2026-09-01",
+      "customer": "C02",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 500
+    },
+    {
+      "id": "B06",
+      "date": "2026-09-01",
+      "customer": "C03",
+      "product": "",
+      "version": "budget",
+      "measure": "sales",
+      "amount": 500
+    }
+  ]
+}

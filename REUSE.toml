@@ -55,3 +55,24 @@ path = [
 precedence = "override"
 SPDX-FileCopyrightText = "2026 Alok Sharan"
 SPDX-License-Identifier = "LicenseRef-NotLicensed"
+
+# The figures demo is ours (MIT), including its ontology folders.
+[[annotations]]
+path = "figures/**"
+precedence = "override"
+SPDX-FileCopyrightText = "2026 almilo"
+SPDX-License-Identifier = "MIT"
+
+# Except the Harbor Vines example of the video "Kiraa Engine Explainer" (Kiraa, 2026): its names,
+# its data, the text of its template, and the generated files that hold them. The source states no
+# licence, so all rights stay with its author.
+[[annotations]]
+path = [
+  "figures/domains/harbor-vines/ontology/**",
+  "figures/domains/harbor-vines/source/**",
+  "figures/domains/harbor-vines/generated/**",
+  "figures/domains/harbor-vines/test/as-shown/**",
+]
+precedence = "override"
+SPDX-FileCopyrightText = "2026 Kiraa"
+SPDX-License-Identifier = "LicenseRef-NotLicensed"
